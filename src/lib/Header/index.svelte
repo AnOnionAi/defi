@@ -10,12 +10,11 @@
 <script lang="ts">
 	import 'virtual:windi.css'
 	import { scale } from "svelte/transition";	
-	import {faWallet} from "@fortawesome/free-solid-svg-icons/faWallet" 
-	import {faSun} from "@fortawesome/free-solid-svg-icons/faSun"
-	import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon"
-	import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
-  	import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
-	import {onMount} from "svelte"
+	import {faWallet} from "@fortawesome/free-solid-svg-icons/faWallet.js" 
+	import {faSun} from "@fortawesome/free-solid-svg-icons/faSun.js"
+	import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon.js"
+	import { faBars } from "@fortawesome/free-solid-svg-icons/faBars.js";
+  	import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes.js";
 	import Icon from "fa-svelte"
 	import {darkMode} from "../../stores/dark"
 	import bFloppa from "../../../static/floppa.jpg"
@@ -95,17 +94,16 @@
 					on:click={()=>{
 						showDropDownMenu = !showDropDownMenu
 					}}
-					class="dark:border-none dark:hover:bg-blue-gray-600 hover:bg-gray-100 focus:outline-none font-medium flex p-2 items-center"
+					class="dark:border dark:rounded-md dark:hover:bg-blue-gray-600 hover:bg-gray-100 focus:outline-none font-medium flex p-2 items-center"
 
 				>
-				<p class = "m-0 font-semibold text-gray-900 dark:text-black">Lang</p>
+				<p class = "m-0 font-semibold text-gray-900 dark:text-white">Lang</p>
 				</button>
 				{#if showDropDownMenu}
 					<div
 						in:scale={{ duration: 100, start: 0.95 }}
 						out:scale={{ duration: 75, start: 0.95 }}
-						style = {isDark && "background-color:#1F2937;"}
-						class="title z-10 sm:origin-top-right sm:left-0 absolute w-auto rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+						class="dark:bg-blue-gray-900 title z-10 sm:origin-top-right sm:left-0 absolute w-auto rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
 					>
 						{#each LANGUAGES as l}
 						<button
@@ -113,7 +111,7 @@
 							? (isDark? 'black' :'#F3F4F6')
 							: ''}; {isDark ? 'color:white' : ''};"
 							class:navbar_item_home={home}
-							class="dark:hover:bg-blue-gray-900 border-none block w-full px-4 py-2 text-dark-200 hover:bg-gray-100"
+							class="dark:hover:bg-blue-gray-900 dark:text-white border-none block w-full px-4 py-2 text-dark-200 hover:bg-gray-100"
 						>
 						<a href= {`/${l.code}`}> {l.lang} </a>
 						</button>
@@ -129,7 +127,7 @@
 			<div class="flex-shrink-0 flex items-center">
 				<a class="flex space-y-2 space-x-2" href="/">
 					<img class = "w-10 rounded-full" src={bFloppa} alt="floppa">
-					<span class="w-24 text-lg text-black font-semibold">
+					<span class="w-24 text-lg dark:text-white font-semibold">
 						Z Y B E R
 					</span>
 				</a>
@@ -140,8 +138,9 @@
 				<div class="flex space-x-4 items-center">
 				  <a href= "#">
 					<span
-					  class="dark:hover:bg-gray-800 hover:bg-gray-200 block px-3 py-3 rounded-md font-medium"
-					  >
+						on:click={changeDark}
+					  	class="dark:hover:bg-gray-800 hover:bg-gray-200 block px-3 py-3 rounded-md font-medium"
+					>
 		
 					  {#if isDark}
 						<Icon class = "text-white" icon = {faMoon}/>
@@ -196,7 +195,7 @@
 	  class:menu_mobile_dark={home}
 	  class="{navbarMenuIsOpen
 		? 'block'
-		: 'hidden'} dark:text-white sm:hidden dark:bg-dark-800 bg-white"
+		: 'hidden'} dark:text-white sm:hidden dark:bg-blue-gray-800 bg-white"
 	>
 	  <div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-1">
 		{#each PAGES as page}
