@@ -7,6 +7,7 @@ specifiers:
   '@fortawesome/free-solid-svg-icons': ^5.15.3
   '@lukeed/uuid': ^2.0.0
   '@sveltejs/adapter-netlify': ^1.0.0-next.14
+  '@sveltejs/adapter-static': ^1.0.0-next.0
   '@sveltejs/kit': next
   '@typescript-eslint/eslint-plugin': ^4.19.0
   '@typescript-eslint/parser': ^4.19.0
@@ -34,6 +35,7 @@ dependencies:
   '@fortawesome/free-regular-svg-icons': 5.15.3
   '@fortawesome/free-solid-svg-icons': 5.15.3
   '@lukeed/uuid': 2.0.0
+  '@sveltejs/adapter-static': 1.0.0-next.0
   cookie: 0.4.1
   cross-env: 7.0.3
   dotenv: 10.0.0
@@ -214,6 +216,10 @@ packages:
       '@sveltejs/kit': 1.0.0-next.115_svelte@3.38.2
       esbuild: 0.11.23
     dev: true
+
+  /@sveltejs/adapter-static/1.0.0-next.0:
+    resolution: {integrity: sha512-5QYrPSjfqI/Jd2av/WuwhZjRZHaWu8tGmBHM6dh5W7cd4s0PG3eW0p4eASZESHmtCFWGG00PYMRjUUFPPtEcOg==}
+    dev: false
 
   /@sveltejs/kit/1.0.0-next.115_svelte@3.38.2:
     resolution: {integrity: sha512-XbkL9hI7LI0Dfum9crtBIeENqdJEjMfDaX3qQTTgdYkhlb4KNNYErmDWo8bJNJKEfdV0BJBVN/I0wiat3cd/yA==}
@@ -1261,8 +1267,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /rollup/2.52.1:
-    resolution: {integrity: sha512-/SPqz8UGnp4P1hq6wc9gdTqA2bXQXGx13TtoL03GBm6qGRI6Hm3p4Io7GeiHNLl0BsQAne1JNYY+q/apcY933w==}
+  /rollup/2.52.2:
+    resolution: {integrity: sha512-4RlFC3k2BIHlUsJ9mGd8OO+9Lm2eDF5P7+6DNQOp5sx+7N/1tFM01kELfbxlMX3MxT6owvLB1ln4S3QvvQlbUA==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -1557,7 +1563,7 @@ packages:
       esbuild: 0.12.9
       postcss: 8.3.5
       resolve: 1.20.0
-      rollup: 2.52.1
+      rollup: 2.52.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
