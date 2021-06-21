@@ -1,3 +1,14 @@
 {
-    "hello": "bonjour"
+    "hello": "bonjour",
+    "pages":{
+        "about": {
+            "title" : "Environ"
+        },
+        "contact": {
+            "title" : "Contact"
+        },
+        "audits": {
+            "title" : "Audits"
+        }
+    }
 }

@@ -18,6 +18,5 @@
 </script>
 
 <section>
-        <h1 class = "text-dark-200 dark:text-white">Z Y B E R</h1>
-        <p class="text-center text-lg">{$_("hello")}</p>
+        <h1 class = "text-dark-200 dark:text-white">Z Y B E R / P O O L S</h1>
 </section>

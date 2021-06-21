@@ -1,36 +1,27 @@
 <script lang="ts">
 	import Header from '$lib/Header/index.svelte';
+	import Footer from "$lib/Footer/index.svelte"
 	import '../app.css';
+	import {darkMode} from "../stores/dark"
 </script>
 
-<Header />
+		<Header />
+		<main class:dark = {$darkMode} class = "main">
+			<div class = "dark:bg-blue-gray-900 main">
+				<slot />
+			</div>
+		</main>
 
-<main>
-	<slot />
-</main>
-
-<footer>
-	<p>visit us to say hello</p>
-</footer>
-
+		<Footer />
+	
 <style>
-	main {
+	.main {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		padding: 1rem;
 		width: 100%;
-		max-width: 1024px;
+		height: 100%;
 		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
 	}
 
 	footer a {
