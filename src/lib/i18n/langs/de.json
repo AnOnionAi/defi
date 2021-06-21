@@ -1,3 +1,14 @@
 {
-    "hello": "hallo"
+    "hello": "hallo",
+    "pages":{
+        "about": {
+            "title" : "Über"
+        },
+        "contact": {
+            "title" : "Kontakt"
+        },
+        "audits": {
+            "title":"Audits"
+        }
+    }
 }

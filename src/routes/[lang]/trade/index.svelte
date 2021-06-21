@@ -3,7 +3,6 @@
     
     import { _ } from "svelte-i18n"
     import {setInit} from "$lib/i18n/init"
-    
     export async function load({page}){
         const { lang } = page.params;
         setInit(lang)
@@ -18,6 +17,5 @@
 </script>
 
 <section>
-        <h1 class = "text-dark-200 dark:text-white">Z Y B E R</h1>
-        <p class="text-center text-lg">{$_("hello")}</p>
+        <h1 class = "text-dark-200 dark:text-white">Z Y B E R / T R A D E</h1>
 </section>
