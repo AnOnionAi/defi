@@ -10,19 +10,19 @@
     >
     <div class = "ml-auto mr-auto w-md flex justify-center text-center">
 
-        <a href="/about">
+        <a href="/#">
             <span class="font-normal p-1">
             {$_("pages.about.title")}
             </span>
         </a>
     
-        <a href="/contact">
+        <a href="/#">
             <span class="font-normal p-1">
             {$_("pages.contact.title")}
             </span>
         </a>
     
-        <a href="/donations">
+        <a href="#">
             <span class="font-normal p-1">
             {$_("pages.audits.title")}
             </span>
