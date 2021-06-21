@@ -11,12 +11,11 @@
 	onMount(() => {
 		const langs : string[] = ["es", "en", "de", "fr"]
 		const lang : string = getLocaleFromNavigator().split("-")[0]
-		/*
 		if(langs.includes(lang)){
 			
 			goto(`/${lang}`, {replaceState:true})	
 		}else
-			goto("/es", {replaceState:true})*/
+			goto("/es", {replaceState:true})
 	})
 </script>
 <div>
