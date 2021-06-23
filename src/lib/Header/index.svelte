@@ -89,7 +89,9 @@
 			bind:this={menu}
 			class="sm:left-32 border hover:bg-gray-100 dark:border-none rounded-md  items-center flex sm:static sm:inset-auto sm:mr-4"
 		>
-			<div>
+			<div
+				class = "sm:absolute sm:left-45"
+			>
 				<button
 					on:click={()=>{
 						showDropDownMenu = !showDropDownMenu
@@ -127,7 +129,7 @@
 			<div class="flex-shrink-0 flex items-center">
 				<a class="flex space-y-2 space-x-2" href="/">
 					<img class = "w-10 rounded-full" src={bFloppa} alt="floppa">
-					<span class="w-24 text-lg dark:text-white font-semibold">
+					<span class="w-24 text-lg dark:text-white font-semibold" style = "margin: auto 0 auto 5px;">
 						Z Y B E R
 					</span>
 				</a>

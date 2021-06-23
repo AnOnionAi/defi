@@ -18,5 +18,5 @@
 </script>
 
 <section>
-        <h1 class = "text-dark-200 dark:text-white">Z Y B E R / P O O L S</h1>
+        <h1 class = "text-dark-200 dark:text-white text-4xl">Z Y B E R / P O O L S</h1>
 </section>
