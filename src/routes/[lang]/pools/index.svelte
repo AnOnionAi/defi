@@ -470,7 +470,7 @@
         width:35%;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
         
         .mush-w{
             width:90%;
