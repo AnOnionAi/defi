@@ -1,9 +1,9 @@
 <script context="module" lang="ts"> 
 	export const prerender = false
 	export async function load({page}){
-        console.log(page)
+        
         return {
-            props:{lang: page.path}
+            props:{lang: page.params}
         }
     }
 </script>
@@ -17,6 +17,7 @@
   	import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes.js";
 	import Icon from "fa-svelte"
 	import {darkMode} from "../../stores/dark"
+	import {accounts} from "../../stores/MetaMaskAccount"
 	import bFloppa from "../../../static/floppa.jpg"
 	import {page} from "$app/stores"
 	export let lang
@@ -28,7 +29,7 @@
 
 	let isDark : boolean;
 	darkMode.subscribe(val => {
-	isDark = val;
+		isDark = val;
 	})
 
 	const changeDark = (e) => {
@@ -66,7 +67,35 @@
 			title: "Trade",
 		}
   	];
+	  import {onMount} from "svelte"
 
+	let isInstalled = "checking"
+
+	onMount(() => {
+		const isMetaMaskInstalled = () => {
+			//Have to check the ethereum binding on the window object to see if it's installed
+			const { ethereum } = window;
+			return Boolean(ethereum && ethereum.isMetaMask);
+		};
+
+		isInstalled = isMetaMaskInstalled() ? 'isInstalled' : 'notInstalled'
+		console.log(isInstalled)
+
+		window.ethereum.on('accountsChanged', (adresses:Array<string>) => {
+			if(adresses.length == 0)
+				accounts.set(undefined)
+		})
+	})
+
+	const metaMaskCon = async (eve:any) => {
+		try{
+			const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+			accounts.set(user_accounts)
+			
+		}catch{
+			console.log("failed")
+		}
+	}
 	
 </script>
 
@@ -87,10 +116,10 @@
 	<div class="dark:bg-blue-gray-800 flex items-center justify-between h-16 px-5">
 		<div
 			bind:this={menu}
-			class="sm:left-32 border hover:bg-gray-100 dark:border-none rounded-md  items-center flex sm:static sm:inset-auto sm:mr-4"
+			class="sm:absolute sm:left-36 border hover:bg-gray-100 dark:border-none rounded-md  items-center flex sm:static sm:inset-auto sm:mr-4"
 		>
 			<div
-				class = "sm:absolute sm:left-45"
+			
 			>
 				<button
 					on:click={()=>{
@@ -99,7 +128,7 @@
 					class="dark:border dark:rounded-md dark:hover:bg-blue-gray-600 hover:bg-gray-100 focus:outline-none font-medium flex p-2 items-center"
 
 				>
-				<p class = "m-0 font-semibold text-gray-900 dark:text-white">Lang</p>
+				<p class = "m-0 font-semibold text-gray-900 dark:text-white">{$page.params.lang}</p>
 				</button>
 				{#if showDropDownMenu}
 					<div
@@ -137,7 +166,7 @@
 			<!-- day/nite toggle -->
 
 			<div class="hidden sm:block sm:ml-auto">
-				<div class="flex space-x-4 items-center">
+				<div class="flex space-x-5 items-center">
 				  <a href= "#">
 					<span
 						on:click={changeDark}
@@ -162,9 +191,32 @@
 					  </a>
 					  
 				  {/each}
-				  <span class="bg-green-600 m-0 p-2 rounded-1 inline-flex">
-					  <Icon icon = {faWallet}/>
-				  </span>
+				  <button disabled={isInstalled == 'checking' || $accounts} on:click="{metaMaskCon}" class="hover:bg-none flex {$accounts && 'cursor-default bg-green-400'}">
+
+					<span
+					class="dark:text-white dark:hover:bg-blue-gray-900 block hover:bg-gray-200 {isInstalled == 'checking' && 'cursor-default hover:bg-transparent'} {$accounts && 'hover:bg-transparent'} px-3 text-dark-200 py-3 mr-1 rounded-md font-medium hover:no-underline no-underline"
+				  	>
+						{#if isInstalled == "checking"}
+								Checking Metamask...
+						{:else if $accounts}
+								Connected
+						{:else if isInstalled == "isInstalled"}
+								Connect to Metamask
+						{:else}
+						
+								<a target="blank" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">
+									Install Metamask
+									
+								</a>
+						{/if}
+				  	</span>
+					<span class="{$accounts ? 'bg-green-400' : 'bg-gray-300' } m-auto p-2 rounded-1 inline-flex">
+						<Icon icon = {faWallet}/>
+					</span>
+				</button>
+
+				  
+				
 				</div>
 			  </div>
 
@@ -238,5 +290,4 @@
 	.menu_mobile_dark {
 	  background-color: black !important;
 	}
-  </style>
-  
+</style>
