@@ -79,12 +79,13 @@
 		};
 
 		isInstalled = isMetaMaskInstalled() ? 'isInstalled' : 'notInstalled'
-		console.log(isInstalled)
 
-		window.ethereum.on('accountsChanged', (adresses:Array<string>) => {
-			if(adresses.length == 0)
-				accounts.set(undefined)
-		})
+		if(isMetaMaskInstalled()){
+			window.ethereum.on('accountsChanged', (adresses:Array<string>) => {
+				if(adresses.length == 0)
+					accounts.set(undefined)
+			})
+		}
 	})
 
 	const metaMaskCon = async (eve:any) => {
@@ -111,7 +112,7 @@
     }
   }}
 />
-<nav class = "top-0 w-full text-black" class:dark = {$darkMode}>
+<nav class = "z-10 backdrop-filter backdrop-blur top-0 w-full text-black" class:dark = {$darkMode}>
 
 	<div class="dark:bg-blue-gray-800 flex items-center justify-between h-16 px-5">
 		<div
@@ -184,7 +185,7 @@
 					
 					  <a href={page.route}>
 						<span
-						  class="dark:text-white dark:hover:bg-blue-gray-900 block hover:bg-gray-200 px-3 text-dark-200 py-3 rounded-md font-medium hover:no-underline no-underline"
+						  class="dark:text-white dark:hover:bg-blue-gray-900 block hover:bg-gray-200 px-3 text-dark-800 py-3 rounded-md font-medium hover:no-underline no-underline"
 						>
 						  {page.title}
 						</span>
@@ -194,7 +195,7 @@
 				  <button disabled={isInstalled == 'checking' || $accounts} on:click="{metaMaskCon}" class="hover:bg-none flex {$accounts && 'cursor-default bg-green-400'}">
 
 					<span
-					class="dark:text-white dark:hover:bg-blue-gray-900 block hover:bg-gray-200 {isInstalled == 'checking' && 'cursor-default hover:bg-transparent'} {$accounts && 'hover:bg-transparent'} px-3 text-dark-200 py-3 mr-1 rounded-md font-medium hover:no-underline no-underline"
+					class="dark:text-white dark:hover:bg-blue-gray-900 block hover:bg-gray-200 {isInstalled == 'checking' && 'cursor-default hover:bg-transparent'} {$accounts && 'hover:bg-transparent'} px-3 text-dark-800 py-3 mr-1 rounded-md font-medium hover:no-underline no-underline"
 				  	>
 						{#if isInstalled == "checking"}
 								Checking Metamask...
@@ -272,6 +273,29 @@
 			{/if}
 		  </span>
 		</a>
+		<button disabled={isInstalled == 'checking' || $accounts} on:click="{metaMaskCon}" class="m-auto hover:bg-none flex {$accounts && 'cursor-default bg-green-400'}">
+
+			<span
+			class="dark:text-white dark:hover:bg-blue-gray-900 block hover:bg-gray-200 {isInstalled == 'checking' && 'cursor-default hover:bg-transparent'} {$accounts && 'hover:bg-transparent'} px-3 text-dark-800 py-3 mr-1 rounded-md font-medium hover:no-underline no-underline"
+			  >
+				{#if isInstalled == "checking"}
+						Checking Metamask...
+				{:else if $accounts}
+						Connected
+				{:else if isInstalled == "isInstalled"}
+						Connect to Metamask
+				{:else}
+				
+						<a target="blank" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">
+							Install Metamask
+							
+						</a>
+				{/if}
+			  </span>
+			<span class="{$accounts ? 'bg-green-400' : 'bg-gray-300' } m-auto p-2 rounded-1 inline-flex">
+				<Icon icon = {faWallet}/>
+			</span>
+		</button>
 	  </div>
 	</div>
 

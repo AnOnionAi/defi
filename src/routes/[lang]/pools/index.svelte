@@ -54,8 +54,8 @@
                                 <p>MUSH</p>
                             </div>
                             <div class="flex justify-between">
-                                <p>DEPOSIT FEE</p>
-                                <p>0%</p>
+                                <p class = "font-bold text-white">DEPOSIT FEE</p>
+                                <p class = "font-bold text-white">0%</p>
                             </div>
                         </div>
                         <a
