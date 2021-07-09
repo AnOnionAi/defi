@@ -8,7 +8,10 @@
             "title" : "Contacto"
         },
         "audits": {
-            "title":"Auditorías"
+            "title": "Auditorías"
+        },
+        "trade": {
+            "title": "Comercio"
         }
     }
 }
