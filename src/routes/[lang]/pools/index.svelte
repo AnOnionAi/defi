@@ -31,10 +31,11 @@
 </script>
 
 <section>
-        <h1 class = "text-dark-200 dark:text-white text-4xl">P O O L S</h1>
+        <br />
+        <h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
         
-        <div class = "mt-5 space-y-4">
-            <div id = "mush" class = "flex justify-center p-5 text-center shadow-lg rounded-md">
+        <div class="mt-5 space-y-4">
+            <div id="mush" class = "flex justify-center p-5 text-center shadow-lg rounded-md">
                 
                     <div class="mush-w bg-gray-100 p-2 text-2xl space-y-3 flex flex-col justify-around rounded-md bg-transparent backdrop-filter backdrop-blur border-solid border-2 border-white">
                         <p class="text-3xl font-bold ">

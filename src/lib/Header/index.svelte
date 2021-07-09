@@ -18,7 +18,7 @@
 	import Icon from "fa-svelte"
 	import {darkMode} from "../../stores/dark"
 	import {accounts} from "../../stores/MetaMaskAccount"
-	import bFloppa from "../../../static/floppa.jpg"
+	import bFloppa from "../../../static/fungfi.png"
 	import {page} from "$app/stores"
 	export let lang
 
@@ -63,8 +63,8 @@
 			title: "Pools",
 		},
 		{
-			route: `/${$page.params.lang}/trade`,
-			title: "Trade",
+			route: `/${$page.params.lang}/vaults`,
+			title: "Vaults",
 		}
   	];
 	  import {onMount} from "svelte"
@@ -158,8 +158,8 @@
 			<!-- LOGO -->
 			<div class="flex-shrink-0 flex items-center">
 				<a class="flex space-y-2 space-x-2" href="/">
-					<img class = "w-10 rounded-full" src={bFloppa} alt="floppa">
-					<span class="w-24 text-lg dark:text-white font-semibold" style = "margin: auto 0 auto 5px;">
+					<img class="w-10 rounded-full" src={bFloppa} alt="floppa">
+					<span class="w-24 text-lg dark:text-white font-semibold" style="margin: auto 0 auto 5px;">
 						Z Y B E R
 					</span>
 				</a>
@@ -202,7 +202,7 @@
 						{:else if $accounts}
 								Connected
 						{:else if isInstalled == "isInstalled"}
-								Connect to Metamask
+								Wallet
 						{:else}
 						
 								<a target="blank" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">

@@ -27,6 +27,11 @@
             {$_("pages.audits.title")}
             </span>
         </a>
+        <a href="#">
+          <span class="font-normal p-1">
+          {$_("pages.trade.title")}
+          </span>
+      </a>
     </div>
     </div>
 </footer>
