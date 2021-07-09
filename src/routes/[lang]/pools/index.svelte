@@ -31,31 +31,32 @@
 </script>
 
 <section>
-        <h1 class = "text-dark-200 dark:text-white text-4xl">P O O L S</h1>
-        
-        <div class = "mt-5 space-y-4">
-            <div id = "mush" class = "flex justify-center p-5 text-center shadow-lg rounded-md">
-                
-                    <div class="mush-w bg-gray-100 p-2 text-2xl space-y-3 flex flex-col justify-around rounded-md bg-transparent backdrop-filter backdrop-blur border-solid border-2 border-white">
-                        <p class="text-3xl font-bold ">
+        <br />
+        <h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
+        <div class="mt-5 space-y-4">
+            <div id="mush" class = "flex justify-center p-5 text-center rounded-md">  
+                <br />
+                    <div class="mush-w p-2 text-2xl space-y-3 flex flex-col justify-around rounded-md backdrop-filter bg-transparent">
+                        <p class="text-8xl font-bold text-white">
                             MUSH
                         </p>
-                        <div class = "px-5">
+                        <br />
+                        <div class="px-5 bg-gray-50 bg-gradient-to-tl rounded-md">
                             <div class="flex justify-between">
-                                <p class = "font-semibold">APY:::</p>
-                                <p>999%</p>
+                                <p class="font-black text-black">APY</p>
+                                <p class="font-black text-black">999%</p>
                             </div>
                             <div class="flex justify-between">
-                                <p class = "font-semibold">APR:</p>
-                                <p>999%</p>
+                                <p class="font-black text-black">APR</p>
+                                <p class="font-black text-black">999%</p>
                             </div>
                             <div class="flex justify-between">
-                                <p class = "font-semibold">EARN:</p>
-                                <p>MUSH</p>
+                                <p class="font-black text-black">EARN</p>
+                                <p class="font-black text-black">MUSH</p>
                             </div>
                             <div class="flex justify-between">
-                                <p class = "font-bold text-white">DEPOSIT FEE</p>
-                                <p class = "font-bold text-white">0%</p>
+                                <p class="font-black text-black">FEE</p>
+                                <p class="font-black text-black">0%</p>
                             </div>
                         </div>
                         <a

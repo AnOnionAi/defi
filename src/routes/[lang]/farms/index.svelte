@@ -21,7 +21,8 @@
 </script>
 
 <section>
-        <h1 class = "text-dark-200 dark:text-white text-4xl">Z Y B E R / F A R M S</h1>
+        <br />
+        <h1 class = "text-dark-200 dark:text-white text-4xl">F A R M S</h1>
         <section class:dark={$darkMode} class="mt-3">
             <section class="mt-5 space-y-4">
               
