@@ -8,7 +8,6 @@
 	import {faSun} from "@fortawesome/free-solid-svg-icons/faSun.js"
 	import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon.js"
 	import { faBars } from "@fortawesome/free-solid-svg-icons/faBars.js";
-  	import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes.js";
 	import Icon from "fa-svelte"
 	import {darkMode} from "../../stores/dark"
 	import {accounts} from "../../stores/MetaMaskAccount"
@@ -234,7 +233,7 @@
 		  {#if !navbarMenuIsOpen}
 			<Icon icon={faBars} />
 		  {:else}
-			<Icon icon={faTimes} />
+			close
 		  {/if}
 		</button>
 	  <!-- end hamburger button -->
