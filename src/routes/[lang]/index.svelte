@@ -123,7 +123,9 @@
         */
         let mushMeshFA
         let mushMeshLI
+        let mushDollar
         getMush().then(mush => {
+
             mushMeshFA = mush[0].scene
             mushMeshFA.position.set(0, -1.25, 0)
             mushMeshLI = mush[1].scene
