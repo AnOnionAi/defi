@@ -1,6 +1,6 @@
 <script context="module" lang="typescript">
 
-    import { GLTFLoader } from './three/examples/loaders/GLTFLoader.js'
+    import { GLTFLoader } from '/three/examples/loaders/GLTFLoader.js'
     export async function getMush(){
         try {
             const mushLoader = new GLTFLoader()
