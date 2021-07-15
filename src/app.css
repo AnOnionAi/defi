@@ -40,12 +40,6 @@ body::before {
 	flex-direction: column;
 }
 
-h1,
-h2,
-p {
-	font-weight: 400;
-	color: var(--heading-color);
-}
 
 p {
 	line-height: 1.5;

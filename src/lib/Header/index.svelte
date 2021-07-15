@@ -1,11 +1,5 @@
 <script context="module" lang="ts"> 
 	export const prerender = false
-	export async function load({page}){
-        
-        return {
-            props:{lang: page.params}
-        }
-    }
 </script>
 <script lang="ts">
 	import 'virtual:windi.css'
@@ -20,7 +14,11 @@
 	import {accounts} from "../../stores/MetaMaskAccount"
 	import bFloppa from "../../../static/fungfi.png"
 	import {page} from "$app/stores"
-	export let lang
+	import {setInit} from "../i18n/init"
+
+	if($page.params.lang){
+		setInit($page.params.lang)
+	}
 
 	let navbarMenuIsOpen = false
 	let showDropDownMenu = false
@@ -129,7 +127,7 @@
 					class="dark:border dark:rounded-md dark:hover:bg-blue-gray-600 hover:bg-gray-100 focus:outline-none font-medium flex p-2 items-center"
 
 				>
-				<p class = "m-0 font-semibold text-gray-900 dark:text-white">{$page.params.lang}</p>
+				<p class = "m-0 font-semibold text-gray-900 dark:text-white">{$page.params.lang ? $page.params.lang : "..." }</p>
 				</button>
 				{#if showDropDownMenu}
 					<div
