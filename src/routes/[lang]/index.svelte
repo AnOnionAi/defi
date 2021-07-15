@@ -1,57 +1,69 @@
 <script context="module" lang="ts">
     export const prerender = false
     
+
     import { _ } from "svelte-i18n"
     import {setInit} from "$lib/i18n/init"
-    
-    export async function load({page}){
+
+    export function load({page}){
+
+        
         const { lang } = page.params;
-        setInit(lang)
+        
         return {
-            props:{lang}
+            props:{
+                lang
+            }
         }
+        
     }
     
 </script>
 <script lang="ts">
+
     import { onMount } from "svelte"
     import space from "../../../static/space.jpg"
-    import floppa from "../../../static/floppa.jpg"
+    import moon from "../../../static/moon.jpg"
     import mush from "../../../static/mush.jpg"
     import lact from "../../../static/lactarius.jpg"
+    import {darkMode} from "../../stores/dark"
+    import {getMush} from "./mushModle.svelte"
     import * as THREE from "three"
     export let lang
     let canvas;
-
+    let scene;
     onMount(() => {
-
-        
-        const scene = new THREE.Scene()
+        scene = new THREE.Scene()
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
 
         const renderer = new THREE.WebGLRenderer({
             canvas
         })
-
         renderer.setPixelRatio(window.devicePixelRatio)
         renderer.setSize(window.innerWidth, window.innerHeight)
 
         camera.position.setZ(30)
 
-        function sineWave ( u, v ) {
-            var x = u * 9 - 4.5;
-            var y = v * 9 - 4.5;
-            var z = Math.sin(u*Math.PI*2.0);
-                        
-            return new THREE.Vector3(x, y, z);
-        }
+        //Start Torus
+        const geometryTorusOne = new THREE.SphereGeometry( 5, 8, 8); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
+        const materialTorusOne = new THREE.MeshStandardMaterial({ color: 0xFF6347, wireframe:true })
+        const torusOne = new THREE.Mesh( geometryTorusOne, materialTorusOne )
 
-        const geometry = new THREE.TorusGeometry(10, 1.9, 6, 50) /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
+        scene.add(torusOne)
         
-        const material = new THREE.MeshStandardMaterial({ color: 0xFF6347 })
-        const torus = new THREE.Mesh( geometry, material )
-        scene.add(torus)
+        const geometryTorusThree = new THREE.TorusGeometry(7, 1, 5, 50) /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
+        const materialTorusThree = new THREE.MeshStandardMaterial({ color: 0xFF6347, wireframe:true })
+        const torusThree = new THREE.Mesh( geometryTorusThree, materialTorusThree )
+
+        const geometryTorusFour = new THREE.TorusGeometry(9, 1, 6, 50) /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
+        const materialTorusFour = new THREE.MeshStandardMaterial({ color: 0xE62E2D, wireframe:true })
+        const torusFour = new THREE.Mesh( geometryTorusFour, materialTorusFour )
+        scene.add(torusThree, torusFour)
+
+        torusOne.position.set(-7.5, 0, -39)
+        //torusTwo.position.set(-15, -10, -15)
+        // End Torus
 
         const lightPoint = new THREE.PointLight(0xffffff)
 
@@ -72,10 +84,16 @@
 
         Array(100).fill().forEach(addStar)
 
+        console.log($darkMode)
         const spaceTexture = new THREE.TextureLoader().load(space)
-        scene.background = spaceTexture
+        if($darkMode){
+            scene.background = new THREE.Color( 0x000000 );
+        }else{
+            scene.background = spaceTexture
+        }
+        
 
-        const floppaTexture = new THREE.TextureLoader().load(floppa)
+        const floppaTexture = new THREE.TextureLoader().load(moon)
         const lactTexture = new THREE.TextureLoader().load(lact)
         const mushTexture = new THREE.TextureLoader().load(mush)
 
@@ -100,16 +118,40 @@
             })
         )
 
-        scene.add(floppaMoon)
-        mushSquare.position.set(20, 10, -20);
-        lactarius.position.set(40, 10, -15);
+        /**
+            Getting gltf models
+        */
+        let mushMeshFA
+        let mushMeshLI
+        getMush().then(mush => {
+            mushMeshFA = mush[0].scene
+            mushMeshFA.position.set(0, -1.25, 0)
+            mushMeshLI = mush[1].scene
+            mushMeshLI.position.set(-7.5, 0, -39)
+            scene.add(mushMeshFA, mushMeshLI)
+
+        }).catch(err => {
+            console.log(err)
+        }) 
+
+
+        //scene.add(floppaMoon)
+        mushSquare.position.set(20, 10, -20)
 
         scene.add(mushSquare)
-        scene.add(lactarius)
         function animate(){
             requestAnimationFrame(animate)
-            torus.rotation.x += 0.01;
-            floppaMoon.rotation.y += 0.02; 
+            
+            torusOne.rotation.x += 0.015 
+            torusFour.rotation.x += 0.015 
+            torusThree.rotation.z += 0.015 
+            //torusTwo.rotation.y -= 0.015 
+            if(mushMeshFA){
+            mushMeshFA.rotation.x -= 0.015 
+            mushMeshFA.rotation.y += 0.015} 
+            /*
+            floppaMoon.rotation.y += 0.01; 
+            floppaMoon.rotation.z += 0.02; */
             mushSquare.rotation.y -= 0.01
             mushSquare.rotation.x -= 0.01
             lactarius.rotation.y -= 0.01
@@ -126,13 +168,15 @@
 
             renderer.render(scene, camera)
         }
-
         function moveCamera() {
-        const t = document.body.getBoundingClientRect().top;
-        
-
-            //camera.position.z = t * -0.01;
+            const t = document.body.getBoundingClientRect().top;
+            
+            torusOne.rotation.x += 0.18 
+            //torusTwo.rotation.y -= 0.18
+            
+            camera.position.z = 15 + t*0.1;
             camera.position.x = t * 0.00625;
+            console.log("Zc:",camera.position.z, "Xc:",camera.position.x, "Yc:",camera.position.y )
             camera.rotation.y = t * -0.00075;
         }
 
@@ -148,7 +192,6 @@
         animate()
 
     })
-
 </script>
 
 <section class = "relative">
@@ -156,20 +199,20 @@
 
     </canvas>
 
-    <section class = "mr-auto ml-auto w-5/6">
+    <section class = "text-white mr-auto ml-auto w-5/6">
 
   
         <section style = "margin: 150px 0;" class = "text-center">
           <h2 class = "relative text-5xl sm:text-9xl"><div>WELCOME TO</div>&#127812;ZYBER&#127812;</h2>
         </section>
-        <section style = "margin-bottom:15px; margin-top:40px;" class = "MUSH_about shadow-md rounded backdrop-filter backdrop-blur">
+        <section style = "margin-bottom:15px; margin-top:40px;" class = "MUSH_about shadow-md rounded backdrop-filter">
           <h2 class = "text-center text-5xl">📜 ABOUT</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </section>
   
-        <section class="MUSH_about shadow-md rounded backdrop-filter backdrop-blur w-full">
+        <section class="MUSH_about shadow-md rounded backdrop-filter w-full">
             <h2 class = "text-center text-5xl">&#128176;M U S H Stats&#127812;</h2>
             <div class = "MUSH_main_section">
                 <div style="padding-right:15px;" class= "MUSH_stats">
@@ -226,6 +269,7 @@
 
     .MUSH_about{
         padding:15px;
+        --tw-backdrop-blur: blur(1px);
     }
     .MUSH_about h2{
         margin-bottom:10px
