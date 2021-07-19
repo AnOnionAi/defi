@@ -9,6 +9,9 @@
         },
         "audits": {
             "title" : "Audits"
+        },
+        "trdae": {
+            "trade": "Commerce"
         }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 error pnpm": {
+    "code": "ELIFECYCLE",
+    "errno": "ENOENT",
+    "syscall": "spawn",
+    "file": "sh",
+    "pkgid": "webstarter@0.0.1",
+    "stage": "dev",
+    "script": "svelte-kit dev",
+    "pkgname": "webstarter",
+    "err": {
+      "name": "Error",
+      "message": "webstarter@0.0.1 dev: `svelte-kit dev`\nspawn ENOENT",
+      "code": "ELIFECYCLE",
+      "stack": "Error: webstarter@0.0.1 dev: `svelte-kit dev`\nspawn ENOENT\n    at ChildProcess.<anonymous> (/opt/homebrew/lib/node_modules/pnpm/dist/pnpm.cjs:92220:22)\n    at ChildProcess.emit (node:events:365:28)\n    at maybeClose (node:internal/child_process:1067:16)\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:301:5)"
+    }
+  }
+}

@@ -8,7 +8,10 @@
             "title" : "Contact"
         },
         "audits": {
-            "title":"Audits"
+            "title": "Audits"
+        },
+        "trade": {
+            "title": "Trade"
         }
     }
 }
