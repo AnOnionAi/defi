@@ -4,9 +4,10 @@
     export async function getMush(){
         try {
             const mushLoader = new GLTFLoader()
-            let mushModelFA = await mushLoader.loadAsync("./static/texturedmuscaria.gltf")
-            let mushModelLI = await mushLoader.loadAsync("./static/lactarius.gltf")
-            return [mushModelFA, mushModelLI]
+            let mushModelFA = await mushLoader.loadAsync("agaricglb.glb")
+            let dollarSign = await mushLoader.loadAsync("dollargold.glb")
+            let lactarius = await mushLoader.loadAsync("lactariusglb.glb")
+            return [mushModelFA, dollarSign, lactarius]
             
         } catch (error) {
             return error
