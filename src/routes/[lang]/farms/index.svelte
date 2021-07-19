@@ -20,9 +20,6 @@
 
 <script lang="ts">
     import {accounts} from "../../../stores/MetaMaskAccount";
-    import Web3 from "web3"
-    let web3 = new Web3(null);
-
     let accountsValue;
     let buttonName;
     
