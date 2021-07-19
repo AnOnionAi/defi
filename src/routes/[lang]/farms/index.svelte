@@ -1,12 +1,12 @@
 <script context="module" lang="ts">
     export const prerender = false
-    
     import { _ } from "svelte-i18n"
     import {setInit} from "$lib/i18n/init"
     import { darkMode } from "../../../stores/dark";
     import sushi from "../../../../static/sushi.png"
     import dyfn from "../../../../static/dfyn.svg"
     import quick from "../../../../static/quiswa.png"
+    
     export async function load({page}){
         const { lang } = page.params;
         setInit(lang)
@@ -14,10 +14,77 @@
             props:{lang}
         }
     }
-    
+  
 </script>
+
+
 <script lang="ts">
+    import {accounts} from "../../../stores/MetaMaskAccount";
+    import Web3 from "web3"
+    let web3 = new Web3(null);
+
+    let accountsValue;
+    let buttonName;
+    
+
+
+     accounts.subscribe(value => {
+        accountsValue=value;
+        if(value == undefined){
+            buttonName="Unlock";
+        }else{
+            buttonName="Execute";
+        }
+    });
+
+    const metaMaskCon = async () => {
+		try{
+			const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+			accounts.set(user_accounts)
+			
+		}catch{
+			console.log("failed")
+		}
+	};
+
+    const contractCall = async() => {
+    console.log(accountsValue[0]);
+    ethereum
+    .request({
+      method: 'eth_sendTransaction',
+      params: [
+        {
+          from: accountsValue[0],
+          to: '0x1455392a8Fe74789a80eF2B101a800C054E7B4A1',
+          value: '0x29a2241af62c0000',
+          gasPrice: '0x09184e72a000',
+          gas: '0x2710',
+        },
+      ],
+    })
+    .then((txHash) => console.log(txHash))
+    .catch((error) => console.error);
+    };
+
+    const buttonOnClickHandler = () => {
+        if (buttonName === "Unlock"){
+            metaMaskCon();
+        }
+        else if(buttonName === "Execute"){
+            contractCall();
+        }
+    }
+
+
+
+
+
+
+   
+    
+    
     export let lang
+
 </script>
 
 <section>
@@ -56,11 +123,12 @@
                                     <p>0%</p>
                                 </div>
                             </div>
-                            <a
+                            <a  
+                                on:click={buttonOnClickHandler}
                                 href="#"
                                 class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                             >
-                                Unlock
+                            {buttonName}
                             </a>
                             </div>
                         </div>
@@ -92,10 +160,11 @@
                                     </div>
                                 </div>
                                 <a
+                                    on:click={buttonOnClickHandler}
                                     href="#"
                                     class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                                 >
-                                    Unlock
+                                    {buttonName}
                                 </a>
                             </div>
                         </div>
@@ -127,10 +196,11 @@
                                     </div>
                                 </div>
                                 <a
+                                    on:click={buttonOnClickHandler}
                                     href="#"
                                     class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                                 >
-                                    Unlock
+                                    {buttonName}
                                 </a>
                             </div>
                         </div>
