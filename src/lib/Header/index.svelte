@@ -157,7 +157,7 @@
 				<a class="flex space-y-2 space-x-2" href="/">
 					<img class="w-10 rounded-full" src={bFloppa} alt="floppa">
 					<span class="w-24 text-lg dark:text-white font-semibold" style="margin: auto 0 auto 5px;">
-						F U N G F I
+						FUNG F I
 					</span>
 				</a>
 			</div>
