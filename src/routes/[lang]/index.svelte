@@ -46,7 +46,7 @@
         camera.position.setZ(30)
 
         //Start Torus
-        const geometryTorusOne = new THREE.SphereGeometry( 5, 8, 8); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
+        const geometryTorusOne = new THREE.TorusGeometry( 7, 1, 8, 25); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
         const materialTorusOne = new THREE.MeshStandardMaterial({ color: 0xFF6347, wireframe:true })
         const torusOne = new THREE.Mesh( geometryTorusOne, materialTorusOne )
 
@@ -61,8 +61,7 @@
         const torusFour = new THREE.Mesh( geometryTorusFour, materialTorusFour )
         scene.add(torusThree, torusFour)
 
-        torusOne.position.set(-7.5, 0, -39)
-        //torusTwo.position.set(-15, -10, -15)
+        torusOne.position.set(-1.5, 0, -47)
         // End Torus
 
         const lightPoint = new THREE.PointLight(0xffffff)
@@ -84,7 +83,6 @@
 
         Array(100).fill().forEach(addStar)
 
-        console.log($darkMode)
         const spaceTexture = new THREE.TextureLoader().load(space)
         if($darkMode){
             scene.background = new THREE.Color( 0x000000 );
@@ -97,20 +95,6 @@
         const lactTexture = new THREE.TextureLoader().load(lact)
         const mushTexture = new THREE.TextureLoader().load(mush)
 
-        const lactarius = new THREE.Mesh(
-            new THREE.OctahedronGeometry(10, 1),
-            new THREE.MeshBasicMaterial({
-                map: lactTexture
-            })
-        )
-
-        const mushSquare = new THREE.Mesh(
-            new THREE.BoxGeometry(9,9,9),
-            new THREE.MeshBasicMaterial({
-                map: mushTexture
-            })
-        )
-
         const floppaMoon = new THREE.Mesh(
             new THREE.SphereGeometry(8, 32, 32),
             new THREE.MeshStandardMaterial({
@@ -122,49 +106,47 @@
             Getting gltf models
         */
         let mushMeshFA
-        let mushMeshLI
+
+        let dollarSign
+        let mushMeshLA
         getMush().then(mush => {
-            mushMeshFA = mush[0].scene
+            const [agaric, dollar, lactarius] = mush
+            mushMeshFA = agaric.scene
             mushMeshFA.position.set(0, -1.25, 0)
-            mushMeshLI = mush[1].scene
-            mushMeshLI.position.set(-7.5, 0, -39)
-            scene.add(mushMeshFA, mushMeshLI)
+            dollarSign = dollar.scene
+            mushMeshLA = lactarius.scene
+            mushMeshLA.position.set(-1.5, 0, -47)
+            scene.add(mushMeshFA, dollarSign, mushMeshLA)
 
         }).catch(err => {
             console.log(err)
         }) 
 
-
-        //scene.add(floppaMoon)
-        mushSquare.position.set(20, 10, -20)
-
-        scene.add(mushSquare)
         function animate(){
             requestAnimationFrame(animate)
             
-            torusOne.rotation.x += 0.015 
+            var time = Date.now() * 0.0005;
+            
+            torusOne.rotation.y += 0.015 
             torusFour.rotation.x += 0.015 
             torusThree.rotation.z += 0.015 
-            //torusTwo.rotation.y -= 0.015 
             if(mushMeshFA){
             mushMeshFA.rotation.x -= 0.015 
-            mushMeshFA.rotation.y += 0.015} 
-            /*
-            floppaMoon.rotation.y += 0.01; 
-            floppaMoon.rotation.z += 0.02; */
-            mushSquare.rotation.y -= 0.01
-            mushSquare.rotation.x -= 0.01
-            lactarius.rotation.y -= 0.01
-            lactarius.rotation.x -= 0.01
-            var time = Date.now() * 0.0005;
-            mushSquare.position.x = Math.cos( time * 10 ) * 25;
-            mushSquare.position.y = Math.cos( time * 7 ) * 18;
-            mushSquare.position.z = Math.cos( time * 8 ) * 16;
-            /*
-            if(mushSquare.position.x > -30){
-                mushSquare.position.x -=0.1
+            mushMeshFA.rotation.y += 0.015
+            } 
+
+            if(mushMeshLA){
+                mushMeshLA.rotation.x += 0.01
+                mushMeshLA.rotation.Y += 0.0025
+                mushMeshLA.rotation.Z += 0.0025
             }
-            */
+            if(dollarSign){
+                dollarSign.rotation.y -= 0.01
+                dollarSign.rotation.x -= 0.01
+                dollarSign.position.x = Math.cos( time * 3 ) * 25;
+                dollarSign.position.y = Math.cos( time * 2.5 ) * 18;
+                dollarSign.position.z = Math.cos( time * 2 ) * 16;
+            }
 
             renderer.render(scene, camera)
         }
@@ -172,11 +154,9 @@
             const t = document.body.getBoundingClientRect().top;
             
             torusOne.rotation.x += 0.18 
-            //torusTwo.rotation.y -= 0.18
             
             camera.position.z = 15 + t*0.1;
             camera.position.x = t * 0.00625;
-            console.log("Zc:",camera.position.z, "Xc:",camera.position.x, "Yc:",camera.position.y )
             camera.rotation.y = t * -0.00075;
         }
 
