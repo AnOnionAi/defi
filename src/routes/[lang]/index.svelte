@@ -203,10 +203,10 @@
 
   
         <section style = "margin: 150px 0;" class = "text-center">
-          <h2 class = "relative text-5xl sm:text-9xl"><div>WELCOME TO</div>&#127812;ZYBER&#127812;</h2>
+          <h2 class = "relative text-5xl sm:text-9xl"><div>WELCOME TO</div>&#127812;#127812;</h2>
         </section>
         <section style = "margin-bottom:15px; margin-top:40px;" class = "MUSH_about shadow-md rounded backdrop-filter">
-          <h2 class = "text-center text-5xl">📜 ABOUT</h2>
+          <h2 class = "text-center text-5xl">📜 THE DEAL</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
