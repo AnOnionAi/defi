@@ -183,7 +183,7 @@
 
   
         <section style = "margin: 150px 0;" class = "text-center">
-          <h2 class = "relative text-5xl text-8xl"><div>FUNGUS FINANCIAL</div></h2>
+          <h2 class = "relative text-5xl text-8xl"><div>FUNG FI</div></h2>
           <h4 class = "relative italic text-4xl"><div>&#127812;WHERE MONEY GROWS&#127812;</div></h4> 
         </section>
 
