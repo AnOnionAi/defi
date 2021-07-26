@@ -183,8 +183,10 @@
 
   
         <section style = "margin: 150px 0;" class = "text-center">
-          <h2 class = "relative text-5xl text-8xl"><div>FUNG FI</div></h2>
-          <h4 class = "relative italic text-4xl"><div>&#127812;WHERE MONEY GROWS&#127812;</div></h4> 
+          <h2 class = "relative text-5xl"><div>FUNGUS</div></h2>
+          <h2 class = "relative text-5xl"><div>FINANCIAL</div></h2>
+               FI
+          <h4 class = "relative italic text-4xl"><div>WHERE MONEY GROWS&#127812;</div></h4> 
         </section>
 
         <section style = "margin-bottom:15px; margin-top:40px;" class = "MUSH_about shadow-md rounded backdrop-filter">
