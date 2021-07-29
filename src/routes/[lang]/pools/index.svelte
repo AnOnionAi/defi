@@ -6,7 +6,6 @@
     
     export async function load({page}){
         const { lang } = page.params;
-        setInit(lang)
         return {
             props:{lang}
         }

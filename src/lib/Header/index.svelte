@@ -13,7 +13,9 @@
 	import {accounts} from "../../stores/MetaMaskAccount"
 	import bFloppa from "../../../static/fungfi.png"
 	import {page} from "$app/stores"
+	import {goto} from "$app/navigation"
 	import {setInit} from "../i18n/init"
+	
 
 	if($page.params.lang){
 		setInit($page.params.lang)
@@ -64,7 +66,14 @@
 			title: "Vaults",
 		}
   	];
-	  import {onMount} from "svelte"
+
+	const gotoPage = (route:string, home:boolean = false) => {
+		if(home)
+			goto(`/${$page.params.lang}`, {replaceState:true})
+		else
+			goto(`/${$page.params.lang}/${route.toLowerCase()}`, {replaceState:true})
+	}
+	import {onMount} from "svelte"
 
 	let isInstalled = "checking"
 
@@ -136,13 +145,17 @@
 					>
 						{#each LANGUAGES as l}
 						<button
+							on:click={() => {
+								goto(`/${l.code}`)
+								setInit(l.code)
+							}}
 							style="background-color: {home
 							? (isDark? 'black' :'#F3F4F6')
 							: ''}; {isDark ? 'color:white' : ''};"
 							class:navbar_item_home={home}
 							class="dark:hover:bg-blue-gray-900 dark:text-white border-none block w-full px-4 py-2 text-dark-200 hover:bg-gray-100"
 						>
-						<a href= {`/${l.code}`}> {l.lang} </a>
+						{l.lang}
 						</button>
 						{/each}
 					</div>
@@ -154,12 +167,12 @@
 		>
 			<!-- LOGO -->
 			<div class="flex-shrink-0 flex items-center">
-				<a class="flex space-y-2 space-x-2" href="/">
+				<span class="flex space-y-2 space-x-2 cursor-pointer" on:click = {() => {gotoPage('',true)}}>
 					<img class="w-10 rounded-full" src={bFloppa} alt="floppa">
 					<span class="w-24 text-lg dark:text-white font-semibold" style="margin: auto 0 auto 5px;">
 						Z Y B E R
 					</span>
-				</a>
+				</span>
 			</div>
 			<!-- day/nite toggle -->
 
@@ -179,14 +192,19 @@
 					</span>
 				  </a>
 				  {#each PAGES as page}
-					
-					  <a href={page.route}>
-						<span
-						  class="dark:text-white dark:hover:bg-blue-gray-900 block hover:bg-gray-200 px-3 text-dark-800 py-3 rounded-md font-medium hover:no-underline no-underline"
-						>
-						  {page.title}
-						</span>
-					  </a>
+					<button
+				  		on:click={() => { 
+							  gotoPage(page.title)
+						}}
+					>
+						  <span
+							class="dark:text-white dark:hover:bg-blue-gray-900 block hover:bg-gray-200 px-3 text-dark-800 py-3 rounded-md font-medium hover:no-underline no-underline"
+						  >
+							{page.title}
+						  </span>
+						
+
+					</button>
 					  
 				  {/each}
 				  <button disabled={isInstalled == 'checking' || $accounts} on:click="{metaMaskCon}" class="hover:bg-none flex {$accounts && 'cursor-default bg-green-400'}">
@@ -251,13 +269,18 @@
 	>
 	  <div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-1">
 		{#each PAGES as page}
-			<a href={page.route}>
+		<button
+			on:click="{() => {
+				gotoPage(page.title)
+			}}"
+		>
 			  <span
 				class="block dark:hover:bg-dark-600 px-3 py-3 rounded-md font-medium"
 			  >
 				{page.title}
 			  </span>
-			</a>
+			
+		</button>
 		{/each}
 		<a on:click={changeDark} href="#">
 		  <span

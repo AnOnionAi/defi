@@ -2,9 +2,6 @@
     export const prerender = false
     
 
-    import { _ } from "svelte-i18n"
-    import {setInit} from "$lib/i18n/init"
-
     export function load({page}){
 
         
@@ -28,6 +25,7 @@
     import lact from "../../../static/lactarius.jpg"
     import {darkMode} from "../../stores/dark"
     import {getMush} from "./mushModle.svelte"
+    import { _ } from "svelte-i18n"
     import * as THREE from "three"
     export let lang
     let canvas;
@@ -183,7 +181,7 @@
 
   
         <section style = "margin: 150px 0;" class = "text-center">
-          <h2 class = "relative text-5xl sm:text-9xl"><div>WELCOME TO</div>&#127812;ZYBER&#127812;</h2>
+          <h2 class = "relative text-5xl sm:text-9xl"><div>{$_('hello')}</div>&#127812;ZYBER&#127812;</h2>
         </section>
         <section style = "margin-bottom:15px; margin-top:40px;" class = "MUSH_about shadow-md rounded backdrop-filter">
           <h2 class = "text-center text-5xl">📜 ABOUT</h2>
