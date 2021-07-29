@@ -9,7 +9,7 @@
     import quick from "../../../../static/quiswa.png"
     export async function load({page}){
         const { lang } = page.params;
-        setInit(lang)
+        
         return {
             props:{lang}
         }

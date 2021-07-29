@@ -2,9 +2,6 @@
     export const prerender = false
     
 
-    import { _ } from "svelte-i18n"
-    import {setInit} from "$lib/i18n/init"
-
     export function load({page}){
 
         
@@ -28,6 +25,7 @@
     import lact from "../../../static/lactarius.jpg"
     import {darkMode} from "../../stores/dark"
     import {getMush} from "./mushModle.svelte"
+    import { _ } from "svelte-i18n"
     import * as THREE from "three"
     export let lang
     let canvas;
@@ -183,6 +181,7 @@
 
   
         <section style = "margin: 150px 0;" class = "text-center">
+
           <h2 class = "relative text-5xl"><div>FUNGUS</div></h2>
           <h2 class = "relative text-5xl"><div>FINANCIAL</div></h2>
           <h4 class = "relative italic text-4xl"><div>WHERE MONEY GROWS&#127812;</div></h4> 
