@@ -1,6 +1,8 @@
 <script context="module" lang="ts"> 
 	export const prerender = false
 </script>
+
+
 <script lang="ts">
 	import 'virtual:windi.css'
 	import { scale } from "svelte/transition";	
@@ -11,10 +13,11 @@
 	import Icon from "fa-svelte"
 	import {darkMode} from "../../stores/dark"
 	import {accounts} from "../../stores/MetaMaskAccount"
+	import {ethers} from "ethers"
 	import bFloppa from "../../../static/fungfi.png"
 	import {page} from "$app/stores"
 	import {setInit} from "../i18n/init"
-
+	
 	if($page.params.lang){
 		setInit($page.params.lang)
 	}
@@ -89,7 +92,7 @@
 		try{
 			const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 			accounts.set(user_accounts)
-			
+
 		}catch{
 			console.log("failed")
 		}

@@ -17,16 +17,18 @@
   
 </script>
 
-
 <script lang="ts">
     import {accounts} from "../../../stores/MetaMaskAccount";
-    let accountsValue;
+    import { BigNumber, ethers } from "ethers";
+    import {getMasterChefContract, getZyberTokenContract,getTESTLPContract} from "../../../utils/contracts";
+    import {addresses} from "../../../config/constants/addresses";
+    import { farms } from "../../../config/constants/farms";
+
     let buttonName;
-    
-
-
+    let currentAccount;
+   
      accounts.subscribe(value => {
-        accountsValue=value;
+         currentAccount = value
         if(value == undefined){
             buttonName="Unlock";
         }else{
@@ -38,48 +40,93 @@
 		try{
 			const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 			accounts.set(user_accounts)
-			
 		}catch{
 			console.log("failed")
 		}
 	};
+ 
+    const approve = async () => {
+        const LPTokenContract = getZyberTokenContract();
+        await LPTokenContract.approve(addresses.ZyberToken.TEST,ethers.utils.parseUnits("10",18))
+    }
 
-    const contractCall = async() => {
-    console.log(accountsValue[0]);
-    ethereum
-    .request({
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          from: accountsValue[0],
-          to: '0x1455392a8Fe74789a80eF2B101a800C054E7B4A1',
-          value: '0x29a2241af62c0000',
-          gasPrice: '0x09184e72a000',
-          gas: '0x2710',
-        },
-      ],
-    })
-    .then((txHash) => console.log(txHash))
-    .catch((error) => console.error);
-    };
+    const getAllowance = async (tokenContract,owner,spender,) => {
+        const contractAllowance = await tokenContract.allowance(owner,spender);
+        return contractAllowance;
+    }
 
-    const buttonOnClickHandler = () => {
+    const checkIfApproved =  (allowance) => {
+        return ethers.constants.Zero == allowance;
+    }
+
+    const stake = async(farmID,wantAmount) => {
+        const MasterChef = getMasterChefContract();
+        await MasterChef.deposit(farmID,ethers.utils.parseUnits(wantAmount,18),ethers.constants.AddressZero);
+    }
+
+    const unStake = async(farmID,wantAmount) => {
+        const MasterChef = getMasterChefContract();
+        await MasterChef.withdraw(farmID,ethers.utils.parseUnits(wantAmount,18))
+    }
+
+    const withdrawFarmedMush = async(farmID) => {
+        const MasterChef = getMasterChefContract();
+        await MasterChef.deposit(farmID,ethers.utils.parseUnits("0",18),ethers.constants.AddressZero);
+    }
+
+    const getPendingMush = async(farmID) => {
+        let pendingMushBN,pendingMush;
+        const MasterChef = getMasterChefContract();
+        pendingMushBN =  await MasterChef.pendingmush(farmID,currentAccount[0])
+        pendingMush = ethers.utils.formatUnits(pendingMushBN,18);
+        return pendingMush;
+    }
+
+    const getUserStakedTokens = async(farmPID) => {
+        let userInfo;
+        const MasterChef = getMasterChefContract();
+        let {amount} = await MasterChef.userInfo(farmPID,currentAccount[0]);
+        amount = ethers.utils.formatUnits(amount,18);
+        return amount;
+    }
+
+    const getPoolInfo = async(farmPID) => {
+        const MasterChef = getMasterChefContract();
+        const poolInfo = await MasterChef.poolInfo(farmPID);
+        return poolInfo;
+    }
+
+    const buttonOnClickHandler = async (farmName) => {
+        console.log(currentAccount)
         if (buttonName === "Unlock"){
             metaMaskCon();
         }
         else if(buttonName === "Execute"){
-            contractCall();
+            // approve()
+            // .then(()=> stake("0","5"))
+            // .catch(()=>console.log("Transaccion no Autorizada"))
+            // console.log(await getPendingMush(farms["ZYBER FARM"].pid));
+            // console.log(await getUserStakedTokens(farms["ZYBER FARM"].pid));
+            withdrawFarmedMush(farms["ZYBER FARM"].pid)
+            .then(()=> console.log("Mush out!"))
+            .catch(()=> console.log("Error"))
         }
     }
 
+    const quickSwapFarm = async () => {
+        if (buttonName === "Unlock"){
+            metaMaskCon();
+        }
+        else if (buttonName === "Execute"){
+        const LPToken = getTESTLPContract();
+        const alowance = await getAllowance(LPToken,currentAccount[0],addresses.MasterChef.TEST);
+        console.log(alowance)
+        console.log(ethers.constants.Zero)
+        console.log(checkIfApproved(alowance));
+        }
+        }
 
 
-
-
-
-   
-    
-    
     export let lang
 
 </script>
@@ -120,8 +167,8 @@
                                     <p>0%</p>
                                 </div>
                             </div>
-                            <a  
-                                on:click={buttonOnClickHandler}
+                            <a       
+                                on:click={quickSwapFarm}
                                 href="#"
                                 class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                             >
