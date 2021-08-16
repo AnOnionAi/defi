@@ -29,27 +29,24 @@
     let isLogged = false;
     let currentAccount;
     let userInfoInFarm;
-    let earningsFromFarms;
     let approvedFarms;
-   onMount(()=>{
-    accounts.subscribe(value => {
-         currentAccount = value
-         currentAccount ? isLogged = true : isLogged = false;
-         if(isLogged){
-             (async() => {
-                earningsFromFarms = await fetchEarnedMushFromFarms();
-                userInfoInFarm = await fetchUserInfoFromFarms();
-                approvedFarms = await fetchApprovedFarms();
-                console.log(approvedFarms)
-             })();
-             
-         }
-        })
-   })
-
-     const userHasApproved = async() => {
-
-     }
+    let earningsFromFarms;
+    
+    onMount(()=>{
+        accounts.subscribe(value => {
+            currentAccount = value
+            currentAccount ? isLogged = true : isLogged = false;
+            if(isLogged){
+                (async() => {
+                    earningsFromFarms = await fetchEarnedMushFromFarms();
+                    userInfoInFarm = await fetchUserInfoFromFarms();
+                    approvedFarms = await fetchApprovedFarms();
+                    console.log(approvedFarms)
+                })();
+                
+            }
+            });
+    })
 
     const metaMaskCon = async () => {
 		try{
@@ -62,14 +59,7 @@
  
     const approve = async (pid: number) => {
         const lpTokens = getLPTokensContracts();
-        // const LPTokenContract = getZyberTokenContract();
-        // await LPTokenContract.approve(addresses.ZyberToken.TEST,ethers.utils.parseUnits("10",18))
         await lpTokens[pid].approve(farms[pid].lpTokenAddress,ethers.constants.MaxUint256);
-    }
-
-    const getAllowance = async (tokenContract,owner,spender,) => {
-        const contractAllowance = await tokenContract.allowance(owner,spender);
-        return contractAllowance;
     }
 
     const checkIfApproved =  (allowance: BigNumber) => {
@@ -81,12 +71,13 @@
         await MasterChef.deposit(farmID,ethers.utils.parseUnits(wantAmount,18),ethers.constants.AddressZero);
     }
 
-    const unStake = async(farmID,wantAmount) => {
+    const unStake = async(farmID: number) => {
+        const stakedAmount= await getUserStakedTokens(farmID);
         if(!isLogged){
             return;
         }
         const MasterChef = getMasterChefContract();
-        await MasterChef.withdraw(farmID,ethers.utils.parseUnits(wantAmount,18))
+        await MasterChef.withdraw(farmID,stakedAmount)
     }
 
     const harvestMush = async(farmID) => {
@@ -134,7 +125,6 @@
         let userInfo;
         const MasterChef = getMasterChefContract();
         let {amount} = await MasterChef.userInfo(farmPID,currentAccount[0]);
-        amount = ethers.utils.formatUnits(amount,18);
         return amount;
     }
 
@@ -154,16 +144,7 @@
         
     }
 
-    const quickSwapFarm = async () => {
-        // if (isLogged === "Unlock"){
-        //     metaMaskCon();
-        // }
-        // else if (isLogged === "Execute"){
-        // const LPToken = getTESTLPContract();
-        // const alowance = await getAllowance(LPToken,currentAccount[0],addresses.MasterChef.TEST);
-       
-        // }
-        }
+    const enableToOperate = (isLogged: boolean, isApproved: boolean) =>  new Boolean(isLogged && isApproved)
 
         
 
@@ -236,8 +217,10 @@
                                         {/if}
                                         </p>
                                         <a
+                                        on:click={()=> unStake(0)}
                                         href="#"
-                                        class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Unstake</a>
+                                        class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
+                                        Unstake</a>
                                     </div>
                                 </div>
                                 
@@ -293,7 +276,11 @@
                                             {"0"}
                                             {/if}
                                         </p>
-                                        <a class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Harvest</a>
+                                        <a 
+                                        href="#"
+                                        on:click={()=> harvestMush(1)}
+                                        class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
+                                        Harvest</a>
                                     </div>
                                     <div class="flex justify-between">
                                         <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
@@ -306,7 +293,9 @@
                                             0
                                             {/if}
                                         </p>
-                                        <a class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Unstake</a>
+                                        <a href="#"
+                                        on:click={()=> unStake(1)}
+                                        class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Unstake</a>
                                     </div>
                                 </div>
                                 <a
@@ -359,7 +348,11 @@
                                             0
                                             {/if}
                                         </p>
-                                        <a class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Harvest</a>
+                                        <a 
+                                        href="#"
+                                        on:click={()=> harvestMush(2)}
+                                        class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
+                                        Harvest</a>
                                     </div>
                                     <div class="flex justify-between">
                                         <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
@@ -372,7 +365,11 @@
                                             0
                                             {/if}
                                         </p>
-                                        <a class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Unstake</a>
+                                        <a
+                                        href="#"
+                                        on:click={()=> unStake(2)}
+                                        class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
+                                        Unstake</a>
                                     </div>
                                 </div>
                                 <a
