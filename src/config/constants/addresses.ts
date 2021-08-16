@@ -15,8 +15,12 @@ export const addresses = {
         "MAIN": ""
     },
 
-    "TEST-LP": {
+    "TESTLP": {
         "TEST": "0x996Ee77CA2434D46dF655062FBBFe5D143Ae24cf"
+    },
+    
+    "DYFN-TESTLP": {
+        "TEST": "0xdC0A4994662cd070277AD935fB652A8d09A1522A"
     }
 
 }

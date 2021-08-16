@@ -20,21 +20,36 @@
 <script lang="ts">
     import {accounts} from "../../../stores/MetaMaskAccount";
     import { BigNumber, ethers } from "ethers";
-    import {getMasterChefContract, getZyberTokenContract,getTESTLPContract} from "../../../utils/contracts";
+    import {getMasterChefContract, getZyberTokenContract,getLPTokensContracts} from "../../../utils/contracts";
     import {addresses} from "../../../config/constants/addresses";
+    import {parseBigNumberToDecimal} from "../../../utils/helpers"
     import { farms } from "../../../config/constants/farms";
+    import {onMount} from "svelte"
 
-    let buttonName;
+    let isLogged = false;
     let currentAccount;
-   
-     accounts.subscribe(value => {
+    let userInfoInFarm;
+    let earningsFromFarms;
+    let approvedFarms;
+   onMount(()=>{
+    accounts.subscribe(value => {
          currentAccount = value
-        if(value == undefined){
-            buttonName="Unlock";
-        }else{
-            buttonName="Execute";
-        }
-    });
+         currentAccount ? isLogged = true : isLogged = false;
+         if(isLogged){
+             (async() => {
+                earningsFromFarms = await fetchEarnedMushFromFarms();
+                userInfoInFarm = await fetchUserInfoFromFarms();
+                approvedFarms = await fetchApprovedFarms();
+                console.log(approvedFarms)
+             })();
+             
+         }
+        })
+   })
+
+     const userHasApproved = async() => {
+
+     }
 
     const metaMaskCon = async () => {
 		try{
@@ -45,9 +60,11 @@
 		}
 	};
  
-    const approve = async () => {
-        const LPTokenContract = getZyberTokenContract();
-        await LPTokenContract.approve(addresses.ZyberToken.TEST,ethers.utils.parseUnits("10",18))
+    const approve = async (pid: number) => {
+        const lpTokens = getLPTokensContracts();
+        // const LPTokenContract = getZyberTokenContract();
+        // await LPTokenContract.approve(addresses.ZyberToken.TEST,ethers.utils.parseUnits("10",18))
+        await lpTokens[pid].approve(farms[pid].lpTokenAddress,ethers.constants.MaxUint256);
     }
 
     const getAllowance = async (tokenContract,owner,spender,) => {
@@ -55,8 +72,8 @@
         return contractAllowance;
     }
 
-    const checkIfApproved =  (allowance) => {
-        return ethers.constants.Zero == allowance;
+    const checkIfApproved =  (allowance: BigNumber) => {
+        return ethers.constants.Zero._hex == allowance._hex;
     }
 
     const stake = async(farmID,wantAmount) => {
@@ -65,13 +82,44 @@
     }
 
     const unStake = async(farmID,wantAmount) => {
+        if(!isLogged){
+            return;
+        }
         const MasterChef = getMasterChefContract();
         await MasterChef.withdraw(farmID,ethers.utils.parseUnits(wantAmount,18))
     }
 
-    const withdrawFarmedMush = async(farmID) => {
+    const harvestMush = async(farmID) => {
+        if (!isLogged){
+            return;
+        }
         const MasterChef = getMasterChefContract();
         await MasterChef.deposit(farmID,ethers.utils.parseUnits("0",18),ethers.constants.AddressZero);
+    }
+
+    const fetchEarnedMushFromFarms = async() => {
+        const MasterChef = getMasterChefContract();
+        const earnings = await Promise.all(farms.map(async (farm) => {
+            return await MasterChef.pendingmush(farm.pid,currentAccount[0]);
+        }));
+        return earnings;
+    }
+
+    const fetchUserInfoFromFarms = async() => {
+        const MasterChef= getMasterChefContract();
+        const userInfoPerFarm = await Promise.all(farms.map(async (farm) => {
+           return await MasterChef.userInfo(farm.pid,currentAccount[0]);
+        }));
+        return userInfoPerFarm;
+    }
+
+    const fetchApprovedFarms = async() => {
+        const lpTokensContracts  = getLPTokensContracts();
+        const lpTokensAllowance = await Promise.all(lpTokensContracts.map(async (tknContract)=>{
+        return await tknContract.allowance(currentAccount[0],addresses.MasterChef.TEST);
+        }));
+        const farmsApproved = await lpTokensAllowance.map((allowance)=>checkIfApproved(allowance));
+        return farmsApproved;
     }
 
     const getPendingMush = async(farmID) => {
@@ -79,7 +127,7 @@
         const MasterChef = getMasterChefContract();
         pendingMushBN =  await MasterChef.pendingmush(farmID,currentAccount[0])
         pendingMush = ethers.utils.formatUnits(pendingMushBN,18);
-        return pendingMush;
+        return parseInt(pendingMush);
     }
 
     const getUserStakedTokens = async(farmPID) => {
@@ -96,39 +144,31 @@
         return poolInfo;
     }
 
-    const buttonOnClickHandler = async (farmName) => {
-        console.log(currentAccount)
-        if (buttonName === "Unlock"){
+    const buttonOnClickHandler =  (pid: number ) => {
+        if(!isLogged){
             metaMaskCon();
         }
-        else if(buttonName === "Execute"){
-            // approve()
-            // .then(()=> stake("0","5"))
-            // .catch(()=>console.log("Transaccion no Autorizada"))
-            // console.log(await getPendingMush(farms["ZYBER FARM"].pid));
-            // console.log(await getUserStakedTokens(farms["ZYBER FARM"].pid));
-            withdrawFarmedMush(farms["ZYBER FARM"].pid)
-            .then(()=> console.log("Mush out!"))
-            .catch(()=> console.log("Error"))
+        else if(isLogged){
+            approve(pid);
         }
+        
     }
 
     const quickSwapFarm = async () => {
-        if (buttonName === "Unlock"){
-            metaMaskCon();
+        // if (isLogged === "Unlock"){
+        //     metaMaskCon();
+        // }
+        // else if (isLogged === "Execute"){
+        // const LPToken = getTESTLPContract();
+        // const alowance = await getAllowance(LPToken,currentAccount[0],addresses.MasterChef.TEST);
+       
+        // }
         }
-        else if (buttonName === "Execute"){
-        const LPToken = getTESTLPContract();
-        const alowance = await getAllowance(LPToken,currentAccount[0],addresses.MasterChef.TEST);
-        console.log(alowance)
-        console.log(ethers.constants.Zero)
-        console.log(checkIfApproved(alowance));
-        }
-        }
+
+        
 
 
     export let lang
-
 </script>
 
 <section>
@@ -166,14 +206,54 @@
                                     <p>DEPOSIT FEE</p>
                                     <p>0%</p>
                                 </div>
+                                
+                                <div>
+                                    <div class="flex pt-3">
+                                        <p class="text-xs">MUSH EARNED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                        {#if earningsFromFarms}
+                                            {parseBigNumberToDecimal(earningsFromFarms[0])}
+                                        {:else}
+                                        0
+                                        {/if}
+                                        </p>
+                                        <a
+                                        on:click={() => harvestMush(0)} 
+                                        href="#" 
+                                        class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Harvest</a>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                        {#if userInfoInFarm}
+                                        {parseBigNumberToDecimal(userInfoInFarm[0].amount) }
+                                        {:else}
+                                        0
+                                        {/if}
+                                        </p>
+                                        <a
+                                        href="#"
+                                        class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Unstake</a>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <a       
-                                on:click={quickSwapFarm}
+                                on:click={() => buttonOnClickHandler(0)}
                                 href="#"
                                 class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                             >
-                            {buttonName}
+                            {#if isLogged }
+                            Approve
+                            {:else }
+                            Unlock
+                            {/if}
                             </a>
+                            
                             </div>
                         </div>
 
@@ -202,13 +282,43 @@
                                         <p>DEPOSIT FEE</p>
                                         <p>0%</p>
                                     </div>
+                                    <div class="flex pt-3">
+                                        <p class="text-xs">MUSH EARNED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                            {#if earningsFromFarms}
+                                            {parseBigNumberToDecimal(earningsFromFarms[1])}
+                                            {:else}
+                                            {"0"}
+                                            {/if}
+                                        </p>
+                                        <a class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Harvest</a>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                            {#if userInfoInFarm}
+                                            {parseBigNumberToDecimal(userInfoInFarm[1].amount)} 
+                                            {:else}
+                                            0
+                                            {/if}
+                                        </p>
+                                        <a class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Unstake</a>
+                                    </div>
                                 </div>
                                 <a
-                                    on:click={buttonOnClickHandler}
+                                    on:click={()=>buttonOnClickHandler(1)}
                                     href="#"
                                     class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                                 >
-                                    {buttonName}
+                                {#if isLogged }
+                                Approve
+                                {:else }
+                                Unlock
+                                {/if}
                                 </a>
                             </div>
                         </div>
@@ -238,13 +348,43 @@
                                         <p>DEPOSIT FEE</p>
                                         <p>0%</p>
                                     </div>
+                                    <div class="flex pt-3">
+                                        <p class="text-xs">MUSH EARNED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                            {#if earningsFromFarms}
+                                            {parseBigNumberToDecimal(earningsFromFarms[2])}
+                                            {:else}
+                                            0
+                                            {/if}
+                                        </p>
+                                        <a class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Harvest</a>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                            {#if userInfoInFarm}
+                                            {parseBigNumberToDecimal(userInfoInFarm[2].amount)}
+                                            {:else}
+                                            0
+                                            {/if}
+                                        </p>
+                                        <a class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Unstake</a>
+                                    </div>
                                 </div>
                                 <a
-                                    on:click={buttonOnClickHandler}
+                                    on:click={()=>buttonOnClickHandler(2)}
                                     href="#"
                                     class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                                 >
-                                    {buttonName}
+                                {#if isLogged }
+                                Approve
+                                {:else }
+                                Unlock
+                                {/if}
                                 </a>
                             </div>
                         </div>
@@ -269,5 +409,9 @@
       background-color: rgba(217, 119, 6, var(--tw-bg-opacity));
       --tw-text-opacity: 1;
       color: rgba(255, 255, 255, var(--tw-text-opacity));
+    }
+
+    .anchor-disabled {
+        pointer-events: none;
     }
 </style>
