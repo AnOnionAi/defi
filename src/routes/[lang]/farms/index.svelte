@@ -110,7 +110,8 @@
         return await tknContract.allowance(currentAccount[0],addresses.MasterChef.TEST);
         }));
         const farmsApproved = await lpTokensAllowance.map((allowance)=>checkIfApproved(allowance));
-        return farmsApproved;
+        const farmIsApproved = farmsApproved.map((bol) => bol? "Approved" : "Approve")
+        return farmIsApproved;
     }
 
     const getPendingMush = async(farmID) => {
@@ -144,7 +145,8 @@
         
     }
 
-    const enableToOperate = (isLogged: boolean, isApproved: boolean) =>  new Boolean(isLogged && isApproved)
+
+    const enableToOperate = (pid: number) =>  new Boolean(isLogged && approvedFarms[pid])
 
         
 
@@ -230,11 +232,13 @@
                                 href="#"
                                 class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                             >
-                            {#if isLogged }
-                            Approve
-                            {:else }
-                            Unlock
-                            {/if}
+                            {#if approvedFarms}
+                                {approvedFarms[0]}
+                                {:else if isLogged }
+                                Approve
+                                {:else}
+                                Unlock
+                                {/if}
                             </a>
                             
                             </div>
@@ -303,9 +307,11 @@
                                     href="#"
                                     class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                                 >
-                                {#if isLogged }
+                                {#if approvedFarms}
+                                {approvedFarms[1]}
+                                {:else if isLogged }
                                 Approve
-                                {:else }
+                                {:else}
                                 Unlock
                                 {/if}
                                 </a>
@@ -377,9 +383,11 @@
                                     href="#"
                                     class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
                                 >
-                                {#if isLogged }
+                                {#if approvedFarms}
+                                {approvedFarms[2]}
+                                {:else if isLogged }
                                 Approve
-                                {:else }
+                                {:else}
                                 Unlock
                                 {/if}
                                 </a>
