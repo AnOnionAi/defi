@@ -26,7 +26,7 @@
     import moon from "../../../static/moon.jpg"
     import mush from "../../../static/mush.jpg"
     import lact from "../../../static/lactarius.jpg"
-    import {darkMode} from "../../stores/dark"
+    import {darkMode} from "$lib/stores/dark"
     import {getMush} from "./mushModle.svelte"
     import * as THREE from "three"
     export let lang

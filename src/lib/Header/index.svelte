@@ -11,8 +11,8 @@
 	import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon.js"
 	import { faBars } from "@fortawesome/free-solid-svg-icons/faBars.js";
 	import Icon from "fa-svelte"
-	import {darkMode} from "../../stores/dark"
-	import {accounts} from "../../stores/MetaMaskAccount"
+	import {darkMode} from "$lib/stores/dark"
+	import {accounts} from "../stores/MetaMaskAccount"
 	import {ethers} from "ethers"
 	import bFloppa from "../../../static/fungfi.png"
 	import {page} from "$app/stores"

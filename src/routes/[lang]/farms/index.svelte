@@ -2,7 +2,7 @@
     export const prerender = false
     import { _ } from "svelte-i18n"
     import {setInit} from "$lib/i18n/init"
-    import { darkMode } from "../../../stores/dark";
+    import { darkMode } from "$lib/stores/dark"
     import sushi from "../../../../static/sushi.png"
     import dyfn from "../../../../static/dfyn.svg"
     import quick from "../../../../static/quiswa.png"
@@ -18,7 +18,7 @@
 </script>
 
 <script lang="ts">
-    import {accounts} from "../../../stores/MetaMaskAccount";
+    import {accounts} from "../../../lib/stores/MetaMaskAccount";
     import { BigNumber, ethers } from "ethers";
     import {getMasterChefContract, getZyberTokenContract,getLPTokensContracts} from "../../../utils/contracts";
     import {addresses} from "../../../config/constants/addresses";
@@ -29,7 +29,7 @@
     let isLogged = false;
     let currentAccount;
     let userInfoInFarm;
-    let approvedFarms;
+    let approvedFarms=[false,false,false];
     let earningsFromFarms;
     
     onMount(()=>{
@@ -57,18 +57,18 @@
 		}
 	};
  
-    const approve = async (pid: number) => {
+    const approve = async ( pid : number ) => {
         const lpTokens = getLPTokensContracts();
-        await lpTokens[pid].approve(farms[pid].lpTokenAddress,ethers.constants.MaxUint256);
+        await lpTokens[pid].approve(addresses.MasterChef.TEST,ethers.constants.MaxUint256);
     }
 
-    const checkIfApproved =  (allowance: BigNumber) => {
-        return ethers.constants.Zero._hex == allowance._hex;
+    const checkIfApproved = ( allowance : BigNumber ) => {
+        return ethers.constants.Zero._hex != allowance._hex;
     }
 
-    const stake = async(farmID,wantAmount) => {
+    const stake = async( farmID : number , wantAmount: string) => {
         const MasterChef = getMasterChefContract();
-        await MasterChef.deposit(farmID,ethers.utils.parseUnits(wantAmount,18),ethers.constants.AddressZero);
+        await MasterChef.deposit(farmID.toString(),ethers.utils.parseUnits(wantAmount,18),ethers.constants.AddressZero);
     }
 
     const unStake = async(farmID: number) => {
@@ -110,8 +110,7 @@
         return await tknContract.allowance(currentAccount[0],addresses.MasterChef.TEST);
         }));
         const farmsApproved = await lpTokensAllowance.map((allowance)=>checkIfApproved(allowance));
-        const farmIsApproved = farmsApproved.map((bol) => bol? "Approved" : "Approve")
-        return farmIsApproved;
+        return farmsApproved;
     }
 
     const getPendingMush = async(farmID) => {
@@ -123,7 +122,6 @@
     }
 
     const getUserStakedTokens = async(farmPID) => {
-        let userInfo;
         const MasterChef = getMasterChefContract();
         let {amount} = await MasterChef.userInfo(farmPID,currentAccount[0]);
         return amount;
@@ -145,16 +143,21 @@
         
     }
 
+   const onStakeHandler = async (farmPID: number) => {
+    await stake( farmPID ,stakeAmounts[farmPID].toString());
 
-    const enableToOperate = (pid: number) =>  new Boolean(isLogged && approvedFarms[pid])
+   }
 
-        
+   let stakeAmounts = [0,0,0];
 
+export let lang;
 
-    export let lang
+import { slide } from 'svelte/transition';
+
 </script>
 
 <section>
+      
         <br />
         <h1 class = "text-dark-200 dark:text-white text-4xl">F A R M S</h1>
         <section class:dark={$darkMode} class="mt-3">
@@ -224,181 +227,227 @@
                                         class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
                                         Unstake</a>
                                     </div>
+
+                                   {#if (isLogged && approvedFarms[0])}
+                                       <div class= "flex py-2 justify-center" in:slide="{{delay: 200, duration: 1000}}">
+                                            <div>
+                                                <input bind:value = {stakeAmounts[0]} class="border-2 rounded border-green-400">
+                                                <a href="" class="text-green-400 font-semibold px-2" on:click={()=> onStakeHandler(0)}>Stake</a>
+                                            </div>
+                                       </div>   
+                                   {/if}
+                                    
                                 </div>
-                                
                             </div>
+                            
                             <a       
                                 on:click={() => buttonOnClickHandler(0)}
                                 href="#"
-                                class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
+                                class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600 {(approvedFarms[0]) && 'hidden'}"
                             >
-                            {#if approvedFarms}
-                                {approvedFarms[0]}
+                            {#if approvedFarms[0]}
+                               Approved
                                 {:else if isLogged }
                                 Approve
                                 {:else}
                                 Unlock
                                 {/if}
                             </a>
-                            
+
                             </div>
                         </div>
 
-                        <div class="shadow-md dark:bg-dark-600 rounded-xl space-y-2 border dark:border-0">
+
+                        <div class="flex flex-col justify-between shadow-md dark:bg-dark-600 rounded-xl space-y-2 border dark:border-0">
                             <div class="flex justify-center items-center">
-                                <img class="max-h-40" src={sushi} alt="tic-tac-toe" />
+                            <img class="max-h-40" src={sushi} alt="tic-tac-toe" />
                             </div>
                             <div class="dark:bg-dark-300 bg-gray-100 p-2 space-y-3">
-                                <p class="text-lg font-bold dark:text-white">
-                                    SushiSwap
-                                </p>
-                                <div class = "px-5">
-                                    <div class="flex justify-between">
-                                        <p class = "font-semibold">APY:::</p>
-                                        <p>999%</p>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <p class = "font-semibold">APR:</p>
-                                        <p>999%</p>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <p class = "font-semibold">EARN:</p>
-                                        <p>MUSH</p>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <p>DEPOSIT FEE</p>
-                                        <p>0%</p>
-                                    </div>
-                                    <div class="flex pt-3">
-                                        <p class="text-xs">MUSH EARNED:</p>
-                                    </div>
-                                    <div class="flex justify-between pb-3">
-                                        <p class="p-1">
-                                            {#if earningsFromFarms}
-                                            {parseBigNumberToDecimal(earningsFromFarms[1])}
-                                            {:else}
-                                            {"0"}
-                                            {/if}
-                                        </p>
-                                        <a 
-                                        href="#"
-                                        on:click={()=> harvestMush(1)}
-                                        class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
-                                        Harvest</a>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
-                                    </div>
-                                    <div class="flex justify-between pb-3">
-                                        <p class="p-1">
-                                            {#if userInfoInFarm}
-                                            {parseBigNumberToDecimal(userInfoInFarm[1].amount)} 
-                                            {:else}
-                                            0
-                                            {/if}
-                                        </p>
-                                        <a href="#"
-                                        on:click={()=> unStake(1)}
-                                        class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Unstake</a>
-                                    </div>
+                            <p class="text-lg font-bold dark:text-white">
+                                SushiSwap
+                            </p>
+                            <div class = "px-5">
+                                <div class="flex justify-between">
+                                    <p class = "font-semibold">APY:::</p>
+                                    <p>999%</p>
                                 </div>
-                                <a
-                                    on:click={()=>buttonOnClickHandler(1)}
-                                    href="#"
-                                    class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
-                                >
-                                {#if approvedFarms}
-                                {approvedFarms[1]}
-                                {:else if isLogged }
-                                Approve
-                                {:else}
-                                Unlock
-                                {/if}
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="shadow-md dark:bg-dark-600 rounded-xl space-y-2 border dark:border-0">
-                            <div class="flex justify-center items-center">
-                                <img class="max-h-40" src={dyfn} alt="tic-tac-toe" />
-                            </div>
-                            <div class="dark:bg-dark-300 bg-gray-100 p-2 space-y-3">
-                                <p class="text-lg font-bold dark:text-white">
-                                    Dyfn
-                                </p>
-                                <div class = "px-5">
-                                    <div class="flex justify-between">
-                                        <p class = "font-semibold">APY:::</p>
-                                        <p>999%</p>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <p class = "font-semibold">APR:</p>
-                                        <p>999%</p>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <p class = "font-semibold">EARN:</p>
-                                        <p>MUSH</p>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <p>DEPOSIT FEE</p>
-                                        <p>0%</p>
-                                    </div>
+                                <div class="flex justify-between">
+                                    <p class = "font-semibold">APR:</p>
+                                    <p>999%</p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p class = "font-semibold">EARN:</p>
+                                    <p>MUSH</p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>DEPOSIT FEE</p>
+                                    <p>0%</p>
+                                </div>
+                                
+                                <div>
                                     <div class="flex pt-3">
                                         <p class="text-xs">MUSH EARNED:</p>
                                     </div>
                                     <div class="flex justify-between pb-3">
                                         <p class="p-1">
-                                            {#if earningsFromFarms}
-                                            {parseBigNumberToDecimal(earningsFromFarms[2])}
-                                            {:else}
-                                            0
-                                            {/if}
-                                        </p>
-                                        <a 
-                                        href="#"
-                                        on:click={()=> harvestMush(2)}
-                                        class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
-                                        Harvest</a>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
-                                    </div>
-                                    <div class="flex justify-between pb-3">
-                                        <p class="p-1">
-                                            {#if userInfoInFarm}
-                                            {parseBigNumberToDecimal(userInfoInFarm[2].amount)}
-                                            {:else}
-                                            0
-                                            {/if}
+                                        {#if earningsFromFarms}
+                                            {parseBigNumberToDecimal(earningsFromFarms[1])}
+                                        {:else}
+                                        0
+                                        {/if}
                                         </p>
                                         <a
+                                        on:click={() => harvestMush(1)} 
+                                        href="#" 
+                                        class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Harvest</a>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                        {#if userInfoInFarm}
+                                        {parseBigNumberToDecimal(userInfoInFarm[1].amount) }
+                                        {:else}
+                                        0
+                                        {/if}
+                                        </p>
+                                        <a
+                                        on:click={()=> unStake(1)}
                                         href="#"
-                                        on:click={()=> unStake(2)}
                                         class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
                                         Unstake</a>
                                     </div>
+
+                                   {#if (isLogged && approvedFarms[1])}
+                                       <div class= "flex py-2 justify-center" in:slide="{{delay: 200, duration: 1000}}">
+                                            <div>
+                                                <input bind:value = {stakeAmounts[1]} class="border-2 rounded border-green-400">
+                                                <a href="" class="text-green-400 font-semibold px-2" on:click={()=> onStakeHandler(1)}>Stake</a>
+                                            </div>
+                                       </div>   
+                                   {/if}
+                                    
                                 </div>
-                                <a
-                                    on:click={()=>buttonOnClickHandler(2)}
-                                    href="#"
-                                    class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
-                                >
-                                {#if approvedFarms}
-                                {approvedFarms[2]}
+                            </div>
+                            
+                            <a       
+                                on:click={() => buttonOnClickHandler(1)}
+                                href="#"
+                                class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600 {(approvedFarms[1]) && 'hidden'}"
+                            >
+                            {#if approvedFarms[1]}
+                               Approved
                                 {:else if isLogged }
                                 Approve
                                 {:else}
                                 Unlock
                                 {/if}
-                                </a>
+                            </a>
+
                             </div>
                         </div>
+
+                      
+
+
+                        <div class="flex flex-col justify-between shadow-md dark:bg-dark-600 rounded-xl space-y-2 border dark:border-0">
+                            <div class="flex justify-center items-center">
+                            <img class="max-h-40" src={dyfn } alt="tic-tac-toe" />
+                            </div>
+                            <div class="dark:bg-dark-300 bg-gray-100 p-2 space-y-3">
+                            <p class="text-lg font-bold dark:text-white">
+                                DYFN
+                            </p>
+                            <div class = "px-5">
+                                <div class="flex justify-between">
+                                    <p class = "font-semibold">APY:::</p>
+                                    <p>999%</p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p class = "font-semibold">APR:</p>
+                                    <p>999%</p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p class = "font-semibold">EARN:</p>
+                                    <p>MUSH</p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p>DEPOSIT FEE</p>
+                                    <p>0%</p>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex pt-3">
+                                        <p class="text-xs">MUSH EARNED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                        {#if earningsFromFarms}
+                                            {parseBigNumberToDecimal(earningsFromFarms[2])}
+                                        {:else}
+                                        0
+                                        {/if}
+                                        </p>
+                                        <a
+                                        on:click={() => harvestMush(2)} 
+                                        href="#" 
+                                        class=" text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">Harvest</a>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <p class="text-xs">MUSH-USDC LP TOKENS STAKED:</p>
+                                    </div>
+                                    <div class="flex justify-between pb-3">
+                                        <p class="p-1">
+                                        {#if userInfoInFarm}
+                                        {parseBigNumberToDecimal(userInfoInFarm[2].amount) }
+                                        {:else}
+                                        0
+                                        {/if}
+                                        </p>
+                                        <a
+                                        on:click={()=> unStake(2)}
+                                        href="#"
+                                        class="text-green-400 font-semibold p-1 rounded-md {! isLogged && 'cursor-not-allowed '}">
+                                        Unstake</a>
+                                    </div>
+
+                                   {#if (isLogged && approvedFarms[2])}
+                                       <div class= "flex py-2 justify-center" in:slide="{{delay: 200, duration: 1000}}">
+                                            <div>
+                                                <input bind:value = {stakeAmounts[2]} class="border-2 rounded border-green-400">
+                                                <a href="" class="text-green-400 font-semibold px-2" on:click={()=> onStakeHandler(2)}>Stake</a>
+                                            </div>
+                                       </div>   
+                                   {/if}
+                                    
+                                </div>
+                            </div>
+                            
+                            <a       
+                                on:click={() => buttonOnClickHandler(2)}
+                                href="#"
+                                class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600 {(approvedFarms[2]) && 'hidden'}"
+                            >
+                            {#if approvedFarms[2]}
+                               Approved
+                                {:else if isLogged }
+                                Approve 
+                                {:else}
+                                Unlock
+                                {/if}
+                            </a>
+
+                            </div>
+                        </div>
+
+
+                        
                         <!--End Farms-->
                     </div>
                 </div>
             </section>
           </section>
-          
 </section>
 
 
@@ -416,7 +465,9 @@
       color: rgba(255, 255, 255, var(--tw-text-opacity));
     }
 
-    .anchor-disabled {
-        pointer-events: none;
+        input:focus{
+        outline: none;
+        border-color: #16a34a;
     }
+
 </style>

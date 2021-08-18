@@ -1,5 +1,5 @@
 import { BigNumber, ethers } from "ethers";
-import { accounts } from "src/stores/MetaMaskAccount";
+import { accounts } from "$lib/stores/MetaMaskAccount";
 
 
 export const getEthersProvider = () => {

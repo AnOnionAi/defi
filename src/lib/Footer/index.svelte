@@ -1,6 +1,6 @@
 
 <script lang="ts">
-    import {darkMode} from "../../stores/dark";
+    import {darkMode} from "$lib/stores/dark";
 
     import { _ } from "svelte-i18n"
 </script>

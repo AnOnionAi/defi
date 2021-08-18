@@ -3,7 +3,7 @@
 	import Footer from "$lib/Footer/index.svelte"
 	import '../app.css';
 	import 'virtual:windi.css'
-	import {darkMode} from "../stores/dark"
+	import {darkMode} from "$lib/stores/dark"
 </script>
 
 		<Header />
