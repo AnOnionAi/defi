@@ -17,6 +17,10 @@
 	import bFloppa from "../../../static/fungfi.png"
 	import {page} from "$app/stores"
 	import {setInit} from "../i18n/init"
+
+
+
+
 	
 	if($page.params.lang){
 		setInit($page.params.lang)
