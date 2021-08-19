@@ -8,7 +8,7 @@
     <div
       class="dark:text-gray-300 dark:bg-blue-gray-800 w-full p-3 text-center text-xl"
     >
-    <div class = "ml-auto mr-auto w-md flex justify-center text-center">
+    <div class = "ml-auto mr-auto flex justify-center text-center">
 
         <a href="/#">
             <span class="font-normal p-1">
