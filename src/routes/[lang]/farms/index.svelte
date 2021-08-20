@@ -17,7 +17,7 @@
 </script>
 
 <script lang="ts">
-	import { accounts } from '../../../lib/stores/MetaMaskAccount';
+	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { BigNumber, ethers } from 'ethers';
 	import {
 		getMasterChefContract,

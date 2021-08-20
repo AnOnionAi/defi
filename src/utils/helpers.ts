@@ -1,5 +1,5 @@
 import { BigNumber, ethers } from 'ethers';
-import { accounts } from '$lib/stores/MetaMaskAccount';
+
 
 export const getEthersProvider = () => {
 	const provider = new ethers.providers.Web3Provider(window.ethereum);
