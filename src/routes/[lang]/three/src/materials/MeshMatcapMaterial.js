@@ -33,16 +33,14 @@ import { Color } from '../math/Color.js';
  */
 
 class MeshMatcapMaterial extends Material {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
-		this.defines = { 'MATCAP': '' };
+		this.defines = { MATCAP: '' };
 
 		this.type = 'MeshMatcapMaterial';
 
-		this.color = new Color( 0xffffff ); // diffuse
+		this.color = new Color(0xffffff); // diffuse
 
 		this.matcap = null;
 
@@ -53,7 +51,7 @@ class MeshMatcapMaterial extends Material {
 
 		this.normalMap = null;
 		this.normalMapType = TangentSpaceNormalMap;
-		this.normalScale = new Vector2( 1, 1 );
+		this.normalScale = new Vector2(1, 1);
 
 		this.displacementMap = null;
 		this.displacementScale = 1;
@@ -66,18 +64,15 @@ class MeshMatcapMaterial extends Material {
 
 		this.flatShading = false;
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
+	copy(source) {
+		super.copy(source);
 
-	copy( source ) {
+		this.defines = { MATCAP: '' };
 
-		super.copy( source );
-
-		this.defines = { 'MATCAP': '' };
-
-		this.color.copy( source.color );
+		this.color.copy(source.color);
 
 		this.matcap = source.matcap;
 
@@ -88,7 +83,7 @@ class MeshMatcapMaterial extends Material {
 
 		this.normalMap = source.normalMap;
 		this.normalMapType = source.normalMapType;
-		this.normalScale.copy( source.normalScale );
+		this.normalScale.copy(source.normalScale);
 
 		this.displacementMap = source.displacementMap;
 		this.displacementScale = source.displacementScale;
@@ -102,9 +97,7 @@ class MeshMatcapMaterial extends Material {
 		this.flatShading = source.flatShading;
 
 		return this;
-
 	}
-
 }
 
 MeshMatcapMaterial.prototype.isMeshMatcapMaterial = true;

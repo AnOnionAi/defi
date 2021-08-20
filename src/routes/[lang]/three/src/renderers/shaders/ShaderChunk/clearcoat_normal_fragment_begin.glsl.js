@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #ifdef CLEARCOAT
 
 	vec3 clearcoatNormal = geometryNormal;

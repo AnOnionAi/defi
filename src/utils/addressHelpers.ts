@@ -1,14 +1,13 @@
-import { addresses } from "src/config/constants/addresses";
-
+import { addresses } from 'src/config/constants/addresses';
 
 export const getMushAddress = () => {
-    return addresses.MushToken.TEST;
-}
+	return addresses.MushToken.TEST;
+};
 
 export const getMasterChefAddress = () => {
-    return addresses.MasterChef.TEST;
-}
+	return addresses.MasterChef.TEST;
+};
 
 export const getZyberTokenAddress = () => {
-    return addresses.ZyberToken.TEST;
-}
+	return addresses.ZyberToken.TEST;
+};

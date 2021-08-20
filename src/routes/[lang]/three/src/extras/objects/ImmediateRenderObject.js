@@ -1,13 +1,11 @@
 import { Object3D } from '../../core/Object3D.js';
 
 class ImmediateRenderObject extends Object3D {
-
-	constructor( material ) {
-
+	constructor(material) {
 		super();
 
 		this.material = material;
-		this.render = function ( /* renderCallback */ ) {};
+		this.render = function (/* renderCallback */) {};
 
 		this.hasPositions = false;
 		this.hasNormals = false;
@@ -20,12 +18,9 @@ class ImmediateRenderObject extends Object3D {
 		this.uvArray = null;
 
 		this.count = 0;
-
 	}
-
 }
 
 ImmediateRenderObject.prototype.isImmediateRenderObject = true;
-
 
 export { ImmediateRenderObject };

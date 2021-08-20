@@ -1,6 +1,6 @@
 name: Waffle
 
-on: 
+on:
   push:
     branches: [develop, release/*]
 
@@ -23,6 +23,3 @@ jobs:
       - name: run mocha/chai for waffle test
         run: |
           # Run Waffle Test
-
-
-  

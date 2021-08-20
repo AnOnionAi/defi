@@ -12,94 +12,80 @@ const _axis = /*@__PURE__*/ new Vector3();
 let _lineGeometry, _coneGeometry;
 
 class ArrowHelper extends Object3D {
-
 	// dir is assumed to be normalized
 
-	constructor( dir = new Vector3( 0, 0, 1 ), origin = new Vector3( 0, 0, 0 ), length = 1, color = 0xffff00, headLength = length * 0.2, headWidth = headLength * 0.2 ) {
-
+	constructor(
+		dir = new Vector3(0, 0, 1),
+		origin = new Vector3(0, 0, 0),
+		length = 1,
+		color = 0xffff00,
+		headLength = length * 0.2,
+		headWidth = headLength * 0.2
+	) {
 		super();
 
 		this.type = 'ArrowHelper';
 
-		if ( _lineGeometry === undefined ) {
-
+		if (_lineGeometry === undefined) {
 			_lineGeometry = new BufferGeometry();
-			_lineGeometry.setAttribute( 'position', new Float32BufferAttribute( [ 0, 0, 0, 0, 1, 0 ], 3 ) );
+			_lineGeometry.setAttribute('position', new Float32BufferAttribute([0, 0, 0, 0, 1, 0], 3));
 
-			_coneGeometry = new CylinderGeometry( 0, 0.5, 1, 5, 1 );
-			_coneGeometry.translate( 0, - 0.5, 0 );
-
+			_coneGeometry = new CylinderGeometry(0, 0.5, 1, 5, 1);
+			_coneGeometry.translate(0, -0.5, 0);
 		}
 
-		this.position.copy( origin );
+		this.position.copy(origin);
 
-		this.line = new Line( _lineGeometry, new LineBasicMaterial( { color: color, toneMapped: false } ) );
+		this.line = new Line(_lineGeometry, new LineBasicMaterial({ color: color, toneMapped: false }));
 		this.line.matrixAutoUpdate = false;
-		this.add( this.line );
+		this.add(this.line);
 
-		this.cone = new Mesh( _coneGeometry, new MeshBasicMaterial( { color: color, toneMapped: false } ) );
+		this.cone = new Mesh(_coneGeometry, new MeshBasicMaterial({ color: color, toneMapped: false }));
 		this.cone.matrixAutoUpdate = false;
-		this.add( this.cone );
+		this.add(this.cone);
 
-		this.setDirection( dir );
-		this.setLength( length, headLength, headWidth );
-
+		this.setDirection(dir);
+		this.setLength(length, headLength, headWidth);
 	}
 
-	setDirection( dir ) {
-
+	setDirection(dir) {
 		// dir is assumed to be normalized
 
-		if ( dir.y > 0.99999 ) {
-
-			this.quaternion.set( 0, 0, 0, 1 );
-
-		} else if ( dir.y < - 0.99999 ) {
-
-			this.quaternion.set( 1, 0, 0, 0 );
-
+		if (dir.y > 0.99999) {
+			this.quaternion.set(0, 0, 0, 1);
+		} else if (dir.y < -0.99999) {
+			this.quaternion.set(1, 0, 0, 0);
 		} else {
+			_axis.set(dir.z, 0, -dir.x).normalize();
 
-			_axis.set( dir.z, 0, - dir.x ).normalize();
+			const radians = Math.acos(dir.y);
 
-			const radians = Math.acos( dir.y );
-
-			this.quaternion.setFromAxisAngle( _axis, radians );
-
+			this.quaternion.setFromAxisAngle(_axis, radians);
 		}
-
 	}
 
-	setLength( length, headLength = length * 0.2, headWidth = headLength * 0.2 ) {
-
-		this.line.scale.set( 1, Math.max( 0.0001, length - headLength ), 1 ); // see #17458
+	setLength(length, headLength = length * 0.2, headWidth = headLength * 0.2) {
+		this.line.scale.set(1, Math.max(0.0001, length - headLength), 1); // see #17458
 		this.line.updateMatrix();
 
-		this.cone.scale.set( headWidth, headLength, headWidth );
+		this.cone.scale.set(headWidth, headLength, headWidth);
 		this.cone.position.y = length;
 		this.cone.updateMatrix();
-
 	}
 
-	setColor( color ) {
-
-		this.line.material.color.set( color );
-		this.cone.material.color.set( color );
-
+	setColor(color) {
+		this.line.material.color.set(color);
+		this.cone.material.color.set(color);
 	}
 
-	copy( source ) {
+	copy(source) {
+		super.copy(source, false);
 
-		super.copy( source, false );
-
-		this.line.copy( source.line );
-		this.cone.copy( source.cone );
+		this.line.copy(source.line);
+		this.cone.copy(source.cone);
 
 		return this;
-
 	}
-
 }
-
 
 export { ArrowHelper };

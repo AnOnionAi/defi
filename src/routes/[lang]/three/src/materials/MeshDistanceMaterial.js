@@ -22,9 +22,7 @@ import { Vector3 } from '../math/Vector3.js';
  */
 
 class MeshDistanceMaterial extends Material {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
 		this.type = 'MeshDistanceMaterial';
@@ -45,15 +43,13 @@ class MeshDistanceMaterial extends Material {
 
 		this.fog = false;
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
-	copy( source ) {
+	copy(source) {
+		super.copy(source);
 
-		super.copy( source );
-
-		this.referencePosition.copy( source.referencePosition );
+		this.referencePosition.copy(source.referencePosition);
 		this.nearDistance = source.nearDistance;
 		this.farDistance = source.farDistance;
 
@@ -68,9 +64,7 @@ class MeshDistanceMaterial extends Material {
 		this.displacementBias = source.displacementBias;
 
 		return this;
-
 	}
-
 }
 
 MeshDistanceMaterial.prototype.isMeshDistanceMaterial = true;

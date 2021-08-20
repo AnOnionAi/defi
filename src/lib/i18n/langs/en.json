@@ -1,17 +1,17 @@
 {
-    "hello": "Welcome to",
-    "pages":{
-        "about": {
-            "title" : "About"
-        },
-        "contact": {
-            "title" : "Contact"
-        },
-        "audits": {
-            "title": "Audits"
-        },
-        "trade": {
-            "title": "Trade"
-        }
-    }
+	"hello": "Welcome to",
+	"pages": {
+		"about": {
+			"title": "About"
+		},
+		"contact": {
+			"title": "Contact"
+		},
+		"audits": {
+			"title": "Audits"
+		},
+		"trade": {
+			"title": "Trade"
+		}
+	}
 }

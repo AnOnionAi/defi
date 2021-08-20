@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #ifdef USE_EMISSIVEMAP
 
 	uniform sampler2D emissiveMap;

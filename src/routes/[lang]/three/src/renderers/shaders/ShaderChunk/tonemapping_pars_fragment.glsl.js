@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #ifndef saturate
 // <common> may have defined saturate() already
 #define saturate(a) clamp( a, 0.0, 1.0 )

@@ -34,14 +34,12 @@ import { Color } from '../math/Color.js';
  */
 
 class MeshBasicMaterial extends Material {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
 		this.type = 'MeshBasicMaterial';
 
-		this.color = new Color( 0xffffff ); // emissive
+		this.color = new Color(0xffffff); // emissive
 
 		this.map = null;
 
@@ -67,15 +65,13 @@ class MeshBasicMaterial extends Material {
 
 		this.morphTargets = false;
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
-	copy( source ) {
+	copy(source) {
+		super.copy(source);
 
-		super.copy( source );
-
-		this.color.copy( source.color );
+		this.color.copy(source.color);
 
 		this.map = source.map;
 
@@ -102,9 +98,7 @@ class MeshBasicMaterial extends Material {
 		this.morphTargets = source.morphTargets;
 
 		return this;
-
 	}
-
 }
 
 MeshBasicMaterial.prototype.isMeshBasicMaterial = true;

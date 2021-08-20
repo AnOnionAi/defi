@@ -1,17 +1,17 @@
 {
-    "hello": "Bienvenue sur",
-    "pages":{
-        "about": {
-            "title" : "Environ"
-        },
-        "contact": {
-            "title" : "Contact"
-        },
-        "audits": {
-            "title" : "Audits"
-        },
-        "trdae": {
-            "trade": "Commerce"
-        }
-    }
+	"hello": "Bienvenue sur",
+	"pages": {
+		"about": {
+			"title": "Environ"
+		},
+		"contact": {
+			"title": "Contact"
+		},
+		"audits": {
+			"title": "Audits"
+		},
+		"trdae": {
+			"trade": "Commerce"
+		}
+	}
 }

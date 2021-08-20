@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 vec3 objectNormal = vec3( normal );
 
 #ifdef USE_TANGENT

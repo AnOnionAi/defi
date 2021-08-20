@@ -1,9 +1,7 @@
 import { Object3D } from '../core/Object3D.js';
 
 class Scene extends Object3D {
-
 	constructor() {
-
 		super();
 
 		this.type = 'Scene';
@@ -16,43 +14,35 @@ class Scene extends Object3D {
 
 		this.autoUpdate = true; // checked by the renderer
 
-		if ( typeof __THREE_DEVTOOLS__ !== 'undefined' ) {
-
-			__THREE_DEVTOOLS__.dispatchEvent( new CustomEvent( 'observe', { detail: this } ) ); // eslint-disable-line no-undef
-
+		if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
+			__THREE_DEVTOOLS__.dispatchEvent(new CustomEvent('observe', { detail: this })); // eslint-disable-line no-undef
 		}
-
 	}
 
-	copy( source, recursive ) {
+	copy(source, recursive) {
+		super.copy(source, recursive);
 
-		super.copy( source, recursive );
+		if (source.background !== null) this.background = source.background.clone();
+		if (source.environment !== null) this.environment = source.environment.clone();
+		if (source.fog !== null) this.fog = source.fog.clone();
 
-		if ( source.background !== null ) this.background = source.background.clone();
-		if ( source.environment !== null ) this.environment = source.environment.clone();
-		if ( source.fog !== null ) this.fog = source.fog.clone();
-
-		if ( source.overrideMaterial !== null ) this.overrideMaterial = source.overrideMaterial.clone();
+		if (source.overrideMaterial !== null) this.overrideMaterial = source.overrideMaterial.clone();
 
 		this.autoUpdate = source.autoUpdate;
 		this.matrixAutoUpdate = source.matrixAutoUpdate;
 
 		return this;
-
 	}
 
-	toJSON( meta ) {
+	toJSON(meta) {
+		const data = super.toJSON(meta);
 
-		const data = super.toJSON( meta );
-
-		if ( this.background !== null ) data.object.background = this.background.toJSON( meta );
-		if ( this.environment !== null ) data.object.environment = this.environment.toJSON( meta );
-		if ( this.fog !== null ) data.object.fog = this.fog.toJSON();
+		if (this.background !== null) data.object.background = this.background.toJSON(meta);
+		if (this.environment !== null) data.object.environment = this.environment.toJSON(meta);
+		if (this.fog !== null) data.object.fog = this.fog.toJSON();
 
 		return data;
-
 	}
-
 }
 
 Scene.prototype.isScene = true;

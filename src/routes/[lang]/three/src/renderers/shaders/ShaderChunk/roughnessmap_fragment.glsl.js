@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 float roughnessFactor = roughness;
 
 #ifdef USE_ROUGHNESSMAP

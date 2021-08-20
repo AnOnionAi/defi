@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #ifdef USE_LIGHTMAP
 
 	vec4 lightMapTexel= texture2D( lightMap, vUv2 );

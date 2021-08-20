@@ -13,14 +13,12 @@ import { Color } from '../math/Color.js';
  */
 
 class LineBasicMaterial extends Material {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
 		this.type = 'LineBasicMaterial';
 
-		this.color = new Color( 0xffffff );
+		this.color = new Color(0xffffff);
 
 		this.linewidth = 1;
 		this.linecap = 'round';
@@ -28,16 +26,13 @@ class LineBasicMaterial extends Material {
 
 		this.morphTargets = false;
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
+	copy(source) {
+		super.copy(source);
 
-	copy( source ) {
-
-		super.copy( source );
-
-		this.color.copy( source.color );
+		this.color.copy(source.color);
 
 		this.linewidth = source.linewidth;
 		this.linecap = source.linecap;
@@ -46,9 +41,7 @@ class LineBasicMaterial extends Material {
 		this.morphTargets = source.morphTargets;
 
 		return this;
-
 	}
-
 }
 
 LineBasicMaterial.prototype.isLineBasicMaterial = true;

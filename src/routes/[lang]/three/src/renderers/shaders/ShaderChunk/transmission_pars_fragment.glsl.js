@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #ifdef USE_TRANSMISSION
 
 	// Transmission code is based on glTF-Sampler-Viewer

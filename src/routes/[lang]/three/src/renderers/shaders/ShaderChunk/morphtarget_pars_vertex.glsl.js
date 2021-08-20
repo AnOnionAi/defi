@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #ifdef USE_MORPHTARGETS
 
 	uniform float morphTargetBaseInfluence;

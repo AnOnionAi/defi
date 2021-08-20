@@ -1,20 +1,20 @@
 <script lang="ts">
 	import Header from '$lib/Header/index.svelte';
-	import Footer from "$lib/Footer/index.svelte"
+	import Footer from '$lib/Footer/index.svelte';
 	import '../app.css';
-	import 'virtual:windi.css'
-	import {darkMode} from "$lib/stores/dark"
+	import 'virtual:windi.css';
+	import { darkMode } from '$lib/stores/dark';
 </script>
 
-		<Header />
-		<main class:dark = {$darkMode} class = "main">
-			<div class = "dark:bg-blue-gray-900 main">
-				<slot />
-			</div>
-		</main>
+<Header />
+<main class:dark={$darkMode} class="main">
+	<div class="dark:bg-blue-gray-900 main">
+		<slot />
+	</div>
+</main>
 
-		<Footer />
-	
+<Footer />
+
 <style>
 	.main {
 		flex: 1;

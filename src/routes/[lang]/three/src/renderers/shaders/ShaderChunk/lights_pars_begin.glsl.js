@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 uniform bool receiveShadow;
 uniform vec3 ambientLightColor;
 uniform vec3 lightProbe[ 9 ];
