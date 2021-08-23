@@ -155,26 +155,22 @@ export { WebGLUtils } from './renderers/webgl/WebGLUtils.js';
 export * from './constants.js';
 export * from './Three.Legacy.js';
 
-if ( typeof __THREE_DEVTOOLS__ !== 'undefined' ) {
-
+if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
 	/* eslint-disable no-undef */
-	__THREE_DEVTOOLS__.dispatchEvent( new CustomEvent( 'register', { detail: {
-		revision: REVISION,
-	} } ) );
+	__THREE_DEVTOOLS__.dispatchEvent(
+		new CustomEvent('register', {
+			detail: {
+				revision: REVISION
+			}
+		})
+	);
 	/* eslint-enable no-undef */
-
 }
 
-if ( typeof window !== 'undefined' ) {
-
-	if ( window.__THREE__ ) {
-
-		console.warn( 'WARNING: Multiple instances of Three.js being imported.' );
-
+if (typeof window !== 'undefined') {
+	if (window.__THREE__) {
+		console.warn('WARNING: Multiple instances of Three.js being imported.');
 	} else {
-
 		window.__THREE__ = REVISION;
-
 	}
-
 }

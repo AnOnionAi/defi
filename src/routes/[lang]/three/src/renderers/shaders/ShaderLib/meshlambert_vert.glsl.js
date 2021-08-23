@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #define LAMBERT
 
 varying vec3 vLightFront;

@@ -2,9 +2,7 @@ import { Texture } from './Texture.js';
 import { ClampToEdgeWrapping, NearestFilter } from '../constants.js';
 
 class DataTexture3D extends Texture {
-
-	constructor( data = null, width = 1, height = 1, depth = 1 ) {
-
+	constructor(data = null, width = 1, height = 1, depth = 1) {
 		// We're going to add .setXXX() methods for setting properties later.
 		// Users can still set in DataTexture3D directly.
 		//
@@ -13,7 +11,7 @@ class DataTexture3D extends Texture {
 		//
 		// See #14839
 
-		super( null );
+		super(null);
 
 		this.image = { data, width, height, depth };
 
@@ -27,9 +25,7 @@ class DataTexture3D extends Texture {
 		this.unpackAlignment = 1;
 
 		this.needsUpdate = true;
-
 	}
-
 }
 
 DataTexture3D.prototype.isDataTexture3D = true;

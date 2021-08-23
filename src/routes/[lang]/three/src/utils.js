@@ -1,33 +1,25 @@
-function arrayMin( array ) {
+function arrayMin(array) {
+	if (array.length === 0) return Infinity;
 
-	if ( array.length === 0 ) return Infinity;
+	let min = array[0];
 
-	let min = array[ 0 ];
-
-	for ( let i = 1, l = array.length; i < l; ++ i ) {
-
-		if ( array[ i ] < min ) min = array[ i ];
-
+	for (let i = 1, l = array.length; i < l; ++i) {
+		if (array[i] < min) min = array[i];
 	}
 
 	return min;
-
 }
 
-function arrayMax( array ) {
+function arrayMax(array) {
+	if (array.length === 0) return -Infinity;
 
-	if ( array.length === 0 ) return - Infinity;
+	let max = array[0];
 
-	let max = array[ 0 ];
-
-	for ( let i = 1, l = array.length; i < l; ++ i ) {
-
-		if ( array[ i ] > max ) max = array[ i ];
-
+	for (let i = 1, l = array.length; i < l; ++i) {
+		if (array[i] > max) max = array[i];
 	}
 
 	return max;
-
 }
 
 const TYPED_ARRAYS = {
@@ -42,10 +34,8 @@ const TYPED_ARRAYS = {
 	Float64Array: Float64Array
 };
 
-function getTypedArray( type, buffer ) {
-
-	return new TYPED_ARRAYS[ type ]( buffer );
-
+function getTypedArray(type, buffer) {
+	return new TYPED_ARRAYS[type](buffer);
 }
 
 export { arrayMin, arrayMax, getTypedArray };

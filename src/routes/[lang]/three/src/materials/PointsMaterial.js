@@ -16,14 +16,12 @@ import { Color } from '../math/Color.js';
  */
 
 class PointsMaterial extends Material {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
 		this.type = 'PointsMaterial';
 
-		this.color = new Color( 0xffffff );
+		this.color = new Color(0xffffff);
 
 		this.map = null;
 
@@ -34,15 +32,13 @@ class PointsMaterial extends Material {
 
 		this.morphTargets = false;
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
-	copy( source ) {
+	copy(source) {
+		super.copy(source);
 
-		super.copy( source );
-
-		this.color.copy( source.color );
+		this.color.copy(source.color);
 
 		this.map = source.map;
 
@@ -54,9 +50,7 @@ class PointsMaterial extends Material {
 		this.morphTargets = source.morphTargets;
 
 		return this;
-
 	}
-
 }
 
 PointsMaterial.prototype.isPointsMaterial = true;

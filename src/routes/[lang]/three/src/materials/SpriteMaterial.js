@@ -12,14 +12,12 @@ import { Color } from '../math/Color.js';
  */
 
 class SpriteMaterial extends Material {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
 		this.type = 'SpriteMaterial';
 
-		this.color = new Color( 0xffffff );
+		this.color = new Color(0xffffff);
 
 		this.map = null;
 
@@ -31,15 +29,13 @@ class SpriteMaterial extends Material {
 
 		this.transparent = true;
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
-	copy( source ) {
+	copy(source) {
+		super.copy(source);
 
-		super.copy( source );
-
-		this.color.copy( source.color );
+		this.color.copy(source.color);
 
 		this.map = source.map;
 
@@ -50,9 +46,7 @@ class SpriteMaterial extends Material {
 		this.sizeAttenuation = source.sizeAttenuation;
 
 		return this;
-
 	}
-
 }
 
 SpriteMaterial.prototype.isSpriteMaterial = true;

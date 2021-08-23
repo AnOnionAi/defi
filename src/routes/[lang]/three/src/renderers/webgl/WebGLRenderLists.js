@@ -1,58 +1,32 @@
-function painterSortStable( a, b ) {
-
-	if ( a.groupOrder !== b.groupOrder ) {
-
+function painterSortStable(a, b) {
+	if (a.groupOrder !== b.groupOrder) {
 		return a.groupOrder - b.groupOrder;
-
-	} else if ( a.renderOrder !== b.renderOrder ) {
-
+	} else if (a.renderOrder !== b.renderOrder) {
 		return a.renderOrder - b.renderOrder;
-
-	} else if ( a.program !== b.program ) {
-
+	} else if (a.program !== b.program) {
 		return a.program.id - b.program.id;
-
-	} else if ( a.material.id !== b.material.id ) {
-
+	} else if (a.material.id !== b.material.id) {
 		return a.material.id - b.material.id;
-
-	} else if ( a.z !== b.z ) {
-
+	} else if (a.z !== b.z) {
 		return a.z - b.z;
-
 	} else {
-
 		return a.id - b.id;
-
 	}
-
 }
 
-function reversePainterSortStable( a, b ) {
-
-	if ( a.groupOrder !== b.groupOrder ) {
-
+function reversePainterSortStable(a, b) {
+	if (a.groupOrder !== b.groupOrder) {
 		return a.groupOrder - b.groupOrder;
-
-	} else if ( a.renderOrder !== b.renderOrder ) {
-
+	} else if (a.renderOrder !== b.renderOrder) {
 		return a.renderOrder - b.renderOrder;
-
-	} else if ( a.z !== b.z ) {
-
+	} else if (a.z !== b.z) {
 		return b.z - a.z;
-
 	} else {
-
 		return a.id - b.id;
-
 	}
-
 }
 
-
-function WebGLRenderList( properties ) {
-
+function WebGLRenderList(properties) {
 	const renderItems = [];
 	let renderItemsIndex = 0;
 
@@ -60,25 +34,21 @@ function WebGLRenderList( properties ) {
 	const transmissive = [];
 	const transparent = [];
 
-	const defaultProgram = { id: - 1 };
+	const defaultProgram = { id: -1 };
 
 	function init() {
-
 		renderItemsIndex = 0;
 
 		opaque.length = 0;
 		transmissive.length = 0;
 		transparent.length = 0;
-
 	}
 
-	function getNextRenderItem( object, geometry, material, groupOrder, z, group ) {
+	function getNextRenderItem(object, geometry, material, groupOrder, z, group) {
+		let renderItem = renderItems[renderItemsIndex];
+		const materialProperties = properties.get(material);
 
-		let renderItem = renderItems[ renderItemsIndex ];
-		const materialProperties = properties.get( material );
-
-		if ( renderItem === undefined ) {
-
+		if (renderItem === undefined) {
 			renderItem = {
 				id: object.id,
 				object: object,
@@ -91,10 +61,8 @@ function WebGLRenderList( properties ) {
 				group: group
 			};
 
-			renderItems[ renderItemsIndex ] = renderItem;
-
+			renderItems[renderItemsIndex] = renderItem;
 		} else {
-
 			renderItem.id = object.id;
 			renderItem.object = object;
 			renderItem.geometry = geometry;
@@ -104,72 +72,51 @@ function WebGLRenderList( properties ) {
 			renderItem.renderOrder = object.renderOrder;
 			renderItem.z = z;
 			renderItem.group = group;
-
 		}
 
-		renderItemsIndex ++;
+		renderItemsIndex++;
 
 		return renderItem;
-
 	}
 
-	function push( object, geometry, material, groupOrder, z, group ) {
+	function push(object, geometry, material, groupOrder, z, group) {
+		const renderItem = getNextRenderItem(object, geometry, material, groupOrder, z, group);
 
-		const renderItem = getNextRenderItem( object, geometry, material, groupOrder, z, group );
-
-		if ( material.transmission > 0.0 ) {
-
-			transmissive.push( renderItem );
-
-		} else if ( material.transparent === true ) {
-
-			transparent.push( renderItem );
-
+		if (material.transmission > 0.0) {
+			transmissive.push(renderItem);
+		} else if (material.transparent === true) {
+			transparent.push(renderItem);
 		} else {
-
-			opaque.push( renderItem );
-
+			opaque.push(renderItem);
 		}
-
 	}
 
-	function unshift( object, geometry, material, groupOrder, z, group ) {
+	function unshift(object, geometry, material, groupOrder, z, group) {
+		const renderItem = getNextRenderItem(object, geometry, material, groupOrder, z, group);
 
-		const renderItem = getNextRenderItem( object, geometry, material, groupOrder, z, group );
-
-		if ( material.transmission > 0.0 ) {
-
-			transmissive.unshift( renderItem );
-
-		} else if ( material.transparent === true ) {
-
-			transparent.unshift( renderItem );
-
+		if (material.transmission > 0.0) {
+			transmissive.unshift(renderItem);
+		} else if (material.transparent === true) {
+			transparent.unshift(renderItem);
 		} else {
-
-			opaque.unshift( renderItem );
-
+			opaque.unshift(renderItem);
 		}
-
 	}
 
-	function sort( customOpaqueSort, customTransparentSort ) {
-
-		if ( opaque.length > 1 ) opaque.sort( customOpaqueSort || painterSortStable );
-		if ( transmissive.length > 1 ) transmissive.sort( customTransparentSort || reversePainterSortStable );
-		if ( transparent.length > 1 ) transparent.sort( customTransparentSort || reversePainterSortStable );
-
+	function sort(customOpaqueSort, customTransparentSort) {
+		if (opaque.length > 1) opaque.sort(customOpaqueSort || painterSortStable);
+		if (transmissive.length > 1)
+			transmissive.sort(customTransparentSort || reversePainterSortStable);
+		if (transparent.length > 1) transparent.sort(customTransparentSort || reversePainterSortStable);
 	}
 
 	function finish() {
-
 		// Clear references from inactive renderItems in the list
 
-		for ( let i = renderItemsIndex, il = renderItems.length; i < il; i ++ ) {
+		for (let i = renderItemsIndex, il = renderItems.length; i < il; i++) {
+			const renderItem = renderItems[i];
 
-			const renderItem = renderItems[ i ];
-
-			if ( renderItem.id === null ) break;
+			if (renderItem.id === null) break;
 
 			renderItem.id = null;
 			renderItem.object = null;
@@ -177,13 +124,10 @@ function WebGLRenderList( properties ) {
 			renderItem.material = null;
 			renderItem.program = null;
 			renderItem.group = null;
-
 		}
-
 	}
 
 	return {
-
 		opaque: opaque,
 		transmissive: transmissive,
 		transparent: transparent,
@@ -195,53 +139,37 @@ function WebGLRenderList( properties ) {
 
 		sort: sort
 	};
-
 }
 
-function WebGLRenderLists( properties ) {
-
+function WebGLRenderLists(properties) {
 	let lists = new WeakMap();
 
-	function get( scene, renderCallDepth ) {
-
+	function get(scene, renderCallDepth) {
 		let list;
 
-		if ( lists.has( scene ) === false ) {
-
-			list = new WebGLRenderList( properties );
-			lists.set( scene, [ list ] );
-
+		if (lists.has(scene) === false) {
+			list = new WebGLRenderList(properties);
+			lists.set(scene, [list]);
 		} else {
-
-			if ( renderCallDepth >= lists.get( scene ).length ) {
-
-				list = new WebGLRenderList( properties );
-				lists.get( scene ).push( list );
-
+			if (renderCallDepth >= lists.get(scene).length) {
+				list = new WebGLRenderList(properties);
+				lists.get(scene).push(list);
 			} else {
-
-				list = lists.get( scene )[ renderCallDepth ];
-
+				list = lists.get(scene)[renderCallDepth];
 			}
-
 		}
 
 		return list;
-
 	}
 
 	function dispose() {
-
 		lists = new WeakMap();
-
 	}
 
 	return {
 		get: get,
 		dispose: dispose
 	};
-
 }
-
 
 export { WebGLRenderLists, WebGLRenderList };

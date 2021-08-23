@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 uniform vec3 diffuse;
 uniform vec3 emissive;
 uniform float opacity;

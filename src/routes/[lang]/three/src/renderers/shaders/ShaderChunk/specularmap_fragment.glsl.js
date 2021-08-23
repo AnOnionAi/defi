@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 float specularStrength;
 
 #ifdef USE_SPECULARMAP

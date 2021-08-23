@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #if defined( USE_COLOR_ALPHA )
 
 	vColor = vec4( 1.0 );

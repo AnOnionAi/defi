@@ -1,7 +1,8 @@
 ## Starting the zyber project
+
 ```
 git clone https://github.com/ZetiAi/zyber.git
-pnpm install 
+pnpm install
 pnpm run dev
 ```
 

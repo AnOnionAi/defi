@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #ifdef DITHERING
 
 	// based on https://www.shadertoy.com/view/MslGR8

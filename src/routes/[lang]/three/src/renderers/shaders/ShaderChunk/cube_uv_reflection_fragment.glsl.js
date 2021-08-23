@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #ifdef ENVMAP_TYPE_CUBE_UV
 
 	#define cubeUV_maxMipLevel 8.0

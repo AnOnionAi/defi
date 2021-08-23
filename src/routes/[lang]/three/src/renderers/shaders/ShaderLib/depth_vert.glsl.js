@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #include <common>
 #include <uv_pars_vertex>
 #include <displacementmap_pars_vertex>

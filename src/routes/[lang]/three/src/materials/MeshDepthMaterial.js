@@ -20,9 +20,7 @@ import { BasicDepthPacking } from '../constants.js';
  */
 
 class MeshDepthMaterial extends Material {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
 		this.type = 'MeshDepthMaterial';
@@ -44,13 +42,11 @@ class MeshDepthMaterial extends Material {
 
 		this.fog = false;
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
-	copy( source ) {
-
-		super.copy( source );
+	copy(source) {
+		super.copy(source);
 
 		this.depthPacking = source.depthPacking;
 
@@ -68,9 +64,7 @@ class MeshDepthMaterial extends Material {
 		this.wireframeLinewidth = source.wireframeLinewidth;
 
 		return this;
-
 	}
-
 }
 
 MeshDepthMaterial.prototype.isMeshDepthMaterial = true;

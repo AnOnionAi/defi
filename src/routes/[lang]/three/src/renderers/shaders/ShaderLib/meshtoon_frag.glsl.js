@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #define TOON
 
 uniform vec3 diffuse;

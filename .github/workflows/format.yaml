@@ -1,32 +1,32 @@
 name: Format
 
-on: 
+on:
   pull_request:
     branches: [develop, release/*]
     types: [synchronize]
 
 jobs:
   format:
-      name: Format and Lint
-      runs-on: ubuntu-latest
+    name: Format and Lint
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-          with:
-            ref: ${{ github.head_ref }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
 
-        - name: Install dependencies
-          run: |
-            npm install -D svelte prettier prettier-plugin-svelte eslint eslint-config-google typescript
-            npm install -D eslint-config-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
-        - name: Format
-          run: npm run format
+      - name: Install dependencies
+        run: |
+          npm install -D svelte prettier prettier-plugin-svelte eslint eslint-config-google typescript
+          npm install -D eslint-config-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
+      - name: Format
+        run: npm run format
 
-        - name: Lint
-          run: npm run lint
+      - name: Lint
+        run: npm run lint
 
-        - name: Commit changes
-          uses: stefanzweifel/git-auto-commit-action@v4.1.2
-          with:
-            commit_message: Apply formatting changes
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4.1.2
+        with:
+          commit_message: Apply formatting changes

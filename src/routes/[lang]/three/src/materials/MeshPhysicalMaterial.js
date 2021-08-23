@@ -28,16 +28,12 @@ import * as MathUtils from '../math/MathUtils.js';
  */
 
 class MeshPhysicalMaterial extends MeshStandardMaterial {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
 		this.defines = {
-
-			'STANDARD': '',
-			'PHYSICAL': ''
-
+			STANDARD: '',
+			PHYSICAL: ''
 		};
 
 		this.type = 'MeshPhysicalMaterial';
@@ -46,23 +42,19 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
 		this.clearcoatMap = null;
 		this.clearcoatRoughness = 0.0;
 		this.clearcoatRoughnessMap = null;
-		this.clearcoatNormalScale = new Vector2( 1, 1 );
+		this.clearcoatNormalScale = new Vector2(1, 1);
 		this.clearcoatNormalMap = null;
 
 		this.reflectivity = 0.5; // maps to F0 = 0.04
 
-		Object.defineProperty( this, 'ior', {
+		Object.defineProperty(this, 'ior', {
 			get: function () {
-
-				return ( 1 + 0.4 * this.reflectivity ) / ( 1 - 0.4 * this.reflectivity );
-
+				return (1 + 0.4 * this.reflectivity) / (1 - 0.4 * this.reflectivity);
 			},
-			set: function ( ior ) {
-
-				this.reflectivity = MathUtils.clamp( 2.5 * ( ior - 1 ) / ( ior + 1 ), 0, 1 );
-
+			set: function (ior) {
+				this.reflectivity = MathUtils.clamp((2.5 * (ior - 1)) / (ior + 1), 0, 1);
 			}
-		} );
+		});
 
 		this.sheen = null; // null will disable sheen bsdf
 
@@ -72,21 +64,17 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
 		this.thickness = 0.01;
 		this.thicknessMap = null;
 		this.attenuationDistance = 0.0;
-		this.attenuationColor = new Color( 1, 1, 1 );
+		this.attenuationColor = new Color(1, 1, 1);
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
-	copy( source ) {
-
-		super.copy( source );
+	copy(source) {
+		super.copy(source);
 
 		this.defines = {
-
-			'STANDARD': '',
-			'PHYSICAL': ''
-
+			STANDARD: '',
+			PHYSICAL: ''
 		};
 
 		this.clearcoat = source.clearcoat;
@@ -94,18 +82,14 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
 		this.clearcoatRoughness = source.clearcoatRoughness;
 		this.clearcoatRoughnessMap = source.clearcoatRoughnessMap;
 		this.clearcoatNormalMap = source.clearcoatNormalMap;
-		this.clearcoatNormalScale.copy( source.clearcoatNormalScale );
+		this.clearcoatNormalScale.copy(source.clearcoatNormalScale);
 
 		this.reflectivity = source.reflectivity;
 
-		if ( source.sheen ) {
-
-			this.sheen = ( this.sheen || new Color() ).copy( source.sheen );
-
+		if (source.sheen) {
+			this.sheen = (this.sheen || new Color()).copy(source.sheen);
 		} else {
-
 			this.sheen = null;
-
 		}
 
 		this.transmission = source.transmission;
@@ -114,12 +98,10 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
 		this.thickness = source.thickness;
 		this.thicknessMap = source.thicknessMap;
 		this.attenuationDistance = source.attenuationDistance;
-		this.attenuationColor.copy( source.attenuationColor );
+		this.attenuationColor.copy(source.attenuationColor);
 
 		return this;
-
 	}
-
 }
 
 MeshPhysicalMaterial.prototype.isMeshPhysicalMaterial = true;

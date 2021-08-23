@@ -1,4 +1,4 @@
-export default /* glsl */`
+export default /* glsl */ `
 #define MATCAP
 
 uniform vec3 diffuse;

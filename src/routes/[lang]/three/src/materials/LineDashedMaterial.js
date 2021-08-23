@@ -14,9 +14,7 @@ import { LineBasicMaterial } from './LineBasicMaterial.js';
  */
 
 class LineDashedMaterial extends LineBasicMaterial {
-
-	constructor( parameters ) {
-
+	constructor(parameters) {
 		super();
 
 		this.type = 'LineDashedMaterial';
@@ -25,22 +23,18 @@ class LineDashedMaterial extends LineBasicMaterial {
 		this.dashSize = 3;
 		this.gapSize = 1;
 
-		this.setValues( parameters );
-
+		this.setValues(parameters);
 	}
 
-	copy( source ) {
-
-		super.copy( source );
+	copy(source) {
+		super.copy(source);
 
 		this.scale = source.scale;
 		this.dashSize = source.dashSize;
 		this.gapSize = source.gapSize;
 
 		return this;
-
 	}
-
 }
 
 LineDashedMaterial.prototype.isLineDashedMaterial = true;

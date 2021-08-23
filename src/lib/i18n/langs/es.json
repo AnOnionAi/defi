@@ -1,17 +1,17 @@
 {
-    "hello": "Bienvenido a",
-    "pages":{
-        "about": {
-            "title" : "A cerca de"
-        },
-        "contact": {
-            "title" : "Contacto"
-        },
-        "audits": {
-            "title": "Auditorías"
-        },
-        "trade": {
-            "title": "Comercio"
-        }
-    }
+	"hello": "Bienvenido a",
+	"pages": {
+		"about": {
+			"title": "A cerca de"
+		},
+		"contact": {
+			"title": "Contacto"
+		},
+		"audits": {
+			"title": "Auditorías"
+		},
+		"trade": {
+			"title": "Comercio"
+		}
+	}
 }
