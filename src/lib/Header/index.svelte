@@ -12,7 +12,6 @@
 	import Icon from 'fa-svelte';
 	import { darkMode } from '$lib/stores/dark';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import { ethers } from 'ethers';
 	import bFloppa from '/static/fungfi.png';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
