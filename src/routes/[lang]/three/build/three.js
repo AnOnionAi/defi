@@ -6449,11 +6449,9 @@
 			this.version = 0;
 		}
 
-		onBuild() /* shaderobject, renderer */
-		{}
+		onBuild /* shaderobject, renderer */() {}
 
-		onBeforeCompile() /* shaderobject, renderer */
-		{}
+		onBeforeCompile /* shaderobject, renderer */() {}
 
 		customProgramCacheKey() {
 			return this.onBeforeCompile.toString();
@@ -20700,8 +20698,7 @@
 			return new FogExp2(this.color, this.density);
 		}
 
-		toJSON() /* meta */
-		{
+		toJSON /* meta */() {
 			return {
 				type: 'FogExp2',
 				color: this.color.getHex(),
@@ -20724,8 +20721,7 @@
 			return new Fog(this.color, this.near, this.far);
 		}
 
-		toJSON() /* meta */
-		{
+		toJSON /* meta */() {
 			return {
 				type: 'Fog',
 				color: this.color.getHex(),
@@ -26567,13 +26563,11 @@
 			return result;
 		} // Template methods for derived classes:
 
-		interpolate_() /* i1, t0, t, t1 */
-		{
+		interpolate_ /* i1, t0, t, t1 */() {
 			throw new Error('call to abstract method'); // implementations shall return this.resultBuffer
 		}
 
-		intervalChanged_() /* i1, t0, t1 */
-		{
+		intervalChanged_ /* i1, t0, t1 */() {
 			// empty
 		}
 	} // ALIAS DEFINITIONS
@@ -27589,8 +27583,7 @@
 			this.requestHeader = {};
 		}
 
-		load() /* url, onLoad, onProgress, onError */
-		{}
+		load /* url, onLoad, onProgress, onError */() {}
 
 		loadAsync(url, onProgress) {
 			const scope = this;
@@ -27599,8 +27592,7 @@
 			});
 		}
 
-		parse() /* data */
-		{}
+		parse /* data */() {}
 
 		setCrossOrigin(crossOrigin) {
 			this.crossOrigin = crossOrigin;
@@ -28210,8 +28202,7 @@
 		} // Virtual base class method to overwrite and implement in subclasses
 		//	- t [0 .. 1]
 
-		getPoint() /* t, optionalTarget */
-		{
+		getPoint /* t, optionalTarget */() {
 			console.warn('THREE.Curve: .getPoint() not implemented.');
 			return null;
 		} // Get point at relative position in curve according to arc length
@@ -35305,8 +35296,7 @@
 			super();
 			this.material = material;
 
-			this.render = function () /* renderCallback */
-			{};
+			this.render = function () /* renderCallback */ {};
 
 			this.hasPositions = false;
 			this.hasNormals = false;

@@ -3,7 +3,6 @@ import zyberLPABI from '../abi/ZyberToken.json';
 import DYFNLP from '../abi/DYFN-LP.json';
 import { addresses } from './addresses';
 
-
 export const farms: {
 	pid: number;
 	lpTokenName: string;

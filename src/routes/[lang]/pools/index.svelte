@@ -24,6 +24,55 @@
 	import wbtc from '/static/wbtc.png';
 	import usdt from '/static/usdt.png';
 	import usdc from '/static/usdc.png';
+
+
+	import {getERC20Contract,getMushAllowance, getTokenAllowance, approveToken, isApproved} from '../../../utils/contracts';
+	import {pools} from "../../../config/constants/pools";
+	import {addresses} from "../../../config/constants/addresses";
+	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import { onMount } from 'svelte';
+	import { ethers } from 'ethers';
+
+	let currentAccount: string;
+
+
+
+	onMount(async() => {
+		accounts.subscribe((accountsArray : Array<string>) =>
+			accountsArray ? currentAccount = accountsArray[0] : currentAccount = undefined
+		);
+		console.log(currentAccount);
+		await fetchApprovedTokens();
+	});
+
+	const fetchApprovedTokens = async()=> {
+		const allowances = await  Promise.all(
+			pools.map(async(pool)=>{
+				 return await getTokenAllowance(pool.token1Addr,addresses.UNIRouter.TEST,currentAccount);
+			}))
+		const poolsApproved =  await allowances.map(poolAllowance => isApproved(poolAllowance))
+		console.log(allowances);
+	}
+
+	const metaMaskCon = async () => {
+		try {
+			const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+			accounts.set(user_accounts);
+		} catch {
+			console.log('failed');
+		}
+	};
+
+
+	const onClickHandler = async(tknAddr: string) => {
+		if(!currentAccount){
+			metaMaskCon();
+		}else{
+			await approveToken(tknAddr,addresses.UNIRouter.TEST,currentAccount);
+		}
+	}
+
+
 	export let lang;
 </script>
 
@@ -56,11 +105,16 @@
 						<p class="font-black text-black">0%</p>
 					</div>
 				</div>
-				<a
+				<a 
+					on:click={()=>onClickHandler(addresses.MushToken.TEST)}
 					href="#"
 					class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 				>
-					Unlock
+					{#if currentAccount}
+						Approve
+					{:else}
+						Unlock
+					{/if}
 				</a>
 			</div>
 		</div>
@@ -92,10 +146,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.FishToken.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -125,10 +184,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.Matic.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -160,10 +224,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.WETH.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -195,10 +264,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.WBTC.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -228,10 +302,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.Sushi.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -263,10 +342,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.Quick.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -296,10 +380,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.Dyfn.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -329,10 +418,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.USDT.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -362,10 +456,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.USDC.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -394,10 +493,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.DOGE.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
@@ -426,10 +530,15 @@
 						</div>
 					</div>
 					<a
+						on:click={()=>onClickHandler(addresses.MXNC.TEST)}
 						href="#"
 						class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
 					>
-						Unlock
+						{#if currentAccount}
+							Approve
+						{:else}
+							Unlock
+						{/if}
 					</a>
 				</div>
 			</div>
