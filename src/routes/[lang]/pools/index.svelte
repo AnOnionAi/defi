@@ -31,7 +31,7 @@
 	import {addresses} from "../../../config/constants/addresses";
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { onMount } from 'svelte';
-	import { ethers } from 'ethers';
+	import type { BigNumber } from 'ethers';
 
 	let currentAccount: string;
 
@@ -42,17 +42,18 @@
 			accountsArray ? currentAccount = accountsArray[0] : currentAccount = undefined
 		);
 		console.log(currentAccount);
-		await fetchApprovedTokens();
+		console.log(await fetchAllowances())
 	});
 
-	const fetchApprovedTokens = async()=> {
-		const allowances = await  Promise.all(
+	const fetchAllowances = async()=> {
+		const allowances: Array<BigNumber> = await  Promise.all(
 			pools.map(async(pool)=>{
 				 return await getTokenAllowance(pool.token1Addr,addresses.UNIRouter.TEST,currentAccount);
-			}))
-		const poolsApproved =  await allowances.map(poolAllowance => isApproved(poolAllowance))
-		console.log(allowances);
+			}));
+		const approvedTokens = allowances.map(isApproved);
+		return approvedTokens;
 	}
+
 
 	const metaMaskCon = async () => {
 		try {

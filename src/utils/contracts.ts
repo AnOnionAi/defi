@@ -58,9 +58,9 @@ export const getERC20Contract = (address : string) => {
 	return ercToken;
 }
 
-export const getMushAllowance = async () => {
+export const getMushAllowance = async (userAddr: string) => {
 	const mushContract = new ethers.Contract(addresses.MushToken.TEST,ERC20ABI,getSigner());
-	return await mushContract.allowance("0x42D73a757E63a18a70C8a86564e405dEca81967c","0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506");
+	return await mushContract.allowance(userAddr,"0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506");
 }
 
 export const getTokenAllowance = async (tknAddr: string, spenderAddr: string,userAddr: string) => {
@@ -73,8 +73,10 @@ export const approveToken = async(tknAddr: string, spenderAddr: string , userAdd
 	return await tokenContract.approve(spenderAddr,userAddr);
 }
 
-export const isApproved = async (allowance: BigNumber) => {
+export const isApproved = (allowance: BigNumber) => {
 	return allowance._hex !== ethers.constants.Zero._hex
 }
+
+// export const addLiqudity()
 
 
