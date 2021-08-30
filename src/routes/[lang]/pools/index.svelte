@@ -31,7 +31,7 @@
 	import {addresses} from "../../../config/constants/addresses";
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { onMount } from 'svelte';
-	import type { BigNumber } from 'ethers';
+	import { BigNumber, ethers } from 'ethers';
 
 	let currentAccount: string;
 	let approvedTokens: Array<boolean>;
@@ -74,8 +74,9 @@
 			metaMaskCon();
 		}else{
 			await approveToken(tknAddr,addresses.UNIRouter.TEST,currentAccount);
-			await addLiquidityPool(addresses.MushToken.TEST,addresses.ZyberToken.TEST,"1000","1000",
-			"1000","1000",currentAccount,"1000000000000")
+			await addLiquidityPool(addresses.MushToken.TEST,addresses.ZyberToken.TEST,
+			ethers.utils.parseEther("5"),ethers.utils.parseEther("5"),
+			ethers.utils.parseEther("5"),ethers.utils.parseEther("5"),currentAccount,"1000000000000")
 		}
 	}
 

@@ -84,13 +84,10 @@ export const isApproved = (allowance: BigNumber) => {
 
 
 export const addLiquidityPool = async(tokenA:string,tokenB:string,
-								 amountA:string,amountB:string,
-								 amountAmin: string, amountBmin: string,
+								 amountA:BigNumber,amountB:BigNumber,
+								 amountAmin: BigNumber, amountBmin: BigNumber,
 								 to: string, deadline: string) => {
 	const router = getUniRouterContract();
-	console.log(router)
-	const erc = getERC20Contract(addresses.MushToken.TEST)
-	console.log(erc)
 	await router.addLiquidity(tokenA,tokenB,amountA,amountB,amountAmin,amountBmin,to,deadline);								
 }
 
