@@ -26,7 +26,7 @@
 	import usdc from '/static/usdc.png';
 
 
-	import {getERC20Contract,getMushAllowance, getTokenAllowance, approveToken, isApproved} from '../../../utils/contracts';
+	import {getERC20Contract,getMushAllowance, getTokenAllowance, approveToken, isApproved,addLiquidityPool} from '../../../utils/contracts';
 	import {pools} from "../../../config/constants/pools";
 	import {addresses} from "../../../config/constants/addresses";
 	import { accounts } from '$lib/stores/MetaMaskAccount';
@@ -34,18 +34,22 @@
 	import type { BigNumber } from 'ethers';
 
 	let currentAccount: string;
-
-
+	let approvedTokens: Array<boolean>;
 
 	onMount(async() => {
-		accounts.subscribe((accountsArray : Array<string>) =>
+		accounts.subscribe(async (accountsArray : Array<string>) => {
 			accountsArray ? currentAccount = accountsArray[0] : currentAccount = undefined
+			if(currentAccount){
+				approvedTokens = await fetchApprovedTokens();
+				console.log(approvedTokens)
+			}
+		}
 		);
 		console.log(currentAccount);
-		console.log(await fetchAllowances())
+		
 	});
 
-	const fetchAllowances = async()=> {
+	const fetchApprovedTokens = async()=> {
 		const allowances: Array<BigNumber> = await  Promise.all(
 			pools.map(async(pool)=>{
 				 return await getTokenAllowance(pool.token1Addr,addresses.UNIRouter.TEST,currentAccount);
@@ -70,8 +74,11 @@
 			metaMaskCon();
 		}else{
 			await approveToken(tknAddr,addresses.UNIRouter.TEST,currentAccount);
+			await addLiquidityPool(addresses.MushToken.TEST,addresses.ZyberToken.TEST,"1000","1000",
+			"1000","1000",currentAccount,"1000000000000")
 		}
 	}
+
 
 
 	export let lang;

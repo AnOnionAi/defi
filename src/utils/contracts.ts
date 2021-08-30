@@ -1,8 +1,8 @@
 import MasterChefABI from '../config/abi/MasterChef.json';
 import MushTokenABI from '../config/abi/MushToken.json';
-import ZyberTokenABI from '../config/abi/ZyberToken.json';
 import TESTLPABI from '../config/abi/TEST-LP.json';
 import ERC20ABI from '../config/abi/ERC20.json'
+import routerABI from '../config/abi/IUniswapV2Router02.json'
 import { farms } from '../config/constants/farms';
 import { addresses } from '../config/constants/addresses';
 import { BigNumber, ethers } from 'ethers';
@@ -58,6 +58,11 @@ export const getERC20Contract = (address : string) => {
 	return ercToken;
 }
 
+export const getUniRouterContract = () => {
+	const router = new ethers.Contract(addresses.UNIRouter.TEST,routerABI,getSigner());
+	return router;
+}
+
 export const getMushAllowance = async (userAddr: string) => {
 	const mushContract = new ethers.Contract(addresses.MushToken.TEST,ERC20ABI,getSigner());
 	return await mushContract.allowance(userAddr,"0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506");
@@ -77,6 +82,15 @@ export const isApproved = (allowance: BigNumber) => {
 	return allowance._hex !== ethers.constants.Zero._hex
 }
 
-// export const addLiqudity()
 
+export const addLiquidityPool = async(tokenA:string,tokenB:string,
+								 amountA:string,amountB:string,
+								 amountAmin: string, amountBmin: string,
+								 to: string, deadline: string) => {
+	const router = getUniRouterContract();
+	console.log(router)
+	const erc = getERC20Contract(addresses.MushToken.TEST)
+	console.log(erc)
+	await router.addLiquidity(tokenA,tokenB,amountA,amountB,amountAmin,amountBmin,to,deadline);								
+}
 
