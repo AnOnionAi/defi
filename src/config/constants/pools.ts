@@ -6,14 +6,14 @@ export let pools = [
         token1Addr: addresses.MushToken.TEST,
         fee: 0,
         approved: false,
-        pairContractAddr: ""
+        pairContractAddr: "0xFF14835f5CCE8878E36af6911BA0d17C0655Fc9e"
     },
     {
         token1Name: "Fish",
         token1Addr: addresses.FishToken.TEST,
         fee: 0,
         approved: false,
-        pairContractAddr: ""
+        pairContractAddr: "0x76b98C24E0b0D544D6F035Bb441470b06fB7c9c9"
     },
     {
         token1Name: "Matic",

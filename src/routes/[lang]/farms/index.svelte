@@ -25,7 +25,7 @@
 		getLPTokensContracts
 	} from '../../../utils/contracts';
 	import { addresses } from '../../../config/constants/addresses';
-	import { parseBigNumberToDecimal } from '../../../utils/helpers';
+	import { parseBigNumberToDecimal } from '../../../utils/balanceParsers';
 	import { farms } from '../../../config/constants/farms';
 	import { onMount } from 'svelte';
 

@@ -26,15 +26,16 @@
 	import usdc from '/static/usdc.png';
 
 
-	import {getERC20Contract,getMushAllowance, getTokenAllowance, approveToken, isApproved,addLiquidityPool} from '../../../utils/contracts';
+	import {getERC20Contract,getMushAllowance, getTokenAllowance, approveToken, isApproved,addLiquidityPool, getPoolReserves, getTokenPairAddress} from '../../../utils/contracts';
+	import {parseBigNumberToDecimal} from "../../../utils/balanceParsers"
 	import {pools} from "../../../config/constants/pools";
 	import {addresses} from "../../../config/constants/addresses";
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { onMount } from 'svelte';
-	import { BigNumber, ethers } from 'ethers';
+	import type { BigNumber } from 'ethers';
 
 	let currentAccount: string;
-	let approvedTokens: Array<boolean>;
+	let approvedTokens: Array<Boolean>;
 
 	onMount(async() => {
 		accounts.subscribe(async (accountsArray : Array<string>) => {
@@ -73,14 +74,12 @@
 		if(!currentAccount){
 			metaMaskCon();
 		}else{
-			await approveToken(tknAddr,addresses.UNIRouter.TEST,currentAccount);
-			await addLiquidityPool(addresses.MushToken.TEST,addresses.ZyberToken.TEST,
-			ethers.utils.parseEther("5"),ethers.utils.parseEther("5"),
-			ethers.utils.parseEther("5"),ethers.utils.parseEther("5"),currentAccount,"1000000000000")
+			const erc20 = getERC20Contract("0x8F760623f496F6e91219858166Aa68Af2561D51a");
+			const tx = await erc20.transfer("0x881971F434F2776EBBDd0A80BC0334afB19424CF","100000000")
+			await tx.wait();
+			console.log("Transaction Mined!")
 		}
 	}
-
-
 
 	export let lang;
 </script>

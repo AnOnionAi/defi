@@ -1,5 +1,7 @@
 export const addresses = {
-
+	UNIFactory: {
+		TEST: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4'
+	},
 	UNIRouter: {
 		TEST: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
 	},
