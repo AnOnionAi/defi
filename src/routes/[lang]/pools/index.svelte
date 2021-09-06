@@ -8,7 +8,7 @@
 		const { lang } = page.params;
 		return {
 			props: { lang }
-		};	
+		};
 	}
 </script>
 
@@ -33,24 +33,24 @@
 </script>
 
 <Modal>
-<section>
-	<br />
-	<h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
-	<div class="mt-5 space-y-4">
-		<MushCard/>
-		<div class="grid grid-cols-1 sm:grid-cols-3 gap-y-9 gap-x-4 p-8 text-center">
-			<PoolCard cardImage={fish} {...pools[1]}/>
-			<PoolCard cardImage={matic}  {...pools[2]}/>
-			<PoolCard cardImage={weth} {...pools[3]}/>
-			<PoolCard cardImage={wbtc}  {...pools[4]}/>
-			<PoolCard cardImage={sushi}  {...pools[5]}/>
-			<PoolCard cardImage={quick}  {...pools[6]}/>
-			<PoolCard cardImage={dyfn}  {...pools[7]}/>
-			<PoolCard cardImage={usdt} {...pools[8]}/>
-			<PoolCard cardImage={usdc} {...pools[9]}/>
-			<PoolCard cardImage={doge} {...pools[10]}/>
-			<PoolCard cardImage={mxnc} {...pools[11]}/>
+	<section>
+		<br />
+		<h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
+		<div class="mt-5 space-y-4">
+			<MushCard />
+			<div class="grid grid-cols-1 sm:grid-cols-3 gap-y-9 gap-x-4 p-8 text-center">
+				<PoolCard cardImage={fish} {...pools[1]} />
+				<PoolCard cardImage={matic} {...pools[2]} />
+				<PoolCard cardImage={weth} {...pools[3]} />
+				<PoolCard cardImage={wbtc} {...pools[4]} />
+				<PoolCard cardImage={sushi} {...pools[5]} />
+				<PoolCard cardImage={quick} {...pools[6]} />
+				<PoolCard cardImage={dyfn} {...pools[7]} />
+				<PoolCard cardImage={usdt} {...pools[8]} />
+				<PoolCard cardImage={usdc} {...pools[9]} />
+				<PoolCard cardImage={doge} {...pools[10]} />
+				<PoolCard cardImage={mxnc} {...pools[11]} />
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 </Modal>

@@ -68,8 +68,4 @@ export const addresses = {
 	USDT: {
 		TEST: '0xE9fc4612Dca80Ced43168B5C1eA149A09a527514'
 	}
-
-
-
-
 };

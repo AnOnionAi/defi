@@ -1,29 +1,27 @@
- import type { BigNumber } from "ethers";
- import { getMasterChefContract } from "./contracts";
- import { ethers } from "ethers";
+import type { BigNumber } from 'ethers';
+import { getMasterChefContract } from './contracts';
+import { ethers } from 'ethers';
 
+export const deposit = async (pid: number, amount: string, referrer?: string) => {
+	if (!referrer) {
+		referrer = ethers.constants.AddressZero;
+	}
+	const mc = getMasterChefContract();
+	return await mc.deposit(pid, ethers.utils.parseUnits(amount, 18), referrer);
+};
 
- export const deposit = async ( pid: number, amount: BigNumber, referrer?: string) => {
-     if(!referrer){
-         referrer = ethers.constants.AddressZero;
-     }
-     const mc = getMasterChefContract();
-     return await mc.deposit(pid,amount,referrer);
- };
+export const withdraw = async (pid: number, amount: string): Promise<BigNumber> => {
+	const mc = getMasterChefContract();
+	return await mc.withdraw(pid, ethers.utils.parseUnits(amount, 18));
+};
 
+export const getRewards = async (pid: number, user: string): Promise<BigNumber> => {
+	const mc = getMasterChefContract();
+	return await mc.pendingmush(pid, user);
+};
 
- export const withdraw = async (pid: number, amount: BigNumber): Promise<BigNumber> => {
-     const mc = getMasterChefContract();
-     return await mc.withdraw(pid,amount);
- };
- 
- export const getRewards = async(pid: number, user: string): Promise <BigNumber> => {
-     const mc = getMasterChefContract();
-     return await mc.pendingmush(pid,user);
- };
-
- export const getStakedTokens = async(pid: number, user: string): Promise <BigNumber> => {
-     const mc = getMasterChefContract();
-     const [stakedTokens, ...x] =  await mc.userInfo(pid,user);
-     return stakedTokens;
- };
+export const getStakedTokens = async (pid: number, user: string): Promise<BigNumber> => {
+	const mc = getMasterChefContract();
+	const [stakedTokens, ...x] = await mc.userInfo(pid, user);
+	return stakedTokens;
+};

@@ -1,4 +1,4 @@
-import  {ethers, BigNumber } from "ethers";
+import { ethers, BigNumber } from 'ethers';
 
 export const parseBigNumberToInt = (n: BigNumber) => {
 	const stringNumber = ethers.utils.formatUnits(n, 18);
