@@ -8,20 +8,21 @@ export const getERC20Contract = (address : string) => {
 }
 
 
-export const getTokenAllowance = async (tknAddr: string, spenderAddr: string,userAddr: string) => {
+export const getTokenAllowance = async (tknAddr: string, spenderAddr: string,userAddr: string): Promise<BigNumber> => {
     try {
         const tokenContract = getERC20Contract(tknAddr);
-	    return await tokenContract.allowance(userAddr,spenderAddr);
+	    const allowance = await tokenContract.allowance(userAddr,spenderAddr);
+        return allowance;
     } catch (e) {
-        return '0';
+        return ethers.constants.Zero;
     }
 	
 }
 
-export const approveToken = async(tknAddr: string, spenderAddr: string , userAddr: string) =>{
+export const approveToken = async(tknAddr: string, spenderAddr: string ) => {
 	try {
         const tokenContract = getERC20Contract(tknAddr)
-        return await tokenContract.approve(spenderAddr,userAddr);    
+        return await tokenContract.approve(spenderAddr, "100000000000");    
     } catch (e) {
         return '0';
     }
@@ -30,13 +31,14 @@ export const approveToken = async(tknAddr: string, spenderAddr: string , userAdd
 export const getTokenBalance = async(tknAddr: string, userAddr) => {
     const tokenContract = getERC20Contract(tknAddr);
     try {
-        return tokenContract.balanceOf(userAddr);
+        const balance = await tokenContract.balanceOf(userAddr);
+        return balance;
     }catch(e){
-        return '0'
+        return ethers.constants.Zero
     }
 }
 
 
-export const isApproved = (allowance: BigNumber) => {
+export const isNotZero = (allowance: BigNumber) => {
 	return allowance._hex !== ethers.constants.Zero._hex
 }

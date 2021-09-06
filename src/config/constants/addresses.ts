@@ -30,7 +30,7 @@ export const addresses = {
 	},
 
 	Matic: {
-		TEST: '0x996Ee77CA2434D46dF655062FBBFe5D143Ae24cf'
+		TEST: '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270'
 	},
 
 	WETH: {

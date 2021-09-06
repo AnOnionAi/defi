@@ -2,90 +2,88 @@ import { addresses } from "./addresses"
 export let pools = [
 
     {
-        token1Name: "Mush",
-        token1Addr: addresses.MushToken.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: "0xFF14835f5CCE8878E36af6911BA0d17C0655Fc9e"
+        tokenName: "MUSH",
+        tokenAddr: addresses.MushToken.TEST,
+        depositFee: 0,
+        pid: 5
     },
     {
-        token1Name: "Fish",
-        token1Addr: addresses.FishToken.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: "0x76b98C24E0b0D544D6F035Bb441470b06fB7c9c9"
+        tokenName: "FISH",
+        tokenAddr: addresses.FishToken.TEST,
+        depositFee: 0,
+        pid: 4
     },
     {
-        token1Name: "Matic",
-        token1Addr: addresses.Matic.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "WMATIC",
+        tokenAddr: addresses.Matic.TEST,
+        depositFee: 0,
+        pid: 4
+        
     },
     {
-        token1Name: "WETH",
-        token1Addr: addresses.WETH.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "WETH",
+        tokenAddr: addresses.WETH.TEST,
+        depositFee: 0,
+        pid: 4
+        
     },
     {
-        token1Name: "WBTC",
-        token1Addr: addresses.WBTC.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "WBTC",
+        tokenAddr: addresses.WBTC.TEST,
+        depositFee: 0,
+        pid: 6
+        
     },
      {
-        token1Name: "Sushi",
-        token1Addr: addresses.Sushi.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "SUSHI",
+        tokenAddr: addresses.Sushi.TEST,
+        depositFee: 0,
+        pid: 7
+        
     },
      {
-        token1Name: "Quick",
-        token1Addr: addresses.Quick.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "QUICK",
+        tokenAddr: addresses.Quick.TEST,
+        depositFee: 0,
+        pid: 8
+        
     },
      {
-        token1Name: "Dyfn",
-        token1Addr: addresses.Dyfn.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "DYFN",
+        tokenAddr: addresses.Dyfn.TEST,
+        depositFee: 0,
+        pid: 9
+        
     },
      {
-        token1Name: "USDT",
-        token1Addr: addresses.USDT.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "USDT",
+        tokenAddr: addresses.USDT.TEST,
+        depositFee: 0,
+        pid: 10
+        
     },
      {
-        token1Name: "USDC",
-        token1Addr: addresses.USDC.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "USDC",
+        tokenAddr: addresses.USDC.TEST,
+        depositFee: 0,
+        pid: 11
+        
     },
     
      {
-        token1Name: "DOGE",
-        token1Addr: addresses.DOGE.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "DOGE",
+        tokenAddr: addresses.DOGE.TEST,
+        depositFee: 0,
+        pid: 12
+        
     },
 
      {
-        token1Name: "MXNC",
-        token1Addr: addresses.MXNC.TEST,
-        fee: 0,
-        approved: false,
-        pairContractAddr: ""
+        tokenName: "MXNC",
+        tokenAddr: addresses.MXNC.TEST,
+        depositFee: 0,
+        pid: 13
+        
     }
 
 ]
