@@ -17,12 +17,9 @@
 		close();
 	}
 
-	$: wantAmount: {
-		console.log('withDraw', wantAmount);
-	}
 </script>
 
-<div class="flex flex-col px-9 py-6">
+<div class="flex flex-col px-6 py-6">
 	<div class=" w-full shadow-2xl  shadow-gray-1000 border-2 rounded-3xl border-gray-200 py-3">
 		<div />
 		<div class="flex justify-between py-1 px-10">

@@ -9,7 +9,7 @@
 	} from '../../../utils/erc20';
 	import { onMount } from 'svelte';
 	import { getContext } from 'svelte';
-	import type { BigNumber } from '@ethersproject/bignumber';
+	import  type { BigNumber } from '@ethersproject/bignumber';
 	import { ethers } from 'ethers';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp.js';
@@ -21,13 +21,45 @@
 
 	const { open } = getContext('simple-modal');
 
-	const onOkay = (amount) => {
-		wantDepositAmount = amount;
+	export let cardImage: any;
+	export let tokenName: string;
+	export let tokenAddr: string;
+	export let depositFee: number;
+	export let pid: number;
+
+	let isHidden: boolean = true;
+	let tokenApproved: boolean;
+	let userAcc: string;
+	let tokenAllowance: BigNumber;
+	let canStake: boolean;
+	let canWithdraw: boolean;
+	let canHarvest: boolean;
+	let userStakedTokens: BigNumber;
+	let userEarnings: BigNumber;
+	let poolTokenLiquidity: BigNumber;
+	let userBalance: BigNumber;
+	let wantWithdrawAmount: any;
+	let idInterval;
+
+	$: {
+		console.log("rect"+tokenName)
+	}
+
+
+	const onOkay =async(amount) => {
+		console.log(userStakedTokens,"before")
+		const tx = await deposit(pid, amount);
+		console.log(tx)
+		await tx.wait();
+		userStakedTokens = await getStakedTokens(pid, userAcc);
 	};
 
-	const onWithdraw = (amount) => {
+	const onWithdraw = async(amount) => {
 		console.log('onWithdraw');
 		wantWithdrawAmount = amount;
+		const tx = await withdraw(pid, wantWithdrawAmount);
+		await tx.wait();
+		userStakedTokens=await getStakedTokens(pid,userAcc);
 	};
 
 	const goDeposit = () => {
@@ -62,39 +94,6 @@
 		);
 	};
 
-	export let cardImage: any;
-	export let tokenName: string;
-	export let tokenAddr: string;
-	export let depositFee: number;
-	export let pid: number;
-
-	let isHidden: boolean = true;
-	let tokenApproved: boolean;
-	let userAcc: string;
-	let tokenAllowance: BigNumber;
-	let canStake: boolean;
-	let canWithdraw: boolean;
-	let canHarvest: boolean;
-	let userStakedTokens: BigNumber;
-	let userEarnings: BigNumber;
-	let poolTokenLiquidity: BigNumber;
-	let userBalance: BigNumber;
-
-	let wantDepositAmount: any;
-	let wantWithdrawAmount: any;
-
-	$: {
-		if (wantDepositAmount) {
-			console.log('deposit triggered');
-			deposit(pid, wantDepositAmount).then((hash) => console.log(hash));
-		}
-
-		if (wantWithdrawAmount) {
-			console.log('Withdraw triggered');
-			withdraw(pid, wantWithdrawAmount).then((hash) => console.log(hash));
-		}
-	}
-
 	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
@@ -107,16 +106,28 @@
 			if (tokenApproved) {
 				userBalance = await getTokenBalance(tokenAddr, userAcc);
 				canStake = isNotZero(userBalance);
-				console.log(canStake, tokenName);
+			//	console.log(canStake, tokenName);
 				userEarnings = await getRewards(pid, userAcc);
 			}
 			if (canStake) {
 				userStakedTokens = await getStakedTokens(pid, userAcc);
 				canWithdraw = userStakedTokens._hex !== ethers.constants.Zero._hex;
-				console.log(userStakedTokens, tokenName);
+			//	console.log(userStakedTokens, tokenName);
 			}
+
+
+			idInterval = setInterval(async()=>{
+				await fetchReards()
+			},10000);
 		}
 	});
+
+	const fetchReards = async() => {
+		if(tokenApproved){
+			userEarnings = await getRewards(pid, userAcc);
+		}
+
+	}
 
 	onMount(async () => {
 		poolTokenLiquidity = await getTokenBalance(

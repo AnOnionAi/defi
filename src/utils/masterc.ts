@@ -10,7 +10,7 @@ export const deposit = async (pid: number, amount: string, referrer?: string) =>
 	return await mc.deposit(pid, ethers.utils.parseUnits(amount, 18), referrer);
 };
 
-export const withdraw = async (pid: number, amount: string): Promise<BigNumber> => {
+export const withdraw = async (pid: number, amount: string) => {
 	const mc = getMasterChefContract();
 	return await mc.withdraw(pid, ethers.utils.parseUnits(amount, 18));
 };

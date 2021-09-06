@@ -15,13 +15,9 @@
 		onOkay(wantAmount.toString());
 		close();
 	}
-
-	$: wantAmount: {
-		console.log('cambio ', wantAmount);
-	}
 </script>
 
-<div class="flex flex-col px-9 py-6">
+<div class="flex flex-col px-2 py-6">
 	<div class=" w-full shadow-2xl  shadow-gray-1000 border-2 rounded-3xl border-gray-200 py-3">
 		<div />
 		<div class="flex justify-between py-1 px-10">
@@ -39,10 +35,10 @@
 			</div>
 		</div>
 		<div class="flex justify-between py-3 px-10">
-			<div>
+			<div class="flex w-3/4">
 				<input bind:value={wantAmount} type="number" id="inputDeposit" min="0" placeholder="0.0" />
 			</div>
-			<div>
+			<div class="flex">
 				<div />
 				<p class="text-gray-400  font-semibold tracking-wide ">{tokenName}</p>
 			</div>
@@ -52,25 +48,25 @@
 	<div class="flex justify-between px-4 pt-2">
 		<button
 			on:click={() => (wantAmount = parseBigNumberToDecimal(userBalance.div(10)))}
-			class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-4 py-1 hover:bg-green-500"
+			class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-3 py-1 hover:bg-green-500"
 		>
 			10%
 		</button>
 		<button
 			on:click={() => (wantAmount = parseBigNumberToDecimal(userBalance.div(4)))}
-			class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-4 py-1 hover:bg-green-500"
+			class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-3 py-1 hover:bg-green-500"
 		>
 			25%
 		</button>
 		<button
 			on:click={() => (wantAmount = parseBigNumberToDecimal(userBalance.div(2)))}
-			class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-4 py-1 hover:bg-green-500"
+			class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-3 py-1 hover:bg-green-500"
 		>
 			50%
 		</button>
 		<button
 			on:click={() => (wantAmount = parseBigNumberToDecimal(userBalance.div(4).mul(3)))}
-			class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-4 py-1 hover:bg-green-500"
+			class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-3 py-1 hover:bg-green-500"
 		>
 			75%
 		</button>
