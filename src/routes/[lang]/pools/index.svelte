@@ -25,8 +25,8 @@
 	import usdt from '/static/usdt.png';
 	import usdc from '/static/usdc.png';
 
-	import PoolCard from './_PoolCard.svelte';
-	import MushCard from './_MushPool.svelte';
+	import PoolCard from './components/_PoolCard.svelte';
+	import MushCard from './components/_MushPool.svelte';
 	import { pools } from '../../../config/constants/pools';
 	import Modal from 'svelte-simple-modal';
 	export let lang;
