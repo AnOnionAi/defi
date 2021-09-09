@@ -144,10 +144,12 @@
 			);
 
 	}
+
+	import { slide } from 'svelte/transition';
 </script>
 
 <div
-	class=" flex flex-col justify-between shadow-l dark:bg-dark-600 rounded-xl space-y-2 border dark:border-0 "
+	class=" flex flex-col justify-between shadow-l dark:bg-dark-600 rounded-xl space-y-2  border dark:border-0 "
 >
 	<div class=" flex justify-center items-center py-2">
 		<img class="max-h-40" src={cardImage} alt="tic-tac-toe" />
@@ -252,7 +254,7 @@
 			{/if}
 		</div>
 
-		<div class="px-5 {isHidden && 'hidden'}">
+		<div class="px-5 {isHidden && 'hidden'}" >
 			<div class="flex justify-between">
 				<p>Stake:</p>
 				<p>{tokenName}</p>

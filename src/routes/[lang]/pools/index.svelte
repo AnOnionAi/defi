@@ -24,7 +24,7 @@
 	import wbtc from '/static/wbtc.png';
 	import usdt from '/static/usdt.png';
 	import usdc from '/static/usdc.png';
-
+	import mushRound from '/static/mushRound.png';
 	import PoolCard from './components/_PoolCard.svelte';
 	import MushCard from './components/_MushPool.svelte';
 	import { pools } from '../../../config/constants/pools';
@@ -37,8 +37,8 @@
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
 		<div class="mt-5 space-y-4">
-			<MushCard />
 			<div class="grid grid-cols-1 sm:grid-cols-3 gap-y-9 gap-x-4 p-8 text-center">
+				<PoolCard cardImage={mushRound} {...pools[0]} />
 				<PoolCard cardImage={fish} {...pools[1]} />
 				<PoolCard cardImage={matic} {...pools[2]} />
 				<PoolCard cardImage={weth} {...pools[3]} />
