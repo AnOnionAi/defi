@@ -9,14 +9,14 @@
 	} from '../../../../utils/erc20';
 	import { onMount } from 'svelte';
 	import { getContext } from 'svelte';
-	import  type { BigNumber } from '@ethersproject/bignumber';
+	import type { BigNumber } from '@ethersproject/bignumber';
 	import { ethers } from 'ethers';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp.js';
 	import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown.js';
 	import { deposit, withdraw, getRewards, getStakedTokens } from '../../../../utils/masterc';
 	import { parseBigNumberToDecimal, parseBigNumberToInt } from '../../../../utils/balanceParsers';
-	import DepositModal from "./_DepositModal.svelte";
+	import DepositModal from './_DepositModal.svelte';
 	import WithdrawModal from './_WithdrawModal.svelte';
 
 	const { open } = getContext('simple-modal');
@@ -41,20 +41,20 @@
 	let wantWithdrawAmount: any;
 	let idInterval;
 
-	const onOkay =async(amount) => {
-		console.log(userStakedTokens,"before")
+	const onOkay = async (amount) => {
+		console.log(userStakedTokens, 'before');
 		const tx = await deposit(pid, amount);
-		console.log(tx)
+		console.log(tx);
 		await tx.wait();
 		userStakedTokens = await getStakedTokens(pid, userAcc);
 	};
 
-	const onWithdraw = async(amount) => {
+	const onWithdraw = async (amount) => {
 		console.log('onWithdraw');
 		wantWithdrawAmount = amount;
 		const tx = await withdraw(pid, wantWithdrawAmount);
 		await tx.wait();
-		userStakedTokens=await getStakedTokens(pid,userAcc);
+		userStakedTokens = await getStakedTokens(pid, userAcc);
 	};
 
 	const goDeposit = () => {
@@ -101,7 +101,7 @@
 			if (tokenApproved) {
 				userBalance = await getTokenBalance(tokenAddr, userAcc);
 				canStake = isNotZero(userBalance);
-			
+
 				userEarnings = await getRewards(pid, userAcc);
 			}
 			if (canStake) {
@@ -109,19 +109,17 @@
 				canWithdraw = userStakedTokens._hex !== ethers.constants.Zero._hex;
 			}
 
-
-			idInterval = setInterval(async()=>{
-				await fetchReards()
-			},10000);
+			idInterval = setInterval(async () => {
+				await fetchReards();
+			}, 10000);
 		}
 	});
 
-	const fetchReards = async() => {
-		if(tokenApproved){
+	const fetchReards = async () => {
+		if (tokenApproved) {
 			userEarnings = await getRewards(pid, userAcc);
 		}
-
-	}
+	};
 
 	onMount(async () => {
 		poolTokenLiquidity = await getTokenBalance(
@@ -134,16 +132,15 @@
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
 
-	const approveHandler = async() => {
-		const tx = await approveToken(tokenAddr,'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9');
+	const approveHandler = async () => {
+		const tx = await approveToken(tokenAddr, '0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9');
 		await tx.wait();
 		tokenAllowance = await getTokenAllowance(
-				tokenAddr,
-				'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9',
-				userAcc
-			);
-
-	}
+			tokenAddr,
+			'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9',
+			userAcc
+		);
+	};
 
 	import { slide } from 'svelte/transition';
 </script>
@@ -224,7 +221,7 @@
 			</div>
 		{:else if $accounts}
 			<a
-				on:click={async() =>await  approveHandler()}
+				on:click={async () => await approveHandler()}
 				href="#"
 				class="block bg-green-400 text-white font-bold p-2 rounded-md w-9/10 hover:bg-green-600 mx-auto "
 			>
@@ -254,7 +251,7 @@
 			{/if}
 		</div>
 
-		<div class="px-5 {isHidden && 'hidden'}" >
+		<div class="px-5 {isHidden && 'hidden'}">
 			<div class="flex justify-between">
 				<p>Stake:</p>
 				<p>{tokenName}</p>

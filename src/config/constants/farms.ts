@@ -1,4 +1,3 @@
-
 import { addresses } from './addresses';
 
 export const farms: {

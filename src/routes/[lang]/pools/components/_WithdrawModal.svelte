@@ -16,7 +16,6 @@
 		onWithdraw(wantAmount.toString());
 		close();
 	}
-
 </script>
 
 <div class="flex flex-col px-6 py-6">
