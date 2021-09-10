@@ -1,4 +1,4 @@
-import ERC20ABI from '../config/abi/ERC20.json';
+import ERC20ABI from '$lib/config/abi/ERC20.json';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
 
