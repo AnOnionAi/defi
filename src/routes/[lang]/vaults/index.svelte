@@ -17,11 +17,14 @@
 	import usdc from '/static/usdc.png';
 	import matic from '/static/matic.png';
 	export let lang;
+	import VaultAccordeon from '../../../lib/components/Cards/_VaultAccordeon.svelte';
 </script>
 
 <section>
 	<h1 class="text-dark-200 dark:text-white text-4xl">V A U L T S</h1>
 	<div class="w-11/12 mx-auto">
+
+		<VaultAccordeon tkn0Img={usdc} tkn1Img={eth}/>
 		<div
 			class="hover:bg-green-600 hover:cursor-pointer hover:shadow-md my-5 p-5 usdc_mush_g rounded-xl relative"
 		>
@@ -65,6 +68,7 @@
 				QuickSwap
 			</p>
 		</div>
+
 		<div
 			class="hover:bg-green-600 hover:cursor-pointer hover:shadow-md matic_mush_g my-5 p-5 bg-gray-50 rounded-xl relative"
 		>
