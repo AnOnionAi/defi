@@ -1,12 +1,12 @@
-import MasterChefABI from '../config/abi/MasterChef.json';
-import MushTokenABI from '../config/abi/MushToken.json';
-import TESTLPABI from '../config/abi/TEST-LP.json';
-import ERC20ABI from '../config/abi/ERC20.json';
-import pairABI from '../config/abi/IUniswapV2Pair.json';
-import routerABI from '../config/abi/IUniswapV2Router02.json';
-import factoryABI from '../config/abi/IUniswapV2Factory.json';
-import { farms } from '../config/constants/farms';
-import  addresses  from '../config/constants/addresses.json';
+import MasterChefABI from '$lib/config/abi/MasterChef.json';
+import MushTokenABI from '$lib/config/abi/MushToken.json';
+import TESTLPABI from '$lib/config/abi/TEST-LP.json';
+import ERC20ABI from '$lib/config/abi/ERC20.json';
+import pairABI from '$lib/config/abi/IUniswapV2Pair.json';
+import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
+import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
+import { farms } from '$lib/config/constants/farms';
+import  addresses  from '$lib/config/constants/addresses.json';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
 

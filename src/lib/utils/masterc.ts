@@ -22,7 +22,7 @@ export const withdraw = async (pid: number, amount: string): Promise<any> => {
 	try{
 		return await mc.withdraw(pid, ethers.utils.parseUnits(amount, 18));
 	}catch(e){
-		return "Unable to Withdraw"
+		return console.log("Unable to Withdraw")
 	}
 	
 };
@@ -30,7 +30,8 @@ export const withdraw = async (pid: number, amount: string): Promise<any> => {
 export const getRewards = async (pid: number, user: string): Promise<any> => {
 	const mc = getMasterChefContract();
 	try {
-		return await mc.pendingmush(pid, user);
+		const reward= await mc.pendingmush(pid, user);
+		return reward;
 	} catch (error) {
 		return "Not Avaliable"
 	}

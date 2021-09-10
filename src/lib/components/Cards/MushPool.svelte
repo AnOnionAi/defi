@@ -34,7 +34,7 @@
 
 <style>
 	#mush {
-		background-image: url('../../../../static/mushpan.jpg');
+		background-image: url('/static/mushpan.jpg');
 		width: 70%;
 		height: 400px;
 		margin: 0 auto;
