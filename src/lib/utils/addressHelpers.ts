@@ -1,4 +1,4 @@
-import { addresses } from 'src/config/constants/addresses';
+import  addresses  from '../config/constants/addresses.json';
 
 export const getMushAddress = () => {
 	return addresses.MushToken.TEST;

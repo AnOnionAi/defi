@@ -13,6 +13,7 @@
 </script>
 
 <script lang="ts">
+
 	import doge from '/static/doge.png';
 	import mxnc from '/static/mxnc.png';
 	import sushi from '/static/sushi.png';
@@ -25,11 +26,12 @@
 	import usdt from '/static/usdt.png';
 	import usdc from '/static/usdc.png';
 	import mushRound from '/static/mushRound.png';
-	import PoolCard from './components/_PoolCard.svelte';
-	import MushCard from './components/_MushPool.svelte';
-	import { pools } from '../../../config/constants/pools';
+	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
+	import MushCard from '$lib/components/Cards/MushPool.svelte';
+	import { pools } from '$lib/config/constants/pools';
 	import Modal from 'svelte-simple-modal';
 	export let lang;
+
 </script>
 
 <Modal>

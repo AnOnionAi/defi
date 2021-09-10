@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getContext } from 'svelte';
-	import { parseBigNumberToDecimal, parseBigNumberToInt } from '../../../../utils/balanceParsers';
+	import { parseBigNumberToDecimal, parseBigNumberToInt } from '$lib/utils/balanceParsers';
 	export let tokenName;
 	export let userStakedTokens: BigNumber;
 	export let onWithdraw = (wantAmount?: any) => {};

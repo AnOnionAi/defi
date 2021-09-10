@@ -1,4 +1,4 @@
-import { addresses } from './addresses';
+import  addresses  from './addresses.json';
 
 export const farms: {
 	pid: number;
@@ -23,7 +23,7 @@ export const farms: {
 	{
 		pid: 2,
 		tokenName: 'DYFN-LP',
-		tokenAddr: addresses['DYFNTESTLP'].TEST,
+		tokenAddr: addresses.DYFNTESTLP.TEST,
 		depositFee: 100
 	}
 ];

@@ -9,7 +9,7 @@
 	import { faSun } from '@fortawesome/free-solid-svg-icons/faSun.js';
 	import { faMoon } from '@fortawesome/free-solid-svg-icons/faMoon.js';
 	import { faBars } from '@fortawesome/free-solid-svg-icons/faBars.js';
-	import Icon from 'fa-svelte';
+	import Icon from 'svelte-fa';
 	import { darkMode } from '$lib/stores/dark';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import bFloppa from '/static/fungfi.png';

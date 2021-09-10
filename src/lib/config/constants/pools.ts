@@ -1,4 +1,4 @@
-import { addresses } from './addresses';
+import  addresses  from './addresses.json';
 export let pools = [
 	{
 		tokenName: 'MUSH',

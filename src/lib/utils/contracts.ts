@@ -6,7 +6,7 @@ import pairABI from '../config/abi/IUniswapV2Pair.json';
 import routerABI from '../config/abi/IUniswapV2Router02.json';
 import factoryABI from '../config/abi/IUniswapV2Factory.json';
 import { farms } from '../config/constants/farms';
-import { addresses } from '../config/constants/addresses';
+import  addresses  from '../config/constants/addresses.json';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
 
@@ -47,13 +47,6 @@ export const getTESTLPContract = () => {
 	return LPContract;
 };
 
-export const getLPTokensContracts = () => {
-	let arrayContracts = [];
-	farms.forEach((farm) => {
-		arrayContracts.push(new ethers.Contract(farm.lpTokenAddress, farm.abiToken, getSigner()));
-	});
-	return arrayContracts;
-};
 
 export const getERC20Contract = (address: string) => {
 	const ercToken = new ethers.Contract(address, ERC20ABI, getSigner());

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import { metaMaskCon } from '../../../../utils/helpers';
+	import { metaMaskCon } from '$lib/utils/helpers';
 	import {
 		approveToken,
 		getTokenAllowance,
 		isNotZero,
 		getTokenBalance
-	} from '../../../../utils/erc20';
+	} from '$lib/utils/erc20';
 	import { onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import type { BigNumber } from '@ethersproject/bignumber';
@@ -14,10 +14,10 @@
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp.js';
 	import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown.js';
-	import { deposit, withdraw, getRewards, getStakedTokens } from '../../../../utils/masterc';
-	import { parseBigNumberToDecimal, parseBigNumberToInt } from '../../../../utils/balanceParsers';
-	import DepositModal from './_DepositModal.svelte';
-	import WithdrawModal from './_WithdrawModal.svelte';
+	import { deposit, withdraw, getRewards, getStakedTokens } from '$lib/utils/masterc';
+	import { parseBigNumberToDecimal, parseBigNumberToInt } from '$lib/utils/balanceParsers';
+	import DepositModal from '$lib/components/Modals/DepositModal.svelte';
+	import WithdrawModal from '$lib/components/Modals/WithdrawModal.svelte';
 
 	const { open } = getContext('simple-modal');
 

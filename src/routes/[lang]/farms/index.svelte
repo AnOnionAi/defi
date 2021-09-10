@@ -17,8 +17,8 @@
 </script>
 
 <script lang="ts">
-	import { farms } from '../../../config/constants/farms';
-	import PoolCard from '../pools/components/_PoolCard.svelte';
+	import { farms } from '$lib/config/constants/farms';
+	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import Modal from 'svelte-simple-modal';
 </script>
 
