@@ -101,10 +101,11 @@
 				canStake = isNotZero(userBalance);
 
 				userEarnings = await getRewards(info.pid, userAcc);
+				canHarvest=isNotZero(userEarnings);
 			}
 			if (canStake) {
 				userStakedTokens = await getStakedTokens(info.pid, userAcc);
-				canWithdraw = userStakedTokens._hex !== ethers.constants.Zero._hex;
+				canWithdraw = isNotZero(userStakedTokens);
 			}
 
 			idInterval = setInterval(async () => {
@@ -185,7 +186,7 @@
 				</p>
 				<p
 					on:click={async () => await deposit(info.pid, '0')}
-					class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer"
+					class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer {!canHarvest && 'invisible'}"
 				>
 					Harvest
 				</p>
@@ -214,8 +215,8 @@
 					</p>
 					<p
 						on:click={goWithdraw}
-						class="text-green-400 font-semibold text-lg tracking-wider p-1 ml-6 cursor-pointer  {!userStakedTokens &&
-							'invisible'}"
+						class="text-green-400 font-semibold text-lg tracking-wider p-1 ml-6 cursor-pointer  {!canWithdraw &&
+							'hidden'}"
 					>
 						Withdraw
 					</p>
