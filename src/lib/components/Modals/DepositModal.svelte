@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getContext } from 'svelte';
+	import type {PoolInfo} from "$lib/ts/types"
 	import { parseBigNumberToDecimal, parseBigNumberToInt } from '$lib/utils/balanceParsers';
-	export let tokenName;
+	export let info: PoolInfo;
 	export let userBalance: BigNumber;
 	export let onOkay = (wantAmount?: any) => {};
 
@@ -40,7 +41,7 @@
 			</div>
 			<div class="flex">
 				<div />
-				<p class="text-gray-400  font-semibold tracking-wide ">{tokenName}</p>
+				<p class="text-gray-400  font-semibold tracking-wide ">{info.tokenName}</p>
 			</div>
 		</div>
 	</div>
@@ -77,7 +78,7 @@
 			on:click={_onOkay}
 			class="w-full p-2 rounded-xl bg-gradient-to-r from-green-400 to-blue-400 hover:from-green-300 hover:to-green-500 text-light-100 font-bold tracking-wide "
 		>
-			DEPOSIT YOUR {tokenName}
+			DEPOSIT YOUR {info.tokenName}
 		</button>
 	</div>
 </div>

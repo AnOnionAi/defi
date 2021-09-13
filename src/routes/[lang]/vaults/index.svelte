@@ -17,7 +17,7 @@
 	import usdc from '/static/usdc.png';
 	import matic from '/static/matic.png';
 	export let lang;
-	import VaultAccordeon from '../../../lib/components/Cards/_VaultAccordeon.svelte';
+	import VaultAccordeon from '$lib/components/Cards/VaultAccordeon.svelte';
 </script>
 
 <section>

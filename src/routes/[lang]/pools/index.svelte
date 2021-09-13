@@ -28,7 +28,7 @@
 	import mushRound from '/static/mushRound.png';
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import MushCard from '$lib/components/Cards/MushPool.svelte';
-	import { pools } from '$lib/config/constants/pools';
+	import {pools} from '$lib/config/constants/pools';
 	import Modal from 'svelte-simple-modal';
 	export let lang;
 
@@ -40,18 +40,18 @@
 		<h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
 		<div class="mt-5 space-y-4">
 			<div class="grid grid-cols-1 sm:grid-cols-3 gap-y-9 gap-x-4 p-8 text-center">
-				<PoolCard cardImage={mushRound} {...pools[0]} />
-				<PoolCard cardImage={fish} {...pools[1]} />
-				<PoolCard cardImage={matic} {...pools[2]} />
-				<PoolCard cardImage={weth} {...pools[3]} />
-				<PoolCard cardImage={wbtc} {...pools[4]} />
-				<PoolCard cardImage={sushi} {...pools[5]} />
-				<PoolCard cardImage={quick} {...pools[6]} />
-				<PoolCard cardImage={dyfn} {...pools[7]} />
-				<PoolCard cardImage={usdt} {...pools[8]} />
-				<PoolCard cardImage={usdc} {...pools[9]} />
-				<PoolCard cardImage={doge} {...pools[10]} />
-				<PoolCard cardImage={mxnc} {...pools[11]} />
+				<PoolCard cardImage={mushRound} info={pools[0]} />
+				<PoolCard cardImage={fish} info={pools[1]} />
+				<PoolCard cardImage={matic} info={pools[2]} />
+				<PoolCard cardImage={weth} info={pools[3]} />
+				<PoolCard cardImage={wbtc} info={pools[4]} />
+				<PoolCard cardImage={sushi} info={pools[5]} />
+				<PoolCard cardImage={quick} info={pools[6]} />
+				<PoolCard cardImage={dyfn} info={pools[7]} />
+				<PoolCard cardImage={usdt} info={pools[8]} />
+				<PoolCard cardImage={usdc} info={pools[9]} />
+				<PoolCard cardImage={doge} info={pools[10]} />
+				<PoolCard cardImage={mxnc} info={pools[11]} />
 			</div>
 		</div>
 	</section>

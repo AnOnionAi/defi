@@ -2,7 +2,8 @@
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getContext } from 'svelte';
 	import { parseBigNumberToDecimal, parseBigNumberToInt } from '$lib/utils/balanceParsers';
-	export let tokenName;
+	import type { PoolInfo } from '$lib/ts/types';
+	export let info: PoolInfo;
 	export let userStakedTokens: BigNumber;
 	export let onWithdraw = (wantAmount?: any) => {};
 
@@ -41,7 +42,7 @@
 			</div>
 			<div>
 				<div />
-				<p class="text-gray-400  font-semibold tracking-wide ">{tokenName}</p>
+				<p class="text-gray-400  font-semibold tracking-wide ">{info.tokenName}</p>
 			</div>
 		</div>
 	</div>
@@ -78,7 +79,7 @@
 			on:click={_onWithdraw}
 			class="w-full p-2 rounded-xl bg-gradient-to-r from-green-400 to-blue-400 hover:from-green-300 hover:to-green-500 text-light-100 font-bold tracking-wide "
 		>
-			WITHDRAW YOUR {tokenName}
+			WITHDRAW YOUR {info.tokenName}
 		</button>
 	</div>
 </div>

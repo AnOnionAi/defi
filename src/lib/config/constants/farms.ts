@@ -1,11 +1,7 @@
 import  addresses  from './addresses.json';
+import type {PoolInfo} from "$lib/ts/types"
 
-export const farms: {
-	pid: number;
-	tokenName: string;
-	tokenAddr: string;
-	depositFee: number;
-}[] = [
+export const farms:PoolInfo[] = [
 	{
 		pid: 0,
 		tokenName: 'QUICK-LP',

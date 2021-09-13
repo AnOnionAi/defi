@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import type { PoolInfo } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import {
 		approveToken,
@@ -7,7 +8,7 @@
 		isNotZero,
 		getTokenBalance
 	} from '$lib/utils/erc20';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { ethers } from 'ethers';
@@ -21,11 +22,8 @@
 
 	const { open } = getContext('simple-modal');
 
-	export let cardImage: any;
-	export let tokenName: string;
-	export let tokenAddr: string;
-	export let depositFee: number;
-	export let pid: number;
+	export let info: PoolInfo
+	export let cardImage;
 
 	let isHidden: boolean = true;
 	let tokenApproved: boolean;
@@ -43,18 +41,18 @@
 
 	const onOkay = async (amount) => {
 		console.log(userStakedTokens, 'before');
-		const tx = await deposit(pid, amount);
+		const tx = await deposit(info.pid, amount);
 		console.log(tx);
 		await tx.wait();
-		userStakedTokens = await getStakedTokens(pid, userAcc);
+		userStakedTokens = await getStakedTokens(info.pid, userAcc);
 	};
 
 	const onWithdraw = async (amount) => {
 		console.log('onWithdraw');
 		wantWithdrawAmount = amount;
-		const tx = await withdraw(pid, wantWithdrawAmount);
+		const tx = await withdraw(info.pid, wantWithdrawAmount);
 		await tx.wait();
-		userStakedTokens = await getStakedTokens(pid, userAcc);
+		userStakedTokens = await getStakedTokens(info.pid, userAcc);
 	};
 
 	const goDeposit = () => {
@@ -62,7 +60,7 @@
 			DepositModal,
 			{
 				userBalance,
-				tokenName,
+				info,
 				onOkay
 			},
 			{
@@ -78,7 +76,7 @@
 			WithdrawModal,
 			{
 				userStakedTokens,
-				tokenName,
+				info,
 				onWithdraw
 			},
 			{
@@ -93,20 +91,21 @@
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
 			tokenAllowance = await getTokenAllowance(
-				tokenAddr,
+				info.tokenAddr,
 				'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9',
 				userAcc
 			);
 			tokenApproved = isNotZero(tokenAllowance);
 			if (tokenApproved) {
-				userBalance = await getTokenBalance(tokenAddr, userAcc);
+				userBalance = await getTokenBalance(info.tokenAddr, userAcc);
 				canStake = isNotZero(userBalance);
 
-				userEarnings = await getRewards(pid, userAcc);
+				userEarnings = await getRewards(info.pid, userAcc);
+				canHarvest=isNotZero(userEarnings);
 			}
 			if (canStake) {
-				userStakedTokens = await getStakedTokens(pid, userAcc);
-				canWithdraw = userStakedTokens._hex !== ethers.constants.Zero._hex;
+				userStakedTokens = await getStakedTokens(info.pid, userAcc);
+				canWithdraw = isNotZero(userStakedTokens);
 			}
 
 			idInterval = setInterval(async () => {
@@ -115,15 +114,19 @@
 		}
 	});
 
+	onDestroy(()=>{
+		clearInterval(idInterval);
+	})
+
 	const fetchReards = async () => {
 		if (tokenApproved) {
-			userEarnings = await getRewards(pid, userAcc);
+			userEarnings = await getRewards(info.pid, userAcc);
 		}
 	};
 
 	onMount(async () => {
 		poolTokenLiquidity = await getTokenBalance(
-			tokenAddr,
+			info.tokenAddr,
 			'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9'
 		);
 	});
@@ -133,16 +136,16 @@
 	};
 
 	const approveHandler = async () => {
-		const tx = await approveToken(tokenAddr, '0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9');
+		const tx = await approveToken(info.tokenAddr, '0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9');
 		await tx.wait();
 		tokenAllowance = await getTokenAllowance(
-			tokenAddr,
+			info.tokenAddr,
 			'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9',
 			userAcc
 		);
 	};
 
-	import { slide } from 'svelte/transition';
+
 </script>
 
 <div
@@ -152,7 +155,7 @@
 		<img class="max-h-40" src={cardImage} alt="tic-tac-toe" />
 	</div>
 	<div class="dark:bg-dark-300 bg-gray-100 p-2 space-y-3">
-		<p class="text-lg font-bold dark:text-white">{tokenName}</p>
+		<p class="text-lg font-bold dark:text-white">{info.tokenName}</p>
 		<div class="px-5">
 			<div class="flex justify-between">
 				<p class="font-semibold">APY:::</p>
@@ -182,15 +185,15 @@
 					{/if}
 				</p>
 				<p
-					on:click={async () => await deposit(pid, '0')}
-					class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer"
+					on:click={async () => await deposit(info.pid, '0')}
+					class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer {!canHarvest && 'invisible'}"
 				>
 					Harvest
 				</p>
 			</div>
 		</div>
 		<div class="flex px-5 -mb-2">
-			<p class="text-xs font-medium ">{tokenName} STAKED</p>
+			<p class="text-xs font-medium ">{info.tokenName} STAKED</p>
 		</div>
 
 		{#if tokenApproved && $accounts}
@@ -212,8 +215,8 @@
 					</p>
 					<p
 						on:click={goWithdraw}
-						class="text-green-400 font-semibold text-lg tracking-wider p-1 ml-6 cursor-pointer  {!userStakedTokens &&
-							'invisible'}"
+						class="text-green-400 font-semibold text-lg tracking-wider p-1 ml-6 cursor-pointer  {!canWithdraw &&
+							'hidden'}"
 					>
 						Withdraw
 					</p>
@@ -254,13 +257,13 @@
 		<div class="px-5 {isHidden && 'hidden'}">
 			<div class="flex justify-between">
 				<p>Stake:</p>
-				<p>{tokenName}</p>
+				<p>{info.tokenName}</p>
 			</div>
 			<div class="flex justify-between">
 				<p>Total Liquidity:</p>
 				<p>
 					{#if poolTokenLiquidity}
-						{parseBigNumberToDecimal(poolTokenLiquidity)} {tokenName}
+						{parseBigNumberToDecimal(poolTokenLiquidity)} {info.tokenName}
 					{:else}
 						0
 					{/if}
@@ -270,9 +273,9 @@
 				<p>My Liquidity:</p>
 				<p>
 					{#if userStakedTokens}
-						{parseBigNumberToDecimal(userStakedTokens)} {tokenName}
+						{parseBigNumberToDecimal(userStakedTokens)} {info.tokenName}
 					{:else}
-						0 {tokenName}
+						0 {info.tokenName}
 					{/if}
 				</p>
 			</div>
