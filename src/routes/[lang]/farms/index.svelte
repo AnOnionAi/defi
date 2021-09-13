@@ -31,9 +31,9 @@
 				<div class="w-full flex">
 					<div class="w-full grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 text-center">
 						<!--Start Farms-->
-						<PoolCard cardImage={quick} {...farms[0]} />
-						<PoolCard cardImage={sushi} {...farms[1]} />
-						<PoolCard cardImage={dyfn} {...farms[2]} />
+						<PoolCard cardImage={quick} info={farms[0]} />
+						<PoolCard cardImage={sushi} info={farms[1]} />
+						<PoolCard cardImage={dyfn} info={farms[2]} />
 						<!--End Farms-->
 					</div>
 				</div>
