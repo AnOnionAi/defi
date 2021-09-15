@@ -12,6 +12,8 @@
 </script>
 
 <script lang="ts">
+	import Fa from 'svelte-fa/src/fa.svelte';
+
 	import wbtc from '/static/wbtc.png';
 	import eth from '/static/eth.png';
 	import usdc from '/static/usdc.png';
@@ -23,8 +25,7 @@
 <section>
 	<h1 class="text-dark-200 dark:text-white text-4xl">V A U L T S</h1>
 	<div class="w-11/12 mx-auto">
-
-		<VaultAccordeon tkn0Img={usdc} tkn1Img={eth}/>
+		<VaultAccordeon tkn0Img={usdc} tkn1Img={eth} />
 		<div
 			class="hover:bg-green-600 hover:cursor-pointer hover:shadow-md my-5 p-5 usdc_mush_g rounded-xl relative"
 		>

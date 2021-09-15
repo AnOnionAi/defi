@@ -1,7 +1,7 @@
-import  addresses  from './addresses.json';
-import type {PoolInfo} from "$lib/ts/types"
+import addresses from './addresses.json';
+import type { PoolInfo } from '$lib/ts/types';
 
-export const farms:PoolInfo[] = [
+export const farms: PoolInfo[] = [
 	{
 		pid: 0,
 		tokenName: 'QUICK-LP',

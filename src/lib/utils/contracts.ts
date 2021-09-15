@@ -5,8 +5,9 @@ import ERC20ABI from '$lib/config/abi/ERC20.json';
 import pairABI from '$lib/config/abi/IUniswapV2Pair.json';
 import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
 import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
+import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import { farms } from '$lib/config/constants/farms';
-import  addresses  from '$lib/config/constants/addresses.json';
+import addresses from '$lib/config/constants/addresses.json';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
 
@@ -46,7 +47,6 @@ export const getTESTLPContract = () => {
 	const LPContract = new ethers.Contract(addresses.TESTLP.TEST, TESTLPABI, getSigner());
 	return LPContract;
 };
-
 
 export const getERC20Contract = (address: string) => {
 	const ercToken = new ethers.Contract(address, ERC20ABI, getSigner());
@@ -110,4 +110,13 @@ export const getPoolReserves = async (pairAddr: string): Promise<BigNumber[]> =>
 export const getTokenPairAddress = async (tkn0Addr: string, tkn1Addr: string) => {
 	const factory = getUniFactoryContract();
 	return await factory.getPair(tkn0Addr, tkn1Addr);
+};
+
+export const getVaultChefContract = () => {
+	const vaultChefContract = new ethers.Contract(
+		addresses.VaultChef.TEST,
+		VaultChefABI,
+		getSigner()
+	);
+	return vaultChefContract;
 };

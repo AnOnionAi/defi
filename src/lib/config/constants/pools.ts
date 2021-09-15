@@ -1,6 +1,6 @@
 import type { PoolInfo } from '$lib/ts/types';
-import  addresses  from './addresses.json';
-export let pools:PoolInfo[] = [
+import addresses from './addresses.json';
+export let pools: PoolInfo[] = [
 	{
 		tokenName: 'MUSH',
 		tokenAddr: addresses.MushToken.TEST,
