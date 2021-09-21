@@ -13,7 +13,6 @@
 
 <script lang="ts">
 	import Fa from 'svelte-fa/src/fa.svelte';
-
 	import wbtc from '/static/wbtc.png';
 	import eth from '/static/eth.png';
 	import usdc from '/static/usdc.png';
@@ -25,198 +24,67 @@
 <section>
 	<h1 class="text-dark-200 dark:text-white text-4xl">V A U L T S</h1>
 	<div class="w-11/12 mx-auto">
-		<VaultAccordeon tkn0Img={usdc} tkn1Img={eth} />
-		<div
-			class="hover:bg-green-600 hover:cursor-pointer hover:shadow-md my-5 p-5 usdc_mush_g rounded-xl relative"
-		>
-			<span class="absolute top-0">
-				<img class="w-15 inline mt-2" src={usdc} />
-			</span>
-			<span class="absolute bottom-1 right-1">
-				<img class="w-15 inline pt-2" src={eth} />
-			</span>
-			<div class="sm:flex sm:justify-between sm:items-center sm:mx-40">
-				<div class="text-center">
-					<p class="font-semibold">Earn USDC-MUSH LP</p>
-					<h3 class="text-lg font-bold">USDC || ETH</h3>
-				</div>
-				<div class="mt-2">
-					<div class="flex flex-row justify-around">
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm sm:px-3 font-semibold text-gray-900">APY</div>
-						</div>
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm sm:px-3 font-semibold text-gray-900">wallet</div>
-						</div>
-					</div>
-					<div class="flex flex-row justify-around">
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm sm:px-3 font-semibold text-gray-900">TVL</div>
-						</div>
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm sm:px-3 font-semibold text-gray-900">DAILY</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<p
-				class="absolute shadow-md font-semibold top-0 right-0 p-3 mush-green rounded-tr-xl rounded-bl-xl"
-			>
-				QuickSwap
-			</p>
-		</div>
+		<VaultAccordeon
+			tkn0Img={eth}
+			tkn1Img={usdc}
+			vaultConfig={{
+				pid: 0,
+				depositFee: 0,
+				platform: { name: 'QuickSwap', brandColor: 'blue' },
+				pair: {
+					token0Name: 'Ether',
+					token1Name: 'USDC',
+					token0quote: 'ETH',
+					token1quote: 'USDC',
+					pairContract: '0x76b98C24E0b0D544D6F035Bb441470b06fB7c9c9',
+					token0Contract: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+					token1Contract: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
+					pairURL: 'lol'
+				}
+			}}
+		/>
 
-		<div
-			class="hover:bg-green-600 hover:cursor-pointer hover:shadow-md matic_mush_g my-5 p-5 bg-gray-50 rounded-xl relative"
-		>
-			<span class="absolute top-0">
-				<img class="w-15 mt-2" src={eth} />
-			</span>
-			<span class="absolute bottom-1 right-1">
-				<img class="w-15 inline pt-2" src={usdc} />
-			</span>
-			<div class="sm:flex sm:justify-between sm:items-center sm:mx-40">
-				<div class="text-center">
-					<p class="font-semibold">Earn ETH-USDC LP</p>
-					<h3 class="text-lg font-bold">ETH || USDC</h3>
-				</div>
-				<div class="mt-2">
-					<div class="flex flex-row justify-around">
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">APY</div>
-						</div>
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">wallet</div>
-						</div>
-					</div>
-					<div class="flex flex-row justify-around">
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">TVL</div>
-						</div>
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">DAILY</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<p
-				class="absolute shadow-md font-semibold top-0 right-0 p-3 mush-green rounded-tr-xl rounded-bl-xl"
-			>
-				QuickSwap
-			</p>
-		</div>
-		<div
-			class="hover:bg-green-600 hover:cursor-pointer hover:shadow-md dyfn_mush_g my-5 p-5 bg-gray-50 rounded-xl relative"
-		>
-			<span class="absolute top-0">
-				<img class="w-15 mt-2" src={eth} />
-			</span>
-			<span class="absolute bottom-1 right-1">
-				<img class="w-15 inline pt-2" src={matic} />
-			</span>
-			<div class="sm:flex sm:justify-between sm:items-center sm:mx-40">
-				<div class="text-center">
-					<p class="font-semibold">Earn ETH-MATIC LP</p>
-					<h3 class="text-lg font-bold">ETH || MATIC</h3>
-				</div>
-				<div class="mt-2">
-					<div class="flex flex-row justify-around">
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">APY</div>
-						</div>
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">wallet</div>
-						</div>
-					</div>
-					<div class="flex flex-row justify-around">
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">TVL</div>
-						</div>
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">DAILY</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<p
-				class="absolute shadow-md font-semibold top-0 right-0 p-3 mush-green rounded-tr-xl rounded-bl-xl"
-			>
-				QuickSwap
-			</p>
-		</div>
-		<div
-			class="hover:bg-green-600 hover:cursor-pointer hover:shadow-md sushi_mush_g my-5 p-5 bg-gray-50 rounded-xl relative"
-		>
-			<span class="absolute top-0">
-				<img class="w-20 mt-2" src={wbtc} />
-			</span>
-			<span class="absolute bottom-1 right-1">
-				<img class="w-15 inline pt-2" src={eth} />
-			</span>
-			<div class="sm:flex sm:justify-between sm:items-center sm:mx-40">
-				<div class="text-center">
-					<p class="font-semibold">Earn WBTC-ETH LP</p>
-					<h3 class="text-lg font-bold">WBTC || ETH</h3>
-				</div>
-				<div class="mt-2">
-					<div class="flex flex-row justify-around">
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">APY</div>
-						</div>
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">wallet</div>
-						</div>
-					</div>
-					<div class="flex flex-row justify-around">
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">TVL</div>
-						</div>
-						<div>
-							<div class="font-bold sm:px-3">457.81%</div>
-							<div class="text-sm font-semibold sm:px-3 text-gray-900">DAILY</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<p
-				class="absolute shadow-md font-semibold top-0 right-0 p-3 mush-green rounded-tr-xl rounded-bl-xl"
-			>
-				QuickSwap
-			</p>
-		</div>
+		<VaultAccordeon
+			tkn0Img={eth}
+			tkn1Img={usdc}
+			vaultConfig={{
+				pid: 0,
+				depositFee: 0,
+				platform: { name: 'SushiSwap', brandColor: 'pink' },
+				pair: {
+					token0Name: 'Ether',
+					token1Name: 'USDC',
+					token0quote: 'ETH',
+					token1quote: 'USDC',
+					pairContract: '0x76b98C24E0b0D544D6F035Bb441470b06fB7c9c9',
+					token0Contract: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+					token1Contract: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
+					pairURL: 'lol'
+				}
+			}}
+		/>
+
+		<VaultAccordeon
+			tkn0Img={usdc}
+			tkn1Img={matic}
+			vaultConfig={{
+				pid: 0,
+				depositFee: 0,
+				platform: { name: 'ApeSwap', brandColor: 'yellow' },
+				pair: {
+					token0Name: 'Ether',
+					token1Name: 'USDC',
+					token0quote: 'ETH',
+					token1quote: 'USDC',
+					pairContract: '0x76b98C24E0b0D544D6F035Bb441470b06fB7c9c9',
+					token0Contract: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+					token1Contract: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
+					pairURL: 'lol'
+				}
+			}}
+		/>
 	</div>
 </section>
 
 <style>
-	.mush-green {
-		background-color: #4da085;
-	}
-
-	.usdc_mush_g {
-		background: linear-gradient(45deg, #4da085 0%, #3b75c9 100%);
-	}
-	.matic_mush_g {
-		background: linear-gradient(45deg, #4da085 0%, #4b91f9 100%);
-	}
-	.sushi_mush_g {
-		background: linear-gradient(45deg, #4da085 0%, #e84e9a 100%);
-	}
-	.dyfn_mush_g {
-		background: linear-gradient(45deg, #4da085 0%, #ae7581 100%);
-	}
 </style>

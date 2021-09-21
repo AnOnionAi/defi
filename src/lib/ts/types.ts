@@ -33,12 +33,24 @@ export interface PoolConfig {
 }
 
 export interface LPair {
-	token0Name: string,
-	token1Name: string,
-	token0quote: string,
-	token1quote: string,
-	token0Contract: string,
-	token1Contract: string,
-	pairContract: string,
-	
+	token0Name: string;
+	token1Name: string;
+	token0quote: string;
+	token1quote: string;
+	token0Contract: string
+	token1Contract: string
+	pairContract: string;
+	pairURL: string;
+}
+
+export interface VaultInfo {
+	pid: number;
+	depositFee: number;
+	platform: Platform;
+	pair: LPair;
+}
+
+export interface Platform {
+	name: string;
+	brandColor: string;
 }
