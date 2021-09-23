@@ -51,7 +51,7 @@
 	}
 </script>
 
-<div class="my-10">
+<div class="my-3">
 	<div
 		on:click={openAccordeon}
 		class="border border-gray-300 hover:cursor-pointer shadow-xl {isHidden == false &&
