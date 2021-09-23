@@ -13,5 +13,22 @@
 		"trade": {
 			"title": "Comercio"
 		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "Creación Automatizada de Criptomercados"
+		},
+		"farms": {
+			"text": "Granjas"
+		},
+		"pools": {
+			"text": "Quinielas"
+		},
+		"vaults": {
+			"text": "Bóvedas"
+		},
+		"crypto-responsibility": {
+			"text":  "Responsibilidad Criptográfica"
+		}
 	}
 }
