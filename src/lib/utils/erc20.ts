@@ -36,7 +36,7 @@ export const getTokenBalance = async (tknAddr: string, userAddr) => {
 		const balance = await tokenContract.balanceOf(userAddr);
 		return balance;
 	} catch (e) {
-		return 'Not Avaliable';
+		return 'N/A';
 	}
 };
 

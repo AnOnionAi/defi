@@ -17,7 +17,7 @@
 	let apy: string;
 	let tvl: string;
 	let daily: string;
-	
+	let borderStyle:string = 'rounded-lg'
 	let tkn0Price: number;
 	let tkn1Price: number;
 
@@ -31,6 +31,7 @@
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
 
+
 	$: if (!isHidden) {
 		if (userAcc) {
 			getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
@@ -40,12 +41,10 @@
 
 			getTokenPriceUSD(vaultConfig.pair.token0Contract).then((response)=> {
 				tkn0Price = response[vaultConfig.pair.token0Contract.toLowerCase()].usd
-				console.log('Price by const',response[vaultConfig.pair.token0Contract.toLowerCase()].usd)
 			})
 
 			getTokenPriceUSD(vaultConfig.pair.token1Contract).then((response)=> {
 				tkn1Price = response[vaultConfig.pair.token1Contract.toLowerCase()].usd
-				console.log('Price by const',response[vaultConfig.pair.token1Contract.toLowerCase()].usd)
 			})
 
 		}
@@ -55,68 +54,68 @@
 <div class="my-10">
 	<div
 		on:click={openAccordeon}
-		class="border border-gray-100 hover:cursor-pointer shadow-xl {isHidden == false &&
-			'shadow-none'} p-5  rounded-t-lg relative hover:bg-gradient-to-t from-{vaultConfig.platform
-			.brandColor}-500 to-{vaultConfig.platform.brandColor}-100"
+		class="border border-gray-300 hover:cursor-pointer shadow-xl {isHidden == false &&
+			'shadow-none'} p-5 {isHidden && 'rounded-lg'} {!isHidden && 'rounded-t-lg'} relative hover:bg-gradient-to-t from-{vaultConfig.platform
+			.brandColor}-500 to-{vaultConfig.platform.brandColor}-200 dark:bg-dark-600 dark:border-none"
 	>
 		<span class="absolute top-0">
-			<img class="w-15 inline mt-2" src={tkn0Img} />
+			<img class="w-12 inline mt-2" src={tkn0Img} alt={vaultConfig.pair.token0Name}/>
 		</span>
 		<span class="absolute bottom-1 right-1">
-			<img class="w-15 inline pt-2" src={tkn1Img} />
+			<img class="w-12 inline pt-2" src={tkn1Img}  alt={vaultConfig.pair.token1Name}/>
 		</span>
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-40">
 			<div class="text-center">
-				<p class="font-semibold">
+				<p class="font-bold uppercase text-xs text-gray-600 dark:text-gray-400">
 					Earn {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
 				</p>
-				<h3 class="text-lg font-bold">
-					{vaultConfig.pair.token0quote} || {vaultConfig.pair.token1quote}
+				<h3 class="text-lg font-bold dark:text-white">
+					{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 				</h3>
 			</div>
 			<div class="">
 				<div class="flex flex-row justify-around ">
 					<div class="text-center w-24">
-						<div class="font-bold sm:px-3 text-sm">
+						<div class="font-medium sm:px-3 text-sm dark:text-white">
 							{#if apy}
 								APY
 							{:else}
 								?
 							{/if}
 						</div>
-						<div class="text-sm sm:px-3 font-bold text-gray-500 ">APY</div>
+						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400">APY</div>
 					</div>
 					<div class="text-center w-24">
-						<div class="font-bold sm:px-3 text-sm">
+						<div class="font-medium sm:px-3 text-sm dark:text-white">
 							{#if userTokens}
 								{parseBigNumberToDecimal(userTokens)}
 							{:else}
 								?
 							{/if}
 						</div>
-						<div class="text-sm sm:px-3 font-bold text-gray-500">WALLET</div>
+						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400 ">WALLET</div>
 					</div>
 				</div>
 				<div class="flex flex-row justify-around">
 					<div class="text-center w-24">
-						<div class="font-bold sm:px-3">
+						<div class="font-medium sm:px-3 dark:text-white">
 							{#if tvl}
 								TVL
 							{:else}
 								0
 							{/if}
 						</div>
-						<div class="text-sm sm:px-3 font-bold text-gray-500">TVL</div>
+						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400">TVL</div>
 					</div>
 					<div class="text-center w-24">
-						<div class="font-bold sm:px-3">
+						<div class="font-medium sm:px-3 dark:text-white">
 							{#if daily}
 								DAILY
 							{:else}
 								?
 							{/if}
 						</div>
-						<div class="text-sm sm:px-3 font-bold text-gray-500">DAILY</div>
+						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400">DAILY</div>
 					</div>
 				</div>
 			</div>
@@ -129,7 +128,7 @@
 		</p>
 	</div>
 	{#if !isHidden}
-		<div class="bg-gray-100 rounded-b-lg px-8 py-5">
+		<div class="bg-gray-100 dark:bg-dark-300 rounded-b-lg px-8 py-5">
 			{#if !$accounts}
 				<button
 					on:click={metaMaskCon}
@@ -141,57 +140,59 @@
 				<div class="flex flex-col  lg:flex-row flex-wrapper justify-around">
 					<div class="">
 						<div class="flex">
-							<p class="text-gray-600 font-medium">In Your Wallet:</p>
+							<p class="text-gray-600 font-medium dark:text-white">In Your Wallet:</p>
 							{#if userTokens}
-								<p class="font-bold	px-2">
+								<p class="font-bold	px-2 dark:text-white font-semibold">
 									{parseBigNumberToDecimal(userTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{:else}
-								<p class="font-bold	px-2">
-									Not Avaliable {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
+								<p class="font-bold	px-2 dark:text-white font-semibold">
+									N/A {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{/if}
 						</div>
-						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm ">
+						<div class="flex my-2 py-2 px-3 bg-gray-300 dark:bg-dark-500 rounded-lg max-w-sm ">
 							<input
 								placeholder="Enter Value"
-								class="bg-gray-300 text-gray-900 font-bold w-8/12"
+								class="bg-gray-300  text-gray-900 font-bold w-8/12 dark:bg-dark-500	dark:text-white"
 								type="number"
 							/>
 							<button
-								class="bg-black text-white hover:bg-green-600 font-bold rounded-lg px-6 py-3 tracking-wide"
+							class="bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
+								.brandColor}-500 to-dark-100"
 								>Approve</button
 							>
 						</div>
 						<div class="flex">
-							<p class="text-gray-500 font-bold">Deposit Fee:</p>
-							<p class="px-2 text-gray-500 font-bold">{vaultConfig.depositFee}%</p>
+							<p class="text-gray-500 font-bold dark:text-white font-medium">Deposit Fee:</p>
+							<p class="px-2 text-gray-500 font-bold dark:text-white font-medium">{vaultConfig.depositFee}%</p>
 						</div>
 					</div>
 
 					<div class="pt-4 lg:pt-0">
 						<div class="flex">
-							<p class="text-gray-600 font-medium">Deposited:</p>
+							<p class="text-gray-600 font-medium dark:text-white font-medium">Deposited:</p>
 							{#if depositedTokens}
-								<p class="font-bold	px-2">
+								<p class="font-bold	px-2 dark:text-white font-medium">
 									{depositedTokens}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
 							{:else}
-								<p class="font-bold	px-2">
+								<p class="font-bold	px-2 dark:text-white font-medium">
 									0 {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
 							{/if}
 						</div>
-						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm">
+						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm dark:bg-dark-500">
 							<input
 								placeholder="Enter Value"
-								class="bg-gray-300 text-gray-900 font-bold w-8/12"
+								class="bg-gray-300 text-gray-900 font-bold w-8/12 dark:bg-dark-500 dark:text-white"
 								type="number"
 							/>
 							<button
-								class="bg-black hover:bg-green-600 text-white font-bold rounded-lg px-6 py-3 tracking-wide"
+								class="bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
+									.brandColor}-500 to-dark-100"
 								>Withdraw</button
 							>
 						</div>
@@ -199,22 +200,22 @@
 
 					<div class="pt-4 lg:pt-0">
 						<div>
-							<p class="text-gray-600 font-semibold pb-1">Current Prices:</p>
-							<p class="text-gray-800	font-medium ">{#if tkn0Price}
+							<p class="text-gray-600 font-semibold pb-1 dark:text-gray-400 font-semibold">Current Prices:</p>
+							<p class="text-gray-800	font-medium dark:text-white ">{#if tkn0Price}
 								{vaultConfig.pair.token0quote}	${tkn0Price}
 								{:else}
-								{vaultConfig.pair.token0quote} Not Avaliable
+								{vaultConfig.pair.token0quote} N/A
 							{/if}</p>
-							<p class="text-gray-800 font-medium ">{#if tkn1Price}
+							<p class="text-gray-800 font-medium dark:text-white">{#if tkn1Price}
 								{vaultConfig.pair.token1quote}	${tkn1Price}
 								{:else}
-								{vaultConfig.pair.token1quote} Not Avaliable
+								{vaultConfig.pair.token1quote} N/A
 							{/if}</p>
 							<div class="py-2">
-								<a class="block text-gray-600 font-semibold hover:text-green-500" href=""
+								<a class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400" href="https://polygonscan.com/"
 									>GET {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}</a
 								>
-								<a class="block text-gray-600 font-semibold hover:text-green-500" href=""
+								<a class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400" href="https://polygonscan.com/"
 									>View Info</a
 								>
 							</div>
@@ -249,5 +250,10 @@
 
 	input[type='number'] {
 		-moz-appearance: textfield;
+	}
+
+
+	.secondary-font{
+		color:rgb(151, 157, 198)
 	}
 </style>

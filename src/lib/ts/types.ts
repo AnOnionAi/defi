@@ -37,8 +37,8 @@ export interface LPair {
 	token1Name: string;
 	token0quote: string;
 	token1quote: string;
-	token0Contract: string
 	token1Contract: string
+	token0Contract: string
 	pairContract: string;
 	pairURL: string;
 }
@@ -53,4 +53,17 @@ export interface VaultInfo {
 export interface Platform {
 	name: string;
 	brandColor: string;
+	swapperURL: string;
+}
+
+
+export enum TokenQuotes {
+	WRAPPED_ETHER = "WETH",
+	WRAPPED_MATIC = "WMATIC",
+	WRAPPED_BITCOIN = "WBTC",
+	USDC = "USDC",
+	USDT = "USDT",
+	AAVE = 'AAVE',
+	DAI = "DAI",
+	QUICK = "QUICK"
 }

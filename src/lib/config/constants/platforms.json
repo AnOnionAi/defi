@@ -1,0 +1,13 @@
+{
+    "QUICKSWAP": {
+        "name": "QuickSwap",
+        "brandColor": "blue",
+        "swapperURL": "https://quickswap.exchange/#/swap"
+    },
+
+    "SUSHISWAP": {
+        "name": "SushiSwap",
+        "brandColor": "pink",
+        "swapperURL": "https://app.sushi.com/swap"
+    }
+}

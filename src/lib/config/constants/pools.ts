@@ -15,7 +15,7 @@ export let pools: PoolInfo[] = [
 	},
 	{
 		tokenName: 'WMATIC',
-		tokenAddr: addresses.Matic.TEST,
+		tokenAddr: addresses.WMATIC.TEST,
 		depositFee: 0,
 		pid: 4
 	},
@@ -39,7 +39,7 @@ export let pools: PoolInfo[] = [
 	},
 	{
 		tokenName: 'QUICK',
-		tokenAddr: addresses.Quick.TEST,
+		tokenAddr: addresses.QUICK.TEST,
 		depositFee: 0,
 		pid: 8
 	},
