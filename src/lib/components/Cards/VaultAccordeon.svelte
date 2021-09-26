@@ -207,20 +207,21 @@
 					</div>
 
 					<div class="pt-4 lg:pt-0 lg:w-1/3">
-						<p class="font-medium text-gray-500">Your Earnings</p>
-						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm dark:bg-dark-500 lg:w-11/12">
-							<input
-								placeholder="Enter Value"
-								class="bg-gray-300 text-gray-900 font-bold w-8/12 dark:bg-dark-500 dark:text-white"
-								type="number"
-							/>
+						<p class="font-medium text-gray-500">Your {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} Earnings</p>
+						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm dark:bg-dark-500 lg:w-10/12">
+							<p
+								class="py-3 bg-gray-300  font-bold w-8/12 text-lg dark:bg-dark-500 dark:text-white"
+							>
+							0.00000
+							</p>
+							
 							<button
 								class="bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
 									.brandColor}-500 to-dark-100"
 								>Harvest</button
 							>
 						</div>
-						<div>
+						<div class="pl-1">
 							<p class="text-gray-600 font-semibold pb-1 dark:text-gray-400 font-semibold">Current Prices:</p>
 							<p class="text-gray-800	font-medium dark:text-white ">{#if tkn0Price}
 								{vaultConfig.pair.token0quote}	${tkn0Price}
