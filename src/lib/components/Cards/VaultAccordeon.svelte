@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import addresses from '$lib/config/constants/addresses.json'
 	import type { LPair, VaultInfo } from '$lib/ts/types';
-	import { getTokenBalance } from '$lib/utils/erc20';
+	import { getTokenBalance,approveToken,getTokenAllowance } from '$lib/utils/erc20';
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import { parseBigNumberToDecimal } from '$lib/utils/balanceParsers';
 	import {getTokenPriceUSD} from '$lib/utils/coinGecko'
 	import type { BigNumber } from '@ethersproject/bignumber';
+	import { getUniPair } from '$lib/utils/contracts';
 	export let tkn0Img;
 	export let tkn1Img;
 	export let vaultConfig: VaultInfo;
 
+	const getTokenFromDex = `${vaultConfig.platform.swapperURL}` 
 	let userAcc: string;
 	let isHidden: boolean = true;
 	let depositedTokens;
@@ -69,7 +72,7 @@
 				<p class="font-bold uppercase text-xs text-gray-600 dark:text-gray-400">
 					Earn {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
 				</p>
-				<h3 class="text-lg font-bold dark:text-white">
+				<h3 class="text-xl font-semibold dark:text-white tracking-tighter">
 					{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 				</h3>
 			</div>
@@ -138,7 +141,7 @@
 				</button>
 			{:else}
 				<div class="flex flex-col  lg:flex-row flex-wrapper justify-around">
-					<div class="">
+					<div class="lg:w-1/3">
 						<div class="flex">
 							<p class="text-gray-600 font-medium dark:text-white">In Your Wallet:</p>
 							{#if userTokens}
@@ -152,25 +155,26 @@
 								</p>
 							{/if}
 						</div>
-						<div class="flex my-2 py-2 px-3 bg-gray-300 dark:bg-dark-500 rounded-lg max-w-sm ">
+						<div class="flex my-2 py-2 px-3 bg-gray-300 dark:bg-dark-500 rounded-lg max-w-sm lg:w-11/12">
 							<input
 								placeholder="Enter Value"
 								class="bg-gray-300  text-gray-900 font-bold w-8/12 dark:bg-dark-500	dark:text-white"
 								type="number"
 							/>
 							<button
-							class="bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
+							on:click={async()=> await approveToken(vaultConfig.pair.pairContract,addresses.VaultChef.TEST)}
+							class="bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
 								.brandColor}-500 to-dark-100"
 								>Approve</button
 							>
 						</div>
 						<div class="flex">
 							<p class="text-gray-500 font-bold dark:text-white font-medium">Deposit Fee:</p>
-							<p class="px-2 text-gray-500 font-bold dark:text-white font-medium">{vaultConfig.depositFee}%</p>
+							<p class="px-1  font-bold dark:text-white font-medium">{vaultConfig.depositFee}%</p>
 						</div>
 					</div>
 
-					<div class="pt-4 lg:pt-0">
+					<div class="pt-4 lg:pt-0 lg:w-1/3">
 						<div class="flex">
 							<p class="text-gray-600 font-medium dark:text-white font-medium">Deposited:</p>
 							{#if depositedTokens}
@@ -184,7 +188,7 @@
 								</p>
 							{/if}
 						</div>
-						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm dark:bg-dark-500">
+						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm dark:bg-dark-500 lg:w-11/12">
 							<input
 								placeholder="Enter Value"
 								class="bg-gray-300 text-gray-900 font-bold w-8/12 dark:bg-dark-500 dark:text-white"
@@ -196,9 +200,26 @@
 								>Withdraw</button
 							>
 						</div>
+						<div class="flex">
+							<p class="mr-1 font-medium text-gray-500">Withdrawal Fee:</p>
+							<p class="font-medium">0%</p>
+						</div>
 					</div>
 
-					<div class="pt-4 lg:pt-0">
+					<div class="pt-4 lg:pt-0 lg:w-1/3">
+						<p class="font-medium text-gray-500">Your Earnings</p>
+						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm dark:bg-dark-500 lg:w-11/12">
+							<input
+								placeholder="Enter Value"
+								class="bg-gray-300 text-gray-900 font-bold w-8/12 dark:bg-dark-500 dark:text-white"
+								type="number"
+							/>
+							<button
+								class="bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
+									.brandColor}-500 to-dark-100"
+								>Harvest</button
+							>
+						</div>
 						<div>
 							<p class="text-gray-600 font-semibold pb-1 dark:text-gray-400 font-semibold">Current Prices:</p>
 							<p class="text-gray-800	font-medium dark:text-white ">{#if tkn0Price}
@@ -212,7 +233,7 @@
 								{vaultConfig.pair.token1quote} N/A
 							{/if}</p>
 							<div class="py-2">
-								<a class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400" href="https://polygonscan.com/"
+								<a class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400" href={getTokenFromDex}
 									>GET {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}</a
 								>
 								<a class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400" href="https://polygonscan.com/"

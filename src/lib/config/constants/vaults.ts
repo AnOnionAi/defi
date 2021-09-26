@@ -31,7 +31,7 @@ export const quickVaults: VaultInfo[] = [
             token1quote: TokenQuotes.WRAPPED_MATIC,
             token0Contract:addresses.WETH.POLYGON,
             token1Contract: addresses.WMATIC.POLYGON,
-            pairContract: "Not Ready",
+            pairContract: "0xadbF1854e5883eB8aa7BAf50705338739e558E5b",
             pairURL: "Not ready"
         }
     },
