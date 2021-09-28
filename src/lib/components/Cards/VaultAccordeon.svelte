@@ -4,6 +4,8 @@
 	import type { LPair, VaultInfo } from '$lib/ts/types';
 	import { getTokenBalance,approveToken,getTokenAllowance } from '$lib/utils/erc20';
 	import { metaMaskCon } from '$lib/utils/helpers';
+	import {getContractAddress} from '$lib/utils/addressHelpers'
+	import {Token} from "$lib/ts/types"
 	import { parseBigNumberToDecimal } from '$lib/utils/balanceParsers';
 	import {getTokenPriceUSD} from '$lib/utils/coinGecko'
 	import type { BigNumber } from '@ethersproject/bignumber';
@@ -162,7 +164,7 @@
 								type="number"
 							/>
 							<button
-							on:click={async()=> await approveToken(vaultConfig.pair.pairContract,addresses.VaultChef.TEST)}
+							on:click={async()=> await approveToken(vaultConfig.pair.pairContract,getContractAddress(Token.VAULTCHEF))}
 							class="bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
 								.brandColor}-500 to-dark-100"
 								>Approve</button

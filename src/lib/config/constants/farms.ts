@@ -1,25 +1,27 @@
 import addresses from './addresses.json';
 import type { PoolInfo } from '$lib/ts/types';
+import { getContractAddress } from '$lib/utils/addressHelpers';
+import { Token } from '$lib/ts/types';
 
 export const farms: PoolInfo[] = [
 	{
 		pid: 0,
 		tokenName: 'QUICK-LP',
-		tokenAddr: addresses.ZyberToken.TEST,
+		tokenAddr: getContractAddress(Token.ZYBERTOKEN),
 		depositFee: 100
 	},
 
 	{
 		pid: 1,
 		tokenName: 'SUSHI-LP',
-		tokenAddr: addresses.TESTLP.TEST,
-		depositFee: 100
+		tokenAddr: getContractAddress(Token.TESTLP),
+		depositFee: 100	
 	},
 
 	{
 		pid: 2,
 		tokenName: 'DYFN-LP',
-		tokenAddr: addresses.DYFNTESTLP.TEST,
+		tokenAddr: getContractAddress(Token.DFYNTESTLP),
 		depositFee: 100
 	}
 ];

@@ -57,6 +57,27 @@ export interface Platform {
 	swapperURL: string;
 }
 
+export enum Token {
+  UNIFACTORY = "UNIFACTORY",
+  UNIROUTER = "UNIROUTER",
+  MUSHTOKEN = "MUSHTOKEN",
+  MASTERCHEF = "MASTERCHEF",
+  ZYBERTOKEN = "ZYBERTOKEN",
+  TESTLP = "TESTLP",
+  DFYNTESTLP = "DFYNTESTLP",
+  FISHTOKEN = "FISHTOKEN",
+  WMATIC = "WMATIC",
+  WETH = "WETH",
+  WBTC = "WBTC",
+  SUSHI  = "SUSHI", 
+  QUICK  = "QUICK", 
+  DFYN  = "DFYN", 
+  MXNC  = "MXNC", 
+  DOGE  = "DOGE", 
+  USDC  = "USDC", 
+  USDT  = "USDT", 
+  VAULTCHEF = "VAULTCHEF",
+}
 
 export enum TokenQuotes {
 	WRAPPED_ETHER = "WETH",
@@ -68,3 +89,4 @@ export enum TokenQuotes {
 	DAI = "DAI",
 	QUICK = "QUICK"
 }
+

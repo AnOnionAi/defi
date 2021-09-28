@@ -16,7 +16,6 @@
 	import WithdrawModal from '$lib/components/Modals/WithdrawModal.svelte';
 
 	const { open } = getContext('simple-modal');
-
 	export let info: PoolInfo;
 	export let cardImage;
 

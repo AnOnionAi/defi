@@ -19,6 +19,11 @@
 	import {quickVaults,sushiVaults} from '$lib/config/constants/vaults'
 	export let lang;
 	import VaultAccordeon from '$lib/components/Cards/VaultAccordeon.svelte';
+	import env from '$lib/env';
+	import addresses from '$lib/config/constants/addresses.json'
+	import {getContractAddress} from '$lib/utils/addressHelpers'
+	console.log(env['CHAIN']);
+	
 </script>
 
 <section>

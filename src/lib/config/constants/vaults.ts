@@ -2,6 +2,9 @@ import type { VaultInfo } from "$lib/ts/types";
 import addresses from "./addresses.json"
 import platforms from "./platforms.json"
 import  {TokenQuotes} from "$lib/ts/types"
+import env from "$lib/env"
+import {Token}  from "$lib/ts/types";
+import { getContractAddress } from "$lib/utils/addressHelpers";
 export const quickVaults: VaultInfo[] = [
     {
         pid:0,
@@ -13,8 +16,8 @@ export const quickVaults: VaultInfo[] = [
             token1Name: "USDC",
             token0quote: TokenQuotes.WRAPPED_ETHER,
             token1quote: TokenQuotes.USDC,
-            token0Contract: addresses.WETH.POLYGON,
-            token1Contract: addresses.USDC.POLYGON,
+            token0Contract: getContractAddress(Token.WETH),
+            token1Contract: getContractAddress(Token.USDC),
             pairContract: "Not Ready",
             pairURL: "Not Ready"
         }
@@ -29,8 +32,8 @@ export const quickVaults: VaultInfo[] = [
             token1Name: "WMATIC",
             token0quote: TokenQuotes.WRAPPED_ETHER,
             token1quote: TokenQuotes.WRAPPED_MATIC,
-            token0Contract:addresses.WETH.POLYGON,
-            token1Contract: addresses.WMATIC.POLYGON,
+            token0Contract:getContractAddress(Token.WETH),
+            token1Contract:getContractAddress(Token.WMATIC),
             pairContract: "0xadbF1854e5883eB8aa7BAf50705338739e558E5b",
             pairURL: "Not ready"
         }
@@ -50,8 +53,8 @@ export const sushiVaults: VaultInfo[] = [
             token1Name: "USDC",
             token0quote: TokenQuotes.WRAPPED_ETHER,
             token1quote: TokenQuotes.USDC,
-            token0Contract: addresses.WETH.POLYGON,
-            token1Contract: addresses.USDC.POLYGON,
+            token0Contract: getContractAddress(Token.WETH),
+            token1Contract: getContractAddress(Token.USDC),
             pairContract: "Not Ready",
             pairURL: "Not Ready"
         }
@@ -66,8 +69,8 @@ export const sushiVaults: VaultInfo[] = [
             token1Name: "WMATIC",
             token0quote: TokenQuotes.WRAPPED_ETHER,
             token1quote: TokenQuotes.WRAPPED_MATIC,
-            token0Contract:addresses.WETH.POLYGON,
-            token1Contract: addresses.WMATIC.POLYGON,
+            token0Contract:getContractAddress(Token.WETH),
+            token1Contract: getContractAddress(Token.WMATIC),
             pairContract: "Not Ready",
             pairURL: "Not ready"
         }
