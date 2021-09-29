@@ -7,10 +7,14 @@
 	},
 	"scripts": {
 		"dev": "svelte-kit dev",
+		"testnet": "export VITE_NODE_ENV=dev && svelte-kit dev",
+		"polyqa": "export VITE_NODE_ENV=qa && svelte-kit dev",
+		"mainnet": "export VITE_NODE_ENV=production && svelte-kit dev",
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --write --plugin-search-dir=. ."
+
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^1.0.0-next.19",
@@ -39,6 +43,7 @@
 		"@fortawesome/free-solid-svg-icons": "^5.15.3",
 		"@lukeed/uuid": "^2.0.0",
 		"@sveltejs/adapter-static": "^1.0.0-next.0",
+		"axios": "^0.21.4",
 		"cookie": "^0.4.1",
 		"cross-env": "^7.0.3",
 		"dotenv": "^10.0.0",

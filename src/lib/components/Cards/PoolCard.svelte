@@ -2,12 +2,7 @@
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { PoolInfo } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
-	import {
-		approveToken,
-		getTokenAllowance,
-		isNotZero,
-		getTokenBalance
-	} from '$lib/utils/erc20';
+	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import type { BigNumber } from '@ethersproject/bignumber';
@@ -21,8 +16,7 @@
 	import WithdrawModal from '$lib/components/Modals/WithdrawModal.svelte';
 
 	const { open } = getContext('simple-modal');
-
-	export let info: PoolInfo
+	export let info: PoolInfo;
 	export let cardImage;
 
 	let isHidden: boolean = true;
@@ -101,7 +95,7 @@
 				canStake = isNotZero(userBalance);
 
 				userEarnings = await getRewards(info.pid, userAcc);
-				canHarvest=isNotZero(userEarnings);
+				canHarvest = isNotZero(userEarnings);
 			}
 			if (canStake) {
 				userStakedTokens = await getStakedTokens(info.pid, userAcc);
@@ -114,9 +108,9 @@
 		}
 	});
 
-	onDestroy(()=>{
+	onDestroy(() => {
 		clearInterval(idInterval);
-	})
+	});
 
 	const fetchReards = async () => {
 		if (tokenApproved) {
@@ -144,8 +138,6 @@
 			userAcc
 		);
 	};
-
-
 </script>
 
 <div
@@ -186,7 +178,8 @@
 				</p>
 				<p
 					on:click={async () => await deposit(info.pid, '0')}
-					class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer {!canHarvest && 'invisible'}"
+					class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer {!canHarvest &&
+						'invisible'}"
 				>
 					Harvest
 				</p>

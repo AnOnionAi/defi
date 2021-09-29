@@ -1,77 +1,80 @@
 import type { PoolInfo } from '$lib/ts/types';
-import  addresses  from './addresses.json';
-export let pools:PoolInfo[] = [
+import addresses from './addresses.json';
+import { getContractAddress } from '$lib/utils/addressHelpers';
+import {Token} from "$lib/ts/types";
+
+export let pools: PoolInfo[] = [
 	{
 		tokenName: 'MUSH',
-		tokenAddr: addresses.MushToken.TEST,
+		tokenAddr: getContractAddress(Token.MUSHTOKEN),
 		depositFee: 0,
 		pid: 5
 	},
 	{
 		tokenName: 'FISH',
-		tokenAddr: addresses.FishToken.TEST,
+		tokenAddr: getContractAddress(Token.FISHTOKEN),
 		depositFee: 0,
 		pid: 4
 	},
 	{
 		tokenName: 'WMATIC',
-		tokenAddr: addresses.Matic.TEST,
+		tokenAddr: getContractAddress(Token.WMATIC),
 		depositFee: 0,
 		pid: 4
 	},
 	{
 		tokenName: 'WETH',
-		tokenAddr: addresses.WETH.TEST,
+		tokenAddr: getContractAddress(Token.WETH),
 		depositFee: 0,
 		pid: 4
 	},
 	{
 		tokenName: 'WBTC',
-		tokenAddr: addresses.WBTC.TEST,
+		tokenAddr: getContractAddress(Token.WBTC),
 		depositFee: 0,
 		pid: 6
 	},
 	{
 		tokenName: 'SUSHI',
-		tokenAddr: addresses.Sushi.TEST,
+		tokenAddr: getContractAddress(Token.SUSHI),
 		depositFee: 0,
 		pid: 7
 	},
 	{
 		tokenName: 'QUICK',
-		tokenAddr: addresses.Quick.TEST,
+		tokenAddr: getContractAddress(Token.QUICK),
 		depositFee: 0,
 		pid: 8
 	},
 	{
 		tokenName: 'DYFN',
-		tokenAddr: addresses.Dyfn.TEST,
+		tokenAddr: getContractAddress(Token.DFYN),
 		depositFee: 0,
 		pid: 9
 	},
 	{
 		tokenName: 'USDT',
-		tokenAddr: addresses.USDT.TEST,
+		tokenAddr: getContractAddress(Token.USDT),
 		depositFee: 0,
 		pid: 10
 	},
 	{
 		tokenName: 'USDC',
-		tokenAddr: addresses.USDC.TEST,
+		tokenAddr: getContractAddress(Token.USDC),
 		depositFee: 0,
 		pid: 11
 	},
 
 	{
 		tokenName: 'DOGE',
-		tokenAddr: addresses.DOGE.TEST,
+		tokenAddr: getContractAddress(Token.DOGE),
 		depositFee: 0,
 		pid: 12
 	},
 
 	{
 		tokenName: 'MXNC',
-		tokenAddr: addresses.MXNC.TEST,
+		tokenAddr: getContractAddress(Token.MXNC),
 		depositFee: 0,
 		pid: 13
 	}

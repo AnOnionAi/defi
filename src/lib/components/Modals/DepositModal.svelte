@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getContext } from 'svelte';
-	import type {PoolInfo} from "$lib/ts/types"
+	import type { PoolInfo } from '$lib/ts/types';
 	import { parseBigNumberToDecimal, parseBigNumberToInt } from '$lib/utils/balanceParsers';
 	export let info: PoolInfo;
 	export let userBalance: BigNumber;
