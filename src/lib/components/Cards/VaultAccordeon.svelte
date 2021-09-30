@@ -13,11 +13,11 @@
 	import { Chasing } from 'svelte-loading-spinners'
 
 	export let tkn0Img;
-	export let colorTheme='blue';
 	export let tkn1Img;
 	export let vaultConfig: VaultInfo;
 
-	const getTokenFromDex = `${vaultConfig.platform.swapperURL}` 
+	const getTokenFromDex = `${vaultConfig.platform.swapperURL}`
+	
 	let userAcc: string;
 	let isHidden: boolean = true;
 	let isApproved: boolean;
@@ -30,10 +30,13 @@
 	let tkn0Price: number;
 	let tkn1Price: number;
 
-	let loadingSomething: boolean;
-	let loadingWithdraw: boolean;
-	let loadingApproval: boolean;
-	let loadingHarvest: boolean;
+	const loadingState = {
+		something: false,
+		approve: false,
+		deposit: false,
+		withdraw: false,
+		harvest:false,
+	}
 
 	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
@@ -45,9 +48,10 @@
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
 
-	const handleTransaction = async(transaction:Promise<any>) => {
-		loadingSomething=true
-		loadingApproval=true;
+	const handleTransaction = async(transaction:Promise<any>,transactionName: string) => {
+		loadingState.something=true
+		loadingState[transactionName] = true
+		console.log(loadingState)
 		try {
 			const tx = await transaction;
 			console.log(tx)
@@ -56,8 +60,9 @@
 		} catch (error) {
 			console.log("Transaction rejected by the user")
 		}
-		loadingApproval=false;
-		loadingSomething=false;
+		loadingState.something=false
+		loadingState[transactionName] = false
+		console.log(loadingState)
 	}
 
 
@@ -89,7 +94,7 @@
 	<div
 		on:click={openAccordeon}
 		class="border border-gray-300 hover:cursor-pointer shadow-xl {isHidden == false &&
-			'shadow-none'} p-5 {isHidden && 'rounded-lg'} {!isHidden && 'rounded-t-lg'} relative hover:bg-gradient-to-t from-{colorTheme}-500 to-{colorTheme}-200 dark:bg-dark-600 dark:border-none"
+			'shadow-none'} p-5 {isHidden && 'rounded-lg'} {!isHidden && 'rounded-t-lg'} relative hover:bg-gradient-to-t from-{vaultConfig.platform.brandColor}-500 to-{vaultConfig.platform.brandColor}-200 dark:bg-dark-600 dark:border-none"
 	>
 		<span class="absolute top-0">
 			<img class="w-12 inline mt-2" src={tkn0Img} alt={vaultConfig.pair.token0Name}/>
@@ -193,27 +198,27 @@
 							/>
 							{#if isApproved}
 							<button
-							class:cursor-not-allowed={loadingSomething}
-							disabled={loadingSomething}
-							on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"))}
+							class:cursor-not-allowed={loadingState.something}
+							disabled={loadingState.deposit}
+							on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"),"deposit")}
 							class="flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-pink-500 bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
 								.brandColor}-500 to-dark-100"
 								>
-								<p class="px-2">Deposit</p> 
-								{#if loadingApproval}
+								<p class="pr-2">Deposit</p> 
+								{#if loadingState.deposit}
 								<Chasing size="15" unit="px" color="#ffff" />
 								{/if}
 							</button>
 							{:else}
 							<button
-							class:cursor-not-allowed={loadingSomething}
-							disabled={loadingSomething}
-							on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"))}
+							class:cursor-not-allowed={loadingState.approve}
+							disabled={loadingState.approve}
+							on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"),"approve")}
 							class="flex items-center bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
 								.brandColor}-500 to-dark-100"
 								>
-								<p class="px-2">Approve</p> 
-								{#if loadingApproval}
+								<p class="pr-2">Approve</p> 
+								{#if loadingState.approve}
 								<Chasing size="15" unit="px" color="#ffff" />
 								{/if}
 							</button>
@@ -247,9 +252,17 @@
 								type="number"
 							/>
 							<button
-								class="bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
+							disabled={loadingState.something}
+								on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"),"withdraw")}
+								class="flex items-center disabled:cursor-not-allowed {loadingState.withdraw && 'bg-pink-500'} bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
 									.brandColor}-500 to-dark-100"
-								>Withdraw</button
+								>
+								<p class="pr-2">Withdraw</p>
+								{#if loadingState.withdraw}
+								<Chasing size="15" unit="px" color="#ffff"/>
+								{/if}
+								
+								</button
 							>
 						</div>
 						<div class="flex">
@@ -260,17 +273,24 @@
 
 					<div class="pt-4 lg:pt-0 lg:w-1/3">
 						<p class="font-medium text-gray-500">Your {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} Earnings</p>
-						<div class="flex my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm dark:bg-dark-500 lg:w-10/12">
+						<div class="flex items-center my-2 py-2 px-3 bg-gray-300 rounded-lg max-w-sm dark:bg-dark-500 lg:w-10/12">
 							<p
-								class="py-3 bg-gray-300  font-bold w-8/12 text-lg dark:bg-dark-500 dark:text-white"
+								class=" bg-gray-300  font-bold w-8/12 text-lg dark:bg-dark-500 dark:text-white"
 							>
 							0.00000
 							</p>
 							
 							<button
-								class="bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
-									.brandColor}-500 to-dark-100"
-								>Harvest</button
+							on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"),"harvest")}
+								disabled = {loadingState.something}
+								class="flex items-center bg-black hover:bg-{vaultConfig.platform.brandColor}-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
+									.brandColor}-500 to-dark-100 disabled:cursor-not-allowed {loadingState.harvest && 'bg-pink-500'}"
+								>
+								<p class="pr-2">Harvest</p>
+								{#if loadingState.harvest}
+								<Chasing size="15" unit="px" color="#ffff"/>
+								{/if}
+								</button
 							>
 						</div>
 						<div class="pl-1">

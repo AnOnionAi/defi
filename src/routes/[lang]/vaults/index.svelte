@@ -50,7 +50,7 @@
 			vaultConfig={sushiVaults[1]}
 		/> -->
 
-		<VaultAccordeon tkn0Img={matic} tkn1Img={usdc} vaultConfig={quickVaults[2]} colorTheme="blue"/>
+		<VaultAccordeon tkn0Img={matic} tkn1Img={usdc} vaultConfig={quickVaults[2]} />
 
 
 	</div>
