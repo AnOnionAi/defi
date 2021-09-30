@@ -14,7 +14,6 @@
 		"preview": "svelte-kit preview",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --write --plugin-search-dir=. ."
-
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^1.0.0-next.19",
@@ -28,6 +27,7 @@
 		"prettier": "~2.2.1",
 		"prettier-plugin-svelte": "^2.2.0",
 		"svelte": "^3.34.0",
+		"svelte-loading-spinners": "^0.1.7",
 		"svelte-preprocess": "^4.0.0",
 		"svelte-windicss-preprocess": "^4.0.7",
 		"tslib": "^2.0.0",

@@ -1,8 +1,11 @@
 import { ethers, BigNumber } from 'ethers';
 
-export const parseBigNumberToString = (n: BigNumber): string => {
-	const stringNumber = ethers.utils.formatUnits(n, 18);
-	return stringNumber;
+export const parseBigNumberToString = (balance: BigNumber | string): string => {
+	if (typeof balance == 'string') {
+		return balance;
+	}
+	const stringBalance = ethers.utils.formatUnits(balance, 18);
+	return stringBalance;
 };
 
 export const parseBigNumberToDecimal = (balance: BigNumber | string) => {

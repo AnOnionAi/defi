@@ -2,7 +2,7 @@
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import addresses from '$lib/config/constants/addresses.json'
 	import type { LPair, VaultInfo } from '$lib/ts/types';
-	import { getTokenBalance,approveToken,getTokenAllowance } from '$lib/utils/erc20';
+	import { getTokenBalance,approveToken,getTokenAllowance, isNotZero } from '$lib/utils/erc20';
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import {getContractAddress} from '$lib/utils/addressHelpers'
 	import {Token} from "$lib/ts/types"
@@ -10,13 +10,17 @@
 	import {getTokenPriceUSD} from '$lib/utils/coinGecko'
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getUniPair } from '$lib/utils/contracts';
+	import { Chasing } from 'svelte-loading-spinners'
+
 	export let tkn0Img;
+	export let colorTheme='blue';
 	export let tkn1Img;
 	export let vaultConfig: VaultInfo;
 
 	const getTokenFromDex = `${vaultConfig.platform.swapperURL}` 
 	let userAcc: string;
 	let isHidden: boolean = true;
+	let isApproved: boolean;
 	let depositedTokens;
 	let userTokens: BigNumber;
 	let apy: string;
@@ -26,9 +30,10 @@
 	let tkn0Price: number;
 	let tkn1Price: number;
 
-
-	let loadingApproval = false;
-
+	let loadingSomething: boolean;
+	let loadingWithdraw: boolean;
+	let loadingApproval: boolean;
+	let loadingHarvest: boolean;
 
 	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
@@ -41,20 +46,30 @@
 	};
 
 	const handleTransaction = async(transaction:Promise<any>) => {
-		console.log("Inicia")
+		loadingSomething=true
 		loadingApproval=true;
-		const tx = await transaction;
-		console.log(tx)
-		await tx.wait()
-		console.log("Termina")
+		try {
+			const tx = await transaction;
+			console.log(tx)
+			await tx.wait()
+			
+		} catch (error) {
+			console.log("Transaction rejected by the user")
+		}
+		loadingApproval=false;
+		loadingSomething=false;
 	}
 
 
 	$: if (!isHidden) {
 		if (userAcc) {
+
+			getTokenAllowance("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40",userAcc).then(res => {
+				isApproved = isNotZero(res)
+			});
+
 			getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
 				userTokens = balance;
-				
 			});
 
 			getTokenPriceUSD(vaultConfig.pair.token0Contract).then((response)=> {
@@ -65,6 +80,7 @@
 				tkn1Price = response[vaultConfig.pair.token1Contract.toLowerCase()].usd
 			})
 
+			console.log(isApproved)
 		}
 	}
 </script>
@@ -73,8 +89,7 @@
 	<div
 		on:click={openAccordeon}
 		class="border border-gray-300 hover:cursor-pointer shadow-xl {isHidden == false &&
-			'shadow-none'} p-5 {isHidden && 'rounded-lg'} {!isHidden && 'rounded-t-lg'} relative hover:bg-gradient-to-t from-{vaultConfig.platform
-			.brandColor}-500 to-{vaultConfig.platform.brandColor}-200 dark:bg-dark-600 dark:border-none"
+			'shadow-none'} p-5 {isHidden && 'rounded-lg'} {!isHidden && 'rounded-t-lg'} relative hover:bg-gradient-to-t from-{colorTheme}-500 to-{colorTheme}-200 dark:bg-dark-600 dark:border-none"
 	>
 		<span class="absolute top-0">
 			<img class="w-12 inline mt-2" src={tkn0Img} alt={vaultConfig.pair.token0Name}/>
@@ -176,12 +191,34 @@
 								class="bg-gray-300  text-gray-900 font-bold w-8/12 dark:bg-dark-500	dark:text-white"
 								type="number"
 							/>
+							{#if isApproved}
 							<button
+							class:cursor-not-allowed={loadingSomething}
+							disabled={loadingSomething}
 							on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"))}
-							class="bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
+							class="flex items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-pink-500 bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
 								.brandColor}-500 to-dark-100"
-								>Approve</button
-							>
+								>
+								<p class="px-2">Deposit</p> 
+								{#if loadingApproval}
+								<Chasing size="15" unit="px" color="#ffff" />
+								{/if}
+							</button>
+							{:else}
+							<button
+							class:cursor-not-allowed={loadingSomething}
+							disabled={loadingSomething}
+							on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"))}
+							class="flex items-center bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
+								.brandColor}-500 to-dark-100"
+								>
+								<p class="px-2">Approve</p> 
+								{#if loadingApproval}
+								<Chasing size="15" unit="px" color="#ffff" />
+								{/if}
+							</button>
+							{/if}
+							
 						</div>
 						<div class="flex">
 							<p class="text-gray-500 font-bold dark:text-white font-medium">Deposit Fee:</p>
