@@ -6,7 +6,7 @@
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import {getContractAddress} from '$lib/utils/addressHelpers'
 	import {Token} from "$lib/ts/types"
-	import { parseBigNumberToDecimal } from '$lib/utils/balanceParsers';
+	import { parseBigNumberToString,parseBigNumberToDecimal} from '$lib/utils/balanceParsers';
 	import {getTokenPriceUSD} from '$lib/utils/coinGecko'
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getUniPair } from '$lib/utils/contracts';
@@ -26,15 +26,28 @@
 	let tkn0Price: number;
 	let tkn1Price: number;
 
+
+	let loadingApproval = false;
+
+
 	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
 		}
 	});
 
-	const openAccordeon = () => {
+	const openAccordeon = ():void => {
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
+
+	const handleTransaction = async(transaction:Promise<any>) => {
+		console.log("Inicia")
+		loadingApproval=true;
+		const tx = await transaction;
+		console.log(tx)
+		await tx.wait()
+		console.log("Termina")
+	}
 
 
 	$: if (!isHidden) {
@@ -147,8 +160,8 @@
 						<div class="flex">
 							<p class="text-gray-600 font-medium dark:text-white">In Your Wallet:</p>
 							{#if userTokens}
-								<p class="font-bold	px-2 dark:text-white font-semibold">
-									{parseBigNumberToDecimal(userTokens)}
+								<p class="font-bold	px-2 dark:text-white font-semibold tracking-tighter">
+									{parseBigNumberToString(userTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{:else}
@@ -164,7 +177,7 @@
 								type="number"
 							/>
 							<button
-							on:click={async()=> await approveToken(vaultConfig.pair.pairContract,getContractAddress(Token.VAULTCHEF))}
+							on:click={async()=> handleTransaction(approveToken("0x8F760623f496F6e91219858166Aa68Af2561D51a","0x5cc76D4888401015138708029e4a965Bb0962b40"))}
 							class="bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig.platform
 								.brandColor}-500 to-dark-100"
 								>Approve</button

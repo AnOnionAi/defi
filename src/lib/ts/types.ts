@@ -49,6 +49,7 @@ export interface VaultInfo {
 	whitdrawalFee: number;
 	platform: Platform;
 	pair: LPair;
+	strategyContractAddress: string
 }
 
 export interface Platform {
