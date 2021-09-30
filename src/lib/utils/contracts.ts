@@ -5,14 +5,17 @@ import ERC20ABI from '$lib/config/abi/ERC20.json';
 import pairABI from '$lib/config/abi/IUniswapV2Pair.json';
 import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
 import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
+import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import { farms } from '$lib/config/constants/farms';
-import  addresses  from '$lib/config/constants/addresses.json';
+import addresses from '$lib/config/constants/addresses.json';
+import {getContractAddress} from "$lib/utils/addressHelpers"
+import { Token } from '$lib/ts/types';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
 
 export const getMasterChefContract = () => {
 	const masterChefContract = new ethers.Contract(
-		addresses.MasterChef.TEST,
+		getContractAddress(Token.MASTERCHEF),
 		MasterChefABI,
 		getSigner()
 	);
@@ -21,7 +24,7 @@ export const getMasterChefContract = () => {
 
 export const getMushTokenContract = () => {
 	const mushTokenContract = new ethers.Contract(
-		addresses.MushToken.TEST,
+		getContractAddress(Token.MUSHTOKEN),
 		MushTokenABI,
 		getSigner()
 	);
@@ -30,7 +33,7 @@ export const getMushTokenContract = () => {
 
 export const getZyberTokenContract = () => {
 	const zyberTokenContract = new ethers.Contract(
-		addresses.ZyberToken.TEST,
+		getContractAddress(Token.ZYBERTOKEN),
 		MushTokenABI,
 		getSigner()
 	);
@@ -42,10 +45,6 @@ export const getContractObject = (address: string, abi: any) => {
 	return contract;
 };
 
-export const getTESTLPContract = () => {
-	const LPContract = new ethers.Contract(addresses.TESTLP.TEST, TESTLPABI, getSigner());
-	return LPContract;
-};
 
 
 export const getERC20Contract = (address: string) => {
@@ -54,12 +53,12 @@ export const getERC20Contract = (address: string) => {
 };
 
 export const getUniRouterContract = () => {
-	const router = new ethers.Contract(addresses.UNIRouter.TEST, routerABI, getSigner());
+	const router = new ethers.Contract(getContractAddress(Token.UNIROUTER), routerABI, getSigner());
 	return router;
 };
 
 export const getUniFactoryContract = () => {
-	const factory = new ethers.Contract(addresses.UNIFactory.TEST, factoryABI, getSigner());
+	const factory = new ethers.Contract(getContractAddress(Token.UNIFACTORY), factoryABI, getSigner());
 	return factory;
 };
 
@@ -69,7 +68,7 @@ export const getUniPair = (address: string) => {
 };
 
 export const getMushAllowance = async (userAddr: string) => {
-	const mushContract = new ethers.Contract(addresses.MushToken.TEST, ERC20ABI, getSigner());
+	const mushContract = new ethers.Contract(getContractAddress(Token.MUSHTOKEN), ERC20ABI, getSigner());
 	return await mushContract.allowance(userAddr, '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506');
 };
 
@@ -110,4 +109,13 @@ export const getPoolReserves = async (pairAddr: string): Promise<BigNumber[]> =>
 export const getTokenPairAddress = async (tkn0Addr: string, tkn1Addr: string) => {
 	const factory = getUniFactoryContract();
 	return await factory.getPair(tkn0Addr, tkn1Addr);
+};
+
+export const getVaultChefContract = () => {
+	const vaultChefContract = new ethers.Contract(
+		getContractAddress(Token.VAULTCHEF),
+		VaultChefABI,
+		getSigner()
+	);
+	return vaultChefContract;
 };
