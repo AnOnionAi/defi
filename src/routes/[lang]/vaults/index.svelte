@@ -16,14 +16,13 @@
 	import eth from '/static/wethIcon.svg';
 	import usdc from '/static/usdc.png';
 	import matic from '/static/matic.png';
-	import {quickVaults,sushiVaults} from '$lib/config/constants/vaults'
+	import { quickVaults, sushiVaults } from '$lib/config/constants/vaults';
 	export let lang;
 	import VaultAccordeon from '$lib/components/Cards/VaultAccordeon.svelte';
 	import env from '$lib/env';
-	import addresses from '$lib/config/constants/addresses.json'
-	import {getContractAddress} from '$lib/utils/addressHelpers'
+	import addresses from '$lib/config/constants/addresses.json';
+	import { getContractAddress } from '$lib/utils/addressHelpers';
 	console.log(env['CHAIN']);
-	
 </script>
 
 <section>
@@ -51,8 +50,6 @@
 		/> -->
 
 		<VaultAccordeon tkn0Img={matic} tkn1Img={usdc} vaultConfig={quickVaults[2]} />
-
-
 	</div>
 </section>
 

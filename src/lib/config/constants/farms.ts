@@ -15,7 +15,7 @@ export const farms: PoolInfo[] = [
 		pid: 1,
 		tokenName: 'SUSHI-LP',
 		tokenAddr: getContractAddress(Token.TESTLP),
-		depositFee: 100	
+		depositFee: 100
 	},
 
 	{
