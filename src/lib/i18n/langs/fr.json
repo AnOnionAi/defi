@@ -13,5 +13,22 @@
 		"trdae": {
 			"trade": "Commerce"
 		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "Création de Marché Crypto Automatisée"
+		},
+		"farms": {
+			"text": "Fermes"
+		},
+		"pools": {
+			"text": "Piscines"
+		},
+		"vaults": {
+			"text": "Coffres"
+		},
+		"crypto-responsibility": {
+			"text":  "Responsabilité Cryptographique"
+		}
 	}
 }

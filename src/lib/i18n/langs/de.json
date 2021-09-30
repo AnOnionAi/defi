@@ -13,5 +13,22 @@
 		"trade": {
 			"title": "Handel"
 		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "Automatisiertes Crypto Market Making"
+		},
+		"farms": {
+			"text": "Bauernhöfe"
+		},
+		"pools": {
+			"text": "Schwimmbäder"
+		},
+		"vaults": {
+			"text": "Tresore"
+		},
+		"crypto-responsibility": {
+			"text":  "Krypto-Verantwortung"
+		}
 	}
 }
