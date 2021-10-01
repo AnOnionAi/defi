@@ -6,7 +6,7 @@ specifiers:
   '@fortawesome/free-regular-svg-icons': ^5.15.3
   '@fortawesome/free-solid-svg-icons': ^5.15.3
   '@lukeed/uuid': ^2.0.0
-  '@sveltejs/adapter-netlify': ^1.0.0-next.19
+  '@sveltejs/adapter-netlify': ^1.0.0-next.32
   '@sveltejs/adapter-static': ^1.0.0-next.0
   '@sveltejs/kit': next
   '@types/three': ^0.129.1
@@ -54,7 +54,7 @@ dependencies:
   three: 0.129.0
 
 devDependencies:
-  '@sveltejs/adapter-netlify': 1.0.0-next.23
+  '@sveltejs/adapter-netlify': 1.0.0-next.32
   '@sveltejs/kit': 1.0.0-next.178_svelte@3.38.2
   '@types/three': 0.129.1
   '@typescript-eslint/eslint-plugin': 4.25.0_6fb86b31e39dbd15f93824c03ca6ca0c
@@ -529,11 +529,11 @@ packages:
       picomatch: 2.3.0
     dev: true
 
-  /@sveltejs/adapter-netlify/1.0.0-next.23:
-    resolution: {integrity: sha512-BM54dDmyJfbjUFrmx2zo9exZ1SxmKSzS1aqu+UJ7g+xosd6JLMqQKYYTPyiE7tq/c9BSxBzYExnf+nf/D7CDeQ==}
+  /@sveltejs/adapter-netlify/1.0.0-next.32:
+    resolution: {integrity: sha512-nJIn806J1p5+YwwYN6EzSslAENfEuSuoNcRJZZsoI/PRJDjgpUJm3Y58iL0ZbaLEMS6iGyMFz2jjXAAUefpGHQ==}
     dependencies:
       '@iarna/toml': 2.2.5
-      esbuild: 0.12.11
+      esbuild: 0.13.3
     dev: true
 
   /@sveltejs/adapter-static/1.0.0-next.0:
@@ -1119,12 +1119,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /esbuild/0.12.11:
-    resolution: {integrity: sha512-h83GwI6lYOrnSv5hSY2i2XZ191v3haj2IGDzwrkfWHhuO/kVMX3RYjhwRNG9E5VSxVLPaUjTVwrv8HWLvhk2nQ==}
-    hasBin: true
-    requiresBuild: true
-    dev: true
 
   /esbuild/0.13.3:
     resolution: {integrity: sha512-98xovMLKnyhv3gcReUuAEi5Ig1rK6SIgvsJuBIcfwzqGSEHsV8UJjMlmkhHoHMf9XZybMpE9Zax8AA8f7i2hlQ==}
