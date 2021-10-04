@@ -1,8 +1,15 @@
-2021/10/04-09:17:55.931 9eb Reusing MANIFEST /home/georgyzeti/repositories/zyber/tests/~/.config/google-chrome/Default/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn/MANIFEST-000001
-2021/10/04-09:17:55.932 9eb Recovering log #2023
-2021/10/04-09:17:55.942 9eb Level-0 table #2025: started
-2021/10/04-09:17:55.992 9eb Level-0 table #2025: 1467614 bytes OK
-2021/10/04-09:17:56.000 9eb Delete type=0 #2023
-2021/10/04-09:18:15.231 a30 Level-0 table #2028: started
-2021/10/04-09:18:15.270 a30 Level-0 table #2028: 1468679 bytes OK
-2021/10/04-09:18:15.278 a30 Delete type=0 #2026
+2021/10/04-10:52:03.612 1202 Reusing MANIFEST /home/georgyzeti/repositories/zyber/tests/~/.config/google-chrome/Default/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn/MANIFEST-000001
+2021/10/04-10:52:03.613 1202 Recovering log #2099
+2021/10/04-10:52:03.620 1202 Reusing old log /home/georgyzeti/repositories/zyber/tests/~/.config/google-chrome/Default/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn/002099.log 
+2021/10/04-10:52:19.709 1242 Level-0 table #2103: started
+2021/10/04-10:52:19.745 1242 Level-0 table #2103: 1468098 bytes OK
+2021/10/04-10:52:19.752 1242 Delete type=0 #2099
+2021/10/04-10:52:19.753 1242 Compacting 4@0 + 1@1 files
+2021/10/04-10:52:19.777 1242 Generated table #2104@0: 1 keys, 489082 bytes
+2021/10/04-10:52:19.777 1242 Compacted 4@0 + 1@1 files => 489082 bytes
+2021/10/04-10:52:19.782 1242 compacted to: files[ 0 1 1 0 0 0 0 ]
+2021/10/04-10:52:19.782 1242 Delete type=2 #2093
+2021/10/04-10:52:19.782 1242 Delete type=2 #2095
+2021/10/04-10:52:19.782 1242 Delete type=2 #2100
+2021/10/04-10:52:19.782 1242 Delete type=2 #2103
+2021/10/04-10:52:19.782 1242 Delete type=2 #2098

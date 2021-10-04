@@ -15,7 +15,7 @@ const getEnvFiltered = (regex: RegExp, env) => {
 
 const getEnv = () => {
 	const NODE_ENV = env['VITE_NODE_ENV'];
-	const NODE_VERSION = env['NODE_VERSION'];
+	const NODE_VERSION = env['VITE_NODE_VERSION'];
 
 	console.log('NODE_VERSION:', NODE_VERSION)
 	console.log('VITE NODE ENV:!!!', NODE_ENV);

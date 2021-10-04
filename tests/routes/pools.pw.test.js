@@ -1,3 +1,7 @@
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.join(__dirname, '../../.env') });
+
 const { chromium } = require('playwright');
 
 jest.setTimeout(180000);
@@ -50,7 +54,7 @@ describe('pools page functionality', () => {
 		await overviewPage.waitForLoadState();
 		await overviewPage.screenshot({ path: `screenshots/pools/pools-metamask-${browserName}-open.png`, fullPage: true });
 
-		await overviewPage.fill('input', 'david1999#');
+		await overviewPage.fill('input', process.env.VITE_PASS_METAMASK);
 		overviewPage.$eval("button", (element) => element.click());
 
 		await page.waitForTimeout(2000);

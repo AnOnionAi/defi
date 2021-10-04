@@ -1,3 +1,7 @@
+const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config({ path: path.join(__dirname, '../../.env') });
+
 const { chromium } = require('playwright');
 
 jest.setTimeout(180000);
@@ -51,10 +55,9 @@ describe('vaults page functionality', () => {
 		await overviewPage.waitForLoadState();
 		await overviewPage.screenshot({ path: `screenshots/vaults/vaults-metamask-${browserName}-open.png`, fullPage: true });
 
-		await overviewPage.fill('input', 'david1999#');
+		await overviewPage.fill('input', process.env.VITE_PASS_METAMASK);
 		overviewPage.$eval("button", (element) => element.click());
 
-		page.$eval(".flex-col > :nth-child(1) [placeholder='Enter Value']", (element) => element.click());
 		await page.fill(".flex-col > :nth-child(1) [placeholder='Enter Value']", '1');
 		await page.screenshot({ path: `screenshots/vaults/vaults-metamask-${browserName}-close-putValues.png`, fullPage: true });
 
