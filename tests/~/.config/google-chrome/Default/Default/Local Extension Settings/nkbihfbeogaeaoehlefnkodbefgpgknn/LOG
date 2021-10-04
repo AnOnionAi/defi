@@ -1,0 +1,15 @@
+2021/10/04-09:18:32.868 ead Reusing MANIFEST /home/georgyzeti/repositories/zyber/tests/~/.config/google-chrome/Default/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn/MANIFEST-000001
+2021/10/04-09:18:32.868 ead Recovering log #2027
+2021/10/04-09:18:32.875 ead Reusing old log /home/georgyzeti/repositories/zyber/tests/~/.config/google-chrome/Default/Default/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn/002027.log 
+2021/10/04-09:18:56.674 eb3 Level-0 table #2031: started
+2021/10/04-09:18:57.137 eb3 Level-0 table #2031: 1468149 bytes OK
+2021/10/04-09:18:57.419 eb3 Delete type=0 #2027
+2021/10/04-09:18:57.420 eb3 Compacting 4@0 + 1@1 files
+2021/10/04-09:18:57.657 eb3 Generated table #2032@0: 1 keys, 490141 bytes
+2021/10/04-09:18:57.657 eb3 Compacted 4@0 + 1@1 files => 490141 bytes
+2021/10/04-09:18:57.941 eb3 compacted to: files[ 0 1 1 0 0 0 0 ]
+2021/10/04-09:18:57.941 eb3 Delete type=2 #2022
+2021/10/04-09:18:57.941 eb3 Delete type=2 #2028
+2021/10/04-09:18:57.941 eb3 Delete type=2 #2031
+2021/10/04-09:18:57.941 eb3 Delete type=2 #2025
+2021/10/04-09:18:57.941 eb3 Delete type=2 #2020
