@@ -1,4 +1,0 @@
-2021/10/04-10:53:03.818 1687 Reusing MANIFEST /home/georgyzeti/repositories/zyber/tests/~/.config/google-chrome/Default/Default/Session Storage/MANIFEST-000001
-2021/10/04-10:53:03.819 1687 Recovering log #3
-2021/10/04-10:53:03.820 1687 (ignoring error) /home/georgyzeti/repositories/zyber/tests/~/.config/google-chrome/Default/Default/Session Storage/000003.log: dropping 13942 bytes; Corruption: checksum mismatch
-2021/10/04-10:53:03.825 1687 Reusing old log /home/georgyzeti/repositories/zyber/tests/~/.config/google-chrome/Default/Default/Session Storage/000003.log 
