@@ -14,6 +14,9 @@ describe('farms page functionality', () => {
 
 	});
 
+	/**
+	 * You need to add the metamask extension to your chrome browser. Where you run the tests
+	 */
 	it('pressing the unlock button and opening metamask', async () => {
 
 		if (browserName === 'firefox') {

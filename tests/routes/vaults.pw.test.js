@@ -18,6 +18,9 @@ describe('vaults page functionality', () => {
 
 	});
 
+	/**
+	 * You need to add the metamask extension to your chrome browser. Where you run the tests
+	 */
 	it('Using the drop down, Putting in values and Opening metamask with those values', async () => {
 
 		if (browserName === 'firefox') {

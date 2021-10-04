@@ -18,6 +18,9 @@ describe('pools page functionality', () => {
 
 	});
 
+	/**
+		 * You need to add the metamask extension to your chrome browser. Where you run the tests
+	 */
 	it('opening the modal and executing metamask', async () => {
 
 		if (browserName === 'firefox') {
