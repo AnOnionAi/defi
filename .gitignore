@@ -4,4 +4,4 @@ node_modules
 /build
 /functions
 .env
-/tests/~/
+tests/~/
