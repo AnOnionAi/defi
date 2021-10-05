@@ -9,7 +9,7 @@ export const quickVaults: VaultInfo[] = [
 	{
 		pid: 0,
 		depositFee: 0,
-		whitdrawalFee: 0.1,
+		withdrawalFee: 0.1,
 		platform: platforms.QUICKSWAP,
 		pair: {
 			token0Name: 'WETH',
@@ -27,7 +27,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: 1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		whitdrawalFee: 0.1,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'WETH',
 			token1Name: 'WMATIC',
@@ -44,7 +44,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: 14,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		whitdrawalFee: 0.4,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'WMATIC',
 			token1Name: 'USDC',
@@ -63,7 +63,7 @@ export const sushiVaults: VaultInfo[] = [
 	{
 		pid: 3,
 		depositFee: 0,
-		whitdrawalFee: 0.1,
+		withdrawalFee: 0.1,
 		platform: platforms.SUSHISWAP,
 		pair: {
 			token0Name: 'WETH',
@@ -80,7 +80,7 @@ export const sushiVaults: VaultInfo[] = [
 	{
 		pid: 4,
 		depositFee: 0,
-		whitdrawalFee: 0.1,
+		withdrawalFee: 0.1,
 		platform: platforms.SUSHISWAP,
 		pair: {
 			token0Name: 'WETH',

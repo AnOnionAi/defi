@@ -46,7 +46,7 @@ export interface LPair {
 export interface VaultInfo {
 	pid: number;
 	depositFee: number;
-	whitdrawalFee: number;
+	withdrawalFee: number;
 	platform: Platform;
 	pair: LPair;
 	strategyContractAddress: string;
