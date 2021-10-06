@@ -90,3 +90,10 @@ export enum TokenQuotes {
 	DAI = 'DAI',
 	QUICK = 'QUICK'
 }
+
+export type Notification = {
+	text:String,
+	position: String,
+	type: String,
+	removeAfter: number,
+}

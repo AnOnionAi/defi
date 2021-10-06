@@ -10,9 +10,13 @@
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getUniPair } from '$lib/utils/contracts';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
-	import { Chasing } from 'svelte-loading-spinners';
-
+	import {Chasing} from "svelte-loading-spinners"
 	import { providers } from 'ethers';
+	import {transactionCompleted,transactionDeniedByTheUser,transactionSend} from '$lib/config/constants/notifications'
+
+	import {getNotificationsContext} from "svelte-notifications"
+	const { addNotification } = getNotificationsContext();
+
 
 	export let tkn0Img;
 	export let tkn1Img;
@@ -57,13 +61,15 @@
 	const handleTransaction = async (transaction: Promise<any>, transactionName: string) => {
 		loadingState.something = true;
 		loadingState[transactionName] = true;
+		addNotification(transactionSend)
 		try {
 			const tx = await transaction;
 			console.log(tx);
 			await tx.wait();
+			addNotification(transactionCompleted)
 		} catch (error) {
 			console.log(error);
-			console.log('Transaction rejected by the user');
+			addNotification(transactionDeniedByTheUser)
 		}
 		loadingState.something = false;
 		loadingState[transactionName] = false;
@@ -99,28 +105,30 @@
 	}
 </script>
 
-<div class="my-3">
+<div class="">
 	<div
 		on:click={openAccordeon}
-		class="border border-gray-300 hover:cursor-pointer shadow-xl {isHidden == false &&
+		class="max-w-7xl mx-auto border border-gray-300 hover:cursor-pointer shadow-xl {isHidden == false &&
 			'shadow-none'} p-5 {isHidden && 'rounded-lg'} {!isHidden &&
-			'rounded-t-lg'} relative hover:bg-gradient-to-t from-{vaultConfig.platform
+			'rounded-t-lg'}  hover:bg-gradient-to-t from-{vaultConfig.platform
 			.brandColor}-500 to-{vaultConfig.platform.brandColor}-200 dark:bg-dark-600 dark:border-none"
 	>
-		<span class="absolute top-0">
-			<img class="w-12 inline mt-2" src={tkn0Img} alt={vaultConfig.pair.token0Name} />
-		</span>
-		<span class="absolute bottom-1 right-1">
-			<img class="w-12 inline pt-2" src={tkn1Img} alt={vaultConfig.pair.token1Name} />
-		</span>
-		<div class="sm:flex sm:justify-between sm:items-center sm:mx-40">
-			<div class="text-center">
-				<p class="font-bold uppercase text-xs text-gray-600 dark:text-gray-400">
-					Earn {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
-				</p>
-				<h3 class="text-xl font-semibold dark:text-white tracking-tighter">
-					{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
-				</h3>
+		
+		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
+			<div class="flex justify-center items-center">
+				<div class="flex relative h-12 w-14">
+					<img src={tkn0Img} alt="Token 1" class="h-8 w-8">
+					<img src={tkn1Img} alt="Token 2" class="h-8 w-8 absolute bottom-0 right-1">
+				</div>
+				<div class="ml-2">
+					<p class="font-bold uppercase smaller-font text-gray-600 dark:text-gray-400">
+						Earn {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
+					</p>
+					<h3 class="text-lg font-semibold dark:text-white ">
+						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
+					</h3>
+					<div class="flex justify-center font-medium items-center border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6">QuickSwap</div>
+				</div>
 			</div>
 			<div class="">
 				<div class="flex flex-row justify-around ">
@@ -169,14 +177,10 @@
 				</div>
 			</div>
 		</div>
-		<p
-			class="absolute font-semibold top-0 right-0 p-3 bg-green-400  rounded-tr-xl rounded-bl-xl text-white tracking-wide"
-		>
-			{vaultConfig.platform.name}
-		</p>
+		
 	</div>
 	{#if !isHidden}
-		<div class="bg-gray-100 dark:bg-dark-300 rounded-b-lg px-5 py-5">
+		<div class="bg-gray-100 max-w-7xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5">
 			{#if !$accounts}
 				<button
 					on:click={metaMaskCon}
@@ -208,7 +212,7 @@
 								bind:value={userDepositAmount}
 								placeholder="Enter Value"
 								class="bg-gray-300  text-gray-900 font-bold w-8/12 dark:bg-dark-500	dark:text-white"
-								type="number"
+								type="text"
 							/>
 							{#if isApproved}
 								<button
@@ -253,7 +257,7 @@
 							{/if}
 						</div>
 						<div class="flex">
-							<p class="text-gray-500 font-bold dark:text-white font-medium">Deposit Fee:</p>
+							<p class="pl-1 text-gray-500 font-bold dark:text-white font-medium">Deposit Fee:</p>
 							<p class="px-1  font-bold dark:text-white font-medium">{vaultConfig.depositFee}%</p>
 						</div>
 					</div>
@@ -276,18 +280,16 @@
 							class="flex justify-between my-2 py-2 px-3 bg-gray-300 rounded-lg  dark:bg-dark-500 lg:w-11/12 "
 						>
 							<input
+								bind:value={userWithdrawAmount}
 								placeholder="Enter Value"
 								class="bg-gray-300 text-gray-900 font-bold w-8/12 dark:bg-dark-500 dark:text-white"
-								type="number"
+								type="text"
 							/>
 							<button
 								disabled={loadingState.something}
 								on:click={async () =>
 									handleTransaction(
-										approveToken(
-											'0x8F760623f496F6e91219858166Aa68Af2561D51a',
-											'0x5cc76D4888401015138708029e4a965Bb0962b40'
-										),
+										withdraw(vaultConfig.pid,userWithdrawAmount.toString()),
 										'withdraw'
 									)}
 								class="flex items-center disabled:cursor-not-allowed {loadingState.withdraw &&
@@ -404,11 +406,13 @@
 		margin: 0;
 	}
 
-	input[type='number'] {
-		-moz-appearance: textfield;
-	}
 
 	.secondary-font {
 		color: rgb(151, 157, 198);
 	}
+
+	.smaller-font{
+		font-size: 0.62rem;
+	}
+
 </style>

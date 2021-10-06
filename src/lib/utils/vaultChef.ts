@@ -27,8 +27,9 @@ export const depositTo = async(pid: number, amount: string, to: string): Promise
 export const withdraw = async(pid: number, amount: string): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
+		console.log(vaultChef)
 		const withdrawalAmount = ethers.utils.parseUnits(amount, 18)
-		return await vaultChef['withdraw(uint256,uint256'](pid,withdrawalAmount);
+		return await vaultChef['withdraw(uint256,uint256)'](pid,withdrawalAmount)
 	} catch (error) {
 		console.log(error, 'Unable to deposit');
 	}
