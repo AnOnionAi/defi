@@ -13,5 +13,22 @@
 		"trade": {
 			"title": "Trade"
 		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "Automated Crypto Market Making"
+		},
+		"farms": {
+			"text": "Farms"
+		},
+		"pools": {
+			"text": "Pools"
+		},
+		"vaults": {
+			"text": "Vaults"
+		},
+		"crypto-responsibility": {
+			"text":  "Crypto Responsibility"
+		}
 	}
 }
