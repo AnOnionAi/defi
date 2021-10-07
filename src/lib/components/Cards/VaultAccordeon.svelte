@@ -121,9 +121,14 @@
 					<p class="font-bold uppercase smaller-font text-gray-600 dark:text-gray-400">
 						Earn {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
 					</p>
-					<h3 class="text-lg font-semibold dark:text-white ">
+					<p class="text-lg font-semibold dark:text-white ">
 						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
-					</h3>
+					</p>
+					<div class="hidden">
+						<p class="bg-blue-500">.</p>
+						<p class="bg-pink-500">.</p>
+					</div>
+					
 					<slot></slot>
 				</div>
 			</div>
@@ -286,8 +291,7 @@
 										withdraw(vaultConfig.pid,userWithdrawAmount.toString()),
 										'withdraw'
 									)}
-								class="flex items-center disabled:cursor-not-allowed {loadingState.withdraw &&
-									'bg-pink-500'} bg-black disabled:opacity-50 text-white font-bold rounded-lg px-4 py-3 tracking-wide"
+								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-bold rounded-lg px-4 py-3 tracking-wide"
 							>
 								<p>Withdraw</p>
 								{#if loadingState.withdraw}
@@ -346,25 +350,25 @@
 								{#if tkn0Price}
 									{vaultConfig.pair.token0quote}: ${tkn0Price}
 								{:else}
-									{vaultConfig.pair.token0quote}: N/A
+									{vaultConfig.pair.token0quote}: Not Listed in CoinGecko
 								{/if}
 							</p>
 							<p class=" dark:text-white">
 								{#if tkn1Price}
 									{vaultConfig.pair.token1quote}: ${tkn1Price}
 								{:else}
-									{vaultConfig.pair.token1quote}: N/A
+									{vaultConfig.pair.token1quote}: Not Listed in CoinGecko
 								{/if}
 							</p>
 							<div class="py-2">
 								<a
 									class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400"
-									href={getTokenFromDex}
+									href={vaultConfig.platform.swapperURL}
 									>Get {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a
 								>
 								<a
 									class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400"
-									href="https://polygonscan.com/">View Info</a
+									href={vaultConfig.pair.pairURL}>View Info</a
 								>
 							</div>
 						</div>
