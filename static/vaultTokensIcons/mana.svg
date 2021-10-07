@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="160.287 145.685 49.983 50" width="49.983" height="50" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="paint0_linear" x1="25.3" y1="-10.0472" x2="-10.0553" y2="25.2965" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF2D55"/>
+      <stop offset="1" stop-color="#FFBC5B"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="18.012" y1="16.5578" x2="18.012" y2="35.3077" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A524B3"/>
+      <stop offset="1" stop-color="#FF2D55"/>
+    </linearGradient>
+    <linearGradient id="paint2_linear" x1="33.8325" y1="26.5577" x2="33.8325" y2="40.3077" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A524B3"/>
+      <stop offset="1" stop-color="#FF2D55"/>
+    </linearGradient>
+  </defs>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M25.3 50.308C39.1025 50.308 50.2917 39.1152 50.2917 25.3081C50.2917 11.501 39.1025 0.308105 25.3 0.308105C11.4974 0.308105 0.308228 11.501 0.308228 25.3081C0.308228 39.1152 11.4974 50.308 25.3 50.308Z" fill="url(#paint0_linear)" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.0172 16.5577V35.3077H33.637L18.0172 16.5577Z" fill="url(#paint1_linear)" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.39709 35.3078H18.0168V16.5579L2.39709 35.3078Z" fill="white" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3043 45.3081C14.4779 48.4456 19.6762 50.3081 25.2993 50.3081C30.9225 50.3081 36.1208 48.4456 40.2944 45.3081H10.3043Z" fill="#FF2D55" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.30786 40.3077C6.73239 42.1952 8.41933 43.8827 10.3062 45.3077H40.2963C42.1831 43.8827 43.8701 42.1952 45.2946 40.3077H5.30786Z" fill="#FC9965" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M33.8366 35.3082H2.39709C3.17184 37.0957 4.15901 38.7707 5.30862 40.3082H33.8491V35.3082H33.8366Z" fill="#FFBC5B" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M33.8363 26.5577V40.3077H45.2951L33.8363 26.5577Z" fill="url(#paint2_linear)" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M22.3887 40.3083H33.8348V26.5583L22.3887 40.3083Z" fill="white" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M33.8324 22.808C37.283 22.808 40.0803 20.0098 40.0803 16.558C40.0803 13.1062 37.283 10.308 33.8324 10.308C30.3818 10.308 27.5845 13.1062 27.5845 16.558C27.5845 20.0098 30.3818 22.808 33.8324 22.808Z" fill="#FFC95B" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M18.0161 12.8083C19.7414 12.8083 21.14 11.4092 21.14 9.68335C21.14 7.95746 19.7414 6.55835 18.0161 6.55835C16.2907 6.55835 14.8921 7.95746 14.8921 9.68335C14.8921 11.4092 16.2907 12.8083 18.0161 12.8083Z" fill="#FFC95B" transform="matrix(1, 0, 0, 1, 159.979233, 145.377182)"/>
+</svg>

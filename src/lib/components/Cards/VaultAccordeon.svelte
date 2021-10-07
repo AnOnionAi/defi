@@ -17,7 +17,7 @@
 	import {getNotificationsContext} from "svelte-notifications"
 	const { addNotification } = getNotificationsContext();
 
-
+	export let hasRoundedBorder = false;
 	export let tkn0Img;
 	export let tkn1Img;
 	export let vaultConfig: VaultInfo;
@@ -108,17 +108,14 @@
 <div class="">
 	<div
 		on:click={openAccordeon}
-		class="max-w-7xl mx-auto border border-gray-300 hover:cursor-pointer shadow-xl {isHidden == false &&
-			'shadow-none'} p-5 {isHidden && 'rounded-lg'} {!isHidden &&
-			'rounded-t-lg'}  hover:bg-gradient-to-t from-{vaultConfig.platform
-			.brandColor}-500 to-{vaultConfig.platform.brandColor}-200 dark:bg-dark-600 dark:border-none"
+		class="max-w-8xl bg-white mx-auto py-4 {isHidden && 'border-b-2 border-black'} hover:cursor-pointer {hasRoundedBorder && 'rounded-t-lg'}  dark:bg-dark-600 dark:border-none"
 	>
 		
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
 			<div class="flex justify-center items-center">
-				<div class="flex relative h-12 w-14">
-					<img src={tkn0Img} alt="Token 1" class="h-8 w-8">
-					<img src={tkn1Img} alt="Token 2" class="h-8 w-8 absolute bottom-0 right-1">
+				<div class="flex relative h-11 w-12">
+					<img src={tkn0Img} alt="Token 1" class="h-7 w-7">
+					<img src={tkn1Img} alt="Token 2" class="h-7 w-7 absolute bottom-0 right-1">
 				</div>
 				<div class="ml-2">
 					<p class="font-bold uppercase smaller-font text-gray-600 dark:text-gray-400">
@@ -127,7 +124,7 @@
 					<h3 class="text-lg font-semibold dark:text-white ">
 						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 					</h3>
-					<div class="flex justify-center font-medium items-center border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6">QuickSwap</div>
+					<slot></slot>
 				</div>
 			</div>
 			<div class="">
@@ -137,7 +134,7 @@
 							{#if apy}
 								APY
 							{:else}
-								?
+								0%
 							{/if}
 						</div>
 						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400">APY</div>
@@ -169,7 +166,7 @@
 							{#if daily}
 								DAILY
 							{:else}
-								?
+								0%
 							{/if}
 						</div>
 						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400">DAILY</div>
@@ -180,7 +177,7 @@
 		
 	</div>
 	{#if !isHidden}
-		<div class="bg-gray-100 max-w-7xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5">
+		<div class="bg-gray-200 max-w-8xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5">
 			{#if !$accounts}
 				<button
 					on:click={metaMaskCon}
@@ -386,13 +383,7 @@
 </div>
 
 <style>
-	.usdc_mush_g {
-		background: linear-gradient(45deg, #4da085 0%, #3b75c9 100%);
-	}
-
-	.mush-green {
-		background-color: #4da085;
-	}
+	
 
 	input {
 		font-size: 18px;
@@ -413,6 +404,10 @@
 
 	.smaller-font{
 		font-size: 0.62rem;
+	}
+
+	.side-shadows{
+		box-shadow: 12px 0 15px -4px rgba(0, 55, 162, 0.97), -12px 0 8px -4px rgba(0, 55, 162, 0.97);
 	}
 
 </style>
