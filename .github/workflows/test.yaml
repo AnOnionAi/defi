@@ -18,7 +18,7 @@ jobs:
           pnpm install
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'
       - uses: microsoft/playwright-github-action@v1
 
       - name: build project, jest test and playwright tests
@@ -26,3 +26,4 @@ jobs:
           pnpm run build
           # Run Jest Test
           # Run Playright Test
+          pnpm run test
