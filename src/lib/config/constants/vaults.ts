@@ -7,40 +7,6 @@ import { Token } from '$lib/ts/types';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 export const quickVaults: VaultInfo[] = [
 	{
-		pid: 0,
-		depositFee: 0,
-		withdrawalFee: 0.1,
-		platform: platforms.QUICKSWAP,
-		pair: {
-			token0Name: 'WETH',
-			token1Name: 'USDC',
-			token0quote: TokenQuotes.WRAPPED_ETHER,
-			token1quote: TokenQuotes.USDC,
-			token0Contract: getContractAddress(Token.WETH),
-			token1Contract: getContractAddress(Token.USDC),
-			pairContract: 'Not Ready',
-			pairURL: 'Not Ready'
-		},
-		strategyContractAddress: ''
-	},
-	{
-		pid: 1,
-		depositFee: 0,
-		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.1,
-		pair: {
-			token0Name: 'WETH',
-			token1Name: 'WMATIC',
-			token0quote: TokenQuotes.WRAPPED_ETHER,
-			token1quote: TokenQuotes.WRAPPED_MATIC,
-			token0Contract: getContractAddress(Token.WETH),
-			token1Contract: getContractAddress(Token.WMATIC),
-			pairContract: '0xadbF1854e5883eB8aa7BAf50705338739e558E5b',
-			pairURL: 'Not ready'
-		},
-		strategyContractAddress: ''
-	},
-	{
 		pid: 14,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
@@ -243,7 +209,7 @@ export const quickVaults: VaultInfo[] = [
 
 export const sushiVaults: VaultInfo[] = [
 	{
-		pid: 3,
+		pid: -1,
 		depositFee: 0,
 		withdrawalFee: 0.1,
 		platform: platforms.SUSHISWAP,
@@ -254,13 +220,31 @@ export const sushiVaults: VaultInfo[] = [
 			token1quote: TokenQuotes.USDC,
 			token0Contract: getContractAddress(Token.WETH),
 			token1Contract: getContractAddress(Token.USDC),
-			pairContract: 'Not Ready',
-			pairURL: 'Not Ready'
+			pairContract: '0x34965ba0ac2451a34a0471f04cca3f990b8dea27',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x34965ba0ac2451a34a0471f04cca3f990b8dea27'
 		},
 		strategyContractAddress: ''
 	},
 	{
-		pid: 4,
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'WBTC',
+			token1Name: 'WETH',
+			token0quote: TokenQuotes.WRAPPED_BITCOIN,
+			token1quote: TokenQuotes.WRAPPED_ETHER,
+			token0Contract: getContractAddress(Token.WBTC),
+			token1Contract: getContractAddress(Token.WETH),
+			pairContract: '0xe62ec2e799305e0d367b0cc3ee2cda135bf89816',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0xe62ec2e799305e0d367b0cc3ee2cda135bf89816'
+		},
+		strategyContractAddress: ''
+	},
+
+	{
+		pid: -1,
 		depositFee: 0,
 		withdrawalFee: 0.1,
 		platform: platforms.SUSHISWAP,
@@ -271,9 +255,151 @@ export const sushiVaults: VaultInfo[] = [
 			token1quote: TokenQuotes.WRAPPED_MATIC,
 			token0Contract: getContractAddress(Token.WETH),
 			token1Contract: getContractAddress(Token.WMATIC),
-			pairContract: 'Not Ready',
-			pairURL: 'Not ready'
+			pairContract: '0xc4e595acdd7d12fec385e5da5d43160e8a0bac0e',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0xc4e595acDD7d12feC385E5dA5D43160e8A0bAC0E'
 		},
 		strategyContractAddress: ''
-	}
+	},
+
+	{
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'WETH',
+			token1Name: 'AAVE',
+			token0quote: TokenQuotes.WRAPPED_ETHER,
+			token1quote: TokenQuotes.AAVE,
+			token0Contract: getContractAddress(Token.WETH),
+			token1Contract: getContractAddress(Token.AAVE),
+			pairContract: '0xc4e595acdd7d12fec385e5da5d43160e8a0bac0e',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x2813d43463c374a680f235c428fb1d7f08de0b69'
+		},
+		strategyContractAddress: ''
+	},
+	{
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'WBTC',
+			token1Name: 'ibBTC',
+			token0quote: TokenQuotes.WRAPPED_BITCOIN,
+			token1quote: TokenQuotes.WRAPPED_MATIC,
+			token0Contract: getContractAddress(Token.WBTC),
+			token1Contract: getContractAddress(Token.IBBTC),
+			pairContract: '0x8f8e95ff4b4c5e354ccb005c6b0278492d7b5907',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x8f8e95ff4b4c5e354ccb005c6b0278492d7b5907'
+		},
+		strategyContractAddress: ''
+	},
+	{
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'LINK',
+			token1Name: 'WETH',
+			token0quote: TokenQuotes.LINK,
+			token1quote: TokenQuotes.WRAPPED_ETHER,
+			token0Contract: getContractAddress(Token.LINK),
+			token1Contract: getContractAddress(Token.WETH),
+			pairContract: '0x74d23f21f780ca26b47db16b0504f2e3832b9321',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x74d23f21f780ca26b47db16b0504f2e3832b9321'
+		},
+		strategyContractAddress: ''
+	},
+	{
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'GRT',
+			token1Name: 'WETH',
+			token0quote: TokenQuotes.GRT,
+			token1quote: TokenQuotes.WRAPPED_ETHER,
+			token0Contract: getContractAddress(Token.GRT),
+			token1Contract: getContractAddress(Token.WETH),
+			pairContract: '0x1ceda73c034218255f50ef8a2c282e6b4c301d60',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x1ceda73c034218255f50ef8a2c282e6b4c301d60'
+		},
+		strategyContractAddress: ''
+	},
+	{
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'WETH',
+			token1Name: 'DAI',
+			token0quote: TokenQuotes.WRAPPED_ETHER,
+			token1quote: TokenQuotes.DAI,
+			token0Contract: getContractAddress(Token.WETH),
+			token1Contract: getContractAddress(Token.DAI),
+			pairContract: '0x6ff62bfb8c12109e8000935a6de54dad83a4f39f',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x6ff62bfb8c12109e8000935a6de54dad83a4f39f'
+		},
+		strategyContractAddress: ''
+	},
+	{
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'WETH',
+			token1Name: 'AXS',
+			token0quote: TokenQuotes.WRAPPED_ETHER,
+			token1quote: TokenQuotes.AXS,
+			token0Contract: getContractAddress(Token.WETH),
+			token1Contract: getContractAddress(Token.AXS),
+			pairContract: '0x7ba331a8b360f4c31e6014abdd6852f92fb21557',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x7ba331a8b360f4c31e6014abdd6852f92fb21557'
+		},
+		strategyContractAddress: ''
+	},
+
+	{
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'CRV',
+			token1Name: 'WETH',
+			token0quote: TokenQuotes.CURVE,
+			token1quote: TokenQuotes.WRAPPED_ETHER,
+			token0Contract: getContractAddress(Token.CRV),
+			token1Contract: getContractAddress(Token.WETH),
+			pairContract: '0x396e655c309676caf0acf4607a868e0cded876db',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x396e655c309676caf0acf4607a868e0cded876db'
+		},
+		strategyContractAddress: ''
+	},
+
+	{
+		pid: -1,
+		depositFee: 0,
+		withdrawalFee: 0.1,
+		platform: platforms.SUSHISWAP,
+		pair: {
+			token0Name: 'WETH',
+			token1Name: 'AVAX',
+			token0quote: TokenQuotes.WRAPPED_ETHER,
+			token1quote: TokenQuotes.AVAX,
+			token0Contract: getContractAddress(Token.WETH),
+			token1Contract: getContractAddress(Token.AVAX),
+			pairContract: '0x1274de0de2e9d9b1d0e06313c0e5edd01cc335ef',
+			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x1274de0de2e9d9b1d0e06313c0e5edd01cc335ef'
+		},
+		strategyContractAddress: ''
+	},
+	
+
+
 ];

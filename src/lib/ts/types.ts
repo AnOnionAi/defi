@@ -59,6 +59,9 @@ export interface Platform {
 }
 
 export enum Token {
+	AVAX = 'AVAX',
+	AXS= 'AXS',
+	AAVE= 'AAVE',
 	UNIFACTORY = 'UNIFACTORY',
 	UNIROUTER = 'UNIROUTER',
 	MUSHTOKEN = 'MUSHTOKEN',
@@ -81,13 +84,23 @@ export enum Token {
 	DOGE = 'DOGE',
 	USDC = 'USDC',
 	USDT = 'USDT',
-	VAULTCHEF = 'VAULTCHEF'
+	VAULTCHEF = 'VAULTCHEF',
+	IBBTC = "IBBTC",
+	GRT = 'GRT',
+	MANA = 'MANA',
+	CRV = "CRV"
 }
 
 export enum TokenQuotes {
+	CURVE = 'CRV',
+	AVAX = 'AVAX',
+	AXS = 'AXS',
 	WRAPPED_ETHER = 'WETH',
 	WRAPPED_MATIC = 'WMATIC',
 	WRAPPED_BITCOIN = 'WBTC',
+	IBBTC = "IBBTC",
+	GRT = 'GRT',
+	MANA = 'MANA',
 	CNTR = 'CNTR',
 	LINK = 'LINK',
 	SOL = 'SOL',

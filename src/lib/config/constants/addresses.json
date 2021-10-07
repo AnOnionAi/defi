@@ -133,5 +133,20 @@
 		"TESTNET": "",
 		"POLYGONQA": "",
 		"POLYGON": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39"
+	},
+	"IBBTC":{
+		"POLYGON": "0x4eac4c4e9050464067d673102f8e24b2fcceb350"
+	},
+	"GRT": {
+		"POLYGON": "0x5fe2b58c013d7601147dcdd68c143a77499f5531"
+	},
+	"AXS": {
+		"POLYGON": "0x61bdd9c7d4df4bf47a4508c0c8245505f2af5b7b"
+	},
+	"CRV": {
+		"POLYGON": "0x172370d5cd63279efa6d502dab29171933a610af"
+	},
+	"AVAX": {
+		"POLYGON": "0x2c89bbc92bd86f8075d1decc58c7f4e0107f286b"
 	}
 }

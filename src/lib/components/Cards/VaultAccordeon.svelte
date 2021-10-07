@@ -108,7 +108,7 @@
 <div class="">
 	<div
 		on:click={openAccordeon}
-		class="max-w-8xl bg-white mx-auto py-4 {isHidden && 'border-b-2 border-black'} hover:cursor-pointer {hasRoundedBorder && 'rounded-t-lg'}  dark:bg-dark-600 dark:border-none"
+		class="max-w-8xl sideShadow bg-white mx-auto py-4 {isHidden && 'border-b-2 border-black'} hover:cursor-pointer {hasRoundedBorder && 'rounded-t-lg'}  dark:bg-dark-600 dark:border-none"
 	>
 		
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
@@ -383,6 +383,13 @@
 </div>
 
 <style>
+
+	.sideShadow{
+		box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197); 
+ 		-moz-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197); 
+		-webkit-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
+	}
+
 	
 
 	input {
