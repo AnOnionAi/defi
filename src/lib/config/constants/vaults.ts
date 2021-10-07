@@ -44,7 +44,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'WETH',
 			token1Name: 'USDT',
@@ -62,7 +62,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'WMATIC',
 			token1Name: 'SOL',
@@ -80,7 +80,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'DAI',
 			token1Name: 'USDC',
@@ -98,7 +98,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'WMATIC',
 			token1Name: 'USDT',
@@ -118,7 +118,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'WMATIC',
 			token1Name: 'QUICK',
@@ -136,7 +136,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'LINK',
 			token1Name: 'WETH',
@@ -156,7 +156,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'QUICK',
 			token1Name: 'CNTR',
@@ -173,7 +173,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'DAI',
 			token1Name: 'USDT',
@@ -191,7 +191,7 @@ export const quickVaults: VaultInfo[] = [
 		pid: -1,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
-		withdrawalFee: 0.0,
+		withdrawalFee: 0.1,
 		pair: {
 			token0Name: 'USDC',
 			token1Name: 'QUICK',

@@ -217,9 +217,7 @@
 									disabled={loadingState.something}
 									on:click={async () =>
 										handleTransaction(deposit(vaultConfig.pid, '0.00000000001'), 'deposit')}
-									class="flex items-center  disabled:cursor-not-allowed  {loadingState.deposit &&
-										'bg-pink-500'} bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-5 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig
-										.platform.brandColor}-500 to-dark-100"
+									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide"
 								>
 									<p>Deposit</p>
 									{#if loadingState.deposit}
@@ -240,9 +238,8 @@
 											),
 											'approve'
 										)}
-									class="flex items-center bg-black hover:bg-pink-500 disabled:bg-pink-500 {loadingState.something &&
-										'cursor-not-allowed'} text-white font-bold rounded-lg px-5 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig
-										.platform.brandColor}-500 to-dark-100"
+									class="flex items-center bg-black  disabled:opacity-50 {loadingState.something &&
+										'cursor-not-allowed'} text-white font-bold rounded-lg px-5 py-3 tracking-wide"
 								>
 									<p>Approve</p>
 									{#if loadingState.approve}
@@ -290,8 +287,7 @@
 										'withdraw'
 									)}
 								class="flex items-center disabled:cursor-not-allowed {loadingState.withdraw &&
-									'bg-pink-500'} bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-4 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig
-									.platform.brandColor}-500 to-dark-100"
+									'bg-pink-500'} bg-black disabled:opacity-50 text-white font-bold rounded-lg px-4 py-3 tracking-wide"
 							>
 								<p>Withdraw</p>
 								{#if loadingState.withdraw}
@@ -332,10 +328,7 @@
 										'harvest'
 									)}
 								disabled={loadingState.something}
-								class="flex items-center bg-black hover:bg-pink-500 text-white font-bold rounded-lg px-6 py-3 tracking-wide dark:bg-gradient-to-b from-{vaultConfig
-									.platform
-									.brandColor}-500 to-dark-100 disabled:cursor-not-allowed {loadingState.harvest &&
-									'bg-pink-500'}"
+								class="flex items-center bg-black  text-white font-bold rounded-lg px-6 py-3 tracking-wide  disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								<p>Harvest</p>
 								{#if loadingState.harvest}
