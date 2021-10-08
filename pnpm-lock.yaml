@@ -2405,17 +2405,11 @@ packages:
     dev: true
 
   /progress/2.0.3:
-<<<<<<< HEAD
     resolution:
       {
         integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
       }
     engines: { node: '>=0.4.0' }
-=======
-    resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
-    engines: {node: '>=0.4.0'}
-
->>>>>>> 920d2302b2fdcf6bac70ef1cd55d009151839306
     dev: true
 
   /punycode/2.1.1:
@@ -3002,14 +2996,8 @@ packages:
     dev: false
 
   /yallist/4.0.0:
-<<<<<<< HEAD
     resolution:
       {
         integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
       }
     dev: true
-=======
-    resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
-    dev: true
-
->>>>>>> 920d2302b2fdcf6bac70ef1cd55d009151839306
