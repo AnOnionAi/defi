@@ -124,17 +124,17 @@
 		"POLYGON": "0x7dff46370e9ea5f0bad3c4e29711ad50062ea7a4",
 		"POLYGONQA": "0x7dff46370e9ea5f0bad3c4e29711ad50062ea7a4"
 	},
-	"CNTR":{
+	"CNTR": {
 		"TESTNET": "",
 		"POLYGONQA": "",
 		"POLYGON": "0xdae89da41a96956e9e70320ac9c0dd077070d3a5"
 	},
-	"LINK":{
+	"LINK": {
 		"TESTNET": "",
 		"POLYGONQA": "",
 		"POLYGON": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39"
 	},
-	"IBBTC":{
+	"IBBTC": {
 		"POLYGON": "0x4eac4c4e9050464067d673102f8e24b2fcceb350"
 	},
 	"GRT": {

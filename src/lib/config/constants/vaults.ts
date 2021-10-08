@@ -112,8 +112,6 @@ export const quickVaults: VaultInfo[] = [
 		strategyContractAddress: 'LF'
 	},
 
-
-
 	{
 		pid: -1,
 		depositFee: 0,
@@ -149,8 +147,6 @@ export const quickVaults: VaultInfo[] = [
 		},
 		strategyContractAddress: 'LF'
 	},
-
-
 
 	{
 		pid: -1,
@@ -203,8 +199,7 @@ export const quickVaults: VaultInfo[] = [
 			pairURL: 'https://polygonscan.com/address/0x1f1e4c845183ef6d50e9609f16f6f9cae43bc9cb'
 		},
 		strategyContractAddress: 'LF'
-	},
-
+	}
 ];
 
 export const sushiVaults: VaultInfo[] = [
@@ -221,7 +216,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.WETH),
 			token1Contract: getContractAddress(Token.USDC),
 			pairContract: '0x34965ba0ac2451a34a0471f04cca3f990b8dea27',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x34965ba0ac2451a34a0471f04cca3f990b8dea27'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x34965ba0ac2451a34a0471f04cca3f990b8dea27'
 		},
 		strategyContractAddress: ''
 	},
@@ -238,7 +234,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.WBTC),
 			token1Contract: getContractAddress(Token.WETH),
 			pairContract: '0xe62ec2e799305e0d367b0cc3ee2cda135bf89816',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0xe62ec2e799305e0d367b0cc3ee2cda135bf89816'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0xe62ec2e799305e0d367b0cc3ee2cda135bf89816'
 		},
 		strategyContractAddress: ''
 	},
@@ -256,7 +253,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.WETH),
 			token1Contract: getContractAddress(Token.WMATIC),
 			pairContract: '0xc4e595acdd7d12fec385e5da5d43160e8a0bac0e',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0xc4e595acDD7d12feC385E5dA5D43160e8A0bAC0E'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0xc4e595acDD7d12feC385E5dA5D43160e8A0bAC0E'
 		},
 		strategyContractAddress: ''
 	},
@@ -274,7 +272,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.WETH),
 			token1Contract: getContractAddress(Token.AAVE),
 			pairContract: '0xc4e595acdd7d12fec385e5da5d43160e8a0bac0e',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x2813d43463c374a680f235c428fb1d7f08de0b69'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x2813d43463c374a680f235c428fb1d7f08de0b69'
 		},
 		strategyContractAddress: ''
 	},
@@ -291,7 +290,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.WBTC),
 			token1Contract: getContractAddress(Token.IBBTC),
 			pairContract: '0x8f8e95ff4b4c5e354ccb005c6b0278492d7b5907',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x8f8e95ff4b4c5e354ccb005c6b0278492d7b5907'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x8f8e95ff4b4c5e354ccb005c6b0278492d7b5907'
 		},
 		strategyContractAddress: ''
 	},
@@ -308,7 +308,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.LINK),
 			token1Contract: getContractAddress(Token.WETH),
 			pairContract: '0x74d23f21f780ca26b47db16b0504f2e3832b9321',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x74d23f21f780ca26b47db16b0504f2e3832b9321'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x74d23f21f780ca26b47db16b0504f2e3832b9321'
 		},
 		strategyContractAddress: ''
 	},
@@ -325,7 +326,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.GRT),
 			token1Contract: getContractAddress(Token.WETH),
 			pairContract: '0x1ceda73c034218255f50ef8a2c282e6b4c301d60',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x1ceda73c034218255f50ef8a2c282e6b4c301d60'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x1ceda73c034218255f50ef8a2c282e6b4c301d60'
 		},
 		strategyContractAddress: ''
 	},
@@ -342,7 +344,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.WETH),
 			token1Contract: getContractAddress(Token.DAI),
 			pairContract: '0x6ff62bfb8c12109e8000935a6de54dad83a4f39f',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x6ff62bfb8c12109e8000935a6de54dad83a4f39f'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x6ff62bfb8c12109e8000935a6de54dad83a4f39f'
 		},
 		strategyContractAddress: ''
 	},
@@ -359,7 +362,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.WETH),
 			token1Contract: getContractAddress(Token.AXS),
 			pairContract: '0x7ba331a8b360f4c31e6014abdd6852f92fb21557',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x7ba331a8b360f4c31e6014abdd6852f92fb21557'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x7ba331a8b360f4c31e6014abdd6852f92fb21557'
 		},
 		strategyContractAddress: ''
 	},
@@ -377,7 +381,8 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.CRV),
 			token1Contract: getContractAddress(Token.WETH),
 			pairContract: '0x396e655c309676caf0acf4607a868e0cded876db',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x396e655c309676caf0acf4607a868e0cded876db'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x396e655c309676caf0acf4607a868e0cded876db'
 		},
 		strategyContractAddress: ''
 	},
@@ -395,11 +400,9 @@ export const sushiVaults: VaultInfo[] = [
 			token0Contract: getContractAddress(Token.WETH),
 			token1Contract: getContractAddress(Token.AVAX),
 			pairContract: '0x1274de0de2e9d9b1d0e06313c0e5edd01cc335ef',
-			pairURL: 'https://analytics-polygon.sushi.com/pairs/0x1274de0de2e9d9b1d0e06313c0e5edd01cc335ef'
+			pairURL:
+				'https://analytics-polygon.sushi.com/pairs/0x1274de0de2e9d9b1d0e06313c0e5edd01cc335ef'
 		},
 		strategyContractAddress: ''
-	},
-	
-
-
+	}
 ];

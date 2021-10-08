@@ -60,15 +60,15 @@ export interface Platform {
 
 export enum Token {
 	AVAX = 'AVAX',
-	AXS= 'AXS',
-	AAVE= 'AAVE',
+	AXS = 'AXS',
+	AAVE = 'AAVE',
 	UNIFACTORY = 'UNIFACTORY',
 	UNIROUTER = 'UNIROUTER',
 	MUSHTOKEN = 'MUSHTOKEN',
 	MASTERCHEF = 'MASTERCHEF',
 	ZYBERTOKEN = 'ZYBERTOKEN',
 	TESTLP = 'TESTLP',
-	SOL='SOL',
+	SOL = 'SOL',
 	DAI = 'DAI',
 	CNTR = 'CNTR',
 	LINK = 'LINK',
@@ -85,10 +85,10 @@ export enum Token {
 	USDC = 'USDC',
 	USDT = 'USDT',
 	VAULTCHEF = 'VAULTCHEF',
-	IBBTC = "IBBTC",
+	IBBTC = 'IBBTC',
 	GRT = 'GRT',
 	MANA = 'MANA',
-	CRV = "CRV"
+	CRV = 'CRV'
 }
 
 export enum TokenQuotes {
@@ -98,7 +98,7 @@ export enum TokenQuotes {
 	WRAPPED_ETHER = 'WETH',
 	WRAPPED_MATIC = 'WMATIC',
 	WRAPPED_BITCOIN = 'WBTC',
-	IBBTC = "IBBTC",
+	IBBTC = 'IBBTC',
 	GRT = 'GRT',
 	MANA = 'MANA',
 	CNTR = 'CNTR',
@@ -112,8 +112,8 @@ export enum TokenQuotes {
 }
 
 export type Notification = {
-	text:String,
-	position: String,
-	type: String,
-	removeAfter: number,
-}
+	text: String;
+	position: String;
+	type: String;
+	removeAfter: number;
+};

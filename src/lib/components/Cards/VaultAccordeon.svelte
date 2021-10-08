@@ -10,11 +10,15 @@
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getUniPair } from '$lib/utils/contracts';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
-	import {Chasing} from "svelte-loading-spinners"
+	import { Chasing } from 'svelte-loading-spinners';
 	import { providers } from 'ethers';
-	import {transactionCompleted,transactionDeniedByTheUser,transactionSend} from '$lib/config/constants/notifications'
+	import {
+		transactionCompleted,
+		transactionDeniedByTheUser,
+		transactionSend
+	} from '$lib/config/constants/notifications';
 
-	import {getNotificationsContext} from "svelte-notifications"
+	import { getNotificationsContext } from 'svelte-notifications';
 	const { addNotification } = getNotificationsContext();
 
 	export let hasRoundedBorder = false;
@@ -61,15 +65,15 @@
 	const handleTransaction = async (transaction: Promise<any>, transactionName: string) => {
 		loadingState.something = true;
 		loadingState[transactionName] = true;
-		addNotification(transactionSend)
+		addNotification(transactionSend);
 		try {
 			const tx = await transaction;
 			console.log(tx);
 			await tx.wait();
-			addNotification(transactionCompleted)
+			addNotification(transactionCompleted);
 		} catch (error) {
 			console.log(error);
-			addNotification(transactionDeniedByTheUser)
+			addNotification(transactionDeniedByTheUser);
 		}
 		loadingState.something = false;
 		loadingState[transactionName] = false;
@@ -108,14 +112,15 @@
 <div class="">
 	<div
 		on:click={openAccordeon}
-		class="max-w-8xl sideShadow bg-white mx-auto py-4 {isHidden && 'border-b-2 border-black'} hover:cursor-pointer {hasRoundedBorder && 'rounded-t-lg'}  dark:bg-dark-600 dark:border-none"
+		class="max-w-8xl sideShadow bg-white mx-auto py-4 {isHidden &&
+			'border-b-2 border-black'} hover:cursor-pointer {hasRoundedBorder &&
+			'rounded-t-lg'}  dark:bg-dark-600 dark:border-none"
 	>
-		
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
 			<div class="flex justify-center items-center">
 				<div class="flex relative h-11 w-12">
-					<img src={tkn0Img} alt="Token 1" class="h-7 w-7">
-					<img src={tkn1Img} alt="Token 2" class="h-7 w-7 absolute bottom-0 right-1">
+					<img src={tkn0Img} alt="Token 1" class="h-7 w-7" />
+					<img src={tkn1Img} alt="Token 2" class="h-7 w-7 absolute bottom-0 right-1" />
 				</div>
 				<div class="ml-2">
 					<p class="font-bold uppercase smaller-font text-gray-600 dark:text-gray-400">
@@ -128,8 +133,8 @@
 						<p class="bg-blue-500">.</p>
 						<p class="bg-pink-500">.</p>
 					</div>
-					
-					<slot></slot>
+
+					<slot />
 				</div>
 			</div>
 			<div class="">
@@ -179,7 +184,6 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
 	{#if !isHidden}
 		<div class="bg-gray-200 max-w-8xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5">
@@ -288,7 +292,7 @@
 								disabled={loadingState.something}
 								on:click={async () =>
 									handleTransaction(
-										withdraw(vaultConfig.pid,userWithdrawAmount.toString()),
+										withdraw(vaultConfig.pid, userWithdrawAmount.toString()),
 										'withdraw'
 									)}
 								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-bold rounded-lg px-4 py-3 tracking-wide"
@@ -380,14 +384,11 @@
 </div>
 
 <style>
-
-	.sideShadow{
-		box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197); 
- 		-moz-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197); 
+	.sideShadow {
+		box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
+		-moz-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
 		-webkit-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
 	}
-
-	
 
 	input {
 		font-size: 18px;
@@ -401,17 +402,15 @@
 		margin: 0;
 	}
 
-
 	.secondary-font {
 		color: rgb(151, 157, 198);
 	}
 
-	.smaller-font{
+	.smaller-font {
 		font-size: 0.62rem;
 	}
 
-	.side-shadows{
+	.side-shadows {
 		box-shadow: 12px 0 15px -4px rgba(0, 55, 162, 0.97), -12px 0 8px -4px rgba(0, 55, 162, 0.97);
 	}
-
 </style>
