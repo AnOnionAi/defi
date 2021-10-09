@@ -37,8 +37,8 @@ export interface LPair {
 	token1Name: string;
 	token0quote: string;
 	token1quote: string;
-	token1Contract: string
-	token0Contract: string
+	token1Contract: string;
+	token0Contract: string;
 	pairContract: string;
 	pairURL: string;
 }
@@ -46,9 +46,10 @@ export interface LPair {
 export interface VaultInfo {
 	pid: number;
 	depositFee: number;
-	whitdrawalFee: number;
+	withdrawalFee: number;
 	platform: Platform;
 	pair: LPair;
+	strategyContractAddress: string;
 }
 
 export interface Platform {
@@ -58,35 +59,61 @@ export interface Platform {
 }
 
 export enum Token {
-  UNIFACTORY = "UNIFACTORY",
-  UNIROUTER = "UNIROUTER",
-  MUSHTOKEN = "MUSHTOKEN",
-  MASTERCHEF = "MASTERCHEF",
-  ZYBERTOKEN = "ZYBERTOKEN",
-  TESTLP = "TESTLP",
-  DFYNTESTLP = "DFYNTESTLP",
-  FISHTOKEN = "FISHTOKEN",
-  WMATIC = "WMATIC",
-  WETH = "WETH",
-  WBTC = "WBTC",
-  SUSHI  = "SUSHI", 
-  QUICK  = "QUICK", 
-  DFYN  = "DFYN", 
-  MXNC  = "MXNC", 
-  DOGE  = "DOGE", 
-  USDC  = "USDC", 
-  USDT  = "USDT", 
-  VAULTCHEF = "VAULTCHEF",
+	AVAX = 'AVAX',
+	AXS = 'AXS',
+	AAVE = 'AAVE',
+	UNIFACTORY = 'UNIFACTORY',
+	UNIROUTER = 'UNIROUTER',
+	MUSHTOKEN = 'MUSHTOKEN',
+	MASTERCHEF = 'MASTERCHEF',
+	ZYBERTOKEN = 'ZYBERTOKEN',
+	TESTLP = 'TESTLP',
+	SOL = 'SOL',
+	DAI = 'DAI',
+	CNTR = 'CNTR',
+	LINK = 'LINK',
+	DFYNTESTLP = 'DFYNTESTLP',
+	FISHTOKEN = 'FISHTOKEN',
+	WMATIC = 'WMATIC',
+	WETH = 'WETH',
+	WBTC = 'WBTC',
+	SUSHI = 'SUSHI',
+	QUICK = 'QUICK',
+	DFYN = 'DFYN',
+	MXNC = 'MXNC',
+	DOGE = 'DOGE',
+	USDC = 'USDC',
+	USDT = 'USDT',
+	VAULTCHEF = 'VAULTCHEF',
+	IBBTC = 'IBBTC',
+	GRT = 'GRT',
+	MANA = 'MANA',
+	CRV = 'CRV'
 }
 
 export enum TokenQuotes {
-	WRAPPED_ETHER = "WETH",
-	WRAPPED_MATIC = "WMATIC",
-	WRAPPED_BITCOIN = "WBTC",
-	USDC = "USDC",
-	USDT = "USDT",
+	CURVE = 'CRV',
+	AVAX = 'AVAX',
+	AXS = 'AXS',
+	WRAPPED_ETHER = 'WETH',
+	WRAPPED_MATIC = 'WMATIC',
+	WRAPPED_BITCOIN = 'WBTC',
+	IBBTC = 'IBBTC',
+	GRT = 'GRT',
+	MANA = 'MANA',
+	CNTR = 'CNTR',
+	LINK = 'LINK',
+	SOL = 'SOL',
+	USDC = 'USDC',
+	USDT = 'USDT',
 	AAVE = 'AAVE',
-	DAI = "DAI",
-	QUICK = "QUICK"
+	DAI = 'DAI',
+	QUICK = 'QUICK'
 }
 
+export type Notification = {
+	text: String;
+	position: String;
+	type: String;
+	removeAfter: number;
+};

@@ -105,18 +105,48 @@
 		"POLYGON": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f"
 	},
 	"VAULTCHEF": {
-		"POLY":"0xBdA1f897E851c7EF22CD490D2Cf2DAce4645A904",
+		"POLYGON": "0xBdA1f897E851c7EF22CD490D2Cf2DAce4645A904",
 		"POLYGONQA": "",
 		"TESTNET": "0x5cc76D4888401015138708029e4a965Bb0962b40"
 	},
-	"AAVE":{
+	"AAVE": {
 		"POLYGON": "0xd6df932a45c0f255f85145f286ea0b292b21c90b",
 		"POLYGONQA": "",
 		"TESTNET": ""
 	},
-	"DAI":{
+	"DAI": {
 		"TESTNET": "",
 		"POLYGON": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
 		"POLYGONQA": ""
+	},
+	"SOL": {
+		"TESTNET": "0x7dff46370e9ea5f0bad3c4e29711ad50062ea7a4",
+		"POLYGON": "0x7dff46370e9ea5f0bad3c4e29711ad50062ea7a4",
+		"POLYGONQA": "0x7dff46370e9ea5f0bad3c4e29711ad50062ea7a4"
+	},
+	"CNTR": {
+		"TESTNET": "",
+		"POLYGONQA": "",
+		"POLYGON": "0xdae89da41a96956e9e70320ac9c0dd077070d3a5"
+	},
+	"LINK": {
+		"TESTNET": "",
+		"POLYGONQA": "",
+		"POLYGON": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39"
+	},
+	"IBBTC": {
+		"POLYGON": "0x4eac4c4e9050464067d673102f8e24b2fcceb350"
+	},
+	"GRT": {
+		"POLYGON": "0x5fe2b58c013d7601147dcdd68c143a77499f5531"
+	},
+	"AXS": {
+		"POLYGON": "0x61bdd9c7d4df4bf47a4508c0c8245505f2af5b7b"
+	},
+	"CRV": {
+		"POLYGON": "0x172370d5cd63279efa6d502dab29171933a610af"
+	},
+	"AVAX": {
+		"POLYGON": "0x2c89bbc92bd86f8075d1decc58c7f4e0107f286b"
 	}
 }

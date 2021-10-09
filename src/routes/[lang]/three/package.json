@@ -26,39 +26,6 @@
 		"example": "examples",
 		"test": "test"
 	},
-	"eslintConfig": {
-		"root": true,
-		"extends": "mdcs",
-		"parser": "@babel/eslint-parser",
-		"parserOptions": {
-			"babelOptions": {
-				"configFile": "./utils/build/.babelrc.json"
-			}
-		},
-		"plugins": [
-			"html"
-		],
-		"globals": {
-			"potpack": true,
-			"fflate": true,
-			"ZSTDDecoder": true,
-			"bodymovin": true,
-			"OIMO": true
-		},
-		"rules": {
-			"quotes": [
-				"error",
-				"single"
-			],
-			"prefer-const": [
-				"error",
-				{
-					"destructuring": "any",
-					"ignoreReadBeforeAssign": false
-				}
-			]
-		}
-	},
 	"scripts": {
 		"start": "npm run dev",
 		"test": "npm run lint && npm run test-unit",
