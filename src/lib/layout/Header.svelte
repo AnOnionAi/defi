@@ -54,6 +54,10 @@
 	];
 	const PAGES = [
 		{
+			route: `/${$page.params.lang}/dashboard`,
+			title: 'Dashboard'
+		},
+		{
 			route: `/${$page.params.lang}/farms`,
 			title: 'Farms'
 		},
@@ -64,7 +68,8 @@
 		{
 			route: `/${$page.params.lang}/vaults`,
 			title: 'Vaults'
-		}
+		},
+		
 	];
 
 	const gotoPage = (route: string, home: boolean = false) => {

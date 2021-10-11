@@ -10,6 +10,7 @@
 <main class:dark={$darkMode} class="main">
 	<div class="dark:bg-blue-gray-900 main">
 		<slot />
+		
 	</div>
 </main>
 
