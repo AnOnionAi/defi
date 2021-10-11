@@ -4,9 +4,7 @@ const iPhone11 = devices['iPhone 11 Pro'];
 jest.setTimeout(180000);
 
 describe('mobile functionality', () => {
-
 	it('should open hamburger menu correctly', async () => {
-
 		let _page = page;
 
 		// bypass
