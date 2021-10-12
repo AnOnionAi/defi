@@ -2,8 +2,8 @@
 	"name": "zyber",
 	"version": "0.0.1",
 	"engines": {
-		"node": ">=14",
-		"pnpm": ">=5"
+		"node": ">=16",
+		"pnpm": ">=6"
 	},
 	"scripts": {
 		"dev": "svelte-kit dev",
