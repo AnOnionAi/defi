@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo npm install -g pnpm 
-          pnpm install
+          pnpm install --no-frozen-lockfile
           
       - name: Install Playwright
         uses: microsoft/playwright-github-action@v1
