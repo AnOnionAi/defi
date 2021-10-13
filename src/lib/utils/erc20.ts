@@ -17,6 +17,7 @@ export const getTokenAllowance = async (
 		const allowance = await tokenContract.allowance(userAddr, spenderAddr);
 		return allowance;
 	} catch (e) {
+		console.log(e);
 		return ethers.constants.Zero;
 	}
 };

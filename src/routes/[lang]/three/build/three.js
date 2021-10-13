@@ -7037,9 +7037,10 @@
 					case 'hsl':
 					case 'hsla':
 						if (
-							(color = /^\s*(\d*\.?\d+)\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec(
-								components
-							))
+							(color =
+								/^\s*(\d*\.?\d+)\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec(
+									components
+								))
 						) {
 							// hsl(120,50%,50%) hsla(120,50%,50%,0.5)
 							const h = parseFloat(color[1]) / 360;
@@ -12355,9 +12356,9 @@
 				}
 			}
 
-			const attribute = new (arrayMax(indices) > 65535
-				? Uint32BufferAttribute
-				: Uint16BufferAttribute)(indices, 1);
+			const attribute = new (
+				arrayMax(indices) > 65535 ? Uint32BufferAttribute : Uint16BufferAttribute
+			)(indices, 1);
 			attribute.version = version; // Updating index buffer in VAO now. See WebGLBindingStates
 			//
 
@@ -13668,8 +13669,10 @@
 		return resolveIncludes(string);
 	} // Unroll Loops
 
-	const deprecatedUnrollLoopPattern = /#pragma unroll_loop[\s]+?for \( int i \= (\d+)\; i < (\d+)\; i \+\+ \) \{([\s\S]+?)(?=\})\}/g;
-	const unrollLoopPattern = /#pragma unroll_loop_start\s+for\s*\(\s*int\s+i\s*=\s*(\d+)\s*;\s*i\s*<\s*(\d+)\s*;\s*i\s*\+\+\s*\)\s*{([\s\S]+?)}\s+#pragma unroll_loop_end/g;
+	const deprecatedUnrollLoopPattern =
+		/#pragma unroll_loop[\s]+?for \( int i \= (\d+)\; i < (\d+)\; i \+\+ \) \{([\s\S]+?)(?=\})\}/g;
+	const unrollLoopPattern =
+		/#pragma unroll_loop_start\s+for\s*\(\s*int\s+i\s*=\s*(\d+)\s*;\s*i\s*<\s*(\d+)\s*;\s*i\s*\+\+\s*\)\s*{([\s\S]+?)}\s+#pragma unroll_loop_end/g;
 
 	function unrollLoops(string) {
 		return string
@@ -21150,26 +21153,7 @@
 			if (_geometry === undefined) {
 				_geometry = new BufferGeometry();
 				const float32Array = new Float32Array([
-					-0.5,
-					-0.5,
-					0,
-					0,
-					0,
-					0.5,
-					-0.5,
-					0,
-					1,
-					0,
-					0.5,
-					0.5,
-					0,
-					1,
-					1,
-					-0.5,
-					0.5,
-					0,
-					0,
-					1
+					-0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, 0, 0.5, 0.5, 0, 1, 1, -0.5, 0.5, 0, 0, 1
 				]);
 				const interleavedBuffer = new InterleavedBuffer(float32Array, 5);
 
@@ -22907,114 +22891,11 @@
 				r
 			];
 			const indices = [
-				3,
-				11,
-				7,
-				3,
-				7,
-				15,
-				3,
-				15,
-				13,
-				7,
-				19,
-				17,
-				7,
-				17,
-				6,
-				7,
-				6,
-				15,
-				17,
-				4,
-				8,
-				17,
-				8,
-				10,
-				17,
-				10,
-				6,
-				8,
-				0,
-				16,
-				8,
-				16,
-				2,
-				8,
-				2,
-				10,
-				0,
-				12,
-				1,
-				0,
-				1,
-				18,
-				0,
-				18,
-				16,
-				6,
-				10,
-				2,
-				6,
-				2,
-				13,
-				6,
-				13,
-				15,
-				2,
-				16,
-				18,
-				2,
-				18,
-				3,
-				2,
-				3,
-				13,
-				18,
-				1,
-				9,
-				18,
-				9,
-				11,
-				18,
-				11,
-				3,
-				4,
-				14,
-				12,
-				4,
-				12,
-				0,
-				4,
-				0,
-				8,
-				11,
-				9,
-				5,
-				11,
-				5,
-				19,
-				11,
-				19,
-				7,
-				19,
-				5,
-				14,
-				19,
-				14,
-				4,
-				19,
-				4,
-				17,
-				1,
-				12,
-				14,
-				1,
-				14,
-				5,
-				1,
-				5,
-				9
+				3, 11, 7, 3, 7, 15, 3, 15, 13, 7, 19, 17, 7, 17, 6, 7, 6, 15, 17, 4, 8, 17, 8, 10, 17, 10,
+				6, 8, 0, 16, 8, 16, 2, 8, 2, 10, 0, 12, 1, 0, 1, 18, 0, 18, 16, 6, 10, 2, 6, 2, 13, 6, 13,
+				15, 2, 16, 18, 2, 18, 3, 2, 3, 13, 18, 1, 9, 18, 9, 11, 18, 11, 3, 4, 14, 12, 4, 12, 0, 4,
+				0, 8, 11, 9, 5, 11, 5, 19, 11, 19, 7, 19, 5, 14, 19, 14, 4, 19, 4, 17, 1, 12, 14, 1, 14, 5,
+				1, 5, 9
 			];
 			super(vertices, indices, radius, detail);
 			this.type = 'DodecahedronGeometry';
@@ -24394,66 +24275,9 @@
 				1
 			];
 			const indices = [
-				0,
-				11,
-				5,
-				0,
-				5,
-				1,
-				0,
-				1,
-				7,
-				0,
-				7,
-				10,
-				0,
-				10,
-				11,
-				1,
-				5,
-				9,
-				5,
-				11,
-				4,
-				11,
-				10,
-				2,
-				10,
-				7,
-				6,
-				7,
-				1,
-				8,
-				3,
-				9,
-				4,
-				3,
-				4,
-				2,
-				3,
-				2,
-				6,
-				3,
-				6,
-				8,
-				3,
-				8,
-				9,
-				4,
-				9,
-				5,
-				2,
-				4,
-				11,
-				6,
-				2,
-				10,
-				8,
-				6,
-				7,
-				9,
-				8,
-				1
+				0, 11, 5, 0, 5, 1, 0, 1, 7, 0, 7, 10, 0, 10, 11, 1, 5, 9, 5, 11, 4, 11, 10, 2, 10, 7, 6, 7,
+				1, 8, 3, 9, 4, 3, 4, 2, 3, 2, 6, 3, 6, 8, 3, 8, 9, 4, 9, 5, 2, 4, 11, 6, 2, 10, 8, 6, 7, 9,
+				8, 1
 			];
 			super(vertices, indices, radius, detail);
 			this.type = 'IcosahedronGeometry';
@@ -35324,36 +35148,7 @@
 			this.color = color;
 			const geometry = new BufferGeometry();
 			const positions = [
-				0,
-				0,
-				0,
-				0,
-				0,
-				1,
-				0,
-				0,
-				0,
-				1,
-				0,
-				1,
-				0,
-				0,
-				0,
-				-1,
-				0,
-				1,
-				0,
-				0,
-				0,
-				0,
-				1,
-				1,
-				0,
-				0,
-				0,
-				0,
-				-1,
-				1
+				0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, -1, 1
 			];
 
 			for (let i = 0, j = 1, l = 32; i < l; i++, j++) {
@@ -35905,30 +35700,7 @@
 	class BoxHelper extends LineSegments {
 		constructor(object, color = 0xffff00) {
 			const indices = new Uint16Array([
-				0,
-				1,
-				1,
-				2,
-				2,
-				3,
-				3,
-				0,
-				4,
-				5,
-				5,
-				6,
-				6,
-				7,
-				7,
-				4,
-				0,
-				4,
-				1,
-				5,
-				2,
-				6,
-				3,
-				7
+				0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7
 			]);
 			const positions = new Float32Array(8 * 3);
 			const geometry = new BufferGeometry();
@@ -36020,56 +35792,10 @@
 	class Box3Helper extends LineSegments {
 		constructor(box, color = 0xffff00) {
 			const indices = new Uint16Array([
-				0,
-				1,
-				1,
-				2,
-				2,
-				3,
-				3,
-				0,
-				4,
-				5,
-				5,
-				6,
-				6,
-				7,
-				7,
-				4,
-				0,
-				4,
-				1,
-				5,
-				2,
-				6,
-				3,
-				7
+				0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7
 			]);
 			const positions = [
-				1,
-				1,
-				1,
-				-1,
-				1,
-				1,
-				-1,
-				-1,
-				1,
-				1,
-				-1,
-				1,
-				1,
-				1,
-				-1,
-				-1,
-				1,
-				-1,
-				-1,
-				-1,
-				-1,
-				1,
-				-1,
-				-1
+				1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1
 			];
 			const geometry = new BufferGeometry();
 			geometry.setIndex(new BufferAttribute(indices, 1));
@@ -36100,36 +35826,8 @@
 		constructor(plane, size = 1, hex = 0xffff00) {
 			const color = hex;
 			const positions = [
-				1,
-				-1,
-				1,
-				-1,
-				1,
-				1,
-				-1,
-				-1,
-				1,
-				1,
-				1,
-				1,
-				-1,
-				1,
-				1,
-				-1,
-				-1,
-				1,
-				1,
-				-1,
-				1,
-				1,
-				1,
-				1,
-				0,
-				0,
-				1,
-				0,
-				0,
-				0
+				1, -1, 1, -1, 1, 1, -1, -1, 1, 1, 1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1, 1, 1, 1, 0, 0, 1, 0,
+				0, 0
 			];
 			const geometry = new BufferGeometry();
 			geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));

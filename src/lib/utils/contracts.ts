@@ -8,7 +8,7 @@ import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
 import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import { farms } from '$lib/config/constants/farms';
 import addresses from '$lib/config/constants/addresses.json';
-import {getContractAddress} from "$lib/utils/addressHelpers"
+import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/ts/types';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
@@ -45,8 +45,6 @@ export const getContractObject = (address: string, abi: any) => {
 	return contract;
 };
 
-
-
 export const getERC20Contract = (address: string) => {
 	const ercToken = new ethers.Contract(address, ERC20ABI, getSigner());
 	return ercToken;
@@ -58,7 +56,11 @@ export const getUniRouterContract = () => {
 };
 
 export const getUniFactoryContract = () => {
-	const factory = new ethers.Contract(getContractAddress(Token.UNIFACTORY), factoryABI, getSigner());
+	const factory = new ethers.Contract(
+		getContractAddress(Token.UNIFACTORY),
+		factoryABI,
+		getSigner()
+	);
 	return factory;
 };
 
@@ -68,7 +70,11 @@ export const getUniPair = (address: string) => {
 };
 
 export const getMushAllowance = async (userAddr: string) => {
-	const mushContract = new ethers.Contract(getContractAddress(Token.MUSHTOKEN), ERC20ABI, getSigner());
+	const mushContract = new ethers.Contract(
+		getContractAddress(Token.MUSHTOKEN),
+		ERC20ABI,
+		getSigner()
+	);
 	return await mushContract.allowance(userAddr, '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506');
 };
 
