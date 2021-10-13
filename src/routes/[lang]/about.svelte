@@ -20,7 +20,7 @@
 		Cupiditate, error?
 	</p>
 	<div class="curve" />
-	<img src="/static/crypto-market.png" alt="crypto-market" />
+	<img src="/crypto-market.png" alt="crypto-market" />
 </section>
 
 <section class="farms">
@@ -31,14 +31,14 @@
 			exercitationem tenetur soluta, nam similique. Eveniet quod facilis, animi aliquam iste
 			perferendis asperiores distinctio corrupti voluptatum, itaque amet.
 		</p>
-		<img src="/static/farms.png" alt="farms" />
+		<img src="/farms.png" alt="farms" />
 	</div>
 </section>
 
 <section class="pools bubble">
 	<h1>{$_('headers.pools.text')}</h1>
 	<div class="columns">
-		<img src="/static/pools.png" alt="pools" />
+		<img src="/pools.png" alt="pools" />
 		<p>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta recusandae totam
 			asperiores nostrum, quo, id excepturi sint aperiam voluptatum quod quia facere aut! Reiciendis
@@ -54,7 +54,7 @@
 		pariatur quibusdam voluptatibus vel quam quia amet minus dolorem sapiente voluptas facere
 		veritatis voluptatum id placeat repellat nisi.
 	</p>
-	<img src="/static/vaults.png" alt="vaults" />
+	<img src="/vaults.png" alt="vaults" />
 </section>
 
 <div class="spacer layer1 flip" />
@@ -66,7 +66,7 @@
 		pariatur quibusdam voluptatibus vel quam quia amet minus dolorem sapiente voluptas facere
 		veritatis voluptatum id placeat repellat nisi.
 	</p>
-	<img src="/static/crypto-responsibility.png" alt="crypto-responsibility" />
+	<img src="/crypto-responsibility.png" alt="crypto-responsibility" />
 </section>
 
 <style>
