@@ -14,21 +14,21 @@
     <h1>{$_('headers.automated-crypto.text')}</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias esse eius quis eaque, vero ullam iste ipsam. Obcaecati error odit debitis distinctio quas eos natus recusandae, non mollitia. Cupiditate, error?</p>
     <div class="curve"></div>
-    <img src="/static/crypto-market.png" alt="crypto-market">
+    <img src="/crypto-market.png" alt="crypto-market">
   </section>
 
   <section class="farms">
     <h1>{$_('headers.farms.text')}</h1>
     <div class="columns">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias fugit eius aspernatur exercitationem tenetur soluta, nam similique. Eveniet quod facilis, animi aliquam iste perferendis asperiores distinctio corrupti voluptatum, itaque amet.</p>
-        <img src="/static/farms.png" alt="farms">
+        <img src="/farms.png" alt="farms">
     </div>
   </section>
 
   <section class="pools bubble">
     <h1>{$_('headers.pools.text')}</h1>
     <div class="columns">
-        <img src="/static/pools.png" alt="pools">
+        <img src="/pools.png" alt="pools">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta recusandae totam asperiores nostrum, quo, id excepturi sint aperiam voluptatum quod quia facere aut! Reiciendis explicabo impedit quod odio excepturi.</p>
     </div>
   </section>
@@ -36,7 +36,7 @@
   <section class="orange">
     <h1>{$_('headers.vaults.text')}</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt incidunt blanditiis, pariatur quibusdam voluptatibus vel quam quia amet minus dolorem sapiente voluptas facere veritatis voluptatum id placeat repellat nisi.</p>
-    <img src="/static/vaults.png" alt="vaults">
+    <img src="/vaults.png" alt="vaults">
   </section>
 
   <div class="spacer layer1 flip"></div>
@@ -44,7 +44,7 @@
   <section class="crypto-responsibility blue">
     <h1>{$_('headers.crypto-responsibility.text')}</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt incidunt blanditiis, pariatur quibusdam voluptatibus vel quam quia amet minus dolorem sapiente voluptas facere veritatis voluptatum id placeat repellat nisi.</p>
-    <img src="/static/crypto-responsibility.png" alt="crypto-responsibility">
+    <img src="/crypto-responsibility.png" alt="crypto-responsibility">
   </section>
 
 
