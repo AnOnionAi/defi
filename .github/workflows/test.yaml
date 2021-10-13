@@ -2,7 +2,7 @@ name: Test
 
 on:
   push:
-    branches: [develop, release/*]
+    branches: [master, release/*]
 
 jobs:
   test:
@@ -29,5 +29,4 @@ jobs:
         run: pnpm run build
         
       - name: Jest & Playwright Tests
-        run: |
-          pnpm run test
+        run: pnpm run test
