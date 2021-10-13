@@ -2,7 +2,7 @@ name: Format
 
 on:
   pull_request:
-    branches: [develop, release/*]
+    branches: [develop, release/**]
     types: [synchronize]
 
 jobs:
