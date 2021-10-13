@@ -36,26 +36,7 @@ class Sprite extends Object3D {
 			_geometry = new BufferGeometry();
 
 			const float32Array = new Float32Array([
-				-0.5,
-				-0.5,
-				0,
-				0,
-				0,
-				0.5,
-				-0.5,
-				0,
-				1,
-				0,
-				0.5,
-				0.5,
-				0,
-				1,
-				1,
-				-0.5,
-				0.5,
-				0,
-				0,
-				1
+				-0.5, -0.5, 0, 0, 0, 0.5, -0.5, 0, 1, 0, 0.5, 0.5, 0, 1, 1, -0.5, 0.5, 0, 0, 1
 			]);
 
 			const interleavedBuffer = new InterleavedBuffer(float32Array, 5);

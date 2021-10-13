@@ -2521,9 +2521,10 @@ class GLTFParser {
 			let material;
 
 			if (materialType === GLTFMeshStandardSGMaterial) {
-				material = extensions[EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS].createMaterial(
-					materialParams
-				);
+				material =
+					extensions[EXTENSIONS.KHR_MATERIALS_PBR_SPECULAR_GLOSSINESS].createMaterial(
+						materialParams
+					);
 			} else {
 				material = new materialType(materialParams);
 			}
