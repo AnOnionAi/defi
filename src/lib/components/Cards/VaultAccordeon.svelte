@@ -196,7 +196,7 @@
 				</button>
 			{:else}
 				<div class="flex flex-col  lg:flex-row flex-wrapper justify-around">
-					<div class="lg:w-1/3">
+					<div class="lg:w-4/12">
 						<div class="flex items-center">
 							<p class="text-gray-600 font-medium dark:text-white tracking-tight">Wallet:</p>
 							{#if userTokens}
@@ -265,7 +265,7 @@
 						</div>
 					</div>
 
-					<div class="pt-4 lg:pt-0 lg:w-1/3">
+					<div class="pt-4 lg:pt-0 lg:w-4/12">
 						<div class="flex">
 							<p class="text-gray-600 font-medium dark:text-white font-medium">Deposited:</p>
 							{#if stakedTokens}
@@ -315,37 +315,9 @@
 						</div>
 					</div>
 
-					<div class="pt-4 lg:pt-0 lg:w-1/3">
-						<p class="font-medium text-gray-500">
-							Your {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} Earnings
-						</p>
-						<div
-							class="flex justify-between items-center my-2 py-2 px-3 bg-gray-300 rounded-lg  dark:bg-dark-500 lg:w-10/12"
-						>
-							<p class=" bg-gray-300  font-bold w-8/12 text-lg dark:bg-dark-500 dark:text-white">
-								0.00000
-							</p>
-
-							<button
-								on:click={async () =>
-									handleTransaction(
-										approveToken(
-											'0x8F760623f496F6e91219858166Aa68Af2561D51a',
-											'0x5cc76D4888401015138708029e4a965Bb0962b40'
-										),
-										'harvest'
-									)}
-								disabled={loadingState.something}
-								class="flex items-center bg-black  text-white font-bold rounded-lg px-6 py-3 tracking-wide  disabled:cursor-not-allowed disabled:opacity-50"
-							>
-								<p>Harvest</p>
-								{#if loadingState.harvest}
-									<div class="pl-2">
-										<Chasing size="20" unit="px" color="#ffff" />
-									</div>
-								{/if}
-							</button>
-						</div>
+					<div class="pt-4 lg:pt-0 lg:w-3/12">
+						
+					
 						<div class="pl-1">
 							<p class="text-gray-500 font-bold pb-1 dark:text-gray-400 font-semibold">
 								Current Prices:

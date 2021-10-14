@@ -22,7 +22,7 @@ export const addTokenToMetamaskWallet = () => {
           address: getContractAddress(Token.MUSHTOKEN),
           symbol: 'MUSH',
           decimals: 18,
-          image: "https://cdn-icons.flaticon.com/png/512/3467/premium/3467614.png?token=exp=1633971027~hmac=34587e24d3b34dafcbc87bdd8f531a9e",
+          image: "https://cdn-icons.flaticon.com/png/512/2217/premium/2217505.png?token=exp=1634245623~hmac=c1fc2027775e39b817b23911d076828d",
         },
       },
     })

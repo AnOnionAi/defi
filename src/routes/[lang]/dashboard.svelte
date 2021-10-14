@@ -1,3 +1,19 @@
+<script context="module" lang="ts">
+	export const prerender = false;
+	import { _ } from 'svelte-i18n';
+	import { darkMode } from '$lib/stores/dark';
+
+	export async function load({ page }) {
+		const { lang } = page.params;
+
+		return {
+			props: { lang }
+		};
+	}
+</script>
+
+
+
 <script lang='ts'>
     import WalletBalance from "$lib/components/Dashboard/WalletBalance.svelte";
     import farmerIcon from "/static/farmerIcon.png"
@@ -45,7 +61,7 @@
                     <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                        <div class="pl-4 flex flex items-center">
                            <img src={farmerIcon} class="h-12 w-12" alt="">
-                           <p class="ml-2 text-gray-500 font-bold tracking-wider text-xl">Farms</p>
+                           <p class="ml-2 text-gray-600 font-bold tracking-wider text-xl">Farms</p>
                        </div>
                        <div class="flex flex-col items-center pb-3 gap-2">
                            <p class="text-3xl tracking-wide font-bold">$29,574.12</p>
@@ -64,7 +80,7 @@
                     <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                        <div class="pl-4 flex flex items-center">
                            <img src={poolIcon} class="h-12 w-12" alt="">
-                           <p class="ml-2 text-gray-700 font-bold text-xl">Pools</p>
+                           <p class="ml-2 text-gray-600 font-bold text-xl">Pools</p>
                        </div>
                        <div class="flex flex-col items-center pb-3 gap-2">
                            <p class="text-3xl tracking-wide font-bold">$40,112.99</p>
@@ -86,7 +102,7 @@
                 <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                    <div class="pl-4 flex flex items-center">
                        <img src={vaultIcon} class="h-12 w-12" alt="">
-                       <p class="ml-2 text-gray-700 font-bold text-xl">Vaults</p>
+                       <p class="ml-2 text-gray-600 font-bold text-xl">Vaults</p>
                    </div>
                    <div class="flex flex-col items-center pb-3 gap-2">
                        <p class="text-3xl tracking-wide font-bold">$20,907.17</p>
@@ -218,8 +234,6 @@
 
 
 <style>
-    .text-title{
-        font-size: 48px;
-        line-height: 60px;
-    }
+   
+    
 </style>
