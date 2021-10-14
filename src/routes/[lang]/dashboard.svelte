@@ -38,10 +38,10 @@
                 </div>
             </div>
             <h2 class="font-bold  px-5 w-full text-center lg:text-left text-4xl md:text-5xl ">Earn More </h2>
-            <div class="  w-full  p-1 mb-5 flex flex-wrap  justify-center   lg:flex-row lg:w-full mt-5">
+            <div class="  w-full  p-1 mb-5 flex flex-wrap  justify-between   lg:flex-row lg:w-full mt-5">
 
                 <!-- FarmCard -->
-                <div class=" lg:w-32/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
+                <div class=" lg:w-30/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
                     <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                        <div class="pl-4 flex flex items-center">
                            <img src={farmerIcon} class="h-12 w-12" alt="">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <!-- FarmCard -->
-                <div class="lg:w-32/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
+                <div class="lg:w-30/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
                     <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                        <div class="pl-4 flex flex items-center">
                            <img src={poolIcon} class="h-12 w-12" alt="">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                <!--Pool Card-->
-               <div class="lg:w-32/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
+               <div class="lg:w-30/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
                 <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                    <div class="pl-4 flex flex items-center">
                        <img src={vaultIcon} class="h-12 w-12" alt="">
