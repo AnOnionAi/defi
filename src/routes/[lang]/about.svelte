@@ -148,7 +148,7 @@
       width: 55%;
       height: 100%;
       transform: translate(85%, 60%);
-      background-color: white;
+      background-color: #f9f8f9;
     }
     .dark-curve::before {
       content: '';
@@ -158,7 +158,7 @@
       width: 55%;
       height: 100%;
       transform: translate(85%, 60%);
-      background-color: #F9F8F9;
+      background-color: #0b1216;
     }
     .curve::after {
       content: '';
