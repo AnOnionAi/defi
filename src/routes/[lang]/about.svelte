@@ -158,7 +158,7 @@
       width: 55%;
       height: 100%;
       transform: translate(85%, 60%);
-      background-color: #0b1216;
+      background-color: #F9F8F9;
     }
     .curve::after {
       content: '';
