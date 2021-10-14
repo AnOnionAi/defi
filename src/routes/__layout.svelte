@@ -7,8 +7,8 @@
 </script>
 
 <Header />
-<main class:dark={$darkMode} class="main">
-	<div class="dark:bg-blue-gray-900 main">
+<main class:dark={$darkMode} class="main {$darkMode && 'dark-active'}">
+	<div class=" main">
 		<slot />
 	</div>
 </main>
@@ -24,11 +24,12 @@
 		height: 100%;
 		margin: 0 auto;
 	}
-
+	.dark-active {
+		background: linear-gradient(to bottom, rgb(45, 55, 63) 0, #0B1216 500px);
+	}
 	footer a {
 		font-weight: bold;
 	}
-
 	@media (min-width: 480px) {
 		footer {
 			padding: 40px 0;
