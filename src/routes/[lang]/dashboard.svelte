@@ -13,21 +13,39 @@
 
 
 <div class="">
-    <h1>Dashboard</h1>
-    <div class="w-11/12 max-w-screen-2xl bg-gray-500 mx-auto">
-        <div class="flex flex-wrap flex-row p-4">
-            <div class="bg-green-600  w-full max-w-screen-sm p-1 mb-5 mx-auto lg:mx-4">
-                <WalletBalance/>
+    <div class=" max-w-screen-xl   mx-auto  p-2 mt-10">
+        <h2 class="font-bold  text-4xl md:text-5xl  px-5 text-center lg:text-left">Dashboard</h2>
+        <div class="flex flex-wrap   h-auto mt-5">
+            <div class="flex flex-wrap h-auto   w-full  p-1 mb-5 mx-auto lg:mx-1 lg:justify-between justify-center mb-10">
+                <div class="w-screen-sm lg:flex-shrink-0 mb-3 lg:mb-0 ">
+                    <WalletBalance/>
+                </div>
+                <div class="bg-white rounded-lg p-6 h-60 w-screen-sm  lg:w-8/24 lg:flex-shrink-0 border border-gray-300 shadow-lg">
+                    <div class="pl-2 flex items-center">
+                       
+                        <p class=" text-xl text-gray-600 font-bold tracking-wide">Total Value Locked (TVL)</p>
+                    </div>
+                    <div class="flex  h-10/12 w-full justify-center items-center pt-2" >
+                        <div class="">
+                            <div class="flex w-full justify-center items-center">
+                                <p class="text-3xl font-bold text-center mt-2">$100305.51</p>
+                                
+                            </div>
+                            
+                            <p class="mt-1 font-medium text-gray-600 text-sm">Across all Zyber Finance</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="bg-green-600  w-full max-w-screen-sm p-1 mb-5 flex flex-col gap-3 lg:flex-row ">
+            <h2 class="font-bold  px-5 w-full text-center lg:text-left text-4xl md:text-5xl ">Earn More </h2>
+            <div class="  w-full  p-1 mb-5 flex flex-wrap  justify-center   lg:flex-row lg:w-full mt-5">
 
                 <!-- FarmCard -->
-                <div>
-                    <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60">
+                <div class=" lg:w-32/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
+                    <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                        <div class="pl-4 flex flex items-center">
                            <img src={farmerIcon} class="h-12 w-12" alt="">
-                           <p class="ml-2 text-gray-700 font-bold text-xl">Farms</p>
+                           <p class="ml-2 text-gray-500 font-bold tracking-wider text-xl">Farms</p>
                        </div>
                        <div class="flex flex-col items-center pb-3 gap-2">
                            <p class="text-3xl tracking-wide font-bold">$29,574.12</p>
@@ -42,8 +60,8 @@
                     </div>
                 </div>
                 <!-- FarmCard -->
-                <div>
-                    <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60">
+                <div class="lg:w-32/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
+                    <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                        <div class="pl-4 flex flex items-center">
                            <img src={poolIcon} class="h-12 w-12" alt="">
                            <p class="ml-2 text-gray-700 font-bold text-xl">Pools</p>
@@ -64,8 +82,8 @@
                     </div>
                 </div>
                <!--Pool Card-->
-               <div>
-                <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60">
+               <div class="lg:w-32/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
+                <div class="flex flex-col justify-between bg-white bg-white rounded-lg px-2 py-5 h-60 border border-gray-300 shadow-md">
                    <div class="pl-4 flex flex items-center">
                        <img src={vaultIcon} class="h-12 w-12" alt="">
                        <p class="ml-2 text-gray-700 font-bold text-xl">Vaults</p>
@@ -91,13 +109,87 @@
 
 
 
+            <h2 class="font-bold text-4xl md:text-5xl px-5 mt-5 mb-5 text-center w-full text-center lg:text-left">Index </h2>
+            <div class="  w-full h-auto p-1 mb-5 flex flex-wrap justify-between">
+                <div class="  w-full lg:w-6/12 mb-2 flex flex-wrap justify-around sm:px-1 md:px-8  lg:px-0 ">
+                    
+                    <div class="bg-white rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 shadow-md">
 
-            <div class="bg-green-600 h-36 w-full max-w-screen-sm p-1 mb-5 ">
-                <div>
+                        <div class="p-4">
+                            <p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide"> MUSH per block</p>
+                            <div class="flex flex-col h-21 items-center justify-center">
+                                <p class="text-3xl tracking-tighter font-bold">1 MUSH</p>
+                                <p class="text-xs font-medium text-gray-600"></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="bg-white rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 shadow-md">
+
+                        <div class="p-4">
+                            <p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide"> Market Cap</p>
+                            <div class="flex flex-col h-21 items-center justify-center">
+                                <p class="text-3xl tracking-tighter font-bold">$1.45 K</p>
+                                <p class="text-xs font-medium text-gray-600"></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                  
+
+
 
                 </div>
+                
+                <div>
+                    
+                </div>
+                <div class="  w-full lg:w-6/12 mb-2 flex flex-wrap justify-around sm:px-1 md:px-8  lg:px-0 ">
+                    
+                    <div class="bg-white rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 shadow-md">
+
+                        <div class="p-4">
+                            <p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide"> Circulation Supply</p>
+                            <div class="flex flex-col h-21 items-center justify-center">
+                                <p class="text-3xl font-bold">300.25 M</p>
+                                <p class="text-xs font-medium text-gray-600"></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="bg-white rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 shadow-md">
+
+                        <div class="p-4">
+                            <p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide">Max Supply</p>
+                            <div class="flex flex-col h-21 items-center justify-center">
+                                <p class="text-3xl font-bold">700 M </p>
+                                <p class="text-xs font-medium text-gray-600"></p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>  
+              
+
+                
             </div>
         </div>
 
     </div>
 </div>
+
+
+<style>
+    .text-title{
+        font-size: 48px;
+        line-height: 60px;
+    }
+</style>

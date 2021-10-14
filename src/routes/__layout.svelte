@@ -8,7 +8,7 @@
 
 <Header />
 <main class:dark={$darkMode} class="main">
-	<div class="dark:bg-blue-gray-900 main">
+	<div class="bg-lightmode dark:bg-blue-gray-900 main">
 		<slot />
 		
 	</div>
@@ -17,6 +17,10 @@
 <Footer />
 
 <style>
+
+
+
+
 	.main {
 		flex: 1;
 		display: flex;
