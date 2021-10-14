@@ -146,23 +146,19 @@
 
                 </div>
                 
-                <div>
-                    
-                </div>
                 <div class="  w-full lg:w-6/12 mb-2 flex flex-wrap justify-around sm:px-1 md:px-8  lg:px-0 ">
                     
                     <div class="bg-white rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 shadow-md">
 
                         <div class="p-4">
-                            <p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide"> Circulation Supply</p>
+                            <p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide"> Total Volume</p>
                             <div class="flex flex-col h-21 items-center justify-center">
                                 <p class="text-3xl font-bold">300.25 M</p>
                                 <p class="text-xs font-medium text-gray-600"></p>
                             </div>
                         </div>
-
-
                     </div>
+
 
                     <div class="bg-white rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 shadow-md">
 
@@ -173,13 +169,47 @@
                                 <p class="text-xs font-medium text-gray-600"></p>
                             </div>
                         </div>
-
-
                     </div>
                 </div>  
               
+            </div>
 
-                
+            <p class="font-bold text-4xl md:text-5xl px-5 mt-5 mb-5 text-center w-full text-center lg:text-left">Mush Price:</p>
+            <div class="w-full h-auto flex flex-wrap">
+                <div class="w-full lg:w-18/24 ">
+                    <div class="p-4 pb-2 lg:p-5 h-full">
+                        <div class="bg-white rounded-lg w-full h-full p-6 border border-gray-300 shadow-md">
+                            <img src="/graphSample.jpg" class="h-full w-full">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-6/24  ">
+                    <div class="w-full  h-26 md:h-36 lg:h-full flex lg:flex-col justify-around p-4 gap-2">
+                        
+                        
+                        <div class="bg-white rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 shadow-md">
+                            <p class="pl-2 font-semibold h-3/12  text-sm md:text-lg">Today</p>
+                            <div class="flex w-full h-9/12 justify-center items-center">
+                                <p class="font-bold text-lg md:text-3xl">$0.00001</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 shadow-md">
+                            <p class="pl-2 font-semibold h-3/12 text-sm md:text-lg">Peak</p>
+                            <div class="flex w-full h-9/12 justify-center items-center">
+                                <p class="font-bold text-lg md:text-3xl">$0.00002</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 shadow-md">
+                            <p class="pl-2 font-semibold h-3/12 text-sm md:text-lg">Profit</p>
+                            <div class="flex w-full h-9/12 justify-center items-center">
+                                <p class="font-bold text-lg md:text-3xl">3.5%</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
 
