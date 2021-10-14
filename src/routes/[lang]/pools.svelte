@@ -1,9 +1,7 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-
 	import { _ } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
-
 	export async function load({ page }) {
 		const { lang } = page.params;
 		return {
@@ -37,7 +35,7 @@
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
 		<div class="mt-5 space-y-4">
-			<div class="grid grid-cols-1 sm:grid-cols-3 gap-y-9 gap-x-4 p-8 text-center">
+			<div class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap">
 				<PoolCard cardImage={mushRound} info={pools[0]} />
 				<PoolCard cardImage={fish} info={pools[1]} />
 				<PoolCard cardImage={matic} info={pools[2]} />
