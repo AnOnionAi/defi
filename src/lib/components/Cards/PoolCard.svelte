@@ -14,11 +14,9 @@
 	import { parseBigNumberToDecimal, parseBigNumberToInt } from '$lib/utils/balanceParsers';
 	import DepositModal from '$lib/components/Modals/DepositModal.svelte';
 	import WithdrawModal from '$lib/components/Modals/WithdrawModal.svelte';
-
 	const { open } = getContext('simple-modal');
 	export let info: PoolInfo;
 	export let cardImage;
-
 	let isHidden: boolean = true;
 	let tokenApproved: boolean;
 	let userAcc: string;
@@ -32,7 +30,6 @@
 	let userBalance: BigNumber;
 	let wantWithdrawAmount: any;
 	let idInterval;
-
 	const onOkay = async (amount) => {
 		console.log(userStakedTokens, 'before');
 		const tx = await deposit(info.pid, amount);
@@ -40,7 +37,6 @@
 		await tx.wait();
 		userStakedTokens = await getStakedTokens(info.pid, userAcc);
 	};
-
 	const onWithdraw = async (amount) => {
 		console.log('onWithdraw');
 		wantWithdrawAmount = amount;
@@ -48,7 +44,6 @@
 		await tx.wait();
 		userStakedTokens = await getStakedTokens(info.pid, userAcc);
 	};
-
 	const goDeposit = () => {
 		open(
 			DepositModal,
@@ -64,7 +59,6 @@
 			}
 		);
 	};
-
 	const goWithdraw = () => {
 		open(
 			WithdrawModal,
@@ -80,7 +74,6 @@
 			}
 		);
 	};
-
 	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
@@ -93,7 +86,6 @@
 			if (tokenApproved) {
 				userBalance = await getTokenBalance(info.tokenAddr, userAcc);
 				canStake = isNotZero(userBalance);
-
 				userEarnings = await getRewards(info.pid, userAcc);
 				canHarvest = isNotZero(userEarnings);
 			}
@@ -101,34 +93,28 @@
 				userStakedTokens = await getStakedTokens(info.pid, userAcc);
 				canWithdraw = isNotZero(userStakedTokens);
 			}
-
 			idInterval = setInterval(async () => {
 				await fetchReards();
 			}, 10000);
 		}
 	});
-
 	onDestroy(() => {
 		clearInterval(idInterval);
 	});
-
 	const fetchReards = async () => {
 		if (tokenApproved) {
 			userEarnings = await getRewards(info.pid, userAcc);
 		}
 	};
-
 	onMount(async () => {
 		poolTokenLiquidity = await getTokenBalance(
 			info.tokenAddr,
 			'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9'
 		);
 	});
-
 	const showPoolInfo = () => {
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
-
 	const approveHandler = async () => {
 		const tx = await approveToken(info.tokenAddr, '0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9');
 		await tx.wait();
@@ -141,39 +127,39 @@
 </script>
 
 <div
-	class=" flex flex-col justify-between shadow-l dark:bg-dark-600 rounded-xl space-y-2  border dark:border-0 "
+	class=" flex flex-col d-flex justify-content-center self-start shadow-l dark:bg-dark-900 rounded-xl space-y-2  border dark:border-0 min-w-80 max-w-80"
 >
-	<div class=" flex justify-center items-center py-2">
+	<div class=" flex justify-center items-center py-2 max-h-100 min-h-50">
 		<img class="max-h-40" src={cardImage} alt="tic-tac-toe" />
 	</div>
-	<div class="dark:bg-dark-300 bg-gray-100 p-2 space-y-3">
+	<div class="dark:bg-dark-400 bg-gray-100 p-2 space-y-3 ">
 		<p class="text-lg font-bold dark:text-white">{info.tokenName}</p>
 		<div class="px-5">
 			<div class="flex justify-between">
-				<p class="font-semibold">APY:::</p>
-				<p>999%</p>
+				<p class="font-semibold dark:text-white">APY:::</p>
+				<p class="dark:text-white">999%</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="font-semibold">APR:</p>
-				<p>999%</p>
+				<p class="font-semibold dark:text-white">APR:</p>
+				<p class="dark:text-white">999%</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="font-semibold">EARN:</p>
-				<p>MUSH</p>
+				<p class="font-semibold dark:text-white">EARN:</p>
+				<p class="dark:text-white">MUSH</p>
 			</div>
 			<div class="flex justify-between">
-				<p>DEPOSIT FEE</p>
-				<p>0%</p>
+				<p class="dark:text-white">DEPOSIT FEE</p>
+				<p class="dark:text-white">0%</p>
 			</div>
 			<div class="flex pt-5">
-				<p class="text-xs font-medium">MUSH EARNED:</p>
+				<p class="text-xs font-medium dark:text-white">MUSH EARNED:</p>
 			</div>
 			<div class="flex pt-3 justify-between">
 				<p class="tabular-nums text-xl p-1 font-medium">
 					{#if userEarnings}
 						{parseBigNumberToDecimal(userEarnings)}
 					{:else}
-						0
+						<p class="dark:text-white">0</p>
 					{/if}
 				</p>
 				<p
@@ -186,7 +172,7 @@
 			</div>
 		</div>
 		<div class="flex px-5 -mb-2">
-			<p class="text-xs font-medium ">{info.tokenName} STAKED</p>
+			<p class="text-xs font-medium dark:text-white">{info.tokenName} STAKED</p>
 		</div>
 
 		{#if tokenApproved && $accounts}
@@ -236,12 +222,12 @@
 		<div class="flex justify-center p-4" on:click={showPoolInfo}>
 			{#if isHidden}
 				<div class="flex cursor-pointer">
-					<p>Details</p>
+					<p class="dark:text-white">Details</p>
 					<Fa icon={faChevronDown} size="xs" scale={0.9} translateX={0.5} translateY={0.65} />
 				</div>
 			{:else}
 				<div class="flex cursor-pointer">
-					<p>Hide</p>
+					<p class="dark:text-white">Hide</p>
 					<Fa icon={faChevronUp} size="xs" scale={0.9} translateX={0.5} translateY={0.6} />
 				</div>
 			{/if}
@@ -249,32 +235,40 @@
 
 		<div class="px-5 {isHidden && 'hidden'}">
 			<div class="flex justify-between">
-				<p>Stake:</p>
-				<p>{info.tokenName}</p>
+				<p class="dark:text-white">Stake:</p>
+				<p class="dark:text-white">{info.tokenName}</p>
 			</div>
 			<div class="flex justify-between">
-				<p>Total Liquidity:</p>
-				<p>
+				<p class="dark:text-white">Total Liquidity:</p>
+				<p class="dark:text-white">
 					{#if poolTokenLiquidity}
 						{parseBigNumberToDecimal(poolTokenLiquidity)} {info.tokenName}
 					{:else}
-						0
+						<p class="dark:text-white">0</p>
 					{/if}
 				</p>
 			</div>
 			<div class="flex justify-between">
-				<p>My Liquidity:</p>
-				<p>
+				<p class="dark:text-white">My Liquidity:</p>
+				<p class="dark:text-white">
 					{#if userStakedTokens}
 						{parseBigNumberToDecimal(userStakedTokens)} {info.tokenName}
 					{:else}
-						0 {info.tokenName}
+						<p class="dark:text-white">0 {info.tokenName}</p> 
 					{/if}
 				</p>
 			</div>
 			<div class="flex">
-				<p>View On Matic</p>
+				<p class="dark:text-white">View On Matic</p>
 			</div>
 		</div>
 	</div>
 </div>
+
+<style>
+@media only screen and (max-width: 700px) {
+	p, div {
+		font-size: 0.8rem;
+	}
+}
+</style>

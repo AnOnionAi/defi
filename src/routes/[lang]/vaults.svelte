@@ -228,7 +228,7 @@
 
 			<BottomList />
 
-			<div class="teal-100">Foo</div>
+			
 		</div>
 	</Notifications>
 </section>
