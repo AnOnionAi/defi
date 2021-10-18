@@ -26,7 +26,7 @@
 	export let tkn1Img;
 	export let vaultConfig: VaultInfo;
 
-	const getTokenFromDex = `${vaultConfig.platform.swapperURL}`;
+	
 
 	let userAcc: string;
 	let isHidden: boolean = true;
@@ -41,8 +41,8 @@
 	let tkn1Price: number;
 
 	let userApproveAmount;
-	let userDepositAmount;
-	let userWithdrawAmount;
+	let userDepositAmount:string;
+	let userWithdrawAmount:string;
 
 	const loadingState = {
 		something: false,
@@ -68,9 +68,20 @@
 		addNotification(transactionSend);
 		try {
 			const tx = await transaction;
-			console.log(tx);
 			await tx.wait();
 			addNotification(transactionCompleted);
+			setTimeout(()=>{
+
+
+				getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
+				userTokens = balance;
+				})
+
+				stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
+				stakedTokens = stakedAmount;
+				});
+			
+			},8000)
 		} catch (error) {
 			console.log(error);
 			addNotification(transactionDeniedByTheUser);
@@ -80,8 +91,8 @@
 	};
 
 	$: if (!isHidden) {
+
 		if (userAcc) {
-			console.log(userDepositAmount);
 			getTokenAllowance(
 				vaultConfig.pair.pairContract,
 				getContractAddress(Token.VAULTCHEF),
@@ -225,7 +236,7 @@
 									class:cursor-not-allowed={loadingState.something}
 									disabled={loadingState.something}
 									on:click={async () =>
-										handleTransaction(deposit(vaultConfig.pid, '0.00000000001'), 'deposit')}
+										handleTransaction(deposit(vaultConfig.pid, userDepositAmount), 'deposit')}
 									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide"
 								>
 									<p>Deposit</p>
