@@ -54,7 +54,7 @@
                 </div>
             </div>
             <h2 class="font-bold  px-5 w-full text-center lg:text-left text-4xl md:text-5xl ">Earn More </h2>
-            <div class="  w-full  p-1 mb-5 flex flex-wrap  justify-between   lg:flex-row lg:w-full mt-5">
+            <div class="  w-full  p-1 mb-5 flex flex-wrap  justify-center lg:justify-between   lg:flex-row lg:w-full mt-5">
 
                 <!-- FarmCard -->
                 <div class=" lg:w-30/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6">
