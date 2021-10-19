@@ -81,14 +81,14 @@
 			}
 
 			if (transactionName == 'deposit') {
-				const bnDepositedTokens = BigNumber.from(ethers.utils.parseEther(userDepositAmount));
+				const bnDepositedTokens = BigNumber.from(ethers.utils.parseEther(userDepositAmount.trim()));
 				stakedTokens = stakedTokens.add(bnDepositedTokens);
 				userTokens = userTokens.sub(bnDepositedTokens);
 			}
 			if (transactionName == 'withdraw') {
-				const bnWithdrawedTokens = BigNumber.from(ethers.utils.parseEther(userWithdrawAmount));
-				stakedTokens = stakedTokens.add(bnWithdrawedTokens);
-				userTokens = userTokens.sub(bnWithdrawedTokens);
+				const bnWithdrawedTokens = BigNumber.from(ethers.utils.parseEther(userWithdrawAmount.trim()));
+				stakedTokens = stakedTokens.sub(bnWithdrawedTokens);
+				userTokens = userTokens.add(bnWithdrawedTokens);
 			}
 
 			setTimeout(() => {
