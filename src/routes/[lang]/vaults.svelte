@@ -227,8 +227,6 @@
 			</VaultAccordeon>
 
 			<BottomList />
-
-			
 		</div>
 	</Notifications>
 </section>

@@ -2,12 +2,11 @@
 
 :root {
 	--text-color: #444444;
-	--light-background: #F9F8F9;
+	--light-background: #f9f8f9;
 	--light-secondary: #fff;
 	--dark-background: #172029;
-	--dark-secondary: #1C1F28;
-	--dark-thirty: rgba(25, 25, 25, 1); /* alpaca finance */  
-
+	--dark-secondary: #1c1f28;
+	--dark-thirty: rgba(25, 25, 25, 1); /* alpaca finance */
 }
 
 body {

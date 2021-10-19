@@ -254,7 +254,7 @@
 					{#if userStakedTokens}
 						{parseBigNumberToDecimal(userStakedTokens)} {info.tokenName}
 					{:else}
-						<p class="dark:text-white">0 {info.tokenName}</p> 
+						<p class="dark:text-white">0 {info.tokenName}</p>
 					{/if}
 				</p>
 			</div>
@@ -266,9 +266,10 @@
 </div>
 
 <style>
-@media only screen and (max-width: 700px) {
-	p, div {
-		font-size: 0.8rem;
+	@media only screen and (max-width: 700px) {
+		p,
+		div {
+			font-size: 0.8rem;
+		}
 	}
-}
 </style>

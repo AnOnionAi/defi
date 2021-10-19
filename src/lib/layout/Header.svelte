@@ -103,7 +103,10 @@
 		}
 	}}
 />
-<nav class="z-10 backdrop-filter {$darkMode && 'dark-active'} backdrop-blur top-0 w-full text-black " class:dark={$darkMode}>
+<nav
+	class="z-10 backdrop-filter {$darkMode && 'dark-active'} backdrop-blur top-0 w-full text-black "
+	class:dark={$darkMode}
+>
 	<div class=" flex items-center justify-between h-16 px-5 ">
 		<div
 			bind:this={menu}
@@ -131,9 +134,7 @@
 								on:click={() => {
 									goto(`/${l.code}`);
 									setInit(l.code);
-									window.location.replace(
-												window.location.origin + `/${l.code.toLowerCase()}/`
-									)
+									window.location.replace(window.location.origin + `/${l.code.toLowerCase()}/`);
 								}}
 								style="background-color: {home ? (isDark ? 'black' : '#F3F4F6') : ''}; {isDark
 									? 'color:white'
@@ -170,7 +171,8 @@
 					<a href="#">
 						<span
 							on:click={changeDark}
-							class="dark:hover:bg-gray-800 hover:bg-gray-200 {$darkMode && 'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium"
+							class="dark:hover:bg-gray-800 hover:bg-gray-200 {$darkMode &&
+								'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium"
 						>
 							{#if isDark}
 								<Icon class="text-white" icon={faMoon} />
@@ -186,7 +188,8 @@
 							}}
 						>
 							<span
-								class="dark:text-white dark:hover:bg-blue-gray-900 {$darkMode && 'dark:hover:bg-green-400'} block hover:bg-gray-200 px-3 text-dark-800 py-3 rounded-md font-medium hover:no-underline no-underline"
+								class="dark:text-white dark:hover:bg-blue-gray-900 {$darkMode &&
+									'dark:hover:bg-green-400'} block hover:bg-gray-200 px-3 text-dark-800 py-3 rounded-md font-medium hover:no-underline no-underline"
 							>
 								{page.title}
 							</span>
@@ -198,8 +201,9 @@
 						class="hover:bg-none flex rounded-lg {$accounts && 'cursor-default bg-green-400'}"
 					>
 						<span
-							class="dark:text-white {$darkMode && 'dark:hover:bg-green-400'}  block hover:bg-gray-200 {isInstalled ==
-								'checking' && 'cursor-default hover:bg-transparent'} {$accounts &&
+							class="dark:text-white {$darkMode &&
+								'dark:hover:bg-green-400'}  block hover:bg-gray-200 {isInstalled == 'checking' &&
+								'cursor-default hover:bg-transparent'} {$accounts &&
 								'hover:bg-transparent connected'} px-3 text-dark-800 py-3 mr-1 rounded-lg font-medium hover:no-underline no-underline"
 						>
 							{#if isInstalled == 'checking'}
