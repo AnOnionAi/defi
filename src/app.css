@@ -2,12 +2,12 @@
 
 :root {
 	--text-color: #444444;
-	--light-background: #F9F8F9;
+	--logo-color: rgba(27,160,133,1);
+	--light-background: #f9f8f9;
 	--light-secondary: #fff;
 	--dark-background: #172029;
-	--dark-secondary: #1C1F28;
-	--dark-thirty: rgba(25, 25, 25, 1); /* alpaca finance */  
-
+	--dark-secondary: #1c1f28;
+	--dark-thirty: rgba(25, 25, 25, 1); /* alpaca finance */
 }
 
 body {
@@ -56,3 +56,23 @@ button {
 button:focus:not(:focus-visible) {
 	outline: none;
 }
+
+::-webkit-scrollbar {
+	width: 5px;
+	border-radius: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f9f9f9; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: var(--text-color); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+  }

@@ -18,11 +18,11 @@
 	import { farms } from '$lib/config/constants/farms';
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import Modal from 'svelte-simple-modal';
-	import 'virtual:windi.css'
+	import 'virtual:windi.css';
 </script>
 
 <Modal>
-	<section class="{$darkMode && 'active'}">
+	<section class={$darkMode && 'active'}>
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl">F A R M S</h1>
 		<section class="mt-3">
@@ -35,14 +35,11 @@
 						<PoolCard cardImage={dyfn} info={farms[2]} />
 						<!--End Farms-->
 					</div>
-					
 				</div>
 			</section>
 		</section>
-
 	</section>
-	<div class="red w-8 h-8" ></div>
-
+	<div class="red w-8 h-8" />
 </Modal>
 
 <style>

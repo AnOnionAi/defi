@@ -25,7 +25,7 @@
 		margin: 0 auto;
 	}
 	.dark-active {
-		background: linear-gradient(to bottom, rgb(45, 55, 63) 0, #0B1216 500px);
+		background: linear-gradient(to bottom, rgb(45, 55, 63) 0, #0b1216 500px);
 	}
 	footer a {
 		font-weight: bold;
