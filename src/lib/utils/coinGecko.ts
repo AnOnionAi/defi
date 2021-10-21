@@ -2,13 +2,20 @@ import axios from 'axios';
 
 type ContractAddress = string;
 
-export const getTokenPriceUSD = (addr: ContractAddress): Promise<any> => {
-	return new Promise((resolve, reject) => {
-		axios
-			.get(
-				`https://api.coingecko.com/api/v3/simple/token_price/polygon-pos?contract_addresses=${addr}&vs_currencies=usd`
-			)
-			.then((response) => resolve(response.data))
-			.catch((error) => reject(error));
-	});
-};
+
+interface TokenPrice  {
+	contractAddress: number
+}
+
+
+
+export const getTokenPriceUSD = async(addr: ContractAddress):Promise<TokenPrice> => {
+	try {
+		const response = await fetch(`https://api.coingecko.com/api/v3/simple/token_price/polygon-pos?contract_addresses=${addr}&vs_currencies=usd`)
+		const data = response.json();
+		return data;
+	} catch (error) {
+		console.log("Unable to fetch the token price")
+	}
+	
+}
