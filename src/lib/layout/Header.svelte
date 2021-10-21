@@ -50,6 +50,10 @@
 	];
 	const PAGES = [
 		{
+			route: `/${$page.params.lang}/dashboard`,
+			title: 'Dashboard'
+		},
+		{
 			route: `/${$page.params.lang}/farms`,
 			title: 'Farms'
 		},
@@ -60,7 +64,8 @@
 		{
 			route: `/${$page.params.lang}/vaults`,
 			title: 'Vaults'
-		}
+		},
+		
 	];
 	const gotoPage = (route: string, home: boolean = false) => {
 		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
@@ -166,7 +171,7 @@
 			</div>
 			<!-- day/nite toggle -->
 
-			<div class="hidden sm:block sm:ml-auto">
+			<div class="hidden md:block sm:ml-auto">
 				<div class="flex space-x-5 items-center">
 					<a href="#">
 						<span
@@ -232,7 +237,7 @@
 		</div>
 
 		<!-- start hamburger button -->
-		<div class="float-0 flex items-center sm:hidden">
+		<div class="float-0 flex items-center md:hidden">
 			<button
 				id="btn_hamburger_navbar"
 				class="dark:text-light-600 focus:outline-none inline-flex items-center justify-center p-2 rounded-md
@@ -256,7 +261,7 @@
 		class:menu_mobile_dark={home}
 		class="{navbarMenuIsOpen
 			? 'block'
-			: 'hidden'} dark:text-white sm:hidden dark:bg-blue-gray-800 bg-white"
+			: 'hidden'} dark:text-white md:hidden dark:bg-blue-gray-800 bg-white"
 	>
 		<div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-1">
 			{#each PAGES as page}

@@ -135,6 +135,7 @@
 			getTokenPriceUSD(vaultConfig.pair.token1Contract).then((response) => {
 				tkn1Price = response[vaultConfig.pair.token1Contract.toLowerCase()].usd;
 			});
+
 		}
 	}
 </script>
