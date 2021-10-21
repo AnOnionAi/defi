@@ -10,7 +10,7 @@
     import {Token} from '$lib/ts/types'
     import {getContractAddress} from '$lib/utils/addressHelpers'
     import {accounts} from '$lib/stores/MetaMaskAccount'
-import { parseBigNumberToString } from '$lib/utils/balanceParsers';
+    import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 
 
     onMount(()=>{
