@@ -5,20 +5,21 @@ import { ethers } from 'ethers';
 export const deposit = async (pid: number, amount: string): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
-		console.log(await vaultChef);
-		const depositAmount = ethers.utils.parseUnits(amount, 18);
-		console.log(vaultChef.functions);
-		console.log(vaultChef.functions.deposit);
+		console.log("Aqui estoy");
+		
+		const depositAmount = ethers.utils.parseUnits(amount.trim(), 18);
+		console.log(depositAmount);
+		
 		return await vaultChef['deposit(uint256,uint256)'](pid, depositAmount);
 	} catch (error) {
-		console.log(error, 'Unable to deposit');
+		console.log(error, 'Unable to deposit here');
 	}
 };
 
 export const depositTo = async (pid: number, amount: string, to: string): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
-		return await vaultChef.deposit(pid, ethers.utils.parseUnits(amount, 18), to);
+		return await vaultChef.deposit(pid, ethers.utils.parseUnits(amount.trim(), 18), to);
 	} catch (error) {
 		console.log(error, 'Unable to deposit');
 	}
@@ -27,20 +28,19 @@ export const depositTo = async (pid: number, amount: string, to: string): Promis
 export const withdraw = async (pid: number, amount: string): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
-		console.log(vaultChef);
-		const withdrawalAmount = ethers.utils.parseUnits(amount, 18);
+		const withdrawalAmount = ethers.utils.parseUnits(amount.trim(), 18);
 		return await vaultChef['withdraw(uint256,uint256)'](pid, withdrawalAmount);
 	} catch (error) {
-		console.log(error, 'Unable to deposit');
+		console.log(error, 'Unable to withdraw');
 	}
 };
 
 export const withdrawTo = (pid: number, amount: string, to: string): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
-		return vaultChef.withdraw(pid, ethers.utils.parseUnits(amount, 18));
+		return vaultChef.withdraw(pid, ethers.utils.parseUnits(amount.trim(), 18));
 	} catch (error) {
-		console.log(error, 'Unable to deposit');
+		console.log(error, 'Unable to withdraw');
 	}
 };
 

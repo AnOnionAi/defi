@@ -7,11 +7,11 @@
 	import { Token } from '$lib/ts/types';
 	import { parseBigNumberToString, parseBigNumberToDecimal } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
-	import type { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from '@ethersproject/bignumber';
 	import { getUniPair } from '$lib/utils/contracts';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
 	import { Chasing } from 'svelte-loading-spinners';
-	import { providers } from 'ethers';
+	import { ethers, providers } from 'ethers';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
@@ -26,23 +26,20 @@
 	export let tkn1Img;
 	export let vaultConfig: VaultInfo;
 
-	const getTokenFromDex = `${vaultConfig.platform.swapperURL}`;
-
 	let userAcc: string;
 	let isHidden: boolean = true;
 	let isApproved: boolean;
-	let stakedTokens;
+	let stakedTokens: BigNumber;
 	let userTokens: BigNumber;
 	let apy: string;
 	let tvl: string;
 	let daily: string;
-	let borderStyle: string = 'rounded-lg';
 	let tkn0Price: number;
 	let tkn1Price: number;
 
 	let userApproveAmount;
-	let userDepositAmount;
-	let userWithdrawAmount;
+	let userDepositAmount: string;
+	let userWithdrawAmount: string;
 
 	const loadingState = {
 		something: false,
@@ -68,9 +65,43 @@
 		addNotification(transactionSend);
 		try {
 			const tx = await transaction;
-			console.log(tx);
 			await tx.wait();
 			addNotification(transactionCompleted);
+
+			if (transactionName == 'approve') {
+				setTimeout(() => {
+					getTokenAllowance(
+						vaultConfig.pair.pairContract,
+						getContractAddress(Token.VAULTCHEF),
+						userAcc
+					).then((res) => {
+						isApproved = isNotZero(res);
+					});
+				}, 10000);
+			}
+
+			if (transactionName == 'deposit') {
+				const bnDepositedTokens = BigNumber.from(ethers.utils.parseEther(userDepositAmount.trim()));
+				stakedTokens = stakedTokens.add(bnDepositedTokens);
+				userTokens = userTokens.sub(bnDepositedTokens);
+			}
+			if (transactionName == 'withdraw') {
+				const bnWithdrawedTokens = BigNumber.from(ethers.utils.parseEther(userWithdrawAmount.trim()));
+				stakedTokens = stakedTokens.sub(bnWithdrawedTokens);
+				userTokens = userTokens.add(bnWithdrawedTokens);
+			}
+
+			setTimeout(() => {
+				getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
+					userTokens = balance;
+					console.log(parseBigNumberToString(userTokens));
+				});
+
+				stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
+					stakedTokens = stakedAmount;
+					console.log(parseBigNumberToString(stakedTokens));
+				});
+			}, 20000);
 		} catch (error) {
 			console.log(error);
 			addNotification(transactionDeniedByTheUser);
@@ -81,7 +112,6 @@
 
 	$: if (!isHidden) {
 		if (userAcc) {
-			console.log(userDepositAmount);
 			getTokenAllowance(
 				vaultConfig.pair.pairContract,
 				getContractAddress(Token.VAULTCHEF),
@@ -225,7 +255,7 @@
 									class:cursor-not-allowed={loadingState.something}
 									disabled={loadingState.something}
 									on:click={async () =>
-										handleTransaction(deposit(vaultConfig.pid, '0.00000000001'), 'deposit')}
+										handleTransaction(deposit(vaultConfig.pid, userDepositAmount), 'deposit')}
 									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide"
 								>
 									<p>Deposit</p>
@@ -316,8 +346,6 @@
 					</div>
 
 					<div class="pt-4 lg:pt-0 lg:w-3/12">
-						
-					
 						<div class="pl-1">
 							<p class="text-gray-500 font-bold pb-1 dark:text-gray-400 font-semibold">
 								Current Prices:

@@ -7,7 +7,7 @@ import { Token } from '$lib/ts/types';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 export const quickVaults: VaultInfo[] = [
 	{
-		pid: 14,
+		pid: 0,
 		depositFee: 0,
 		platform: platforms.QUICKSWAP,
 		withdrawalFee: 0.1,
@@ -35,8 +35,8 @@ export const quickVaults: VaultInfo[] = [
 			token1quote: TokenQuotes.WRAPPED_ETHER,
 			token0Contract: getContractAddress(Token.WMATIC),
 			token1Contract: getContractAddress(Token.WETH),
-			pairContract: '0x853ee4b2a13f8a742d64c8f088be7ba2131f670d',
-			pairURL: 'https://polygonscan.com/address/0x853ee4b2a13f8a742d64c8f088be7ba2131f670d'
+			pairContract: '0xadbf1854e5883eb8aa7baf50705338739e558e5b',
+			pairURL: 'https://polygonscan.com/address/0xadbf1854e5883eb8aa7baf50705338739e558e5b'
 		},
 		strategyContractAddress: 'LF'
 	},
@@ -177,8 +177,8 @@ export const quickVaults: VaultInfo[] = [
 			token1quote: TokenQuotes.USDT,
 			token0Contract: getContractAddress(Token.DAI),
 			token1Contract: getContractAddress(Token.USDT),
-			pairContract: '0x5ca6ca6c3709e1e6cfe74a50cf6b2b6ba2dadd67',
-			pairURL: 'https://polygonscan.com/address/0x5ca6ca6c3709e1e6cfe74a50cf6b2b6ba2dadd67'
+			pairContract: '	',
+			pairURL: 'https://polygonscan.com/address/0x59153f27eefe07e5ece4f9304ebba1da6f53ca88'
 		},
 		strategyContractAddress: 'LF'
 	},

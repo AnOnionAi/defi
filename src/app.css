@@ -1,37 +1,19 @@
 @import '@fontsource/fira-mono';
 
 :root {
-	--pure-white: #ffffff;
-	--primary-color: #b9c6d2;
-	--secondary-color: #d0dde9;
-	--tertiary-color: #edf0f8;
-	--accent-color: #ff3e00;
-	--heading-color: rgba(0, 0, 0, 0.7);
 	--text-color: #444444;
-	--background-without-opacity: rgba(255, 255, 255, 0.7);
-	--column-width: 42rem;
-	--column-margin-top: 4rem;
+	--logo-color: rgba(27,160,133,1);
+	--light-background: #f9f8f9;
+	--light-secondary: #fff;
+	--dark-background: #172029;
+	--dark-secondary: #1c1f28;
+	--dark-thirty: rgba(25, 25, 25, 1); /* alpaca finance */
 }
 
 body {
 	min-height: 100vh;
 	margin: 0;
-}
-
-body::before {
-	content: '';
-	width: 80vw;
-	height: 100vh;
-	position: absolute;
-	top: 0;
-	left: 10vw;
-	z-index: -1;
-	background: radial-gradient(
-		50% 50% at 50% 50%,
-		var(--pure-white) 0%,
-		rgba(255, 255, 255, 0) 100%
-	);
-	opacity: 0.05;
+	background-color: var(--light-background);
 }
 
 #svelte {
@@ -75,13 +57,22 @@ button:focus:not(:focus-visible) {
 	outline: none;
 }
 
-@media (min-width: 720px) {
-	h1 {
-		font-size: 2.4rem;
-	}
-}
-
-
-.bg-lightmode {
-	background-color: #f9f8f9;
-}
+::-webkit-scrollbar {
+	width: 5px;
+	border-radius: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f9f9f9; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: var(--text-color); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+  }

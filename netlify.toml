@@ -1,7 +1,17 @@
 [build]
   command = "npm run build"
-  publish = "build/"
-  functions = "functions/"
-
-[context.production]
+  publish = "build"
   environment = { NODE_VERSION = "16.2.0" }
+ 
+[dev]
+  command = "svelte-kit dev"
+ 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  
+[context.master]
+  environment = { VITE_NODE_ENV = "production" }
+  
+[context."release/**"]
+  environment = { VITE_NODE_ENV = "qa" }

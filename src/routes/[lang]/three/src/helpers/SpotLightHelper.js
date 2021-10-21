@@ -21,36 +21,7 @@ class SpotLightHelper extends Object3D {
 		const geometry = new BufferGeometry();
 
 		const positions = [
-			0,
-			0,
-			0,
-			0,
-			0,
-			1,
-			0,
-			0,
-			0,
-			1,
-			0,
-			1,
-			0,
-			0,
-			0,
-			-1,
-			0,
-			1,
-			0,
-			0,
-			0,
-			0,
-			1,
-			1,
-			0,
-			0,
-			0,
-			0,
-			-1,
-			1
+			0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, -1, 1
 		];
 
 		for (let i = 0, j = 1, l = 32; i < l; i++, j++) {
