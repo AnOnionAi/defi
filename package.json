@@ -44,7 +44,6 @@
 		"@fortawesome/free-regular-svg-icons": "^5.15.3",
 		"@fortawesome/free-solid-svg-icons": "^5.15.3",
 		"@sveltejs/adapter-static": "^1.0.0-next.0",
-		"axios": "^0.21.4",
 		"cookie": "^0.4.1",
 		"dotenv": "^10.0.0",
 		"ethers": "^5.4.3",
