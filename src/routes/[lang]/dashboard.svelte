@@ -48,7 +48,7 @@
                                 
                             </div>
                             
-                            <p class="mt-1 font-medium text-gray-600 text-sm">Across all Zyber Finance</p>
+                            <p class="mt-1 font-medium text-gray-600 text-sm">Across all Fung Financial</p>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                        </div>
                        <div class="flex flex-col items-center pb-3 gap-2">
                            <p class="text-3xl tracking-wide font-bold">$40,112.99</p>
-                           <p class="text-gray-700 font-semibold text-sm">Locked In Zyber Pools</p>
+                           <p class="text-gray-700 font-semibold text-sm">Locked In Poly Pools</p>
                            <button class="border border-green-500 rounded-lg py-2 px-5  flex items-center">
                                <p class="font-semibold pr-1">
                                    Add Liquidity
