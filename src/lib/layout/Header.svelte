@@ -54,6 +54,10 @@
 			title: 'Dashboard'
 		},
 		{
+			route: `/${$page.params.lang}/dividends`,
+			title: 'Dividends'
+		},
+		{
 			route: `/${$page.params.lang}/farms`,
 			title: 'Farms'
 		},
