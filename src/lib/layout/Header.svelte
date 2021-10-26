@@ -68,8 +68,7 @@
 		{
 			route: `/${$page.params.lang}/vaults`,
 			title: 'Vaults'
-		},
-		
+		}
 	];
 	const gotoPage = (route: string, home: boolean = false) => {
 		if (home) goto(`/${$page.params.lang}`, { replaceState: true });

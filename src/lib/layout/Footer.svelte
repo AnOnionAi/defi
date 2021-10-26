@@ -23,7 +23,7 @@
 		{
 			route: `/${$page.params.lang}/trade`,
 			title: $_('pages.trade.title')
-		},
+		}
 	];
 </script>
 

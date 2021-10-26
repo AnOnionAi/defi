@@ -5,11 +5,11 @@ import { ethers } from 'ethers';
 export const deposit = async (pid: number, amount: string): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
-		console.log("Aqui estoy");
 		
+
 		const depositAmount = ethers.utils.parseUnits(amount.trim(), 18);
 		console.log(depositAmount);
-		
+
 		return await vaultChef['deposit(uint256,uint256)'](pid, depositAmount);
 	} catch (error) {
 		console.log(error, 'Unable to deposit here');

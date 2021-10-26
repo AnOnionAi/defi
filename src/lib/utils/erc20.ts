@@ -23,10 +23,12 @@ export const getTokenAllowance = async (
 };
 
 export const approveToken = async (tknAddr: string, spenderAddr: string) => {
+	
 	try {
 		const tokenContract = getERC20Contract(tknAddr);
 		return await tokenContract.approve(spenderAddr, ethers.constants.MaxUint256);
 	} catch (e) {
+		
 		return 'Unable to approve the transaction';
 	}
 };
@@ -37,6 +39,7 @@ export const getTokenBalance = async (tknAddr: string, userAddr) => {
 		const balance = await tokenContract.balanceOf(userAddr);
 		return balance;
 	} catch (e) {
+		console.log(e)
 		return 'N/A';
 	}
 };

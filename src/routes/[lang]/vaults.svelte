@@ -45,9 +45,6 @@
 
 	<Notifications>
 		<div class="mt-10 sideShadow">
-
-		
-
 			<VaultAccordeon
 				tkn0Img={wmatic}
 				tkn1Img={usdc}

@@ -10,17 +10,12 @@
 <main class:dark={$darkMode} class="main {$darkMode && 'dark-active'}">
 	<div class=" main">
 		<slot />
-		
 	</div>
 </main>
 
 <Footer />
 
 <style>
-
-
-
-
 	.main {
 		flex: 1;
 		display: flex;

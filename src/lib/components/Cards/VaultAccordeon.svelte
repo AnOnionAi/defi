@@ -86,7 +86,9 @@
 				userTokens = userTokens.sub(bnDepositedTokens);
 			}
 			if (transactionName == 'withdraw') {
-				const bnWithdrawedTokens = BigNumber.from(ethers.utils.parseEther(userWithdrawAmount.trim()));
+				const bnWithdrawedTokens = BigNumber.from(
+					ethers.utils.parseEther(userWithdrawAmount.trim())
+				);
 				stakedTokens = stakedTokens.sub(bnWithdrawedTokens);
 				userTokens = userTokens.add(bnWithdrawedTokens);
 			}
@@ -135,7 +137,6 @@
 			getTokenPriceUSD(vaultConfig.pair.token1Contract).then((response) => {
 				tkn1Price = response[vaultConfig.pair.token1Contract.toLowerCase()].usd;
 			});
-
 		}
 	}
 </script>

@@ -2,7 +2,7 @@
 
 :root {
 	--text-color: #444444;
-	--logo-color: rgba(27,160,133,1);
+	--logo-color: rgba(27, 160, 133, 1);
 	--light-background: #f9f8f9;
 	--light-secondary: #fff;
 	--dark-background: #172029;
@@ -53,6 +53,13 @@ button {
 	font-family: inherit;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+	outline: none;
+}
+
 button:focus:not(:focus-visible) {
 	outline: none;
 }
@@ -60,19 +67,19 @@ button:focus:not(:focus-visible) {
 ::-webkit-scrollbar {
 	width: 5px;
 	border-radius: 20px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-	background: #f9f9f9; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-	background: var(--text-color); 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-	background: #555; 
-  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f9f9f9;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: var(--text-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
