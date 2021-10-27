@@ -16,26 +16,27 @@
 	import type { Unsubscriber } from 'svelte/store';
 	import type { BigNumber } from 'ethers';
 	import {approveToken} from "$lib/utils/erc20";
+	
 
+	
 	let userAccount: string
 	let unsubscribe: Unsubscriber
 	let userMushAllowance: BigNumber;
 	let approved: boolean = false;
+	
 
 		unsubscribe = accounts.subscribe(	arrayAccs => {
 			if(arrayAccs){
 				userAccount = arrayAccs[0];
 				getTokenAllowance(getContractAddress(Token.MUSHTOKEN),getContractAddress(Token.VAULTCHEF),userAccount).then(allowance => {
-					console.log(allowance, "HEY")
 					userMushAllowance = allowance;
 					approved = isNotZero(allowance);
+					
+					
 				}
 				)
-
-
 			}
-
-		}  );
+		});
 
 
 	
@@ -57,17 +58,15 @@
 	}
 
 </script>
-
-<div class="mb-12 mt-6">
-	<p class="text-center text-3xl font-bold tracking-widest mb-5 dark:text-white">DIVIDENDS</p>
+<p class="text-center text-2xl font-bold tracking-widest mt-7 dark:text-white">DIVIDENDS</p>
+<div class="my-auto">
 	<div class="dividends-wrapper {$darkMode && 'darkBackground'}">
 		<div
-			class="h-142 w-95/100 max-w-lg p-5 border-1 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
+			class="h-130 w-95/100 max-w-lg p-5 border-1 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
 		>
 		{#if approved}
-		<div transition:fade={{duration:500}} class="h-full">
+		<div transition:fade={{duration:200}} class="h-full">
 			<DividendCard/>
-			
 			
 		</div>
 		{:else if $accounts}
@@ -81,13 +80,12 @@
 </div>
 
 <style>
-	.test {
-		justify-self: center;
-	}
+	
+
 
 	.dividends-wrapper {
 		width: 100%;
-		height: 75vh;
+		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;

@@ -37,13 +37,11 @@
 	import env from '$lib/env';
 	import addresses from '$lib/config/constants/addresses.json';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
-	import Notifications from 'svelte-notifications';
 </script>
 
 <section class="background-vaults">
 	<h1 class="text-dark-200 dark:text-white text-4xl">V A U L T S</h1>
 
-	<Notifications>
 		<div class="mt-10 sideShadow">
 			<VaultAccordeon
 				tkn0Img={wmatic}
@@ -228,7 +226,6 @@
 
 			<BottomList />
 		</div>
-	</Notifications>
 </section>
 
 <style>

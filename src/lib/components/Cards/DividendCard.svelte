@@ -1,15 +1,92 @@
 <script lang="ts">
     import {getContractAddress} from "$lib/utils/addressHelpers"
     import { getTokenBalance } from "$lib/utils/erc20";
-    import { stakedWantTokens } from "$lib/utils/vaultChef";
+    import { stakedWantTokens,deposit,withdraw } from "$lib/utils/vaultChef";
     import {Token} from "$lib/ts/types"
     import { onMount } from "svelte";
     import {accounts} from "$lib/stores/MetaMaskAccount"
-    import type { BigNumber } from "ethers";
+    import {Chasing} from 'svelte-loading-spinners'
+    import { BigNumber, ethers } from "ethers";
     import { parseBigNumberToDecimal, parseBigNumberToString } from "$lib/utils/balanceParsers";
+    import {
+		transactionCompleted,
+		transactionDeniedByTheUser,
+		transactionSend,
+        wrongInput
+	} from '$lib/config/constants/notifications';
+    import { getNotificationsContext } from 'svelte-notifications';
+
+	const { addNotification } = getNotificationsContext();
+
+    const numericRegex:RegExp = /^\d+(\.\d+)*$/ 
 
     let userBalance: BigNumber
     let userStakedTokens: BigNumber
+
+    let depositInput: string = ''
+    let withdrawInput: string = ''
+
+
+    interface LoadingState{
+		loadingDeposit: boolean,
+		loadingWithdraw: boolean,
+		loadingHarvest: boolean;
+	}
+	let loadingState: LoadingState = {
+		loadingDeposit : false,
+		loadingHarvest : false,
+		loadingWithdraw : false
+	};
+
+
+    async function handleDeposit(){
+        if(!depositInput.trim().match(numericRegex)){
+            addNotification(wrongInput);
+            return;
+        }
+        addNotification(transactionSend)
+        try{
+            loadingState.loadingDeposit=true;
+            const tx = await deposit(2,depositInput.trim())
+            await tx.wait();
+            loadingState.loadingDeposit=false;
+            userBalance.sub(BigNumber.from(ethers.utils.parseEther(depositInput.trim())));
+            userStakedTokens.add(BigNumber.from(ethers.utils.parseEther(depositInput.trim())))
+            addNotification(transactionCompleted)
+
+        }catch(error){
+            addNotification(transactionDeniedByTheUser)
+            loadingState.loadingDeposit=false
+            console.log(loadingState.loadingDeposit);
+            
+        }
+        loadingState.loadingDeposit=false
+    }
+
+
+    async function handleWithdraw(){
+        if(!withdrawInput.trim().match(numericRegex)){
+            addNotification(wrongInput);
+            return;
+        }
+        addNotification(transactionSend)
+
+        try{
+            loadingState.loadingWithdraw=true
+            const tx = await withdraw(2,withdrawInput.trim())
+            await tx.wait();
+            addNotification(transactionCompleted)
+            userBalance.add(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())));
+            userStakedTokens.sub(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())))
+            loadingState.loadingWithdraw=false
+
+        }catch(error){
+            addNotification(transactionDeniedByTheUser)
+            loadingState.loadingWithdraw=false
+        }
+    }
+     
+
     onMount(()=>{
         if($accounts){
             getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]).then(balance => (userBalance = balance))
@@ -21,7 +98,7 @@
 
 
 
-<div class="h-full w-full ">
+<div class="h-full w-full mb-2">
     <div class="flex flex-col justify-around w-full h-4/12">
         <div class="flex w-23/24 mx-auto justify-between items-center">
             <div class="flex items-center">
@@ -41,12 +118,12 @@
             <div class="flex w-full h-12 text-center">
                 <div class="w-6/12">
                     <p class="text-xs text-gray-600 font-semibold dark:text-gray-300">APR</p>
-                    <p class="font-medium dark:text-white">65.82%</p>
+                    <p class="font-medium dark:text-white">0%</p>
                 </div>
 
                 <div class="w-6/12">
                     <p class="text-xs text-gray-600 font-semibold dark:text-gray-300">TVL</p>
-                    <p class="font-medium dark:text-white">$1000</p>
+                    <p class="font-medium dark:text-white">$0</p>
                 </div>
             </div>
 
@@ -92,18 +169,24 @@
 
             <div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-around">
                 <input
+                    bind:value={depositInput}
                     type="text"
                     class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12"
                 />
                 <button
-                    class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5"
+                    disabled={loadingState.loadingDeposit}
+                    on:click={handleDeposit}
+                    class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5 {loadingState.loadingDeposit && 'cursor-not-allowed'} disabled:opacity-50 disabled:bg-green-500"
                 >
                     <p>Deposit</p>
-                    <!-- <div class="pl-3">
-                    <Chasing size={18} unit="px" color="#FFF"></Chasing>
-                </div> -->
+                    {#if loadingState.loadingDeposit}    
+                    <div class="pl-3">
+                    <Chasing size={18} unit="px" color="#FFF"/>
+                    </div>
+                    {/if}
                 </button>
             </div>
+            <p class="text-xs text-gray-700 dark:text-white pl-1 mt-1">Daily ROI Breakdown: 0.41% from Pools</p>
             
         </div>
 
@@ -122,15 +205,21 @@
             <div class="bg-gray-200  dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-around">
                 <input
                     type="text"
+                    bind:value={withdrawInput}
                     class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12"
                 />
                 <button
-                    class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5"
+                    on:click={handleWithdraw}
+                    disabled={loadingState.loadingWithdraw}
+                    class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5 {loadingState.loadingWithdraw && 'cursor-not-allowed'} disabled:opacity-50 disabled:bg-green-500"
                 >
                     <p>Withdraw</p>
-                    <!-- <div class="pl-3">
+                    {#if loadingState.loadingWithdraw}
+                    <div class="pl-3">
                     <Chasing size={18} unit="px" color="#FFF"></Chasing>
-                </div> -->
+                    </div>
+  
+                    {/if}
                 </button>
             </div>
             
@@ -148,11 +237,17 @@
                     class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5"
                 >
                     <p>Harvest</p>
-                    <!-- <div class="pl-3">
+                    {#if loadingState.loadingHarvest}
+                    <div class="pl-3">
                     <Chasing size={18} unit="px" color="#FFF"></Chasing>
-                </div> -->
+                    </div>
+                    {/if}
                 </button>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    
+</style>

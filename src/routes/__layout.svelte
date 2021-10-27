@@ -4,16 +4,16 @@
 	import '../app.css';
 	import 'virtual:windi.css';
 	import { darkMode } from '$lib/stores/dark';
+	import Notifications from 'svelte-notifications';
 </script>
 
+<Notifications>
 <Header />
 <main class:dark={$darkMode} class="main {$darkMode && 'dark-active'}">
-	<div class=" main">
 		<slot />
-	</div>
 </main>
-
 <Footer />
+</Notifications>
 
 <style>
 	.main {

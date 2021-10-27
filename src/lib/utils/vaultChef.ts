@@ -12,7 +12,7 @@ export const deposit = async (pid: number, amount: string): Promise<any> => {
 
 		return await vaultChef['deposit(uint256,uint256)'](pid, depositAmount);
 	} catch (error) {
-		console.log(error, 'Unable to deposit here');
+		console.log( 'Unable to deposit here');
 	}
 };
 

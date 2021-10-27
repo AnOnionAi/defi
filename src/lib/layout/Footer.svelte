@@ -27,7 +27,7 @@
 	];
 </script>
 
-<footer class="z-20" class:dark={$darkMode}>
+<footer class="" class:dark={$darkMode}>
 	<div class="dark:text-gray-300 {$darkMode && 'dark-active'} w-full p-3 text-center text-xl">
 		<div class="ml-auto mr-auto flex justify-center text-center">
 			{#each PAGES as page}
