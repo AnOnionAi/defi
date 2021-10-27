@@ -8,7 +8,6 @@ export const deposit = async (pid: number, amount: string): Promise<any> => {
 		
 
 		const depositAmount = ethers.utils.parseUnits(amount.trim(), 18);
-		console.log(depositAmount);
 
 		return await vaultChef['deposit(uint256,uint256)'](pid, depositAmount);
 	} catch (error) {

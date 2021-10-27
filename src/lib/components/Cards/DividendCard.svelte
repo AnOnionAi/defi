@@ -50,9 +50,14 @@
             const tx = await deposit(2,depositInput.trim())
             await tx.wait();
             loadingState.loadingDeposit=false;
-            userBalance.sub(BigNumber.from(ethers.utils.parseEther(depositInput.trim())));
-            userStakedTokens.add(BigNumber.from(ethers.utils.parseEther(depositInput.trim())))
+            userBalance = userBalance.sub(BigNumber.from(ethers.utils.parseEther(depositInput.trim())));
+            userStakedTokens = userStakedTokens.add(BigNumber.from(ethers.utils.parseEther(depositInput.trim())))
             addNotification(transactionCompleted)
+            setTimeout(async()=>{
+                console.log("Fetched");
+               userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]);
+               userStakedTokens = await stakedWantTokens(2,$accounts[0])
+            },20000)
 
         }catch(error){
             addNotification(transactionDeniedByTheUser)
@@ -76,9 +81,14 @@
             const tx = await withdraw(2,withdrawInput.trim())
             await tx.wait();
             addNotification(transactionCompleted)
-            userBalance.add(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())));
-            userStakedTokens.sub(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())))
+            userBalance = userBalance.add(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())));
+            userStakedTokens = userStakedTokens.sub(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())))
             loadingState.loadingWithdraw=false
+            setTimeout(async()=>{
+                console.log("Fetched");
+               userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]);
+               userStakedTokens = await stakedWantTokens(2,$accounts[0])
+            },20000)
 
         }catch(error){
             addNotification(transactionDeniedByTheUser)
@@ -90,7 +100,7 @@
     onMount(()=>{
         if($accounts){
             getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]).then(balance => (userBalance = balance))
-            stakedWantTokens(2,$accounts[0]).then(stakedTokens => (userStakedTokens = stakedTokens)).then(()=> console.log(userStakedTokens,"AQUI"))
+            stakedWantTokens(2,$accounts[0]).then(stakedTokens => (userStakedTokens = stakedTokens))
             
         }
     });
