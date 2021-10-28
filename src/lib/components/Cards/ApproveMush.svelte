@@ -9,9 +9,9 @@
 </script>
 
 
-<div class="h-8/12 w-full flex justify-center "
+<div class="h-12/12 w-full flex justify-center "
 >
-    <div class="w-8/12 h-full flex flex-col items-center justify-around">
+    <div class="w-9/12 h-full flex flex-col items-center justify-center">
         <img src="/mushRound.png" alt="MushToken" class="w-40  mb-5">
         <div>
             <p class="text-xl text-center font-medium dark:text-white mb-1">Approval Required</p>

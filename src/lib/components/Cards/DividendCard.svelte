@@ -177,7 +177,7 @@
                 </span>
             </p>
 
-            <div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-around">
+            <div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-between px-4">
                 <input
                     bind:value={depositInput}
                     type="text"
@@ -212,7 +212,7 @@
                 </span>
             </p>
 
-            <div class="bg-gray-200  dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-around">
+            <div class="bg-gray-200  dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-between px-4">
                 <input
                     type="text"
                     bind:value={withdrawInput}
@@ -241,7 +241,7 @@
                 <span class="text-black" />
             </p>
 
-            <div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-around">
+            <div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-between px-4">
                 <p class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12 flex items-center">0.00000</p>
                 <button
                     class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5"
