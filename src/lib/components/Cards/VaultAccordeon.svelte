@@ -7,7 +7,7 @@
 	import { Token } from '$lib/ts/types';
 	import { parseBigNumberToString, parseBigNumberToDecimal } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
-	import { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	import { getUniPair } from '$lib/utils/contracts';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
 	import { Chasing } from 'svelte-loading-spinners';
