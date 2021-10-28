@@ -41,6 +41,16 @@
 	};
 
 
+    async function refreshUserData  () {
+                console.log("Fetched");
+               userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]);
+               userStakedTokens = await stakedWantTokens(2,$accounts[0])
+               const [,rewardDebt] = await getUserInfo($accounts[0])
+               console.log("Entre",rewardDebt);
+               
+               
+    }
+
     async function handleDeposit(){
         if(!depositInput.trim().match(numericRegex)){
             addNotification(wrongInput);
@@ -55,11 +65,7 @@
             userBalance = userBalance.sub(BigNumber.from(ethers.utils.parseEther(depositInput.trim())));
             userStakedTokens = userStakedTokens.add(BigNumber.from(ethers.utils.parseEther(depositInput.trim())))
             addNotification(transactionCompleted)
-            setTimeout(async()=>{
-                console.log("Fetched");
-               userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]);
-               userStakedTokens = await stakedWantTokens(2,$accounts[0])
-            },20000)
+            setTimeout(refreshUserData,20000)
 
         }catch(error){
             addNotification(transactionDeniedByTheUser)
@@ -86,11 +92,7 @@
             userBalance = userBalance.add(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())));
             userStakedTokens = userStakedTokens.sub(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())))
             loadingState.loadingWithdraw=false
-            setTimeout(async()=>{
-                console.log("Fetched");
-               userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]);
-               userStakedTokens = await stakedWantTokens(2,$accounts[0])
-            },20000)
+            setTimeout(refreshUserData,20000)
 
         }catch(error){
             addNotification(transactionDeniedByTheUser)
@@ -106,11 +108,7 @@
             const tx = await harvest();
             await tx.wait();
             addNotification(transactionCompleted);
-            setTimeout(async()=>{
-                console.log("Fetched");
-               userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]);
-               userStakedTokens = await stakedWantTokens(2,$accounts[0])
-            },20000)
+            setTimeout(refreshUserData,20000)
         }catch{
             console.log("Failed on Harvest");
             addNotification(transactionDeniedByTheUser);
