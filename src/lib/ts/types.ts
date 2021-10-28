@@ -85,6 +85,7 @@ export enum Token {
 	USDC = 'USDC',
 	USDT = 'USDT',
 	VAULTCHEF = 'VAULTCHEF',
+	DIVIDENDS = 'DIVIDENDS',
 	IBBTC = 'IBBTC',
 	GRT = 'GRT',
 	MANA = 'MANA',

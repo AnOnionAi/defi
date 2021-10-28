@@ -9,10 +9,10 @@
 </script>
 
 
-<div class="h-12/12 w-full flex justify-center "
+<div class="h-12/12 w-full flex items-center justify-center"
 >
-    <div class="w-9/12 h-full flex flex-col items-center justify-center">
-        <img src="/mushRound.png" alt="MushToken" class="w-40  mb-5">
+    <div class="w-9/12 h-8/12 flex flex-col  justify-around items-center">
+        <img src="/mushRound.png" alt="MushToken" class="w-40  ">
         <div>
             <p class="text-xl text-center font-medium dark:text-white mb-1">Approval Required</p>
             <p class="text-center text-xs">You need to approve your MUSH expent first.</p>

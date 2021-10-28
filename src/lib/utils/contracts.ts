@@ -6,6 +6,7 @@ import pairABI from '$lib/config/abi/IUniswapV2Pair.json';
 import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
 import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
 import VaultChefABI from '$lib/config/abi/VaultChef.json';
+import DividendsABI from "$lib/config/abi/Dividends.json"
 import { farms } from '$lib/config/constants/farms';
 import addresses from '$lib/config/constants/addresses.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
@@ -125,3 +126,12 @@ export const getVaultChefContract = () => {
 	);
 	return vaultChefContract;
 };
+
+export const getMushStrategyContract = () => {
+	const dividendsContract = new ethers.Contract(
+		getContractAddress(Token.DIVIDENDS),
+		DividendsABI,
+		getSigner());
+
+	return dividendsContract;
+}

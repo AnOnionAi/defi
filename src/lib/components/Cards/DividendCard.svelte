@@ -1,6 +1,7 @@
 <script lang="ts">
     import {getContractAddress} from "$lib/utils/addressHelpers"
-    import { getTokenBalance } from "$lib/utils/erc20";
+    import { getTokenBalance, isNotZero } from "$lib/utils/erc20";
+    import {getUserInfo, harvest} from "$lib/utils/dividends"
     import { stakedWantTokens,deposit,withdraw } from "$lib/utils/vaultChef";
     import {Token} from "$lib/ts/types"
     import { onMount } from "svelte";
@@ -22,7 +23,8 @@
 
     let userBalance: BigNumber
     let userStakedTokens: BigNumber
-
+    let userReward: BigNumber
+    let userCanHarvest: boolean = false;
     let depositInput: string = ''
     let withdrawInput: string = ''
 
@@ -95,12 +97,39 @@
             loadingState.loadingWithdraw=false
         }
     }
+
+
+    async function handleHarvest(){
+        loadingState.loadingHarvest=true;
+        addNotification(transactionSend)
+        try{
+            const tx = await harvest();
+            await tx.wait();
+            addNotification(transactionCompleted);
+            setTimeout(async()=>{
+                console.log("Fetched");
+               userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]);
+               userStakedTokens = await stakedWantTokens(2,$accounts[0])
+            },20000)
+        }catch{
+            console.log("Failed on Harvest");
+            addNotification(transactionDeniedByTheUser);
+            loadingState.loadingHarvest=false
+        }
+        loadingState.loadingHarvest=false
+    }
      
 
     onMount(()=>{
         if($accounts){
             getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]).then(balance => (userBalance = balance))
             stakedWantTokens(2,$accounts[0]).then(stakedTokens => (userStakedTokens = stakedTokens))
+            getUserInfo($accounts[0]).then(([shares,rewardDebt])=>{
+                userReward=rewardDebt
+                userCanHarvest=isNotZero(rewardDebt);
+                console.log(userCanHarvest);
+            })
+            
             
         }
     });
@@ -242,9 +271,17 @@
             </p>
 
             <div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-between px-4">
-                <p class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12 flex items-center">0.00000</p>
+                <p class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12 flex items-center">
+                {#if userReward}
+                    {parseBigNumberToString(userReward)}
+                    {:else}
+                    --.--
+                {/if}
+                </p>
                 <button
-                    class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5"
+                    disabled={!userCanHarvest}
+                    on:click={handleHarvest}
+                    class="{userCanHarvest && 'hover:bg-green-500'} bg-black  h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5 {!userCanHarvest && 'cursor-not-allowed'} disabled:opacity-50 {loadingState.loadingHarvest && 'bg-green-500'}"
                 >
                     <p>Harvest</p>
                     {#if loadingState.loadingHarvest}
