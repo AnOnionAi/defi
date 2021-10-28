@@ -1,7 +1,7 @@
 <script lang="ts">
     import {getContractAddress} from "$lib/utils/addressHelpers"
     import { getTokenBalance, isNotZero } from "$lib/utils/erc20";
-    import {getUserInfo, harvest} from "$lib/utils/dividends"
+    import {getSharesTotal, getUserInfo, harvest} from "$lib/utils/dividends"
     import { stakedWantTokens,deposit,withdraw } from "$lib/utils/vaultChef";
     import {Token} from "$lib/ts/types"
     import { onMount } from "svelte";
@@ -16,10 +16,16 @@
         wrongInput
 	} from '$lib/config/constants/notifications';
     import { getNotificationsContext } from 'svelte-notifications';
+import { parseEther } from "ethers/lib/utils";
 
 	const { addNotification } = getNotificationsContext();
 
     const numericRegex:RegExp = /^\d+(\.\d+)*$/ 
+
+    const mushUsdPrice = 0.000000000001 //todo: change this value to the real mushPrice fetching an api.
+    
+    let TVL:BigNumber;
+
 
     let userBalance: BigNumber
     let userStakedTokens: BigNumber
@@ -42,12 +48,17 @@
 
 
     async function refreshUserData  () {
-                console.log("Fetched");
+            try{
+                console.log("Balances Fetched");
                userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]);
                userStakedTokens = await stakedWantTokens(2,$accounts[0])
                const [,rewardDebt] = await getUserInfo($accounts[0])
-               console.log("Entre",rewardDebt);
-               
+               TVL = await getSharesTotal();
+            }catch{
+                console.log("Failed on fetching data");
+                
+            }
+                               
                
     }
 
@@ -127,7 +138,9 @@
                 userCanHarvest=isNotZero(rewardDebt);
                 console.log(userCanHarvest);
             })
-            
+            getSharesTotal().then(totalShares => {
+                TVL = totalShares; 
+            })
             
         }
     });
@@ -159,8 +172,14 @@
                 </div>
 
                 <div class="w-6/12">
-                    <p class="text-xs text-gray-600 font-semibold dark:text-gray-300">TVL</p>
-                    <p class="font-medium dark:text-white">$0</p>
+                    <p class="text-xs text-gray-600 font-semibold dark:text-gray-300">TVL🍄</p>
+                     <p class="font-medium dark:text-white">
+                    {#if TVL }
+                        {parseBigNumberToString(TVL)}
+                        {:else}
+                        - - 
+                    {/if}
+                </p>
                 </div>
             </div>
 

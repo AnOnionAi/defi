@@ -13,3 +13,9 @@ export const harvest = async() => {
     const mushStrategy = getMushStrategyContract();
     return await mushStrategy.harvest();
 }
+
+export const getSharesTotal = async():Promise<BigNumber> => {
+    const mushStrategy = getMushStrategyContract();
+    const sharesTotal = await mushStrategy.sharesTotal()
+    return sharesTotal;
+}
