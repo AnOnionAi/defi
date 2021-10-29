@@ -9,6 +9,6 @@
         <img src="/metamask.svg" alt="Metamask Fox" class="w-40 self-center mb-5">
         <p 
         
-        class="text-xl text-center bg-black text-white font-medium rounded-full p-1 ">Connect your Wallet</p>
+        class="text-xl text-center bg-black text-white font-medium rounded-full p-1  dark:border-green-500 dark:border-3">Connect your Wallet</p>
     </div>
 </div>
