@@ -24,12 +24,14 @@ export const withdraw = async (pid: number, amount: string): Promise<any> => {
 };
 
 export const getRewards = async (pid: number, user: string): Promise<any> => {
-	const mc = getMasterChefContract();
 	try {
-		const reward = await mc.pendingmush(pid, user);
+		const mc = getMasterChefContract();
+		const reward = await mc.pendingFish(pid,user);
 		return reward;
+		
 	} catch (error) {
-		return 'Not Avaliable';
+		console.log("Unable to fetch user rewards",error);
+		
 	}
 };
 

@@ -201,7 +201,7 @@
 			</div>
 
 			<p
-				class="font-bold text-4xl md:text-5xl px-5 mt-5 mb-5 text-center w-full text-center lg:text-left"
+				class="font-bold text-4xl md:text-5xl px-5 mt-5 mb-5 text-center w-full text-center lg:text-left dark:text-white"
 			>
 				Mush Price:
 			</p>

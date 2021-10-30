@@ -12,6 +12,7 @@ export interface FarmConfig {
 
 export interface PoolInfo {
 	tokenName: string;
+	tokenImagePath:string;
 	tokenAddr: string;
 	depositFee: number;
 	pid: number;
@@ -89,7 +90,10 @@ export enum Token {
 	IBBTC = 'IBBTC',
 	GRT = 'GRT',
 	MANA = 'MANA',
-	CRV = 'CRV'
+	CRV = 'CRV',
+	QUICKLP="QUICKLP",
+	SUSHILP="SUSHILP",
+	CATLP="CATLP"
 }
 
 export enum TokenQuotes {

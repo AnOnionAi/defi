@@ -6,22 +6,26 @@ import { Token } from '$lib/ts/types';
 export const farms: PoolInfo[] = [
 	{
 		pid: 0,
+		tokenImagePath:"/static/vaultTokensIcons/quick.svg",
 		tokenName: 'QUICK-LP',
-		tokenAddr: getContractAddress(Token.ZYBERTOKEN),
+		tokenAddr: getContractAddress(Token.QUICKLP),
 		depositFee: 100
+
 	},
 
 	{
 		pid: 1,
+		tokenImagePath:"/static/sushi.png",
 		tokenName: 'SUSHI-LP',
-		tokenAddr: getContractAddress(Token.TESTLP),
+		tokenAddr: getContractAddress(Token.SUSHILP),
 		depositFee: 100
 	},
 
 	{
 		pid: 2,
-		tokenName: 'DYFN-LP',
-		tokenAddr: getContractAddress(Token.DFYNTESTLP),
+		tokenImagePath:"/static/polycatLogo.png",
+		tokenName: 'CAT-LP',
+		tokenAddr: getContractAddress(Token.CATLP),
 		depositFee: 100
 	}
 ];

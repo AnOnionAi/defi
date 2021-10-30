@@ -23,13 +23,13 @@
 	let unsubscribe: Unsubscriber
 	let userMushAllowance: BigNumber;
 	let approved: boolean = false;
-
-	let finishedApprovalFetch = false
+	let finishedApprovalFetch:boolean = false
 	
 
 		unsubscribe = accounts.subscribe(	arrayAccs => {
 			if(arrayAccs){
 				userAccount = arrayAccs[0];
+				
 				getTokenAllowance(getContractAddress(Token.MUSHTOKEN),getContractAddress(Token.VAULTCHEF),userAccount).then(allowance => {
 					userMushAllowance = allowance;
 					approved = isNotZero(allowance);
@@ -63,7 +63,7 @@
 <div class="my-auto">
 	<div class="dividends-wrapper {$darkMode && 'darkBackground'}">
 		<div
-			class="h-130 w-95/100 max-w-lg p-5 border-1 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
+			class="h-130 w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
 		>
 		{#if approved}
 		<div in:fade={{duration:1000}} class="h-full">
@@ -72,7 +72,7 @@
 		</div>
 		{:else if $accounts && finishedApprovalFetch}
 		<ApproveMush onApproval={handleApproval}/>
-			{:else}
+			{:else if !$accounts }
 			<Connect/>
 		{/if}
 		
