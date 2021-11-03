@@ -12,12 +12,11 @@
 
     const select = () => dispatch('staked');
 
-
 </script>
 
-<div class="w-full max-w-7xl m-auto overflow-hidden shadow rounded-2xl bg-white mt-4 mb-4 p-4 dark:bg-dark-600 dark:text-white">
+<div class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white mt-4 mb-4 p-4 dark:bg-dark-600 dark:text-white">
 
-    <div class="flex flex-row flex-wrap w-auto justify-around">
+    <div class="flex flex-row flex-wrap w-auto justify-around relative">
 
         <div class="flex lg:flex-row flex-col w-full max-w-6xl m-auto sm:justify-between">
 
@@ -40,7 +39,7 @@
                         </svg>
                       </span>
                 </span>
-                <span class="radio__label text-base">All</span>
+                <span id="all" class="radio__label text-base dark:font-normal dark:tracking-wider">All</span>
             </label>
 
             <label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
@@ -110,13 +109,13 @@
                         </svg>
                       </span>
                 </span>
-                <span class="radio__label text-base">Hide Zero Balances</span>
+                <span id="zero" class="radio__label text-base dark:font-normal dark:tracking-wider">Hide Zero Balances</span>
             </label>
 
         </div>
     
         <div class=" pt-4 pb-4 mt-2 max-w-7xl m-auto sm:ml-0 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-            <div class="text-sm pl-2 pb-2">
+            <div class="text-sm pl-2 pb-2 title">
                 FILTER BY
             </div>
             <div class="content-select">
@@ -130,13 +129,13 @@
         </div>
 
         <div class=" pt-4 pb-4 mt-2 m-auto sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-            <div class="text-sm pl-2 pb-2">
+            <div class="text-sm pl-2 pb-2 title">
                 SORT BY
             </div>
             <div class="content-select">
                 <select
                     bind:value={sortby}>
-                    <option value="Descending">Descending</option>
+                    <option class="min-w-7xl" value="Descending">Descending</option>
                     <option value="Ascending">Ascending</option>
                 </select>
                 <i></i>
@@ -144,7 +143,7 @@
         </div>
 
         <div class=" pt-4 pb-4 mt-2 m-auto sm:ml-2 sm:mb-0 sm:mr-2 sm:mt-2 inline-block	">
-            <div class="text-sm pl-2 pb-2">
+            <div class="text-sm pl-2 pb-2 title">
                 SEARCH
             </div>
             <div class="content-input">
@@ -153,11 +152,12 @@
         </div>
 
         <div class="pt-8 pb-4 mt-4 sm:pt-10 m-auto sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-            <button class:active={stakedOnly} class="  bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded" on:click={select}>Staked only</button>
+            <button class:active={stakedOnly} class="bg-gray-300 hover:bg-gray-500 text-dark dark:text-dark font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded" on:click={select}>Staked only</button>
         </div>
 
-
     </div>
+
+    
 
 </div>
 
@@ -181,10 +181,10 @@
         border-radius: 0;
         background: #f0f0f0;
         color: #7b7b7b;
-        font-size: 1em;
+        font-size: 1.1em;
+        font-weight: 400;
         color: #999;
-        font-family: 
-        'Quicksand', sans-serif;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         border:2px solid rgba(0,0,0,0.2);
         border-radius: 12px;
         position: relative;
@@ -199,9 +199,16 @@
         min-width: 200px;
         padding: 7px 10px;
         height: 42px;
-        font-size: .9em;
-        font-family: 
-        'Quicksand', sans-serif;
+        font-size: 1em;
+        font-weight: 400;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: black;
+    }
+
+    .title {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 400;
     }
 
     /* ----------- DROP DOWN STYLES ---------------- */
@@ -234,18 +241,27 @@
         border-radius: 0;
         background: #f0f0f0;
         color: #7b7b7b;
-        font-size: 1em;
+        font-size: 1.1em;
+        font-weight: 400;
         color: #999;
-        font-family: 
-        'Quicksand', sans-serif;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         border:2px solid rgba(0,0,0,0.2);
         border-radius: 12px;
         position: relative;
         transition: all 0.25s ease;
     }
+
  
     .content-select select:hover{
         background: #B1E8CD;
+    }
+
+    select option {
+        background-color: white;
+        min-width: 200px;
+        min-height: 200px;
+        cursor: pointer;
+        height: 500px;
     }
     
     /* 
@@ -271,17 +287,37 @@
     }
 
 
-
     /* ------------ CHECKBOX STYLES --------------- */
+    input[type='radio'] {
+        cursor: pointer
+    }
+
+    input[type='checkbox'] {
+        cursor: pointer;
+    }
+
     .checkbox {
         display: grid;
         grid-template-columns: min-content auto;
         /* grid-gap: 0.5em; */
         font-size: 2rem;
+        font-weight: 100;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         color: var(--color);
         max-width: 200px;
-        min-width: 200px;
-        
+        min-width: 200px;        
+    }
+
+    .checkbox .radio__label {
+        font-size: 16px;
+    }
+
+    .radio__label#all {
+        color: #059669;
+    }
+
+    .radio__label#zero {
+        color: #DC2626;
     }
 
 
@@ -289,6 +325,7 @@
         opacity: 0;
         width: 1em;
         height: 1em;
+        z-index: 999999999;
     }
 
     .checkbox__control {
@@ -319,6 +356,10 @@
     }
 
     .checkbox__input input:focus + .checkbox__control {
+        box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+    }
+
+    .checkbox__input input:hover + .checkbox__control {
         box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
     }
 
