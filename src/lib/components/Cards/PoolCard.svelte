@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { PoolInfo } from '$lib/ts/types';
+	import { Token } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
@@ -14,9 +15,25 @@
 	import { parseBigNumberToDecimal, parseBigNumberToInt } from '$lib/utils/balanceParsers';
 	import DepositModal from '$lib/components/Modals/DepositModal.svelte';
 	import WithdrawModal from '$lib/components/Modals/WithdrawModal.svelte';
+	import { getContractAddress } from '$lib/utils/addressHelpers';
 	const { open } = getContext('simple-modal');
+
+	interface LoadingState {
+		loadingApproval: boolean;
+		loadingDeposit: boolean;
+		loadingWithdraw: boolean;
+		loadingHarvest: boolean;
+	}
+
 	export let info: PoolInfo;
 	export let cardImage;
+	let loadingState: LoadingState = {
+		loadingApproval: false,
+		loadingDeposit: false,
+		loadingWithdraw: false,
+		loadingHarvest: false
+	};
+
 	let isHidden: boolean = true;
 	let tokenApproved: boolean;
 	let userAcc: string;
@@ -30,20 +47,34 @@
 	let userBalance: BigNumber;
 	let wantWithdrawAmount: any;
 	let idInterval;
+
 	const onOkay = async (amount) => {
+		loadingState.loadingDeposit = true;
 		console.log(userStakedTokens, 'before');
-		const tx = await deposit(info.pid, amount);
-		console.log(tx);
-		await tx.wait();
+		try {
+			const tx = await deposit(info.pid, amount);
+			console.log(tx);
+			await tx.wait();
+		} catch (error) {
+			console.log('Internal Error on DepositHandler', error);
+		}
+		loadingState.loadingDeposit = false;
 		userStakedTokens = await getStakedTokens(info.pid, userAcc);
 	};
+
 	const onWithdraw = async (amount) => {
-		console.log('onWithdraw');
+		loadingState.loadingWithdraw = true;
 		wantWithdrawAmount = amount;
-		const tx = await withdraw(info.pid, wantWithdrawAmount);
-		await tx.wait();
-		userStakedTokens = await getStakedTokens(info.pid, userAcc);
+		try {
+			const tx = await withdraw(info.pid, wantWithdrawAmount);
+			await tx.wait();
+			loadingState.loadingWithdraw = false;
+			userStakedTokens = await getStakedTokens(info.pid, userAcc);
+		} catch (error) {
+			console.log('Internal Error on WithdrawHandler', error);
+		}
 	};
+
 	const goDeposit = () => {
 		open(
 			DepositModal,
@@ -79,12 +110,16 @@
 			userAcc = arrayAccs[0];
 			tokenAllowance = await getTokenAllowance(
 				info.tokenAddr,
-				'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9',
+				getContractAddress(Token.MASTERCHEF),
 				userAcc
 			);
+			console.log(tokenAllowance);
+
 			tokenApproved = isNotZero(tokenAllowance);
 			if (tokenApproved) {
 				userBalance = await getTokenBalance(info.tokenAddr, userAcc);
+				console.log(userBalance, 'balance');
+
 				canStake = isNotZero(userBalance);
 				userEarnings = await getRewards(info.pid, userAcc);
 				canHarvest = isNotZero(userEarnings);
@@ -94,45 +129,59 @@
 				canWithdraw = isNotZero(userStakedTokens);
 			}
 			idInterval = setInterval(async () => {
-				await fetchReards();
+				/* await fetchRewards(); */
 			}, 10000);
 		}
 	});
 	onDestroy(() => {
 		clearInterval(idInterval);
 	});
-	const fetchReards = async () => {
+
+	const fetchRewards = async () => {
 		if (tokenApproved) {
 			userEarnings = await getRewards(info.pid, userAcc);
 		}
 	};
+
 	onMount(async () => {
-		poolTokenLiquidity = await getTokenBalance(
-			info.tokenAddr,
-			'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9'
-		);
+		try {
+			poolTokenLiquidity = await getTokenBalance(
+				info.tokenAddr,
+				getContractAddress(Token.MASTERCHEF)
+			);
+
+			console.log(poolTokenLiquidity);
+		} catch {
+			console.log('Error onMount get MasterChef token balance');
+		}
 	});
 	const showPoolInfo = () => {
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
 	const approveHandler = async () => {
-		const tx = await approveToken(info.tokenAddr, '0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9');
-		await tx.wait();
-		tokenAllowance = await getTokenAllowance(
-			info.tokenAddr,
-			'0x96306fa6C17A5edfA80C679051E3CA980A2e9CC9',
-			userAcc
-		);
+		try {
+			const tx = await approveToken(info.tokenAddr, getContractAddress(Token.MASTERCHEF));
+			await tx.wait();
+			tokenApproved = true;
+			canStake = true;
+			tokenAllowance = await getTokenAllowance(
+				info.tokenAddr,
+				getContractAddress(Token.MASTERCHEF),
+				userAcc
+			);
+		} catch (error) {
+			console.log('Error on approveHandler🥶', error);
+		}
 	};
 </script>
 
 <div
-	class=" flex flex-col d-flex justify-content-center self-start shadow-l dark:bg-dark-900 rounded-xl space-y-2  border dark:border-0 min-w-80 max-w-80"
+	class=" flex flex-col d-flex justify-content-center self-start  bg-white shadow-lg dark:bg-dark-900 rounded-2xl space-y-2 dark:border-2  dark:border-green-500 min-w-88 max-w-88 "
 >
 	<div class=" flex justify-center items-center py-2 max-h-100 min-h-50">
-		<img class="max-h-40" src={cardImage} alt="tic-tac-toe" />
+		<img class="max-h-40" src={info.tokenImagePath} alt="tic-tac-toe" />
 	</div>
-	<div class="dark:bg-dark-400 bg-gray-100 p-2 space-y-3 ">
+	<div class="p-2 space-y-3 ">
 		<p class="text-lg font-bold dark:text-white">{info.tokenName}</p>
 		<div class="px-5">
 			<div class="flex justify-between">
@@ -209,7 +258,7 @@
 			>
 				Approve
 			</a>
-		{:else}
+		{:else if !$accounts}
 			<a
 				on:click={metaMaskCon}
 				href="#"

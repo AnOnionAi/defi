@@ -7,12 +7,12 @@
 	import { Token } from '$lib/ts/types';
 	import { parseBigNumberToString, parseBigNumberToDecimal } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
-	import type { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	import { getUniPair } from '$lib/utils/contracts';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
 	import { quickImages, sushiImages } from '$lib/config/constants/vaultsImages';
 	import { Chasing } from 'svelte-loading-spinners';
-	import { providers } from 'ethers';
+	import { providers , ethers} from 'ethers';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
@@ -60,6 +60,32 @@
 			const tx = await transaction;			
 			await tx.wait();
 			addNotification(transactionCompleted);
+
+			if (transactionName == 'approve') {
+				setTimeout(() => {
+					getTokenAllowance(
+						vaultConfig.pair.pairContract,
+						getContractAddress(Token.VAULTCHEF),
+						userAcc
+					).then((res) => {
+						isApproved = isNotZero(res);
+					});
+				}, 10000);
+			}
+
+			if (transactionName == 'deposit') {
+				const bnDepositedTokens = BigNumber.from(ethers.utils.parseEther(userDepositAmount.trim()));
+				stakedTokens = stakedTokens.add(bnDepositedTokens);
+				userTokens = userTokens.sub(bnDepositedTokens);
+			}
+			if (transactionName == 'withdraw') {
+				const bnWithdrawedTokens = BigNumber.from(
+					ethers.utils.parseEther(userWithdrawAmount.trim())
+				);
+				stakedTokens = stakedTokens.sub(bnWithdrawedTokens);
+				userTokens = userTokens.add(bnWithdrawedTokens);
+			}
+
 			setTimeout(() => {
 				getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
 					userTokens = balance;

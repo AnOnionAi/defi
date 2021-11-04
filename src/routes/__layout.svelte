@@ -4,23 +4,19 @@
 	import '../app.css';
 	import 'virtual:windi.css';
 	import { darkMode } from '$lib/stores/dark';
+	import Notifications from 'svelte-notifications';
+	import { accounts } from '$lib/stores/MetaMaskAccount';
 </script>
 
-<Header />
-<main class:dark={$darkMode} class="main {$darkMode && 'dark-active'}">
-	<div class=" main">
+<Notifications>
+	<Header />
+	<main class:dark={$darkMode} class="main {$darkMode && 'dark-active'}">
 		<slot />
-		
-	</div>
-</main>
-
-<Footer />
+	</main>
+	<Footer />
+</Notifications>
 
 <style>
-
-
-
-
 	.main {
 		flex: 1;
 		display: flex;
