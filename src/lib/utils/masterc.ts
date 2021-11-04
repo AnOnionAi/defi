@@ -26,12 +26,10 @@ export const withdraw = async (pid: number, amount: string): Promise<any> => {
 export const getRewards = async (pid: number, user: string): Promise<any> => {
 	try {
 		const mc = getMasterChefContract();
-		const reward = await mc.pendingFish(pid,user);
+		const reward = await mc.pendingFish(pid, user);
 		return reward;
-		
 	} catch (error) {
-		console.log("Unable to fetch user rewards",error);
-		
+		console.log('Unable to fetch user rewards', error);
 	}
 };
 

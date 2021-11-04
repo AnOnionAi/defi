@@ -1,8 +1,7 @@
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/ts/types';
 import mushIcon from '/static/mushRound.png';
-import {accounts} from "$lib/stores/MetaMaskAccount"
-
+import { accounts } from '$lib/stores/MetaMaskAccount';
 
 export const metaMaskCon = async () => {
 	try {

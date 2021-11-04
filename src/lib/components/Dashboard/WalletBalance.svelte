@@ -30,7 +30,9 @@
 	let mushToFiat: number | string;
 </script>
 
-<div class="bg-white dark:bg-dark-800 rounded-lg px-2 py-5 h-60 border border-gray-300 dark:border-green-500 shadow-lg dark:text-white">
+<div
+	class="bg-white dark:bg-dark-800 rounded-lg px-2 py-5 h-60 border border-gray-300 dark:border-green-500 shadow-lg dark:text-white"
+>
 	<p class="font-bold text-3xl pl-3 text-gray-600  text-lg dark:text-white">In your Wallet</p>
 	<div class="flex h-44 justify-center items-center flex-col gap-3">
 		<p class="font-bold text-4xl">

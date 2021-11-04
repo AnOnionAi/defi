@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { PoolInfo } from '$lib/ts/types';
-	import {Token} from "$lib/ts/types"
+	import { Token } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
@@ -18,7 +18,7 @@
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	const { open } = getContext('simple-modal');
 
-	interface LoadingState{
+	interface LoadingState {
 		loadingApproval: boolean;
 		loadingDeposit: boolean;
 		loadingWithdraw: boolean;
@@ -27,7 +27,12 @@
 
 	export let info: PoolInfo;
 	export let cardImage;
-	let loadingState:LoadingState = {loadingApproval:false,loadingDeposit:false,loadingWithdraw:false,loadingHarvest:false};
+	let loadingState: LoadingState = {
+		loadingApproval: false,
+		loadingDeposit: false,
+		loadingWithdraw: false,
+		loadingHarvest: false
+	};
 
 	let isHidden: boolean = true;
 	let tokenApproved: boolean;
@@ -43,38 +48,33 @@
 	let wantWithdrawAmount: any;
 	let idInterval;
 
-
 	const onOkay = async (amount) => {
-		loadingState.loadingDeposit=true;
+		loadingState.loadingDeposit = true;
 		console.log(userStakedTokens, 'before');
 		try {
 			const tx = await deposit(info.pid, amount);
 			console.log(tx);
 			await tx.wait();
-			
 		} catch (error) {
-			console.log("Internal Error on DepositHandler",error);
-			
+			console.log('Internal Error on DepositHandler', error);
 		}
-		loadingState.loadingDeposit=false;
+		loadingState.loadingDeposit = false;
 		userStakedTokens = await getStakedTokens(info.pid, userAcc);
 	};
 
 	const onWithdraw = async (amount) => {
-		loadingState.loadingWithdraw=true;
+		loadingState.loadingWithdraw = true;
 		wantWithdrawAmount = amount;
 		try {
 			const tx = await withdraw(info.pid, wantWithdrawAmount);
 			await tx.wait();
-			loadingState.loadingWithdraw=false;
+			loadingState.loadingWithdraw = false;
 			userStakedTokens = await getStakedTokens(info.pid, userAcc);
 		} catch (error) {
-			console.log("Internal Error on WithdrawHandler",error);
+			console.log('Internal Error on WithdrawHandler', error);
 		}
+	};
 
-	}
-
-	
 	const goDeposit = () => {
 		open(
 			DepositModal,
@@ -109,16 +109,17 @@
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
 			tokenAllowance = await getTokenAllowance(
-				info.tokenAddr,getContractAddress(Token.MASTERCHEF),
+				info.tokenAddr,
+				getContractAddress(Token.MASTERCHEF),
 				userAcc
 			);
 			console.log(tokenAllowance);
-			
+
 			tokenApproved = isNotZero(tokenAllowance);
 			if (tokenApproved) {
 				userBalance = await getTokenBalance(info.tokenAddr, userAcc);
-				console.log(userBalance,"balance");
-				
+				console.log(userBalance, 'balance');
+
 				canStake = isNotZero(userBalance);
 				userEarnings = await getRewards(info.pid, userAcc);
 				canHarvest = isNotZero(userEarnings);
@@ -143,16 +144,15 @@
 	};
 
 	onMount(async () => {
-		try{
+		try {
 			poolTokenLiquidity = await getTokenBalance(
 				info.tokenAddr,
-				getContractAddress(Token.MASTERCHEF));
+				getContractAddress(Token.MASTERCHEF)
+			);
 
 			console.log(poolTokenLiquidity);
-			
-		}catch{
-			console.log("Error onMount get MasterChef token balance");
-			
+		} catch {
+			console.log('Error onMount get MasterChef token balance');
 		}
 	});
 	const showPoolInfo = () => {
@@ -162,18 +162,16 @@
 		try {
 			const tx = await approveToken(info.tokenAddr, getContractAddress(Token.MASTERCHEF));
 			await tx.wait();
-			tokenApproved=true
-			canStake=true
+			tokenApproved = true;
+			canStake = true;
 			tokenAllowance = await getTokenAllowance(
 				info.tokenAddr,
 				getContractAddress(Token.MASTERCHEF),
 				userAcc
 			);
 		} catch (error) {
-			console.log("Error on approveHandler🥶",error);
-			
+			console.log('Error on approveHandler🥶', error);
 		}
-		
 	};
 </script>
 
@@ -252,7 +250,7 @@
 					</p>
 				</div>
 			</div>
-		{:else if $accounts }
+		{:else if $accounts}
 			<a
 				on:click={async () => await approveHandler()}
 				href="#"

@@ -2,14 +2,18 @@
 	import type { BigNumber } from '@ethersproject/bignumber';
 	import { getContext } from 'svelte';
 	import type { PoolInfo } from '$lib/ts/types';
-	import { parseBigNumberToDecimal, parseBigNumberToInt, parseBigNumberToString } from '$lib/utils/balanceParsers';
+	import {
+		parseBigNumberToDecimal,
+		parseBigNumberToInt,
+		parseBigNumberToString
+	} from '$lib/utils/balanceParsers';
 	export let info: PoolInfo;
 	export let userBalance: BigNumber;
 	export let onOkay = (wantAmount?: any) => {};
 
 	const { close } = getContext('simple-modal');
 
-	let wantAmount:string;
+	let wantAmount: string;
 
 	function _onOkay() {
 		onOkay(wantAmount);
@@ -36,11 +40,21 @@
 		</div>
 		<div class="flex justify-between py-3 px-10 flex-wrap">
 			<div class="flex w-15/24">
-				<input bind:value={wantAmount}  id="inputDeposit" min="0" placeholder="0.0" class="w-full font-medium"/>
+				<input
+					bind:value={wantAmount}
+					id="inputDeposit"
+					min="0"
+					placeholder="0.0"
+					class="w-full font-medium"
+				/>
 			</div>
 			<div class="flex">
 				<div />
-				<div class="text-gray-400  font-semibold tracking-wide text-xs md:text-base flex items-center">{info.tokenName}</div>
+				<div
+					class="text-gray-400  font-semibold tracking-wide text-xs md:text-base flex items-center"
+				>
+					{info.tokenName}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -84,7 +98,6 @@
 
 <style>
 	input {
-		
 		outline: none;
 	}
 

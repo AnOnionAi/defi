@@ -27,7 +27,9 @@
 
 <div class="">
 	<div class=" max-w-screen-xl   mx-auto  p-2 mt-10">
-		<h2 class="font-bold  text-4xl md:text-5xl  px-5 text-center lg:text-left dark:text-white">Dashboard</h2>
+		<h2 class="font-bold  text-4xl md:text-5xl  px-5 text-center lg:text-left dark:text-white">
+			Dashboard
+		</h2>
 		<div class="flex flex-wrap   h-auto mt-5">
 			<div
 				class="flex flex-wrap h-auto   w-full  p-1 mb-5 mx-auto lg:mx-1 lg:justify-between justify-center mb-10"
@@ -39,7 +41,9 @@
 					class="bg-white dark:bg-dark-800 rounded-lg p-6 h-60 w-screen-sm  lg:w-8/24 lg:flex-shrink-0 border border-gray-300   dark:border-green-500 shadow-lg "
 				>
 					<div class="pl-2 flex items-center">
-						<p class=" text-xl text-gray-600 font-bold tracking-wide dark:text-white">Total Value Locked (TVL)</p>
+						<p class=" text-xl text-gray-600 font-bold tracking-wide dark:text-white">
+							Total Value Locked (TVL)
+						</p>
 					</div>
 					<div class="flex  h-10/12 w-full justify-center items-center pt-2">
 						<div class="">
@@ -47,12 +51,16 @@
 								<p class="text-3xl font-bold text-center mt-2 dark:text-white">$100305.51</p>
 							</div>
 
-							<p class="mt-1 font-medium text-gray-600 text-sm dark:text-white">Across all Fung Financial</p>
+							<p class="mt-1 font-medium text-gray-600 text-sm dark:text-white">
+								Across all Fung Financial
+							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<h2 class="font-bold  px-5 w-full text-center lg:text-left text-4xl md:text-5xl dark:text-white">
+			<h2
+				class="font-bold  px-5 w-full text-center lg:text-left text-4xl md:text-5xl dark:text-white"
+			>
 				Earn More
 			</h2>
 			<div
@@ -67,11 +75,15 @@
 					>
 						<div class="pl-4 flex flex items-center">
 							<img src={farmerIcon} class="h-12 w-12" alt="" />
-							<p class="ml-2 text-gray-600 font-bold tracking-wider text-xl dark:text-white">Farms</p>
+							<p class="ml-2 text-gray-600 font-bold tracking-wider text-xl dark:text-white">
+								Farms
+							</p>
 						</div>
 						<div class="flex flex-col items-center pb-3 gap-2">
 							<p class="text-3xl tracking-wide font-bold dark:text-white">$29,574.12</p>
-							<p class="text-gray-700 font-semibold text-sm dark:text-white">Locked In Mush Farms</p>
+							<p class="text-gray-700 font-semibold text-sm dark:text-white">
+								Locked In Mush Farms
+							</p>
 							<button class="border border-green-500 rounded-lg py-2 px-3  flex items-center">
 								<p class="font-semibold pr-1 dark:text-white">Start Farming</p>
 								<img src={hoe} alt="farming hoe" />
@@ -92,7 +104,9 @@
 						</div>
 						<div class="flex flex-col items-center pb-3 gap-2">
 							<p class="text-3xl tracking-wide font-bold dark:text-white">$40,112.99</p>
-							<p class="text-gray-700 font-semibold text-sm dark:text-white">Locked In Poly Pools</p>
+							<p class="text-gray-700 font-semibold text-sm dark:text-white">
+								Locked In Poly Pools
+							</p>
 							<button class="border border-green-500 rounded-lg py-2 px-5  flex items-center">
 								<p class="font-semibold pr-1 dark:text-white">Add Liquidity</p>
 								<div class="flex relative">
@@ -116,7 +130,9 @@
 						</div>
 						<div class="flex flex-col items-center pb-3 gap-2">
 							<p class="text-3xl tracking-wide font-bold dark:text-white">$20,907.17</p>
-							<p class="text-gray-700 font-semibold text-sm dark:text-white">Locked In Zyber Vaults</p>
+							<p class="text-gray-700 font-semibold text-sm dark:text-white">
+								Locked In Zyber Vaults
+							</p>
 							<button class="border border-green-500 rounded-lg py-2 px-5  flex items-center">
 								<p class="font-semibold pr-1 dark:text-white">Go Deposit</p>
 								<div class="flex relative">
@@ -142,7 +158,9 @@
 						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 dark:border-green-500 shadow-md"
 					>
 						<div class="p-4">
-							<p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white">
+							<p
+								class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white"
+							>
 								MUSH per block
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center">
@@ -156,7 +174,9 @@
 						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 dark:border-green-500 shadow-md"
 					>
 						<div class="p-4">
-							<p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white">
+							<p
+								class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white"
+							>
 								Market Cap
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
@@ -174,7 +194,9 @@
 						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 dark:border-green-500 shadow-md"
 					>
 						<div class="p-4">
-							<p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white">
+							<p
+								class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white"
+							>
 								Total Volume
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
@@ -188,7 +210,9 @@
 						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300  dark:border-green-500 shadow-md"
 					>
 						<div class="p-4">
-							<p class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white">
+							<p
+								class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white"
+							>
 								Max Supply
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
@@ -208,7 +232,9 @@
 			<div class="w-full h-auto flex flex-wrap">
 				<div class="w-full lg:w-18/24 ">
 					<div class="p-4 pb-2 lg:p-5 h-full">
-						<div class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-6 border border-gray-300 dark:border-green-500 shadow-md">
+						<div
+							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-6 border border-gray-300 dark:border-green-500 shadow-md"
+						>
 							<img src="/graphSample.jpg" class="h-full w-full" />
 						</div>
 					</div>

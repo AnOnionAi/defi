@@ -17,7 +17,7 @@
 <script lang="ts">
 	import { farms } from '$lib/config/constants/farms';
 	console.log(farms);
-	
+
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import Modal from 'svelte-simple-modal';
 	import 'virtual:windi.css';
@@ -32,13 +32,12 @@
 				<div class="w-full">
 					<div class="flex flex-row justify-center gap-6 p-5 m-5 text-center flex-wrap ">
 						<!--Start Farms-->
-						{#each farms as farm }
-							<PoolCard cardImage={undefined} info={farm}/>
+						{#each farms as farm}
+							<PoolCard cardImage={undefined} info={farm} />
 						{/each}
 						<!-- <PoolCard cardImage={undefined} info={farms[0]} />
 						<PoolCard cardImage={undefined} info={farms[1]} />
 						<PoolCard  cardImage={undefined} info={farms[2]} /> -->
-			
 					</div>
 				</div>
 			</section>
