@@ -16,7 +16,6 @@
 		wrongInput
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
-	import { parseEther } from 'ethers/lib/utils';
 
 	const { addNotification } = getNotificationsContext();
 
