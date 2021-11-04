@@ -11,221 +11,221 @@
 </script>
 
 <script lang="ts">
-	import Fa from 'svelte-fa/src/fa.svelte';
-	import wbtc from '/static/vaultTokensIcons/wbtc.svg';
-	import usdc from '/static/vaultTokensIcons/usdc.svg';
-	import wmatic from '/static/vaultTokensIcons/wmatic.svg';
-	import aave from '/static/vaultTokensIcons/aave.svg';
-	import avax from '/static/vaultTokensIcons/avax.svg';
-	import axs from '/static/vaultTokensIcons/axs.svg';
-	import dai from '/static/vaultTokensIcons/dai.svg';
-	import grt from '/static/vaultTokensIcons/grt.svg';
-	import ibbtc from '/static/vaultTokensIcons/ibbtc.svg';
-	import link from '/static/vaultTokensIcons/link.svg';
-	import mana from '/static/vaultTokensIcons/mana.svg';
-	import mvi from '/static/vaultTokensIcons/mvi.svg';
-	import weth from '/static/vaultTokensIcons/weth.svg';
-	import usdt from '/static/vaultTokensIcons/usdt.svg';
-	import sol from '/static/vaultTokensIcons/sol.svg';
-	import quick from '/static/vaultTokensIcons/quick.svg';
-	import cntr from '/static/vaultTokensIcons/cntr.svg';
-	import crv from '/static/vaultTokensIcons/crv.svg';
 	import { quickVaults, sushiVaults } from '$lib/config/constants/vaults';
+	import type { VaultInfo } from '$lib/ts/types';
 	export let lang;
 	import VaultAccordeon from '$lib/components/Cards/VaultAccordeon.svelte';
+	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import BottomList from '$lib/components/Cards/BottomList.svelte';
 	import env from '$lib/env';
 	import addresses from '$lib/config/constants/addresses.json';
-	import { getContractAddress } from '$lib/utils/addressHelpers';
+	import Notifications from 'svelte-notifications';
+	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import { onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
+	import { getTokenBalance, isNotZero } from '$lib/utils/erc20';
+	import { stakedWantTokens } from '$lib/utils/vaultChef';
+	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
+ 	import { BigNumber } from "ethers";
+
+	let unsubscribe;
+
+	onMount(() => {
+		unsubscribe = accounts.subscribe(async (account) => {
+			account && (userAccount = account[0]);
+			if (account) {
+				for (const vault of allVaults) {
+					const balance = await getTokenBalance(vault.pair.pairContract, userAccount);
+					if ( vault.pid !== -1 ) {
+						const staked = await stakedWantTokens( vault.pid, userAccount )
+						vaultsWithBalance.push({ ...vault, balance, staked })		// BigNumber.from('0')
+					} else {
+						vaultsWithBalance.push({ ...vault, balance });
+					}
+
+				}
+				console.log(vaultsWithBalance);
+				filteredVaults = [...vaultsWithBalance];
+			}
+
+		});
+	});
+	onDestroy(() => {});
+	const allVaults: VaultInfo[] = [...quickVaults, ...sushiVaults];
+	let filteredVaults = [];
+	let filteredVaultsPrev = [...filteredVaults];
+	let userAccount;
+	let vaultsWithBalance = [];
+
+	let platformSelected;
+	let platformSelectedPrev;
+	let zero;
+	let zeroPrev;
+	let sortby;
+	let sortbyPrev;
+	let stakedOnly;
+	let stakedOnlyPrev;
+	let statement;
+	
+	$: {
+
+
+			if ( zeroPrev !== undefined )
+			{ 
+				zeroPrev = zero;
+			}
+
+			platformSelectedPrev = platformSelected;
+
+
+			if ( platformSelected !== 'All' && platformSelected !== undefined ) {
+				if ( $accounts && zero ) {
+					filteredVaults = vaultsWithBalance.filter((vault) => vault.platform.name == platformSelected && isNotZero(vault.balance));
+				} else if ( $accounts && stakedOnly ) {
+					filteredVaults = vaultsWithBalance.filter((vault) => vault.platform.name == platformSelected && ( vault.staked && isNotZero(vault.staked)));
+				} 
+				else {
+					filteredVaults = allVaults.filter((vault) => vault.platform.name == platformSelected);
+				}
+				
+			}
+			else {
+				filteredVaults = [...allVaults];
+			}
+
+	}
+
+	$: {
+
+		if ( $accounts ) {
+
+			if ( stakedOnly ) {
+				filteredVaultsPrev = [...filteredVaults]
+				if ( !zero ) {
+					filteredVaults = vaultsWithBalance.filter( vault => vault.staked ? isNotZero( vault.staked ) : false )
+				} else {
+					filteredVaults = filteredVaultsPrev.filter( vault => vault.staked ? isNotZero( vault.staked ) : false )
+				}
+				
+			} else {
+				if ( !zero ) {
+					filteredVaults = [...filteredVaultsPrev];
+				} else {
+
+				}
+			} 
+
+		} else {
+			filteredVaultsPrev = [...filteredVaults];
+			if ( stakedOnly ) {
+				filteredVaults = [];
+				
+			} else {
+				
+				filteredVaults = [...filteredVaultsPrev];
+
+			}
+		}
+
+    }
+	
+
+	$: {
+		if ( $accounts ) {
+		
+			if ( zero ) {
+				filteredVaultsPrev = [...filteredVaults];
+				if ( stakedOnly ) filteredVaults = vaultsWithBalance.filter( vault => isNotZero( vault.balance ) && vault.balance !== 'N/A' && (vault.platform.name === platformSelected || platformSelected === 'All' ) && ( vault.staked ? isNotZero( vault.staked ) : false ))		
+				else filteredVaults = vaultsWithBalance.filter( vault => isNotZero( vault.balance ) && vault.balance !== 'N/A' && (vault.platform.name === platformSelected || platformSelected === 'All' ) )				
+		
+
+			}
+			
+		} else {
+			if ( zero ) {
+				zeroPrev = zero;
+				filteredVaultsPrev = [...filteredVaults];
+				filteredVaults = [];				
+			}
+		}
+
+	}	
+
+	$: {	
+		if ( !stakedOnly && !zero ) {
+
+			if ( sortby && sortby !== undefined ) 
+				if ( sortby === 'Ascending' ) {
+					filteredVaultsPrev = [...filteredVaults];
+
+					if ( platformSelected === 'All' ) {
+							filteredVaults = [...quickVaults, ...sushiVaults].reverse();
+							
+						} else if ( platformSelected === 'QuickSwap' ) {
+							filteredVaults = [...quickVaults].reverse();
+						} else if ( platformSelected === 'SushiSwap' ) {
+							filteredVaults = [...sushiVaults].reverse();
+						}
+				}
+				else if ( sortby === 'Descending' ) {
+					if ( sortbyPrev === 'Ascending' || sortbyPrev === 'Descending' ) {
+						filteredVaultsPrev = [...filteredVaults];
+						
+						if ( platformSelected === 'All' ) {
+							filteredVaults = [...quickVaults, ...sushiVaults];
+
+						} else if ( platformSelected === 'QuickSwap' ) {
+							filteredVaults = [...quickVaults];
+						} else if ( platformSelected === 'SushiSwap' ) {
+							filteredVaults = [...sushiVaults];
+
+						}
+					}
+					else {					
+						filteredVaultsPrev = [...filteredVaults];
+						filteredVaults = [...allVaults];
+					}
+				}
+				
+		sortbyPrev = sortby;
+	}
+
+		}	
+		
+		
+
+	$: {
+
+		const keys = ['token0Name', 'token1Name'];
+		filteredVaults = allVaults.filter( vault => keys.some(ex => (new RegExp(statement,"gi")).test(vault['pair'][ex])) && (( platformSelected !== 'All') ? vault.platform.name === platformSelected : true) );
+	}
+
+	const handleStaked = () => {
+
+		stakedOnlyPrev = stakedOnly;
+		stakedOnly = !stakedOnly;
+
+	}
+	
+
 </script>
 
 <section class="background-vaults">
 	<h1 class="text-dark-200 dark:text-white text-4xl">V A U L T S</h1>
 
-	<div class="mt-10 sideShadow">
-		<VaultAccordeon
-			tkn0Img={wmatic}
-			tkn1Img={usdc}
-			vaultConfig={quickVaults[0]}
-			hasRoundedBorder={true}
-		>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
+		<div class="mt-10 sideShadow">
+			<VaultFilter bind:platformSelected={platformSelected} bind:stakedOnly={stakedOnly} on:staked={handleStaked} bind:sortby={sortby} bind:zeroBalance={zero} bind:statement={statement} />
 
-		<VaultAccordeon tkn0Img={weth} tkn1Img={wmatic} vaultConfig={quickVaults[1]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
+					{#each [...filteredVaults] as vault, index}
+						{#if index == 0}
+							<VaultAccordeon vaultConfig={vault} hasRoundedBorder={true} />
+						{:else}
+							<VaultAccordeon vaultConfig={vault} />
+						{/if}
+					{/each}
 
-		<VaultAccordeon tkn0Img={weth} tkn1Img={usdt} vaultConfig={quickVaults[2]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={wmatic} tkn1Img={sol} vaultConfig={quickVaults[3]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={dai} tkn1Img={usdc} vaultConfig={quickVaults[4]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={wmatic} tkn1Img={usdt} vaultConfig={quickVaults[5]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={wmatic} tkn1Img={quick} vaultConfig={quickVaults[6]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={link} tkn1Img={weth} vaultConfig={quickVaults[7]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={quick} tkn1Img={cntr} vaultConfig={quickVaults[8]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={dai} tkn1Img={usdt} vaultConfig={quickVaults[9]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={usdc} tkn1Img={quick} vaultConfig={quickVaults[10]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-blue-500 text-blue-500  text-xs w-20 h-6"
-			>
-				QuickSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={usdc} tkn1Img={weth} vaultConfig={sushiVaults[0]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={wbtc} tkn1Img={weth} vaultConfig={sushiVaults[1]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={weth} tkn1Img={wmatic} vaultConfig={sushiVaults[2]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={weth} tkn1Img={aave} vaultConfig={sushiVaults[3]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={wbtc} tkn1Img={wmatic} vaultConfig={sushiVaults[4]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={link} tkn1Img={weth} vaultConfig={sushiVaults[5]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={grt} tkn1Img={weth} vaultConfig={sushiVaults[6]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={weth} tkn1Img={dai} vaultConfig={sushiVaults[7]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={weth} tkn1Img={axs} vaultConfig={sushiVaults[8]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={crv} tkn1Img={weth} vaultConfig={sushiVaults[9]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<VaultAccordeon tkn0Img={weth} tkn1Img={avax} vaultConfig={sushiVaults[10]}>
-			<div
-				class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-pink-500 text-pink-500  text-xs w-20 h-6"
-			>
-				SushiSwap
-			</div>
-		</VaultAccordeon>
-
-		<BottomList />
-	</div>
+			<BottomList />
+		</div>
 </section>
 
 <style>
