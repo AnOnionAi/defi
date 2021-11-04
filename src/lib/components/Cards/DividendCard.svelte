@@ -54,6 +54,8 @@ import { parseEther } from "ethers/lib/utils";
                userStakedTokens = await stakedWantTokens(2,$accounts[0])
                const [,rewardDebt] = await getUserInfo($accounts[0])
                TVL = await getSharesTotal();
+               userReward = await getPendingReward($accounts[0])
+               userCanHarvest = isNotZero(userReward)
             }catch{
                 console.log("Failed on fetching data");
                 
@@ -119,6 +121,8 @@ import { parseEther } from "ethers/lib/utils";
             const tx = await harvest();
             await tx.wait();
             addNotification(transactionCompleted);
+            userCanHarvest=false;
+            userReward=ethers.constants.Zero; 
             setTimeout(refreshUserData,20000)
         }catch{
             console.log("Failed on Harvest");
@@ -132,14 +136,16 @@ import { parseEther } from "ethers/lib/utils";
     onMount(()=>{
         if($accounts){
             getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]).then(balance => (userBalance = balance))
-            stakedWantTokens(2,$accounts[0]).then(stakedTokens => (userStakedTokens = stakedTokens))
-            getPendingReward($accounts[0]).then(reward => {
-                userReward = reward;
-
-            })
+            stakedWantTokens(2,$accounts[0]).then(stakedTokens => (userStakedTokens = stakedTokens));
             getSharesTotal().then(totalShares => {
                 TVL = totalShares; 
             });
+
+            getPendingReward($accounts[0]).then(reward => {
+                userReward=reward;
+                console.log(userReward);
+                userCanHarvest=isNotZero(userReward)
+            })
         }
     });
 </script>

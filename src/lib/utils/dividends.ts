@@ -1,4 +1,4 @@
-import  { BigNumber } from "ethers";
+import  type { BigNumber } from "ethers";
 import { getMushStrategyContract } from "./contracts"
 import { ethers } from "ethers";
 
@@ -41,20 +41,9 @@ export const getPendingReward = async(address:string) => {
     const [userInfo,usdcPerShare,sharesTotal,lockedTotal] = await Promise.all([promiseGetUserInfo,usdcPerSharePromise,sharesTotalPromise,lockedTotalPromise])
     const [userShares,rewardDebt] = userInfo;
 
-    const sharesTotalBI = sharesTotal.toBigInt();
-    const lockedTotalBI = lockedTotal.toBigInt();
-    const userSharesBI = userShares.toBigInt();
-    const rewardDebtBI = rewardDebt.toBigInt();
-    const usdcPerShareBI = usdcPerShare.toBigInt();
-    const amount = userSharesBI / (sharesTotalBI * lockedTotalBI)
-    const reward = (amount * usdcPerShareBI)-rewardDebtBI
-    console.log(reward);
+    const pending = userShares.mul(usdcPerShare).div(ethers.utils.parseEther("1")).sub(rewardDebt)
+
+    return pending;
     
-    if(reward < 0 ){
-        return ethers.constants.Zero
-    }
-    else{
-        return reward
-    }
     
 }
