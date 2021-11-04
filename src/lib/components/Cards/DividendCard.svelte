@@ -1,7 +1,7 @@
 <script lang="ts">
     import {getContractAddress} from "$lib/utils/addressHelpers"
     import { getTokenBalance, isNotZero } from "$lib/utils/erc20";
-    import {getSharesTotal, getUserInfo, harvest} from "$lib/utils/dividends"
+    import {getPendingReward, getSharesTotal, getUserInfo, harvest} from "$lib/utils/dividends"
     import { stakedWantTokens,deposit,withdraw } from "$lib/utils/vaultChef";
     import {Token} from "$lib/ts/types"
     import { onMount } from "svelte";
@@ -27,7 +27,7 @@ import { parseEther } from "ethers/lib/utils";
     let TVL:BigNumber;
 
 
-    let userBalance: BigNumber
+    let userBalance: BigNumber 
     let userStakedTokens: BigNumber
     let userReward: BigNumber
     let userCanHarvest: boolean = false;
@@ -133,15 +133,13 @@ import { parseEther } from "ethers/lib/utils";
         if($accounts){
             getTokenBalance(getContractAddress(Token.MUSHTOKEN),$accounts[0]).then(balance => (userBalance = balance))
             stakedWantTokens(2,$accounts[0]).then(stakedTokens => (userStakedTokens = stakedTokens))
-            getUserInfo($accounts[0]).then(([shares,rewardDebt])=>{
-                userReward=rewardDebt
-                userCanHarvest=isNotZero(rewardDebt);
-                console.log(userCanHarvest);
+            getPendingReward($accounts[0]).then(reward => {
+                userReward = reward;
+
             })
             getSharesTotal().then(totalShares => {
                 TVL = totalShares; 
-            })
-            
+            });
         }
     });
 </script>

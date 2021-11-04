@@ -5,6 +5,8 @@
 	import 'virtual:windi.css';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
+	import {accounts} from '$lib/stores/MetaMaskAccount';
+	
 </script>
 
 <Notifications>
