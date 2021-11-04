@@ -24,6 +24,10 @@
 			route: `/${$page.params.lang}/trade`,
 			title: $_('pages.trade.title')
 		},
+		{
+			route: `https://fung.wiki/`,
+			title: 'Wiki'
+		},
 	];
 </script>
 
