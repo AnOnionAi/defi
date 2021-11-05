@@ -36,18 +36,9 @@
 		<h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
 		<div class="mt-5 space-y-4">
 			<div class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap">
-				<PoolCard  info={pools[0]} />
-				<PoolCard info={pools[1]} />
-				<PoolCard  info={pools[2]} />
-				<PoolCard info={pools[3]} />
-				<PoolCard info={pools[4]} />
-				<PoolCard  info={pools[5]} />
-				<PoolCard  info={pools[6]} />
-				<PoolCard info={pools[7]} />
-				<PoolCard info={pools[8]} />
-				<PoolCard info={pools[9]} />
-				<PoolCard info={pools[10]} />
-				<PoolCard info={pools[11]} />
+				{#each pools as pool  }
+				<PoolCard  info={pool} />
+				{/each}
 			</div>
 		</div>
 	</section>
