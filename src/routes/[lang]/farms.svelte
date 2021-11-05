@@ -33,7 +33,7 @@
 					<div class="flex flex-row justify-center gap-6 p-5 m-5 text-center flex-wrap ">
 						<!--Start Farms-->
 						{#each farms as farm}
-							<PoolCard cardImage={undefined} info={farm} />
+							<PoolCard  info={farm} />
 						{/each}
 						<!-- <PoolCard cardImage={undefined} info={farms[0]} />
 						<PoolCard cardImage={undefined} info={farms[1]} />

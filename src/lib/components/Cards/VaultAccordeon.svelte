@@ -19,6 +19,8 @@
 		transactionSend
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
+	import { darkMode } from '$lib/stores/dark';
+
 	const { addNotification } = getNotificationsContext();
 	export let hasRoundedBorder = false;
 	export let vaultConfig: VaultInfo;
@@ -129,9 +131,9 @@
 <div class="">
 	<div
 		on:click={openAccordeon}
-		class="max-w-8xl sideShadow bg-white mx-auto py-4 {isHidden &&
+		class="max-w-8xl {!	$darkMode && 'sideShadow'} bg-white mx-auto py-4 {isHidden &&
 			'border-b-2 border-black'} hover:cursor-pointer {hasRoundedBorder &&
-			'rounded-t-lg'}  dark:bg-dark-600 dark:border-none"
+			'rounded-t-lg'}  dark:bg-dark-600 dark:border-green-500"
 	>
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
 			<div class="flex justify-center items-center">

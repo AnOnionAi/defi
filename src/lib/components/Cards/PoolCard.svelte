@@ -26,7 +26,7 @@
 	}
 
 	export let info: PoolInfo;
-	export let cardImage;
+	
 	let loadingState: LoadingState = {
 		loadingApproval: false,
 		loadingDeposit: false,

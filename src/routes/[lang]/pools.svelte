@@ -36,18 +36,18 @@
 		<h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
 		<div class="mt-5 space-y-4">
 			<div class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap">
-				<PoolCard cardImage={mushRound} info={pools[0]} />
-				<PoolCard cardImage={fish} info={pools[1]} />
-				<PoolCard cardImage={matic} info={pools[2]} />
-				<PoolCard cardImage={weth} info={pools[3]} />
-				<PoolCard cardImage={wbtc} info={pools[4]} />
-				<PoolCard cardImage={sushi} info={pools[5]} />
-				<PoolCard cardImage={quick} info={pools[6]} />
-				<PoolCard cardImage={dyfn} info={pools[7]} />
-				<PoolCard cardImage={usdt} info={pools[8]} />
-				<PoolCard cardImage={usdc} info={pools[9]} />
-				<PoolCard cardImage={doge} info={pools[10]} />
-				<PoolCard cardImage={mxnc} info={pools[11]} />
+				<PoolCard  info={pools[0]} />
+				<PoolCard info={pools[1]} />
+				<PoolCard  info={pools[2]} />
+				<PoolCard info={pools[3]} />
+				<PoolCard info={pools[4]} />
+				<PoolCard  info={pools[5]} />
+				<PoolCard  info={pools[6]} />
+				<PoolCard info={pools[7]} />
+				<PoolCard info={pools[8]} />
+				<PoolCard info={pools[9]} />
+				<PoolCard info={pools[10]} />
+				<PoolCard info={pools[11]} />
 			</div>
 		</div>
 	</section>

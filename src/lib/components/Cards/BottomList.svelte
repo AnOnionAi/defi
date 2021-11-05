@@ -7,7 +7,7 @@
 	};
 </script>
 
-<div class="mx-auto max-w-8xl py-5 rounded-b-lg bg-white flex justify-center items-center">
+<div class="mx-auto max-w-8xl py-5 rounded-b-lg bg-white flex justify-center items-center dark:bg-dark-600">
 	<div on:click={scrollTop} class="flex px-5 cursor-pointer">
 		<p class="text-xl font-semibold text-gray-500">To Top</p>
 		<Fa icon={faChevronUp} size="xs" translateX={0.7} translateY={0.9} color="#737373" />

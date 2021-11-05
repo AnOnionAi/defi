@@ -12,7 +12,6 @@
 	import Icon from 'svelte-fa';
 	import { darkMode } from '$lib/stores/dark';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import bFloppa from '/static/fungfi.png';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
@@ -166,7 +165,7 @@
 						gotoPage('', true);
 					}}
 				>
-					<img class="w-10 rounded-full" src={bFloppa} alt="floppa" />
+					<img class="w-10 rounded-full" src="/static/fungfi.png" alt="floppa" />
 					<span class="w-24 text-lg dark:text-white font-semibold" style="margin: auto 0 auto 5px;">
 						FUNG F I
 					</span>

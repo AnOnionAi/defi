@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { BigNumber } from '@ethersproject/bignumber';
+	import type { BigNumber } from 'ethers';
 	import { getContext } from 'svelte';
 	import { parseBigNumberToDecimal, parseBigNumberToInt } from '$lib/utils/balanceParsers';
 	import type { PoolInfo } from '$lib/ts/types';
@@ -18,7 +18,7 @@
 		close();
 	}
 </script>
-
+<div>
 <div class="flex flex-col px-6 py-6">
 	<div class=" w-full shadow-2xl  shadow-gray-1000 border-2 rounded-3xl border-gray-200 py-3">
 		<div />
@@ -82,6 +82,7 @@
 			WITHDRAW YOUR {info.tokenName}
 		</button>
 	</div>
+</div>
 </div>
 
 <style>
