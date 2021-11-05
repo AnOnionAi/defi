@@ -19,3 +19,10 @@ export const transactionCompleted: Notification = {
 	type: 'success',
 	removeAfter: 4000
 };
+
+export const wrongInput: Notification = {
+	text: 'Be sure to input a number',
+	position: 'bottom-center',
+	type: 'warning',
+	removeAfter: 2000
+};

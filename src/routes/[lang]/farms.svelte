@@ -16,6 +16,8 @@
 
 <script lang="ts">
 	import { farms } from '$lib/config/constants/farms';
+	console.log(farms);
+
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import Modal from 'svelte-simple-modal';
 	import 'virtual:windi.css';
@@ -24,16 +26,18 @@
 <Modal>
 	<section class={$darkMode && 'active'}>
 		<br />
-		<h1 class="text-dark-200 dark:text-white text-4xl">F A R M S</h1>
+		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">FARMS</h1>
 		<section class="mt-3">
 			<section class="mt-5 space-y-4">
 				<div class="w-full">
-					<div class="flex flex-row justify-center gap-4 p-5 m-5 text-center flex-wrap ">
+					<div class="flex flex-row justify-center gap-6 p-5 m-5 text-center flex-wrap ">
 						<!--Start Farms-->
-						<PoolCard cardImage={quick} info={farms[0]} />
-						<PoolCard cardImage={sushi} info={farms[1]} />
-						<PoolCard cardImage={dyfn} info={farms[2]} />
-						<!--End Farms-->
+						{#each farms as farm}
+							<PoolCard cardImage={undefined} info={farm} />
+						{/each}
+						<!-- <PoolCard cardImage={undefined} info={farms[0]} />
+						<PoolCard cardImage={undefined} info={farms[1]} />
+						<PoolCard  cardImage={undefined} info={farms[2]} /> -->
 					</div>
 				</div>
 			</section>
