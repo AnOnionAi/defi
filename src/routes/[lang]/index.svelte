@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
+	import { isHomescreen } from '$lib/stores/homescreen';
 	export const prerender = false;
-
+	
 	export function load({ page }) {
 		const { lang } = page.params;
 
@@ -13,7 +14,8 @@
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
+	
 	import space from '/static/space.jpg';
 	import moon from '/static/moon.jpg';
 	import mush from '/static/mush.jpg';
@@ -26,6 +28,11 @@
 	let canvas;
 	let scene;
 	onMount(() => {
+
+		isHomescreen.set(true);
+		console.log($isHomescreen);
+		
+
 		scene = new THREE.Scene();
 
 		const camera = new THREE.PerspectiveCamera(
@@ -186,6 +193,11 @@
 
 		animate();
 	});
+
+
+	onDestroy(()=>{
+		isHomescreen.set(false);
+	})
 </script>
 
 <section class="relative">

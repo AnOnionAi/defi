@@ -11,6 +11,7 @@
 	import { faBars } from '@fortawesome/free-solid-svg-icons/faBars.js';
 	import Icon from 'svelte-fa';
 	import { darkMode } from '$lib/stores/dark';
+	import {isHomescreen} from "$lib/stores/homescreen"
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
@@ -74,6 +75,8 @@
 		else goto(`/${$page.params.lang}/${route.toLowerCase()}`, { replaceState: true });
 	};
 	import { onMount } from 'svelte';
+
+
 	let isInstalled = 'checking';
 	onMount(() => {
 		const isMetaMaskInstalled = () => {
@@ -111,7 +114,7 @@
 	}}
 />
 <nav
-	class="z-10 backdrop-filter {$darkMode && 'dark-active'} backdrop-blur top-0 w-full text-black "
+	class="z-10 backdrop-filter {($darkMode && !$isHomescreen) && 'dark-active'} backdrop-blur top-0 w-full text-black "
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-5 ">
@@ -322,11 +325,6 @@
 <style global>
 	.dark-active {
 		background: #2c363e;
-	}
-	.navbar_home {
-		color: white !important;
-		z-index: 10;
-		background-color: transparent !important;
 	}
 	.navbar_item_home:hover {
 		color: black;

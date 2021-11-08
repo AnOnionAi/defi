@@ -58,7 +58,7 @@
 	}
 </script>
 
-<h1 class="pt-6 tracking-widest font-semibold">DIVIDENDS</h1>
+<h1 class="pt-6 tracking-widest font-medium text-4xl dark:text-white">DIVIDENDS</h1>
 <div class="my-6">
 	<div class="dividends-wrapper {$darkMode && 'darkBackground'}">
 		<div

@@ -5,7 +5,7 @@
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import Fa from 'svelte-fa/src/fa.svelte';
-	
+	import { isHomescreen } from '$lib/stores/homescreen';
 	if ($page.params.lang) {
 		setInit($page.params.lang);
 	}
@@ -33,8 +33,8 @@
 	];
 </script>
 
-<footer class="z-20" class:dark={$darkMode}>
-	<div class="dark:text-gray-300 {$darkMode && 'dark-active'} w-full p-3 text-center text-xl ">
+<footer class="{$isHomescreen && 'z-20 backdrop-filter backdrop-blur'}" class:dark={$darkMode}>
+	<div class="dark:text-gray-300 {($darkMode && !$isHomescreen) && 'dark-active'} w-full p-3 text-center text-xl ">
 		<div class="w-4/5 max-w-2xl  mx-auto flex justify-between">
 			<a href="">
 				<img src="/info.png" alt="Go to get more information">
@@ -56,9 +56,6 @@
 </footer>
 
 <style>
-	.footer_home {
-		color: white !important;
-	}
 	.dark-active {
 		background: #0b1216;
 	}

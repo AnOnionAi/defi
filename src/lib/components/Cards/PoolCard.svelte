@@ -16,6 +16,7 @@
 	import DepositModal from '$lib/components/Modals/DepositModal.svelte';
 	import WithdrawModal from '$lib/components/Modals/WithdrawModal.svelte';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
+import { darkMode } from '$lib/stores/dark';
 	const { open } = getContext('simple-modal');
 
 	interface LoadingState {
@@ -33,7 +34,6 @@
 		loadingWithdraw: false,
 		loadingHarvest: false
 	};
-
 	let isHidden: boolean = true;
 	let tokenApproved: boolean;
 	let userAcc: string;
@@ -74,6 +74,7 @@
 			console.log('Internal Error on WithdrawHandler', error);
 		}
 	};
+
 
 	const goDeposit = () => {
 		open(
@@ -272,12 +273,21 @@
 			{#if isHidden}
 				<div class="flex cursor-pointer">
 					<p class="dark:text-white">Details</p>
-					<Fa icon={faChevronDown} size="xs" scale={0.9} translateX={0.5} translateY={0.65} />
+					{#if $darkMode}
+					<Fa icon={faChevronDown} size="xs" scale={0.9} translateX={0.5} translateY={0.65} color={"#fff"} />
+					{:else}
+					<Fa icon={faChevronDown} size="xs" scale={0.9} translateX={0.5} translateY={0.65} color={"#000"} />
+					{/if}
 				</div>
 			{:else}
 				<div class="flex cursor-pointer">
 					<p class="dark:text-white">Hide</p>
-					<Fa icon={faChevronUp} size="xs" scale={0.9} translateX={0.5} translateY={0.6} />
+					{#if $darkMode}
+					<Fa icon={faChevronUp} size="xs" scale={0.9} translateX={0.5} translateY={0.65} color={"#fff"} />
+					{:else}
+					<Fa icon={faChevronUp} size="xs" scale={0.9} translateX={0.5} translateY={0.65} color={"#000"} />
+					{/if}
+					
 				</div>
 			{/if}
 		</div>
