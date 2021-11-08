@@ -6,6 +6,7 @@
 	import { setInit } from '../i18n/init';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { isHomescreen } from '$lib/stores/homescreen';
+	import { faGithub } from '@fortawesome/free-brands-svg-icons'
 	if ($page.params.lang) {
 		setInit($page.params.lang);
 	}
@@ -35,21 +36,27 @@
 
 <footer class="{$isHomescreen && 'z-20 backdrop-filter backdrop-blur'}" class:dark={$darkMode}>
 	<div class="dark:text-gray-300 {($darkMode && !$isHomescreen) && 'dark-active'} w-full p-3 text-center text-xl ">
-		<div class="w-4/5 max-w-2xl  mx-auto flex justify-between">
+		<div class="w-11/12 max-w-2xl  mx-auto flex justify-between lg:justify-around">
 			<a href="">
-				<img src="/info.png" alt="Go to get more information">
+				<img src="/info.png" alt="Go to get more information" class="w-6 ">
 			</a>
 			<a href="">
-				<img src="/telegram.png" alt="Go to official Fung Fi Telegram">
+				<img src="/telegram.png" alt="Go to official Fung Fi Telegram" class="w-6 ">
 			</a>
 			<a href="">
-				<img src="/twitter.png" alt="Go to the official Fung Fi twitter page">
+				<img src="/discord.png" alt="Go to official Fung Fi Telegram" class="w-6 ">
 			</a>
 			<a href="">
-				<img src="/handshake.png" alt="Go to the trade section">
+				<img src="/twitter.png" alt="Go to the official Fung Fi twitter page" class="w-6 ">
 			</a>
 			<a href="">
-				<img src="/book.png" alt="Go to Fung Finance Wiki">
+				<Fa icon={faGithub} size="24"/>
+			</a>
+			<a href="">
+				<img src="/handshake.png" alt="Go to the trade section" class="w-6 ">
+			</a>
+			<a href="">
+				<img src="/book.png" alt="Go to Fung Finance Wiki" class="w-6 ">
 			</a>
 		</div>
 	</div>

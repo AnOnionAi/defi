@@ -114,7 +114,7 @@
 	}}
 />
 <nav
-	class="z-10 backdrop-filter {($darkMode && !$isHomescreen) && 'dark-active'} backdrop-blur top-0 w-full text-black "
+	class="{isHomescreen && 'z-10'} backdrop-filter {($darkMode && !$isHomescreen) && 'dark-active'} backdrop-blur top-0 w-full text-black "
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-5 ">
