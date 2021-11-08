@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp.js';
-
 	const scrollTop = () => {
 		window.scrollTo(0, 0);
 	};
