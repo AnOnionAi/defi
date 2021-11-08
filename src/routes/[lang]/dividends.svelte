@@ -58,11 +58,11 @@
 	}
 </script>
 
-<p class="text-center text-2xl font-bold tracking-widest mt-7 dark:text-white">DIVIDENDS</p>
-<div class="my-auto">
+<h1 class="pt-6 tracking-widest font-semibold">DIVIDENDS</h1>
+<div class="my-6">
 	<div class="dividends-wrapper {$darkMode && 'darkBackground'}">
 		<div
-			class="h-130 w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
+			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
 		>
 			{#if approved}
 				<div in:fade={{ duration: 1000 }} class="h-full">
@@ -80,11 +80,15 @@
 <style>
 	.dividends-wrapper {
 		width: 100%;
-		height: 100%;
+		height: 82vh;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background-color: var(--light-background);
+	}
+
+	.dividends{
+		max-height: 600px;
 	}
 
 	.darkBackground {

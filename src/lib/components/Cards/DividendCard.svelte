@@ -143,7 +143,7 @@
 	});
 </script>
 
-<div class="h-full w-full mb-2">
+<div class="h-full w-full">
 	<div class="flex flex-col justify-around w-full h-4/12">
 		<div class="flex w-23/24 mx-auto justify-between items-center">
 			<div class="flex items-center">
@@ -204,8 +204,8 @@
 		</div>
 	</div>
 
-	<div class="w-full h-8/12 flex flex-col justify-between">
-		<div class="flex flex-col text-sm">
+	<div class="w-full h-8/12 flex flex-col justify-around">
+		<div class="flex flex-col text-sm h-2/6 justify-center">
 			<p class="text-gray-600 font-semibold mb-1 ml-1 dark:text-gray-300">
 				Your Wallet:
 				<span class="text-black dark:text-white">
@@ -217,7 +217,7 @@
 				</span>
 			</p>
 
-			<div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-between px-4">
+			<div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4">
 				<input
 					bind:value={depositInput}
 					type="text"
@@ -237,12 +237,13 @@
 					{/if}
 				</button>
 			</div>
-			<p class="text-xs text-gray-700 dark:text-white pl-1 mt-1">
-				Daily ROI Breakdown: 0.41% from Pools
-			</p>
+			
 		</div>
+		<p class="text-xs text-gray-500 dark:text-white pl-1 ">
+			Daily ROI Breakdown: 0.41% from Pools
+		</p>
 
-		<div class="flex flex-col text-sm">
+		<div class="flex flex-col text-sm h-2/6 justify-center">
 			<p class="text-gray-600 dark:text-gray-300 font-semibold ml-1 mb-1">
 				Deposited:
 				<span class="text-black dark:text-white">
@@ -254,7 +255,7 @@
 				</span>
 			</p>
 
-			<div class="bg-gray-200  dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-between px-4">
+			<div class="bg-gray-200  dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4">
 				<input
 					type="text"
 					bind:value={withdrawInput}
@@ -276,13 +277,13 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col text-sm">
+		<div class="flex flex-col text-sm h-2/6 justify-center">
 			<p class="text-gray-600 dark:text-gray-300 font-semibold mb-1 ml-1">
 				MUSH Earned:
 				<span class="text-black" />
 			</p>
 
-			<div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-17 py-2 flex justify-between px-4">
+			<div class="bg-gray-200 dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4">
 				<p
 					class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12 flex items-center"
 				>
