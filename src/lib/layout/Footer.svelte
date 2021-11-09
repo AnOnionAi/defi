@@ -40,22 +40,22 @@
 			<a href="">
 				<img src="/info.png" alt="Go to get more information" class="w-6 ">
 			</a>
-			<a href="">
+			<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
 				<img src="/telegram.png" alt="Go to official Fung Fi Telegram" class="w-6 ">
 			</a>
-			<a href="">
+			<a href="https://discord.gg/EbvCkxhP">
 				<img src="/discord.png" alt="Go to official Fung Fi Telegram" class="w-6 ">
 			</a>
-			<a href="">
+			<a href="https://twitter.com/fung_fi">
 				<img src="/twitter.png" alt="Go to the official Fung Fi twitter page" class="w-6 ">
 			</a>
 			<a href="">
 				<Fa icon={faGithub} size="24"/>
 			</a>
-			<a href="">
+			<a href="https://app.sushi.com/swap">
 				<img src="/handshake.png" alt="Go to the trade section" class="w-6 ">
 			</a>
-			<a href="">
+			<a href="https://fung.wiki/">
 				<img src="/book.png" alt="Go to Fung Finance Wiki" class="w-6 ">
 			</a>
 		</div>
