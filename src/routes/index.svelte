@@ -12,6 +12,8 @@
 	onMount(() => {
 		const langs: string[] = ['es', 'en', 'de', 'fr'];
 		const lang: string = getLocaleFromNavigator().split('-')[0];
+		console.log("LANG IS",lang);
+		
 		if (langs.includes(lang)) {
 			goto(`/${lang}`, { replaceState: true });
 		} else goto('/es', { replaceState: true });

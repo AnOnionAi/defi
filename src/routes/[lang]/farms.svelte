@@ -33,7 +33,7 @@ import { onMount } from 'svelte';
 <Modal>
 	<section class={$darkMode && 'active'}>
 		<br />
-		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">FARMS</h1>
+		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.farms.text")}</h1>
 		<section class="mt-3">
 			<section class="mt-5 space-y-4">
 				<div class="w-full">

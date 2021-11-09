@@ -211,7 +211,8 @@
 </script>
 
 <section class="mb-12">
-	<h1 class="text-dark-200 dark:text-white text-4xl">V A U L T S</h1>
+	<br />
+	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.vaults.text")}</h1>
 
 		<div class="mt-10 sideShadow">
 			<VaultFilter bind:platformSelected={platformSelected} bind:stakedOnly={stakedOnly} on:staked={handleStaked} bind:sortby={sortby} bind:zeroBalance={zero} bind:statement={statement} />

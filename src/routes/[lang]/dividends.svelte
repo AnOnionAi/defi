@@ -1,6 +1,15 @@
 <script context="module" lang="ts">
 	export const prerender = false;
 	import { darkMode } from '$lib/stores/dark';
+
+	import { _ } from 'svelte-i18n';
+	export async function load({ page }) {
+		const { lang } = page.params;
+
+		return {
+			props: { lang }
+		};
+	}
 </script>
 
 <script lang="ts">
@@ -57,8 +66,8 @@
 		}
 	}
 </script>
-
-<h1 class="pt-6 tracking-widest font-medium text-4xl dark:text-white">DIVIDENDS</h1>	
+<br />
+<h1 class="tracking-widest  text-4xl dark:text-white">{$_("headers.dividends.text")}</h1>	
 <div class="my-6">
 	<div class="dividends-wrapper {$darkMode && 'darkBackground'}">
 		

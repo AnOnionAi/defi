@@ -20,7 +20,6 @@
 	import vaultIcon from '/static/vaultIcon.png';
 	import usdc from '/static/vaultTokensIcons/usdc.svg';
 	import usdt from '/static/vaultTokensIcons/usdt.svg';
-
 	import btc from '/static/vaultTokensIcons/wbtc.svg';
 	import dai from '/static/vaultTokensIcons/dai.svg';
 </script>
@@ -28,7 +27,7 @@
 <div class="">
 	<div class=" max-w-screen-xl   mx-auto  p-2 mt-10">
 		<h2 class="font-bold  text-4xl md:text-5xl  px-5 text-center lg:text-left dark:text-white">
-			Dashboard
+			{$_("headers.dashboard.text")}
 		</h2>
 		<div class="flex flex-wrap   h-auto mt-5">
 			<div

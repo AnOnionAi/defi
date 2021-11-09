@@ -5,6 +5,7 @@
 <script lang="ts">
 	import 'virtual:windi.css';
 	import { _ } from 'svelte-i18n';
+	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { scale } from 'svelte/transition';
 	import { faWallet } from '@fortawesome/free-solid-svg-icons/faWallet.js';
 	import { faSun } from '@fortawesome/free-solid-svg-icons/faSun.js';
@@ -18,20 +19,28 @@
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	if ($page.params.lang) {
-		setInit($page.params.lang);
-	}
+	
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;
 	let home = false;
 	let menu;
 	let isDark: boolean;
+
 	darkMode.subscribe((val) => {
 		isDark = val;
 	});
 	const changeDark = (e) => {
 		darkMode.set(!isDark);
 	};
+
+	if (!$page.params.lang) {
+		setInit("en");
+	}
+
+	if ($page.params.lang) {
+		setInit($page.params.lang);
+	}
+
 	const LANGUAGES = [
 		{
 			code: 'es',
@@ -50,6 +59,7 @@
 			lang: 'Français'
 		}
 	];
+
 	const PAGES = [
 		{
 			route: `/dashboard`,
@@ -72,12 +82,23 @@
 			title: $_('headers.vaults.text')
 		}
 	];
+
 	const gotoPage = (route: string, home: boolean = false) => {
 		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
 		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
 		console.log($page.params.lang);
 		
 	};
+
+	const validLang= (lang:string) => {
+		const langs = ["es","en","de","fr"];
+		if(langs.includes(lang)){
+			return lang;
+		}
+		else{
+			return "en";
+		}
+	}
 
 
 	let isInstalled = 'checking';
@@ -133,7 +154,7 @@
 					class="dark:border dark:rounded-md dark:hover:bg-blue-gray-600 hover:bg-gray-100 focus:outline-none font-medium flex p-2 items-center "
 				>
 					<p class="m-0 font-semibold text-gray-900 dark:text-white">
-						{$page.params.lang ? $page.params.lang : '...'}
+						{$page.params.lang ? validLang($page.params.lang) : '...'}
 					</p>
 				</button>
 				{#if showDropDownMenu}
