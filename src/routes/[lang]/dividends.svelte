@@ -61,6 +61,7 @@
 <h1 class="pt-6 tracking-widest font-medium text-4xl dark:text-white">DIVIDENDS</h1>
 <div class="my-6">
 	<div class="dividends-wrapper {$darkMode && 'darkBackground'}">
+		
 		<div
 			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
 		>
@@ -95,7 +96,5 @@
 		background-color: var(--dark-gradient);
 	}
 
-	.darkCard {
-		background-color: var(--dark-thirty);
-	}
+	
 </style>

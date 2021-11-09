@@ -28,12 +28,5 @@
 	.dark-active {
 		background: linear-gradient(to bottom, rgb(45, 55, 63) 0, #0b1216 500px);
 	}
-	footer a {
-		font-weight: bold;
-	}
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	}
+	
 </style>

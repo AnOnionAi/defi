@@ -57,11 +57,6 @@ import { onMount } from 'svelte';
 	section {
 		height: 100%;
 	}
-	.dark .active {
-		--tw-bg-opacity: 1;
-		--tw-text-opacity: 1;
-		color: rgba(0, 0, 0, var(--tw-text-opacity));
-	}
 	.active {
 		--tw-bg-opacity: 1;
 		--tw-text-opacity: 1;

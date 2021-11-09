@@ -18,11 +18,17 @@
 		"automated-crypto": {
 			"text": "Creación Automatizada de Criptomercados"
 		},
+		"dividends":{
+			"text": "Dividendos"
+		},
+		"dashboard":{
+			"text":"Tablero"
+		},
 		"farms": {
 			"text": "Granjas"
 		},
 		"pools": {
-			"text": "Quinielas"
+			"text": "Fondos"
 		},
 		"vaults": {
 			"text": "Bóvedas"

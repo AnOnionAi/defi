@@ -229,7 +229,5 @@
 </section>
 
 <style>
-	.background-vaults {
-		background-color: #f9f8f9;
-	}
+	
 </style>

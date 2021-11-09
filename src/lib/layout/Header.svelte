@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import 'virtual:windi.css';
+	import { _ } from 'svelte-i18n';
 	import { scale } from 'svelte/transition';
 	import { faWallet } from '@fortawesome/free-solid-svg-icons/faWallet.js';
 	import { faSun } from '@fortawesome/free-solid-svg-icons/faSun.js';
@@ -16,6 +17,7 @@
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	if ($page.params.lang) {
 		setInit($page.params.lang);
 	}
@@ -50,31 +52,32 @@
 	];
 	const PAGES = [
 		{
-			route: `/${$page.params.lang}/dashboard`,
-			title: 'Dashboard'
+			route: `/dashboard`,
+			title: $_('headers.dashboard.text')
 		},
 		{
-			route: `/${$page.params.lang}/dividends`,
-			title: 'Dividends'
+			route: `/dividends`,
+			title: $_('headers.dividends.text')
 		},
 		{
-			route: `/${$page.params.lang}/farms`,
-			title: 'Farms'
+			route: `/farms`,
+			title: $_('headers.farms.text')
 		},
 		{
-			route: `/${$page.params.lang}/pools`,
-			title: 'Pools'
+			route: `/pools`,
+			title: $_('headers.pools.text')
 		},
 		{
-			route: `/${$page.params.lang}/vaults`,
-			title: 'Vaults'
+			route: `/vaults`,
+			title: $_('headers.vaults.text')
 		}
 	];
 	const gotoPage = (route: string, home: boolean = false) => {
 		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
-		else goto(`/${$page.params.lang}/${route.toLowerCase()}`, { replaceState: true });
+		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
+		console.log($page.params.lang);
+		
 	};
-	import { onMount } from 'svelte';
 
 
 	let isInstalled = 'checking';
@@ -194,7 +197,7 @@
 					{#each PAGES as page}
 						<button
 							on:click={() => {
-								gotoPage(page.title);
+								gotoPage(page.route);
 							}}
 						>
 							<span
@@ -272,7 +275,7 @@
 			{#each PAGES as page}
 				<button
 					on:click={() => {
-						gotoPage(page.title);
+						gotoPage(page.route);
 					}}
 				>
 					<span class="block dark:hover:bg-dark-600 px-3 py-3 rounded-md font-medium">

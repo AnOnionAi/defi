@@ -144,6 +144,9 @@
 </script>
 
 <div class="h-full w-full">
+	<div class="h-full w-full">
+
+	
 	<div class="flex flex-col justify-around w-full h-4/12">
 		<div class="flex w-23/24 mx-auto justify-between items-center">
 			<div class="flex items-center">
@@ -311,6 +314,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 <style>

@@ -319,11 +319,7 @@
 		left: 0;
 		top: 0;
 	}
-	main {
-		color: white;
-		z-index: 99;
-		width: 90%;
-	}
+	
 
 	canvas {
 		position: absolute;

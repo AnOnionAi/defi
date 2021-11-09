@@ -18,6 +18,12 @@
 		"automated-crypto": {
 			"text": "Automated Crypto Market Making"
 		},
+		"dividends":{
+			"text": "Dividends"
+		},
+		"dashboard":{
+			"text":"Dashboard"
+		},
 		"farms": {
 			"text": "Farms"
 		},
@@ -31,4 +37,6 @@
 			"text": "Crypto Responsibility"
 		}
 	}
+	
+
 }

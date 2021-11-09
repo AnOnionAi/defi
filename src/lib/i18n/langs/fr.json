@@ -18,6 +18,12 @@
 		"automated-crypto": {
 			"text": "Création de Marché Crypto Automatisée"
 		},
+		"dividends":{
+			"text": "Dividendes"
+		},
+		"dashboard":{
+			"text":"Tableau"
+		},
 		"farms": {
 			"text": "Fermes"
 		},

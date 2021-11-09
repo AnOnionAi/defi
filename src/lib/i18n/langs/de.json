@@ -1,4 +1,4 @@
-{
+	{
 	"hello": "Willkommen bei",
 	"pages": {
 		"about": {
@@ -17,6 +17,12 @@
 	"headers": {
 		"automated-crypto": {
 			"text": "Automatisiertes Crypto Market Making"
+		},
+		"dividends":{
+			"text": "Dividenden"
+		},
+		"dashboard":{
+			"text":"Armaturenbrett"
 		},
 		"farms": {
 			"text": "Bauernhöfe"
