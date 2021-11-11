@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
+	import { _ } from "svelte-i18n"
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { PoolInfo } from '$lib/ts/types';
 	import { Token } from '$lib/ts/types';
@@ -6,7 +8,7 @@
 	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
-	import type { BigNumber } from '@ethersproject/bignumber';
+	import type { BigNumber } from 'ethers';
 	import { ethers } from 'ethers';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp.js';
@@ -16,7 +18,8 @@
 	import DepositModal from '$lib/components/Modals/DepositModal.svelte';
 	import WithdrawModal from '$lib/components/Modals/WithdrawModal.svelte';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
-import { darkMode } from '$lib/stores/dark';
+	import { darkMode } from '$lib/stores/dark';
+
 	const { open } = getContext('simple-modal');
 
 	interface LoadingState {
@@ -176,7 +179,7 @@ import { darkMode } from '$lib/stores/dark';
 	};
 </script>
 
-<div
+<div in:fly={{y:250, duration: 400 }}
 	class=" flex flex-col d-flex justify-content-center self-start  bg-white shadow-lg dark:bg-dark-900 rounded-2xl space-y-2 dark:border-2  dark:border-green-500 min-w-88 max-w-88 "
 >
 	<div class=" flex justify-center items-center py-2 max-h-100 min-h-50">
@@ -194,15 +197,15 @@ import { darkMode } from '$lib/stores/dark';
 				<p class="dark:text-white">999%</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="font-semibold dark:text-white">EARN:</p>
+				<p class="font-semibold dark:text-white uppercase">{$_("actions.earn")}:</p>
 				<p class="dark:text-white">MUSH</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="dark:text-white">DEPOSIT FEE</p>
+				<p class="dark:text-white uppercase">{$_("actions.depositfee")}</p>
 				<p class="dark:text-white">0%</p>
 			</div>
 			<div class="flex pt-5">
-				<p class="text-xs font-medium dark:text-white">MUSH EARNED:</p>
+				<p class="text-xs font-medium dark:text-white uppercase">MUSH {$_("pastActions.earned")}:</p>
 			</div>
 			<div class="flex pt-3 justify-between">
 				<p class="tabular-nums text-xl p-1 font-medium">
@@ -217,12 +220,12 @@ import { darkMode } from '$lib/stores/dark';
 					class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer {!canHarvest &&
 						'invisible'}"
 				>
-					Harvest
+					{$_("actions.harvest")}
 				</p>
 			</div>
 		</div>
 		<div class="flex px-5 -mb-2">
-			<p class="text-xs font-medium dark:text-white">{info.tokenName} STAKED</p>
+			<p class="text-xs font-medium dark:text-white uppercase">{info.tokenName} {$_("pastActions.staked")}</p>
 		</div>
 
 		{#if tokenApproved && $accounts}
@@ -240,39 +243,38 @@ import { darkMode } from '$lib/stores/dark';
 						class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer  {!canStake &&
 							'invisible'}"
 					>
-						Deposit
+						{$_("actions.deposit")}
 					</p>
 					<p
 						on:click={goWithdraw}
 						class="text-green-400 font-semibold text-lg tracking-wider p-1 ml-6 cursor-pointer  {!canWithdraw &&
 							'hidden'}"
 					>
-						Withdraw
+					{$_("actions.withdraw")}
 					</p>
 				</div>
 			</div>
 		{:else if $accounts}
-			<a
+			<p
 				on:click={async () => await approveHandler()}
-				href="#"
-				class="block bg-green-400 text-white font-bold p-2 rounded-md w-9/10 hover:bg-green-600 mx-auto "
+				class="block bg-green-400 text-white font-bold p-2 rounded-md w-9/10 hover:bg-green-600 mx-auto cursor-pointer"
 			>
-				Approve
-			</a>
+				{$_("actions.approve")}
+		</p>
 		{:else if !$accounts}
-			<a
+			<p
 				on:click={metaMaskCon}
 				href="#"
-				class="block bg-green-400 text-white font-bold p-2 rounded-md w-9/10 hover:bg-green-600 mx-auto"
+				class="block bg-green-400 text-white font-bold p-2 rounded-md w-9/10 hover:bg-green-600 mx-auto cursor-pointer"
 			>
-				Unlock
-			</a>
+				{$_("actions.unlock")}
+		</p>
 		{/if}
 
 		<div class="flex justify-center p-4" on:click={showPoolInfo}>
 			{#if isHidden}
 				<div class="flex cursor-pointer">
-					<p class="dark:text-white">Details</p>
+					<p class="dark:text-white">{$_("poolCard.details")}</p>
 					{#if $darkMode}
 					<Fa icon={faChevronDown} size="xs" scale={0.9} translateX={0.5} translateY={0.65} color={"#fff"} />
 					{:else}
@@ -281,7 +283,7 @@ import { darkMode } from '$lib/stores/dark';
 				</div>
 			{:else}
 				<div class="flex cursor-pointer">
-					<p class="dark:text-white">Hide</p>
+					<p class="dark:text-white">{$_("poolCard.hide")}</p>
 					{#if $darkMode}
 					<Fa icon={faChevronUp} size="xs" scale={0.9} translateX={0.5} translateY={0.65} color={"#fff"} />
 					{:else}
@@ -294,11 +296,11 @@ import { darkMode } from '$lib/stores/dark';
 
 		<div class="px-5 {isHidden && 'hidden'}">
 			<div class="flex justify-between">
-				<p class="dark:text-white">Stake:</p>
+				<p class="dark:text-white">{$_("actions.stake")}:</p>
 				<p class="dark:text-white">{info.tokenName}</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="dark:text-white">Total Liquidity:</p>
+				<p class="dark:text-white">{$_("poolCard.totalLiquidity")}:</p>
 				<p class="dark:text-white">
 					{#if poolTokenLiquidity}
 						{parseBigNumberToDecimal(poolTokenLiquidity)} {info.tokenName}
@@ -308,7 +310,7 @@ import { darkMode } from '$lib/stores/dark';
 				</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="dark:text-white">My Liquidity:</p>
+				<p class="dark:text-white">{$_("poolCard.myLiquidity")}:</p>
 				<p class="dark:text-white">
 					{#if userStakedTokens}
 						{parseBigNumberToDecimal(userStakedTokens)} {info.tokenName}
@@ -318,7 +320,7 @@ import { darkMode } from '$lib/stores/dark';
 				</p>
 			</div>
 			<div class="flex">
-				<p class="dark:text-white">View On Matic</p>
+				<p class="dark:text-white">{$_("poolCard.viewonMatic")}</p>
 			</div>
 		</div>
 	</div>

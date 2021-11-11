@@ -192,7 +192,7 @@
 						gotoPage('', true);
 					}}
 				>
-					<img class="w-10 rounded-full" src="/static/fungfi.png" alt="floppa" />
+					<img class="w-10 rounded-full" src="/fungfi.png" alt="Fung Finance Logo" />
 					<span class="w-24 text-lg dark:text-white font-semibold" style="margin: auto 0 auto 5px;">
 						FUNG F I
 					</span>
@@ -202,7 +202,7 @@
 
 			<div class="hidden lg:block sm:ml-auto">
 				<div class="flex space-x-5 items-center">
-					<a href="#">
+					<p>
 						<span
 							on:click={changeDark}
 							class="dark:hover:bg-gray-800 hover:bg-gray-200 {$darkMode &&
@@ -214,7 +214,7 @@
 								<Icon class="text-black" icon={faSun} />
 							{/if}
 						</span>
-					</a>
+					</p>
 					{#each PAGES as page}
 						<button
 							on:click={() => {
@@ -304,7 +304,7 @@
 					</span>
 				</button>
 			{/each}
-			<a on:click={changeDark} href="#">
+			<p on:click={changeDark}>
 				<span class="block dark:hover:bg-dark-600 px-3 py-3 rounded-md font-medium">
 					{#if isDark}
 						<Icon icon={faMoon} />
@@ -312,7 +312,7 @@
 						<Icon icon={faSun} />
 					{/if}
 				</span>
-			</a>
+			</p>
 			<button
 				disabled={isInstalled == 'checking' || $accounts}
 				on:click={metaMaskCon}

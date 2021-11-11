@@ -24,7 +24,7 @@
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.pools.text")}</h1>
 		<div class="mt-5 space-y-4">
 			<div class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap max-w-6xl mx-auto">
-				<MushCard></MushCard>
+				
 				{#each pools as pool  }
 				<PoolCard  info={pool} />
 				{/each}

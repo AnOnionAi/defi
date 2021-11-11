@@ -1,4 +1,5 @@
 <script lang="ts">
+	import {_} from "svelte-i18n"
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { getTokenBalance, isNotZero } from '$lib/utils/erc20';
 	import { getPendingReward, getSharesTotal, getUserInfo, harvest } from '$lib/utils/dividends';
@@ -157,7 +158,7 @@
 				<p
 					class="rounded-full py-1 px-4  border-2 border-green-500 text-green-600 inline text-xs font-semibold"
 				>
-					Earn MUSH 🍄
+					{$_("actions.earn")} MUSH 🍄
 				</p>
 			</div>
 		</div>
@@ -183,7 +184,7 @@
 
 			<div class="flex w-full h-12 text-center">
 				<div class="w-6/12">
-					<p class="text-xs text-gray-600 font-semibold dark:text-gray-300 ">Wallet</p>
+					<p class="text-xs text-gray-600 font-semibold dark:text-gray-300 ">{$_("actions.wallet")}</p>
 					<p class="font-medium dark:text-white">
 						{#if userBalance}
 							{parseBigNumberToString(userBalance)}
@@ -194,7 +195,7 @@
 				</div>
 
 				<div class="w-6/12">
-					<p class="text-xs text-gray-600 font-semibold dark:text-gray-300">Deposit</p>
+					<p class="text-xs text-gray-600 font-semibold dark:text-gray-300">{$_("actions.deposit")}</p>
 					<p class="font-medium dark:text-white">
 						{#if userStakedTokens}
 							{parseBigNumberToString(userStakedTokens)}
@@ -210,7 +211,7 @@
 	<div class="w-full h-8/12 flex flex-col justify-around">
 		<div class="flex flex-col text-sm h-2/6 justify-center">
 			<p class="text-gray-600 font-semibold mb-1 ml-1 dark:text-gray-300">
-				Your Wallet:
+				{$_("your.wallet")}:
 				<span class="text-black dark:text-white">
 					{#if userBalance}
 						{parseBigNumberToString(userBalance)} MUSH
@@ -232,7 +233,7 @@
 					class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5 {loadingState.loadingDeposit &&
 						'cursor-not-allowed'} disabled:opacity-50 disabled:bg-green-500"
 				>
-					<p>Deposit</p>
+					<p>{$_("actions.deposit")}</p>
 					{#if loadingState.loadingDeposit}
 						<div class="pl-3">
 							<Chasing size={18} unit="px" color="#FFF" />
@@ -270,7 +271,7 @@
 					class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5 {loadingState.loadingWithdraw &&
 						'cursor-not-allowed'} disabled:opacity-50 disabled:bg-green-500"
 				>
-					<p>Withdraw</p>
+					<p>{$_("actions.withdraw")}</p>
 					{#if loadingState.loadingWithdraw}
 						<div class="pl-3">
 							<Chasing size={18} unit="px" color="#FFF" />
@@ -282,7 +283,7 @@
 
 		<div class="flex flex-col text-sm h-2/6 justify-center">
 			<p class="text-gray-600 dark:text-gray-300 font-semibold mb-1 ml-1">
-				MUSH Earned:
+				MUSH {$_("pastActions.earned")}:
 				<span class="text-black" />
 			</p>
 
@@ -304,7 +305,7 @@
 						'cursor-not-allowed'} disabled:opacity-50 {loadingState.loadingHarvest &&
 						'bg-green-500'}"
 				>
-					<p>Harvest</p>
+					<p>{$_("actions.harvest")}</p>
 					{#if loadingState.loadingHarvest}
 						<div class="pl-3">
 							<Chasing size={18} unit="px" color="#FFF" />

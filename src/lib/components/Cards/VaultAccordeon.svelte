@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {fly} from "svelte/transition"
+	import { _ } from "svelte-i18n";
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { LPair, VaultInfo } from '$lib/ts/types';
 	import { getTokenBalance, approveToken, getTokenAllowance, isNotZero } from '$lib/utils/erc20';
@@ -128,7 +130,7 @@
 	}
 </script>
 
-<div class="">
+<div in:fly={{y:200, duration: 300 }} class="">
 	<div
 		on:click={openAccordeon}
 		class="max-w-8xl {!	$darkMode && 'sideShadow'} bg-white mx-auto py-4 {isHidden &&
@@ -147,7 +149,7 @@
 				</div>
 				<div class="ml-2">
 					<p class="font-bold uppercase smaller-font text-gray-600 dark:text-gray-400">
-						Earn {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
+						{$_("actions.earn")} {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
 					</p>
 					<p class="text-lg font-semibold dark:text-white ">
 						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
@@ -184,7 +186,7 @@
 								?
 							{/if}
 						</div>
-						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400 ">WALLET</div>
+						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400 uppercase">{$_("actions.wallet")}</div>
 					</div>
 				</div>
 				<div class="flex flex-row justify-around">
@@ -218,13 +220,13 @@
 				<button
 					on:click={metaMaskCon}
 					class="w-full bg-{vaultConfig.platform.brandColor}-500  rounded-xl p-2 text-white font-semibold text-xl tracking-wide "
-					>Unlock
+					>{$_("actions.unlock")}
 				</button>
 			{:else}
 				<div class="flex flex-col  lg:flex-row flex-wrapper justify-around">
 					<div class="lg:w-4/12">
 						<div class="flex items-center">
-							<p class="text-gray-600 font-medium dark:text-white tracking-tight">Wallet:</p>
+							<p class="text-gray-600 font-medium dark:text-white tracking-tight">{$_("actions.wallet")}:</p>
 							{#if userTokens}
 								<p class="font-bold	pl-1 dark:text-white font-semibold tracking-tighter">
 									{parseBigNumberToString(userTokens)}
@@ -254,7 +256,7 @@
 										handleTransaction(deposit(vaultConfig.pid, userDepositAmount), 'deposit')}
 									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide"
 								>
-									<p>Deposit</p>
+									<p>{$_("actions.deposit")}</p>
 									{#if loadingState.deposit}
 										<div class="pl-2">
 											<Chasing size="20" unit="px" color="#ffff" />
@@ -276,7 +278,7 @@
 									class="flex items-center bg-black  disabled:opacity-50 {loadingState.something &&
 										'cursor-not-allowed'} text-white font-bold rounded-lg px-5 py-3 tracking-wide"
 								>
-									<p>Approve</p>
+									<p>{$_("actions.approve")}</p>
 									{#if loadingState.approve}
 										<div class="pl-2">
 											<Chasing size="20" unit="px" color="#ffff" />
@@ -286,14 +288,14 @@
 							{/if}
 						</div>
 						<div class="flex">
-							<p class="pl-1 text-gray-500 font-bold dark:text-white font-medium">Deposit Fee:</p>
+							<p class="pl-1 text-gray-500 font-bold dark:text-white font-medium">{$_("actions.depositfee")}:</p>
 							<p class="px-1  font-bold dark:text-white font-medium">{vaultConfig.depositFee}%</p>
 						</div>
 					</div>
 
 					<div class="pt-4 lg:pt-0 lg:w-4/12">
 						<div class="flex">
-							<p class="text-gray-600 font-medium dark:text-white font-medium">Deposited:</p>
+							<p class="text-gray-600 font-medium dark:text-white font-medium">{$_("pastActions.deposited")}:</p>
 							{#if stakedTokens}
 								<p class="font-bold	pl-1 dark:text-white font-medium tracking-tight">
 									{parseBigNumberToString(stakedTokens)}
@@ -323,7 +325,7 @@
 									)}
 								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-bold rounded-lg px-4 py-3 tracking-wide"
 							>
-								<p>Withdraw</p>
+								<p>{$_("actions.withdraw")}</p>
 								{#if loadingState.withdraw}
 									<div class="pl-2">
 										<Chasing size="20" unit="px" color="#ffff" />
@@ -332,11 +334,11 @@
 							</button>
 						</div>
 						<div class="flex">
-							<p class="mr-1 font-medium text-gray-500">Withdrawal Fee:</p>
+							<p class="mr-1 font-medium text-gray-500">{$_("actions.withdrawalfee")}:</p>
 							{#if vaultConfig.withdrawalFee}
 								<p class="font-medium">{vaultConfig.withdrawalFee}%</p>
 							{:else}
-								<p class="font-medium">Not Avaliable</p>
+								<p class="font-medium">{$_("actions.notAvaliable")}</p>
 							{/if}
 						</div>
 					</div>
@@ -344,31 +346,31 @@
 					<div class="pt-4 lg:pt-0 lg:w-3/12">
 						<div class="pl-1">
 							<p class="text-gray-500 font-bold pb-1 dark:text-gray-400 font-semibold">
-								Current Prices:
+								{$_("vaultAccordeon.currentPrices")}:
 							</p>
 							<p class="	 dark:text-white ">
 								{#if tkn0Price}
 									{vaultConfig.pair.token0quote}: ${tkn0Price}
 								{:else}
-									{vaultConfig.pair.token0quote}: Not Listed in CoinGecko
+									{vaultConfig.pair.token0quote}: {$_("vaultAccordeon.notListedIn")} CoinGecko
 								{/if}
 							</p>
 							<p class=" dark:text-white">
 								{#if tkn1Price}
 									{vaultConfig.pair.token1quote}: ${tkn1Price}
 								{:else}
-									{vaultConfig.pair.token1quote}: Not Listed in CoinGecko
+									{vaultConfig.pair.token1quote}: {$_("vaultAccordeon.notListedIn")} CoinGecko
 								{/if}
 							</p>
 							<div class="py-2">
 								<a
 									class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400"
 									href={vaultConfig.platform.swapperURL}
-									>Get {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a
+									>{$_("actions.get")} {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a
 								>
 								<a
 									class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400"
-									href={vaultConfig.pair.pairURL}>View Info</a
+									href={vaultConfig.pair.pairURL}>{$_("vaultAccordeon.viewInfo")}</a
 								>
 							</div>
 						</div>

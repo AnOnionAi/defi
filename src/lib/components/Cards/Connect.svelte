@@ -1,6 +1,15 @@
-
 <script>
+	import { _ } from 'svelte-i18n';
 	import { metaMaskCon } from '$lib/utils/metamaskCalls';
+
+	export async function load({ page }) {
+		const { lang } = page.params;
+
+		return {
+			props: { lang }
+		};
+	}
+
 </script>
 
 <div class="h-12/12 w-full flex justify-center items-center cursor-pointer" on:click={metaMaskCon}>
@@ -9,7 +18,7 @@
 		<p
 			class="text-xl text-center bg-black text-white font-medium rounded-full p-1  dark:border-green-500 dark:border-3"
 		>
-			Connect your Wallet
+			{$_("dividendsPage.cyw")}
 		</p>
 	</div>
 </div>

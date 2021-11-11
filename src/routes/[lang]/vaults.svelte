@@ -11,6 +11,8 @@
 </script>
 
 <script lang="ts">
+	import { fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { quickVaults, sushiVaults } from '$lib/config/constants/vaults';
 	import type { VaultInfo } from '$lib/ts/types';
 	export let lang;
@@ -214,7 +216,7 @@
 	<br />
 	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.vaults.text")}</h1>
 
-		<div class="mt-10 sideShadow">
+		<div in:fade={{ duration: 600 }} class="mt-10 sideShadow">
 			<VaultFilter bind:platformSelected={platformSelected} bind:stakedOnly={stakedOnly} on:staked={handleStaked} bind:sortby={sortby} bind:zeroBalance={zero} bind:statement={statement} />
 
 					{#each [...filteredVaults] as vault, index}

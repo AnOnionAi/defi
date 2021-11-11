@@ -6,7 +6,7 @@
     export let statement = '';
 
     export let sortby = 'Descending';
-
+    import { _ } from "svelte-i18n"
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
 
@@ -109,14 +109,14 @@
                         </svg>
                       </span>
                 </span>
-                <span id="zero" class="radio__label text-base dark:font-normal dark:tracking-wider">Hide Zero Balances</span>
+                <span id="zero" class="radio__label text-base dark:font-normal dark:tracking-wider">{$_("vaultFilter.hidezero")}</span>
             </label>
 
         </div>
     
         <div class=" pt-4 pb-4 mt-2 max-w-7xl m-auto sm:ml-0 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-            <div class="text-sm pl-2 pb-2 title">
-                FILTER BY
+            <div class="text-sm pl-2 pb-2 title uppercase">
+                {$_("vaultFilter.filterby")}
             </div>
             <div class="content-select">
                 <select>
@@ -129,8 +129,8 @@
         </div>
 
         <div class=" pt-4 pb-4 mt-2 m-auto sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-            <div class="text-sm pl-2 pb-2 title">
-                SORT BY
+            <div class="text-sm pl-2 pb-2 title uppercase">
+                {$_("vaultFilter.sortby")}
             </div>
             <div class="content-select">
                 <select
@@ -143,16 +143,16 @@
         </div>
 
         <div class=" pt-4 pb-4 mt-2 m-auto sm:ml-2 sm:mb-0 sm:mr-2 sm:mt-2 inline-block	">
-            <div class="text-sm pl-2 pb-2 title">
-                SEARCH
+            <div class="text-sm pl-2 pb-2 title uppercase">
+                {$_("vaultFilter.search")}
             </div>
             <div class="content-input">
-                <input type="text" placeholder="Search vaults" bind:value={statement}>
+                <input type="text" placeholder={$_("vaultFilter.searchvaults")} bind:value={statement}>
             </div>
         </div>
 
         <div class="pt-8 pb-4 mt-4 sm:pt-10 m-auto sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-            <button class:active={stakedOnly} class="bg-gray-300 hover:bg-gray-500 text-dark dark:text-dark font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded" on:click={select}>Staked only</button>
+            <button class:active={stakedOnly} class="bg-gray-300 hover:bg-gray-500 text-dark dark:text-dark font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded" on:click={select}>{$_("vaultFilter.stakedonly")}</button>
         </div>
 
     </div>

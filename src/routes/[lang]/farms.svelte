@@ -3,9 +3,6 @@
 	import { _ } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
 	import { darkMode } from '$lib/stores/dark';
-	import sushi from '/static/sushi.png';
-	import dyfn from '/static/dfyn.svg';
-	import quick from '/static/quiswa.png';
 	export async function load({ page }) {
 		const { lang } = page.params;
 		return {
@@ -42,9 +39,6 @@ import { onMount } from 'svelte';
 						{#each farms as farm}
 							<PoolCard  info={farm} />
 						{/each}
-						<!-- <PoolCard cardImage={undefined} info={farms[0]} />
-						<PoolCard cardImage={undefined} info={farms[1]} />
-						<PoolCard  cardImage={undefined} info={farms[2]} /> -->
 					</div>
 				</div>
 			</section>
