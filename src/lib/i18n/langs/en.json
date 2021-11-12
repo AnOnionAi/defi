@@ -62,7 +62,7 @@
 	"dividendsPage":{
 		"cyw":  "Connect your Wallet",
 		"approval": "Approval Required",
-		"approvalDescription":"You need to approve your MUSH expent first."
+		"approvalDescription":"You must first approve your MUSH spending."
 	},
 
 	"your":{

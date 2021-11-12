@@ -76,7 +76,7 @@
 							<p class="text-gray-700 font-semibold text-sm dark:text-white">
 								{$_("dashboard.lockedInFarms")}
 							</p>
-							<button class="border border-green-500 rounded-lg py-2 px-3  flex items-center">
+							<button class="border border-green-500 rounded-lg py-2 px-3  flex items-center hover:text-white hover:bg-green-400">
 								<p class="font-semibold pr-1 dark:text-white">{$_("dashboard.startFarming")}</p>
 								<img src="/hoe.png" alt="farming hoe" />
 							</button>
@@ -99,7 +99,7 @@
 							<p class="text-gray-700 font-semibold text-sm dark:text-white">
 								{$_("dashboard.lockedInPools")}
 							</p>
-							<button class="border border-green-500 rounded-lg py-2 px-5  flex items-center">
+							<button class="border border-green-500 rounded-lg py-2 px-5  flex items-center hover:text-white hover:bg-green-400">
 								<p class="font-semibold pr-1 dark:text-white">{$_("dashboard.addLiquidity")}</p>
 								<div class="flex relative">
 									<img src="/vaultTokensIcons/wbtc.svg" alt="btc" class="h-5 w-5" />
@@ -125,7 +125,7 @@
 							<p class="text-gray-700 font-semibold text-sm dark:text-white">
 								{$_("dashboard.lockedInVaults")}
 							</p>
-							<button class="border border-green-500 rounded-lg py-2 px-5  flex items-center">
+							<button class="border border-green-500 rounded-lg py-2 px-5  flex items-center hover:text-white hover:bg-green-400">
 								<p class="font-semibold pr-1 dark:text-white">{$_("dashboard.goDeposit")}</p>
 								<div class="flex relative">
 									<img src="/vaultTokensIcons/usdc.svg" alt="mushToken" class="h-5 w-5" />
@@ -238,7 +238,7 @@
 						>
 							<p class="pl-2 font-semibold h-3/12  text-sm md:text-lg dark:text-white">{$_("dashboard.today")}</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-bold text-lg md:text-3xl dark:text-white">$0.00001</p>
+								<p class="font-bold md:text-lg md:text-3xl dark:text-white">$0.00001</p>
 							</div>
 						</div>
 
@@ -247,7 +247,7 @@
 						>
 							<p class="pl-2 font-semibold h-3/12 text-sm md:text-lg dark:text-white">{$_("dashboard.peak")}</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-bold text-lg md:text-3xl dark:text-white">$0.00002</p>
+								<p class="font-bold md:text-lg md:text-3xl dark:text-white">$0.00002</p>
 							</div>
 						</div>
 
@@ -256,7 +256,7 @@
 						>
 							<p class="pl-2 font-semibold h-3/12 text-sm md:text-lg dark:text-white">{$_("dashboard.profit")}</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-bold text-lg md:text-3xl dark:text-white">3.5%</p>
+								<p class="font-bold md:text-lg md:text-3xl dark:text-white">3.5%</p>
 							</div>
 						</div>
 					</div>

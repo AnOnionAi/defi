@@ -201,7 +201,7 @@
 				<p class="dark:text-white">MUSH</p>
 			</div>
 			<div class="flex justify-between">
-				<p class="dark:text-white uppercase">{$_("actions.depositfee")}</p>
+				<p class="dark:text-white font-semibold uppercase">{$_("actions.depositfee")}</p>
 				<p class="dark:text-white">0%</p>
 			</div>
 			<div class="flex pt-5">

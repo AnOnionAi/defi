@@ -28,7 +28,7 @@
 			"text": "Bauernhöfe"
 		},
 		"pools": {
-			"text": "Schwimmbäder"
+			"text": "Geld"
 		},
 		"vaults": {
 			"text": "Tresore"
@@ -36,5 +36,96 @@
 		"crypto-responsibility": {
 			"text": "Krypto-Verantwortung"
 		}
+	},
+	"dashboard":{
+		"wallet": "In deinem Portemonnaiet",
+		"tvl": "Gesamtwert gesperrt",
+		"across": "Über alle Fung Financial",
+		"earn": "Mehr verdienen",
+		"index": "Index",
+		"mushpb": "MUSH pro block",
+		"marketcap": "Marktkapitalisierung",
+		"totalvol": "Volle Lautstärke",
+		"maxsupply": "maximale Versorgung",
+		"price": "Mush Preis:",
+		"today": "Das Heute",
+		"peak": "Das Haupt",
+		"profit": "Der Nutzen",
+		"lockedInFarms": "Gesperrt in MUSH-Farmen",
+		"lockedInPools": "In Poly-Pools gesperrt",
+		"lockedInVaults": "In FungFi Tresoren gesperrt",
+		"startFarming": "Fang An Zu Farmen",
+		"addLiquidity": "Liquidität Hinzufügen",
+		"goDeposit": "Einzahlung Gehen"
+	},
+
+	"dividendsPage":{
+		"cyw":  "Verbinden Sie Ihre Brieftasche",
+		"approval": "Genehmigung erforderlich",
+		"approvalDescription":"Sie müssen zuerst Ihre MUSH-Ausgaben genehmigen."
+	},
+
+	"your":{
+		"wallet": "Deine Geldbörse"
+	},
+	"actions":{
+		"earn": "Verdiene",
+		"get": "Erhalten",
+		"add": "Addieren",
+		"depositFee": "Einzahlungsgebühr",
+		"wallet": "Brieftasche",
+		"approve": "Genehmigen",
+		"unlock": "Freischalten",
+		"deposit": "Anzahlung",
+		"withdraw":"Zurückziehen",
+		"harvest":"Ernte",
+		"stake": "Einatz",
+		"details": "Einzelheiten",
+		"depositfee": "Einzahlungsgebühr",
+		"withdrawalfee":"Abhebegebühr",
+		"notAvaliable": "Nicht verfügbar"
+	},
+
+	"pastActions":{
+		"earned": "Verdient",
+		"deposited": "Hinterlegt",
+		"withdrawed": "Zurückgezogen",
+		"staked": "Abgesteckt"
+	},
+
+	"poolCard":{
+		"details": "Einzelheiten",
+		"hide": "Verstecken",
+		"totalLiquidity":"Gesamtliquidität",
+		"myLiquidity": "Meine Liquidität",
+		"viewonMatic": "Ansicht Auf Matic"
+	},
+
+	"vaultAccordeon": {
+		"currentPrices": "Aktuelle Preise",
+		"notListedIn":"Nicht Aufgeführt In",
+		"viewInfo":"Informationen Anzeigen"
+	},
+	
+	"vaultFilter": {
+		"all" : "Alle",
+		"hidezero": "Nullsalden Ausblenden",
+		"filterby": "Filtern Nach",
+		"sortby": "Sortieren Nach",
+		"search": "Suche",
+		"stakedonly":"Staked nur",
+		"desceding": "Absteigend",
+		"ascending": "Aufsteigend",
+		"searchvaults": "Tresore durchsuchen"
+	},
+
+	"modals":{
+		"input" : "Eingang",
+		"balance": "Gleichgewicht",
+		"otherOptions": "Andere Optionen",
+		"depositYour": "Hinterlegen Sie Ihre",
+		"withdrawYour": "Ziehen Sie Ihres"
 	}
+
+
 }

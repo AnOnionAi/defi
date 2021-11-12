@@ -51,7 +51,7 @@
 		</p>
 		<button
 			on:click={addTokenToMetamaskWallet}
-			class="flex items-center font-medium border border-green-500 rounded-lg p-2  text-lg "
+			class="flex items-center font-medium border border-green-500 rounded-lg p-2  text-lg  hover:text-white hover:bg-green-400"
 		>
 			<p class="pr-1">{$_("actions.add")} MUSH</p>
 			<img src="/metamask.svg" class="h-7" alt="Metamask Icon" />

@@ -36,5 +36,94 @@
 		"crypto-responsibility": {
 			"text": "Responsabilité Cryptographique"
 		}
+	},
+	"dashboard":{
+		"wallet": "Dans Votre Portefeuille",
+		"tvl": "Valeur totale verrouillée",
+		"across": "Dans l'ensemble de la FungFinance",
+		"earn": "Gagne plus",
+		"index": "Index",
+		"mushpb": "MUSH par block",
+		"marketcap": "Capitalisation Boursière",
+		"totalvol": "Volume total",
+		"maxsupply": "Approvisionnement maximum",
+		"price": "Prix MUSH:",
+		"today": "Aujourd'hui",
+		"peak": "Pic",
+		"profit": "Profit",
+		"lockedInFarms": "Enfermé dans les fermes MUSH",
+		"lockedInPools": "Verrouillé dans les pools MUSH",
+		"lockedInVaults": "Verrouillé dans les coffres FungFI",
+		"startFarming": "Commencer l'agriculture",
+		"addLiquidity": "Ajouter de la liquidité",
+		"goDeposit": "Aller Dépôt"
+	},
+
+	"dividendsPage":{
+		"cyw":  "Connectez Votre Portefeuille",
+		"approval": "Approbation exigée",
+		"approvalDescription":"Vous devez d'abord approuver vos dépenses MUSH"
+	},
+
+	"your":{
+		"wallet": "Ton Portefeuille"
+	},
+	"actions":{
+		"earn": "Gagner",
+		"get": "Avoir",
+		"add": "Ajouter",
+		"depositFee": "Frais de dépôt",
+		"wallet": "Wallet",
+		"approve": "Approve",
+		"unlock": "Unlock",
+		"deposit": "Deposit",
+		"withdraw":"Withdraw",
+		"harvest":"Harvest",
+		"stake": "Stake",
+		"details": "Details",
+		"depositfee": "Frais de dépôt",
+		"withdrawalfee":"Frais de Retrait",
+		"notAvaliable": "Pas Disponible"
+	},
+
+	"pastActions":{
+		"earned": "Gagné",
+		"deposited": "Déposée",
+		"withdrawed": "Retirée",
+		"staked": "Jalonné"
+	},
+
+	"poolCard":{
+		"details": "Détails",
+		"hide": "Cacher",
+		"totalLiquidity":"Liquidité Totale",
+		"myLiquidity": "Ma liquidité",
+		"viewonMatic": "Voir sur Matic"
+	},
+
+	"vaultAccordeon": {
+		"currentPrices": "Prix ​​Actuels",
+		"notListedIn":"Non répertorié dans",
+		"viewInfo":"Voir Informations"
+	},
+	
+	"vaultFilter": {
+		"all" : "Tout",
+		"hidezero": "Masquer Les Soldes Nuls",
+		"filterby": "Filtrer Par",
+		"sortby": "Trier Par",
+		"search": "Chercher",
+		"stakedonly":"Jalonné Seulement",
+		"desceding": "Descendante",
+		"ascending": "Ascendant",
+		"searchvaults": "Rechercher Des Coffres"
+	},
+
+	"modals":{
+		"input" : "L'apport",
+		"balance": "Le Solde",
+		"otherOptions": "Autres Options",
+		"depositYour": "Déposez Votre",
+		"withdrawYour": "Retirez votre"
 	}
 }

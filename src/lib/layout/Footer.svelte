@@ -6,7 +6,13 @@
 	import { setInit } from '../i18n/init';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { isHomescreen } from '$lib/stores/homescreen';
-	import { faGithub } from '@fortawesome/free-brands-svg-icons'
+	import { faDiscord, faGit, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
+	import { faInfoCircle,faHandHoldingUsd,faBookOpen} from "@fortawesome/free-solid-svg-icons"
+	import { faTelegram } from '@fortawesome/free-brands-svg-icons'
+	import { faSnapchat } from '@fortawesome/free-brands-svg-icons'
+	import { faInstagram } from '@fortawesome/free-brands-svg-icons'
+	import { faTiktok } from '@fortawesome/free-brands-svg-icons'
+
 	if ($page.params.lang) {
 		setInit($page.params.lang);
 	}
@@ -35,29 +41,57 @@
 </script>
 
 <footer class="{$isHomescreen && 'z-20 backdrop-filter backdrop-blur'}" class:dark={$darkMode}>
-	<div class="dark:text-gray-300 {($darkMode && !$isHomescreen) && 'dark-active'} w-full p-3 text-center text-xl ">
-		<div class="w-11/12 max-w-2xl  mx-auto flex justify-between lg:justify-around">
-			<a href="">
-				<img src="/info.png" alt="Go to get more information" class="w-6 ">
-			</a>
-			<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
-				<img src="/telegram.png" alt="Go to official Fung Fi Telegram" class="w-6 ">
-			</a>
-			<a href="https://discord.gg/EbvCkxhP">
-				<img src="/discord.png" alt="Go to official Fung Fi Telegram" class="w-6 ">
-			</a>
-			<a href="https://twitter.com/fung_fi">
-				<img src="/twitter.png" alt="Go to the official Fung Fi twitter page" class="w-6 ">
-			</a>
-			<a href="">
-				<Fa icon={faGithub} size="24"/>
-			</a>
-			<a href="https://app.sushi.com/swap">
-				<img src="/handshake.png" alt="Go to the trade section" class="w-6 ">
-			</a>
-			<a href="https://fung.wiki/">
-				<img src="/book.png" alt="Go to Fung Finance Wiki" class="w-6 ">
-			</a>
+	<div class="{($darkMode && !$isHomescreen) && 'dark-active'} ">
+		<div class="flex flex-col lg:flex-row  w-full items-center gap-y-6 lg:justify-between p-2 dark:text-white">
+
+			<div class="w-1/12">
+
+			</div>
+
+			<div class="flex">
+				<a href="https://fung.wiki/">
+					<Fa icon={faInfoCircle} size="20" class="mr-5"/>
+				</a>
+
+				<a href="https://github.com" >
+					<Fa icon={faGithub} size="20" class="mr-5"/>
+				</a>
+
+				<a href="https://app.sushi.com/swap">
+					<Fa icon={faHandHoldingUsd} size="20" class="mr-5"/>
+				</a>
+				
+				<a href="https://fung.wiki/">
+					<Fa icon={faBookOpen} size="20" class="mr-5"/>
+				</a>
+
+				<a href="https://discord.gg/EbvCkxhP">
+					<Fa icon={faDiscord} size="20" class="mr-5"/>
+				</a>
+
+			</div>
+
+			<div class="social-media flex">
+				<a href="https://github.com">
+					<Fa icon={faTwitter} size="20" class="mr-4"/>
+				</a>
+
+				<a href="https://twitter.com/fung_fi">
+					<Fa icon={faTelegram} size="20" class="mr-4"/>
+				</a>
+				<a href="https://fung.wiki/">
+					<Fa icon={faInstagram} size="20" class="mr-4"/>
+				</a>
+				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
+					<Fa icon={faTiktok} size="20" class="mr-4"/>
+				</a>
+				<a href="https://discord.gg/EbvCkxhP">
+					<Fa icon={faSnapchat} size="20" class="mr-4"/>
+				</a>
+			</div>
+
+			
+			
 		</div>
 	</div>
 </footer>
@@ -66,4 +100,6 @@
 	.dark-active {
 		background: #0b1216;
 	}
+
+	
 </style>
