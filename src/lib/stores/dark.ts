@@ -7,6 +7,5 @@ const autoDark = setInterval(() => {
 	if (date.getHours() >= 20 || date.getHours() <= 8) {
 		console.log('Dark mode: on');
 		darkMode.set(true);
-		clearInterval(autoDark);
 	}
 }, 1000);
