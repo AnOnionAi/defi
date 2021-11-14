@@ -8,13 +8,13 @@
 	import { onMount } from 'svelte';
 	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
-	setInit('es');
+	setInit('en');
 	onMount(() => {
 		const langs: string[] = ['es', 'en', 'de', 'fr'];
 		const lang: string = getLocaleFromNavigator().split('-')[0];
 		if (langs.includes(lang)) {
 			goto(`/${lang}`, { replaceState: true });
-		} else goto('/es', { replaceState: true });
+		} else goto('/en', { replaceState: true });
 	});
 </script>
 
