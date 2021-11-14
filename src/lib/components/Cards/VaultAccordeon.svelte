@@ -7,40 +7,36 @@
 	import { Token } from '$lib/ts/types';
 	import { parseBigNumberToString, parseBigNumberToDecimal } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
-	import { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	import { getUniPair } from '$lib/utils/contracts';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
+	import { quickImages, sushiImages } from '$lib/config/constants/vaultsImages';
 	import { Chasing } from 'svelte-loading-spinners';
-	import { ethers, providers } from 'ethers';
+	import { providers , ethers} from 'ethers';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
 		transactionSend
 	} from '$lib/config/constants/notifications';
-
 	import { getNotificationsContext } from 'svelte-notifications';
 	const { addNotification } = getNotificationsContext();
-
 	export let hasRoundedBorder = false;
-	export let tkn0Img;
-	export let tkn1Img;
 	export let vaultConfig: VaultInfo;
-
+	let allImages = [ ...quickImages, ...sushiImages ];
 	let userAcc: string;
 	let isHidden: boolean = true;
 	let isApproved: boolean;
-	let stakedTokens: BigNumber;
+	let stakedTokens;
 	let userTokens: BigNumber;
 	let apy: string;
 	let tvl: string;
 	let daily: string;
+	let borderStyle: string = 'rounded-lg';
 	let tkn0Price: number;
 	let tkn1Price: number;
-
 	let userApproveAmount;
 	let userDepositAmount: string;
 	let userWithdrawAmount: string;
-
 	const loadingState = {
 		something: false,
 		approve: false,
@@ -48,23 +44,20 @@
 		withdraw: false,
 		harvest: false
 	};
-
 	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
 		}
 	});
-
 	const openAccordeon = (): void => {
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
-
 	const handleTransaction = async (transaction: Promise<any>, transactionName: string) => {
 		loadingState.something = true;
 		loadingState[transactionName] = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await transaction;
+			const tx = await transaction;			
 			await tx.wait();
 			addNotification(transactionCompleted);
 
@@ -86,7 +79,9 @@
 				userTokens = userTokens.sub(bnDepositedTokens);
 			}
 			if (transactionName == 'withdraw') {
-				const bnWithdrawedTokens = BigNumber.from(ethers.utils.parseEther(userWithdrawAmount.trim()));
+				const bnWithdrawedTokens = BigNumber.from(
+					ethers.utils.parseEther(userWithdrawAmount.trim())
+				);
 				stakedTokens = stakedTokens.sub(bnWithdrawedTokens);
 				userTokens = userTokens.add(bnWithdrawedTokens);
 			}
@@ -94,14 +89,11 @@
 			setTimeout(() => {
 				getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
 					userTokens = balance;
-					console.log(parseBigNumberToString(userTokens));
 				});
-
 				stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
 					stakedTokens = stakedAmount;
-					console.log(parseBigNumberToString(stakedTokens));
 				});
-			}, 20000);
+			}, 8000);
 		} catch (error) {
 			console.log(error);
 			addNotification(transactionDeniedByTheUser);
@@ -109,7 +101,6 @@
 		loadingState.something = false;
 		loadingState[transactionName] = false;
 	};
-
 	$: if (!isHidden) {
 		if (userAcc) {
 			getTokenAllowance(
@@ -119,19 +110,15 @@
 			).then((res) => {
 				isApproved = isNotZero(res);
 			});
-
 			getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
 				userTokens = balance;
 			});
-
 			stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
 				stakedTokens = stakedAmount;
 			});
-
 			getTokenPriceUSD(vaultConfig.pair.token0Contract).then((response) => {
 				tkn0Price = response[vaultConfig.pair.token0Contract.toLowerCase()].usd;
 			});
-
 			getTokenPriceUSD(vaultConfig.pair.token1Contract).then((response) => {
 				tkn1Price = response[vaultConfig.pair.token1Contract.toLowerCase()].usd;
 			});
@@ -149,8 +136,12 @@
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
 			<div class="flex justify-center items-center">
 				<div class="flex relative h-11 w-12">
-					<img src={tkn0Img} alt="Token 1" class="h-7 w-7" />
-					<img src={tkn1Img} alt="Token 2" class="h-7 w-7 absolute bottom-0 right-1" />
+					<img src={ [...allImages.filter(({pair}) => pair.token0Name === vaultConfig.pair.token0Name )][0].pair.token0ImagePath} alt="Token 1" class="h-7 w-7" />
+					<img
+						src={ [...allImages.filter(({pair}) => pair.token1Name === vaultConfig.pair.token1Name )][0].pair.token1ImagePath}
+						alt="Token 2"
+						class="h-7 w-7 absolute bottom-0 right-1"
+					/>
 				</div>
 				<div class="ml-2">
 					<p class="font-bold uppercase smaller-font text-gray-600 dark:text-gray-400">
@@ -160,11 +151,15 @@
 						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 					</p>
 					<div class="hidden">
-						<p class="bg-blue-500">.</p>
-						<p class="bg-pink-500">.</p>
+						<p class="bg-blue-500 text-blue-500 border-blue-500">.</p>
+						<p class="bg-pink-500 text-pink-500 border-pink-500">.</p>
 					</div>
 
-					<slot />
+					<div
+						class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-{vaultConfig.platform.brandColor}-500 text-{vaultConfig.platform.brandColor}-500  text-xs w-20 h-6"
+					>
+						{vaultConfig.platform.name}
+					</div>
 				</div>
 			</div>
 			<div class="">
@@ -220,8 +215,7 @@
 			{#if !$accounts}
 				<button
 					on:click={metaMaskCon}
-					class="w-full bg-{vaultConfig.platform
-						.brandColor}-500  rounded-xl p-2 text-white font-semibold text-xl tracking-wide "
+					class="w-full bg-{vaultConfig.platform.brandColor}-500  rounded-xl p-2 text-white font-semibold text-xl tracking-wide "
 					>Unlock
 				</button>
 			{:else}
@@ -389,27 +383,22 @@
 		-moz-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
 		-webkit-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
 	}
-
 	input {
 		font-size: 18px;
 		font-weight: bold;
 		outline: none;
 	}
-
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
-
 	.secondary-font {
 		color: rgb(151, 157, 198);
 	}
-
 	.smaller-font {
 		font-size: 0.62rem;
 	}
-
 	.side-shadows {
 		box-shadow: 12px 0 15px -4px rgba(0, 55, 162, 0.97), -12px 0 8px -4px rgba(0, 55, 162, 0.97);
 	}
