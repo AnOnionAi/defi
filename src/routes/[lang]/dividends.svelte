@@ -107,13 +107,13 @@
 
 	.mush_background{
 		background-image: url("/backgrounds/niceMush.svg");
-		background-position: right;
+		background-position: 60% 50%;
 		background-repeat: no-repeat;
 	}
 
 	.mush_background__dark{
 		background-image: url("/backgrounds/niceDarkMush.svg");
-		background-position: right;
+		background-position: 52% 40%;
 		background-repeat: no-repeat;
 	}
 

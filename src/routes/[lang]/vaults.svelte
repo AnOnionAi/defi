@@ -212,12 +212,15 @@
 
 </script>
 
-<section class="mb-12 background__lite">
+<section class="pb-3 ">
 	<br />
 	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.vaults.text")}</h1>
 
-		<div in:fade={{ duration: 600 }} class="mt-10 sideShadow">
-			<VaultFilter bind:platformSelected={platformSelected} bind:stakedOnly={stakedOnly} on:staked={handleStaked} bind:sortby={sortby} bind:zeroBalance={zero} bind:statement={statement} />
+		<div  class="pt-10 sideShadow background__lite">
+			<div in:fade={{ duration: 600 }}>
+				<VaultFilter bind:platformSelected={platformSelected} bind:stakedOnly={stakedOnly} on:staked={handleStaked} bind:sortby={sortby} bind:zeroBalance={zero} bind:statement={statement} />
+
+			</div>
 
 					{#each [...filteredVaults] as vault, index}
 						{#if index == 0}

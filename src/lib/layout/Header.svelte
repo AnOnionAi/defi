@@ -241,11 +241,11 @@
 								'hover:bg-transparent connected'} px-3 text-dark-800 py-3 mr-1 rounded-lg font-medium hover:no-underline no-underline"
 						>
 							{#if isInstalled == 'checking'}
-								Checking Metamask...
+								{$_("walletStatus.checking")}
 							{:else if $accounts}
-								Connected
+							{$_("walletStatus.connected")}
 							{:else if isInstalled == 'isInstalled'}
-								Wallet
+							{$_("walletStatus.wallet")}
 							{:else}
 								<a
 									target="blank"

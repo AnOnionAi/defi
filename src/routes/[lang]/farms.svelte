@@ -21,12 +21,12 @@
 </script>
 
 <Modal>
-	<section class="background_pattern {$darkMode && 'darkbg_pattern'}">
+	<section class="">
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.farms.text")}</h1>
-		<section class="mt-3">
-			<section class="mt-5 space-y-4">
-				<div class="w-23/24 {$darkMode && ''}  mx-auto rounded-xl">
+		<section class="">
+			<section class="mt-5 background_lite {$darkMode && 'background__dark'} py-10">
+				<div class="w-23/24  mx-auto rounded-xl max-w-7xl ">
 					<div class="flex flex-row justify-center gap-6 p-12 text-center flex-wrap   rounded-xl">
 						<!--Start Farms-->
 						{#each farms as farm}
@@ -41,11 +41,16 @@
 </Modal>
 
 <style>
-	.background_pattern{
-		background-image: url("/backgrounds/transparentBg.png");
+	.background_lite{
+		background-image: url("/backgrounds/niceMush.svg");
+		background-position: 50% 50%;
+		
+		background-repeat: no-repeat;
 	}
 
-	.darkbg_pattern{
-		background-image: url("/backgrounds/transparentDarkBg.png");
+	.background__dark{
+		background-image: url("/backgrounds/niceDarkMush.svg");
+		background-position: 45% 100%;
+		background-repeat: no-repeat;	
 	}
 </style>

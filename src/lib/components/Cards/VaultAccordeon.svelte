@@ -155,8 +155,8 @@
 						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 					</p>
 					<div class="hidden">
-						<p class="bg-blue-500 text-blue-500 border-blue-500">.</p>
-						<p class="bg-pink-500 text-pink-500 border-pink-500">.</p>
+						<p class="bg-blue-500 text-blue-500 border-blue-500 hover:bg-blue-500 active:bg-blue-500">.</p>
+						<p class="bg-pink-500 text-pink-500 border-pink-500 hover:bg-pink-500 active:bg-pink-500">.</p>
 					</div>
 
 					<div
@@ -254,7 +254,7 @@
 									disabled={loadingState.something}
 									on:click={async () =>
 										handleTransaction(deposit(vaultConfig.pid, userDepositAmount), 'deposit')}
-									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide"
+									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig.platform.brandColor}-500 {loadingState.deposit && `bg-${vaultConfig.platform.brandColor}-500`}"
 								>
 									<p>{$_("actions.deposit")}</p>
 									{#if loadingState.deposit}
@@ -276,7 +276,7 @@
 											'approve'
 										)}
 									class="flex items-center bg-black  disabled:opacity-50 {loadingState.something &&
-										'cursor-not-allowed'} text-white font-bold rounded-lg px-5 py-3 tracking-wide"
+										'cursor-not-allowed'} text-white font-bold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig.platform.brandColor}-500 {loadingState.approve && `bg-${vaultConfig.platform.brandColor}-500`}"
 								>
 									<p>{$_("actions.approve")}</p>
 									{#if loadingState.approve}
@@ -323,7 +323,7 @@
 										withdraw(vaultConfig.pid, userWithdrawAmount.toString()),
 										'withdraw'
 									)}
-								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-bold rounded-lg px-4 py-3 tracking-wide"
+								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-bold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig.platform.brandColor}-500 {loadingState.withdraw && `bg-${vaultConfig.platform.brandColor}-500`}"
 							>
 								<p>{$_("actions.withdraw")}</p>
 								{#if loadingState.withdraw}
@@ -333,12 +333,12 @@
 								{/if}
 							</button>
 						</div>
-						<div class="flex">
-							<p class="mr-1 font-medium text-gray-500">{$_("actions.withdrawalfee")}:</p>
+						<div class="flex dark:text-white font-semibold">
+							<p class="mr-1 text-gray-500 dark:text-white	 ">{$_("actions.withdrawalfee")}:</p>
 							{#if vaultConfig.withdrawalFee}
-								<p class="font-medium">{vaultConfig.withdrawalFee}%</p>
+								<p class="">{vaultConfig.withdrawalFee}%</p>
 							{:else}
-								<p class="font-medium">{$_("actions.notAvaliable")}</p>
+								<p class="">{$_("actions.notAvaliable")}</p>
 							{/if}
 						</div>
 					</div>
@@ -352,14 +352,14 @@
 								{#if tkn0Price}
 									{vaultConfig.pair.token0quote}: ${tkn0Price}
 								{:else}
-									{vaultConfig.pair.token0quote}: {$_("vaultAccordeon.notListedIn")} CoinGecko
+									{vaultConfig.pair.token0quote}: {$_("vaultAccordeon.loading")}...
 								{/if}
 							</p>
 							<p class=" dark:text-white">
 								{#if tkn1Price}
 									{vaultConfig.pair.token1quote}: ${tkn1Price}
 								{:else}
-									{vaultConfig.pair.token1quote}: {$_("vaultAccordeon.notListedIn")} CoinGecko
+									{vaultConfig.pair.token1quote}: {$_("vaultAccordeon.loading")}...
 								{/if}
 							</p>
 							<div class="py-2">

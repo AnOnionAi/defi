@@ -104,7 +104,8 @@
 	"vaultAccordeon": {
 		"currentPrices": "Aktuelle Preise",
 		"notListedIn":"Nicht Aufgeführt In",
-		"viewInfo":"Informationen Anzeigen"
+		"viewInfo":"Informationen Anzeigen",
+		"loading": "Wird geladen"
 	},
 	
 	"vaultFilter": {
@@ -125,6 +126,13 @@
 		"otherOptions": "Andere Optionen",
 		"depositYour": "Hinterlegen Sie Ihre",
 		"withdrawYour": "Ziehen Sie Ihres"
+	},
+
+	"walletStatus":{
+		"wallet": "Brieftasche",
+		"install": "Installieren Metamask",
+		"connected": "Verbunden",
+		"checking": "Suche nach Metamask..."
 	}
 
 

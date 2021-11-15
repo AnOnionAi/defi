@@ -183,7 +183,7 @@
 	class=" flex flex-col d-flex justify-content-center self-start  bg-white shadow-lg dark:bg-dark-900 rounded-2xl space-y-2 dark:border-2  dark:border-green-500 min-w-88 max-w-88 "
 >
 	<div class=" flex justify-center items-center py-2 max-h-100 min-h-50">
-		<img class="max-h-40" src={info.tokenImagePath} alt="tic-tac-toe" />
+		<img class="max-h-40" src={info.tokenImagePath} alt="Farm Picture" />
 	</div>
 	<div class="p-2 space-y-3 ">
 		<p class="text-lg font-bold dark:text-white">{info.tokenName}</p>
@@ -208,7 +208,7 @@
 				<p class="text-xs font-medium dark:text-white uppercase">MUSH {$_("pastActions.earned")}:</p>
 			</div>
 			<div class="flex pt-3 justify-between">
-				<p class="tabular-nums text-xl p-1 font-medium">
+				<p class="tabular-nums  p-1 font-medium dark:text-white">
 					{#if userEarnings}
 						{parseBigNumberToDecimal(userEarnings)}
 					{:else}
@@ -230,7 +230,7 @@
 
 		{#if tokenApproved && $accounts}
 			<div class="flex justify-between px-5">
-				<p class="tabular-nums text-xl p-1 font-medium">
+				<p class="tabular-nums  p-1 font-medium dark:text-white">
 					{#if userStakedTokens}
 						{parseBigNumberToDecimal(userStakedTokens)}
 					{:else}
@@ -240,14 +240,14 @@
 				<div class="flex">
 					<p
 						on:click={goDeposit}
-						class="text-green-400 font-semibold text-lg tracking-wider p-1 cursor-pointer  {!canStake &&
+						class="text-green-400 font-semibold  tracking-wider p-1 cursor-pointer  {!canStake &&
 							'invisible'}"
 					>
 						{$_("actions.deposit")}
 					</p>
 					<p
 						on:click={goWithdraw}
-						class="text-green-400 font-semibold text-lg tracking-wider p-1 ml-6 cursor-pointer  {!canWithdraw &&
+						class="text-green-400 font-semibold  tracking-wider p-1 ml-6 cursor-pointer  {!canWithdraw &&
 							'hidden'}"
 					>
 					{$_("actions.withdraw")}
@@ -271,10 +271,10 @@
 		</p>
 		{/if}
 
-		<div class="flex justify-center p-4" on:click={showPoolInfo}>
+		<div class="flex justify-center p-4 hover:animate-bounce" on:click={showPoolInfo}>
 			{#if isHidden}
 				<div class="flex cursor-pointer">
-					<p class="dark:text-white">{$_("poolCard.details")}</p>
+					<p class="dark:text-white font-semibold">{$_("poolCard.details")}</p>
 					{#if $darkMode}
 					<Fa icon={faChevronDown} size="xs" scale={0.9} translateX={0.5} translateY={0.65} color={"#fff"} />
 					{:else}
@@ -282,8 +282,8 @@
 					{/if}
 				</div>
 			{:else}
-				<div class="flex cursor-pointer">
-					<p class="dark:text-white">{$_("poolCard.hide")}</p>
+				<div class="flex cursor-pointer ">
+					<p class="dark:text-white font-semibold">{$_("poolCard.hide")}</p>
 					{#if $darkMode}
 					<Fa icon={faChevronUp} size="xs" scale={0.9} translateX={0.5} translateY={0.65} color={"#fff"} />
 					{:else}

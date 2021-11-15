@@ -14,11 +14,11 @@
 
 </script>
 
-<div class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white mt-4 mb-4 p-4 dark:bg-dark-600 dark:text-white">
+<div class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white my-4 px-4 pb-4 pt-6 dark:bg-dark-600 dark:text-white border border-white">
 
     <div class="flex flex-row flex-wrap w-auto justify-around relative">
 
-        <div class="flex lg:flex-row flex-col w-full max-w-6xl m-auto sm:justify-between">
+        <div class="flex lg:flex-row flex-col w-full max-w-6xl m-auto sm:justify-between ">
 
             <label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
                 <span class="checkbox__input">
@@ -135,8 +135,8 @@
             <div class="content-select">
                 <select
                     bind:value={sortby}>
-                    <option class="min-w-7xl" value="Descending">Descending</option>
-                    <option value="Ascending">Ascending</option>
+                    <option class="min-w-7xl" value="Descending">{$_("vaultFilter.desceding")}</option>
+                    <option value="Ascending">{$_("vaultFilter.ascending")}</option>
                 </select>
                 <i></i>
             </div>

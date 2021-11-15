@@ -102,12 +102,13 @@
 	"vaultAccordeon": {
 		"currentPrices": "Precios Actuales",
 		"notListedIn":"Sin listar en",
-		"viewInfo":"Ver Información"
+		"viewInfo":"Ver Información",
+		"loading": "Cargando"
 	},
 	
 	"vaultFilter": {
 		"all" : "Todos",
-		"hidezero": "Hide Zero Balances",
+		"hidezero": "Esconder Balances Cero",
 		"filterby": "Filtrar por",
 		"sortby": "Ordenar por",
 		"search": "Buscar",
@@ -123,5 +124,12 @@
 		"otherOptions": "Otras Opciones",
 		"depositYour": "DEPOSITA TU",
 		"withdrawYour": "RETIRA TU"
+	},
+
+	"walletStatus":{
+		"wallet": "Cartera",
+		"install": "Instala Metamask",
+		"connected": "Conectado",
+		"checking": "Verificando Metamask..."
 	}
 }
