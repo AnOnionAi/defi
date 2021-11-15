@@ -212,7 +212,7 @@
 
 </script>
 
-<section class="mb-12">
+<section class="mb-12 background__lite">
 	<br />
 	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.vaults.text")}</h1>
 
@@ -232,5 +232,7 @@
 </section>
 
 <style>
-	
+	.background__lite{
+		background-image: url("/backgrounds/vaultsBackgroundLite.png");
+	}
 </style>
