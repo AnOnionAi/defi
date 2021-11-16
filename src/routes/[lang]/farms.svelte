@@ -13,8 +13,6 @@
 
 <script lang="ts">
 	import { farms } from '$lib/config/constants/farms';
-	console.log(farms);
-
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import Modal from 'svelte-simple-modal';
 	import 'virtual:windi.css';
