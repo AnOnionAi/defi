@@ -25,6 +25,7 @@ specifiers:
   playwright: ^1.15.1
   prettier: ^2.4.1
   prettier-plugin-svelte: ^2.4.0
+  rollup: ^2.60.0
   svelte: ^3.43.2
   svelte-fa: ^2.3.3
   svelte-i18n: ^3.3.9
@@ -71,6 +72,7 @@ devDependencies:
   playwright: 1.15.2
   prettier: 2.4.1
   prettier-plugin-svelte: 2.4.0_prettier@2.4.1+svelte@3.44.0
+  rollup: 2.60.0
   svelte: 3.44.0
   svelte-preprocess: 4.7.3_svelte@3.44.0+typescript@4.4.4
   svelte-windicss-preprocess: 4.0.7_svelte@3.44.0
@@ -4378,8 +4380,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /rollup/2.57.0:
-    resolution: {integrity: sha512-bKQIh1rWKofRee6mv8SrF2HdP6pea5QkwBZSMImJysFj39gQuiV8MEPBjXOCpzk3wSYp63M2v2wkWBmFC8O/rg==}
+  /rollup/2.60.0:
+    resolution: {integrity: sha512-cHdv9GWd58v58rdseC8e8XIaPUo8a9cgZpnCMMDGZFDZKEODOiPPEQFXLriWr/TjXzhPPmG5bkAztPsOARIcGQ==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -4959,7 +4961,7 @@ packages:
       esbuild: 0.13.3
       postcss: 8.3.8
       resolve: 1.20.0
-      rollup: 2.57.0
+      rollup: 2.60.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
