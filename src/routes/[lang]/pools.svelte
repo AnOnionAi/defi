@@ -12,7 +12,6 @@
 
 <script lang="ts">
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
-	import MushCard from '$lib/components/Cards/MushPool.svelte';
 	import { pools } from '$lib/config/constants/pools';
 	import Modal from 'svelte-simple-modal';
 	import { darkMode } from '$lib/stores/dark';

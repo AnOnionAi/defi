@@ -7,7 +7,7 @@
 	import { _ } from 'svelte-i18n';
 	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { scale } from 'svelte/transition';
-	import { faWallet, faSun, faMoon, faBars } from '@fortawesome/free-solid-svg-icons/';
+	import { faWallet, faSun, faMoon, faBars } from '@fortawesome/free-solid-svg-icons';
 	import Icon from 'svelte-fa';
 	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';

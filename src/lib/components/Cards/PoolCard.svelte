@@ -9,9 +9,8 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import type { BigNumber } from 'ethers';
-	import { ethers } from 'ethers';
 	import Fa from 'svelte-fa';
-	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons/';
+	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 	import { deposit, withdraw, getRewards, getStakedTokens } from '$lib/utils/masterc';
 	import {
 		parseBigNumberToDecimal,

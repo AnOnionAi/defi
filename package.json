@@ -48,7 +48,7 @@
 		"@sveltejs/adapter-static": "^1.0.0-next.0",
 		"cookie": "^0.4.1",
 		"dotenv": "^10.0.0",
-		"ethers": "^5.4.3",
+		"ethers": "5.5.1",
 		"path": "^0.12.7",
 		"svelte-fa": "^2.3.3",
 		"svelte-i18n": "^3.3.9",
