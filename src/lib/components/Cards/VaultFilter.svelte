@@ -152,7 +152,7 @@
 		<div class="pt-8 pb-4 mt-4 sm:pt-10 m-auto sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
 			<button
 				class:active={stakedOnly}
-				class="bg-gray-300 hover:bg-gray-500 text-dark dark:text-dark font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded"
+				class="bg-green-400 rounded-md text-white capitalize"
 				on:click={select}>{$_('vaultFilter.stakedonly')}</button
 			>
 		</div>
@@ -198,9 +198,9 @@
 		padding: 7px 10px;
 		height: 42px;
 		font-size: 1em;
-		font-weight: 400;
+		font-weight: 600;
 		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-		color: black;
+		
 	}
 
 	.title {

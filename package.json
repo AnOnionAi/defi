@@ -18,10 +18,11 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^1.0.0-next.32",
-		"@sveltejs/kit": "1.0.0-next.182",
+		"@sveltejs/kit": "1.0.0-next.196",
 		"@types/three": "^0.129.1",
 		"@typescript-eslint/eslint-plugin": "^4.33.0",
 		"@typescript-eslint/parser": "^4.33.0",
+		"@yushijinhun/three-minifier-rollup": "^0.3.0",
 		"eslint": "^7.32.0",
 		"eslint-config-google": "^0.14.0",
 		"eslint-config-prettier": "^8.3.0",
