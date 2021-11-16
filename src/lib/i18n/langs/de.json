@@ -1,4 +1,4 @@
-	{
+{
 	"hello": "Willkommen bei",
 	"pages": {
 		"about": {
@@ -18,11 +18,11 @@
 		"automated-crypto": {
 			"text": "Automatisiertes Crypto Market Making"
 		},
-		"dividends":{
+		"dividends": {
 			"text": "Dividenden"
 		},
-		"dashboard":{
-			"text":"Armaturenbrett"
+		"dashboard": {
+			"text": "Armaturenbrett"
 		},
 		"farms": {
 			"text": "Bauernhöfe"
@@ -37,7 +37,7 @@
 			"text": "Krypto-Verantwortung"
 		}
 	},
-	"dashboard":{
+	"dashboard": {
 		"wallet": "In deinem Portemonnaiet",
 		"tvl": "Gesamtwert gesperrt",
 		"across": "Über alle Fung Financial",
@@ -59,16 +59,16 @@
 		"goDeposit": "Einzahlung Gehen"
 	},
 
-	"dividendsPage":{
-		"cyw":  "Verbinden Sie Ihre Brieftasche",
+	"dividendsPage": {
+		"cyw": "Verbinden Sie Ihre Brieftasche",
 		"approval": "Genehmigung erforderlich",
-		"approvalDescription":"Sie müssen zuerst Ihre MUSH-Ausgaben genehmigen."
+		"approvalDescription": "Sie müssen zuerst Ihre MUSH-Ausgaben genehmigen."
 	},
 
-	"your":{
+	"your": {
 		"wallet": "Deine Geldbörse"
 	},
-	"actions":{
+	"actions": {
 		"earn": "Verdiene",
 		"get": "Erhalten",
 		"add": "Addieren",
@@ -77,63 +77,61 @@
 		"approve": "Genehmigen",
 		"unlock": "Freischalten",
 		"deposit": "Anzahlung",
-		"withdraw":"Zurückziehen",
-		"harvest":"Ernte",
+		"withdraw": "Zurückziehen",
+		"harvest": "Ernte",
 		"stake": "Einatz",
 		"details": "Einzelheiten",
 		"depositfee": "Einzahlungsgebühr",
-		"withdrawalfee":"Abhebegebühr",
+		"withdrawalfee": "Abhebegebühr",
 		"notAvaliable": "Nicht verfügbar"
 	},
 
-	"pastActions":{
+	"pastActions": {
 		"earned": "Verdient",
 		"deposited": "Hinterlegt",
 		"withdrawed": "Zurückgezogen",
 		"staked": "Abgesteckt"
 	},
 
-	"poolCard":{
+	"poolCard": {
 		"details": "Einzelheiten",
 		"hide": "Verstecken",
-		"totalLiquidity":"Gesamtliquidität",
+		"totalLiquidity": "Gesamtliquidität",
 		"myLiquidity": "Meine Liquidität",
 		"viewonMatic": "Ansicht Auf Matic"
 	},
 
 	"vaultAccordeon": {
 		"currentPrices": "Aktuelle Preise",
-		"notListedIn":"Nicht Aufgeführt In",
-		"viewInfo":"Informationen Anzeigen",
+		"notListedIn": "Nicht Aufgeführt In",
+		"viewInfo": "Informationen Anzeigen",
 		"loading": "Wird geladen"
 	},
-	
+
 	"vaultFilter": {
-		"all" : "Alle",
+		"all": "Alle",
 		"hidezero": "Nullsalden Ausblenden",
 		"filterby": "Filtern Nach",
 		"sortby": "Sortieren Nach",
 		"search": "Suche",
-		"stakedonly":"Staked nur",
+		"stakedonly": "Staked nur",
 		"desceding": "Absteigend",
 		"ascending": "Aufsteigend",
 		"searchvaults": "Tresore durchsuchen"
 	},
 
-	"modals":{
-		"input" : "Eingang",
+	"modals": {
+		"input": "Eingang",
 		"balance": "Gleichgewicht",
 		"otherOptions": "Andere Optionen",
 		"depositYour": "Hinterlegen Sie Ihre",
 		"withdrawYour": "Ziehen Sie Ihres"
 	},
 
-	"walletStatus":{
+	"walletStatus": {
 		"wallet": "Brieftasche",
 		"install": "Installieren Metamask",
 		"connected": "Verbunden",
 		"checking": "Suche nach Metamask..."
 	}
-
-
 }

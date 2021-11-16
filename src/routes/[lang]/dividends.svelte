@@ -66,11 +66,13 @@
 		}
 	}
 </script>
+
 <br />
-<h1 class="tracking-widest  text-4xl dark:text-white">{$_("headers.dividends.text")}</h1>	
+<h1 class="tracking-widest  text-4xl dark:text-white">{$_('headers.dividends.text')}</h1>
 <div class="my-6">
-	<div class="dividends-wrapper {$darkMode && 'darkBackground  mush_background__dark'} mush_background">
-		
+	<div
+		class="dividends-wrapper {$darkMode && 'darkBackground  mush_background__dark'} mush_background"
+	>
 		<div
 			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
 		>
@@ -97,7 +99,7 @@
 		background-color: var(--light-background);
 	}
 
-	.dividends{
+	.dividends {
 		max-height: 600px;
 	}
 
@@ -105,17 +107,15 @@
 		background-color: var(--dark-gradient);
 	}
 
-	.mush_background{
-		background-image: url("/backgrounds/niceMush.svg");
+	.mush_background {
+		background-image: url('/backgrounds/niceMush.svg');
 		background-position: 60% 50%;
 		background-repeat: no-repeat;
 	}
 
-	.mush_background__dark{
-		background-image: url("/backgrounds/niceDarkMush.svg");
+	.mush_background__dark {
+		background-image: url('/backgrounds/niceDarkMush.svg');
 		background-position: 52% 40%;
 		background-repeat: no-repeat;
 	}
-
-	
 </style>

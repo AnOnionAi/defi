@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import { isHomescreen } from '$lib/stores/homescreen';
 	export const prerender = false;
-	
+
 	export function load({ page }) {
 		const { lang } = page.params;
 
@@ -15,7 +15,7 @@
 
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	
+
 	import space from '/static/space.jpg';
 	import moon from '/static/moon.jpg';
 	import mush from '/static/mush.jpg';
@@ -28,10 +28,8 @@
 	let canvas;
 	let scene;
 	onMount(() => {
-
 		isHomescreen.set(true);
 		console.log($isHomescreen);
-		
 
 		scene = new THREE.Scene();
 
@@ -194,10 +192,9 @@
 		animate();
 	});
 
-
-	onDestroy(()=>{
+	onDestroy(() => {
 		isHomescreen.set(false);
-	})
+	});
 </script>
 
 <section class="relative">
@@ -319,7 +316,6 @@
 		left: 0;
 		top: 0;
 	}
-	
 
 	canvas {
 		position: absolute;

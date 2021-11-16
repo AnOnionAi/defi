@@ -7,19 +7,16 @@
 	import { _ } from 'svelte-i18n';
 	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { scale } from 'svelte/transition';
-	import { faWallet } from '@fortawesome/free-solid-svg-icons/faWallet.js';
-	import { faSun } from '@fortawesome/free-solid-svg-icons/faSun.js';
-	import { faMoon } from '@fortawesome/free-solid-svg-icons/faMoon.js';
-	import { faBars } from '@fortawesome/free-solid-svg-icons/faBars.js';
+	import { faWallet, faSun, faMoon, faBars } from '@fortawesome/free-solid-svg-icons/';
 	import Icon from 'svelte-fa';
 	import { darkMode } from '$lib/stores/dark';
-	import {isHomescreen} from "$lib/stores/homescreen"
+	import { isHomescreen } from '$lib/stores/homescreen';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	
+
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;
 	let home = false;
@@ -34,7 +31,7 @@
 	};
 
 	if (!$page.params.lang) {
-		setInit("en");
+		setInit('en');
 	}
 
 	if ($page.params.lang) {
@@ -87,19 +84,16 @@
 		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
 		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
 		console.log($page.params.lang);
-		
 	};
 
-	const validLang= (lang:string) => {
-		const langs = ["es","en","de","fr"];
-		if(langs.includes(lang)){
+	const validLang = (lang: string) => {
+		const langs = ['es', 'en', 'de', 'fr'];
+		if (langs.includes(lang)) {
 			return lang;
+		} else {
+			return 'en';
 		}
-		else{
-			return "en";
-		}
-	}
-
+	};
 
 	let isInstalled = 'checking';
 	onMount(() => {
@@ -138,7 +132,9 @@
 	}}
 />
 <nav
-	class="{isHomescreen && 'z-10'} backdrop-filter {($darkMode && !$isHomescreen) && 'dark-active'} backdrop-blur top-0 w-full text-black "
+	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
+		!$isHomescreen &&
+		'dark-active'} backdrop-blur top-0 w-full text-black "
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-5 ">
@@ -206,7 +202,8 @@
 						<span
 							on:click={changeDark}
 							class="dark:hover:bg-gray-800 hover:bg-gray-200 {$darkMode &&
-								'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium"
+								'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium {!$darkMode &&
+								'spinner'}"
 						>
 							{#if isDark}
 								<Icon class="text-white" icon={faMoon} />
@@ -238,14 +235,14 @@
 							class="dark:text-white {$darkMode &&
 								'dark:hover:bg-green-400'}  block hover:bg-gray-200 {isInstalled == 'checking' &&
 								'cursor-default hover:bg-transparent'} {$accounts &&
-								'hover:bg-transparent connected'} px-3 text-dark-800 py-3 mr-1 rounded-lg font-medium hover:no-underline no-underline"
+								'hover:bg-transparent connected'} pl-2 pr-1 text-dark-800 py-2 mr-1 rounded-lg font-medium hover:no-underline no-underline"
 						>
 							{#if isInstalled == 'checking'}
-								{$_("walletStatus.checking")}
+								{$_('walletStatus.checking')}
 							{:else if $accounts}
-							{$_("walletStatus.connected")}
+								{$_('walletStatus.connected')}
 							{:else if isInstalled == 'isInstalled'}
-							{$_("walletStatus.wallet")}
+								{$_('walletStatus.wallet')}
 							{:else}
 								<a
 									target="blank"
@@ -256,9 +253,13 @@
 							{/if}
 						</span>
 						<span
-							class="{$accounts ? 'bg-green-400' : 'bg-gray-300'} m-auto p-2 rounded-1 inline-flex"
+							class="{$accounts ? 'bg-green-400' : 'bg-gray-300'} m-auto pr-2 rounded-1 inline-flex"
 						>
-							<Icon icon={faWallet} />
+							{#if isDark}
+								<Icon icon={faWallet} color="#fff" />
+							{:else}
+								<Icon icon={faWallet} color="#000" />
+							{/if}
 						</span>
 					</button>
 				</div>
@@ -288,13 +289,14 @@
 	<!-- start mobile navbar -->
 	<div
 		class:menu_mobile_dark={home}
-		class="{navbarMenuIsOpen
-			? 'block'
-			: 'hidden'} dark:text-white lg:hidden dark:bg-blue-gray-800 bg-white"
+		class="{navbarMenuIsOpen ? 'block' : 'hidden'} dark:text-white lg:hidden  {$darkMode &&
+			!$isHomescreen &&
+			'dark-active'}"
 	>
 		<div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-1">
 			{#each PAGES as page}
 				<button
+					class="w-full"
 					on:click={() => {
 						gotoPage(page.route);
 					}}
@@ -304,7 +306,7 @@
 					</span>
 				</button>
 			{/each}
-			<p on:click={changeDark}>
+			<div class="flex justify-center py-3" on:click={changeDark}>
 				<span class="block dark:hover:bg-dark-600 px-3 py-3 rounded-md font-medium">
 					{#if isDark}
 						<Icon icon={faMoon} />
@@ -312,7 +314,7 @@
 						<Icon icon={faSun} />
 					{/if}
 				</span>
-			</p>
+			</div>
 			<button
 				disabled={isInstalled == 'checking' || $accounts}
 				on:click={metaMaskCon}
@@ -346,18 +348,32 @@
 	</div>
 </nav>
 
-<style global>
+<style>
+	.spinner {
+		animation: spin 4s linear infinite;
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.menu_mobile__background {
+		background-color: #f9f9f9;
+	}
 	.dark-active {
 		background: #2c363e;
 	}
 	.navbar_item_home:hover {
 		color: black;
 	}
-	.menu_mobile_dark {
-		background-color: black !important;
-	}
+
 	button.bg-green-400 {
-		border-radius: 15px;
+		border-radius: 12px;
 		cursor: pointer;
 	}
 	span.connected:hover {

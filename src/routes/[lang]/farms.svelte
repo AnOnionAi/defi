@@ -23,14 +23,16 @@
 <Modal>
 	<section class="">
 		<br />
-		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.farms.text")}</h1>
+		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
+			{$_('headers.farms.text')}
+		</h1>
 		<section class="">
 			<section class="mt-5 background_lite {$darkMode && 'background__dark'} py-10">
 				<div class="w-23/24  mx-auto rounded-xl max-w-7xl ">
 					<div class="flex flex-row justify-center gap-6 p-12 text-center flex-wrap   rounded-xl">
 						<!--Start Farms-->
 						{#each farms as farm}
-							<PoolCard  info={farm} />
+							<PoolCard info={farm} />
 						{/each}
 					</div>
 				</div>
@@ -41,16 +43,16 @@
 </Modal>
 
 <style>
-	.background_lite{
-		background-image: url("/backgrounds/niceMush.svg");
+	.background_lite {
+		background-image: url('/backgrounds/niceMush.svg');
 		background-position: 50% 50%;
-		
+
 		background-repeat: no-repeat;
 	}
 
-	.background__dark{
-		background-image: url("/backgrounds/niceDarkMush.svg");
+	.background__dark {
+		background-image: url('/backgrounds/niceDarkMush.svg');
 		background-position: 45% 100%;
-		background-repeat: no-repeat;	
+		background-repeat: no-repeat;
 	}
 </style>

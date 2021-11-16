@@ -18,11 +18,11 @@
 		"automated-crypto": {
 			"text": "Création de Marché Crypto Automatisée"
 		},
-		"dividends":{
+		"dividends": {
 			"text": "Dividendes"
 		},
-		"dashboard":{
-			"text":"Tableau"
+		"dashboard": {
+			"text": "Tableau"
 		},
 		"farms": {
 			"text": "Fermes"
@@ -37,7 +37,7 @@
 			"text": "Responsabilité Cryptographique"
 		}
 	},
-	"dashboard":{
+	"dashboard": {
 		"wallet": "Dans Votre Portefeuille",
 		"tvl": "Valeur totale verrouillée",
 		"across": "Dans l'ensemble de la FungFinance",
@@ -59,16 +59,16 @@
 		"goDeposit": "Aller Dépôt"
 	},
 
-	"dividendsPage":{
-		"cyw":  "Connectez Votre Portefeuille",
+	"dividendsPage": {
+		"cyw": "Connectez Votre Portefeuille",
 		"approval": "Approbation exigée",
-		"approvalDescription":"Vous devez d'abord approuver vos dépenses MUSH"
+		"approvalDescription": "Vous devez d'abord approuver vos dépenses MUSH"
 	},
 
-	"your":{
+	"your": {
 		"wallet": "Ton Portefeuille"
 	},
-	"actions":{
+	"actions": {
 		"earn": "Gagner",
 		"get": "Avoir",
 		"add": "Ajouter",
@@ -77,57 +77,57 @@
 		"approve": "Approve",
 		"unlock": "Unlock",
 		"deposit": "Deposit",
-		"withdraw":"Withdraw",
-		"harvest":"Harvest",
+		"withdraw": "Withdraw",
+		"harvest": "Harvest",
 		"stake": "Stake",
 		"details": "Details",
 		"depositfee": "Frais de dépôt",
-		"withdrawalfee":"Frais de Retrait",
+		"withdrawalfee": "Frais de Retrait",
 		"notAvaliable": "Pas Disponible"
 	},
 
-	"pastActions":{
+	"pastActions": {
 		"earned": "Gagné",
 		"deposited": "Déposée",
 		"withdrawed": "Retirée",
 		"staked": "Jalonné"
 	},
 
-	"poolCard":{
+	"poolCard": {
 		"details": "Détails",
 		"hide": "Cacher",
-		"totalLiquidity":"Liquidité Totale",
+		"totalLiquidity": "Liquidité Totale",
 		"myLiquidity": "Ma liquidité",
 		"viewonMatic": "Voir sur Matic"
 	},
 
 	"vaultAccordeon": {
 		"currentPrices": "Prix ​​Actuels",
-		"notListedIn":"Non répertorié dans",
-		"viewInfo":"Voir Informations",
+		"notListedIn": "Non répertorié dans",
+		"viewInfo": "Voir Informations",
 		"loading": "Charge"
 	},
-	
+
 	"vaultFilter": {
-		"all" : "Tout",
+		"all": "Tout",
 		"hidezero": "Masquer Les Soldes Nuls",
 		"filterby": "Filtrer Par",
 		"sortby": "Trier Par",
 		"search": "Chercher",
-		"stakedonly":"Jalonné Seulement",
+		"stakedonly": "Jalonné Seulement",
 		"desceding": "Descendante",
 		"ascending": "Ascendant",
 		"searchvaults": "Rechercher Des Coffres"
 	},
 
-	"modals":{
-		"input" : "L'apport",
+	"modals": {
+		"input": "L'apport",
 		"balance": "Le Solde",
 		"otherOptions": "Autres Options",
 		"depositYour": "Déposez Votre",
 		"withdrawYour": "Retirez votre"
 	},
-	"walletStatus":{
+	"walletStatus": {
 		"wallet": "Portefeuille",
 		"install": "Installer Metamask",
 		"connected": "Connecté",

@@ -28,7 +28,7 @@
 	import { getTokenBalance, isNotZero } from '$lib/utils/erc20';
 	import { stakedWantTokens } from '$lib/utils/vaultChef';
 	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
- 	import { BigNumber } from "ethers";
+	import { BigNumber } from 'ethers';
 
 	let unsubscribe;
 
@@ -38,18 +38,16 @@
 			if (account) {
 				for (const vault of allVaults) {
 					const balance = await getTokenBalance(vault.pair.pairContract, userAccount);
-					if ( vault.pid !== -1 ) {
-						const staked = await stakedWantTokens( vault.pid, userAccount )
-						vaultsWithBalance.push({ ...vault, balance, staked })		// BigNumber.from('0')
+					if (vault.pid !== -1) {
+						const staked = await stakedWantTokens(vault.pid, userAccount);
+						vaultsWithBalance.push({ ...vault, balance, staked }); // BigNumber.from('0')
 					} else {
 						vaultsWithBalance.push({ ...vault, balance });
 					}
-
 				}
 				console.log(vaultsWithBalance);
 				filteredVaults = [...vaultsWithBalance];
 			}
-
 		});
 	});
 	onDestroy(() => {});
@@ -68,174 +66,171 @@
 	let stakedOnly;
 	let stakedOnlyPrev;
 	let statement;
-	
+
 	$: {
+		if (zeroPrev !== undefined) {
+			zeroPrev = zero;
+		}
 
+		platformSelectedPrev = platformSelected;
 
-			if ( zeroPrev !== undefined )
-			{ 
-				zeroPrev = zero;
+		if (platformSelected !== 'All' && platformSelected !== undefined) {
+			if ($accounts && zero) {
+				filteredVaults = vaultsWithBalance.filter(
+					(vault) => vault.platform.name == platformSelected && isNotZero(vault.balance)
+				);
+			} else if ($accounts && stakedOnly) {
+				filteredVaults = vaultsWithBalance.filter(
+					(vault) =>
+						vault.platform.name == platformSelected && vault.staked && isNotZero(vault.staked)
+				);
+			} else {
+				filteredVaults = allVaults.filter((vault) => vault.platform.name == platformSelected);
 			}
-
-			platformSelectedPrev = platformSelected;
-
-
-			if ( platformSelected !== 'All' && platformSelected !== undefined ) {
-				if ( $accounts && zero ) {
-					filteredVaults = vaultsWithBalance.filter((vault) => vault.platform.name == platformSelected && isNotZero(vault.balance));
-				} else if ( $accounts && stakedOnly ) {
-					filteredVaults = vaultsWithBalance.filter((vault) => vault.platform.name == platformSelected && ( vault.staked && isNotZero(vault.staked)));
-				} 
-				else {
-					filteredVaults = allVaults.filter((vault) => vault.platform.name == platformSelected);
-				}
-				
-			}
-			else {
-				filteredVaults = [...allVaults];
-			}
-
+		} else {
+			filteredVaults = [...allVaults];
+		}
 	}
 
 	$: {
-
-		if ( $accounts ) {
-
-			if ( stakedOnly ) {
-				filteredVaultsPrev = [...filteredVaults]
-				if ( !zero ) {
-					filteredVaults = vaultsWithBalance.filter( vault => vault.staked ? isNotZero( vault.staked ) : false )
+		if ($accounts) {
+			if (stakedOnly) {
+				filteredVaultsPrev = [...filteredVaults];
+				if (!zero) {
+					filteredVaults = vaultsWithBalance.filter((vault) =>
+						vault.staked ? isNotZero(vault.staked) : false
+					);
 				} else {
-					filteredVaults = filteredVaultsPrev.filter( vault => vault.staked ? isNotZero( vault.staked ) : false )
+					filteredVaults = filteredVaultsPrev.filter((vault) =>
+						vault.staked ? isNotZero(vault.staked) : false
+					);
 				}
-				
 			} else {
-				if ( !zero ) {
+				if (!zero) {
 					filteredVaults = [...filteredVaultsPrev];
 				} else {
-
 				}
-			} 
-
+			}
 		} else {
 			filteredVaultsPrev = [...filteredVaults];
-			if ( stakedOnly ) {
+			if (stakedOnly) {
 				filteredVaults = [];
-				
 			} else {
-				
 				filteredVaults = [...filteredVaultsPrev];
-
 			}
 		}
-
-    }
-	
+	}
 
 	$: {
-		if ( $accounts ) {
-		
-			if ( zero ) {
+		if ($accounts) {
+			if (zero) {
 				filteredVaultsPrev = [...filteredVaults];
-				if ( stakedOnly ) filteredVaults = vaultsWithBalance.filter( vault => isNotZero( vault.balance ) && vault.balance !== 'N/A' && (vault.platform.name === platformSelected || platformSelected === 'All' ) && ( vault.staked ? isNotZero( vault.staked ) : false ))		
-				else filteredVaults = vaultsWithBalance.filter( vault => isNotZero( vault.balance ) && vault.balance !== 'N/A' && (vault.platform.name === platformSelected || platformSelected === 'All' ) )				
-		
-
+				if (stakedOnly)
+					filteredVaults = vaultsWithBalance.filter(
+						(vault) =>
+							isNotZero(vault.balance) &&
+							vault.balance !== 'N/A' &&
+							(vault.platform.name === platformSelected || platformSelected === 'All') &&
+							(vault.staked ? isNotZero(vault.staked) : false)
+					);
+				else
+					filteredVaults = vaultsWithBalance.filter(
+						(vault) =>
+							isNotZero(vault.balance) &&
+							vault.balance !== 'N/A' &&
+							(vault.platform.name === platformSelected || platformSelected === 'All')
+					);
 			}
-			
 		} else {
-			if ( zero ) {
+			if (zero) {
 				zeroPrev = zero;
 				filteredVaultsPrev = [...filteredVaults];
-				filteredVaults = [];				
+				filteredVaults = [];
 			}
 		}
+	}
 
-	}	
-
-	$: {	
-		if ( !stakedOnly && !zero ) {
-
-			if ( sortby && sortby !== undefined ) 
-				if ( sortby === 'Ascending' ) {
+	$: {
+		if (!stakedOnly && !zero) {
+			if (sortby && sortby !== undefined)
+				if (sortby === 'Ascending') {
 					filteredVaultsPrev = [...filteredVaults];
 
-					if ( platformSelected === 'All' ) {
-							filteredVaults = [...quickVaults, ...sushiVaults].reverse();
-							
-						} else if ( platformSelected === 'QuickSwap' ) {
-							filteredVaults = [...quickVaults].reverse();
-						} else if ( platformSelected === 'SushiSwap' ) {
-							filteredVaults = [...sushiVaults].reverse();
-						}
-				}
-				else if ( sortby === 'Descending' ) {
-					if ( sortbyPrev === 'Ascending' || sortbyPrev === 'Descending' ) {
-						filteredVaultsPrev = [...filteredVaults];
-						
-						if ( platformSelected === 'All' ) {
-							filteredVaults = [...quickVaults, ...sushiVaults];
-
-						} else if ( platformSelected === 'QuickSwap' ) {
-							filteredVaults = [...quickVaults];
-						} else if ( platformSelected === 'SushiSwap' ) {
-							filteredVaults = [...sushiVaults];
-
-						}
+					if (platformSelected === 'All') {
+						filteredVaults = [...quickVaults, ...sushiVaults].reverse();
+					} else if (platformSelected === 'QuickSwap') {
+						filteredVaults = [...quickVaults].reverse();
+					} else if (platformSelected === 'SushiSwap') {
+						filteredVaults = [...sushiVaults].reverse();
 					}
-					else {					
+				} else if (sortby === 'Descending') {
+					if (sortbyPrev === 'Ascending' || sortbyPrev === 'Descending') {
+						filteredVaultsPrev = [...filteredVaults];
+
+						if (platformSelected === 'All') {
+							filteredVaults = [...quickVaults, ...sushiVaults];
+						} else if (platformSelected === 'QuickSwap') {
+							filteredVaults = [...quickVaults];
+						} else if (platformSelected === 'SushiSwap') {
+							filteredVaults = [...sushiVaults];
+						}
+					} else {
 						filteredVaultsPrev = [...filteredVaults];
 						filteredVaults = [...allVaults];
 					}
 				}
-				
-		sortbyPrev = sortby;
+
+			sortbyPrev = sortby;
+		}
 	}
 
-		}	
-		
-		
-
 	$: {
-
 		const keys = ['token0Name', 'token1Name'];
-		filteredVaults = allVaults.filter( vault => keys.some(ex => (new RegExp(statement,"gi")).test(vault['pair'][ex])) && (( platformSelected !== 'All') ? vault.platform.name === platformSelected : true) );
+		filteredVaults = allVaults.filter(
+			(vault) =>
+				keys.some((ex) => new RegExp(statement, 'gi').test(vault['pair'][ex])) &&
+				(platformSelected !== 'All' ? vault.platform.name === platformSelected : true)
+		);
 	}
 
 	const handleStaked = () => {
-
 		stakedOnlyPrev = stakedOnly;
 		stakedOnly = !stakedOnly;
-
-	}
-	
-
+	};
 </script>
 
 <section class="pb-3 ">
 	<br />
-	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">{$_("headers.vaults.text")}</h1>
+	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
+		{$_('headers.vaults.text')}
+	</h1>
 
-		<div  class="pt-10 sideShadow background__lite">
-			<div in:fade={{ duration: 600 }}>
-				<VaultFilter bind:platformSelected={platformSelected} bind:stakedOnly={stakedOnly} on:staked={handleStaked} bind:sortby={sortby} bind:zeroBalance={zero} bind:statement={statement} />
-
-			</div>
-
-					{#each [...filteredVaults] as vault, index}
-						{#if index == 0}
-							<VaultAccordeon vaultConfig={vault} hasRoundedBorder={true} />
-						{:else}
-							<VaultAccordeon vaultConfig={vault} />
-						{/if}
-					{/each}
-
-			<BottomList />
+	<div class="pt-10 sideShadow background__lite">
+		<div in:fade={{ duration: 600 }}>
+			<VaultFilter
+				bind:platformSelected
+				bind:stakedOnly
+				on:staked={handleStaked}
+				bind:sortby
+				bind:zeroBalance={zero}
+				bind:statement
+			/>
 		</div>
+
+		{#each [...filteredVaults] as vault, index}
+			{#if index == 0}
+				<VaultAccordeon vaultConfig={vault} hasRoundedBorder={true} />
+			{:else}
+				<VaultAccordeon vaultConfig={vault} />
+			{/if}
+		{/each}
+
+		<BottomList />
+	</div>
 </section>
 
 <style>
-	.background__lite{
-		background-image: url("/backgrounds/vaultsBackgroundLite.png");
+	.background__lite {
+		background-image: url('/backgrounds/vaultsBackgroundLite.png');
 	}
 </style>
