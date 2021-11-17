@@ -20,8 +20,6 @@ jobs:
         run: sudo npm install -g pnpm
 
       - name: Install dependencies
-        with:
-          node-version: '16'
         run: |
           pnpm install -D svelte prettier prettier-plugin-svelte eslint eslint-config-google typescript
           pnpm install -D eslint-config-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
