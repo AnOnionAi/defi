@@ -7,7 +7,7 @@ specifiers:
   '@fortawesome/free-solid-svg-icons': ^5.15.3
   '@sveltejs/adapter-netlify': ^1.0.0-next.32
   '@sveltejs/adapter-static': ^1.0.0-next.0
-  '@sveltejs/kit': 1.0.0-next.182
+  '@sveltejs/kit': 1.0.0-next.196
   '@types/three': ^0.129.1
   '@typescript-eslint/eslint-plugin': ^4.33.0
   '@typescript-eslint/parser': ^4.33.0
@@ -56,7 +56,7 @@ dependencies:
 
 devDependencies:
   '@sveltejs/adapter-netlify': 1.0.0-next.32
-  '@sveltejs/kit': 1.0.0-next.182_svelte@3.44.0
+  '@sveltejs/kit': 1.0.0-next.196_svelte@3.44.0
   '@types/three': 0.129.1
   '@typescript-eslint/eslint-plugin': 4.33.0_cc617358c89d3f38c52462f6d809db4c
   '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.4.4
@@ -1134,12 +1134,12 @@ packages:
     resolution: {integrity: sha512-5QYrPSjfqI/Jd2av/WuwhZjRZHaWu8tGmBHM6dh5W7cd4s0PG3eW0p4eASZESHmtCFWGG00PYMRjUUFPPtEcOg==}
     dev: false
 
-  /@sveltejs/kit/1.0.0-next.182_svelte@3.44.0:
-    resolution: {integrity: sha512-XR8SYJTDD84wN89ynRmP/FBwUWY61dAXsveKPI4JcW9njgnDN6mplDqh4lTZ0CvexV/Yv5Fd910Pm3IPV6SEBw==}
-    engines: {node: ^12.20 || >=14.13}
+  /@sveltejs/kit/1.0.0-next.196_svelte@3.44.0:
+    resolution: {integrity: sha512-z7sA/2/3Il5biibjPXCYXJC11TyFhgCvMaJvvbtMnu2l3EmOmJBMS+r2djGptzfFsugSVNwGQFn8+ldWQWq3jA==}
+    engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
-      svelte: ^3.43.0
+      svelte: ^3.44.0
     dependencies:
       '@sveltejs/vite-plugin-svelte': 1.0.0-next.30_svelte@3.44.0+vite@2.6.14
       cheap-watch: 1.0.4
