@@ -46,7 +46,7 @@
 
 	async function refreshUserData() {
 		try {
-			console.log('Balances Fetched');
+			
 			userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN), $accounts[0]);
 			userStakedTokens = await stakedWantTokens(2, $accounts[0]);
 			const [, rewardDebt] = await getUserInfo($accounts[0]);
@@ -78,7 +78,7 @@
 		} catch (error) {
 			addNotification(transactionDeniedByTheUser);
 			loadingState.loadingDeposit = false;
-			console.log(loadingState.loadingDeposit);
+			
 		}
 		loadingState.loadingDeposit = false;
 	}
@@ -137,7 +137,6 @@
 
 			getPendingReward($accounts[0]).then((reward) => {
 				userReward = reward;
-				console.log(userReward);
 				userCanHarvest = isNotZero(userReward);
 			});
 		}

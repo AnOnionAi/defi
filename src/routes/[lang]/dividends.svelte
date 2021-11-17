@@ -56,11 +56,8 @@
 				getContractAddress(Token.MUSHTOKEN),
 				getContractAddress(Token.VAULTCHEF)
 			);
-			console.log(tx);
 			await tx.wait();
-			console.log('Prueba de approval');
 			approved = true;
-			console.log(approved);
 		} catch (e) {
 			console.log(e);
 		}

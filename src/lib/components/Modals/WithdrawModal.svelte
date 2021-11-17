@@ -18,7 +18,6 @@
 	let onChange = (wantAmount?: any) => {};
 
 	function _onWithdraw() {
-		console.log('ejecuta');
 		onWithdraw(wantAmount);
 		close();
 	}

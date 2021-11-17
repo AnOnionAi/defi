@@ -29,7 +29,6 @@
 	let scene;
 	onMount(() => {
 		isHomescreen.set(true);
-		console.log($isHomescreen);
 
 		scene = new THREE.Scene();
 

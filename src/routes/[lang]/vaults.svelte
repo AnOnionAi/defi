@@ -45,7 +45,6 @@
 						vaultsWithBalance.push({ ...vault, balance });
 					}
 				}
-				console.log(vaultsWithBalance);
 				filteredVaults = [...vaultsWithBalance];
 			}
 		});

@@ -64,11 +64,9 @@
 
 	const onOkay = async (amount) => {
 		loadingState.loadingDeposit = true;
-		console.log(userStakedTokens, 'before');
 		addNotification(transactionSend);
 		try {
 			const tx = await deposit(info.pid, amount);
-			console.log(tx);
 			await tx.wait();
 		} catch (error) {
 			console.log('Internal Error on DepositHandler', error);
@@ -136,7 +134,6 @@
 			tokenApproved = isNotZero(tokenAllowance);
 			if (tokenApproved) {
 				userBalance = await getTokenBalance(info.tokenAddr, userAcc);
-				console.log(userBalance, 'balance');
 
 				canStake = isNotZero(userBalance);
 				userEarnings = await getRewards(info.pid, userAcc);

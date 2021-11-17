@@ -19,7 +19,6 @@
 				userMushAmount = formattedNumber;
 				const factor: number = 0.0001;
 				mushToFiat = parseInt(fullNumber) * factor;
-				console.log(mushToFiat);
 				mushToFiat = mushToFiat.toFixed(2);
 			}
 		});
