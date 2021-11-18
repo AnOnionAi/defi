@@ -11,12 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
+
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
         node-version: '16'
-        run: npm install  
 
 
       - name: Checkout code
