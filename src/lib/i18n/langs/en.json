@@ -18,6 +18,12 @@
 		"automated-crypto": {
 			"text": "Automated Crypto Market Making"
 		},
+		"dividends": {
+			"text": "Dividends"
+		},
+		"dashboard": {
+			"text": "Dashboard"
+		},
 		"farms": {
 			"text": "Farms"
 		},
@@ -30,5 +36,102 @@
 		"crypto-responsibility": {
 			"text": "Crypto Responsibility"
 		}
+	},
+	"dashboard": {
+		"wallet": "In your Wallet",
+		"tvl": "Total Value Locked",
+		"across": "Across all Fung Financial",
+		"earn": "Earn More",
+		"index": "Index",
+		"mushpb": "MUSH per block",
+		"marketcap": "Market Cap",
+		"totalvol": "Total Volume",
+		"maxsupply": "Max Supply",
+		"price": "Mush Price:",
+		"today": "Today",
+		"peak": "Peak",
+		"profit": "Profit",
+		"lockedInFarms": "Locked in Mush Farms",
+		"lockedInPools": "Locked in Poly Pools",
+		"lockedInVaults": "Locked in Zyber Vaults",
+		"startFarming": "Start Farming",
+		"addLiquidity": "Add Liquidity",
+		"goDeposit": "Go Deposit"
+	},
+
+	"dividendsPage": {
+		"cyw": "Connect your Wallet",
+		"approval": "Approval Required",
+		"approvalDescription": "You must first approve your MUSH spending."
+	},
+
+	"your": {
+		"wallet": "Your Wallet"
+	},
+	"actions": {
+		"earn": "Earn",
+		"get": "Get",
+		"add": "Add",
+		"depositFee": "Deposit Fee",
+		"wallet": "Wallet",
+		"approve": "Approve",
+		"unlock": "Unlock",
+		"deposit": "Deposit",
+		"withdraw": "Withdraw",
+		"harvest": "Harvest",
+		"stake": "Stake",
+		"details": "Details",
+		"depositfee": "Deposit Fee",
+		"withdrawalfee": "Withdrawal Fee",
+		"notAvaliable": "Not Avaliable"
+	},
+
+	"pastActions": {
+		"earned": "Earned",
+		"deposited": "Deposited",
+		"withdrawed": "Withdrawed",
+		"staked": "Staked"
+	},
+
+	"poolCard": {
+		"details": "Details",
+		"hide": "Hide",
+		"totalLiquidity": "Total Liquidity",
+		"myLiquidity": "My Liquidity",
+		"viewonMatic": "View On Matic"
+	},
+
+	"vaultAccordeon": {
+		"currentPrices": "Current Prices",
+		"notListedIn": "Not Listed In",
+		"viewInfo": "View Info",
+		"loading": "Loading"
+	},
+
+	"vaultFilter": {
+		"all": "All",
+		"hidezero": "Hide Zero Balances",
+		"filterby": "Filter By",
+		"sortby": "Sort By",
+		"search": "Search",
+		"stakedonly": "Staked Only",
+		"desceding": "Descending",
+		"ascending": "Ascending",
+		"searchvaults": "Search Vaults"
+	},
+
+	"modals": {
+		"input": "Input",
+		"balance": "Balance",
+		"otherOptions": "Other Options",
+		"depositYour": "DEPOSIT YOUR",
+		"withdrawYour": "WITHDRAW YOUR"
+	},
+
+	"walletStatus": {
+		"wallet": "Wallet",
+		"install": "Install Metamask",
+		"connected": "Connected",
+		"checking": "Checking Metamask..."
 	}
 }

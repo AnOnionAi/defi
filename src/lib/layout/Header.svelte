@@ -4,32 +4,40 @@
 
 <script lang="ts">
 	import 'virtual:windi.css';
+	import { _ } from 'svelte-i18n';
+	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { scale } from 'svelte/transition';
-	import { faWallet } from '@fortawesome/free-solid-svg-icons/faWallet.js';
-	import { faSun } from '@fortawesome/free-solid-svg-icons/faSun.js';
-	import { faMoon } from '@fortawesome/free-solid-svg-icons/faMoon.js';
-	import { faBars } from '@fortawesome/free-solid-svg-icons/faBars.js';
+	import { faWallet, faSun, faMoon, faBars } from '@fortawesome/free-solid-svg-icons';
 	import Icon from 'svelte-fa';
 	import { darkMode } from '$lib/stores/dark';
+	import { isHomescreen } from '$lib/stores/homescreen';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import bFloppa from '/static/fungfi.png';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
-	if ($page.params.lang) {
-		setInit($page.params.lang);
-	}
+	import { onMount } from 'svelte';
+
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;
 	let home = false;
 	let menu;
 	let isDark: boolean;
+
 	darkMode.subscribe((val) => {
 		isDark = val;
 	});
 	const changeDark = (e) => {
 		darkMode.set(!isDark);
 	};
+
+	if (!$page.params.lang) {
+		setInit('en');
+	}
+
+	if ($page.params.lang) {
+		setInit($page.params.lang);
+	}
+
 	const LANGUAGES = [
 		{
 			code: 'es',
@@ -48,33 +56,45 @@
 			lang: 'Français'
 		}
 	];
+
 	const PAGES = [
 		{
-			route: `/${$page.params.lang}/dashboard`,
-			title: 'Dashboard'
+			route: `/dashboard`,
+			title: $_('headers.dashboard.text')
 		},
 		{
-			route: `/${$page.params.lang}/dividends`,
-			title: 'Dividends'
+			route: `/dividends`,
+			title: $_('headers.dividends.text')
 		},
 		{
-			route: `/${$page.params.lang}/farms`,
-			title: 'Farms'
+			route: `/farms`,
+			title: $_('headers.farms.text')
 		},
 		{
-			route: `/${$page.params.lang}/pools`,
-			title: 'Pools'
+			route: `/pools`,
+			title: $_('headers.pools.text')
 		},
 		{
-			route: `/${$page.params.lang}/vaults`,
-			title: 'Vaults'
+			route: `/vaults`,
+			title: $_('headers.vaults.text')
 		}
 	];
+
 	const gotoPage = (route: string, home: boolean = false) => {
 		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
-		else goto(`/${$page.params.lang}/${route.toLowerCase()}`, { replaceState: true });
+		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
+		console.log($page.params.lang);
 	};
-	import { onMount } from 'svelte';
+
+	const validLang = (lang: string) => {
+		const langs = ['es', 'en', 'de', 'fr'];
+		if (langs.includes(lang)) {
+			return lang;
+		} else {
+			return 'en';
+		}
+	};
+
 	let isInstalled = 'checking';
 	onMount(() => {
 		const isMetaMaskInstalled = () => {
@@ -112,7 +132,9 @@
 	}}
 />
 <nav
-	class="z-10 backdrop-filter {$darkMode && 'dark-active'} backdrop-blur top-0 w-full text-black "
+	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
+		!$isHomescreen &&
+		'dark-active'} backdrop-blur top-0 w-full text-black "
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-5 ">
@@ -128,7 +150,7 @@
 					class="dark:border dark:rounded-md dark:hover:bg-blue-gray-600 hover:bg-gray-100 focus:outline-none font-medium flex p-2 items-center "
 				>
 					<p class="m-0 font-semibold text-gray-900 dark:text-white">
-						{$page.params.lang ? $page.params.lang : '...'}
+						{$page.params.lang ? validLang($page.params.lang) : '...'}
 					</p>
 				</button>
 				{#if showDropDownMenu}
@@ -166,7 +188,7 @@
 						gotoPage('', true);
 					}}
 				>
-					<img class="w-10 rounded-full" src={bFloppa} alt="floppa" />
+					<img class="w-10 rounded-full" src="/fungfi.png" alt="Fung Finance Logo" />
 					<span class="w-24 text-lg dark:text-white font-semibold" style="margin: auto 0 auto 5px;">
 						FUNG F I
 					</span>
@@ -176,11 +198,12 @@
 
 			<div class="hidden lg:block sm:ml-auto">
 				<div class="flex space-x-5 items-center">
-					<a href="#">
+					<p>
 						<span
 							on:click={changeDark}
 							class="dark:hover:bg-gray-800 hover:bg-gray-200 {$darkMode &&
-								'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium"
+								'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium {!$darkMode &&
+								'spinner'}"
 						>
 							{#if isDark}
 								<Icon class="text-white" icon={faMoon} />
@@ -188,11 +211,11 @@
 								<Icon class="text-black" icon={faSun} />
 							{/if}
 						</span>
-					</a>
+					</p>
 					{#each PAGES as page}
 						<button
 							on:click={() => {
-								gotoPage(page.title);
+								gotoPage(page.route);
 							}}
 						>
 							<span
@@ -212,14 +235,14 @@
 							class="dark:text-white {$darkMode &&
 								'dark:hover:bg-green-400'}  block hover:bg-gray-200 {isInstalled == 'checking' &&
 								'cursor-default hover:bg-transparent'} {$accounts &&
-								'hover:bg-transparent connected'} px-3 text-dark-800 py-3 mr-1 rounded-lg font-medium hover:no-underline no-underline"
+								'hover:bg-transparent connected'} pl-2 pr-1 text-dark-800 py-2 mr-1 rounded-lg font-medium hover:no-underline no-underline"
 						>
 							{#if isInstalled == 'checking'}
-								Checking Metamask...
+								{$_('walletStatus.checking')}
 							{:else if $accounts}
-								Connected
+								{$_('walletStatus.connected')}
 							{:else if isInstalled == 'isInstalled'}
-								Wallet
+								{$_('walletStatus.wallet')}
 							{:else}
 								<a
 									target="blank"
@@ -230,9 +253,13 @@
 							{/if}
 						</span>
 						<span
-							class="{$accounts ? 'bg-green-400' : 'bg-gray-300'} m-auto p-2 rounded-1 inline-flex"
+							class="{$accounts ? 'bg-green-400' : 'bg-gray-300'} m-auto pr-2 rounded-1 inline-flex"
 						>
-							<Icon icon={faWallet} />
+							{#if isDark}
+								<Icon icon={faWallet} color="#fff" />
+							{:else}
+								<Icon icon={faWallet} color="#000" />
+							{/if}
 						</span>
 					</button>
 				</div>
@@ -262,15 +289,16 @@
 	<!-- start mobile navbar -->
 	<div
 		class:menu_mobile_dark={home}
-		class="{navbarMenuIsOpen
-			? 'block'
-			: 'hidden'} dark:text-white lg:hidden dark:bg-blue-gray-800 bg-white"
+		class="{navbarMenuIsOpen ? 'block' : 'hidden'} dark:text-white lg:hidden  {$darkMode &&
+			!$isHomescreen &&
+			'dark-active'}"
 	>
 		<div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-1">
 			{#each PAGES as page}
 				<button
+					class="w-full"
 					on:click={() => {
-						gotoPage(page.title);
+						gotoPage(page.route);
 					}}
 				>
 					<span class="block dark:hover:bg-dark-600 px-3 py-3 rounded-md font-medium">
@@ -278,7 +306,7 @@
 					</span>
 				</button>
 			{/each}
-			<a on:click={changeDark} href="#">
+			<div class="flex justify-center py-3" on:click={changeDark}>
 				<span class="block dark:hover:bg-dark-600 px-3 py-3 rounded-md font-medium">
 					{#if isDark}
 						<Icon icon={faMoon} />
@@ -286,7 +314,7 @@
 						<Icon icon={faSun} />
 					{/if}
 				</span>
-			</a>
+			</div>
 			<button
 				disabled={isInstalled == 'checking' || $accounts}
 				on:click={metaMaskCon}
@@ -320,23 +348,32 @@
 	</div>
 </nav>
 
-<style global>
+<style>
+	.spinner {
+		animation: spin 4s linear infinite;
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.menu_mobile__background {
+		background-color: #f9f9f9;
+	}
 	.dark-active {
 		background: #2c363e;
-	}
-	.navbar_home {
-		color: white !important;
-		z-index: 10;
-		background-color: transparent !important;
 	}
 	.navbar_item_home:hover {
 		color: black;
 	}
-	.menu_mobile_dark {
-		background-color: black !important;
-	}
+
 	button.bg-green-400 {
-		border-radius: 15px;
+		border-radius: 12px;
 		cursor: pointer;
 	}
 	span.connected:hover {

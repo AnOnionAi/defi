@@ -11,44 +11,36 @@
 </script>
 
 <script lang="ts">
-	import doge from '/static/doge.png';
-	import mxnc from '/static/mxnc.png';
-	import sushi from '/static/sushi.png';
-	import fish from '/static/fish.svg';
-	import dyfn from '/static/dfyn.svg';
-	import quick from '/static/quiswa.png';
-	import matic from '/static/matic.png';
-	import weth from '/static/weth.png';
-	import wbtc from '/static/wbtc.png';
-	import usdt from '/static/usdt.png';
-	import usdc from '/static/usdc.png';
-	import mushRound from '/static/mushRound.png';
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
-	import MushCard from '$lib/components/Cards/MushPool.svelte';
 	import { pools } from '$lib/config/constants/pools';
 	import Modal from 'svelte-simple-modal';
+	import { darkMode } from '$lib/stores/dark';
 	export let lang;
 </script>
 
 <Modal>
-	<section>
+	<section class="">
 		<br />
-		<h1 class="text-dark-200 dark:text-white text-4xl">P O O L S</h1>
-		<div class="mt-5 space-y-4">
-			<div class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap">
-				<PoolCard cardImage={mushRound} info={pools[0]} />
-				<PoolCard cardImage={fish} info={pools[1]} />
-				<PoolCard cardImage={matic} info={pools[2]} />
-				<PoolCard cardImage={weth} info={pools[3]} />
-				<PoolCard cardImage={wbtc} info={pools[4]} />
-				<PoolCard cardImage={sushi} info={pools[5]} />
-				<PoolCard cardImage={quick} info={pools[6]} />
-				<PoolCard cardImage={dyfn} info={pools[7]} />
-				<PoolCard cardImage={usdt} info={pools[8]} />
-				<PoolCard cardImage={usdc} info={pools[9]} />
-				<PoolCard cardImage={doge} info={pools[10]} />
-				<PoolCard cardImage={mxnc} info={pools[11]} />
+		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
+			{$_('headers.pools.text')}
+		</h1>
+		<div class="mt-5 space-y-4 background  {$darkMode && 'background__dark'}">
+			<div
+				class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap max-w-7xl mx-auto "
+			>
+				{#each pools as pool}
+					<PoolCard info={pool} />
+				{/each}
 			</div>
 		</div>
 	</section>
 </Modal>
+
+<style>
+	.background {
+		background-image: url('/backgrounds/poolsBackgroundLite.png');
+	}
+	.background__dark {
+		background-image: url('/backgrounds/poolsDarkBackground.png');
+	}
+</style>
