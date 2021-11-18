@@ -23,8 +23,20 @@
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from './mushModle.svelte';
 	import { _ } from 'svelte-i18n';
-	import {PerspectiveCamera,WebGLRenderer,TorusGeometry,Mesh,MeshStandardMaterial,PointLight,AmbientLight,SphereGeometry,
-	TextureLoader,MathUtils,Scene,Color} from "three"
+	import {
+		PerspectiveCamera,
+		WebGLRenderer,
+		TorusGeometry,
+		Mesh,
+		MeshStandardMaterial,
+		PointLight,
+		AmbientLight,
+		SphereGeometry,
+		TextureLoader,
+		MathUtils,
+		Scene,
+		Color
+	} from 'three';
 	export let lang;
 	let canvas;
 	let scene;
@@ -33,12 +45,7 @@
 
 		scene = new Scene();
 
-		const camera = new PerspectiveCamera(
-			75,
-			window.innerWidth / window.innerHeight,
-			0.1,
-			1000
-		);
+		const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 		const renderer = new WebGLRenderer({
 			canvas

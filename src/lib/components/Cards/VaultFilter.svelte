@@ -200,7 +200,6 @@
 		font-size: 1em;
 		font-weight: 600;
 		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-		
 	}
 
 	.title {
