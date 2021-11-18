@@ -1,6 +1,15 @@
 <script context="module" lang="ts">
 	export const prerender = false;
 	import { darkMode } from '$lib/stores/dark';
+
+	import { _ } from 'svelte-i18n';
+	export async function load({ page }) {
+		const { lang } = page.params;
+
+		return {
+			props: { lang }
+		};
+	}
 </script>
 
 <script lang="ts">
@@ -47,22 +56,22 @@
 				getContractAddress(Token.MUSHTOKEN),
 				getContractAddress(Token.VAULTCHEF)
 			);
-			console.log(tx);
 			await tx.wait();
-			console.log('Prueba de approval');
 			approved = true;
-			console.log(approved);
 		} catch (e) {
 			console.log(e);
 		}
 	}
 </script>
 
-<p class="text-center text-2xl font-bold tracking-widest mt-7 dark:text-white">DIVIDENDS</p>
-<div class="my-auto">
-	<div class="dividends-wrapper {$darkMode && 'darkBackground'}">
+<br />
+<h1 class="tracking-widest  text-4xl dark:text-white">{$_('headers.dividends.text')}</h1>
+<div class="my-6">
+	<div
+		class="dividends-wrapper {$darkMode && 'darkBackground  mush_background__dark'} mush_background"
+	>
 		<div
-			class="h-130 w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
+			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
 		>
 			{#if approved}
 				<div in:fade={{ duration: 1000 }} class="h-full">
@@ -80,18 +89,30 @@
 <style>
 	.dividends-wrapper {
 		width: 100%;
-		height: 100%;
+		height: 82vh;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background-color: var(--light-background);
 	}
 
+	.dividends {
+		max-height: 600px;
+	}
+
 	.darkBackground {
 		background-color: var(--dark-gradient);
 	}
 
-	.darkCard {
-		background-color: var(--dark-thirty);
+	.mush_background {
+		background-image: url('/backgrounds/niceMush.svg');
+		background-position: 60% 50%;
+		background-repeat: no-repeat;
+	}
+
+	.mush_background__dark {
+		background-image: url('/backgrounds/niceDarkMush.svg');
+		background-position: 52% 40%;
+		background-repeat: no-repeat;
 	}
 </style>

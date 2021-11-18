@@ -12,6 +12,8 @@
 	onMount(() => {
 		const langs: string[] = ['es', 'en', 'de', 'fr'];
 		const lang: string = getLocaleFromNavigator().split('-')[0];
+		console.log('LANG IS', lang);
+
 		if (langs.includes(lang)) {
 			goto(`/${lang}`, { replaceState: true });
 		} else goto('/en', { replaceState: true });
@@ -20,4 +22,5 @@
 
 <div>
 	<h1 class="text-center mt-auto mt-5">Getting your lang...</h1>
+	<h2>xd</h2>
 </div>

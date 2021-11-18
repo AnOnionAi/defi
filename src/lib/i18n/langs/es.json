@@ -18,11 +18,17 @@
 		"automated-crypto": {
 			"text": "Creación Automatizada de Criptomercados"
 		},
+		"dividends": {
+			"text": "Dividendos"
+		},
+		"dashboard": {
+			"text": "Tablero"
+		},
 		"farms": {
 			"text": "Granjas"
 		},
 		"pools": {
-			"text": "Quinielas"
+			"text": "Fondos"
 		},
 		"vaults": {
 			"text": "Bóvedas"
@@ -30,5 +36,100 @@
 		"crypto-responsibility": {
 			"text": "Responsibilidad Criptográfica"
 		}
+	},
+	"dashboard": {
+		"wallet": "Tu cartera",
+		"tvl": "Valor Total Guardado",
+		"across": "En todo Fung Financial",
+		"earn": "Gana más",
+		"index": "Index",
+		"mushpb": "MUSH por bloque",
+		"marketcap": "Capitalización",
+		"totalvol": "Volumen Total",
+		"maxsupply": "Suministro Máximo",
+		"price": "Precio del MUSH",
+		"today": "Hoy",
+		"peak": "Máximo",
+		"profit": "Ganancia",
+		"lockedInFarms": "En las granjas de MUSH",
+		"lockedInPools": "En los fondos de Poly",
+		"lockedInVaults": "En las Bóvedas de FungFi ",
+		"startFarming": "Empieza a Farmear",
+		"addLiquidity": "Agrega Liquidez",
+		"goDeposit": "Deposita"
+	},
+	"dividendsPage": {
+		"cyw": "Conecta tu Cartera",
+		"approval": "Se requiere aprobación",
+		"approvalDescription": "Necesitas aprobar el gasto de MUSH primero"
+	},
+	"your": {
+		"wallet": "Your Wallet"
+	},
+	"actions": {
+		"earn": "Gana",
+		"get": "Obten",
+		"add": "Agregar",
+		"depositFee": "Tarifa por Depósito",
+		"wallet": "Cartera",
+		"approve": "Aprobar",
+		"unlock": "Desbloquear",
+		"deposit": "Depositar",
+		"withdraw": "Retirar",
+		"harvest": "Cosechar",
+		"stake": "Poner",
+		"details": "Detalles",
+		"depositfee": "Tarifa por Depósito",
+		"withdrawalfee": "Tarifa de Retiro",
+		"notAvaliable": "No disponible"
+	},
+
+	"pastActions": {
+		"earned": "Ganado",
+		"deposited": "Depositado",
+		"withdrawed": "Retirado",
+		"staked": "Puesto"
+	},
+
+	"poolCard": {
+		"details": "Detalles",
+		"hide": "Esconder",
+		"totalLiquidity": "Liquidez Total",
+		"myLiquidity": "Mi Liquidez",
+		"viewonMatic": "Ver en Matic"
+	},
+
+	"vaultAccordeon": {
+		"currentPrices": "Precios Actuales",
+		"notListedIn": "Sin listar en",
+		"viewInfo": "Ver Información",
+		"loading": "Cargando"
+	},
+
+	"vaultFilter": {
+		"all": "Todos",
+		"hidezero": "Esconder Balances Cero",
+		"filterby": "Filtrar por",
+		"sortby": "Ordenar por",
+		"search": "Buscar",
+		"stakedonly": "Solo Staked",
+		"desceding": "Descendiente",
+		"ascending": "Ascendiente",
+		"searchvaults": "Buscar Bóvedas"
+	},
+
+	"modals": {
+		"input": "Aporte",
+		"balance": "Balance",
+		"otherOptions": "Otras Opciones",
+		"depositYour": "DEPOSITA TU",
+		"withdrawYour": "RETIRA TU"
+	},
+
+	"walletStatus": {
+		"wallet": "Cartera",
+		"install": "Instala Metamask",
+		"connected": "Conectado",
+		"checking": "Verificando Metamask..."
 	}
 }

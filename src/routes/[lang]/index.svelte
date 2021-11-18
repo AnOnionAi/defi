@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { isHomescreen } from '$lib/stores/homescreen';
 	export const prerender = false;
 
 	export function load({ page }) {
@@ -13,7 +14,8 @@
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
+
 	import space from '/static/space.jpg';
 	import moon from '/static/moon.jpg';
 	import mush from '/static/mush.jpg';
@@ -21,21 +23,31 @@
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from './mushModle.svelte';
 	import { _ } from 'svelte-i18n';
-	import * as THREE from 'three';
+	import {
+		PerspectiveCamera,
+		WebGLRenderer,
+		TorusGeometry,
+		Mesh,
+		MeshStandardMaterial,
+		PointLight,
+		AmbientLight,
+		SphereGeometry,
+		TextureLoader,
+		MathUtils,
+		Scene,
+		Color
+	} from 'three';
 	export let lang;
 	let canvas;
 	let scene;
 	onMount(() => {
-		scene = new THREE.Scene();
+		isHomescreen.set(true);
 
-		const camera = new THREE.PerspectiveCamera(
-			75,
-			window.innerWidth / window.innerHeight,
-			0.1,
-			1000
-		);
+		scene = new Scene();
 
-		const renderer = new THREE.WebGLRenderer({
+		const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+		const renderer = new WebGLRenderer({
 			canvas
 		});
 		renderer.setPixelRatio(window.devicePixelRatio);
@@ -44,74 +56,74 @@
 		camera.position.setZ(30);
 
 		//Start Torus
-		const geometryTorusOne = new THREE.TorusGeometry(
+		const geometryTorusOne = new TorusGeometry(
 			7,
 			1,
 			8,
 			25
 		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
-		const materialTorusOne = new THREE.MeshStandardMaterial({ color: 0xff6347, wireframe: true });
-		const torusOne = new THREE.Mesh(geometryTorusOne, materialTorusOne);
+		const materialTorusOne = new MeshStandardMaterial({ color: 0xff6347, wireframe: true });
+		const torusOne = new Mesh(geometryTorusOne, materialTorusOne);
 
 		scene.add(torusOne);
 
-		const geometryTorusThree = new THREE.TorusGeometry(
+		const geometryTorusThree = new TorusGeometry(
 			7,
 			1,
 			5,
 			50
 		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
-		const materialTorusThree = new THREE.MeshStandardMaterial({ color: 0xff6347, wireframe: true });
-		const torusThree = new THREE.Mesh(geometryTorusThree, materialTorusThree);
+		const materialTorusThree = new MeshStandardMaterial({ color: 0xff6347, wireframe: true });
+		const torusThree = new Mesh(geometryTorusThree, materialTorusThree);
 
-		const geometryTorusFour = new THREE.TorusGeometry(
+		const geometryTorusFour = new TorusGeometry(
 			9,
 			1,
 			6,
 			50
 		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
-		const materialTorusFour = new THREE.MeshStandardMaterial({ color: 0xe62e2d, wireframe: true });
-		const torusFour = new THREE.Mesh(geometryTorusFour, materialTorusFour);
+		const materialTorusFour = new MeshStandardMaterial({ color: 0xe62e2d, wireframe: true });
+		const torusFour = new Mesh(geometryTorusFour, materialTorusFour);
 		scene.add(torusThree, torusFour);
 
 		torusOne.position.set(-1.5, 0, -47);
 		// End Torus
 
-		const lightPoint = new THREE.PointLight(0xffffff);
+		const lightPoint = new PointLight(0xffffff);
 
 		lightPoint.position.set(20, 20, 20);
 
-		const ambientLight = new THREE.AmbientLight(0xffffff);
+		const ambientLight = new AmbientLight(0xffffff);
 		scene.add(lightPoint, ambientLight);
 
 		function addStar() {
-			const geometry = new THREE.SphereGeometry(0.25, 24, 24);
-			const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+			const geometry = new SphereGeometry(0.25, 24, 24);
+			const material = new MeshStandardMaterial({ color: 0xffffff });
 
-			const star = new THREE.Mesh(geometry, material);
+			const star = new Mesh(geometry, material);
 			const [x, y, z] = Array(3)
 				.fill()
-				.map(() => THREE.MathUtils.randFloatSpread(100));
+				.map(() => MathUtils.randFloatSpread(100));
 			star.position.set(x, y, z);
 			scene.add(star);
 		}
 
 		Array(100).fill().forEach(addStar);
 
-		const spaceTexture = new THREE.TextureLoader().load(space);
+		const spaceTexture = new TextureLoader().load(space);
 		if ($darkMode) {
-			scene.background = new THREE.Color(0x000000);
+			scene.background = new Color(0x000000);
 		} else {
 			scene.background = spaceTexture;
 		}
 
-		const floppaTexture = new THREE.TextureLoader().load(moon);
-		const lactTexture = new THREE.TextureLoader().load(lact);
-		const mushTexture = new THREE.TextureLoader().load(mush);
+		const floppaTexture = new TextureLoader().load(moon);
+		const lactTexture = new TextureLoader().load(lact);
+		const mushTexture = new TextureLoader().load(mush);
 
-		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(8, 32, 32),
-			new THREE.MeshStandardMaterial({
+		const floppaMoon = new Mesh(
+			new SphereGeometry(8, 32, 32),
+			new MeshStandardMaterial({
 				map: floppaTexture
 			})
 		);
@@ -185,6 +197,10 @@
 		moveCamera();
 
 		animate();
+	});
+
+	onDestroy(() => {
+		isHomescreen.set(false);
 	});
 </script>
 
@@ -306,11 +322,6 @@
 		position: fixed;
 		left: 0;
 		top: 0;
-	}
-	main {
-		color: white;
-		z-index: 99;
-		width: 90%;
 	}
 
 	canvas {

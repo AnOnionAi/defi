@@ -4,4 +4,3 @@
 		<p class="font-bold text-gray-700">Mush Per Block</p>
 	</div>
 </div>
-
