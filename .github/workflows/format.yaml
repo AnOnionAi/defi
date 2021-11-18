@@ -13,11 +13,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        uses: actions/setup-node@v2
         with:
-          node-version: '16'
           ref: ${{ github.head_ref }}
-          
+
+      - name: Do something
+        run: echo "works"    
+        
       - name: Install pnpm
         run: sudo npm install -g pnpm
 
