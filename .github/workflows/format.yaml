@@ -16,9 +16,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Do something
-        run: echo "works"    
-        
+      - name: Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  
+
       - name: Install pnpm
         run: sudo npm install -g pnpm
 
