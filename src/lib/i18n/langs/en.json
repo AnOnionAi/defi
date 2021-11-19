@@ -54,9 +54,9 @@
 		"lockedInFarms": "Locked in Mush Farms",
 		"lockedInPools": "Locked in Poly Pools",
 		"lockedInVaults": "Locked in Zyber Vaults",
-		"startFarming": "Start Farming",
-		"addLiquidity": "Add Liquidity",
-		"goDeposit": "Go Deposit"
+		"startFarming": "Plant A Seed",
+		"addLiquidity": "Create Liquidity",
+		"goDeposit": "Make Markets"
 	},
 
 	"dividendsPage": {
