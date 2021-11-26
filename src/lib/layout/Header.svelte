@@ -95,19 +95,8 @@
 		}
 	};
 
-	let isInstalled = 'checking';
 	onMount(() => {
-		const isMetaMaskInstalled = () => {
-			//Have to check the ethereum binding on the window object to see if it's installed
-			const { ethereum } = window;
-			return Boolean(ethereum && ethereum.isMetaMask);
-		};
-		isInstalled = isMetaMaskInstalled() ? 'isInstalled' : 'notInstalled';
-		if (isMetaMaskInstalled()) {
-			window.ethereum.on('accountsChanged', (adresses: Array<string>) => {
-				if (adresses.length == 0) accounts.set(undefined);
-			});
-		}
+		
 	});
 	const metaMaskCon = async (eve: any) => {
 		try {
@@ -226,42 +215,8 @@
 							</span>
 						</button>
 					{/each}
-					<button
-						disabled={isInstalled == 'checking' || $accounts}
-						on:click={metaMaskCon}
-						class="hover:bg-none flex rounded-lg {$accounts && 'cursor-default bg-green-400'}"
-					>
-						<span
-							class="dark:text-white {$darkMode &&
-								'dark:hover:bg-green-400'}  block hover:bg-gray-200 {isInstalled == 'checking' &&
-								'cursor-default hover:bg-transparent'} {$accounts &&
-								'hover:bg-transparent connected'} pl-2 pr-1 text-dark-800 py-2 mr-1 rounded-lg font-medium hover:no-underline no-underline"
-						>
-							{#if isInstalled == 'checking'}
-								{$_('walletStatus.checking')}
-							{:else if $accounts}
-								{$_('walletStatus.connected')}
-							{:else if isInstalled == 'isInstalled'}
-								{$_('walletStatus.wallet')}
-							{:else}
-								<a
-									target="blank"
-									href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
-								>
-									Install Metamask
-								</a>
-							{/if}
-						</span>
-						<span
-							class="{$accounts ? 'bg-green-400' : 'bg-gray-300'} m-auto pr-2 rounded-1 inline-flex"
-						>
-							{#if isDark}
-								<Icon icon={faWallet} color="#fff" />
-							{:else}
-								<Icon icon={faWallet} color="#000" />
-							{/if}
-						</span>
-					</button>
+
+					<!-- PUT HERE THE BUTTON -->
 				</div>
 			</div>
 		</div>
@@ -315,7 +270,7 @@
 					{/if}
 				</span>
 			</div>
-			<button
+			<!-- <button
 				disabled={isInstalled == 'checking' || $accounts}
 				on:click={metaMaskCon}
 				class="m-auto hover:bg-none flex {$accounts && 'cursor-default bg-green-400'}"
@@ -343,7 +298,7 @@
 				<span class="{$accounts ? 'bg-green-400' : 'bg-gray-300'} m-auto p-2 rounded-1 inline-flex">
 					<Icon icon={faWallet} />
 				</span>
-			</button>
+			</button> -->
 		</div>
 	</div>
 </nav>

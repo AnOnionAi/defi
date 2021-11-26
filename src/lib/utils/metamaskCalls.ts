@@ -2,6 +2,15 @@ import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/ts/types';
 import { accounts } from '$lib/stores/MetaMaskAccount';
 
+
+
+export const isMetaMaskInstalled = () => {
+	//Have to check the ethereum binding on the window object to see if it's installed
+	const { ethereum } = window;
+	return Boolean(ethereum && ethereum.isMetaMask);
+};
+
+
 export const metaMaskCon = async () => {
 	try {
 		const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });

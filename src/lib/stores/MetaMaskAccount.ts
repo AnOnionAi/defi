@@ -11,4 +11,8 @@ async function metamaskConnect() {
 	}
 }
 
-metamaskConnect();
+let timesAsked = 0;
+
+if(timesAsked < 2 ){
+	metamaskConnect();
+}
