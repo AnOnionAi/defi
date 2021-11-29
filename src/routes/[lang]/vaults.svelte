@@ -29,6 +29,9 @@
 	import { stakedWantTokens } from '$lib/utils/vaultChef';
 	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 	import { BigNumber } from 'ethers';
+	import { isHomescreen } from '$lib/stores/homescreen';
+
+	isHomescreen.update( v => v = false );
 
 	let unsubscribe;
 

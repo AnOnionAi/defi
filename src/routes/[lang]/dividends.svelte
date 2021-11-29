@@ -25,6 +25,9 @@
 	import type { Unsubscriber } from 'svelte/store';
 	import type { BigNumber } from 'ethers';
 	import { approveToken } from '$lib/utils/erc20';
+	import { isHomescreen } from '$lib/stores/homescreen';
+
+	isHomescreen.update( v => v = false );
 
 	let userAccount: string;
 	let unsubscribe: Unsubscriber;

@@ -16,6 +16,9 @@
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import Modal from 'svelte-simple-modal';
 	import 'virtual:windi.css';
+	import { isHomescreen } from '$lib/stores/homescreen';
+
+	isHomescreen.update( v => v = false );
 </script>
 
 <Modal>
