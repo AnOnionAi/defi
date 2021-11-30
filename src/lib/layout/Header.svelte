@@ -203,7 +203,7 @@
 							on:click={changeDark}
 							class="dark:hover:bg-gray-800 hover:bg-gray-200 {$darkMode &&
 								'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium {!$darkMode &&
-								'spinner '}"
+								'spinner'}"
 						>
 						<Icon class="{isDark ? 'text-white' : 'text-dark-800'}" icon={isDark ? faMoon: faSun} />
 						</span>

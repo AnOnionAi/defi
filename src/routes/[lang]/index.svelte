@@ -225,11 +225,11 @@
 			if (mushMeshCryp) {
 				// mushMeshCryp.rotation.y += 0.005;
 				mushMeshCryp.rotation.y -= 0.01;
-				mushMeshCryp.rotation.z -= 0.01;
+				// mushMeshCryp.rotation.z -= 0.01;
 
-				mushMeshCryp.position.x = (-340) + Math.sin( time * 1.5 ) * 50;
-				mushMeshCryp.position.y = (0);
-				mushMeshCryp.position.z = (-1100) + Math.cos(time * 1.5) * 50;
+				mushMeshCryp.position.x = (-340) //+ Math.sin( time * 1.5 ) * 50;
+				mushMeshCryp.position.y = (-50);
+				mushMeshCryp.position.z = (-1000)  //+ Math.cos(time * 1.5) * 50;
 			}
 			if (floppaMoon) {
 				// floppaMoon.rotation.x += 0.01;
@@ -484,6 +484,7 @@
 	section {
 		font-family:'Fira Sans Condensed', sans-serif;
 	}
+
 	section blockquote {
 		line-height: 90px;
 		font-size: 30px;
