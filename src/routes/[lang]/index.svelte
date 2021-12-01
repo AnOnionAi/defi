@@ -18,9 +18,9 @@
 	import spaceNight from '/static/space35.jpg';
 	import moon from '/static/moon2k.jpg';
 	import earth from '/static/earth.jpg';
-	import venus from '/static/venus2k.jpg';
+	import venus from '/static/venus.jpg';
 	import mercury from '/static/mercury.jpg';
-	import sun from '/static/sun2k.jpg';
+	import sun from '/static/sun.jpg';
 	import mush from '/static/mush.jpg';
 	import lact from '/static/lactarius.jpg';
 	import { darkMode } from '$lib/stores/dark';
@@ -93,18 +93,18 @@
 		scene.add(lightPoint, ambientLight);
 
 		function addStar() {
-			const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+			const geometry = new THREE.SphereGeometry(1, 24, 24);
 			const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
 			const star = new THREE.Mesh(geometry, material);
 			const [x, y, z] = Array(3)
 				.fill()
-				.map(() => THREE.MathUtils.randFloatSpread(100));
+				.map(() => THREE.MathUtils.randFloatSpread(2500));
 			star.position.set(x, y, z);
 			scene.add(star);
 		}
 
-		Array(100).fill().forEach(addStar);
+		Array(1000).fill().forEach(addStar);
 
 		const spaceTexture = new THREE.TextureLoader().load(spaceDay);
 		const spaceTextureLight = new THREE.TextureLoader().load(spaceNight);
@@ -125,7 +125,7 @@
 		const mushTexture = new THREE.TextureLoader().load(mush);
 
 		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(8, 32, 32),
+			new THREE.SphereGeometry(3, 11, 11),
 			new THREE.MeshStandardMaterial({
 				map: floppaTexture,
 				normalMap: moonTexture
@@ -175,8 +175,8 @@
 		getMush()
 			.then((mush) => {
 				const [agaric, dollar, lactarius, mushCrypto] = mush;
-				mushMeshFA = agaric.scene;
-				mushMeshFA.position.set(0, 5, -5);
+				// mushMeshFA = agaric.scene;
+				// mushMeshFA.position.set(0, 5, -5);
 				dollarSign = dollar.scene;
 				mushMeshLA = lactarius.scene;
 				mushMeshLA.position.set(-1.5, 0, -47);
@@ -190,7 +190,7 @@
 				// floppaMercury.position.set(0, 0, -700);
 				floppaSun.position.set(500, 0, -1000);
 				scene.add(
-					mushMeshFA,
+					// mushMeshFA,
 					dollarSign,
 					mushMeshLA,
 					floppaMoon,
@@ -219,11 +219,11 @@
 				mushMeshFA.rotateX(Math.PI / 120);
 			}
 
-			if (mushMeshLA) {
-				mushMeshLA.rotation.x += 0.01;
-				mushMeshLA.rotation.Y += 0.0025;
-				mushMeshLA.rotation.Z += 0.0025;
-			}
+			// if (mushMeshLA) {
+			// 	mushMeshLA.rotation.x += 0.01;
+			// 	mushMeshLA.rotation.Y += 0.0025;
+			// 	mushMeshLA.rotation.Z += 0.0025;
+			// }
 			if (mushMeshCryp) {
 				// mushMeshCryp.rotation.y += 0.005;
 				mushMeshCryp.rotation.y -= 0.01;
@@ -235,11 +235,11 @@
 			}
 			if (floppaMoon) {
 				// floppaMoon.rotation.x += 0.01;
-				floppaMoon.rotation.y += 0.05;
+				floppaMoon.rotation.y += 0.01;
 				// floppaMoon.rotation.Z += 0.0025;
 			}
 			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.05;
+				floppaEarth.rotation.y += 0.01;
 			}
 			// if ( floppaVenus ) {
 			// 	// floppaVenus.rotation.x += 0.01;
@@ -257,7 +257,7 @@
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
 				// console.log('T', t);
-
+				
 				dollarSign.rotation.y -= 0.01;
 				dollarSign.rotation.x -= 0.01;
 
