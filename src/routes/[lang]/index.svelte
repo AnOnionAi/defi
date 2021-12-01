@@ -16,7 +16,7 @@
 	import { onMount } from 'svelte';
 	import spaceDay from '/static/space.jpg';
 	import spaceNight from '/static/space35.jpg';
-	import moon from '/static/moon2k.jpg';
+	import moon from '/static/moon.jpg';
 	import earth from '/static/earth.jpg';
 	import venus from '/static/venus.jpg';
 	import mercury from '/static/mercury.jpg';
