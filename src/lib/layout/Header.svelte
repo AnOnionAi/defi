@@ -149,7 +149,13 @@
 					}}
 					class="dark:border dark:rounded-md dark:hover:bg-blue-gray-600 hover:bg-gray-100 focus:outline-none font-medium flex p-2 items-center "
 				>
-					<p class="m-0 font-semibold {($isHomescreen && $darkMode) || $isHomescreen || (!$isHomescreen && $darkMode) ? 'text-white': 'text-dark-800'}">
+					<p
+						class="m-0 font-semibold {($isHomescreen && $darkMode) ||
+						$isHomescreen ||
+						(!$isHomescreen && $darkMode)
+							? 'text-white'
+							: 'text-dark-800'}"
+					>
 						{$page.params.lang ? validLang($page.params.lang) : '...'}
 					</p>
 				</button>
@@ -189,7 +195,14 @@
 					}}
 				>
 					<img class="w-10 rounded-full" src="/fungfi.png" alt="Fung Finance Logo" />
-					<span class="w-24 text-lg {($isHomescreen && $darkMode) || $isHomescreen || (!$isHomescreen && $darkMode) ? 'text-white': 'text-dark-800'} font-semibold" style="margin: auto 0 auto 5px;">
+					<span
+						class="w-24 text-lg {($isHomescreen && $darkMode) ||
+						$isHomescreen ||
+						(!$isHomescreen && $darkMode)
+							? 'text-white'
+							: 'text-dark-800'} font-semibold"
+						style="margin: auto 0 auto 5px;"
+					>
 						FUNG F I
 					</span>
 				</span>
@@ -205,7 +218,10 @@
 								'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium {!$darkMode &&
 								'spinner'}"
 						>
-						<Icon class="{isDark ? 'text-white' : 'text-dark-800'}" icon={isDark ? faMoon: faSun} />
+							<Icon
+								class={isDark ? 'text-white' : 'text-dark-800'}
+								icon={isDark ? faMoon : faSun}
+							/>
 						</span>
 					</p>
 					{#each PAGES as page}
@@ -216,7 +232,12 @@
 						>
 							<span
 								class="dark:text-white dark:hover:bg-blue-gray-900 {$darkMode &&
-									'dark:hover:bg-green-400'} block hover:bg-gray-200 px-3 {($isHomescreen && $darkMode) || $isHomescreen || (!$isHomescreen && $darkMode) ? 'text-white hover:text-dark-800': 'text-dark-800'} py-3 rounded-md font-medium hover:no-underline no-underline"
+									'dark:hover:bg-green-400'} block hover:bg-gray-200 px-3 {($isHomescreen &&
+									$darkMode) ||
+								$isHomescreen ||
+								(!$isHomescreen && $darkMode)
+									? 'text-white hover:text-dark-800'
+									: 'text-dark-800'} py-3 rounded-md font-medium hover:no-underline no-underline"
 							>
 								{page.title}
 							</span>
@@ -228,8 +249,11 @@
 						class="hover:bg-none flex rounded-lg {$accounts && 'cursor-default bg-green-400'}"
 					>
 						<span
-							class="{$darkMode &&
-								'dark:hover:bg-green-400'} {($isHomescreen && $darkMode) || $isHomescreen || (!$isHomescreen && $darkMode) ? 'text-white hover:text-dark-800': 'text-dark-800'} block hover:bg-gray-200 {isInstalled == 'checking' &&
+							class="{$darkMode && 'dark:hover:bg-green-400'} {($isHomescreen && $darkMode) ||
+							$isHomescreen ||
+							(!$isHomescreen && $darkMode)
+								? 'text-white hover:text-dark-800'
+								: 'text-dark-800'} block hover:bg-gray-200 {isInstalled == 'checking' &&
 								'cursor-default hover:bg-transparent'} {$accounts &&
 								'hover:bg-transparent connected'} pl-2 pr-1 py-2 mr-1 rounded-lg font-medium hover:no-underline no-underline"
 						>
