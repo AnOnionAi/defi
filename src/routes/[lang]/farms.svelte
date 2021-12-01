@@ -18,7 +18,7 @@
 	import 'virtual:windi.css';
 	import { isHomescreen } from '$lib/stores/homescreen';
 
-	isHomescreen.update( v => v = false );
+	isHomescreen.update((v) => (v = false));
 </script>
 
 <Modal>

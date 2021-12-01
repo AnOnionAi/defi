@@ -31,7 +31,7 @@
 	import { BigNumber } from 'ethers';
 	import { isHomescreen } from '$lib/stores/homescreen';
 
-	isHomescreen.update( v => v = false );
+	isHomescreen.update((v) => (v = false));
 
 	let unsubscribe;
 

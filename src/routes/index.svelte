@@ -12,20 +12,20 @@
 	onMount(() => {
 		const langs: string[] = ['es', 'en', 'de', 'fr'];
 		const lang: string = getLocaleFromNavigator().split('-')[0];
-		
-			if (langs.includes(lang)) {
-				goto(`/${lang}`, { replaceState: true });
-			} else goto('/en', { replaceState: true });
+
+		if (langs.includes(lang)) {
+			goto(`/${lang}`, { replaceState: true });
+		} else goto('/en', { replaceState: true });
 	});
 </script>
 
 <noscript>
-	<div id='noscript_warning'>
+	<div id="noscript_warning">
 		We have detected javascript is disabled on your browser, please enable it !
 	</div>
 </noscript>
 
-<div id="preloader"></div>
+<div id="preloader" />
 
 <style>
 	#preloader {
@@ -38,17 +38,16 @@
 	}
 
 	#noscript_warning {
-            position: relative;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 101;
-            text-align: center;
-            font-weight: bold;
-            color: #FFF;
-            background-color: orangered;
-            padding: 5px 0 5px 0;
-			z-index: 100;
-    }
+		position: relative;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 101;
+		text-align: center;
+		font-weight: bold;
+		color: #fff;
+		background-color: orangered;
+		padding: 5px 0 5px 0;
+		z-index: 100;
+	}
 </style>
-

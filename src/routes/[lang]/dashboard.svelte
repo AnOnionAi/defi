@@ -17,7 +17,7 @@
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
 	import { isHomescreen } from '$lib/stores/homescreen';
 
-	isHomescreen.update( v => v = false );
+	isHomescreen.update((v) => (v = false));
 </script>
 
 <div in:fade={{ duration: 300 }}>

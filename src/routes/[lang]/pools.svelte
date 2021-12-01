@@ -18,7 +18,7 @@
 	export let lang;
 	import { isHomescreen } from '$lib/stores/homescreen';
 
-	isHomescreen.update( v => v = false );
+	isHomescreen.update((v) => (v = false));
 </script>
 
 <Modal>
