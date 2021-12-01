@@ -162,14 +162,7 @@
 				floppaMoon.position.set(-50, 0, -150);
 				floppaEarth.position.set(-100, 0, -300);
 				floppaSun.position.set(500, 0, -1000);
-				scene.add(
-					dollarSign,
-					mushMeshLA,
-					floppaMoon,
-					floppaEarth,
-					floppaSun,
-					mushMeshCryp
-				);
+				scene.add(dollarSign, mushMeshLA, floppaMoon, floppaEarth, floppaSun, mushMeshCryp);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -185,7 +178,6 @@
 			torusThree.rotation.z += 0.015;
 
 			if (mushMeshLA) {
-
 				mushMeshLA.rotateY((Math.PI / 60) * 0.6);
 				mushMeshLA.rotateX((Math.PI / 120) * 0.6);
 			}
@@ -194,7 +186,7 @@
 
 				mushMeshCryp.position.x = -340;
 				mushMeshCryp.position.y = -50;
-				mushMeshCryp.position.z = -1000; 
+				mushMeshCryp.position.z = -1000;
 			}
 			if (floppaMoon) {
 				// floppaMoon.rotation.x += 0.01;
@@ -209,7 +201,7 @@
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
-				
+
 				dollarSign.rotation.y -= 0.01;
 				dollarSign.rotation.x -= 0.01;
 
