@@ -16,6 +16,11 @@
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	let iconColor;
+
+	$: {
+		iconColor = ((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode));
+	}	
 
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;
@@ -205,7 +210,7 @@
 								'dark:hover:bg-green-400'} block px-3 py-3 rounded-md font-medium {!$darkMode &&
 								'spinner'}"
 						>
-						<Icon class="{isDark ? 'text-white' : 'text-dark-800'}" icon={isDark ? faMoon: faSun} />
+						<Icon color="{iconColor ? '#fff' : '#000'}" icon={isDark ? faMoon: faSun} />
 						</span>
 					</p>
 					{#each PAGES as page}

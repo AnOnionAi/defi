@@ -12,7 +12,12 @@
 	import { faSnapchat } from '@fortawesome/free-brands-svg-icons';
 	import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
-import { logger } from 'ethers';
+	import { logger } from 'ethers';
+	let iconColor;
+
+	$: {
+		iconColor = ((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode));
+	}
 
 	if ($page.params.lang) {
 		setInit($page.params.lang);
@@ -50,37 +55,37 @@ import { logger } from 'ethers';
 
 			<div class="flex">
 				<a href="https://fung.wiki/">
-					<Icon icon={faInfoCircle} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faInfoCircle} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 				<a href="https://github.com">
-					<Icon icon={faGithub} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faGithub} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 				<a href="https://app.sushi.com/swap">
-					<Icon icon={faHandHoldingUsd} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faHandHoldingUsd} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 				<a href="https://fung.wiki/">
-					<Icon icon={faBookOpen} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faBookOpen} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 				<a href="https://discord.gg/EbvCkxhP">
-					<Icon icon={faDiscord} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faDiscord} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 			</div>
 
 			<div class="social-media flex">
 				<a href="https://github.com">
-					<Icon icon={faTwitter} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faTwitter} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 				<a href="https://twitter.com/fung_fi">
-					<Icon icon={faTelegram} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faTelegram} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 				<a href="https://fung.wiki/">
-					<Icon icon={faInstagram} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faInstagram} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
-					<Icon icon={faTiktok} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faTiktok} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 				<a href="https://discord.gg/EbvCkxhP">
-					<Icon icon={faSnapchat} color="{((!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode)) ? '#fff' : '#000'}" size="20" class="mr-5" />
+					<Icon icon={faSnapchat} color="{iconColor ? '#fff' : '#000'}" size="20" class="mr-5" />
 				</a>
 			</div>
 		</div>

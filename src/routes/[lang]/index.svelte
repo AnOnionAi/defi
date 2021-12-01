@@ -254,7 +254,7 @@
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
-				console.log('T', t);
+				// console.log('T', t);
 				
 
 				dollarSign.rotation.y -= 0.01;
