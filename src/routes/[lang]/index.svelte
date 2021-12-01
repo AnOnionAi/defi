@@ -16,13 +16,9 @@
 	import { onMount } from 'svelte';
 	import spaceDay from '/static/space.jpg';
 	import spaceNight from '/static/space35.jpg';
-	import moon from '/static/moon2k.jpg';
+	import moon from '/static/moon.jpg';
 	import earth from '/static/earth.jpg';
-	import venus from '/static/venus2k.jpg';
-	import mercury from '/static/mercury.jpg';
-	import sun from '/static/sun2k.jpg';
-	import mush from '/static/mush.jpg';
-	import lact from '/static/lactarius.jpg';
+	import sun from '/static/sun.jpg';
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from './mushModle.svelte';
 	import { _ } from 'svelte-i18n';
@@ -93,18 +89,18 @@
 		scene.add(lightPoint, ambientLight);
 
 		function addStar() {
-			const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+			const geometry = new THREE.SphereGeometry(1, 24, 24);
 			const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
 			const star = new THREE.Mesh(geometry, material);
 			const [x, y, z] = Array(3)
 				.fill()
-				.map(() => THREE.MathUtils.randFloatSpread(100));
+				.map(() => THREE.MathUtils.randFloatSpread(2500));
 			star.position.set(x, y, z);
 			scene.add(star);
 		}
 
-		Array(100).fill().forEach(addStar);
+		Array(1000).fill().forEach(addStar);
 
 		const spaceTexture = new THREE.TextureLoader().load(spaceDay);
 		const spaceTextureLight = new THREE.TextureLoader().load(spaceNight);
@@ -118,14 +114,10 @@
 
 		const floppaTexture = new THREE.TextureLoader().load(moon);
 		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
-		// const floppaTextureVenus = new THREE.TextureLoader().load(venus);
-		// const floppaTextureMercury = new THREE.TextureLoader().load(mercury);
 		const floppaTextureSun = new THREE.TextureLoader().load(sun);
-		const lactTexture = new THREE.TextureLoader().load(lact);
-		const mushTexture = new THREE.TextureLoader().load(mush);
 
 		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(8, 32, 32),
+			new THREE.SphereGeometry(3, 11, 11),
 			new THREE.MeshStandardMaterial({
 				map: floppaTexture,
 				normalMap: moonTexture
@@ -139,22 +131,6 @@
 				normalMap: moonTexture
 			})
 		);
-
-		// const floppaVenus = new THREE.Mesh(
-		// 	new THREE.SphereGeometry(8, 32, 32),
-		// 	new THREE.MeshStandardMaterial({
-		// 		map: floppaTextureVenus,
-		// 		normalMap: moonTexture
-		// 	})
-		// );
-
-		// const floppaMercury = new THREE.Mesh(
-		// 	new THREE.SphereGeometry(8, 32, 32),
-		// 	new THREE.MeshStandardMaterial({
-		// 		map: floppaTextureMercury,
-		// 		normalMap: moonTexture
-		// 	})
-		// );
 
 		const floppaSun = new THREE.Mesh(
 			new THREE.SphereGeometry(128, 508, 508),
@@ -175,8 +151,8 @@
 		getMush()
 			.then((mush) => {
 				const [agaric, dollar, lactarius, mushCrypto] = mush;
-				mushMeshFA = agaric.scene;
-				mushMeshFA.position.set(0, 5, -5);
+				// mushMeshFA = agaric.scene;
+				// mushMeshFA.position.set(0, 5, -5);
 				dollarSign = dollar.scene;
 				mushMeshLA = lactarius.scene;
 				mushMeshLA.position.set(-1.5, 0, -47);
@@ -185,19 +161,8 @@
 				mushMeshCryp.position.set(-340, 0, -1100);
 				floppaMoon.position.set(-50, 0, -150);
 				floppaEarth.position.set(-100, 0, -300);
-				// floppaVenus.position.set(400, 0, -500);
-				// floppaVenus.position.set(0, 0, -600);
-				// floppaMercury.position.set(0, 0, -700);
 				floppaSun.position.set(500, 0, -1000);
-				scene.add(
-					mushMeshFA,
-					dollarSign,
-					mushMeshLA,
-					floppaMoon,
-					floppaEarth,
-					floppaSun,
-					mushMeshCryp
-				);
+				scene.add(dollarSign, mushMeshLA, floppaMoon, floppaEarth, floppaSun, mushMeshCryp);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -211,68 +176,36 @@
 			torusOne.rotation.y += 0.015;
 			torusFour.rotation.x += 0.015;
 			torusThree.rotation.z += 0.015;
-			if (mushMeshFA) {
-				// mushMeshFA.rotation.x -= 0.015;
-				// mushMeshFA.rotation.y += 0.015;
-
-				mushMeshFA.rotateY(Math.PI / 60);
-				mushMeshFA.rotateX(Math.PI / 120);
-			}
 
 			if (mushMeshLA) {
-				mushMeshLA.rotation.x += 0.01;
-				mushMeshLA.rotation.Y += 0.0025;
-				mushMeshLA.rotation.Z += 0.0025;
+				mushMeshLA.rotateY((Math.PI / 60) * 0.6);
+				mushMeshLA.rotateX((Math.PI / 120) * 0.6);
 			}
 			if (mushMeshCryp) {
-				// mushMeshCryp.rotation.y += 0.005;
 				mushMeshCryp.rotation.y -= 0.01;
-				// mushMeshCryp.rotation.z -= 0.01;
 
-				mushMeshCryp.position.x = -340; //+ Math.sin( time * 1.5 ) * 50;
+				mushMeshCryp.position.x = -340;
 				mushMeshCryp.position.y = -50;
-				mushMeshCryp.position.z = -1000; //+ Math.cos(time * 1.5) * 50;
+				mushMeshCryp.position.z = -1000;
 			}
 			if (floppaMoon) {
 				// floppaMoon.rotation.x += 0.01;
-				floppaMoon.rotation.y += 0.05;
+				floppaMoon.rotation.y += 0.01;
 				// floppaMoon.rotation.Z += 0.0025;
 			}
 			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.05;
+				floppaEarth.rotation.y += 0.01;
 			}
-			// if ( floppaVenus ) {
-			// 	// floppaVenus.rotation.x += 0.01;
-			// 	floppaVenus.rotation.y += 0.005;
-			// 	// floppaVenus.rotation.Z += 0.0025;
-			// }
-			// if ( floppaMercury ) {
-			// 	// floppaMercury.rotation.x += 0.01;
-			// 	floppaMercury.rotation.y += 0.005;
-			// 	// floppaMercury.rotation.Z += 0.0025;
-			// }
 			if (floppaSun) {
 				floppaSun.rotation.y += 0.005;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
-				// console.log('T', t);
 
 				dollarSign.rotation.y -= 0.01;
 				dollarSign.rotation.x -= 0.01;
 
 				if (t < -7000) {
-					// dollarSign.position.x = (-340);
-					// dollarSign.position.y = (0) + Math.cos(time * 2.5) * 256;
-					// dollarSign.position.z = (-1100) + Math.sin(time * 2) * 256;
-
-					// dollarSign.position.x = (-340) + Math.sin( time * 2.5 ) * 146;
-					// dollarSign.position.y = (0) + Math.cos(time * 2.5) * 146;
-					// dollarSign.position.z = (-1100);
-
-					// dollarSign.position.x = (-340) ;
-					// dollarSign.position.y = (0) + Math.sin( time * 2.5 ) * 146;
-					// dollarSign.position.z = (-1100) + Math.cos(time * 2.5) * 146;
 					dollarSign.position.x = -340 + Math.sin(time * 2.5) * 200;
 					dollarSign.position.y = 0;
 					dollarSign.position.z = -1100 + Math.cos(time * 2.5) * 200;
