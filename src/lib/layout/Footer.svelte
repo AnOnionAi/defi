@@ -4,7 +4,6 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
-	import Fa from 'svelte-fa';
 	import Icon from 'svelte-fa';
 	import { isHomescreen } from '$lib/stores/homescreen';
 	import { faDiscord, faGit, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
