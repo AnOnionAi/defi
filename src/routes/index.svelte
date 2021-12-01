@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	export const prerendered = true;
+	export const prerendered = false;
 </script>
 
 <script lang="ts">
@@ -12,7 +12,6 @@
 	onMount(() => {
 		const langs: string[] = ['es', 'en', 'de', 'fr'];
 		const lang: string = getLocaleFromNavigator().split('-')[0];
-		console.log('LANG IS', lang);
 
 		if (langs.includes(lang)) {
 			goto(`/${lang}`, { replaceState: true });
@@ -20,7 +19,35 @@
 	});
 </script>
 
-<div>
-	<h1 class="text-center mt-auto mt-5">Getting your lang...</h1>
-	<h2>xd</h2>
-</div>
+<noscript>
+	<div id="noscript_warning">
+		We have detected javascript is disabled on your browser, please enable it !
+	</div>
+</noscript>
+
+<div id="preloader" />
+
+<style>
+	#preloader {
+		background: #000 url(loader2.gif) no-repeat center;
+		background-size: 15%;
+		height: 100vh;
+		width: 100%;
+		position: fixed;
+		z-index: 99;
+	}
+
+	#noscript_warning {
+		position: relative;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 101;
+		text-align: center;
+		font-weight: bold;
+		color: #fff;
+		background-color: orangered;
+		padding: 5px 0 5px 0;
+		z-index: 100;
+	}
+</style>

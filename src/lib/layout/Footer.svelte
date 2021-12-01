@@ -4,7 +4,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
-	import Fa from 'svelte-fa';
+	import Icon from 'svelte-fa';
 	import { isHomescreen } from '$lib/stores/homescreen';
 	import { faDiscord, faGit, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 	import { faInfoCircle, faHandHoldingUsd, faBookOpen } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,12 @@
 	import { faSnapchat } from '@fortawesome/free-brands-svg-icons';
 	import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+	import { logger } from 'ethers';
+	let iconColor;
+
+	$: {
+		iconColor = (!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode);
+	}
 
 	if ($page.params.lang) {
 		setInit($page.params.lang);
@@ -49,42 +55,42 @@
 
 			<div class="flex">
 				<a href="https://fung.wiki/">
-					<Fa icon={faInfoCircle} size="20" class="mr-5" />
+					<Icon icon={faInfoCircle} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
-
 				<a href="https://github.com">
-					<Fa icon={faGithub} size="20" class="mr-5" />
+					<Icon icon={faGithub} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
-
 				<a href="https://app.sushi.com/swap">
-					<Fa icon={faHandHoldingUsd} size="20" class="mr-5" />
+					<Icon
+						icon={faHandHoldingUsd}
+						color={iconColor ? '#fff' : '#000'}
+						size="20"
+						class="mr-5"
+					/>
 				</a>
-
 				<a href="https://fung.wiki/">
-					<Fa icon={faBookOpen} size="20" class="mr-5" />
+					<Icon icon={faBookOpen} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
-
 				<a href="https://discord.gg/EbvCkxhP">
-					<Fa icon={faDiscord} size="20" class="mr-5" />
+					<Icon icon={faDiscord} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
 			</div>
 
 			<div class="social-media flex">
 				<a href="https://github.com">
-					<Fa icon={faTwitter} size="20" class="mr-4" />
+					<Icon icon={faTwitter} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
-
 				<a href="https://twitter.com/fung_fi">
-					<Fa icon={faTelegram} size="20" class="mr-4" />
+					<Icon icon={faTelegram} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
 				<a href="https://fung.wiki/">
-					<Fa icon={faInstagram} size="20" class="mr-4" />
+					<Icon icon={faInstagram} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
 				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
-					<Fa icon={faTiktok} size="20" class="mr-4" />
+					<Icon icon={faTiktok} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
 				<a href="https://discord.gg/EbvCkxhP">
-					<Fa icon={faSnapchat} size="20" class="mr-4" />
+					<Icon icon={faSnapchat} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
 			</div>
 		</div>
@@ -94,5 +100,8 @@
 <style>
 	.dark-active {
 		background: #0b1216;
+	}
+	footer {
+		z-index: 1;
 	}
 </style>

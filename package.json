@@ -53,7 +53,7 @@
 		"svelte-loading-spinners": "^0.1.7",
 		"svelte-notifications": "^0.9.91",
 		"svelte-simple-modal": "^1.0.2",
-		"three": "^0.129.0"
+		"three": "0.135.0"
 	},
 	"type": "module"
 }
