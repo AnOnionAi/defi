@@ -117,7 +117,7 @@
 		const floppaTextureSun = new THREE.TextureLoader().load(sun);
 
 		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(3, 11, 11),
+			new THREE.SphereGeometry(2, 8, 8),
 			new THREE.MeshStandardMaterial({
 				map: floppaTexture,
 				normalMap: moonTexture
@@ -267,7 +267,7 @@
 			<h2 class="relative text-5xl lg:text-9xl"><div>FUNG FINANCIAL</div></h2>
 			<h4 class="relative italic text-4xl"><div>WHERE MONEY GROWS&#127812;</div></h4>
 			<h3
-				class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-10 lg:mt-20 pt-2 pb-2 max-w-screen -ml-10 -mr-10 lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
+				class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-10 lg:mt-30 pt-2 pb-2 max-w-screen -ml-10 -mr-10 lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
 			>
 				Market Cap: $10, 000, 000
 			</h3>
