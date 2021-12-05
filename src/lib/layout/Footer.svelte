@@ -4,6 +4,21 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
+	import Icon from 'svelte-fa';
+	import { isHomescreen } from '$lib/stores/homescreen';
+	import { faDiscord, faGit, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
+	import { faInfoCircle, faHandHoldingUsd, faBookOpen } from '@fortawesome/free-solid-svg-icons';
+	import { faTelegram } from '@fortawesome/free-brands-svg-icons';
+	import { faSnapchat } from '@fortawesome/free-brands-svg-icons';
+	import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+	import { logger } from 'ethers';
+	let iconColor;
+
+	$: {
+		iconColor = (!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode);
+	}
+
 	if ($page.params.lang) {
 		setInit($page.params.lang);
 	}
@@ -27,29 +42,66 @@
 		{
 			route: `https://fung.wiki/`,
 			title: 'Wiki'
-		},
+		}
 	];
 </script>
 
-<footer class="z-20" class:dark={$darkMode}>
-	<div class="dark:text-gray-300 {$darkMode && 'dark-active'} w-full p-3 text-center text-xl">
-		<div class="ml-auto mr-auto flex justify-center text-center">
-			{#each PAGES as page}
-				<a href={page.route}>
-					<span class="font-normal p-1">
-						{page.title}
-					</span>
+<footer class={$isHomescreen && 'z-20 backdrop-filter backdrop-blur'} class:dark={$darkMode}>
+	<div class="{$darkMode && !$isHomescreen && 'dark-active'} ">
+		<div
+			class="flex flex-col lg:flex-row  w-full items-center gap-y-6 lg:justify-between p-2 dark:text-white"
+		>
+			<div class="w-1/12" />
+
+			<div class="flex">
+				<a href="https://fung.wiki/">
+					<Icon icon={faInfoCircle} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
 				</a>
-			{/each}
+				<a href="https://github.com">
+					<Icon icon={faGithub} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+				</a>
+				<a href="https://app.sushi.com/swap">
+					<Icon
+						icon={faHandHoldingUsd}
+						color={iconColor ? '#fff' : '#000'}
+						size="20"
+						class="mr-5"
+					/>
+				</a>
+				<a href="https://fung.wiki/">
+					<Icon icon={faBookOpen} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+				</a>
+				<a href="https://discord.gg/EbvCkxhP">
+					<Icon icon={faDiscord} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+				</a>
+			</div>
+
+			<div class="social-media flex">
+				<a href="https://github.com">
+					<Icon icon={faTwitter} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+				</a>
+				<a href="https://twitter.com/fung_fi">
+					<Icon icon={faTelegram} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+				</a>
+				<a href="https://fung.wiki/">
+					<Icon icon={faInstagram} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+				</a>
+				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
+					<Icon icon={faTiktok} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+				</a>
+				<a href="https://discord.gg/EbvCkxhP">
+					<Icon icon={faSnapchat} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+				</a>
+			</div>
 		</div>
 	</div>
 </footer>
 
 <style>
-	.footer_home {
-		color: white !important;
-	}
 	.dark-active {
 		background: #0b1216;
+	}
+	footer {
+		z-index: 1;
 	}
 </style>

@@ -14,14 +14,18 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import space from '/static/space.jpg';
+	import spaceDay from '/static/space.jpg';
+	import spaceNight from '/static/space35.jpg';
 	import moon from '/static/moon.jpg';
-	import mush from '/static/mush.jpg';
-	import lact from '/static/lactarius.jpg';
+	import earth from '/static/earth.jpg';
+	import sun from '/static/sun.jpg';
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from './mushModle.svelte';
 	import { _ } from 'svelte-i18n';
 	import * as THREE from 'three';
+	import { isHomescreen } from '$lib/stores/homescreen';
+
+	isHomescreen.update((v) => (v = true));
 	export let lang;
 	let canvas;
 	let scene;
@@ -72,7 +76,7 @@
 		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
 		const materialTorusFour = new THREE.MeshStandardMaterial({ color: 0xe62e2d, wireframe: true });
 		const torusFour = new THREE.Mesh(geometryTorusFour, materialTorusFour);
-		scene.add(torusThree, torusFour);
+		// scene.add(torusThree, torusFour);
 
 		torusOne.position.set(-1.5, 0, -47);
 		// End Torus
@@ -85,34 +89,54 @@
 		scene.add(lightPoint, ambientLight);
 
 		function addStar() {
-			const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+			const geometry = new THREE.SphereGeometry(1, 24, 24);
 			const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
 
 			const star = new THREE.Mesh(geometry, material);
 			const [x, y, z] = Array(3)
 				.fill()
-				.map(() => THREE.MathUtils.randFloatSpread(100));
+				.map(() => THREE.MathUtils.randFloatSpread(2500));
 			star.position.set(x, y, z);
 			scene.add(star);
 		}
 
-		Array(100).fill().forEach(addStar);
+		Array(1000).fill().forEach(addStar);
 
-		const spaceTexture = new THREE.TextureLoader().load(space);
+		const spaceTexture = new THREE.TextureLoader().load(spaceDay);
+		const spaceTextureLight = new THREE.TextureLoader().load(spaceNight);
 		if ($darkMode) {
-			scene.background = new THREE.Color(0x000000);
+			scene.background = spaceTextureLight; //new THREE.Color(0x000000);
 		} else {
 			scene.background = spaceTexture;
 		}
 
+		const moonTexture = new THREE.TextureLoader().load('textureMoon.jpg');
+
 		const floppaTexture = new THREE.TextureLoader().load(moon);
-		const lactTexture = new THREE.TextureLoader().load(lact);
-		const mushTexture = new THREE.TextureLoader().load(mush);
+		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
+		const floppaTextureSun = new THREE.TextureLoader().load(sun);
 
 		const floppaMoon = new THREE.Mesh(
+			new THREE.SphereGeometry(2, 8, 8),
+			new THREE.MeshStandardMaterial({
+				map: floppaTexture,
+				normalMap: moonTexture
+			})
+		);
+
+		const floppaEarth = new THREE.Mesh(
 			new THREE.SphereGeometry(8, 32, 32),
 			new THREE.MeshStandardMaterial({
-				map: floppaTexture
+				map: floppaTextureEarth,
+				normalMap: moonTexture
+			})
+		);
+
+		const floppaSun = new THREE.Mesh(
+			new THREE.SphereGeometry(128, 508, 508),
+			new THREE.MeshStandardMaterial({
+				map: floppaTextureSun,
+				normalMap: moonTexture
 			})
 		);
 
@@ -123,15 +147,22 @@
 
 		let dollarSign;
 		let mushMeshLA;
+		let mushMeshCryp;
 		getMush()
 			.then((mush) => {
-				const [agaric, dollar, lactarius] = mush;
-				mushMeshFA = agaric.scene;
-				mushMeshFA.position.set(0, -1.25, 0);
+				const [agaric, dollar, lactarius, mushCrypto] = mush;
+				// mushMeshFA = agaric.scene;
+				// mushMeshFA.position.set(0, 5, -5);
 				dollarSign = dollar.scene;
 				mushMeshLA = lactarius.scene;
 				mushMeshLA.position.set(-1.5, 0, -47);
-				scene.add(mushMeshFA, dollarSign, mushMeshLA);
+				mushMeshCryp = mushCrypto.scene;
+				mushMeshCryp.scale.set(25, 25, 25);
+				mushMeshCryp.position.set(-340, 0, -1100);
+				floppaMoon.position.set(-50, 0, -150);
+				floppaEarth.position.set(-100, 0, -300);
+				floppaSun.position.set(500, 0, -1000);
+				scene.add(dollarSign, mushMeshLA, floppaMoon, floppaEarth, floppaSun, mushMeshCryp);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -145,22 +176,53 @@
 			torusOne.rotation.y += 0.015;
 			torusFour.rotation.x += 0.015;
 			torusThree.rotation.z += 0.015;
-			if (mushMeshFA) {
-				mushMeshFA.rotation.x -= 0.015;
-				mushMeshFA.rotation.y += 0.015;
-			}
 
 			if (mushMeshLA) {
-				mushMeshLA.rotation.x += 0.01;
-				mushMeshLA.rotation.Y += 0.0025;
-				mushMeshLA.rotation.Z += 0.0025;
+				mushMeshLA.rotateY((Math.PI / 60) * 0.6);
+				mushMeshLA.rotateX((Math.PI / 120) * 0.6);
+			}
+			if (mushMeshCryp) {
+				mushMeshCryp.rotation.y -= 0.01;
+
+				mushMeshCryp.position.x = -340;
+				mushMeshCryp.position.y = -50;
+				mushMeshCryp.position.z = -1000;
+			}
+			if (floppaMoon) {
+				// floppaMoon.rotation.x += 0.01;
+				floppaMoon.rotation.y += 0.01;
+				// floppaMoon.rotation.Z += 0.0025;
+			}
+			if (floppaEarth) {
+				floppaEarth.rotation.y += 0.01;
+			}
+			if (floppaSun) {
+				floppaSun.rotation.y += 0.005;
 			}
 			if (dollarSign) {
+				const t = document.body.getBoundingClientRect().top;
+
 				dollarSign.rotation.y -= 0.01;
 				dollarSign.rotation.x -= 0.01;
-				dollarSign.position.x = Math.cos(time * 3) * 25;
-				dollarSign.position.y = Math.cos(time * 2.5) * 18;
-				dollarSign.position.z = Math.cos(time * 2) * 16;
+
+				if (t < -7000) {
+					dollarSign.position.x = -340 + Math.sin(time * 2.5) * 200;
+					dollarSign.position.y = 0;
+					dollarSign.position.z = -1100 + Math.cos(time * 2.5) * 200;
+
+					dollarSign.rotation.y = 0;
+					dollarSign.rotation.x = 0;
+				} else {
+					dollarSign.position.x = t * 0.00625 + Math.cos(time * 3) * 25;
+					dollarSign.position.y = t * -0.00075 + Math.cos(time * 2.5) * 18;
+					dollarSign.position.z = 10 + t * 0.1 + Math.cos(time * 2) * 16;
+				}
+			}
+
+			if ($darkMode) {
+				scene.background = spaceTextureLight; //new THREE.Color(0x000000);
+			} else {
+				scene.background = spaceTexture;
 			}
 
 			renderer.render(scene, camera);
@@ -170,7 +232,7 @@
 
 			torusOne.rotation.x += 0.18;
 
-			camera.position.z = 15 + t * 0.1;
+			camera.position.z = 10 + t * 0.1;
 			camera.position.x = t * 0.00625;
 			camera.rotation.y = t * -0.00075;
 		}
@@ -188,84 +250,228 @@
 	});
 </script>
 
+<noscript>
+	<div id="noscript_warning">
+		We have detected javascript is disabled on your browser, please enable it !
+	</div>
+</noscript>
+
 <section class="relative">
 	<canvas bind:this={canvas} id="bg" />
 
 	<section class="text-white mr-auto ml-auto w-5/6">
-		<section style="margin: 150px 0;" class="text-center">
-			<h2 class="relative text-5xl"><div>FUNGUS</div></h2>
-			<h2 class="relative text-5xl"><div>FINANCIAL</div></h2>
-			<h4 class="relative italic text-4xl"><div>WHERE MONEY GROWS&#127812;</div></h4>
-		</section>
-
 		<section
-			style="margin-bottom:15px; margin-top:40px;"
-			class="MUSH_about shadow-md rounded backdrop-filter"
+			style="margin-top: 100px;"
+			class="MUSH_about title text-center bg-transparent min-h-screen"
 		>
-			<h2 class="text-center text-5xl">📜 THE DEAL</h2>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-				labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-				laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-				voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-				cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</p>
+			<h2 class="relative text-5xl lg:text-9xl"><div>FUNG FINANCIAL</div></h2>
+			<h4 class="relative italic text-4xl"><div>WHERE MONEY GROWS&#127812;</div></h4>
+			<h3
+				class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-10 lg:mt-30 pt-2 pb-2 max-w-screen -ml-10 -mr-10 lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
+			>
+				Market Cap: $10, 000, 000
+			</h3>
 		</section>
 
-		<section class="MUSH_about shadow-md rounded backdrop-filter w-full">
-			<h2 class="text-center text-5xl">&#128176;M U S H Stats&#127812;</h2>
-			<div class="MUSH_main_section">
-				<div style="padding-right:15px;" class="MUSH_stats">
-					<div>
-						<p>Market Cap</p>
-						<p>$31, 076,</p>
-					</div>
-					<div>
-						<p>Total Minted</p>
-						<p>$31, 076,</p>
-					</div>
-					<div>
-						<p>Total Burned</p>
-						<p>$31, 076,</p>
-					</div>
-					<div>
-						<p>Circulation Supply</p>
-						<p>$31, 076,</p>
-					</div>
-					<div>
-						<p>Maximun supply</p>
-						<p>$31, 076,</p>
-					</div>
-					<div>
-						<p>New MUSH/bloc</p>
-						<p>$31, 076,</p>
-					</div>
-				</div>
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen rounded">
+			<h2 class="text-center text-5xl">THE DEAL 📜</h2>
+			<div class="MUSH_main_section text-md lg:text-xl">
+				<p>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure
+					voluptate, numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel
+					distinctio. Ut, quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo
+					quasi earum distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta
+					sapiente possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates
+					dolorem cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod,
+					enim, tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
+					laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
+					Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
+					exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
+					illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
+					Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
+					dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut
+					earum accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi
+					quia veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
+					reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt.
+					Ipsum magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
+					mollitia a qui aliquam dolore.
+				</p>
+			</div>
+		</section>
 
-				<div class="MUSH_tvl">
-					<div>
-						<p>Total Value Locked (TVL)</p>
-						<p>$999,999,999.99</p>
-					</div>
-					<div>
-						<p>Farms & Pools:</p>
-						<p>$99,999,999.98.</p>
-					</div>
-					<div>
-						<p>Vaults</p>
-						<p>$99,999,999.98</p>
-					</div>
-				</div>
+		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto min-h-screen flex text-sm">
+			<div class="MUSH_main_section">
+				<blockquote>GETTING STARTED</blockquote>
+			</div>
+		</section>
+
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen">
+			<div class="MUSH_main_section text-md lg:text-xl">
+				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure voluptate,
+				numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel distinctio. Ut,
+				quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo quasi earum
+				distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta sapiente
+				possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates dolorem
+				cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod, enim,
+				tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
+				laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
+				Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
+				exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
+				illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
+				Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
+				dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut earum
+				accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi quia
+				veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
+				reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt. Ipsum
+				magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
+				mollitia a qui aliquam dolore.
+			</div>
+		</section>
+
+		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto min-h-screen flex">
+			<div class="MUSH_main_section">
+				<blockquote>YOUR CRYPTO ADVENTURE</blockquote>
+			</div>
+		</section>
+
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen">
+			<div class="MUSH_main_section text-md lg:text-xl">
+				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure voluptate,
+				numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel distinctio. Ut,
+				quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo quasi earum
+				distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta sapiente
+				possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates dolorem
+				cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod, enim,
+				tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
+				laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
+				Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
+				exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
+				illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
+				Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
+				dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut earum
+				accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi quia
+				veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
+				reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt. Ipsum
+				magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
+				mollitia a qui aliquam dolore.
+			</div>
+		</section>
+
+		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto min-h-screen flex">
+			<div class="MUSH_main_section">
+				<blockquote>WALL STREET CRYPTO</blockquote>
+			</div>
+		</section>
+
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen">
+			<div class="MUSH_main_section text-md lg:text-xl">
+				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure voluptate,
+				numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel distinctio. Ut,
+				quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo quasi earum
+				distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta sapiente
+				possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates dolorem
+				cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod, enim,
+				tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
+				laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
+				Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
+				exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
+				illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
+				Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
+				dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut earum
+				accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi quia
+				veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
+				reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt. Ipsum
+				magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
+				mollitia a qui aliquam dolore.
+			</div>
+		</section>
+
+		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto min-h-screen flex">
+			<div class="MUSH_main_section">
+				<blockquote>THE FUTURE OF CRYPTO IS HERE</blockquote>
+			</div>
+		</section>
+
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen">
+			<div class="MUSH_main_section text-md lg:text-xl">
+				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure voluptate,
+				numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel distinctio. Ut,
+				quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo quasi earum
+				distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta sapiente
+				possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates dolorem
+				cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod, enim,
+				tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
+				laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
+				Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
+				exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
+				illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
+				Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
+				dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut earum
+				accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi quia
+				veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
+				reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt. Ipsum
+				magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
+				mollitia a qui aliquam dolore.
 			</div>
 		</section>
 	</section>
 </section>
 
 <style>
-	.MUSH_about {
-		padding: 15px;
-		--tw-backdrop-blur: blur(1px);
+	@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&family=IBM+Plex+Sans:wght@200&family=Roboto:wght@100;400&display=swap');
+
+	section {
+		font-family: 'Fira Sans Condensed', sans-serif;
 	}
+
+	section blockquote {
+		line-height: 90px;
+		font-size: 30px;
+		font-family: 'Fira Sans Condensed', sans-serif;
+		display: inline;
+		background-color: white;
+		-webkit-box-decoration-break: clone;
+		padding: 0;
+		color: black;
+		font-size: 45px;
+		padding: 10px;
+		/* line-height: 100px; */
+
+		max-height: none;
+		height: -webkit-max-content;
+		height: -moz-max-content;
+		height: max-content;
+		text-align: center;
+	}
+	@media (min-width: 1024px) {
+		section blockquote {
+			font-size: 90px;
+		}
+	}
+
+	.MUSH_about {
+		background-color: rgba(15, 15, 15, 0.7);
+		padding: 45px;
+		--tw-backdrop-blur: blur(1px);
+		margin-bottom: 70vh;
+	}
+
+	.MUSH_about:last-child {
+		margin-bottom: 40px;
+	}
+
+	.MUSH_about.title {
+		background-color: transparent;
+		margin-bottom: 50vh !important;
+	}
+
+	.MUSH_about.subtitle {
+		background-color: transparent;
+		align-items: center;
+		justify-content: center;
+		font-family: 'Roboto Thin', sans-serif;
+	}
+
 	.MUSH_about h2 {
 		margin-bottom: 10px;
 	}
@@ -288,6 +494,9 @@
 	.MUSH_main_section {
 		display: flex;
 		justify-content: space-between;
+		font-family: 'IBM Plex Sans', sans-serif;
+		margin-top: 50px;
+		margin-bottom: 50px;
 	}
 
 	@media (max-width: 680px) {
@@ -313,9 +522,27 @@
 		width: 90%;
 	}
 
+	.market-cap {
+		text-shadow: 4px 4px 4px seagreen;
+	}
+
 	canvas {
 		position: absolute;
 		top: 0;
 		left: 0;
+	}
+
+	#noscript_warning {
+		position: relative;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 101;
+		text-align: center;
+		font-weight: bold;
+		color: #fff;
+		background-color: orangered;
+		padding: 5px 0 5px 0;
+		z-index: 100;
 	}
 </style>

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { BigNumber } from '@ethersproject/bignumber';
+	import { _ } from 'svelte-i18n';
+	import type { BigNumber } from 'ethers';
 	import { getContext } from 'svelte';
 	import type { PoolInfo } from '$lib/ts/types';
 	import {
@@ -25,7 +26,7 @@
 	<div class=" w-full shadow-2xl  shadow-gray-1000 border-2 rounded-3xl border-gray-200 py-3">
 		<div />
 		<div class="flex flex-wrap justify-between py-1 px-10">
-			<p class="text-gray-400 font-semibold tracking-wide">Input</p>
+			<p class="text-gray-400 font-semibold tracking-wide">{$_('modals.input')}</p>
 			<div class="flex items-center">
 				<div
 					on:click={() => (wantAmount = parseBigNumberToString(userBalance))}
@@ -34,7 +35,7 @@
 					MAX
 				</div>
 				<p class="text-gray-400  font-medium text-xs md:text-base ">
-					Balance: {parseBigNumberToString(userBalance)}
+					{$_('modals.balance')}: {parseBigNumberToString(userBalance)}
 				</p>
 			</div>
 		</div>
@@ -58,7 +59,7 @@
 			</div>
 		</div>
 	</div>
-	<p class="text-gray-400  font-semibold tracking-wide mt-5 px-1">Other options:</p>
+	<p class="text-gray-400  font-semibold tracking-wide mt-5 px-1">{$_('modals.otherOptions')}</p>
 	<div class="flex justify-between px-4 pt-2">
 		<button
 			on:click={() => (wantAmount = parseBigNumberToString(userBalance.div(10)))}
@@ -105,9 +106,5 @@
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
-	}
-
-	input[type='number'] {
-		-moz-appearance: textfield;
 	}
 </style>

@@ -5,12 +5,18 @@
 	import 'virtual:windi.css';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
-	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import { navigating } from '$app/stores';
+	import LinearBar from '$lib/layout/LinearBar.svelte';
 </script>
 
 <Notifications>
 	<Header />
-	<main class:dark={$darkMode} class="main {$darkMode && 'dark-active'}">
+	{#if $navigating}
+		<div class="absolute left-0 top-0 w-screen z-10">
+			<LinearBar />
+		</div>
+	{/if}
+	<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'dark-active'} ">
 		<slot />
 	</main>
 	<Footer />
@@ -27,13 +33,5 @@
 	}
 	.dark-active {
 		background: linear-gradient(to bottom, rgb(45, 55, 63) 0, #0b1216 500px);
-	}
-	footer a {
-		font-weight: bold;
-	}
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
 	}
 </style>

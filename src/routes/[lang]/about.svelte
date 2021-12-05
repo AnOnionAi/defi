@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	export const prerender = false;
+	export const prerender = true;
 
 	import { _ } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
