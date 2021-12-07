@@ -22,5 +22,4 @@
 
 <div>
 	<h1 class="text-center mt-auto mt-5">Getting your lang...</h1>
-	<h2>xd</h2>
 </div>

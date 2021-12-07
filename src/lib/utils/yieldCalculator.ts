@@ -1,3 +1,9 @@
+import BigNumber from "bignumber.js"
+
+
+const BLOCKS_PER_YEAR = new BigNumber("15768400")
+
+
 /**
  * Get the APR value in %
  * @param stakingTokenPrice Token price in the same quote currency
@@ -18,4 +24,3 @@
     return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
   }
 
-  

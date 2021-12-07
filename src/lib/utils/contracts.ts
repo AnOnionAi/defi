@@ -12,7 +12,7 @@ import addresses from '$lib/config/constants/addresses.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/ts/types';
 import { BigNumber, ethers } from 'ethers';
-import { getSigner } from './helpers';
+import { getEthersProvider, getSigner } from './helpers';
 
 export const getMasterChefContract = () => {
 	const masterChefContract = new ethers.Contract(
@@ -32,14 +32,6 @@ export const getMushTokenContract = () => {
 	return mushTokenContract;
 };
 
-export const getZyberTokenContract = () => {
-	const zyberTokenContract = new ethers.Contract(
-		getContractAddress(Token.ZYBERTOKEN),
-		MushTokenABI,
-		getSigner()
-	);
-	return zyberTokenContract;
-};
 
 export const getContractObject = (address: string, abi: any) => {
 	const contract = new ethers.Contract(address, abi, getSigner());
@@ -65,10 +57,12 @@ export const getUniFactoryContract = () => {
 	return factory;
 };
 
-export const getUniPair = (address: string) => {
-	const unipair = new ethers.Contract(address, pairABI, getSigner());
-	return unipair;
-};
+
+export const getLiquidityPairContract = (address: string) => {
+	const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/");
+	const univ2Pair = new ethers.Contract(address,pairABI,provider);
+	return univ2Pair;
+}
 
 export const getMushAllowance = async (userAddr: string) => {
 	const mushContract = new ethers.Contract(
@@ -107,11 +101,7 @@ export const addLiquidityPool = async (
 	await router.addLiquidity(tokenA, tokenB, amountA, amountB, amountAmin, amountBmin, to, deadline);
 };
 
-export const getPoolReserves = async (pairAddr: string): Promise<BigNumber[]> => {
-	const pair = getUniPair(pairAddr);
-	const { reserve0, reserve1 } = await pair.getReserves();
-	return [reserve0, reserve1];
-};
+
 
 export const getTokenPairAddress = async (tkn0Addr: string, tkn1Addr: string) => {
 	const factory = getUniFactoryContract();

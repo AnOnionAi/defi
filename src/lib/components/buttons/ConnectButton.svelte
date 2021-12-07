@@ -1,53 +1,63 @@
+
+<script context="module" lang="ts">
+	export const prerender = false;
+</script>
+
 <script lang="ts">
+
+    
 import { _ } from 'svelte-i18n';
 import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import Icon from 'svelte-fa';
 import { darkMode } from '$lib/stores/dark';
 import {accounts} from "$lib/stores/MetaMaskAccount"
+import { formatAddress } from '$lib/utils/addressHelpers';
+import { onMount } from 'svelte';
+import { isMetaMaskInstalled,goInstallMetamask,metaMaskCon } from '$lib/utils/metamaskCalls';
 
-type MetamaskExtensionStatus = "checking" | "isInstalled" 
-let isInstalled = 'checking';
+type MetamaskExtensionStatus = "checking" | "isInstalled" | "notInstalled";
+
+let isInstalled:MetamaskExtensionStatus = 'checking';
+
+    onMount(()=>{
+       isInstalled = isMetaMaskInstalled() ? 'isInstalled' : 'notInstalled';
+    })
+
+    const onClickDispatcher = (status: MetamaskExtensionStatus) =>{
+        if(status == "notInstalled"){
+            return goInstallMetamask();
+        }
+        else if(status == "isInstalled" && !$accounts){
+            console.log("hey");
+            
+            return metaMaskCon();
+        }
+        else if(status == "isInstalled" && $accounts){
+            console.log("TODO: Make a modal for unlogging the user")
+        }
+    }
+
+   
+    
 
 </script>
 
 
-<button class="bg-green-400">
-    <p>Status</p>
+<button 
+    on:click={()=>onClickDispatcher(isInstalled)}
+    class="rounded-md py-1 px-3 hover:bg-green-400 {$accounts && 'bg-green-400'} {!$accounts && "bg-green-600"} {!$darkMode && "shadow-md"}">
+    <p class=" text-white font-light flex items-center">
+        {#if isInstalled == "checking"}
+            {$_('walletStatus.checking')}
+        {:else if $accounts}
+            {formatAddress($accounts)}
+            <img src="/happyMushroom.svg" alt="Mush for the family" class="w-4 h-4 ml-1" >
+        {:else if isInstalled == "isInstalled"}
+            {$_('dividendsPage.cyw')}
+        {:else if isInstalled == "notInstalled"}
+            {$_('walletStatus.install')}
+        {/if}
+    </p>
 </button>
 
-<!-- <button
-disabled={isInstalled == 'checking' || $accounts}
-on:click={metaMaskCon}
-                                class="hover:bg-none flex rounded-lg {$accounts && 'cursor-default bg-green-400'}"
-                            >
-                                <span
-                                    class="dark:text-white {$darkMode &&
-                                        'dark:hover:bg-green-400'}  block hover:bg-gray-200 {isInstalled == 'checking' &&
-                                        'cursor-default hover:bg-transparent'} {$accounts &&
-                                        'hover:bg-transparent connected'} pl-2 pr-1 text-dark-800 py-2 mr-1 rounded-lg font-medium hover:no-underline no-underline"
-                                >
-                                    {#if isInstalled == 'checking'}
-                                        {$_('walletStatus.checking')}
-                                    {:else if $accounts}
-                                        {$_('walletStatus.connected')}
-                                    {:else if isInstalled == 'isInstalled'}
-                                        {$_('walletStatus.wallet')}
-                                    {:else}
-                                        <a
-                                            target="blank"
-                                            href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
-                                        >
-                                            Install Metamask
-                                        </a>
-                                    {/if}
-                                </span>
-                                <span
-                                    class="{$accounts ? 'bg-green-400' : 'bg-gray-300'} m-auto pr-2 rounded-1 inline-flex"
-                                >
-                                    {#if isDark}
-                                        <Icon icon={faWallet} color="#fff" />
-                                    {:else}
-                                        <Icon icon={faWallet} color="#000" />
-                                    {/if}
-                                </span>
-					</button> -->
+

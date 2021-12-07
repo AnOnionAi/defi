@@ -2,12 +2,7 @@
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
-	export async function load({ page }) {
-		const { lang } = page.params;
-		return {
-			props: { lang }
-		};
-	}
+	
 </script>
 
 <script lang="ts">

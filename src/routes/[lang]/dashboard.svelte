@@ -3,13 +3,7 @@
 	import { _ } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
 
-	export async function load({ page }) {
-		const { lang } = page.params;
-
-		return {
-			props: { lang }
-		};
-	}
+	
 </script>
 
 <script lang="ts">

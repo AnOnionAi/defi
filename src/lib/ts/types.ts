@@ -1,13 +1,12 @@
-import type { BigNumber } from '@ethersproject/bignumber';
+import type { BigNumber } from "ethers";
 
 export interface FarmConfig {
 	pid: number;
 	lpSymbol: string;
-	lpAddresses: string;
+	lpAddress: string;
 	tokenSymbol: string;
 	tokenAddresses: string;
 	multiplier?: string;
-	risk: number;
 }
 
 export interface PoolInfo {
@@ -16,6 +15,8 @@ export interface PoolInfo {
 	tokenAddr: string;
 	depositFee: number;
 	pid: number;
+	multiplier?: string;
+	pairToken?: Array<string> ;
 }
 
 export interface PoolConfig {

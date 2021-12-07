@@ -11,6 +11,10 @@ export const isMetaMaskInstalled = () => {
 };
 
 
+export const goInstallMetamask = () => {
+	window.open("https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn","_blank")
+}
+
 export const metaMaskCon = async () => {
 	try {
 		const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -31,7 +35,7 @@ export const addTokenToMetamaskWallet = () => {
 					symbol: 'MUSH',
 					decimals: 18,
 					image:
-						'https://cdn-icons.flaticon.com/png/512/2217/premium/2217505.png?token=exp=1634245623~hmac=c1fc2027775e39b817b23911d076828d'
+						'https://zyber-dev.netlify.app/mushRound.png'
 				}
 			}
 		})

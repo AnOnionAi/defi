@@ -29,7 +29,7 @@
 			<div />
 			<div class="flex flex-wrap justify-between py-1 px-10">
 				<p class="text-gray-400 font-semibold tracking-wide">{$_('modals.input')}</p>
-				<div class="flex">
+				<div class="flex items-center">
 					<div
 						on:click={() => (wantAmount = parseBigNumberToString(userStakedTokens))}
 						class="text-green-400 rounded-3xl cursor-pointer border border-green-400 text-xs font-semibold tracking-wide mr-1 p-1 hover:bg-green-400 hover:text-light-100"

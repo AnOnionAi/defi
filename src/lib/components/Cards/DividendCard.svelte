@@ -151,9 +151,10 @@
 				</div>
 				<div>
 					<p
-						class="rounded-full py-1 px-4  border-2 border-green-500 text-green-600 inline text-xs font-semibold"
+						class="rounded-full flex py-1 px-4  border-2 border-blue-500 text-blue-500 inline text-xs font-semibold dark:border-blue-400 dark:text-blue-400"
 					>
-						{$_('actions.earn')} MUSH 🍄
+						<span class="mr-1">{$_('actions.earn')} USDC </span> 
+						<img src="/vaultTokensIcons/usdc.svg" alt="" class="w-4">
 					</p>
 				</div>
 			</div>
@@ -162,7 +163,7 @@
 				<div class="flex w-full h-12 text-center">
 					<div class="w-6/12">
 						<p class="text-xs text-gray-600 font-semibold dark:text-gray-300">APR</p>
-						<p class="font-medium dark:text-white">0%</p>
+						<p class="font-medium dark:text-white">185.4%</p>
 					</div>
 
 					<div class="w-6/12">
@@ -285,7 +286,7 @@
 
 			<div class="flex flex-col text-sm h-2/6 justify-center">
 				<p class="text-gray-600 dark:text-gray-300 font-semibold mb-1 ml-1">
-					MUSH {$_('pastActions.earned')}:
+					USDC  {$_('pastActions.earned')}:
 					<span class="text-black" />
 				</p>
 

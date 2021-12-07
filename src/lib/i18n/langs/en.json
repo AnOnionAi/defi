@@ -60,7 +60,7 @@
 	},
 
 	"dividendsPage": {
-		"cyw": "Connect your Wallet",
+		"cyw": "Connect  Wallet",
 		"approval": "Approval Required",
 		"approvalDescription": "You must first approve your MUSH spending."
 	},
@@ -98,7 +98,7 @@
 		"hide": "Hide",
 		"totalLiquidity": "Total Liquidity",
 		"myLiquidity": "My Liquidity",
-		"viewonMatic": "View On Matic"
+		"viewonMatic": "Check on PolyScan"
 	},
 
 	"vaultAccordeon": {

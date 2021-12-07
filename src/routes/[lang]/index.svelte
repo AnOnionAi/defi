@@ -2,15 +2,6 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 	export const prerender = false;
 
-	export function load({ page }) {
-		const { lang } = page.params;
-
-		return {
-			props: {
-				lang
-			}
-		};
-	}
 </script>
 
 <script lang="ts">
