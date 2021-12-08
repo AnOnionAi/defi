@@ -128,7 +128,7 @@
 
 	"walletStatus": {
 		"wallet": "Cartera",
-		"install": "Instala Metamask",
+		"install": "Metamask",
 		"connected": "Conectado",
 		"checking": "Verificando Metamask..."
 	}
