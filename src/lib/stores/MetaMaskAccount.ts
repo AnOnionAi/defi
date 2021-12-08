@@ -36,7 +36,3 @@ async function metamaskConnect() {
 };
 
 
-
-
-metamaskConnect();
-

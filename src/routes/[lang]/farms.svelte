@@ -20,10 +20,11 @@
 	import MasterChefABI from "$lib/config/abi/MasterChef.json"
 	import { ethersToBigNumber } from '$lib/utils/bigNumber';
 	import { getPoolWeight } from '$lib/utils/masterc';
-import { testSushiSdk } from '$lib/utils/lpTokenUtils';
+	import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
+	import { onMount } from 'svelte';
 
+	
 
-	let totalAllocPoints:BigNumber;
 
 	
 </script>
@@ -40,7 +41,7 @@ import { testSushiSdk } from '$lib/utils/lpTokenUtils';
 					<div class="flex flex-row justify-center gap-6 p-8 text-center flex-wrap   rounded-xl">
 						<!--Start Farms-->
 						{#each farms as farm}
-							<PoolCard info={farm} totalAllocPoints = {totalAllocPoints}  />
+							<PoolCard info={farm}  isFarm={true} />
 						{/each}
 					</div>
 				</div>

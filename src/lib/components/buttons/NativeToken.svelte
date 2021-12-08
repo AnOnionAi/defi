@@ -13,7 +13,7 @@
     {#if $loading}
         <p class="w-16 h-5 bg-gray-300 dark:bg-dark-200 rounded-md animate-pulse"></p>
     {:else}
-        ${$tokenPrice.toFixed(5)}
+        ${$tokenPrice.toPrecision(6)}
     {/if}
     
 

@@ -81,4 +81,12 @@ export const getPoolWeight= (totalAllocPoints: BigNumber, poolAllocPoints: BigNu
 	  export async function poolExistance(){
 		  return masterChefContract.poolExistance()
 	  }
+
+	  export async function getMushPerBlock(){
+		  return masterChefContract.fishPerBlock()
+	  }
+
+	  export async function getTotalAllocPoint(){
+		  return masterChefContract.totalAllocPoint();
+	  }
   }

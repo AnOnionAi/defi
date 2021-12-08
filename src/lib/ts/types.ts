@@ -13,10 +13,7 @@ export interface PoolInfo {
 	tokenName: string;
 	tokenImagePath: string;
 	tokenAddr: string;
-	depositFee: number;
 	pid: number;
-	multiplier?: string;
-	pairToken?: Array<string> ;
 }
 
 export interface PoolConfig {

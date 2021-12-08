@@ -13,7 +13,7 @@
 	import { BigNumber, ethers } from 'ethers';
 	import Fa from 'svelte-fa';
 	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-	import { deposit, withdraw, getRewards, getStakedTokens, MasterChef, getPoolMultiplier } from '$lib/utils/masterc';
+	import { deposit, withdraw, getRewards, getStakedTokens, MasterChef, getPoolMultiplier, getPoolWeight } from '$lib/utils/masterc';
 	import {
 		parseBigNumberToDecimal,
 		parseBigNumberToString
@@ -32,7 +32,11 @@
 	import { ethersToBigNumber } from '$lib/utils/bigNumber';
 	import { getPoolApr } from '$lib/utils/yieldCalculator';
 	import BN from "bignumber.js"
-	import {tokenPrice} from "$lib/stores/NativeTokenPrice"
+	import {fetchNativeTokenPrice, tokenPrice} from "$lib/stores/NativeTokenPrice"
+	import { getERC20Contract } from '$lib/utils/contracts';
+import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
+import { getTokenPriceUSD } from '$lib/utils/coinGecko';
+import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 
 	interface LoadingState {
 		loadingApproval: boolean;
@@ -40,8 +44,16 @@
 		loadingWithdraw: boolean;
 		loadingHarvest: boolean;
 	}
-	export let totalAllocPoints: BigNumber;
 	export let info: PoolInfo;
+	export let isFarm:boolean = false;
+
+	let poolFeePercentage:number = null;
+	let stakingTokenPrice: number;
+	let stakingTokenAmount: number
+	let rewardTokenPrice: number;
+	let poolLiquidityUSD: number;
+	let tokenAllocatedPerBlock:number;
+	let poolApr;
 
 	let loadingState: LoadingState = {
 		loadingApproval: false,
@@ -50,13 +62,8 @@
 		loadingHarvest: false
 	};
 	
-	let poolTokenLiquidity: number;
-	let stakingTokenPrice: number = 0.00002;
-	let rewardTokenPrice: number = 1;
-	let poolLiquidityUSD: number;
 	let poolMultiplier:number;
-	let poolAPR: number;
-	let poolAllocation: BigNumber
+	
 
 	let isHidden: boolean = true;
 	let tokenApproved: boolean;
@@ -71,19 +78,46 @@
 	let wantWithdrawAmount: any;
 	let idInterval;
 
-
+	const stakingTokenContract = new ethers.Contract(info.tokenAddr,ERC20ABI,Provider.getProviderSingleton());
+	tokenPrice.subscribe(tokenPrice=>{
+		rewardTokenPrice = tokenPrice
+	})
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
-	
-	
-	const LPTokenContract = new ethers.Contract(info.tokenAddr,ERC20ABI,Provider.getProviderSingleton());
-	MasterChef.getPoolInfo(info.pid)
-	.then(({allocPoint,lastRewardBlock}) => {
-		poolAllocation = allocPoint;
+
+	onMount(async()=>{
+		const totalAllocPoints = await MasterChef.getTotalAllocPoint()
+		const poolInfo = await  MasterChef.getPoolInfo(info.pid);
+		console.log(poolInfo.depositFeeBP)
+		poolFeePercentage = poolInfo.depositFeeBP * 0.0001
+		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
+		stakingTokenPrice = await getStakingTokenPrice();
+		const sta:BigNumber = await stakingTokenContract.balanceOf(getContractAddress(Token.MASTERCHEF))
+		stakingTokenAmount = parseFloat(ethers.utils.formatEther(sta))
+		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
+		const poolWeightbn = getPoolWeight(totalAllocPoints,poolInfo.allocPoint)
+		const tokenPerBlock = await  MasterChef.getMushPerBlock()
+		const mushPerBlock: number = parseFloat(ethers.utils.formatEther(tokenPerBlock))
+		tokenAllocatedPerBlock = mushPerBlock * poolWeightbn.toNumber()
+		
+		poolApr = getPoolApr(stakingTokenPrice,rewardTokenPrice,stakingTokenAmount,tokenAllocatedPerBlock);
+		
 	})
-
-
+	
+	const getStakingTokenPrice = async() => {
+		if (isFarm){
+			stakingTokenPrice = await getPriceOfMushPair(info.tokenAddr)
+			return stakingTokenPrice;
+		}
+		else{
+			const response = getTokenPriceUSD(info.tokenAddr)
+			stakingTokenPrice = response[info.tokenAddr];
+			return stakingTokenPrice;
+		}
+	}
+	
+	
 	const onOkay = async (amount) => {
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
@@ -205,18 +239,6 @@
 		}
 	};
 
-	onMount(async () => {
-		try {
-			poolTokenLiquidity = await getTokenBalance(
-				info.tokenAddr,
-				getContractAddress(Token.MASTERCHEF)
-			);
-
-			console.log(poolTokenLiquidity);
-		} catch {
-			console.log('Error onMount get MasterChef token balance');
-		}
-	});
 	const showPoolInfo = () => {
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
@@ -246,18 +268,30 @@
 
 <div
 	in:fly={{ y: 250, duration: 400 }}
-	class=" flex flex-col  self-start pt-5 bg-white shadow-lg dark:bg-dark-900 rounded-2xl space-y-2 dark:border-2  dark:border-green-500 min-w-96 max-w-96 "
+	class=" flex flex-col  self-start px-5 py-3 bg-white shadow-lg dark:bg-dark-900 rounded-2xl space-y-2 dark:border-2  dark:border-green-500 min-w-96 max-w-96 relative"
 >
-	<div class=" flex justify-center items-center py-2 ">
-		<img class="max-h-40" src={info.tokenImagePath} alt={info.tokenName + 'Token Icon'} />
+	{#if isFarm}
+		<div class="flex flex-row-reverse w-22/24 mt-1  absolute">
+			<div class="flex items-center border-2 border-pink-400 rounded-full text-pink-400 px-2 text-xs">
+				<img src="/sushi.png" alt="Sushiswap logo" class="w-3 h-3 mr-1">
+				<p>SushiSwap</p>
+			</div>
+		</div>
+	{/if}
+	<div class=" flex justify-center items-center  ">
+		<img class="w-32 h-32 max-h-32" src={info.tokenImagePath} alt={info.tokenName + 'Token Icon'} />
 	</div>
 	<div class="p-2 space-y-3 ">
 		<p class="text-lg font-bold dark:text-white">{info.tokenName}</p>
-		<div class="px-5">
+		<div class="">
 			
 			<div class="flex justify-between">
 				<p class="dark:text-white">APR:</p>
-				<p class="dark:text-white">2450%</p>
+				{#if poolApr}
+				<p class="dark:text-white">{shortLargeAmount(poolApr)}%</p>
+					{:else}
+					<p class="w-16 h-5 bg-gray-200 dark:bg-dark-400  animate-pulse rounded-md "></p>
+				{/if}
 			</div>
 			<div class="flex justify-between">
 				<p class="dark:text-white">Multiplier:</p>
@@ -272,9 +306,13 @@
 				<p class="dark:text-white capitalize">{$_('actions.earn')}:</p>
 				<p class="dark:text-white">MUSH</p>
 			</div>
-			<div class="flex justify-between">
+			<div class="flex justify-between items-center">
 				<p class="dark:text-white text-lg capitalize">{$_('actions.depositfee')}:</p>
-				<p class="dark:text-white text-lg font-semibold">0%</p>
+				{#if poolFeePercentage != null}
+				<p class="dark:text-white">{poolFeePercentage}%</p>
+				{:else}
+				<p class="w-10 h-5 bg-gray-200 dark:bg-dark-400  animate-pulse rounded-md "></p>
+				{/if}
 			</div>
 			<div class="flex pt-5">
 				<p class="text-xs font-medium dark:text-white uppercase">
@@ -301,48 +339,47 @@
 				</button>
 			</div>
 		</div>
-		<div class="flex px-5">
+		<div class="flex">
 			<p class="text-xs font-medium dark:text-white uppercase">
 				{info.tokenName}
 				{$_('pastActions.staked')}
 			</p>
 		</div>
-		<div>
-			<p class="tabular-nums  px-5 font-medium dark:text-white text-left">
+		<div class="flex w-full justify-between items-center">
+			<p class="tabular-nums  font-medium dark:text-white text-left">
 				{#if userStakedTokens}
-					{parseBigNumberToString(userStakedTokens)}
-				{:else}
-					0
+					{parseBigNumberToString(userStakedTokens)}					
 				{/if}
 			</p>
+			<div class="flex justify-around space-x-3">
+				<button
+					on:click={goDeposit}
+					class="text-white flex items-center py-2 px-5 font-medium justify-center hover:bg-green-500 bg-green-400 rounded-md"
+				>
+					+
+					{#if loadingState.loadingDeposit}
+						<div class="ml-1">
+							<Circle size="16" color="#fff" duration="2s" />
+						</div>
+					{/if}
+				</button>
+				<button
+					on:click={goWithdraw}
+					class="text-white flex items-center py-2 px-5 font-medium justify-center hover:bg-green-500 bg-green-400 rounded-md"
+				>
+					-
+					{#if loadingState.loadingWithdraw}
+						<div class="ml-1">
+							<Circle size="16" color="#fff" duration="2s" />
+						</div>
+					{/if}
+				</button>
+			</div>
 		</div>
 		<div class="">
 			{#if tokenApproved && $accounts}
 				<div class="">
-					<div class="flex w-full justify-around  px-5">
-						<button
-							on:click={goDeposit}
-							class="text-white flex items-center py-2 w-4/12 font-medium justify-center hover:bg-green-500 bg-green-400 rounded-md"
-						>
-							{$_('actions.deposit')}
-							{#if loadingState.loadingDeposit}
-								<div class="ml-1">
-									<Circle size="16" color="#fff" duration="2s" />
-								</div>
-							{/if}
-						</button>
-						<button
-							on:click={goWithdraw}
-							class="text-white flex items-center py-2 w-4/12 font-medium justify-center hover:bg-green-500 bg-green-400 rounded-md"
-						>
-							{$_('actions.withdraw')}
-							{#if loadingState.loadingWithdraw}
-								<div class="ml-1">
-									<Circle size="16" color="#fff" duration="2s" />
-								</div>
-							{/if}
-						</button>
-					</div>
+					
 				</div>
 			{:else if $accounts}
 				<p
@@ -358,14 +395,14 @@
 				<p
 					on:click={metaMaskCon}
 					href="#"
-					class="block bg-green-400 text-white font-bold p-2 rounded-md w-9/10 hover:bg-green-500 mx-auto cursor-pointer transform transition duration-300 hover:scale-105"
+					class="block bg-green-400 text-white font-bold py-3 rounded-md w-10/10 hover:bg-green-500 mx-auto cursor-pointer transform transition duration-300 hover:scale-105"
 				>
 					{$_('actions.unlock')}
 				</p>
 			{/if}
 		</div>
 
-		<div class="flex justify-center px-5 py-3 hover:animate-bounce" on:click={showPoolInfo}>
+		<div class="flex justify-center  py-3 hover:animate-bounce" on:click={showPoolInfo}>
 			{#if isHidden}
 				<div class="flex cursor-pointer">
 					<p class="dark:text-white font-semibold">{$_('poolCard.details')}</p>
@@ -423,8 +460,8 @@
 			<div class="flex justify-between">
 				<p class="dark:text-white">{$_('poolCard.totalLiquidity')}:</p>
 				<p class="dark:text-white">
-					{#if poolTokenLiquidity}
-						{poolTokenLiquidity}
+					{#if poolLiquidityUSD}
+						${poolLiquidityUSD.toPrecision(4)}
 					{:else}
 						<p class="dark:text-white">0</p>
 					{/if}

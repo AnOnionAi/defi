@@ -14,10 +14,9 @@ export const farms: PoolInfo[] = [
  */
 	{
 		pid: 1,
-		tokenImagePath: '/sushi.png',
+		tokenImagePath: '/mush-usdc.svg',
 		tokenName: 'MUSH-USDC',
 		tokenAddr: getContractAddress(Token.SUSHILP),
-		depositFee: 100
 	}
 	/* , 
 	{
