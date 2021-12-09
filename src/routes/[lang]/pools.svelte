@@ -19,7 +19,7 @@
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
 			{$_('headers.pools.text')}
 		</h1>
-		<div class="mt-5 space-y-4 background  {$darkMode && 'background__dark'}">
+		<div class="mt-5 space-y-4 pools background  {$darkMode && 'background__dark'}">
 			<div
 				class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap max-w-7xl mx-auto "
 			>
@@ -37,5 +37,8 @@
 	}
 	.background__dark {
 		background-image: url('/backgrounds/poolsDarkBackground.png');
+	}
+	.pools{
+		min-height: 85vh;
 	}
 </style>

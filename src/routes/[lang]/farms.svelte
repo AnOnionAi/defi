@@ -22,21 +22,18 @@
 	import { getPoolWeight } from '$lib/utils/masterc';
 	import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
 	import { onMount } from 'svelte';
-
-	
-
-
+	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
 	
 </script>
 
 <Modal>
-	<section class="farms">
+	<section class="farms background_lite {$darkMode && 'background__dark'}	">
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
 			{$_('headers.farms.text')}
 		</h1>
 		
-			<section class=" background_lite {$darkMode && 'background__dark'}">
+			<section class=" ">
 				<div class="w-23/24  mx-auto rounded-xl max-w-7xl ">
 					<div class="flex flex-row justify-center gap-6 p-8 text-center flex-wrap   rounded-xl">
 						<!--Start Farms-->
@@ -54,14 +51,17 @@
 <style>
 	.background_lite {
 		background-image: url('/backgrounds/niceMush.svg');
-		background-position: right;
+		background-position: 50% 50%;
 
 		background-repeat: no-repeat;
 	}
 
 	.background__dark {
 		background-image: url('/backgrounds/niceDarkMush.svg');
-		background-position: 45% 100%;
+		background-position: 50% 50%;
 		background-repeat: no-repeat;
+	}
+	.farms{
+		min-height: 85vh;
 	}
 </style>

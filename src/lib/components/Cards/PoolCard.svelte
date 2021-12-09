@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Provider } from '$lib/utils/web3Helpers';
 	import ERC20ABI from "$lib/config/abi/ERC20.json"
-	import { fly } from 'svelte/transition';
+	import { fly, slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { PoolInfo } from '$lib/ts/types';
@@ -10,7 +10,7 @@
 	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
-	import { BigNumber, ethers } from 'ethers';
+	import { BigNumber, ethers, providers, utils } from 'ethers';
 	import Fa from 'svelte-fa';
 	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 	import { deposit, withdraw, getRewards, getStakedTokens, MasterChef, getPoolMultiplier, getPoolWeight } from '$lib/utils/masterc';
@@ -35,7 +35,7 @@
 	import {fetchNativeTokenPrice, tokenPrice} from "$lib/stores/NativeTokenPrice"
 	import { getERC20Contract } from '$lib/utils/contracts';
 import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
-import { getTokenPriceUSD } from '$lib/utils/coinGecko';
+import { getPoolTokenPriceUSD, getTokenPriceUSD } from '$lib/utils/coinGecko';
 import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 
 	interface LoadingState {
@@ -90,7 +90,7 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 		const totalAllocPoints = await MasterChef.getTotalAllocPoint()
 		const poolInfo = await  MasterChef.getPoolInfo(info.pid);
 		console.log(poolInfo.depositFeeBP)
-		poolFeePercentage = poolInfo.depositFeeBP * 0.0001
+		poolFeePercentage = poolInfo.depositFeeBP * 0.01
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
 		stakingTokenPrice = await getStakingTokenPrice();
 		const sta:BigNumber = await stakingTokenContract.balanceOf(getContractAddress(Token.MASTERCHEF))
@@ -102,7 +102,9 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 		tokenAllocatedPerBlock = mushPerBlock * poolWeightbn.toNumber()
 		
 		poolApr = getPoolApr(stakingTokenPrice,rewardTokenPrice,stakingTokenAmount,tokenAllocatedPerBlock);
-		
+		if(poolApr === null){
+			poolApr = "Infinity"
+		}
 	})
 	
 	const getStakingTokenPrice = async() => {
@@ -111,8 +113,9 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 			return stakingTokenPrice;
 		}
 		else{
-			const response = getTokenPriceUSD(info.tokenAddr)
-			stakingTokenPrice = response[info.tokenAddr];
+			const price = await getPoolTokenPriceUSD(info.tokenAddr)
+			console.log(price)
+			stakingTokenPrice = price;
 			return stakingTokenPrice;
 		}
 	}
@@ -205,7 +208,6 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 				getContractAddress(Token.MASTERCHEF),
 				userAcc
 			);
-			console.log(tokenAllowance);
 
 			tokenApproved = isNotZero(tokenAllowance);
 			if (tokenApproved) {
@@ -215,11 +217,11 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 				userEarnings = await getRewards(info.pid, userAcc);
 				canHarvest = isNotZero(userEarnings);
 				userStakedTokens = await getStakedTokens(info.pid, userAcc);
-				console.log(userStakedTokens,"HEY HEY")
+				
 			}
 			if (canStake) {
 				userStakedTokens = await getStakedTokens(info.pid, userAcc);
-				console.log(userStakedTokens,"HEY HEY")
+				
 				canWithdraw = isNotZero(userStakedTokens);
 			}
 			idInterval = setInterval(async () => {
@@ -266,215 +268,139 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	};
 </script>
 
-<div
-	in:fly={{ y: 250, duration: 400 }}
-	class=" flex flex-col  self-start px-5 py-3 bg-white shadow-lg dark:bg-dark-900 rounded-2xl space-y-2 dark:border-2  dark:border-green-500 min-w-96 max-w-96 relative"
->
-	{#if isFarm}
-		<div class="flex flex-row-reverse w-22/24 mt-1  absolute">
-			<div class="flex items-center border-2 border-pink-400 rounded-full text-pink-400 px-2 text-xs">
-				<img src="/sushi.png" alt="Sushiswap logo" class="w-3 h-3 mr-1">
-				<p>SushiSwap</p>
+
+<div class="self-start min-w-84 max-w-84  bg-white dark:bg-dark-900 {!$darkMode && "shadow-xl"} {$darkMode && "border-2 border-green-500"} rounded-2xl relative">
+	<div class="absolute flex flex-row-reverse p-4 w-full">
+		{#if isFarm}
+		<div class="flex items-center border-2 border-pink-400 text-pink-400 font-medium  px-1 rounded-full text-xs">
+			<img src="/sushi.png" alt="SushiSwap Logo" class="w-3 h-3 ">
+			<p class="px-1">SushiSwap</p>
+		</div>
+		{/if}
+		
+	</div>
+	<div class="py-4 px-8 flex flex-col h-124">
+		<img src={info.tokenImagePath} alt={info.tokenName} class="w-30 h-30 self-center my-2">
+		<div>
+			<p class="font-bold dark:text-white text-lg mb-3">{info.tokenName}</p>
+		</div>
+		<div class="flex justify-between mb-2">
+			<p class="dark:text-gray-200  text-gray-800">APR:</p>
+			{#if poolApr == "Infinity"}
+			<p class="font-medium dark:text-white">∞</p>
+			{:else if poolApr }
+			<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
+			{:else}
+				<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse"></p>
+			{/if}
+		</div>
+
+		<div class="flex justify-between mb-2">
+			<p class="dark:text-gray-200  text-gray-800 capitalize">{$_('actions.earn')}:</p>
+			<p class="font-medium dark:text-white">MUSH</p>
+			
+		</div>
+
+		<div class="flex justify-between text-lg mb-6">
+			<p class="dark:text-gray-200  text-gray-800 capitalize">{$_('actions.depositFee')}:</p>
+			{#if poolFeePercentage != null }
+				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
+			{:else}
+				<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse"></p>
+			{/if}
+		</div>
+
+		<div class="flex flex-col w-full mb-2">
+			<p class="text-xs text-left font-semibold dark:text-white uppercase"><span class="text-pink-400">MUSH </span>{$_('pastActions.earned')}</p>
+			<div class="flex w-full justify-between">
+				{#if userEarnings}
+				<p class="text-xl flex items-center dark:text-white">{parseFloat(ethers.utils.formatEther(userEarnings)).toFixed(2)}</p>
+				{:else}
+				<p class="text-xl flex items-center dark:text-white">0</p>
+				{/if}
+				<button
+				disabled = {!canHarvest}
+				on:click={onHarvest}
+				class="text-sm py-2 px-4 rounded-lg {canHarvest ? "bg-green-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"}  text-white font-semibold tracking-wide ">{$_('actions.harvest')}</button>
 			</div>
 		</div>
-	{/if}
-	<div class=" flex justify-center items-center  ">
-		<img class="w-32 h-32 max-h-32" src={info.tokenImagePath} alt={info.tokenName + 'Token Icon'} />
-	</div>
-	<div class="p-2 space-y-3 ">
-		<p class="text-lg font-bold dark:text-white">{info.tokenName}</p>
-		<div class="">
-			
-			<div class="flex justify-between">
-				<p class="dark:text-white">APR:</p>
-				{#if poolApr}
-				<p class="dark:text-white">{shortLargeAmount(poolApr)}%</p>
-					{:else}
-					<p class="w-16 h-5 bg-gray-200 dark:bg-dark-400  animate-pulse rounded-md "></p>
-				{/if}
-			</div>
-			<div class="flex justify-between">
-				<p class="dark:text-white">Multiplier:</p>
-				{#if poolMultiplier}
-				<p class="dark:text-white">{poolMultiplier}x</p>
-				{:else}
-				<p class="w-10 h-5 bg-gray-200 dark:bg-dark-400  animate-pulse rounded-md "></p>
+
+		<p class="text-xs text-left font-semibold dark:text-white uppercase"><span class="text-pink-400">{info.tokenName} </span>{$_('pastActions.staked')}</p>
+		<div class="flex h-10  w-full mb-6 mt-2">
+			{#if !$accounts}
+			<button
+			on:click={metaMaskCon} 
+			class="bg-green-500 hover:bg-green-600 text-white tracking-wide font-semibold w-full h-full rounded-xl">
+			{$_('actions.unlock')}
+			</button>
+			{:else if !tokenApproved}
+			<button
+			 on:click={approveHandler}
+			 class="flex justify-center items-center bg-green-500 hover:bg-green-600 text-white tracking-wide font-semibold w-full h-full rounded-xl">
+				{$_('actions.approve')} {isFarm ? "Farm" : "Pool"}
+				{#if loadingState.loadingApproval}
+				<div class="ml-1">
+					<Circle color="#fff" size={16} duration="2s"/>
+				</div>
 				{/if}
 				
-			</div>
-			<div class="flex justify-between">
-				<p class="dark:text-white capitalize">{$_('actions.earn')}:</p>
-				<p class="dark:text-white">MUSH</p>
-			</div>
-			<div class="flex justify-between items-center">
-				<p class="dark:text-white text-lg capitalize">{$_('actions.depositfee')}:</p>
-				{#if poolFeePercentage != null}
-				<p class="dark:text-white">{poolFeePercentage}%</p>
-				{:else}
-				<p class="w-10 h-5 bg-gray-200 dark:bg-dark-400  animate-pulse rounded-md "></p>
-				{/if}
-			</div>
-			<div class="flex pt-5">
-				<p class="text-xs font-medium dark:text-white uppercase">
-					MUSH {$_('pastActions.earned')}:
-				</p>
-			</div>
-			<div class="flex pt-1 justify-between">
-				<p class="h-5 flex self-center	 font-medium dark:text-white">
-					{#if userEarnings}
-						{parseBigNumberToDecimal(userEarnings)}
-					{:else}
-						<p class="dark:text-white">0</p>
-					{/if}
-				</p>
-				<button
-					on:click={async () => onHarvest()}
-					class="flex items-center text-white bg-green-400  font-semibold  py-2 px-4 rounded-md  {!canHarvest &&
-						'invisible'}"
-				>
-					<span class="mr-1">{$_('actions.harvest')}</span>
-					{#if loadingState.loadingHarvest}
-					<Circle size="16" color="#fff" duration="2s" />
-					{/if}
-				</button>
-			</div>
-		</div>
-		<div class="flex">
-			<p class="text-xs font-medium dark:text-white uppercase">
-				{info.tokenName}
-				{$_('pastActions.staked')}
-			</p>
-		</div>
-		<div class="flex w-full justify-between items-center">
-			<p class="tabular-nums  font-medium dark:text-white text-left">
-				{#if userStakedTokens}
-					{parseBigNumberToString(userStakedTokens)}					
-				{/if}
-			</p>
-			<div class="flex justify-around space-x-3">
-				<button
-					on:click={goDeposit}
-					class="text-white flex items-center py-2 px-5 font-medium justify-center hover:bg-green-500 bg-green-400 rounded-md"
-				>
-					+
-					{#if loadingState.loadingDeposit}
-						<div class="ml-1">
-							<Circle size="16" color="#fff" duration="2s" />
-						</div>
-					{/if}
-				</button>
-				<button
-					on:click={goWithdraw}
-					class="text-white flex items-center py-2 px-5 font-medium justify-center hover:bg-green-500 bg-green-400 rounded-md"
-				>
-					-
-					{#if loadingState.loadingWithdraw}
-						<div class="ml-1">
-							<Circle size="16" color="#fff" duration="2s" />
-						</div>
-					{/if}
-				</button>
-			</div>
-		</div>
-		<div class="">
-			{#if tokenApproved && $accounts}
-				<div class="">
-					
-				</div>
-			{:else if $accounts}
-				<p
-					on:click={async () => await approveHandler()}
-					class="flex items-center justify-center bg-green-400 text-white font-bold p-2 rounded-md w-9/10 hover:bg-green-500 mx-auto cursor-pointer transform transition duration-300 hover:scale-105"
-				>
-					<span class="mr-1">{$_('actions.approve')}</span>
-					{#if loadingState.loadingApproval}
-					<Circle size="16" color="#fff" duration="2s" />
-					{/if}
-				</p>
-			{:else if !$accounts}
-				<p
-					on:click={metaMaskCon}
-					href="#"
-					class="block bg-green-400 text-white font-bold py-3 rounded-md w-10/10 hover:bg-green-500 mx-auto cursor-pointer transform transition duration-300 hover:scale-105"
-				>
-					{$_('actions.unlock')}
-				</p>
-			{/if}
-		</div>
-
-		<div class="flex justify-center  py-3 hover:animate-bounce" on:click={showPoolInfo}>
-			{#if isHidden}
-				<div class="flex cursor-pointer">
-					<p class="dark:text-white font-semibold">{$_('poolCard.details')}</p>
-					{#if $darkMode}
-						<Fa
-							icon={faChevronDown}
-							size="xs"
-							scale={0.9}
-							translateX={0.5}
-							translateY={0.65}
-							color={'#fff'}
-						/>
-					{:else}
-						<Fa
-							icon={faChevronDown}
-							size="xs"
-							scale={0.9}
-							translateX={0.5}
-							translateY={0.65}
-							color={'#000'}
-						/>
-					{/if}
-				</div>
+			</button>
 			{:else}
-				<div class="flex cursor-pointer ">
-					<p class="dark:text-white font-semibold">{$_('poolCard.hide')}</p>
-					{#if $darkMode}
-						<Fa
-							icon={faChevronUp}
-							size="xs"
-							scale={0.9}
-							translateX={0.5}
-							translateY={0.65}
-							color={'#fff'}
-						/>
-					{:else}
-						<Fa
-							icon={faChevronUp}
-							size="xs"
-							scale={0.9}
-							translateX={0.5}
-							translateY={0.65}
-							color={'#000'}
-						/>
-					{/if}
+			<div class="flex justify-between items-center w-full h-full">
+				{#if userStakedTokens}
+				<p class="flex text-xl dark:text-white">{parseFloat(ethers.utils.formatEther(userStakedTokens)).toPrecision(2)}</p>
+				{:else}
+				<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse"></p>	
+				{/if}
+
+				<div class="flex space-x-2">
+					<button 
+					on:click={goDeposit}
+					class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white">+</button>
+					<button 
+					on:click={goWithdraw}
+					class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white">-</button>
 				</div>
+			</div>
+			{/if}
+			
+			
+		</div>
+
+		<div
+		on:click={showPoolInfo} 
+		class="flex items-center justify-center dark:text-white cursor-pointer hover:text-green-500">
+			<p class="font-medium mr-2">{$_('poolCard.details')}</p>
+			{#if isHidden}
+			<Fa icon={faChevronDown} size="xs" translateY={0.15}/>
+			{:else}
+			<Fa icon={faChevronUp} size="xs" translateY={0.15}/>
 			{/if}
 		</div>
 
-		<div class="px-5	 {isHidden && 'hidden'}">
-			<div class="flex justify-between">
-				<p class="dark:text-white">{$_('actions.stake')}:</p>
-				<p class="dark:text-white">{info.tokenName}</p>
-			</div>
-			<div class="flex justify-between">
-				<p class="dark:text-white">{$_('poolCard.totalLiquidity')}:</p>
-				<p class="dark:text-white">
-					{#if poolLiquidityUSD}
-						${poolLiquidityUSD.toPrecision(4)}
-					{:else}
-						<p class="dark:text-white">0</p>
-					{/if}
-				</p>
-			</div>
-			
-			<div class="flex">
-				<a
-				 target="_blank" href={`https://polygonscan.com/address/${info.tokenAddr}`} 
-				class="dark:text-white font-medium hover:text-green-400">{$_('poolCard.viewonMatic')}</a>
-			</div>
-		</div>
 	</div>
+	{#if !isHidden}
+	<div
+	in:slide={{  duration: 350 }}
+	out:slide={{  duration: 350 }} 
+	class="px-8 pb-4 dark:text-white">
+		<div class="flex justify-between mb-1">
+			<p>{$_('actions.stake')}</p>
+			<p class="font-medium">{info.tokenName}</p>
+		</div>
+		<div class="flex justify-between mb-1">
+			<p>{$_('poolCard.totalLiquidity')}:</p>
+			{#if poolLiquidityUSD}
+			${shortLargeAmount(poolLiquidityUSD)}
+			{:else}
+			0
+			{/if}
+		</div>	
+		<a class="font-medium hover:text-green-500" href={`https://polygonscan.com/address/${info.tokenAddr}`} target="_blank">{$_('poolCard.viewonMatic')}</a>
+	</div>
+	{/if }
+	
+	
 </div>
 
 <style>

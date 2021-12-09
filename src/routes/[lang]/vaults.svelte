@@ -225,6 +225,6 @@
 
 <style>
 	.background__lite {
-		background-image: url('/backgrounds/vaultsBackgroundLite.png');
+		background-image: url('/backgrounds/vaultsBackground2.png');
 	}
 </style>
