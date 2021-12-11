@@ -51,15 +51,14 @@
 <style>
 	.background_lite {
 		background-image: url('/backgrounds/niceMush.svg');
-		background-position: 50% 50%;
-
-		background-repeat: no-repeat;
+		
 	}
 
 	.background__dark {
-		background-image: url('/backgrounds/niceDarkMush.svg');
-		background-position: 50% 50%;
+		background: url('/backgrounds/niceDarkMush.svg');
 		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
 	}
 	.farms{
 		min-height: 85vh;

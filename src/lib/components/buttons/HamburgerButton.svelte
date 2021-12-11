@@ -14,7 +14,7 @@
         }}
     >
         {#if !navbarMenuIsOpen}
-            <Icon icon={faBars} />
+            <Icon icon={faBars}  />
         {:else}
             close
         {/if}

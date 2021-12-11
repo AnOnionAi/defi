@@ -14,7 +14,7 @@
 </script>
 
 <div
-	class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white my-4 px-4 pb-4 pt-6 dark:bg-dark-600 dark:text-white border border-white"
+	class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white my-4 px-4 pb-4 pt-6 dark:bg-dark-800 dark:text-white border border-white"
 >
 	<div class="flex flex-row flex-wrap w-auto justify-around relative">
 		<div class="flex lg:flex-row flex-col w-full max-w-6xl m-auto sm:justify-between ">
@@ -119,7 +119,7 @@
 				{$_('vaultFilter.filterby')}
 			</div>
 			<div class="content-select">
-				<select>
+				<select class="dark:bg-dark-500">
 					<option value="TVL">TVL</option>
 					<option value="APY">APY</option>
 				</select>
@@ -182,7 +182,7 @@
 		font-size: 1.1em;
 		font-weight: 400;
 		color: #999;
-		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		
 		border: 2px solid rgba(0, 0, 0, 0.2);
 		border-radius: 12px;
 		position: relative;
@@ -199,11 +199,11 @@
 		height: 42px;
 		font-size: 1em;
 		font-weight: 600;
-		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		
 	}
 
 	.title {
-		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		
 		font-size: 15px;
 		font-weight: 400;
 	}
@@ -241,7 +241,7 @@
 		font-size: 1.1em;
 		font-weight: 400;
 		color: #999;
-		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		
 		border: 2px solid rgba(0, 0, 0, 0.2);
 		border-radius: 12px;
 		position: relative;
@@ -294,10 +294,7 @@
 	.checkbox {
 		display: grid;
 		grid-template-columns: min-content auto;
-		/* grid-gap: 0.5em; */
 		font-size: 2rem;
-		font-weight: 100;
-		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 		color: var(--color);
 		max-width: 200px;
 		min-width: 200px;

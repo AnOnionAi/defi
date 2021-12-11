@@ -12,15 +12,10 @@
 </script>
 
 
-<button
-							on:click={() => {
-								gotoPage(pageRoute.route);
-							}}
-						>
-							<span
-								class="dark:text-white hover:text-green-500 {$darkMode &&
-									'hover:text-green-300'}   px-2 text-dark-800 py-3 rounded-md  "
-							>
+<button on:click={() => {gotoPage(pageRoute.route)}}>
+<span
+class="dark:text-white hover:text-green-500 {$darkMode && 'hover:text-green-300'}   px-2 text-dark-800 py-3 rounded-md  
+">
 								{pageRoute.title}
 							</span>
 						</button>

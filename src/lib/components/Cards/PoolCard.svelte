@@ -269,7 +269,7 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 </script>
 
 
-<div class="self-start min-w-84 max-w-84  bg-white dark:bg-dark-900 {!$darkMode && "shadow-xl"} {$darkMode && "border-2 border-green-500"} rounded-2xl relative">
+<div class="self-start min-w-84 max-w-84  bg-white dark:bg-dark-900 {!$darkMode && "shadow-xl"} {$darkMode && "border-2 border-green-500"} rounded-2xl relative transform transition duration-300 hover:scale-102">
 	<div class="absolute flex flex-row-reverse p-4 w-full">
 		{#if isFarm}
 		<div class="flex items-center border-2 border-pink-400 text-pink-400 font-medium  px-1 rounded-full text-xs">
@@ -311,7 +311,7 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 		</div>
 
 		<div class="flex flex-col w-full mb-2">
-			<p class="text-xs text-left font-semibold dark:text-white uppercase"><span class="text-pink-400">MUSH </span>{$_('pastActions.earned')}</p>
+			<p class="text-xs text-left font-medium dark:text-white uppercase"><span class="text-pink-400">MUSH </span>{$_('pastActions.earned')}</p>
 			<div class="flex w-full justify-between">
 				{#if userEarnings}
 				<p class="text-xl flex items-center dark:text-white">{parseFloat(ethers.utils.formatEther(userEarnings)).toFixed(2)}</p>
@@ -325,7 +325,7 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 			</div>
 		</div>
 
-		<p class="text-xs text-left font-semibold dark:text-white uppercase"><span class="text-pink-400">{info.tokenName} </span>{$_('pastActions.staked')}</p>
+		<p class="text-xs text-left font-medium dark:text-white uppercase"><span class="text-pink-400">{info.tokenName} </span>{$_('pastActions.staked')}</p>
 		<div class="flex h-10  w-full mb-6 mt-2">
 			{#if !$accounts}
 			<button

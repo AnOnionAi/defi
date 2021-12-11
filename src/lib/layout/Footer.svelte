@@ -9,6 +9,7 @@
 	import { faDiscord, faGit, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 	import { faInfoCircle, faHandHoldingUsd, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 	import { faTelegram } from '@fortawesome/free-brands-svg-icons';
+	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 	import { faSnapchat } from '@fortawesome/free-brands-svg-icons';
 	import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
@@ -38,53 +39,69 @@
 			title: 'Wiki'
 		}
 	];
+
+	const gotoPage = (route: string, home: boolean = false) => {
+		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
+		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
+		console.log($page.params.lang);
+	};
+
 </script>
 
 <footer class={$isHomescreen && 'z-20 backdrop-filter backdrop-blur'} class:dark={$darkMode}>
-	<div class="{$darkMode && !$isHomescreen && 'dark-active'} ">
+	<div class="{$darkMode && !$isHomescreen && 'bg-dark-500'} ">
 		<div
-			class="flex flex-col lg:flex-row  w-full items-center gap-y-6 lg:justify-between p-2 dark:text-white"
+			class="flex flex-col lg:flex-row  w-full items-center gap-y-6 lg:justify-between px-2 py-4 dark:text-white"
 		>
 			<div class="w-1/12" />
 
-			<div class="flex">
-				<a href="https://fung.wiki/">
-					<Fa icon={faInfoCircle} size="20" class="mr-5" />
-				</a>
+			<div class="flex space-x-5">
+				<p
+				class="cursor-pointer"
+				on:click={()=> gotoPage("/about")}
+				>
+					<Fa icon={faInfoCircle} size="20"  />
+			</p>
 
 				<a href="https://github.com">
-					<Fa icon={faGithub} size="20" class="mr-5" />
+					<Fa icon={faGithub} size="20"  />
 				</a>
 
 				<a href="https://app.sushi.com/swap">
-					<Fa icon={faHandHoldingUsd} size="20" class="mr-5" />
+					<Fa icon={faHandHoldingUsd} size="20"  />
 				</a>
 
 				<a href="https://fung.wiki/">
-					<Fa icon={faBookOpen} size="20" class="mr-5" />
+					<Fa icon={faBookOpen} size="20"  />
 				</a>
 
 				<a href="https://discord.gg/EbvCkxhP">
-					<Fa icon={faDiscord} size="20" class="mr-5" />
+					<Fa icon={faDiscord} size="20"  />
 				</a>
 			</div>
 
-			<div class="social-media flex">
+			<div class="social-media flex space-x-4 mr-4">
+
 				<a href="https://github.com">
-					<Fa icon={faTwitter} size="20" class="mr-4" />
+					<Fa icon={faYoutube} size="20"  />
+				</a>
+
+
+				<a href="https://github.com">
+					<Fa icon={faTwitter} size="20"  />
 				</a>
 
 				<a href="https://twitter.com/fung_fi">
-					<Fa icon={faTelegram} size="20" class="mr-4" />
+					<Fa icon={faTelegram} size="20"  />
 				</a>
 				<a href="https://fung.wiki/">
-					<Fa icon={faInstagram} size="20" class="mr-4" />
+					<Fa icon={faInstagram} size="20"  />
 				</a>
 				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
-					<Fa icon={faTiktok} size="20" class="mr-4" />
+					<Fa icon={faTiktok} size="20"  />
 				</a>
 				<a href="https://discord.gg/EbvCkxhP">
-					<Fa icon={faSnapchat} size="20" class="mr-4" />
+					<Fa icon={faSnapchat} size="20"  />
 				</a>
 			</div>
 		</div>

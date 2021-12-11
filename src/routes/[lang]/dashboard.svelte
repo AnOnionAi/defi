@@ -9,6 +9,12 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
+	import { MasterChef } from '$lib/utils/masterc';
+	import { onMount } from 'svelte';
+	import{ BigNumber, ethers } from 'ethers';
+	import { mushPerBlock, totalMushSupply,mushMarketCap } from '$lib/stores/MushMarketStats';
+	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
+	
 </script>
 
 <div in:fade={{ duration: 300 }}>
@@ -27,14 +33,14 @@
 					class="bg-white dark:bg-dark-800 rounded-lg p-6 h-60 w-screen-sm  lg:w-8/24 lg:flex-shrink-0 border border-gray-300   dark:border-green-500 shadow-lg "
 				>
 					<div class="pl-2 flex items-center">
-						<p class=" text-xl text-gray-600 font-bold tracking-wide dark:text-white">
+						<p class=" text-xl text-gray-600 font-light tracking-wide dark:text-white">
 							{$_('dashboard.tvl')} (TVL)
 						</p>
 					</div>
 					<div class="flex  h-10/12 w-full justify-center items-center pt-2">
 						<div class="">
 							<div class="flex w-full justify-center items-center">
-								<p class="text-3xl font-bold text-center mt-2 dark:text-white">$100305.51</p>
+								<p class="text-3xl font-semibold text-center mt-2 dark:text-white">$0</p>
 							</div>
 
 							<p class="mt-1 font-medium text-gray-600 text-sm dark:text-white">
@@ -61,19 +67,19 @@
 					>
 						<div class="pl-4 flex flex items-center">
 							<img src="/farmerIcon.png" class="h-12 w-12" alt="" />
-							<p class="ml-2 text-gray-600 font-bold tracking-wider text-xl dark:text-white">
+							<p class="ml-2 text-gray-600 font-light tracking-wider text-xl dark:text-white">
 								{$_('headers.farms.text')}
 							</p>
 						</div>
 						<div class="flex flex-col items-center pb-3 gap-2">
-							<p class="text-3xl tracking-wide font-bold dark:text-white">$29,574.12</p>
-							<p class="text-gray-700 font-semibold text-sm dark:text-white">
+							<p class="text-3xl tracking-wide font-semibold dark:text-white">$29,574.12</p>
+							<p class="text-gray-700 font-medium text-sm dark:text-white">
 								{$_('dashboard.lockedInFarms')}
 							</p>
 							<button
 								class="border border-green-500 rounded-lg py-2 px-3  flex items-center hover:text-white hover:bg-green-400"
 							>
-								<p class="font-semibold pr-1 dark:text-white">{$_('dashboard.startFarming')}</p>
+								<p class="font-medium pr-1 dark:text-white">{$_('dashboard.startFarming')}</p>
 								<img src="/hoe.png" alt="farming hoe" />
 							</button>
 						</div>
@@ -88,19 +94,19 @@
 					>
 						<div class="pl-4 flex flex items-center">
 							<img src="/poolIcon.png" class="h-12 w-12" alt="" />
-							<p class="ml-2 text-gray-600 font-bold text-xl dark:text-white">
+							<p class="ml-2 text-gray-600 font-light text-xl dark:text-white">
 								{$_('headers.pools.text')}
 							</p>
 						</div>
 						<div class="flex flex-col items-center pb-3 gap-2">
-							<p class="text-3xl tracking-wide font-bold dark:text-white">$40,112.99</p>
-							<p class="text-gray-700 font-semibold text-sm dark:text-white">
+							<p class="text-3xl tracking-wide font-semibold dark:text-white">$40,112.99</p>
+							<p class="text-gray-700 font-medium text-sm dark:text-white">
 								{$_('dashboard.lockedInPools')}
 							</p>
 							<button
 								class="border border-green-500 rounded-lg py-2 px-5  flex items-center hover:text-white hover:bg-green-400"
 							>
-								<p class="font-semibold pr-1 dark:text-white">{$_('dashboard.addLiquidity')}</p>
+								<p class="font-medium pr-1 dark:text-white">{$_('dashboard.addLiquidity')}</p>
 								<div class="flex relative">
 									<img src="/vaultTokensIcons/wbtc.svg" alt="btc" class="h-5 w-5" />
 									<img
@@ -122,19 +128,19 @@
 					>
 						<div class="pl-4 flex flex items-center">
 							<img src="/vaultIcon.png" class="h-12 w-12" alt="" />
-							<p class="ml-2 text-gray-600 font-bold text-xl dark:text-white ">
+							<p class="ml-2 text-gray-600 font-light text-xl dark:text-white ">
 								{$_('headers.vaults.text')}
 							</p>
 						</div>
 						<div class="flex flex-col items-center pb-3 gap-2">
-							<p class="text-3xl tracking-wide font-bold dark:text-white">$20,907.17</p>
-							<p class="text-gray-700 font-semibold text-sm dark:text-white">
+							<p class="text-3xl tracking-wide font-semibold dark:text-white">$20,907.17</p>
+							<p class="text-gray-700 font-medium text-sm dark:text-white">
 								{$_('dashboard.lockedInVaults')}
 							</p>
 							<button
 								class="border border-green-500 rounded-lg py-2 px-5  flex items-center hover:text-white hover:bg-green-400"
 							>
-								<p class="font-semibold pr-1 dark:text-white">{$_('dashboard.goDeposit')}</p>
+								<p class="font-medium pr-1 dark:text-white">{$_('dashboard.goDeposit')}</p>
 								<div class="flex relative">
 									<img src="/vaultTokensIcons/usdc.svg" alt="mushToken" class="h-5 w-5" />
 									<img
@@ -163,12 +169,17 @@
 					>
 						<div class="p-4">
 							<p
-								class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white"
+								class="pl-1 text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
 							>
 								{$_('dashboard.mushpb')}
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center">
-								<p class="text-3xl tracking-tighter font-bold dark:text-white">1 MUSH</p>
+								{#if $mushPerBlock}
+								<p class="text-2xl tracking-tighter font-semibold dark:text-white">{$mushPerBlock} MUSH</p>
+								{:else }	
+								<p class="w-20 rounded-lg h-8 bg-gray-200 dark:bg-dark-600 animate-pulse "></p>
+								{/if}
+								
 								<p class="text-xs font-medium text-gray-600" />
 							</div>
 						</div>
@@ -179,13 +190,13 @@
 					>
 						<div class="p-4">
 							<p
-								class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white"
+								class="pl-1 text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
 							>
 								{$_('dashboard.marketcap')}
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
-								<p class="text-3xl tracking-tighter font-bold">$1.45 K</p>
-								<p class="text-xs font-medium text-gray-600" />
+								<p class="text-2xl tracking-tighter font-semibold">${shortLargeAmount($mushMarketCap)} USD</p>
+								
 							</div>
 						</div>
 					</div>
@@ -199,13 +210,16 @@
 					>
 						<div class="p-4">
 							<p
-								class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white"
+								class="pl-1 text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
 							>
 								{$_('dashboard.totalvol')}
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
-								<p class="text-3xl font-bold">300.25 M</p>
-								<p class="text-xs font-medium text-gray-600" />
+								{#if $totalMushSupply}
+								<p class="text-2xl font-semibold">{shortLargeAmount($totalMushSupply)}</p>
+								{:else}
+								<p class="w-20 rounded-lg h-8 bg-gray-200 dark:bg-dark-600 animate-pulse "></p>
+								{/if}
 							</div>
 						</div>
 					</div>
@@ -215,12 +229,12 @@
 					>
 						<div class="p-4">
 							<p
-								class="pl-1 text-gray-600 font-bold md:text-lg text-md tracking-wide dark:text-white"
+								class="pl-1 text-sm text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
 							>
 								{$_('dashboard.maxsupply')}
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
-								<p class="text-3xl font-bold">700 M</p>
+								<p class="text-2xl font-semibold">700 M</p>
 								<p class="text-xs font-medium text-gray-600" />
 							</div>
 						</div>

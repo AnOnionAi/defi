@@ -17,8 +17,7 @@
 	import DarkModeButton from '$lib/components/Buttons/DarkModeButton.svelte';
 	import HamburgerButton from '$lib/components/Buttons/HamburgerButton.svelte';
 	import NavItemButton from '$lib/components/Buttons/NavItemButton.svelte';
-import ChainButton from '$lib/components/Buttons/ChainButton.svelte';
-import NativeToken from '$lib/components/Buttons/NativeToken.svelte';
+	import NativeToken from '$lib/components/Buttons/NativeToken.svelte';
 
 
 	let navbarMenuIsOpen = false;
@@ -93,7 +92,7 @@ import NativeToken from '$lib/components/Buttons/NativeToken.svelte';
 <nav
 	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
-		'dark-active'} backdrop-blur top-0 w-full text-black "
+		'bg-dark-500'} backdrop-blur top-0 w-full text-black "
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-5 ">
@@ -126,14 +125,13 @@ import NativeToken from '$lib/components/Buttons/NativeToken.svelte';
 				
 				<div class="flex items-center mx-10 space-x-2">
 						{#each PAGES as page}
-						<NavItemButton pageRoute={page}></NavItemButton>
+						<NavItemButton pageRoute={page}/>
 					{/each}
 					
 						
 					<!-- PUT HERE THE BUTTON -->
 				</div>
 				<NativeToken/>
-				<ChainButton/>
 				<ConnectButton/>
 			</div>
 		</div>
@@ -147,12 +145,12 @@ import NativeToken from '$lib/components/Buttons/NativeToken.svelte';
 		class:menu_mobile_dark={home}
 		class="{navbarMenuIsOpen ? 'block' : 'hidden'} dark:text-white lg:hidden  {$darkMode &&
 			!$isHomescreen &&
-			'dark-active'}"
+			'bg-dark-600'}"
 	>
 		<div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-4">
 			{#each PAGES as page}
 			<div class="">
-				<NavItemButton pageRoute={page}></NavItemButton>
+				<NavItemButton pageRoute={page}/>
 			</div>
 			{/each}
 			<div class="flex justify-center">

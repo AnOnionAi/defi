@@ -1,11 +1,5 @@
 
-<script context="module" lang="ts">
-	export const prerender = false;
-</script>
-
-<script lang="ts">
-
-    
+<script lang="ts">    
 import { _ } from 'svelte-i18n';
 import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import Icon from 'svelte-fa';
@@ -36,17 +30,13 @@ let isInstalled:MetamaskExtensionStatus = 'checking';
             console.log("TODO: Make a modal for unlogging the user")
         }
     }
-
-   
-    
-
 </script>
 
 
 <button 
     on:click={()=>onClickDispatcher(isInstalled)}
-    class="rounded-md py-1 px-3 hover:bg-green-400 {$accounts && 'bg-green-400'} {!$accounts && "bg-green-600"} {!$darkMode && "shadow-md"}">
-    <p class=" text-white font-light flex items-center">
+    class="px-3 rounded-md  hover:bg-green-400 {$accounts && 'bg-green-400'} {!$accounts && "bg-green-600"} {!$darkMode && "shadow-md"}">
+    <p class=" text-white font-light flex items-center ">
         {#if isInstalled == "checking"}
             {$_('walletStatus.checking')}
         {:else if $accounts}
@@ -59,5 +49,13 @@ let isInstalled:MetamaskExtensionStatus = 'checking';
         {/if}
     </p>
 </button>
+
+<style>
+
+    button{
+        height: 38px;
+    }
+
+</style>
 
 

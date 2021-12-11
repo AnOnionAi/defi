@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
+	import { fly, slide } from 'svelte/transition';
+	import Fa from "svelte-fa";
+	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { LPair, VaultInfo } from '$lib/ts/types';
@@ -129,12 +131,11 @@
 	}
 </script>
 
-<div in:fly={{ y: 200, duration: 300 }} class="">
+<div in:fly={{ y: 200, duration: 300 }} class="mb-5">
 	<div
 		on:click={openAccordeon}
-		class="max-w-8xl {!$darkMode && 'sideShadow'} bg-white mx-auto py-4 {isHidden &&
-			'border-b-2 border-black'} hover:cursor-pointer {hasRoundedBorder &&
-			'rounded-t-lg'}  dark:bg-dark-600 dark:border-green-500"
+		class="max-w-8xl {!$darkMode && 'sideShadow'} bg-white mx-auto py-6 rounded-lg  	{!isHidden &&
+			'rounded-t-lg'} hover:cursor-pointer  dark:bg-dark-800 hover:bg-gray-100 dark:hover:bg-dark-600 dark:border-green-500"
 	>
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
 			<div class="flex justify-center items-center">
@@ -155,7 +156,7 @@
 					/>
 				</div>
 				<div class="ml-2">
-					<p class="font-bold uppercase smaller-font text-gray-600 dark:text-gray-400">
+					<p class="font-medium uppercase smaller-font text-gray-600 dark:text-gray-400">
 						{$_('actions.earn')}
 						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
 					</p>
@@ -184,63 +185,45 @@
 					</div>
 				</div>
 			</div>
-			<div class="">
-				<div class="flex flex-row justify-around ">
-					<div class="text-center w-24">
-						<div class="font-medium sm:px-3 text-sm dark:text-white">
-							{#if apy}
-								APY
-							{:else}
-								0%
-							{/if}
-						</div>
-						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400">APY</div>
-					</div>
-					<div class="text-center w-24">
-						<div class="font-medium sm:px-3 text-sm dark:text-white">
-							{#if userTokens}
-								{parseBigNumberToDecimal(userTokens)}
-							{:else}
-								?
-							{/if}
-						</div>
-						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400 uppercase">
-							{$_('actions.wallet')}
-						</div>
-					</div>
+			<div class="flex items-center justify-between w-8/12 h-20 mx-auto lg:mx-0">
+				<div class="flex w-10/12 justify-around ">
+				<div>
+					<p class="text-gray-600 font-light text-sm dark:text-gray-300">APY</p>
+					<p class="dark:text-white">1.12K%</p>
 				</div>
-				<div class="flex flex-row justify-around">
-					<div class="text-center w-24">
-						<div class="font-medium sm:px-3 dark:text-white">
-							{#if tvl}
-								TVL
-							{:else}
-								0
-							{/if}
-						</div>
-						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400">TVL</div>
-					</div>
-					<div class="text-center w-24">
-						<div class="font-medium sm:px-3 dark:text-white">
-							{#if daily}
-								DAILY
-							{:else}
-								0%
-							{/if}
-						</div>
-						<div class="text-sm sm:px-3 font-medium text-gray-600 dark:text-gray-400">DAILY</div>
-					</div>
+				<div>
+					<p class="text-gray-600 font-light text-sm dark:text-gray-300">Daily</p>
+					<p class="dark:text-white">7%</p>
+				</div>
+				<div>
+					<p class="text-gray-600 font-light text-sm dark:text-gray-300">Wallet</p>
+					<p class="dark:text-white">0.0001</p>
+				</div>
+				<div>
+					<p class="text-gray-600 font-light text-sm dark:text-gray-300">TVL</p>
+					<p class="dark:text-white">$1,254</p>
+				</div>
+				</div>
+				<div class="dark:text-white">
+					{#if isHidden}
+					<Fa icon={faChevronDown}></Fa>
+					{:else}
+					<Fa icon={faChevronUp}></Fa>
+					{/if}
 				</div>
 			</div>
 		</div>
 	</div>
 	{#if !isHidden}
-		<div class="bg-gray-200 max-w-8xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5">
+		<div
+		in:slide={{  duration: 400 }}
+		out:slide={{  duration: 400 }}
+		class="bg-gray-200 max-w-8xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5">
 			{#if !$accounts}
 				<button
 					on:click={metaMaskCon}
-					class="w-full bg-{vaultConfig.platform
-						.brandColor}-500  rounded-xl p-2 text-white font-semibold text-xl tracking-wide "
+					class=" block w-10/12 mx-auto  bg-{vaultConfig.platform
+						.brandColor}-500 transform transition duration-300 hover:scale-105 rounded-xl py-2  text-white font-semibold text-xl tracking-wide "
 					>{$_('actions.unlock')}
 				</button>
 			{:else}
@@ -251,12 +234,12 @@
 								{$_('actions.wallet')}:
 							</p>
 							{#if userTokens}
-								<p class="font-bold	pl-1 dark:text-white font-semibold tracking-tighter">
+								<p class="pl-1 dark:text-white font-medium tracking-tighter">
 									{parseBigNumberToString(userTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{:else}
-								<p class="font-bold	pl-1 dark:text-white font-semibold text-sm">
+								<p class="pl-1 dark:text-white font-semibold text-sm">
 									0.000000000000000000 WMATIC-USDC
 									<!-- N/A {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name} -->
 								</p>
@@ -301,7 +284,7 @@
 											'approve'
 										)}
 									class="flex items-center bg-black  disabled:opacity-50 {loadingState.something &&
-										'cursor-not-allowed'} text-white font-bold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig
+										'cursor-not-allowed'} text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig
 										.platform.brandColor}-500 {loadingState.approve &&
 										`bg-${vaultConfig.platform.brandColor}-500`}"
 								>
@@ -315,25 +298,25 @@
 							{/if}
 						</div>
 						<div class="flex">
-							<p class="pl-1 text-gray-500 font-bold dark:text-white font-medium">
+							<p class="pl-1 text-gray-500  dark:text-white font-medium">
 								{$_('actions.depositfee')}:
 							</p>
-							<p class="px-1  font-bold dark:text-white font-medium">{vaultConfig.depositFee}%</p>
+							<p class="px-1   dark:text-white font-medium">{vaultConfig.depositFee}%</p>
 						</div>
 					</div>
 
 					<div class="pt-4 lg:pt-0 lg:w-4/12">
 						<div class="flex">
-							<p class="text-gray-600 font-medium dark:text-white font-medium">
+							<p class="text-gray-600 font-medium dark:text-white ">
 								{$_('pastActions.deposited')}:
 							</p>
 							{#if stakedTokens}
-								<p class="font-bold	pl-1 dark:text-white font-medium tracking-tight">
+								<p class="font-medium pl-1 dark:text-white  tracking-tight">
 									{parseBigNumberToString(stakedTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
 							{:else}
-								<p class="font-bold	pl-1 dark:text-white font-medium">
+								<p class="font-medium pl-1 dark:text-white">
 									0 {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
 							{/if}
@@ -354,7 +337,7 @@
 										withdraw(vaultConfig.pid, userWithdrawAmount.toString()),
 										'withdraw'
 									)}
-								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-bold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig
+								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig
 									.platform.brandColor}-500 {loadingState.withdraw &&
 									`bg-${vaultConfig.platform.brandColor}-500`}"
 							>
@@ -366,7 +349,7 @@
 								{/if}
 							</button>
 						</div>
-						<div class="flex dark:text-white font-semibold">
+						<div class="flex dark:text-white font-medium">
 							<p class="mr-1 text-gray-500 dark:text-white	 ">{$_('actions.withdrawalfee')}:</p>
 							{#if vaultConfig.withdrawalFee}
 								<p class="">{vaultConfig.withdrawalFee}%</p>
@@ -378,17 +361,17 @@
 
 					<div class="pt-4 lg:pt-0 lg:w-3/12">
 						<div class="pl-1">
-							<p class="text-gray-500 font-bold pb-1 dark:text-gray-400 font-semibold">
+							<p class="text-gray-500  pb-1 dark:text-gray-400 font-medium">
 								{$_('vaultAccordeon.currentPrices')}:
 							</p>
-							<p class="	 dark:text-white ">
+							<p class="font-light	 dark:text-white ">
 								{#if tkn0Price}
 									{vaultConfig.pair.token0quote}: ${tkn0Price}
 								{:else}
 									{vaultConfig.pair.token0quote}: {$_('vaultAccordeon.loading')}...
 								{/if}
 							</p>
-							<p class=" dark:text-white">
+							<p class="font-light dark:text-white">
 								{#if tkn1Price}
 									{vaultConfig.pair.token1quote}: ${tkn1Price}
 								{:else}
@@ -397,14 +380,20 @@
 							</p>
 							<div class="py-2">
 								<a
-									class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400"
+									target="_blank"
+									class="block text-gray-600 font-medium hover:text-green-500 dark:text-gray-400"
 									href={vaultConfig.platform.swapperURL}
 									>{$_('actions.get')}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a
 								>
 								<a
-									class="block text-gray-600 font-semibold hover:text-green-500 dark:text-gray-400"
-									href={vaultConfig.pair.pairURL}>{$_('vaultAccordeon.viewInfo')}</a
+									target="_blank"
+									class="block text-gray-600 font-medium  dark:text-gray-400"
+									href={vaultConfig.pair.pairURL}>
+									<span class="hover:text-green-500">
+										{$_('vaultAccordeon.viewInfo')}
+									</span>
+									</a
 								>
 							</div>
 						</div>
@@ -417,13 +406,13 @@
 
 <style>
 	.sideShadow {
-		box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
-		-moz-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
-		-webkit-box-shadow: 6px 0 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
+		box-shadow: 6px 6px 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
+		-moz-box-shadow: 6px 6px 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
+		-webkit-box-shadow: 6px 6px 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
 	}
 	input {
 		font-size: 18px;
-		font-weight: bold;
+		font-weight: medium;
 		outline: none;
 	}
 	input::-webkit-outer-spin-button,
