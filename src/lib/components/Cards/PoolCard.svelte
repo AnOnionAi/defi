@@ -403,11 +403,4 @@ import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	
 </div>
 
-<style>
-	@media only screen and (max-width: 700px) {
-		p,
-		div {
-			font-size: 0.8rem;
-		}
-	}
-</style>
+

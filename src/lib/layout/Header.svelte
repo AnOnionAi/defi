@@ -18,6 +18,7 @@
 	import HamburgerButton from '$lib/components/Buttons/HamburgerButton.svelte';
 	import NavItemButton from '$lib/components/Buttons/NavItemButton.svelte';
 	import NativeToken from '$lib/components/Buttons/NativeToken.svelte';
+	import MushPrice from '$lib/components/buttons/MushPrice.svelte';
 
 
 	let navbarMenuIsOpen = false;
@@ -92,13 +93,13 @@
 <nav
 	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
-		'bg-dark-500'} backdrop-blur top-0 w-full text-black "
+		'bg-dark-500 border-dark-200'} backdrop-blur top-0 w-full text-black border-b-2 border-gray-200"
 	class:dark={$darkMode}
 >
-	<div class=" flex items-center justify-between h-16 px-5 ">
+	<div class=" flex items-center justify-between h-16 px-3 ">
 		<div
 			bind:this={menu}
-			class="sm:absolute sm:left-36 border  dark:border-none rounded-md  items-center flex sm:static sm:inset-auto sm:mr-4"
+			class="sm:absolute sm:left-35 border  dark:border-none rounded-md  items-center flex sm:static sm:inset-auto sm:mr-4"
 		>
 			<LangPicker bind:showDropDownMenu/>
 		</div>
@@ -106,32 +107,32 @@
 			<!-- LOGO -->
 			<div class="flex-shrink-0 flex items-center">
 				<span
-					class="flex space-y-2 space-x-2 cursor-pointer"
+					class="flex cursor-pointer"
 					on:click={() => {
 						gotoPage('', true);
 					}}
 				>
-					<img class="w-10 rounded-full" src="/fungfi.png" alt="Fung Finance Logo" />
-					<span class="w-24 text-lg dark:text-white font-semibold" style="margin: auto 0 auto 5px;">
-						FUNG F I
-					</span>
+					<img class="w-10 " src="/cute/fiji.svg" alt="Fung Finance Logo" />
+					{#if $darkMode}
+					<img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
+					{:else}
+					<img class="mt-1 " src="/cute/fungfiLiteMode.svg" alt="Fung Finance" />
+					{/if}
 				</span>
+			</div>
+			<div class="ml-4 hidden lg:block">
+				<div class="flex items-center ml-9 space-x-2">
+					{#each PAGES as page}
+					<NavItemButton pageRoute={page}/>
+				{/each}
+			</div>
 			</div>
 			<!-- day/nite toggle -->
 			
 
-			<div class="hidden lg:flex sm:ml-auto items-center ">
+			<div class="hidden lg:flex space-x-5 ml-auto items-center ">
 				<DarkModeButton/>
-				
-				<div class="flex items-center mx-10 space-x-2">
-						{#each PAGES as page}
-						<NavItemButton pageRoute={page}/>
-					{/each}
-					
-						
-					<!-- PUT HERE THE BUTTON -->
-				</div>
-				<NativeToken/>
+				<MushPrice/>
 				<ConnectButton/>
 			</div>
 		</div>

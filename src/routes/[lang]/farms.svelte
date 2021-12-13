@@ -24,16 +24,21 @@
 	import { onMount } from 'svelte';
 	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
 	
+	let backgroundImage;
+
+	darkMode.subscribe((darkEnabled)=>{
+		darkEnabled
+		 ? (backgroundImage = "/backgrounds/niceDarkMush.svg")
+		 : (backgroundImage = "/backgrounds/niceMush.svg")
+	})
 </script>
 
 <Modal>
-	<section class="farms background_lite {$darkMode && 'background__dark'}	">
+	<section class="farms" style="background:url({backgroundImage}); background-position: center; background-repeat: no-repeat;">
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
 			{$_('headers.farms.text')}
 		</h1>
-		
-			<section class=" ">
 				<div class="w-23/24  mx-auto rounded-xl max-w-7xl ">
 					<div class="flex flex-row justify-center gap-6 p-8 text-center flex-wrap   rounded-xl">
 						<!--Start Farms-->
@@ -42,24 +47,11 @@
 						{/each}
 					</div>
 				</div>
-			</section>
-
 	</section>
 	<div/>
 </Modal>
 
 <style>
-	.background_lite {
-		background-image: url('/backgrounds/niceMush.svg');
-		
-	}
-
-	.background__dark {
-		background: url('/backgrounds/niceDarkMush.svg');
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: contain;
-	}
 	.farms{
 		min-height: 85vh;
 	}

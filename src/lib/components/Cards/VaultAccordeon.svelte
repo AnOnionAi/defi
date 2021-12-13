@@ -23,6 +23,7 @@
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
+import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 
 	const { addNotification } = getNotificationsContext();
 	export let hasRoundedBorder = false;
@@ -249,6 +250,7 @@
 							class="flex my-2 py-2 px-3 bg-gray-300 dark:bg-dark-500 rounded-lg  lg:w-11/12 justify-between"
 						>
 							<input
+								on:keypress={onyAllowFloatNumbers}
 								bind:value={userDepositAmount}
 								placeholder="Enter Value"
 								class="bg-gray-300  text-gray-900 font-bold w-8/12 dark:bg-dark-500	dark:text-white"
@@ -325,6 +327,7 @@
 							class="flex justify-between my-2 py-2 px-3 bg-gray-300 rounded-lg  dark:bg-dark-500 lg:w-11/12 "
 						>
 							<input
+								on:keypress={onyAllowFloatNumbers}
 								bind:value={userWithdrawAmount}
 								placeholder="Enter Value"
 								class="bg-gray-300 text-gray-900 font-bold w-8/12 dark:bg-dark-500 dark:text-white"

@@ -25,6 +25,14 @@
 	let approved: boolean = false;
 	let finishedApprovalFetch: boolean = false;
 
+	let backgroundImage;
+
+	darkMode.subscribe((darkEnabled)=>{
+		darkEnabled
+		 ? (backgroundImage = "/backgrounds/mushHouse.svg")
+		 : (backgroundImage = "/backgrounds/cuteMush.svg")
+	})
+
 	unsubscribe = accounts.subscribe((arrayAccs) => {
 		if (arrayAccs) {
 			userAccount = arrayAccs[0];
@@ -61,7 +69,8 @@
 <h1 class="tracking-widest  text-4xl dark:text-white">{$_('headers.dividends.text')}</h1>
 <div class="my-6">
 	<div
-		class="dividends-wrapper {$darkMode && 'darkBackground  mush_background__dark'} mush_background"
+		style="background-image:url({backgroundImage});"
+		class="dividends-wrapper"
 	>
 		<div
 			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
@@ -86,26 +95,13 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: var(--light-background);
+		background-size: 350px;
+		background-position: 85% 75%;
+		background-repeat: no-repeat;
 	}
 
 	.dividends {
 		max-height: 600px;
 	}
 
-	.darkBackground {
-		background-color: var(--dark-gradient);
-	}
-
-	.mush_background {
-		background-image: url('/backgrounds/niceMush.svg');
-		background-position: 60% 50%;
-		background-repeat: no-repeat;
-	}
-
-	.mush_background__dark {
-		background-image: url('/backgrounds/niceDarkMush.svg');
-		background-position: 52% 40%;
-		background-repeat: no-repeat;
-	}
 </style>

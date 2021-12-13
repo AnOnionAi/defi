@@ -51,59 +51,72 @@
 <footer class={$isHomescreen && 'z-20 backdrop-filter backdrop-blur'} class:dark={$darkMode}>
 	<div class="{$darkMode && !$isHomescreen && 'bg-dark-500'} ">
 		<div
-			class="flex flex-col lg:flex-row  w-full items-center gap-y-6 lg:justify-between px-2 py-4 dark:text-white"
+			class="flex flex-col lg:flex-row  w-full items-center  lg:justify-between px-2 py-4 dark:text-white"
 		>
-			<div class="w-1/12" />
+			<div class="w-12" />
 
-			<div class="flex space-x-5">
+			<div class="flex space-x-4 mb-2 lg:mb-0">
 				<p
 				class="cursor-pointer"
 				on:click={()=> gotoPage("/about")}
 				>
-					<Fa icon={faInfoCircle} size="20"  />
+					<Fa icon={faInfoCircle} size="lg"  />
 			</p>
 
 				<a href="https://github.com">
-					<Fa icon={faGithub} size="20"  />
+					<Fa icon={faGithub} size="lg"  />
 				</a>
 
+				
+				<a href="google.com" >
+					{#if $darkMode}
+					<img src="/auditsWhite.svg" class="icon_size" alt="">
+					{:else}
+					<img src="/audits.svg" class="icon_size" alt="">
+					{/if}
+				</a>
+				
+				
+
 				<a href="https://app.sushi.com/swap">
-					<Fa icon={faHandHoldingUsd} size="20"  />
+					<Fa icon={faHandHoldingUsd} size="lg"  />
 				</a>
 
 				<a href="https://fung.wiki/">
-					<Fa icon={faBookOpen} size="20"  />
+					<Fa icon={faBookOpen} size="lg"  />
 				</a>
 
 				<a href="https://discord.gg/EbvCkxhP">
-					<Fa icon={faDiscord} size="20"  />
+					<Fa icon={faDiscord} size="lg"  />
 				</a>
 			</div>
 
-			<div class="social-media flex space-x-4 mr-4">
+			<div class="social-media flex space-x-4 	">
 
 				<a href="https://github.com">
-					<Fa icon={faYoutube} size="20"  />
+					<Fa icon={faYoutube} size="lg"  />
 				</a>
 
 
 				<a href="https://github.com">
-					<Fa icon={faTwitter} size="20"  />
+					<Fa icon={faTwitter} size="lg"  />
 				</a>
 
 				<a href="https://twitter.com/fung_fi">
-					<Fa icon={faTelegram} size="20"  />
+					<Fa icon={faTelegram} size="lg"  />
 				</a>
 				<a href="https://fung.wiki/">
-					<Fa icon={faInstagram} size="20"  />
+					<Fa icon={faInstagram} size="lg"  />
 				</a>
 				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
-					<Fa icon={faTiktok} size="20"  />
+					<Fa icon={faTiktok} size="lg"  />
 				</a>
 				<a href="https://discord.gg/EbvCkxhP">
-					<Fa icon={faSnapchat} size="20"  />
+					<Fa icon={faSnapchat} size="lg"  />
 				</a>
 			</div>
+
+			
 		</div>
 	</div>
 </footer>
@@ -111,5 +124,10 @@
 <style>
 	.dark-active {
 		background: #0b1216;
+	}
+
+	.icon_size{
+		height: 22px;
+		
 	}
 </style>

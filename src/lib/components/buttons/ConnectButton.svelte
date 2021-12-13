@@ -40,8 +40,8 @@ let isInstalled:MetamaskExtensionStatus = 'checking';
         {#if isInstalled == "checking"}
             {$_('walletStatus.checking')}
         {:else if $accounts}
-            {formatAddress($accounts)}
-            <img src="/happyMushroom.svg" alt="Mush for the family" class="w-4 h-4 ml-1" >
+            <span class="flex items-center">{formatAddress($accounts)}</span>
+            <img src="/tinyRedMush.png" alt="Mush for the family" class="w-6 h-6 ml-2" >
         {:else if isInstalled == "isInstalled"}
             {$_('dividendsPage.cyw')}
         {:else if isInstalled == "notInstalled"}

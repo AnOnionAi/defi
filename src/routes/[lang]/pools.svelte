@@ -33,12 +33,14 @@
 
 <style>
 	.background {
-		background-image: url('/backgrounds/poolsBackgroundLite.png');
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-image: url('/backgrounds/redBrilliantMushPattern.svg');
 	}
 	.background__dark {
-		background-image: url('/backgrounds/poolsDarkBackground.png');
+		background-image: url('/backgrounds/redMushPattern.svg');
 	}
 	.pools{
-		min-height: 85vh;
+		min-height: 86vh;
 	}
 </style>

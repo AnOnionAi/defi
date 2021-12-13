@@ -262,33 +262,33 @@
 						<div
 							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 dark:border-green-500 shadow-md"
 						>
-							<p class="pl-2 font-semibold h-3/12  text-sm md:text-lg dark:text-white">
+							<p class="pl-2 font-light h-3/12  text-sm md:text-lg dark:text-white">
 								{$_('dashboard.today')}
 							</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-bold md:text-lg md:text-3xl dark:text-white">$0.00001</p>
+								<p class="font-medium  md:text-2xl dark:text-white">$0.00001</p>
 							</div>
 						</div>
 
 						<div
 							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 dark:border-green-500 shadow-md"
 						>
-							<p class="pl-2 font-semibold h-3/12 text-sm md:text-lg dark:text-white">
+							<p class="pl-2 font-light h-3/12 text-sm md:text-lg dark:text-white">
 								{$_('dashboard.peak')}
 							</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-bold md:text-lg md:text-3xl dark:text-white">$0.00002</p>
+								<p class="font-medium  md:text-2xl dark:text-white">$0.00002</p>
 							</div>
 						</div>
 
 						<div
 							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 dark:border-green-500 shadow-md"
 						>
-							<p class="pl-2 font-semibold h-3/12 text-sm md:text-lg dark:text-white">
+							<p class="pl-2 font-light h-3/12 text-sm md:text-lg dark:text-white">
 								{$_('dashboard.profit')}
 							</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-bold md:text-lg md:text-3xl dark:text-white">3.5%</p>
+								<p class="font-medium  md:text-2xl dark:text-white">3.5%</p>
 							</div>
 						</div>
 					</div>
