@@ -56,7 +56,7 @@
 <footer class={$isHomescreen && 'z-20 backdrop-filter backdrop-blur'} class:dark={$darkMode}>
 	<div class="{$darkMode && !$isHomescreen && 'bg-dark-500'} ">
 		<div
-			class="flex flex-col lg:flex-row  w-full items-center  lg:justify-between px-2 py-4 dark:text-white"
+			class="flex flex-col lg:flex-row  w-full items-center  lg:justify-between px-2 py-4 dark:text-white {$isHomescreen && "text-white"}"
 		>
 			<div class="w-12" />
 
@@ -70,7 +70,7 @@
 				</a>
 
 				<a href="google.com">
-					{#if $darkMode}
+					{#if $darkMode || $isHomescreen}
 						<img src="/auditsWhite.svg" class="icon_size" alt="" />
 					{:else}
 						<img src="/audits.svg" class="icon_size" alt="" />
