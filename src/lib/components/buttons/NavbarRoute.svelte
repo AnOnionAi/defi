@@ -16,10 +16,7 @@
 		gotoPage(pageRoute.route);
 	}}
 >
-	<span
-		class="hover:text-green-500 {$darkMode &&
-			'hover:text-green-300'}   px-2  py-3 rounded-md"
-	>
+	<span class="hover:text-green-500 {$darkMode && 'hover:text-green-300'}   px-2  py-3 rounded-md">
 		{pageRoute.title}
 	</span>
 </button>

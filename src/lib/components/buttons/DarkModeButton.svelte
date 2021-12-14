@@ -24,7 +24,6 @@
 	{/if}
 </span>
 
-
 <style>
 	.spinner {
 		animation: spin 4s linear infinite;
