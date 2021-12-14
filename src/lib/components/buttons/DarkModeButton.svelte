@@ -2,36 +2,30 @@
 	export const prerender = false;
 </script>
 
-
 <script lang="ts">
-import Icon from 'svelte-fa';
-import {faSun, faMoon} from '@fortawesome/free-solid-svg-icons';
-import {darkMode} from "$lib/stores/dark"
+	import Icon from 'svelte-fa';
+	import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+	import { darkMode } from '$lib/stores/dark';
 
-const changeDark = () => {
-    darkMode.set(!$darkMode);
-}
-
+	const changeDark = () => {
+		darkMode.set(!$darkMode);
+	};
 </script>
 
-
-    <span
-        on:click={changeDark}
-        class=" {$darkMode &&
-            ''} block px-2 py-3 rounded-md font-medium {!$darkMode &&
-            'spinner'} cursor-pointer text-gray-800 dark:text-gray-100 hover:text-yellow-300 "
-    >
-        {#if $darkMode}
-            <Icon  icon={faMoon} />
-        {:else}
-            <Icon icon={faSun} />
-        {/if}
-    </span>
-
-
+<span
+	on:click={changeDark}
+	class=" {$darkMode && ''} block px-2 py-3 rounded-md font-medium {!$darkMode &&
+		'spinner'} cursor-pointer text-gray-800 dark:text-gray-100 hover:text-yellow-300 "
+>
+	{#if $darkMode}
+		<Icon icon={faMoon} />A
+	{:else}
+		<Icon icon={faSun} />A
+	{/if}
+</span>
 
 <style>
-    .spinner {
+	.spinner {
 		animation: spin 4s linear infinite;
 	}
 

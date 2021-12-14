@@ -1,4 +1,4 @@
-import type { BigNumber } from "ethers";
+import type { BigNumber } from 'ethers';
 
 export interface FarmConfig {
 	pid: number;

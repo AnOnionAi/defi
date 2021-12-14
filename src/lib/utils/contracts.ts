@@ -32,7 +32,6 @@ export const getMushTokenContract = () => {
 	return mushTokenContract;
 };
 
-
 export const getContractObject = (address: string, abi: any) => {
 	const contract = new ethers.Contract(address, abi, getSigner());
 	return contract;
@@ -57,12 +56,11 @@ export const getUniFactoryContract = () => {
 	return factory;
 };
 
-
 export const getLiquidityPairContract = (address: string) => {
-	const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com/");
-	const univ2Pair = new ethers.Contract(address,pairABI,provider);
+	const provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com/');
+	const univ2Pair = new ethers.Contract(address, pairABI, provider);
 	return univ2Pair;
-}
+};
 
 export const getMushAllowance = async (userAddr: string) => {
 	const mushContract = new ethers.Contract(
@@ -100,8 +98,6 @@ export const addLiquidityPool = async (
 	const router = getUniRouterContract();
 	await router.addLiquidity(tokenA, tokenB, amountA, amountB, amountAmin, amountBmin, to, deadline);
 };
-
-
 
 export const getTokenPairAddress = async (tkn0Addr: string, tkn1Addr: string) => {
 	const factory = getUniFactoryContract();

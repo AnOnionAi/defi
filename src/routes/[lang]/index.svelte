@@ -1,10 +1,9 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import spaceDay from '/static/space.jpg';
 	import spaceNight from '/static/space35.jpg';
 	import moon from '/static/moon.jpg';
@@ -16,13 +15,17 @@
 	import * as THREE from 'three';
 	import { isHomescreen } from '$lib/stores/homescreen';
 
-	isHomescreen.update((v) => (v = true));
+	isHomescreen.set(true);
 	export let lang;
 	let canvas;
 	let scene;
+
+	onDestroy(() => {
+		isHomescreen.set(false);
+	});
+
 	onMount(() => {
 		scene = new THREE.Scene();
-
 		const camera = new THREE.PerspectiveCamera(
 			75,
 			window.innerWidth / window.innerHeight,

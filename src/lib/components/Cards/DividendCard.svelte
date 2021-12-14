@@ -154,8 +154,8 @@
 					<p
 						class="rounded-full flex py-1 px-4  border-2 border-blue-500 text-blue-500 inline text-xs font-semibold dark:border-blue-400 dark:text-blue-400"
 					>
-						<span class="mr-1">{$_('actions.earn')} USDC </span> 
-						<img src="/vaultTokensIcons/usdc.svg" alt="" class="w-4">
+						<span class="mr-1">{$_('actions.earn')} USDC </span>
+						<img src="/vaultTokensIcons/usdc.svg" alt="" class="w-4" />
 					</p>
 				</div>
 			</div>
@@ -289,7 +289,7 @@
 
 			<div class="flex flex-col text-sm h-2/6 justify-center">
 				<p class="text-gray-600 dark:text-gray-300 font-semibold mb-1 ml-1">
-					USDC  {$_('pastActions.earned')}:
+					USDC {$_('pastActions.earned')}:
 					<span class="text-black" />
 				</p>
 

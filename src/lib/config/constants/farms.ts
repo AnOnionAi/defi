@@ -4,7 +4,7 @@ import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/ts/types';
 
 export const farms: PoolInfo[] = [
-/* 		{
+	/* 		{
 		pid: 0,
 		tokenImagePath: '/vaultTokensIcons/quick.svg',
 		tokenName: 'QUICK-LP',
@@ -16,7 +16,7 @@ export const farms: PoolInfo[] = [
 		pid: 1,
 		tokenImagePath: '/mush-usdc.svg',
 		tokenName: 'MUSH-USDC',
-		tokenAddr: getContractAddress(Token.SUSHILP),
+		tokenAddr: getContractAddress(Token.SUSHILP)
 	}
 	/* , 
 	{

@@ -8,7 +8,7 @@
 		parseBigNumberToString
 	} from '$lib/utils/balanceParsers';
 	import type { PoolInfo } from '$lib/ts/types';
-import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
+	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	export let info: PoolInfo;
 	export let userStakedTokens: BigNumber;
 	export let onWithdraw = (wantAmount?: any) => {};
@@ -44,9 +44,7 @@ import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 			</div>
 			<div class="flex flex-wrap justify-between py-3 px-10">
 				<div>
-					<input
-					on:keypress={onyAllowFloatNumbers}
-					 bind:value={wantAmount} placeholder="0.0" />
+					<input on:keypress={onyAllowFloatNumbers} bind:value={wantAmount} placeholder="0.0" />
 				</div>
 				<div>
 					<div />

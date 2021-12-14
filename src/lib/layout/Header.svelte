@@ -11,23 +11,21 @@
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
-	import ConnectButton from "$lib/components/Buttons/ConnectButton.svelte"
-	import LangPicker from "$lib/components/Dropdowns/LangPicker.svelte"
+	import { onDestroy, onMount } from 'svelte';
+	import ConnectButton from '$lib/components/Buttons/ConnectButton.svelte';
+	import LangPicker from '$lib/components/Dropdowns/LangPicker.svelte';
 	import DarkModeButton from '$lib/components/Buttons/DarkModeButton.svelte';
 	import HamburgerButton from '$lib/components/Buttons/HamburgerButton.svelte';
 	import NavItemButton from '$lib/components/Buttons/NavItemButton.svelte';
 	import NativeToken from '$lib/components/Buttons/NativeToken.svelte';
 	import MushPrice from '$lib/components/buttons/MushPrice.svelte';
 
-
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;
 
 	let home = false;
 	let menu;
-	
-	
+
 	if (!$page.params.lang) {
 		setInit('en');
 	}
@@ -35,8 +33,6 @@
 	if ($page.params.lang) {
 		setInit($page.params.lang);
 	}
-
-	
 
 	const PAGES = [
 		{
@@ -66,14 +62,6 @@
 		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
 		console.log($page.params.lang);
 	};
-
-	
-
-	onMount(() => {
-		
-	});
-
-
 </script>
 
 <svelte:window
@@ -89,11 +77,10 @@
 	}}
 />
 
-
 <nav
 	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
-		'bg-dark-500 border-dark-200'} backdrop-blur top-0 w-full text-black border-b-2 border-gray-200"
+		'bg-dark-500 border-dark-200'} backdrop-blur top-0 w-full  border-b-2 border-gray-200"
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-3 ">
@@ -101,7 +88,7 @@
 			bind:this={menu}
 			class="sm:absolute sm:left-35 border  dark:border-none rounded-md  items-center flex sm:static sm:inset-auto sm:mr-4"
 		>
-			<LangPicker bind:showDropDownMenu/>
+			<LangPicker bind:showDropDownMenu />
 		</div>
 		<div class="sm:mr-3 flex-1 flex items-center justify-center sm:justify-start">
 			<!-- LOGO -->
@@ -114,31 +101,31 @@
 				>
 					<img class="w-10 " src="/cute/fiji.svg" alt="Fung Finance Logo" />
 					{#if $darkMode}
-					<img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
+						<img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
 					{:else}
-					<img class="mt-1 " src="/cute/fungfiLiteMode.svg" alt="Fung Finance" />
+						<img class="mt-1 " src="/cute/fungfiLiteMode.svg" alt="Fung Finance" />
 					{/if}
 				</span>
 			</div>
 			<div class="ml-4 hidden lg:block">
 				<div class="flex items-center ml-9 space-x-2">
 					{#each PAGES as page}
-					<NavItemButton pageRoute={page}/>
-				{/each}
+						<NavItemButton pageRoute={page} />
+					{/each}
+				</div>
 			</div>
-			</div>
+			<div class="w-4 h-4 bg-black dark:bg-white {$isHomescreen && 'bg-white'} " />
 			<!-- day/nite toggle -->
-			
 
 			<div class="hidden lg:flex space-x-5 ml-auto items-center ">
-				<DarkModeButton/>
-				<MushPrice/>
-				<ConnectButton/>
+				<DarkModeButton />
+				<MushPrice />
+				<ConnectButton />
 			</div>
 		</div>
 
 		<!-- start hamburger button -->
-		<HamburgerButton bind:navbarMenuIsOpen/>
+		<HamburgerButton bind:navbarMenuIsOpen />
 	</div>
 
 	<!-- start mobile navbar -->
@@ -150,21 +137,19 @@
 	>
 		<div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-4">
 			{#each PAGES as page}
-			<div class="">
-				<NavItemButton pageRoute={page}/>
-			</div>
+				<div class="">
+					<NavItemButton pageRoute={page} />
+				</div>
 			{/each}
 			<div class="flex justify-center">
-				<DarkModeButton/>
+				<DarkModeButton />
 			</div>
-			<ConnectButton/>
+			<ConnectButton />
 		</div>
 	</div>
 </nav>
 
 <style>
-	                                                               
-
 	.menu_mobile__background {
 		background-color: #f9f9f9;
 	}
@@ -174,5 +159,4 @@
 	.navbar_item_home:hover {
 		color: black;
 	}
-
 </style>

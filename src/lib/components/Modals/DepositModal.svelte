@@ -8,7 +8,7 @@
 		parseBigNumberToInt,
 		parseBigNumberToString
 	} from '$lib/utils/balanceParsers';
-import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
+	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	export let info: PoolInfo;
 	export let userBalance: BigNumber;
 	export let onOkay = (wantAmount?: any) => {};

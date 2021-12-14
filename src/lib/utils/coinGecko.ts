@@ -16,13 +16,14 @@ export const getTokenPriceUSD = async (addr: ContractAddress): Promise<TokenPric
 	}
 };
 
-
 export const getPoolTokenPriceUSD = async (addr: ContractAddress) => {
-	try{
-		const response = await fetch(`https://api.coingecko.com/api/v3/simple/token_price/polygon-pos?contract_addresses=${addr}&vs_currencies=usd`);
-		const data = await  response.json()
-		return data[addr].usd
-	}catch{
-		console.log("Unable to get token price ");
+	try {
+		const response = await fetch(
+			`https://api.coingecko.com/api/v3/simple/token_price/polygon-pos?contract_addresses=${addr}&vs_currencies=usd`
+		);
+		const data = await response.json();
+		return data[addr].usd;
+	} catch {
+		console.log('Unable to get token price ');
 	}
-}
+};

@@ -2,8 +2,6 @@
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
-
-	
 </script>
 
 <script lang="ts">
@@ -11,10 +9,9 @@
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
 	import { MasterChef } from '$lib/utils/masterc';
 	import { onMount } from 'svelte';
-	import{ BigNumber, ethers } from 'ethers';
-	import { mushPerBlock, totalMushSupply,mushMarketCap } from '$lib/stores/MushMarketStats';
+	import { BigNumber, ethers } from 'ethers';
+	import { mushPerBlock, totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
-	
 </script>
 
 <div in:fade={{ duration: 300 }}>
@@ -175,11 +172,13 @@
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center">
 								{#if $mushPerBlock}
-								<p class="text-2xl tracking-tighter font-semibold dark:text-white">{$mushPerBlock} MUSH</p>
-								{:else }	
-								<p class="w-20 rounded-lg h-8 bg-gray-200 dark:bg-dark-600 animate-pulse "></p>
+									<p class="text-2xl tracking-tighter font-semibold dark:text-white">
+										{$mushPerBlock} MUSH
+									</p>
+								{:else}
+									<p class="w-20 rounded-lg h-8 bg-gray-200 dark:bg-dark-600 animate-pulse " />
 								{/if}
-								
+
 								<p class="text-xs font-medium text-gray-600" />
 							</div>
 						</div>
@@ -195,8 +194,9 @@
 								{$_('dashboard.marketcap')}
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
-								<p class="text-2xl tracking-tighter font-semibold">${shortLargeAmount($mushMarketCap)} USD</p>
-								
+								<p class="text-2xl tracking-tighter font-semibold">
+									${shortLargeAmount($mushMarketCap)} USD
+								</p>
 							</div>
 						</div>
 					</div>
@@ -216,9 +216,9 @@
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
 								{#if $totalMushSupply}
-								<p class="text-2xl font-semibold">{shortLargeAmount($totalMushSupply)}</p>
+									<p class="text-2xl font-semibold">{shortLargeAmount($totalMushSupply)}</p>
 								{:else}
-								<p class="w-20 rounded-lg h-8 bg-gray-200 dark:bg-dark-600 animate-pulse "></p>
+									<p class="w-20 rounded-lg h-8 bg-gray-200 dark:bg-dark-600 animate-pulse " />
 								{/if}
 							</div>
 						</div>
