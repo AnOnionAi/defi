@@ -182,7 +182,7 @@
 		font-size: 1.1em;
 		font-weight: 400;
 		color: #999;
-		
+
 		border: 2px solid rgba(0, 0, 0, 0.2);
 		border-radius: 12px;
 		position: relative;
@@ -199,11 +199,9 @@
 		height: 42px;
 		font-size: 1em;
 		font-weight: 600;
-		
 	}
 
 	.title {
-		
 		font-size: 15px;
 		font-weight: 400;
 	}
@@ -241,7 +239,7 @@
 		font-size: 1.1em;
 		font-weight: 400;
 		color: #999;
-		
+
 		border: 2px solid rgba(0, 0, 0, 0.2);
 		border-radius: 12px;
 		position: relative;

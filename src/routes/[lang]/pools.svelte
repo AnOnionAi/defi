@@ -2,7 +2,6 @@
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
-	
 </script>
 
 <script lang="ts">
@@ -43,7 +42,7 @@
 	.background__dark {
 		background-image: url('/backgrounds/redMushPattern.svg');
 	}
-	.pools{
+	.pools {
 		min-height: 86vh;
 	}
 </style>

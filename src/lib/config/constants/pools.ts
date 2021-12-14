@@ -4,7 +4,7 @@ import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/ts/types';
 
 export let pools: PoolInfo[] = [
-/* 	{
+	/* 	{
 		tokenName: 'MUSH',
 		tokenAddr: getContractAddress(Token.MUSHTOKEN),
 		pid: 5,
@@ -63,8 +63,8 @@ export let pools: PoolInfo[] = [
 		tokenAddr: getContractAddress(Token.USDC),
 		pid: 3,
 		tokenImagePath: '/vaultTokensIcons/usdc.svg'
-	},
-/* 
+	}
+	/* 
 	{
 		tokenName: 'DOGE',
 		tokenAddr: getContractAddress(Token.DOGE),

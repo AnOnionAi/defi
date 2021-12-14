@@ -2,7 +2,6 @@
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
-	
 </script>
 
 <script lang="ts">
@@ -24,7 +23,7 @@
 	import { stakedWantTokens } from '$lib/utils/vaultChef';
 	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 	import { BigNumber } from 'ethers';
-	
+
 	let unsubscribe;
 
 	onMount(() => {
@@ -45,11 +44,8 @@
 		});
 	});
 
-
-
 	onDestroy(() => {});
 	const allVaults: VaultInfo[] = [...quickVaults, ...sushiVaults];
-
 
 	let filteredVaults = [];
 	let filteredVaultsPrev = [...filteredVaults];
@@ -229,7 +225,7 @@
 </section>
 
 <style>
-	.mainContainer{
+	.mainContainer {
 		min-height: 85vh;
 	}
 

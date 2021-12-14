@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fly, slide } from 'svelte/transition';
-	import Fa from "svelte-fa";
+	import Fa from 'svelte-fa';
 	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
@@ -23,7 +23,7 @@
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
-import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
+	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 
 	const { addNotification } = getNotificationsContext();
 	export let hasRoundedBorder = false;
@@ -188,28 +188,28 @@ import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 			</div>
 			<div class="flex items-center justify-between w-8/12 h-20 mx-auto lg:mx-0">
 				<div class="flex w-10/12 justify-around ">
-				<div>
-					<p class="text-gray-600 font-light text-sm dark:text-gray-300">APY</p>
-					<p class="dark:text-white">1.12K%</p>
-				</div>
-				<div>
-					<p class="text-gray-600 font-light text-sm dark:text-gray-300">Daily</p>
-					<p class="dark:text-white">7%</p>
-				</div>
-				<div>
-					<p class="text-gray-600 font-light text-sm dark:text-gray-300">Wallet</p>
-					<p class="dark:text-white">0.0001</p>
-				</div>
-				<div>
-					<p class="text-gray-600 font-light text-sm dark:text-gray-300">TVL</p>
-					<p class="dark:text-white">$1,254</p>
-				</div>
+					<div>
+						<p class="text-gray-600 font-light text-sm dark:text-gray-300">APY</p>
+						<p class="dark:text-white">1.12K%</p>
+					</div>
+					<div>
+						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Daily</p>
+						<p class="dark:text-white">7%</p>
+					</div>
+					<div>
+						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Wallet</p>
+						<p class="dark:text-white">0.0001</p>
+					</div>
+					<div>
+						<p class="text-gray-600 font-light text-sm dark:text-gray-300">TVL</p>
+						<p class="dark:text-white">$1,254</p>
+					</div>
 				</div>
 				<div class="dark:text-white">
 					{#if isHidden}
-					<Fa icon={faChevronDown}></Fa>
+						<Fa icon={faChevronDown} />
 					{:else}
-					<Fa icon={faChevronUp}></Fa>
+						<Fa icon={faChevronUp} />
 					{/if}
 				</div>
 			</div>
@@ -217,9 +217,10 @@ import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	</div>
 	{#if !isHidden}
 		<div
-		in:slide={{  duration: 400 }}
-		out:slide={{  duration: 400 }}
-		class="bg-gray-200 max-w-8xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5">
+			in:slide={{ duration: 400 }}
+			out:slide={{ duration: 400 }}
+			class="bg-gray-200 max-w-8xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5"
+		>
 			{#if !$accounts}
 				<button
 					on:click={metaMaskCon}
@@ -392,12 +393,12 @@ import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 								<a
 									target="_blank"
 									class="block text-gray-600 font-medium  dark:text-gray-400"
-									href={vaultConfig.pair.pairURL}>
+									href={vaultConfig.pair.pairURL}
+								>
 									<span class="hover:text-green-500">
 										{$_('vaultAccordeon.viewInfo')}
 									</span>
-									</a
-								>
+								</a>
 							</div>
 						</div>
 					</div>

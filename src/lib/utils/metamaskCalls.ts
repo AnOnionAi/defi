@@ -2,18 +2,18 @@ import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/ts/types';
 import { accounts } from '$lib/stores/MetaMaskAccount';
 
-
-
 export const isMetaMaskInstalled = () => {
 	//Have to check the ethereum binding on the window object to see if it's installed
 	const { ethereum } = window;
 	return Boolean(ethereum && ethereum.isMetaMask);
 };
 
-
 export const goInstallMetamask = () => {
-	window.open("https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn","_blank")
-}
+	window.open(
+		'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn',
+		'_blank'
+	);
+};
 
 export const metaMaskCon = async () => {
 	try {
@@ -34,8 +34,7 @@ export const addTokenToMetamaskWallet = () => {
 					address: getContractAddress(Token.MUSHTOKEN),
 					symbol: 'MUSH',
 					decimals: 18,
-					image:
-						'https://zyber-dev.netlify.app/mushRound.png'
+					image: 'https://zyber-dev.netlify.app/mushRound.png'
 				}
 			}
 		})

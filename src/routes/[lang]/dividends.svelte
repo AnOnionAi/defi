@@ -30,11 +30,11 @@
 
 	let backgroundImage;
 
-	darkMode.subscribe((darkEnabled)=>{
+	darkMode.subscribe((darkEnabled) => {
 		darkEnabled
-		 ? (backgroundImage = "/backgrounds/mushHouse.svg")
-		 : (backgroundImage = "/backgrounds/cuteMush.svg")
-	})
+			? (backgroundImage = '/backgrounds/mushHouse.svg')
+			: (backgroundImage = '/backgrounds/cuteMush.svg');
+	});
 
 	unsubscribe = accounts.subscribe((arrayAccs) => {
 		if (arrayAccs) {
@@ -71,10 +71,7 @@
 <br />
 <h1 class="tracking-widest  text-4xl dark:text-white">{$_('headers.dividends.text')}</h1>
 <div class="my-6">
-	<div
-		style="background-image:url({backgroundImage});"
-		class="dividends-wrapper"
-	>
+	<div style="background-image:url({backgroundImage});" class="dividends-wrapper">
 		<div
 			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
 		>
@@ -106,5 +103,4 @@
 	.dividends {
 		max-height: 600px;
 	}
-
 </style>
