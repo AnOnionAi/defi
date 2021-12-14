@@ -2,7 +2,6 @@
 	import { darkMode } from '$lib/stores/dark';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { isHomescreen } from '$lib/stores/homescreen';
 	export let pageRoute;
 
 	const gotoPage = (route: string, home: boolean = false) => {
@@ -18,10 +17,9 @@
 	}}
 >
 	<span
-		class="dark:text-white hover:text-green-500 {$darkMode &&
-			'hover:text-green-300'}   px-2 text-dark-800 py-3 rounded-md  {$isHomescreen && 'text-white'}
-"
+		class="hover:text-green-500 {$darkMode &&
+			'hover:text-green-300'}   px-2  py-3 rounded-md"
 	>
-		{pageRoute.title}A
+		{pageRoute.title}
 	</span>
 </button>

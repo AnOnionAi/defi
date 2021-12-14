@@ -16,9 +16,9 @@
 	import LangPicker from '$lib/components/Dropdowns/LangPicker.svelte';
 	import DarkModeButton from '$lib/components/Buttons/DarkModeButton.svelte';
 	import HamburgerButton from '$lib/components/Buttons/HamburgerButton.svelte';
-	import NavItemButton from '$lib/components/Buttons/NavItemButton.svelte';
-	import NativeToken from '$lib/components/Buttons/NativeToken.svelte';
+	import NavItemButton from '$lib/components/Buttons/NavItemButton.svelte';	
 	import MushPrice from '$lib/components/buttons/MushPrice.svelte';
+	import NavbarRoute from '$lib/components/buttons/NavbarRoute.svelte';
 
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;
@@ -80,7 +80,7 @@
 <nav
 	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
-		'bg-dark-500 border-dark-200'} backdrop-blur top-0 w-full  border-b-2 border-gray-200"
+		'bg-dark-500 border-dark-200'} backdrop-blur top-0 w-full  {!$isHomescreen && "border-b-2"} border-gray-200"
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-3 ">
@@ -100,7 +100,9 @@
 					}}
 				>
 					<img class="w-10 " src="/cute/fiji.svg" alt="Fung Finance Logo" />
-					{#if $darkMode}
+					{#if $isHomescreen}
+						<img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
+					{:else if $darkMode}
 						<img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
 					{:else}
 						<img class="mt-1 " src="/cute/fungfiLiteMode.svg" alt="Fung Finance" />
@@ -108,16 +110,15 @@
 				</span>
 			</div>
 			<div class="ml-4 hidden lg:block">
-				<div class="flex items-center ml-9 space-x-2">
+				<div class="flex items-center ml-9 space-x-2 dark:text-white {$isHomescreen && "text-white"}">
 					{#each PAGES as page}
-						<NavItemButton pageRoute={page} />
+						<NavbarRoute pageRoute={page}/>
 					{/each}
 				</div>
 			</div>
-			<div class="w-4 h-4 bg-black dark:bg-white {$isHomescreen && 'bg-white'} " />
 			<!-- day/nite toggle -->
 
-			<div class="hidden lg:flex space-x-5 ml-auto items-center ">
+			<div class="hidden lg:flex space-x-5 ml-auto  dark:text-white items-center {$isHomescreen && "text-white"}   ">
 				<DarkModeButton />
 				<MushPrice />
 				<ConnectButton />
@@ -138,7 +139,7 @@
 		<div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-4">
 			{#each PAGES as page}
 				<div class="">
-					<NavItemButton pageRoute={page} />
+					<NavbarRoute pageRoute={page}/>
 				</div>
 			{/each}
 			<div class="flex justify-center">

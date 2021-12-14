@@ -5,7 +5,7 @@
 	import { goto } from '$app/navigation';
 	import { setInit } from '$lib/i18n/init';
 	import { darkMode } from '$lib/stores/dark';
-
+import { isHomescreen } from '$lib/stores/homescreen';
 	export let home = false;
 
 	export let showDropDownMenu = false;
@@ -44,9 +44,9 @@
 		on:click={() => {
 			showDropDownMenu = !showDropDownMenu;
 		}}
-		class="dark:border dark:rounded-md dark:hover:bg-dark-600 focus:outline-none font-medium flex p-2 items-center "
+		class="dark:border dark:rounded-md dark:hover:bg-dark-300 focus:outline-none font-medium flex p-2 items-center "
 	>
-		<p class="m-0 font-semibold text-gray-900 dark:text-white">
+		<p class="m-0 font-semibold {$darkMode && "text-white"} {$isHomescreen && "text-white"}">
 			{$page.params.lang ? validLang($page.params.lang) : '...'}
 		</p>
 	</button>

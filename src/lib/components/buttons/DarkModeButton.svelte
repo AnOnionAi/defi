@@ -15,14 +15,15 @@
 <span
 	on:click={changeDark}
 	class=" {$darkMode && ''} block px-2 py-3 rounded-md font-medium {!$darkMode &&
-		'spinner'} cursor-pointer text-gray-800 dark:text-gray-100 hover:text-yellow-300 "
+		'spinner'} cursor-pointer  hover:text-yellow-300 "
 >
 	{#if $darkMode}
-		<Icon icon={faMoon} />A
+		<Icon icon={faMoon} />
 	{:else}
-		<Icon icon={faSun} />A
+		<Icon icon={faSun} />
 	{/if}
 </span>
+
 
 <style>
 	.spinner {
