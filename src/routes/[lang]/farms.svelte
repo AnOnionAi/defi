@@ -34,7 +34,7 @@
 </script>
 
 <Modal>
-	<section class="farms" style="background:url({backgroundImage}); background-position: center; background-repeat: no-repeat;">
+	<section class="farms" style="background:url({backgroundImage});">
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
 			{$_('headers.farms.text')}
@@ -53,6 +53,7 @@
 
 <style>
 	.farms{
+		background-repeat:no-repeat;
 		min-height: 85vh;
 	}
 </style>
