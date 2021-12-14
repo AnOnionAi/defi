@@ -35,4 +35,5 @@ async function metamaskConnect() {
 	}
 };
 
+metamaskConnect();
 
