@@ -33,7 +33,7 @@ specifiers:
   svelte-preprocess: ^4.0.0
   svelte-simple-modal: ^1.0.2
   svelte-windicss-preprocess: ^4.0.7
-  three: ^0.129.0
+  three: 0.135.0
   tslib: ^2.0.0
   typescript: ^4.4.4
   vite-plugin-windicss: ^1.4.7
@@ -54,7 +54,7 @@ dependencies:
   svelte-loading-spinners: 0.1.7
   svelte-notifications: 0.9.91
   svelte-simple-modal: 1.0.3_svelte@3.44.0
-  three: 0.129.0
+  three: 0.135.0
 
 devDependencies:
   '@sveltejs/adapter-netlify': 1.0.0-next.32
@@ -4722,8 +4722,11 @@ packages:
     resolution: {integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=}
     dev: true
 
-  /three/0.129.0:
-    resolution: {integrity: sha512-wiWio1yVRg2Oj6WEWsTHQo5eSzYpEwSBtPSi3OofNpvFbf26HFfb9kw4FZJNjII4qxzp0b1xLB11+tKkBGB1ZA==}
+  /three/0.135.0:
+    resolution:
+      {
+        integrity: sha512-kuEpuuxRzLv0MDsXai9huCxOSQPZ4vje6y0gn80SRmQvgz6/+rI0NAvCRAw56zYaWKMGMfqKWsxF9Qa2Z9xymQ==
+      }
     dev: false
 
   /throat/6.0.1:

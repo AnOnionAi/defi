@@ -13,6 +13,12 @@
 	import { faSnapchat } from '@fortawesome/free-brands-svg-icons';
 	import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+	import { logger } from 'ethers';
+	let iconColor;
+
+	$: {
+		iconColor = (!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode);
+	}
 
 	if ($page.params.lang) {
 		setInit($page.params.lang);
@@ -81,11 +87,9 @@
 				<a href="https://app.sushi.com/swap">
 					<Fa icon={faHandHoldingUsd} size="lg"  />
 				</a>
-
 				<a href="https://fung.wiki/">
 					<Fa icon={faBookOpen} size="lg"  />
 				</a>
-
 				<a href="https://discord.gg/EbvCkxhP">
 					<Fa icon={faDiscord} size="lg"  />
 				</a>
@@ -101,7 +105,6 @@
 				<a href="https://github.com">
 					<Fa icon={faTwitter} size="lg"  />
 				</a>
-
 				<a href="https://twitter.com/fung_fi">
 					<Fa icon={faTelegram} size="lg"  />
 				</a>
@@ -128,6 +131,9 @@
 
 	.icon_size{
 		height: 22px;
-		
+	}
+	
+	footer{
+		z-index: 1;
 	}
 </style>
