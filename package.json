@@ -33,10 +33,9 @@
 		"prettier-plugin-svelte": "^2.4.0",
 		"svelte": "^3.44.0",
 		"svelte-preprocess": "^4.0.0",
-		"svelte-windicss-preprocess": "^4.0.7",
 		"tslib": "^2.0.0",
 		"typescript": "^4.4.4",
-		"vite-plugin-windicss": "^1.4.7"
+		"vite-plugin-windicss": "1.5.1"
 	},
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.2.2",
