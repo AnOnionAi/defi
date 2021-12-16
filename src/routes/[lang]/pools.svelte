@@ -9,7 +9,6 @@
 	import { pools } from '$lib/config/constants/pools';
 	import Modal from 'svelte-simple-modal';
 	import { darkMode } from '$lib/stores/dark';
-	export let lang;
 	import { isHomescreen } from '$lib/stores/homescreen';
 
 	isHomescreen.update((v) => (v = false));

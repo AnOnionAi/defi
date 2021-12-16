@@ -16,7 +16,6 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 
 	isHomescreen.set(true);
-	export let lang;
 	let canvas;
 	let scene;
 

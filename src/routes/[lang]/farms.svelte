@@ -9,7 +9,6 @@
 	import { farms } from '$lib/config/constants/farms';
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import Modal from 'svelte-simple-modal';
-	import 'virtual:windi.css';
 	import { getProvider, getRPCSigner, Provider } from '$lib/utils/web3Helpers';
 	import { ethers } from 'ethers';
 	import type { BigNumber } from 'ethers';
