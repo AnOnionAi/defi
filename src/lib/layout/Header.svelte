@@ -17,8 +17,8 @@
 	import DarkModeButton from '$lib/components/Buttons/DarkModeButton.svelte';
 	import HamburgerButton from '$lib/components/Buttons/HamburgerButton.svelte';
 	import NavItemButton from '$lib/components/Buttons/NavItemButton.svelte';
-	import MushPrice from '$lib/components/buttons/MushPrice.svelte';
-	import NavbarRoute from '$lib/components/buttons/NavbarRoute.svelte';
+	import MushPrice from '$lib/components/Buttons/MushPrice.svelte';
+	import NavbarRoute from '$lib/components/Buttons/NavbarRoute.svelte';
 
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;

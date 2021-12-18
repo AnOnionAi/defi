@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { faWallet } from '@fortawesome/free-solid-svg-icons';
-	import Icon from 'svelte-fa';
 	import { darkMode } from '$lib/stores/dark';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { formatAddress } from '$lib/utils/addressHelpers';
