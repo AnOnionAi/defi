@@ -2,12 +2,6 @@
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
-	export async function load({ page }) {
-		const { lang } = page.params;
-		return {
-			props: { lang }
-		};
-	}
 </script>
 
 <script lang="ts">
@@ -15,7 +9,6 @@
 	import { pools } from '$lib/config/constants/pools';
 	import Modal from 'svelte-simple-modal';
 	import { darkMode } from '$lib/stores/dark';
-	export let lang;
 	import { isHomescreen } from '$lib/stores/homescreen';
 
 	isHomescreen.update((v) => (v = false));
@@ -27,7 +20,7 @@
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
 			{$_('headers.pools.text')}
 		</h1>
-		<div class="mt-5 space-y-4 background  {$darkMode && 'background__dark'}">
+		<div class="mt-5 space-y-4 pools background  {$darkMode && 'background__dark'}">
 			<div
 				class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap max-w-7xl mx-auto "
 			>
@@ -41,9 +34,14 @@
 
 <style>
 	.background {
-		background-image: url('/backgrounds/poolsBackgroundLite.png');
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-image: url('/backgrounds/redBrilliantMushPattern.svg');
 	}
 	.background__dark {
-		background-image: url('/backgrounds/poolsDarkBackground.png');
+		background-image: url('/backgrounds/redMushPattern.svg');
+	}
+	.pools {
+		min-height: 86vh;
 	}
 </style>

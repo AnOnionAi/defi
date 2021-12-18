@@ -8,6 +8,7 @@
 		parseBigNumberToInt,
 		parseBigNumberToString
 	} from '$lib/utils/balanceParsers';
+	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	export let info: PoolInfo;
 	export let userBalance: BigNumber;
 	export let onOkay = (wantAmount?: any) => {};
@@ -42,6 +43,7 @@
 		<div class="flex justify-between py-3 px-10 flex-wrap">
 			<div class="flex w-15/24">
 				<input
+					on:keypress={onyAllowFloatNumbers}
 					bind:value={wantAmount}
 					id="inputDeposit"
 					min="0"

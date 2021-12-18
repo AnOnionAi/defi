@@ -4,7 +4,6 @@
 
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import 'virtual:windi.css';
 	import { onMount } from 'svelte';
 	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';

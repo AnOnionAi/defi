@@ -2,12 +2,6 @@
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
 	import { setInit } from '$lib/i18n/init';
-	export async function load({ page }) {
-		const { lang } = page.params;
-		return {
-			props: { lang }
-		};
-	}
 </script>
 
 <script lang="ts">
@@ -29,9 +23,6 @@
 	import { stakedWantTokens } from '$lib/utils/vaultChef';
 	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 	import { BigNumber } from 'ethers';
-	import { isHomescreen } from '$lib/stores/homescreen';
-
-	isHomescreen.update((v) => (v = false));
 
 	let unsubscribe;
 
@@ -52,8 +43,10 @@
 			}
 		});
 	});
+
 	onDestroy(() => {});
 	const allVaults: VaultInfo[] = [...quickVaults, ...sushiVaults];
+
 	let filteredVaults = [];
 	let filteredVaultsPrev = [...filteredVaults];
 	let userAccount;
@@ -207,7 +200,7 @@
 		{$_('headers.vaults.text')}
 	</h1>
 
-	<div class="pt-10 sideShadow background__lite">
+	<div class="mainContainer 	pt-10 sideShadow background__lite">
 		<div in:fade={{ duration: 600 }}>
 			<VaultFilter
 				bind:platformSelected
@@ -232,7 +225,11 @@
 </section>
 
 <style>
+	.mainContainer {
+		min-height: 85vh;
+	}
+
 	.background__lite {
-		background-image: url('/backgrounds/vaultsBackgroundLite.png');
+		background-image: url('/backgrounds/vaultsBackground2.png');
 	}
 </style>

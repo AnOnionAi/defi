@@ -1,20 +1,18 @@
-import type { BigNumber } from '@ethersproject/bignumber';
+import type { BigNumber } from 'ethers';
 
 export interface FarmConfig {
 	pid: number;
 	lpSymbol: string;
-	lpAddresses: string;
+	lpAddress: string;
 	tokenSymbol: string;
 	tokenAddresses: string;
 	multiplier?: string;
-	risk: number;
 }
 
 export interface PoolInfo {
 	tokenName: string;
 	tokenImagePath: string;
 	tokenAddr: string;
-	depositFee: number;
 	pid: number;
 }
 

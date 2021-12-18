@@ -17,6 +17,7 @@
 		wrongInput
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
+	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 
 	const { addNotification } = getNotificationsContext();
 
@@ -151,9 +152,10 @@
 				</div>
 				<div>
 					<p
-						class="rounded-full py-1 px-4  border-2 border-green-500 text-green-600 inline text-xs font-semibold"
+						class="rounded-full flex py-1 px-4  border-2 border-blue-500 text-blue-500 inline text-xs font-semibold dark:border-blue-400 dark:text-blue-400"
 					>
-						{$_('actions.earn')} MUSH 🍄
+						<span class="mr-1">{$_('actions.earn')} USDC </span>
+						<img src="/vaultTokensIcons/usdc.svg" alt="" class="w-4" />
 					</p>
 				</div>
 			</div>
@@ -162,7 +164,7 @@
 				<div class="flex w-full h-12 text-center">
 					<div class="w-6/12">
 						<p class="text-xs text-gray-600 font-semibold dark:text-gray-300">APR</p>
-						<p class="font-medium dark:text-white">0%</p>
+						<p class="font-medium dark:text-white">185.4%</p>
 					</div>
 
 					<div class="w-6/12">
@@ -224,6 +226,7 @@
 					class="bg-gray-200 dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
 				>
 					<input
+						on:keypress={onyAllowFloatNumbers}
 						bind:value={depositInput}
 						type="text"
 						class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12"
@@ -264,6 +267,7 @@
 				>
 					<input
 						type="text"
+						on:keypress={onyAllowFloatNumbers}
 						bind:value={withdrawInput}
 						class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12"
 					/>
@@ -285,7 +289,7 @@
 
 			<div class="flex flex-col text-sm h-2/6 justify-center">
 				<p class="text-gray-600 dark:text-gray-300 font-semibold mb-1 ml-1">
-					MUSH {$_('pastActions.earned')}:
+					USDC {$_('pastActions.earned')}:
 					<span class="text-black" />
 				</p>
 

@@ -7,6 +7,11 @@
 	import Notifications from 'svelte-notifications';
 	import { navigating } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
+	import { isHomescreen } from '$lib/stores/homescreen';
+
+	isHomescreen.subscribe((value) => {
+		console.log(value);
+	});
 </script>
 
 <Notifications>
@@ -16,7 +21,7 @@
 			<LinearBar />
 		</div>
 	{/if}
-	<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'dark-active'} ">
+	<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'bg-dark-500'} ">
 		<slot />
 	</main>
 	<Footer />
@@ -28,6 +33,7 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+
 		height: 100%;
 		margin: 0 auto;
 	}

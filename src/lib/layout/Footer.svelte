@@ -4,11 +4,12 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
-	import Icon from 'svelte-fa';
+	import Fa from 'svelte-fa';
 	import { isHomescreen } from '$lib/stores/homescreen';
 	import { faDiscord, faGit, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 	import { faInfoCircle, faHandHoldingUsd, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 	import { faTelegram } from '@fortawesome/free-brands-svg-icons';
+	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 	import { faSnapchat } from '@fortawesome/free-brands-svg-icons';
 	import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
@@ -44,53 +45,69 @@
 			title: 'Wiki'
 		}
 	];
+
+	const gotoPage = (route: string, home: boolean = false) => {
+		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
+		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
+		console.log($page.params.lang);
+	};
 </script>
 
 <footer class={$isHomescreen && 'z-20 backdrop-filter backdrop-blur'} class:dark={$darkMode}>
-	<div class="{$darkMode && !$isHomescreen && 'dark-active'} ">
+	<div class="{$darkMode && !$isHomescreen && 'bg-dark-500'} ">
 		<div
-			class="flex flex-col lg:flex-row  w-full items-center gap-y-6 lg:justify-between p-2 dark:text-white"
+			class="flex flex-col lg:flex-row  w-full items-center  lg:justify-between px-2 py-4 dark:text-white {$isHomescreen &&
+				'text-white'}"
 		>
-			<div class="w-1/12" />
+			<div class="w-12" />
 
-			<div class="flex">
-				<a href="https://fung.wiki/">
-					<Icon icon={faInfoCircle} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
-				</a>
+			<div class="flex space-x-4 mb-2 lg:mb-0">
+				<p class="cursor-pointer" on:click={() => gotoPage('/about')}>
+					<Fa icon={faInfoCircle} size="lg" />
+				</p>
+
 				<a href="https://github.com">
-					<Icon icon={faGithub} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+					<Fa icon={faGithub} size="lg" />
 				</a>
+
+				<a href="google.com">
+					{#if $darkMode || $isHomescreen}
+						<img src="/auditsWhite.svg" class="icon_size" alt="" />
+					{:else}
+						<img src="/audits.svg" class="icon_size" alt="" />
+					{/if}
+				</a>
+
 				<a href="https://app.sushi.com/swap">
-					<Icon
-						icon={faHandHoldingUsd}
-						color={iconColor ? '#fff' : '#000'}
-						size="20"
-						class="mr-5"
-					/>
+					<Fa icon={faHandHoldingUsd} size="lg" />
 				</a>
 				<a href="https://fung.wiki/">
-					<Icon icon={faBookOpen} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+					<Fa icon={faBookOpen} size="lg" />
 				</a>
 				<a href="https://discord.gg/EbvCkxhP">
-					<Icon icon={faDiscord} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+					<Fa icon={faDiscord} size="lg" />
 				</a>
 			</div>
 
-			<div class="social-media flex">
+			<div class="social-media flex space-x-4 	">
 				<a href="https://github.com">
-					<Icon icon={faTwitter} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+					<Fa icon={faYoutube} size="lg" />
+				</a>
+
+				<a href="https://github.com">
+					<Fa icon={faTwitter} size="lg" />
 				</a>
 				<a href="https://twitter.com/fung_fi">
-					<Icon icon={faTelegram} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+					<Fa icon={faTelegram} size="lg" />
 				</a>
 				<a href="https://fung.wiki/">
-					<Icon icon={faInstagram} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+					<Fa icon={faInstagram} size="lg" />
 				</a>
 				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
-					<Icon icon={faTiktok} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+					<Fa icon={faTiktok} size="lg" />
 				</a>
 				<a href="https://discord.gg/EbvCkxhP">
-					<Icon icon={faSnapchat} color={iconColor ? '#fff' : '#000'} size="20" class="mr-5" />
+					<Fa icon={faSnapchat} size="lg" />
 				</a>
 			</div>
 		</div>
@@ -101,6 +118,11 @@
 	.dark-active {
 		background: #0b1216;
 	}
+
+	.icon_size {
+		height: 22px;
+	}
+
 	footer {
 		z-index: 1;
 	}

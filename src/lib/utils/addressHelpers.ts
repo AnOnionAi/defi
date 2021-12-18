@@ -13,3 +13,10 @@ export const getMasterChefAddress = () => {
 export const getContractAddress = (contractName: Token): string => {
 	return addresses[contractName][env['CHAIN']];
 };
+
+export const formatAddress = (walletAddress: Array<string>): string => {
+	if (walletAddress) {
+		const address = walletAddress[0];
+		return `${address.substring(0, 6)}...${address.substr(address.length - 4)}`;
+	}
+};
