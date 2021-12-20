@@ -129,7 +129,7 @@
 	},
 	"walletStatus": {
 		"wallet": "Portefeuille",
-		"install": "Installer Metamask",
+		"install": "Metamask",
 		"connected": "Connecté",
 		"checking": "Vérifier Metamask..."
 	}

@@ -96,7 +96,7 @@
 		"hide": "Esconder",
 		"totalLiquidity": "Liquidez Total",
 		"myLiquidity": "Mi Liquidez",
-		"viewonMatic": "Ver en Matic"
+		"viewonMatic": "Ver en el explorador"
 	},
 
 	"vaultAccordeon": {
@@ -128,7 +128,7 @@
 
 	"walletStatus": {
 		"wallet": "Cartera",
-		"install": "Instala Metamask",
+		"install": "Metamask",
 		"connected": "Conectado",
 		"checking": "Verificando Metamask..."
 	}

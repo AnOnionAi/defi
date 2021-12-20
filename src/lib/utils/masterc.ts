@@ -1,6 +1,11 @@
 import type { BigNumber } from 'ethers';
 import { getMasterChefContract } from './contracts';
 import { ethers } from 'ethers';
+import { ethersToBigNumber } from './bigNumber';
+import { Provider } from './web3Helpers';
+import MasterChefAbi from '$lib/config/abi/MasterChef.json';
+import { getContractAddress } from './addressHelpers';
+import { Token } from '$lib/ts/types';
 
 export const deposit = (pid: number, amount: string, referrer?: string): Promise<any> => {
 	if (!referrer) {
@@ -42,3 +47,49 @@ export const getStakedTokens = async (pid: number, user: string): Promise<any> =
 		return 'Not Avaliable';
 	}
 };
+
+export const getPoolWeight = (totalAllocPoints: BigNumber, poolAllocPoints: BigNumber) => {
+	const totalAP = ethersToBigNumber(totalAllocPoints);
+	const poolAP = ethersToBigNumber(poolAllocPoints);
+	const poolWeight = poolAP.div(totalAP);
+
+	return poolWeight;
+};
+
+export const getPoolMultiplier = (poolAllocPoints: BigNumber) => {
+	const poolAp = ethersToBigNumber(poolAllocPoints);
+	const multiplier = poolAp.toNumber() / 1000;
+	return multiplier;
+};
+
+export namespace MasterChef {
+	const masterChefContract = new ethers.Contract(
+		getContractAddress(Token.MASTERCHEF),
+		MasterChefAbi,
+		Provider.getProviderSingleton()
+	);
+
+	export async function getPoolInfo(pid: number) {
+		return masterChefContract.poolInfo(pid);
+	}
+
+	export async function getUserInfo(pid: number, address: string) {
+		return masterChefContract.userInfo(pid, address);
+	}
+
+	export async function getTokenPerBlock() {
+		return masterChefContract.fishPerBlock();
+	}
+
+	export async function poolExistance() {
+		return masterChefContract.poolExistance();
+	}
+
+	export async function getMushPerBlock() {
+		return masterChefContract.fishPerBlock();
+	}
+
+	export async function getTotalAllocPoint() {
+		return masterChefContract.totalAllocPoint();
+	}
+}

@@ -1,37 +1,30 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-
-	export function load({ page }) {
-		const { lang } = page.params;
-
-		return {
-			props: {
-				lang
-			}
-		};
-	}
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import spaceDay from '/static/space.jpg';
 	import spaceNight from '/static/space35.jpg';
 	import moon from '/static/moon.jpg';
 	import earth from '/static/earth.jpg';
 	import sun from '/static/sun.jpg';
 	import { darkMode } from '$lib/stores/dark';
-	import { getMush } from './mushModle.svelte';
+	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
 	import { _ } from 'svelte-i18n';
 	import * as THREE from 'three';
 	import { isHomescreen } from '$lib/stores/homescreen';
 
-	isHomescreen.update((v) => (v = true));
-	export let lang;
+	isHomescreen.set(true);
 	let canvas;
 	let scene;
+
+	onDestroy(() => {
+		isHomescreen.set(false);
+	});
+
 	onMount(() => {
 		scene = new THREE.Scene();
-
 		const camera = new THREE.PerspectiveCamera(
 			75,
 			window.innerWidth / window.innerHeight,
@@ -150,7 +143,7 @@
 		let mushMeshCryp;
 		getMush()
 			.then((mush) => {
-				const [agaric, dollar, lactarius, mushCrypto] = mush;
+				const [dollar, lactarius, mushCrypto] = mush;
 				// mushMeshFA = agaric.scene;
 				// mushMeshFA.position.set(0, 5, -5);
 				dollarSign = dollar.scene;

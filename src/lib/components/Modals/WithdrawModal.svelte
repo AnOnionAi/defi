@@ -8,6 +8,7 @@
 		parseBigNumberToString
 	} from '$lib/utils/balanceParsers';
 	import type { PoolInfo } from '$lib/ts/types';
+	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	export let info: PoolInfo;
 	export let userStakedTokens: BigNumber;
 	export let onWithdraw = (wantAmount?: any) => {};
@@ -29,7 +30,7 @@
 			<div />
 			<div class="flex flex-wrap justify-between py-1 px-10">
 				<p class="text-gray-400 font-semibold tracking-wide">{$_('modals.input')}</p>
-				<div class="flex">
+				<div class="flex items-center">
 					<div
 						on:click={() => (wantAmount = parseBigNumberToString(userStakedTokens))}
 						class="text-green-400 rounded-3xl cursor-pointer border border-green-400 text-xs font-semibold tracking-wide mr-1 p-1 hover:bg-green-400 hover:text-light-100"
@@ -43,7 +44,7 @@
 			</div>
 			<div class="flex flex-wrap justify-between py-3 px-10">
 				<div>
-					<input bind:value={wantAmount} placeholder="0.0" />
+					<input on:keypress={onyAllowFloatNumbers} bind:value={wantAmount} placeholder="0.0" />
 				</div>
 				<div>
 					<div />

@@ -1,12 +1,17 @@
 <script lang="ts">
 	import Header from '$lib/layout/Header.svelte';
 	import Footer from '$lib/layout/Footer.svelte';
-	import '../app.css';
-	import 'virtual:windi.css';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
 	import { navigating } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
+	import { isHomescreen } from '$lib/stores/homescreen';
+	import 'virtual:windi.css';
+	import '../app.css';
+
+	isHomescreen.subscribe((value) => {
+		console.log(value);
+	});
 </script>
 
 <Notifications>
@@ -16,7 +21,7 @@
 			<LinearBar />
 		</div>
 	{/if}
-	<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'dark-active'} ">
+	<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'bg-dark-500'} ">
 		<slot />
 	</main>
 	<Footer />

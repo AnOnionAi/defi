@@ -2,18 +2,7 @@
 	export const prerender = true;
 
 	import { _ } from 'svelte-i18n';
-	import { setInit } from '$lib/i18n/init';
 	import { darkMode } from '$lib/stores/dark';
-
-	export async function load({ page }) {
-		const { lang } = page.params;
-		return {
-			props: { lang }
-		};
-	}
-</script>
-
-<script lang="ts">
 </script>
 
 <svelte:head>
