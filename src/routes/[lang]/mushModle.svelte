@@ -1,4 +1,4 @@
-<script context="module" lang="typescript">
+<script context="module" lang="ts">
 	import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 	export async function getMush() {
 		try {
