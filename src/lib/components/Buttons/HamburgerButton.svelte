@@ -6,6 +6,7 @@
 
 <div class="float-0 flex items-center lg:hidden">
 	<button
+		aria-label="Menu"
 		id="btn_hamburger_navbar"
 		class="dark:text-light-600 focus:outline-none inline-flex items-center justify-center p-2 rounded-md
   text-gray-500"
