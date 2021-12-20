@@ -1,5 +1,4 @@
 @import '@fontsource/fira-mono';
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
 
 :root {
@@ -9,7 +8,7 @@
 	--light-secondary: #fff;
 	--dark-background: #172029;
 	--dark-secondary: #1c1f28;
-	--dark-thirty: rgba(25, 25, 25, 1); /* alpaca finance */
+	--dark-thirty: rgba(25, 25, 25, 1); 
 }
 
 body {

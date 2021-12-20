@@ -1,13 +1,13 @@
 <script lang="ts">
 	import Header from '$lib/layout/Header.svelte';
 	import Footer from '$lib/layout/Footer.svelte';
-	import '../app.css';
-	import 'virtual:windi.css';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
 	import { navigating } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
 	import { isHomescreen } from '$lib/stores/homescreen';
+	import 'virtual:windi.css';
+	import '../app.css';
 
 	isHomescreen.subscribe((value) => {
 		console.log(value);
@@ -33,7 +33,6 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-
 		height: 100%;
 		margin: 0 auto;
 	}

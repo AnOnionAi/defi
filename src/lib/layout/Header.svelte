@@ -3,7 +3,6 @@
 </script>
 
 <script lang="ts">
-	import 'virtual:windi.css';
 	import { _ } from 'svelte-i18n';
 	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';

@@ -35,7 +35,7 @@
 		"svelte-preprocess": "^4.0.0",
 		"tslib": "^2.0.0",
 		"typescript": "^4.5.4",
-		"vite-plugin-windicss": "1.5.1"
+		"vite-plugin-windicss": "1.5.4"
 	},
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.2.2",
