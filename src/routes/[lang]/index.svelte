@@ -10,7 +10,7 @@
 	import earth from '/static/earth.jpg';
 	import sun from '/static/sun.jpg';
 	import { darkMode } from '$lib/stores/dark';
-	import { getMush } from '$lib/components/Three/mushModle.svelte';
+	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
 	import { _ } from 'svelte-i18n';
 	import * as THREE from 'three';
 	import { isHomescreen } from '$lib/stores/homescreen';
