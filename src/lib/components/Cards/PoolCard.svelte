@@ -92,11 +92,12 @@
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
 
-	stakingTokenContract.decimals().then((decimals)=>{
-		tokenDecimals = decimals
-	})
+	
+
+	
 
 	onMount(async () => {
+		tokenDecimals = await stakingTokenContract.decimals();
 		const totalAllocPoints = await MasterChef.getTotalAllocPoint();
 		const poolInfo = await MasterChef.getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;

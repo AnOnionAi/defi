@@ -4,11 +4,11 @@
 
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import spaceDay from '/static/space.jpg';
-	import spaceNight from '/static/space35.jpg';
-	import moon from '/static/moon.jpg';
-	import earth from '/static/earth.jpg';
-	import sun from '/static/sun.jpg';
+	import spaceDay from '/space.jpg';
+	import spaceNight from '/space35.jpg';
+	import moon from '/moon.jpg';
+	import earth from '/earth.jpg';
+	import sun from '/sun.jpg';
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from './mushModle.svelte';
 	import { _ } from 'svelte-i18n';
@@ -468,52 +468,22 @@
 	.MUSH_about h2 {
 		margin-bottom: 10px;
 	}
-	.MUSH_tvl,
-	.MUSH_stats {
-		margin: auto;
-	}
-	.MUSH_stats,
-	.MUSH_tvl {
-		width: 100%;
-	}
-
-	.MUSH_stats p,
-	.MUSH_tvl p,
-	.MUSH_about p {
-		font-weight: 700;
-	}
-	.MUSH_stats div,
-	.MUSH_tvl div,
-	.MUSH_main_section {
-		display: flex;
-		justify-content: space-between;
-		font-family: 'IBM Plex Sans', sans-serif;
-		margin-top: 50px;
-		margin-bottom: 50px;
-	}
+	
+	
 
 	@media (max-width: 680px) {
-		.MUSH_info {
-			width: 550px;
-		}
+		
 		.MUSH_main_section {
 			display: block;
 		}
 	}
-	.bg-white {
-		background-color: transparent;
-		border-radius: 5px;
-	}
+	
 	#bg {
 		position: fixed;
 		left: 0;
 		top: 0;
 	}
-	main {
-		color: white;
-		z-index: 99;
-		width: 90%;
-	}
+	
 
 	.market-cap {
 		text-shadow: 4px 4px 4px seagreen;

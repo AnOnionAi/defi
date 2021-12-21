@@ -8,6 +8,12 @@
 	import Modal  from 'svelte-simple-modal';
 	import 'virtual:windi.css';
 	import '../app.css';
+import { onMount } from 'svelte';
+import { metamaskConnect } from '$lib/stores/MetaMaskAccount';
+
+	onMount(()=>{
+		metamaskConnect()
+	})
 </script>
 
 <Notifications>

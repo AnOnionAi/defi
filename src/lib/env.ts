@@ -33,7 +33,7 @@ const getEnv = () => {
 			env = getEnvFiltered(/VITE_(?!PROD|QA)/, env);
 	}
 
-	console.log(env['CHAIN']);
+	console.log("APP RUNNING ON: ",env['CHAIN']," BLOCKCHAIN");
 
 	return env;
 };
