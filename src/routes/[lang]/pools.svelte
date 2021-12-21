@@ -10,7 +10,6 @@
 	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
 
-	isHomescreen.update((v) => (v = false));
 </script>
 
 	<section class="">

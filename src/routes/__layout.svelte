@@ -5,14 +5,9 @@
 	import Notifications from 'svelte-notifications';
 	import { navigating } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
-	import { isHomescreen } from '$lib/stores/homescreen';
 	import Modal  from 'svelte-simple-modal';
 	import 'virtual:windi.css';
 	import '../app.css';
-
-	isHomescreen.subscribe((value) => {
-		console.log(value);
-	});
 </script>
 
 <Notifications>

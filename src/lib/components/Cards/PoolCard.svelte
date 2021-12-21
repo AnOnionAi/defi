@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Provider } from '$lib/utils/web3Helpers';
 	import ERC20ABI from '$lib/config/abi/ERC20.json';
-	import { fly, slide } from 'svelte/transition';
+	import {slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { PoolInfo } from '$lib/ts/types';
@@ -10,7 +10,7 @@
 	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
-	import { BigNumber, ethers, providers, utils } from 'ethers';
+	import { BigNumber, ethers} from 'ethers';
 	import Fa from 'svelte-fa';
 	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 	import {
@@ -22,9 +22,6 @@
 		getPoolMultiplier,
 		getPoolWeight
 	} from '$lib/utils/masterc';
-	import { parseBigNumberToDecimal, parseBigNumberToString } from '$lib/utils/balanceParsers';
-	import DepositModal from '$lib/components/Modals/DepositModal.svelte';
-	import WithdrawModal from '$lib/components/Modals/WithdrawModal.svelte';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
 	import { Circle } from 'svelte-loading-spinners';
@@ -34,15 +31,13 @@
 		transactionSend
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
-	import { ethersToBigNumber } from '$lib/utils/bigNumber';
 	import { getPoolApr } from '$lib/utils/yieldCalculator';
 	import BN from 'bignumber.js';
-	import { fetchNativeTokenPrice, tokenPrice } from '$lib/stores/NativeTokenPrice';
-	import { getERC20Contract } from '$lib/utils/contracts';
+	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
-	import { getPoolTokenPriceUSD, getTokenPriceUSD } from '$lib/utils/coinGecko';
+	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
-import DepositWithdraw from '../Modals/DepositWithdraw.svelte';
+	import DepositWithdraw from '../Modals/DepositWithdraw.svelte';
 
 	interface LoadingState {
 		loadingApproval: boolean;
@@ -50,6 +45,7 @@ import DepositWithdraw from '../Modals/DepositWithdraw.svelte';
 		loadingWithdraw: boolean;
 		loadingHarvest: boolean;
 	}
+	
 	export let info: PoolInfo;
 	export let isFarm: boolean = false;
 
