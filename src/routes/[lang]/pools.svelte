@@ -7,14 +7,12 @@
 <script lang="ts">
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import { pools } from '$lib/config/constants/pools';
-	import Modal from 'svelte-simple-modal';
 	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
 
 	isHomescreen.update((v) => (v = false));
 </script>
 
-<Modal>
 	<section class="">
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
@@ -30,7 +28,7 @@
 			</div>
 		</div>
 	</section>
-</Modal>
+
 
 <style>
 	.background {

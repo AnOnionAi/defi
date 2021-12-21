@@ -7,22 +7,22 @@ import MasterChefAbi from '$lib/config/abi/MasterChef.json';
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/ts/types';
 
-export const deposit = (pid: number, amount: string, referrer?: string): Promise<any> => {
+export const deposit = (pid: number, amount: string,decimals:number =18, referrer?: string): Promise<any> => {
 	if (!referrer) {
 		referrer = ethers.constants.AddressZero;
 	}
 	try {
 		const mc = getMasterChefContract();
-		return mc.deposit(pid, ethers.utils.parseUnits(amount, 18), referrer);
+		return mc.deposit(pid, ethers.utils.parseUnits(amount, decimals), referrer);
 	} catch (error) {
 		console.log(error, 'Unable to deposit');
 	}
 };
 
-export const withdraw = async (pid: number, amount: string): Promise<any> => {
+export const withdraw = async (pid: number, amount: string,decimals:number = 18): Promise<any> => {
 	const mc = getMasterChefContract();
 	try {
-		return await mc.withdraw(pid, ethers.utils.parseUnits(amount, 18));
+		return  mc.withdraw(pid, ethers.utils.parseUnits(amount, decimals));
 	} catch (e) {
 		return console.log('Unable to Withdraw');
 	}

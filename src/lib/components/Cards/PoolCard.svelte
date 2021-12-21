@@ -42,6 +42,7 @@
 	import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
 	import { getPoolTokenPriceUSD, getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
+import DepositWithdraw from '../Modals/DepositWithdraw.svelte';
 
 	interface LoadingState {
 		loadingApproval: boolean;
@@ -59,6 +60,7 @@
 	let poolLiquidityUSD: number;
 	let tokenAllocatedPerBlock: number;
 	let poolApr;
+	let tokenDecimals
 
 	let loadingState: LoadingState = {
 		loadingApproval: false,
@@ -94,17 +96,20 @@
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
 
+	stakingTokenContract.decimals().then((decimals)=>{
+		tokenDecimals = decimals
+	})
+
 	onMount(async () => {
 		const totalAllocPoints = await MasterChef.getTotalAllocPoint();
 		const poolInfo = await MasterChef.getPoolInfo(info.pid);
-		console.log(poolInfo.depositFeeBP);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
 		stakingTokenPrice = await getStakingTokenPrice();
 		const sta: BigNumber = await stakingTokenContract.balanceOf(
 			getContractAddress(Token.MASTERCHEF)
 		);
-		stakingTokenAmount = parseFloat(ethers.utils.formatEther(sta));
+		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta,tokenDecimals));
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 		const poolWeightbn = getPoolWeight(totalAllocPoints, poolInfo.allocPoint);
 		const tokenPerBlock = await MasterChef.getMushPerBlock();
@@ -134,11 +139,11 @@
 		}
 	};
 
-	const onOkay = async (amount) => {
+	const onDeposit = async (amount) => {
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await deposit(info.pid, amount);
+			const tx = await deposit(info.pid, amount,tokenDecimals	);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
@@ -154,7 +159,7 @@
 		wantWithdrawAmount = amount;
 		addNotification(transactionSend);
 		try {
-			const tx = await withdraw(info.pid, wantWithdrawAmount);
+			const tx = await withdraw(info.pid, wantWithdrawAmount,tokenDecimals);
 			await tx.wait();
 			loadingState.loadingWithdraw = false;
 			addNotification(transactionCompleted);
@@ -180,36 +185,27 @@
 		loadingState.loadingHarvest = false;
 	};
 
-	const goDeposit = () => {
-		open(
-			DepositModal,
-			{
-				userBalance,
-				info,
-				onOkay
-			},
-			{
-				closeButton: false,
-				closeOnEsc: true,
-				closeOnOuterClick: true
-			}
-		);
-	};
-	const goWithdraw = () => {
-		open(
-			WithdrawModal,
-			{
+
+
+	const openModal = (action:string) => {
+		open(DepositWithdraw,
+		{
 				userStakedTokens,
+				userBalance,
+				tokenDecimals,
 				info,
-				onWithdraw
+				onDeposit,
+				onWithdraw,
+				action: action
 			},
 			{
 				closeButton: false,
 				closeOnEsc: true,
 				closeOnOuterClick: true
 			}
-		);
-	};
+		)
+	}
+
 	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
@@ -234,7 +230,7 @@
 				canWithdraw = isNotZero(userStakedTokens);
 			}
 			idInterval = setInterval(async () => {
-				/* await fetchRewards(); */
+				 await fetchRecentData(); 
 			}, 10000);
 		}
 	});
@@ -244,9 +240,11 @@
 		clearInterval(idInterval);
 	});
 
-	const fetchRewards = async () => {
+	const fetchRecentData = async () => {
 		if (tokenApproved) {
 			userEarnings = await getRewards(info.pid, userAcc);
+			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
+			userStakedTokens = await getStakedTokens(info.pid, userAcc);
 		}
 	};
 
@@ -373,7 +371,7 @@
 				<div class="flex justify-between items-center w-full h-full">
 					{#if userStakedTokens}
 						<p class="flex text-xl dark:text-white">
-							{parseFloat(ethers.utils.formatEther(userStakedTokens)).toPrecision(2)}
+							{parseFloat(ethers.utils.formatUnits(userStakedTokens,tokenDecimals)).toPrecision(4)}
 						</p>
 					{:else}
 						<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
@@ -381,12 +379,12 @@
 
 					<div class="flex space-x-2">
 						<button
-							on:click={goDeposit}
+							on:click={()=>openModal("DEPOSIT")}
 							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white"
 							>+</button
 						>
 						<button
-							on:click={goWithdraw}
+							on:click={()=>openModal("WITHDRAW")}
 							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white"
 							>-</button
 						>

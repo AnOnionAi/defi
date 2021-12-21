@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import type { BigNumber } from 'ethers';
+	import { BigNumber, ethers } from 'ethers';
 	import { getContext } from 'svelte';
 	import {
 		parseBigNumberToDecimal,
@@ -9,6 +9,7 @@
 	} from '$lib/utils/balanceParsers';
 	import type { PoolInfo } from '$lib/ts/types';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
+	import { getERC20Contract } from '$lib/utils/contracts';
 	export let info: PoolInfo;
 	export let userStakedTokens: BigNumber;
 	export let onWithdraw = (wantAmount?: any) => {};
@@ -16,6 +17,13 @@
 	const { close } = getContext('simple-modal');
 
 	let wantAmount;
+	let tokenDecimals:number;
+
+	const erc20 = getERC20Contract(info.tokenAddr);
+	erc20.decimals().then((decimals)=>{
+		tokenDecimals=decimals;
+	})
+
 	let onChange = (wantAmount?: any) => {};
 
 	function _onWithdraw() {
@@ -32,13 +40,13 @@
 				<p class="text-gray-400 font-semibold tracking-wide">{$_('modals.input')}</p>
 				<div class="flex items-center">
 					<div
-						on:click={() => (wantAmount = parseBigNumberToString(userStakedTokens))}
+						on:click={() => (wantAmount = ethers.utils.formatUnits(userStakedTokens,tokenDecimals))}
 						class="text-green-400 rounded-3xl cursor-pointer border border-green-400 text-xs font-semibold tracking-wide mr-1 p-1 hover:bg-green-400 hover:text-light-100"
 					>
 						MAX
 					</div>
 					<p class="text-gray-400  font-semibold tracking-wide text-xs md:text-md">
-						{$_('pastActions.staked')}: {parseBigNumberToString(userStakedTokens)}
+						{$_('pastActions.staked')}: {ethers.utils.formatUnits(userStakedTokens,tokenDecimals)}
 					</p>
 				</div>
 			</div>
@@ -57,25 +65,25 @@
 		</p>
 		<div class="flex justify-around px-2 pt-2">
 			<button
-				on:click={() => (wantAmount = parseBigNumberToDecimal(userStakedTokens.div(10)))}
+				on:click={() => (wantAmount = ethers.utils.formatUnits(userStakedTokens.div(10),tokenDecimals))}
 				class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-3 md:px-4 py-1 hover:bg-green-500 text-xs md:text-sm lg:text-md"
 			>
 				10%
 			</button>
 			<button
-				on:click={() => (wantAmount = parseBigNumberToDecimal(userStakedTokens.div(4)))}
+				on:click={() => (wantAmount = ethers.utils.formatUnits(userStakedTokens.div(4),tokenDecimals))}
 				class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-3 md:px-4 py-1 hover:bg-green-500 text-xs md:text-sm lg:text-md"
 			>
 				25%
 			</button>
 			<button
-				on:click={() => (wantAmount = parseBigNumberToDecimal(userStakedTokens.div(2)))}
+				on:click={() => (wantAmount = ethers.utils.formatUnits(userStakedTokens.div(2),tokenDecimals))}
 				class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-3 md:px-4 py-1 hover:bg-green-500 text-xs md:text-sm lg:text-md"
 			>
 				50%
 			</button>
 			<button
-				on:click={() => (wantAmount = parseBigNumberToDecimal(userStakedTokens.div(4).mul(3)))}
+				on:click={() => (wantAmount = ethers.utils.formatUnits(userStakedTokens.div(4).mul(3),tokenDecimals))}
 				class="bg-green-400 text-light-100 rounded-xl cursor-pointer border border-green-400  font-semibold tracking-wide  px-3 md:px-4 py-1 hover:bg-green-500 text-xs md:text-sm lg:text-md"
 			>
 				75%

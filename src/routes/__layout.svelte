@@ -6,6 +6,7 @@
 	import { navigating } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
 	import { isHomescreen } from '$lib/stores/homescreen';
+	import Modal  from 'svelte-simple-modal';
 	import 'virtual:windi.css';
 	import '../app.css';
 
@@ -15,6 +16,7 @@
 </script>
 
 <Notifications>
+ <Modal>
 	<Header />
 	{#if $navigating}
 		<div class="absolute left-0 top-0 w-screen z-10">
@@ -25,6 +27,7 @@
 		<slot />
 	</main>
 	<Footer />
+ </Modal>
 </Notifications>
 
 <style>

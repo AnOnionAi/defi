@@ -8,7 +8,6 @@
 <script lang="ts">
 	import { farms } from '$lib/config/constants/farms';
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
-	import Modal from 'svelte-simple-modal';
 	import { getProvider, getRPCSigner, Provider } from '$lib/utils/web3Helpers';
 	import { ethers } from 'ethers';
 	import type { BigNumber } from 'ethers';
@@ -30,7 +29,6 @@
 	});
 </script>
 
-<Modal>
 	<section class="farms" style="background:url({backgroundImage});">
 		<br />
 		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
@@ -46,7 +44,6 @@
 		</div>
 	</section>
 	<div />
-</Modal>
 
 <style>
 	.farms {
