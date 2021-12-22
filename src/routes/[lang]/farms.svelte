@@ -8,17 +8,6 @@
 <script lang="ts">
 	import { farms } from '$lib/config/constants/farms';
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
-	import { getProvider, getRPCSigner, Provider } from '$lib/utils/web3Helpers';
-	import { ethers } from 'ethers';
-	import type { BigNumber } from 'ethers';
-	import { getContractAddress } from '$lib/utils/addressHelpers';
-	import { Token } from '$lib/ts/types';
-	import MasterChefABI from '$lib/config/abi/MasterChef.json';
-	import { ethersToBigNumber } from '$lib/utils/bigNumber';
-	import { getPoolWeight } from '$lib/utils/masterc';
-	import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
-	import { onMount } from 'svelte';
-	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
 
 	let backgroundImage;
 

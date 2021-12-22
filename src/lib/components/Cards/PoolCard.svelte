@@ -80,11 +80,19 @@
 	let wantWithdrawAmount: any;
 	let idInterval;
 
-	const stakingTokenContract = new ethers.Contract(
+	let stakingTokenContract
+	try{
+		stakingTokenContract = new ethers.Contract(
 		info.tokenAddr,
 		ERC20ABI,
 		Provider.getProviderSingleton()
 	);
+
+	}catch{
+
+	}
+	
+
 	tokenPrice.subscribe((tokenPrice) => {
 		rewardTokenPrice = tokenPrice;
 	});
@@ -97,7 +105,8 @@
 	
 
 	onMount(async () => {
-		tokenDecimals = await stakingTokenContract.decimals();
+		
+			tokenDecimals = await stakingTokenContract.decimals();
 		const totalAllocPoints = await MasterChef.getTotalAllocPoint();
 		const poolInfo = await MasterChef.getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
@@ -122,6 +131,8 @@
 		if (poolApr === null) {
 			poolApr = 'Infinity';
 		}
+	
+		
 	});
 
 	const getStakingTokenPrice = async () => {
@@ -202,8 +213,7 @@
 			}
 		)
 	}
-
-	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
+		const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
 			tokenAllowance = await getTokenAllowance(
@@ -231,9 +241,9 @@
 			}, 10000);
 		}
 	});
+	
 
 	onDestroy(() => {
-		unsubscribe;
 		clearInterval(idInterval);
 	});
 
