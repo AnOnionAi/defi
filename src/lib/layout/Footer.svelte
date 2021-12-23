@@ -71,11 +71,11 @@
 					<Fa icon={faInfoCircle} size="lg" />
 				</p>
 
-				<a href="https://github.com">
+				<a href="https://github.com" aria-label="Github">
 					<Fa icon={faGithub} size="lg" />
 				</a>
 
-				<a href="google.com">
+				<a href="google.com" aria-label="Audits">
 					{#if $darkMode || $isHomescreen}
 						<img src="/auditsWhite.svg" class="icon_size" alt="" />
 					{:else}
@@ -83,35 +83,35 @@
 					{/if}
 				</a>
 
-				<a href="https://app.sushi.com/swap">
+				<a href="https://app.sushi.com/swap" aria-label="SushiSwap">
 					<Fa icon={faHandHoldingUsd} size="lg" />
 				</a>
-				<a href="https://fung.wiki/">
+				<a href="https://fung.wiki/" aria-label="Wiki">
 					<Fa icon={faBookOpen} size="lg" />
 				</a>
-				<a href="https://discord.gg/EbvCkxhP">
+				<a href="https://discord.gg/EbvCkxhP" aria-label="Discord">
 					<Fa icon={faDiscord} size="lg" />
 				</a>
 			</div>
 
-			<div class="social-media flex space-x-4 	">
+			<div class="social-media flex space-x-4 " aria-label="Youtube">
 				<a href="https://github.com">
 					<Fa icon={faYoutube} size="lg" />
 				</a>
 
-				<a href="https://github.com">
+				<a href="https://github.com" aria-label="Twitter">
 					<Fa icon={faTwitter} size="lg" />
 				</a>
-				<a href="https://twitter.com/fung_fi">
+				<a href="https://twitter.com/fung_fi" aria-label="Telegram">
 					<Fa icon={faTelegram} size="lg" />
 				</a>
-				<a href="https://fung.wiki/">
+				<a href="https://fung.wiki/" aria-label="Instagram">
 					<Fa icon={faInstagram} size="lg" />
 				</a>
-				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh">
+				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh" aria-label="Tiktok">
 					<Fa icon={faTiktok} size="lg" />
 				</a>
-				<a href="https://discord.gg/EbvCkxhP">
+				<a href="https://discord.gg/EbvCkxhP" aria-label="Snapchat">
 					<Fa icon={faSnapchat} size="lg" />
 				</a>
 			</div>

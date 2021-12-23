@@ -1,13 +1,59 @@
+<script>
+	if ( 'serviceWorker' in navigator ) {
+		navigator.serviceWorker.register('service-worker.js')
+			.then((reg) => {
+				console.log('service worker REGISTERED', reg);
+			})
+			.catch((err)=> {
+				console.log('service worker not REGISTERED', err);
+			}) 
+	}
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" href="/favicon-icon.ico" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Fung Financial</title>
+
+		<!--SEO CONFIGURATION-->
+
+		<link rel="alternate" hreflang="en" href="https://zyber.netlify.app/en" /> 
+		<link rel="alternate" hreflang="es" href="https://zyber.netlify.app/es" /> 
+		<link rel="alternate" hreflang="de" href="https://zyber.netlify.app/de" /> 
+		<link rel="alternate" hreflang="fr" href="https://zyber.netlify.app/fr" /> 
+
+		<title>Fung Fi Decentralized Finance</title>
 		%svelte.head%
+
+		<meta name="description" content="A Defi protocol that allows automated crypto market making with farms, pools & vaults to maximize yield">
+
+		<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+
+		<meta  name="twitter:card" content="summary_large_image" > 
+		<meta  name="twitter:site" content="@fung_fi" > 
+		<meta  name="twitter:title" content="Fung Fi | Decentralized Finance" > 
+		<meta  name="twitter:description" content="A Defi protocol that allows automated crypto market making with farms, pools & vaults to maximize yield." > 
+		<meta  name="twitter:image" content="https://images.pexels.com/photos/757292/pexels-photo-757292.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" >
+
+		<meta name="og:type" content="summary_large_image" />
+		<meta name="og:title" content="Fung Fi | Decentralized Finance" />
+		<meta name="og:description" content="A Defi protocol that allows automated crypto market making with farms, pools & vaults to maximize yield." />
+		<meta name="og:image" content="https://images.pexels.com/photos/757292/pexels-photo-757292.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+
+		<!--PWA CONFIGURATION-->
+		<meta name="theme-color" content="#319197">
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+		<link rel="manifest" crossorigin="use-credentials" href="manifest.json" />
+
 	</head>
 	<body>
 		<div id="svelte">%svelte.body%</div>
 	</body>
 </html>
+
