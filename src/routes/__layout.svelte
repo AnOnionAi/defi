@@ -37,9 +37,8 @@
 
 <style>
 	.main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
+		
+		min-height: 88vh;
 		width: 100%;
 		height: 100%;
 		margin: 0 auto;
