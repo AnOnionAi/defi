@@ -37,7 +37,6 @@
 
 <style>
 	.main {
-		
 		min-height: 88vh;
 		width: 100%;
 		height: 100%;
