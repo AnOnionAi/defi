@@ -468,22 +468,18 @@
 	.MUSH_about h2 {
 		margin-bottom: 10px;
 	}
-	
-	
 
 	@media (max-width: 680px) {
-		
 		.MUSH_main_section {
 			display: block;
 		}
 	}
-	
+
 	#bg {
 		position: fixed;
 		left: 0;
 		top: 0;
 	}
-	
 
 	.market-cap {
 		text-shadow: 4px 4px 4px seagreen;

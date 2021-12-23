@@ -1,3 +1,5 @@
+import { POLYGON_CHAIN_ID } from '$lib/config';
+import { getContext } from 'svelte';
 import { writable } from 'svelte/store';
 
 export const accounts = writable(undefined);
@@ -28,7 +30,13 @@ export async function metamaskConnect() {
 			}
 		});
 	} catch {
-		console.log("Error: Unable to log the user in Metamask")
+		console.log('Error: Unable to log the user in Metamask');
 	}
 }
 
+export const requestChainChange = async () => {
+	return window.ethereum.request({
+		method: 'wallet_switchEthereumChain',
+		params: [{ chainId: POLYGON_CHAIN_ID }] // chainId must be in hexadecimal numbers
+	});
+};

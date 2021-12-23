@@ -5,30 +5,34 @@
 	import Notifications from 'svelte-notifications';
 	import { navigating } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
-	import Modal  from 'svelte-simple-modal';
+	import Modal from 'svelte-simple-modal';
 	import 'virtual:windi.css';
 	import '../app.css';
-import { onMount } from 'svelte';
-import { metamaskConnect } from '$lib/stores/MetaMaskAccount';
+	import { onMount } from 'svelte';
+	import { chainID, metamaskConnect } from '$lib/stores/MetaMaskAccount';
+	import WrongNetwork from '$lib/components/Modals/WrongNetwork.svelte';
+	import { POLYGON_CHAIN_ID } from '$lib/config';
 
-	onMount(()=>{
-		metamaskConnect()
-	})
+	let currentChain;
+
+	onMount(() => {
+		metamaskConnect();
+	});
 </script>
 
 <Notifications>
- <Modal>
-	<Header />
-	{#if $navigating}
-		<div class="absolute left-0 top-0 w-screen z-10">
-			<LinearBar />
-		</div>
-	{/if}
-	<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'bg-dark-500'} ">
-		<slot />
-	</main>
-	<Footer />
- </Modal>
+	<Modal>
+		<Header />
+		{#if $navigating}
+			<div class="absolute left-0 top-0 w-screen z-10">
+				<LinearBar />
+			</div>
+		{/if}
+		<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'bg-dark-500'} ">
+			<slot />
+		</main>
+		<Footer />
+	</Modal>
 </Notifications>
 
 <style>

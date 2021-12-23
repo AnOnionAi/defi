@@ -18,21 +18,21 @@
 	});
 </script>
 
-	<section class="farms" style="background:url({backgroundImage});">
-		<br />
-		<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
-			{$_('headers.farms.text')}
-		</h1>
-		<div class="w-23/24  mx-auto rounded-xl max-w-7xl ">
-			<div class="flex flex-row justify-center gap-6 p-8 text-center flex-wrap   rounded-xl">
-				<!--Start Farms-->
-				{#each farms as farm}
-					<PoolCard info={farm} isFarm={true} />
-				{/each}
-			</div>
+<section class="farms" style="background:url({backgroundImage});">
+	<br />
+	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
+		{$_('headers.farms.text')}
+	</h1>
+	<div class="w-23/24  mx-auto rounded-xl max-w-7xl ">
+		<div class="flex flex-row justify-center gap-6 p-8 text-center flex-wrap   rounded-xl">
+			<!--Start Farms-->
+			{#each farms as farm}
+				<PoolCard info={farm} isFarm={true} />
+			{/each}
 		</div>
-	</section>
-	<div />
+	</div>
+</section>
+<div />
 
 <style>
 	.farms {

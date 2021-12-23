@@ -140,7 +140,10 @@
 			!$isHomescreen &&
 			'bg-dark-600'}"
 	>
-		<div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-4 {$isHomescreen && 'text-white'}">
+		<div
+			id="navbar-menu-mobile"
+			class="text-center px-2 pt-2 pb-3 space-y-4 {$isHomescreen && 'text-white'}"
+		>
 			{#each PAGES as page}
 				<div class="">
 					<NavbarRoute pageRoute={page} />

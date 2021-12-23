@@ -53,7 +53,12 @@
 	};
 </script>
 
-<footer class="{$isHomescreen && 'z-20 backdrop-filter backdrop-blur border-none '} border-t-2  border-gray-200 {$darkMode && "border-dark-200"}" class:dark={$darkMode}>
+<footer
+	class="{$isHomescreen &&
+		'z-20 backdrop-filter backdrop-blur border-none '} border-t-2  border-gray-200 {$darkMode &&
+		'border-dark-200'}"
+	class:dark={$darkMode}
+>
 	<div class="{$darkMode && !$isHomescreen && 'bg-dark-500 '} ">
 		<div
 			class="flex flex-col lg:flex-row  w-full items-center  lg:justify-between px-2 py-5 dark:text-white {$isHomescreen &&

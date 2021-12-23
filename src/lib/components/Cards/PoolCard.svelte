@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Provider } from '$lib/utils/web3Helpers';
 	import ERC20ABI from '$lib/config/abi/ERC20.json';
-	import {slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { PoolInfo } from '$lib/ts/types';
@@ -10,7 +10,7 @@
 	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
-	import { BigNumber, ethers} from 'ethers';
+	import { BigNumber, ethers } from 'ethers';
 	import Fa from 'svelte-fa';
 	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 	import {
@@ -45,7 +45,7 @@
 		loadingWithdraw: boolean;
 		loadingHarvest: boolean;
 	}
-	
+
 	export let info: PoolInfo;
 	export let isFarm: boolean = false;
 
@@ -56,7 +56,7 @@
 	let poolLiquidityUSD: number;
 	let tokenAllocatedPerBlock: number;
 	let poolApr;
-	let tokenDecimals
+	let tokenDecimals;
 
 	let loadingState: LoadingState = {
 		loadingApproval: false,
@@ -80,18 +80,11 @@
 	let wantWithdrawAmount: any;
 	let idInterval;
 
-	let stakingTokenContract
-	try{
-		stakingTokenContract = new ethers.Contract(
+	const stakingTokenContract = new ethers.Contract(
 		info.tokenAddr,
 		ERC20ABI,
 		Provider.getProviderSingleton()
 	);
-
-	}catch{
-
-	}
-	
 
 	tokenPrice.subscribe((tokenPrice) => {
 		rewardTokenPrice = tokenPrice;
@@ -100,13 +93,8 @@
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
 
-	
-
-	
-
 	onMount(async () => {
-		
-			tokenDecimals = await stakingTokenContract.decimals();
+		tokenDecimals = await stakingTokenContract.decimals();
 		const totalAllocPoints = await MasterChef.getTotalAllocPoint();
 		const poolInfo = await MasterChef.getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
@@ -115,7 +103,7 @@
 		const sta: BigNumber = await stakingTokenContract.balanceOf(
 			getContractAddress(Token.MASTERCHEF)
 		);
-		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta,tokenDecimals));
+		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, tokenDecimals));
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 		const poolWeightbn = getPoolWeight(totalAllocPoints, poolInfo.allocPoint);
 		const tokenPerBlock = await MasterChef.getMushPerBlock();
@@ -131,8 +119,6 @@
 		if (poolApr === null) {
 			poolApr = 'Infinity';
 		}
-	
-		
 	});
 
 	const getStakingTokenPrice = async () => {
@@ -141,7 +127,6 @@
 			return stakingTokenPrice;
 		} else {
 			const price = await getPoolTokenPriceUSD(info.tokenAddr);
-			console.log(price);
 			stakingTokenPrice = price;
 			return stakingTokenPrice;
 		}
@@ -151,7 +136,7 @@
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await deposit(info.pid, amount,tokenDecimals	);
+			const tx = await deposit(info.pid, amount, tokenDecimals);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
@@ -167,7 +152,7 @@
 		wantWithdrawAmount = amount;
 		addNotification(transactionSend);
 		try {
-			const tx = await withdraw(info.pid, wantWithdrawAmount,tokenDecimals);
+			const tx = await withdraw(info.pid, wantWithdrawAmount, tokenDecimals);
 			await tx.wait();
 			loadingState.loadingWithdraw = false;
 			addNotification(transactionCompleted);
@@ -193,11 +178,10 @@
 		loadingState.loadingHarvest = false;
 	};
 
-
-
-	const openModal = (action:string) => {
-		open(DepositWithdraw,
-		{
+	const openModal = (action: string) => {
+		open(
+			DepositWithdraw,
+			{
 				userStakedTokens,
 				userBalance,
 				tokenDecimals,
@@ -211,9 +195,9 @@
 				closeOnEsc: true,
 				closeOnOuterClick: true
 			}
-		)
-	}
-		const unsubscribe = accounts.subscribe(async (arrayAccs) => {
+		);
+	};
+	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
 			tokenAllowance = await getTokenAllowance(
@@ -221,7 +205,6 @@
 				getContractAddress(Token.MASTERCHEF),
 				userAcc
 			);
-
 			tokenApproved = isNotZero(tokenAllowance);
 			if (tokenApproved) {
 				userBalance = await getTokenBalance(info.tokenAddr, userAcc);
@@ -237,11 +220,10 @@
 				canWithdraw = isNotZero(userStakedTokens);
 			}
 			idInterval = setInterval(async () => {
-				 await fetchRecentData(); 
+				await fetchRecentData();
 			}, 10000);
 		}
 	});
-	
 
 	onDestroy(() => {
 		clearInterval(idInterval);
@@ -378,7 +360,7 @@
 				<div class="flex justify-between items-center w-full h-full">
 					{#if userStakedTokens}
 						<p class="flex text-xl dark:text-white">
-							{parseFloat(ethers.utils.formatUnits(userStakedTokens,tokenDecimals)).toPrecision(4)}
+							{parseFloat(ethers.utils.formatUnits(userStakedTokens, tokenDecimals)).toPrecision(4)}
 						</p>
 					{:else}
 						<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
@@ -386,12 +368,12 @@
 
 					<div class="flex space-x-2">
 						<button
-							on:click={()=>openModal("DEPOSIT")}
+							on:click={() => openModal('DEPOSIT')}
 							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white"
 							>+</button
 						>
 						<button
-							on:click={()=>openModal("WITHDRAW")}
+							on:click={() => openModal('WITHDRAW')}
 							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white"
 							>-</button
 						>

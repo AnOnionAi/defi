@@ -212,7 +212,7 @@
 		</div>
 
 		{#each [...filteredVaults] as vault, index}
-				<VaultAccordeon vaultConfig={vault} />
+			<VaultAccordeon vaultConfig={vault} />
 		{/each}
 
 		<BottomList />
