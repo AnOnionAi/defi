@@ -40,40 +40,6 @@
 
 		camera.position.setZ(30);
 
-		//Start Torus
-		const geometryTorusOne = new THREE.TorusGeometry(
-			7,
-			1,
-			8,
-			25
-		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
-		const materialTorusOne = new THREE.MeshStandardMaterial({ color: 0xff6347, wireframe: true });
-		const torusOne = new THREE.Mesh(geometryTorusOne, materialTorusOne);
-
-		scene.add(torusOne);
-
-		const geometryTorusThree = new THREE.TorusGeometry(
-			7,
-			1,
-			5,
-			50
-		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
-		const materialTorusThree = new THREE.MeshStandardMaterial({ color: 0xff6347, wireframe: true });
-		const torusThree = new THREE.Mesh(geometryTorusThree, materialTorusThree);
-
-		const geometryTorusFour = new THREE.TorusGeometry(
-			9,
-			1,
-			6,
-			50
-		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
-		const materialTorusFour = new THREE.MeshStandardMaterial({ color: 0xe62e2d, wireframe: true });
-		const torusFour = new THREE.Mesh(geometryTorusFour, materialTorusFour);
-		// scene.add(torusThree, torusFour);
-
-		torusOne.position.set(-1.5, 0, -47);
-		// End Torus
-
 		const lightPoint = new THREE.PointLight(0xffffff);
 
 		lightPoint.position.set(20, 20, 20);
@@ -103,7 +69,7 @@
 			scene.background = spaceTexture;
 		}
 
-		const moonTexture = new THREE.TextureLoader().load('textureMoon.jpg');
+		const moonTexture = new THREE.TextureLoader().load('textureMoon.webp');
 
 		const floppaTexture = new THREE.TextureLoader().load(moon);
 		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
@@ -143,19 +109,17 @@
 		let mushMeshCryp;
 		getMush()
 			.then((mush) => {
-				const [dollar, lactarius, mushCrypto] = mush;
-				// mushMeshFA = agaric.scene;
-				// mushMeshFA.position.set(0, 5, -5);
+				const [dollar, mushCrypto] = mush;
 				dollarSign = dollar.scene;
-				mushMeshLA = lactarius.scene;
-				mushMeshLA.position.set(-1.5, 0, -47);
+				// mushMeshLA = lactarius.scene;
+				// mushMeshLA.position.set(-1.5, 0, -47);
 				mushMeshCryp = mushCrypto.scene;
 				mushMeshCryp.scale.set(25, 25, 25);
 				mushMeshCryp.position.set(-340, 0, -1100);
-				floppaMoon.position.set(-50, 0, -150);
-				floppaEarth.position.set(-100, 0, -300);
+				floppaMoon.position.set(-45, 0, -150);
+				floppaEarth.position.set(-50, 0, -300);
 				floppaSun.position.set(500, 0, -1000);
-				scene.add(dollarSign, mushMeshLA, floppaMoon, floppaEarth, floppaSun, mushMeshCryp);
+				scene.add(dollarSign, floppaMoon, floppaEarth, floppaSun, mushMeshCryp);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -166,14 +130,10 @@
 
 			var time = Date.now() * 0.0005;
 
-			torusOne.rotation.y += 0.015;
-			torusFour.rotation.x += 0.015;
-			torusThree.rotation.z += 0.015;
-
-			if (mushMeshLA) {
-				mushMeshLA.rotateY((Math.PI / 60) * 0.6);
-				mushMeshLA.rotateX((Math.PI / 120) * 0.6);
-			}
+			// if (mushMeshLA) {
+			// 	mushMeshLA.rotateY((Math.PI / 60) * 0.6);
+			// 	mushMeshLA.rotateX((Math.PI / 120) * 0.6);
+			// }
 			if (mushMeshCryp) {
 				mushMeshCryp.rotation.y -= 0.01;
 
@@ -182,9 +142,7 @@
 				mushMeshCryp.position.z = -1000;
 			}
 			if (floppaMoon) {
-				// floppaMoon.rotation.x += 0.01;
 				floppaMoon.rotation.y += 0.01;
-				// floppaMoon.rotation.Z += 0.0025;
 			}
 			if (floppaEarth) {
 				floppaEarth.rotation.y += 0.01;
@@ -222,8 +180,6 @@
 		}
 		function moveCamera() {
 			const t = document.body.getBoundingClientRect().top;
-
-			torusOne.rotation.x += 0.18;
 
 			camera.position.z = 10 + t * 0.1;
 			camera.position.x = t * 0.00625;
