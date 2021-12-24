@@ -40,6 +40,20 @@
 
 		camera.position.setZ(30);
 
+		//Start Torus
+		const geometryTorusOne = new THREE.TorusGeometry(
+			7,
+			1,
+			8,
+			25
+		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
+		const materialTorusOne = new THREE.MeshStandardMaterial({ color: 0xff6347, wireframe: true });
+		const torusOne = new THREE.Mesh(geometryTorusOne, materialTorusOne);
+		scene.add(torusOne);
+
+		torusOne.position.set(-1.5, 0, -47);
+		// End Torus
+
 		const lightPoint = new THREE.PointLight(0xffffff);
 
 		lightPoint.position.set(20, 20, 20);
@@ -130,6 +144,8 @@
 
 			var time = Date.now() * 0.0005;
 
+			torusOne.rotation.y += 0.015;
+
 			// if (mushMeshLA) {
 			// 	mushMeshLA.rotateY((Math.PI / 60) * 0.6);
 			// 	mushMeshLA.rotateX((Math.PI / 120) * 0.6);
@@ -180,6 +196,8 @@
 		}
 		function moveCamera() {
 			const t = document.body.getBoundingClientRect().top;
+
+			torusOne.rotation.x += 0.18;
 
 			camera.position.z = 10 + t * 0.1;
 			camera.position.x = t * 0.00625;
