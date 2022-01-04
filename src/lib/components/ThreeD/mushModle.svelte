@@ -5,9 +5,9 @@
 			const mushLoader = new GLTFLoader();
 			//let mushModelFA = await mushLoader.loadAsync('agaricCompressedGLB.glb');
 			let dollarSign = await mushLoader.loadAsync('dollarCompressedGLB.glb');
-			let lactarius = await mushLoader.loadAsync('lactariusCompressedGLB.glb');
+			// let lactarius = await mushLoader.loadAsync('lactariusCompressedGLB.glb');
 			let mushCrypto = await mushLoader.loadAsync('mushglb.glb');
-			return [dollarSign, lactarius, mushCrypto];
+			return [dollarSign, mushCrypto];
 		} catch (error) {
 			return error;
 		}

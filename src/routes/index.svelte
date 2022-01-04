@@ -28,7 +28,7 @@
 
 <style>
 	#preloader {
-		background: #000 url(loader2.gif) no-repeat center;
+		background: #000 url(../../../loader2.gif) no-repeat center;
 		background-size: 15%;
 		height: 100vh;
 		width: 100%;
