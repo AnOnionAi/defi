@@ -1,6 +1,6 @@
 {
-    "short_name": "fung-financial",
-    "name": "fungfi",
+    "short_name": "FungFi",
+    "name": "Fung Financial",
     "id": "/?homescreen=1",
     "start_url": "/",
     "display": "standalone",
