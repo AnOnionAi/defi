@@ -31,13 +31,14 @@
 			if (account) {
 				for (const vault of allVaults) {
 					const balance = await getTokenBalance(vault.pair.pairContract, userAccount);
+					console.log(balance)
 					if (vault.pid !== -1) {
 						const staked = await stakedWantTokens(vault.pid, userAccount);
 						vaultsWithBalance.push({ ...vault, balance, staked }); // BigNumber.from('0')
 					} else {
 						vaultsWithBalance.push({ ...vault, balance });
 					}
-				}
+				}											
 				filteredVaults = [...vaultsWithBalance];
 			}
 		});

@@ -24,8 +24,13 @@
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
+	import { onMount } from 'svelte';
+	import { getErc20Contract, getPairContract } from '$lib/utils/contractHelpers';
+	import { Provider } from '$lib/utils/web3Helpers';
+import { getErc20TokenUsdPrice } from '$lib/utils/tokensPrice';
 
 	const { addNotification } = getNotificationsContext();
+
 	export let vaultConfig: VaultInfo;
 	let allImages = [...quickImages, ...sushiImages];
 	let userAcc: string;
@@ -33,13 +38,10 @@
 	let isApproved: boolean;
 	let stakedTokens;
 	let userTokens: BigNumber;
-	let apy: string;
-	let tvl: string;
-	let daily: string;
-	let borderStyle: string = 'rounded-lg';
+	let apy: number = Math.random()*120;
+	let tvl: number = Math.random()*1500;
 	let tkn0Price: number;
 	let tkn1Price: number;
-	let userApproveAmount;
 	let userDepositAmount: string;
 	let userWithdrawAmount: string;
 	const loadingState = {
@@ -49,13 +51,17 @@
 		withdraw: false,
 		harvest: false
 	};
+
 	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
+			const pair = getPairContract(vaultConfig.pair.pairContract,Provider.getProviderSingleton());
+			userTokens = await pair.balanceOf(userAcc)
 		}
 	});
+
 	const openAccordeon = (): void => {
-		isHidden ? (isHidden = false) : (isHidden = true);
+		isHidden = !isHidden;
 	};
 	const handleTransaction = async (transaction: Promise<any>, transactionName: string) => {
 		loadingState.something = true;
@@ -106,6 +112,8 @@
 		loadingState.something = false;
 		loadingState[transactionName] = false;
 	};
+
+
 	$: if (!isHidden) {
 		if (userAcc) {
 			getTokenAllowance(
@@ -115,18 +123,11 @@
 			).then((res) => {
 				isApproved = isNotZero(res);
 			});
-			getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
-				userTokens = balance;
-			});
 			stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
 				stakedTokens = stakedAmount;
 			});
-			getTokenPriceUSD(vaultConfig.pair.token0Contract).then((response) => {
-				tkn0Price = response[vaultConfig.pair.token0Contract.toLowerCase()].usd;
-			});
-			getTokenPriceUSD(vaultConfig.pair.token1Contract).then((response) => {
-				tkn1Price = response[vaultConfig.pair.token1Contract.toLowerCase()].usd;
-			});
+			getErc20TokenUsdPrice(vaultConfig.pair.token0Contract).then(price => (tkn0Price = price))
+			getErc20TokenUsdPrice(vaultConfig.pair.token1Contract).then(price => (tkn1Price = price))
 		}
 	}
 </script>
@@ -189,19 +190,38 @@
 				<div class="flex w-10/12 justify-around ">
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">APY</p>
-						<p class="dark:text-white">1.12K%</p>
+						{#if apy}
+						<p class="dark:text-white">{apy.toFixed(2)}%</p>
+						{:else}
+						<p class="w-11 h-5 rounded-md animate-pulse bg-gray-200 dark:bg-dark-200"></p>
+						{/if}
 					</div>
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Daily</p>
-						<p class="dark:text-white">7%</p>
+						{#if apy}
+						<p class="dark:text-white">{(apy/365).toFixed(2)}%</p>
+						{:else}
+						<p class="w-11 h-5 rounded-md animate-pulse bg-gray-200 dark:bg-dark-200"></p>
+						{/if}
 					</div>
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Wallet</p>
-						<p class="dark:text-white">0.0001</p>
+						{#if !userAcc}
+							<p class="dark:text-white">0</p>
+						{:else if userTokens && userAcc}
+							<p class="dark:text-white">{parseFloat(ethers.utils.formatUnits(userTokens, 18)).toFixed(4)}</p>
+						{:else}
+							<p class="w-11 h-5 rounded-md animate-pulse bg-gray-200 dark:bg-dark-200"></p>
+						{/if}
 					</div>
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">TVL</p>
-						<p class="dark:text-white">$1,254</p>
+						{#if tvl}
+							<p class="dark:text-white">${tvl.toFixed(2)}</p>
+						{:else}
+							<p class="w-11 h-5 rounded-md animate-pulse bg-gray-200 dark:bg-dark-200"></p>
+						{/if}
+						
 					</div>
 				</div>
 				<div class="dark:text-white">
@@ -365,18 +385,19 @@
 					<div class="pt-4 lg:pt-0 lg:w-3/12">
 						<div class="pl-1">
 							<p class="text-gray-500  pb-1 dark:text-gray-400 font-medium">
+								
 								{$_('vaultAccordeon.currentPrices')}:
 							</p>
 							<p class="font-light	 dark:text-white ">
 								{#if tkn0Price}
-									{vaultConfig.pair.token0quote}: ${tkn0Price}
+									{vaultConfig.pair.token0quote}: ${tkn0Price.toFixed(2)}
 								{:else}
 									{vaultConfig.pair.token0quote}: {$_('vaultAccordeon.loading')}...
 								{/if}
 							</p>
 							<p class="font-light dark:text-white">
 								{#if tkn1Price}
-									{vaultConfig.pair.token1quote}: ${tkn1Price}
+									{vaultConfig.pair.token1quote}: ${tkn1Price.toFixed(2)}
 								{:else}
 									{vaultConfig.pair.token1quote}: {$_('vaultAccordeon.loading')}...
 								{/if}

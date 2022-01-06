@@ -177,7 +177,7 @@ export const quickVaults: VaultInfo[] = [
 			token1quote: TokenQuotes.USDT,
 			token0Contract: getContractAddress(Token.DAI),
 			token1Contract: getContractAddress(Token.USDT),
-			pairContract: '	',
+			pairContract: '0x59153f27eefe07e5ece4f9304ebba1da6f53ca88',
 			pairURL: 'https://polygonscan.com/address/0x59153f27eefe07e5ece4f9304ebba1da6f53ca88'
 		},
 		strategyContractAddress: 'LF'
