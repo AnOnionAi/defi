@@ -10,8 +10,8 @@
 	import { faInfoCircle, faHandHoldingUsd, faBookOpen } from '@fortawesome/free-solid-svg-icons';
 	import { faTelegram } from '@fortawesome/free-brands-svg-icons';
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-	import { faSnapchat } from '@fortawesome/free-brands-svg-icons';
-	import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+	import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+	//import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
 	import { logger } from 'ethers';
 	let iconColor;
@@ -66,7 +66,7 @@
 					<Fa icon={faInfoCircle} size="lg" />
 				</p>
 
-				<a href="https://github.com" aria-label="Github">
+				<a href="https://github.com/fungfi" aria-label="Github">
 					<Fa icon={faGithub} size="lg" />
 				</a>
 
@@ -90,24 +90,21 @@
 			</div>
 
 			<div class="social-media flex space-x-4 " aria-label="Youtube">
-				<a href="https://github.com">
+				<a href="https://youtube.com">
 					<Fa icon={faYoutube} size="lg" />
 				</a>
 
-				<a href="https://github.com" aria-label="Twitter">
+				<a href="https://twitter.com/fung_fi" aria-label="Twitter">
 					<Fa icon={faTwitter} size="lg" />
 				</a>
-				<a href="https://twitter.com/fung_fi" aria-label="Telegram">
+				<a href="https://telegram.com/fungfi" aria-label="Telegram">
 					<Fa icon={faTelegram} size="lg" />
-				</a>
-				<a href="https://fung.wiki/" aria-label="Instagram">
-					<Fa icon={faInstagram} size="lg" />
 				</a>
 				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh" aria-label="Tiktok">
 					<Fa icon={faTiktok} size="lg" />
 				</a>
-				<a href="https://discord.gg/EbvCkxhP" aria-label="Snapchat">
-					<Fa icon={faSnapchat} size="lg" />
+				<a href="https://facebook.com" aria-label="Facebook">
+					<Fa icon={faFacebook} size="lg" />
 				</a>
 			</div>
 		</div>
