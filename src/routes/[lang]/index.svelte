@@ -5,11 +5,11 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 
-	import spaceDay from '/space.jpg';
-	import spaceNight from '/space35.jpg';
-	import moon from '/moon.jpg';
-	import earth from '/earth.jpg';
-	import sun from '/sun.jpg';
+	import spaceDay from '/static/space.webp';
+	import spaceNight from '/static/space35.webp';
+	import moon from '/static/moon.webp';
+	import earth from '/static/earth.webp';
+	import sun from '/static/sun.webp';
 
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
