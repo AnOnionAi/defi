@@ -9,7 +9,6 @@
 	import { fade } from 'svelte/transition';
 	import { quickVaults, sushiVaults } from '$lib/config/constants/vaults';
 	import type { VaultInfo } from '$lib/ts/types';
-	export let lang;
 	import VaultAccordeon from '$lib/components/Cards/VaultAccordeon.svelte';
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import BottomList from '$lib/components/Cards/BottomList.svelte';
@@ -213,11 +212,7 @@
 		</div>
 
 		{#each [...filteredVaults] as vault, index}
-			{#if index == 0}
-				<VaultAccordeon vaultConfig={vault} hasRoundedBorder={true} />
-			{:else}
-				<VaultAccordeon vaultConfig={vault} />
-			{/if}
+			<VaultAccordeon vaultConfig={vault} />
 		{/each}
 
 		<BottomList />

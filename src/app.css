@@ -67,21 +67,5 @@ button:focus:not(:focus-visible) {
 }
 
 ::-webkit-scrollbar {
-	width: 5px;
-	border-radius: 20px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-	background: #f9f9f9;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-	background: var(--text-color);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	background: #555;
+	display: none;
 }

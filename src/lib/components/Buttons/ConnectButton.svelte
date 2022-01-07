@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
-	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import { accounts, chainID } from '$lib/stores/MetaMaskAccount';
 	import { formatAddress } from '$lib/utils/addressHelpers';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { isMetaMaskInstalled, goInstallMetamask, metaMaskCon } from '$lib/utils/metamaskCalls';
+	import { POLYGON_CHAIN_ID } from '$lib/config';
+	import WrongNetwork from '../Modals/WrongNetwork.svelte';
+	import { fade, fly } from 'svelte/transition';
+
+	const { open } = getContext('simple-modal');
 
 	type MetamaskExtensionStatus = 'checking' | 'isInstalled' | 'notInstalled';
 
@@ -12,6 +17,20 @@
 
 	onMount(() => {
 		isInstalled = isMetaMaskInstalled() ? 'isInstalled' : 'notInstalled';
+		chainID.subscribe((id) => {
+			if (id !== POLYGON_CHAIN_ID && id !== undefined) {
+				open(
+					WrongNetwork,
+					{},
+					{
+						closeButton: false,
+						closeOnEsc: false,
+						closeOnOuterClick: false,
+						styleWindow: { width: '400px' }
+					}
+				);
+			}
+		});
 	});
 
 	const onClickDispatcher = (status: MetamaskExtensionStatus) => {

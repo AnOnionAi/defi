@@ -1,3 +1,4 @@
 export const BLOCK_TIMER = 3;
+export const POLYGON_CHAIN_ID = '0x89';
 export const MUSHSYMBOL = 'ZTEST';
 export const BURN_ADDRESS = '0x000000000000000000000000000000000000dEaD';

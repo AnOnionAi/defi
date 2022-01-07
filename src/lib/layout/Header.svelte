@@ -15,7 +15,6 @@
 	import LangPicker from '$lib/components/Dropdowns/LangPicker.svelte';
 	import DarkModeButton from '$lib/components/Buttons/DarkModeButton.svelte';
 	import HamburgerButton from '$lib/components/Buttons/HamburgerButton.svelte';
-	import NavItemButton from '$lib/components/Buttons/NavItemButton.svelte';
 	import MushPrice from '$lib/components/Buttons/MushPrice.svelte';
 	import NavbarRoute from '$lib/components/Buttons/NavbarRoute.svelte';
 
@@ -109,7 +108,7 @@
 					{/if}
 				</span>
 			</div>
-			<div class="ml-4 hidden lg:block">
+			<div class="ml-4 hidden lg:block ">
 				<div
 					class="flex items-center ml-9 space-x-2 dark:text-white {$isHomescreen && 'text-white'}"
 				>
@@ -141,7 +140,10 @@
 			!$isHomescreen &&
 			'bg-dark-600'}"
 	>
-		<div id="navbar-menu-mobile" class="text-center px-2 pt-2 pb-3 space-y-4">
+		<div
+			id="navbar-menu-mobile"
+			class="text-center px-2 pt-2 pb-3 space-y-4 {$isHomescreen && 'text-white'}"
+		>
 			{#each PAGES as page}
 				<div class="">
 					<NavbarRoute pageRoute={page} />

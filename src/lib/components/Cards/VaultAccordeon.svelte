@@ -26,7 +26,6 @@
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 
 	const { addNotification } = getNotificationsContext();
-	export let hasRoundedBorder = false;
 	export let vaultConfig: VaultInfo;
 	let allImages = [...quickImages, ...sushiImages];
 	let userAcc: string;
