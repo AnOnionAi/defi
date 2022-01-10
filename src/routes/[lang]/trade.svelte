@@ -15,12 +15,12 @@ import { getQuickswapLPTokenPrice, getTokenPriceUSDQuickSwap} from '$lib/utils/q
 
 <script lang="ts">
 	onMount(async()=>{
-		/*  const genesis = await getQuickswapSingleStakingAPY("0x853ee4b2a13f8a742d64c8f088be7ba2131f670d","")
-		console.log(genesis)  */
+		 const genesis = await getQuickswapSingleStakingAPY("0x853ee4b2a13f8a742d64c8f088be7ba2131f670d","")
+		console.log(genesis) 
 		/* console.log(await getQuickSwapStakingContractAddress("0x853ee4b2a13f8a742d64c8f088be7ba2131f670d")) */
-		/* await getDragonQuickTokenPrice() */
+		/* await getDragonQuickTokenPrice() *//* 
 		console.log(await getQuickswapLPTokenPrice("0xadbf1854e5883eb8aa7baf50705338739e558e5b"))
-		
+		 */
 	})
 </script>
 

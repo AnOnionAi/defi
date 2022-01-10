@@ -9,6 +9,7 @@ import { getTokensFromPair } from "./lpTokenUtils"
 import { getErc20TokenUsdPrice, getLpTokenUsdWorth } from "./tokensPrice"
 import { Provider } from "./web3Helpers"
 import { getApy, getPoolApr } from "./yieldCalculator"
+import { getQuickswapLPTokenPrice } from "./quickSwapDexHelpers"
 
 export const getSushiSwapApyFromVaultChefPoolId = async(vaultChefPid: number ) => {
     const miniChefContract = getMiniChefContract();
@@ -48,11 +49,22 @@ export const getQuickswapSingleStakingAPY = async(lpTokenAddress:string,singleSt
  const stakingRewards = getStakingSingleRewardsContract(stakingRewardsAddress);
  const rewardPerSecond:BigNumber = await stakingRewards.rewardRate();
  const decimalRewardPerSecond = parseFloat(ethers.utils.formatEther(rewardPerSecond))
- const rewardPerDay = (decimalRewardPerSecond * 86400) //Seconds in a day
- const totalStaked = await stakingRewards.totalSupply();
-
- console.log("TOTAL STAKED",ethers.utils.formatEther(totalStaked))
- return rewardPerDay
+ const rewardRatePerDay = (decimalRewardPerSecond * 86400) //Seconds in a day
+ const totalStakedBN:BigNumber = await stakingRewards.totalSupply();
+ const totalStaked = parseFloat(ethers.utils.formatEther(totalStakedBN))
+ const dQuickPrice = await  getDragonQuickTokenPrice();
+ const stakingTokenPrice = await getQuickswapLPTokenPrice("0x853ee4b2a13f8a742d64c8f088be7ba2131f670d")
+ const rewardPerDay = rewardRatePerDay * dQuickPrice;
+ console.log("MONEY PER DAY",rewardPerDay)
+ console.log(stakingTokenPrice, "STAKIG TOKEN PRICE")
+ const tvl = totalStaked * stakingTokenPrice;
+ console.log(dQuickPrice,"d quick price")
+ console.log(totalStaked, "TOTAL STAKED")
+ console.log(tvl, "TOTAL DEPOSITED ")
+ const apr = (365 * rewardPerDay * dQuickPrice)/tvl;
+ const roundedApr = Math.round(apr * 100) / 100;
+ console.log(roundedApr)
+ return roundedApr
 }
 
 
@@ -65,8 +77,3 @@ export const getDragonQuickTokenPrice = async():Promise<number> => {
  return dragonQuickUsdPrice
 }
 
-
-
-export const getTokenPrice = async():Promise<number> => {
-    return 1
-}

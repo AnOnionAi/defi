@@ -94,8 +94,11 @@ export const getCirculatingSupply = async(pairAddress):Promise<number> => {
 }
 
 
-export const getLpPrice = (totalValueOfLiquidityPool:number,circulatingSupply:number) => {
- return totalValueOfLiquidityPool / circulatingSupply
+export const getLpPrice = (totalValueOfLiquidityPool:number,circulatingSupply:number):number => {
+	console.log("TVL: ",totalValueOfLiquidityPool)
+	console.log("Circulating Supply",circulatingSupply);
+	
+ return totalValueOfLiquidityPool/circulatingSupply
 }
 
 
