@@ -51,6 +51,11 @@ export interface VaultInfo {
 	strategyContractAddress: string;
 }
 
+
+export interface QuickSwapVault extends VaultInfo {
+	dualRewarding: boolean;
+}
+
 export interface Platform {
 	name: string;
 	brandColor: string;

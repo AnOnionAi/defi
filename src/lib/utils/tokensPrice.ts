@@ -66,3 +66,4 @@ export const getLpTokenUsdWorth = async(lpTokenAddress: string) => {
     const lpPrice = getLpPrice(totalLiquidityPoolWorth,circulatingLpTokenSupply)
     return lpPrice;
 }
+

@@ -1,11 +1,11 @@
-import type { VaultInfo } from '$lib/ts/types';
+import type { QuickSwapVault, VaultInfo } from '$lib/ts/types';
 import addresses from './addresses.json';
 import platforms from './platforms.json';
 import { TokenQuotes } from '$lib/ts/types';
 import env from '$lib/env';
 import { Token } from '$lib/ts/types';
 import { getContractAddress } from '$lib/utils/addressHelpers';
-export const quickVaults: VaultInfo[] = [
+export const quickVaults: QuickSwapVault[] = [
 	{
 		pid: 0,
 		depositFee: 0,
@@ -21,7 +21,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0x6e7a5FAFcec6BB1e78bAE2A1F0B612012BF14827',
 			pairURL: 'https://polygonscan.com/address/0x6e7a5FAFcec6BB1e78bAE2A1F0B612012BF14827#code'
 		},
-		strategyContractAddress: '0x5a80f6fc727f7D0c060aeaAAb1640bb92FCfb30B'
+		strategyContractAddress: '0x5a80f6fc727f7D0c060aeaAAb1640bb92FCfb30B',
+		dualRewarding:false
 	},
 	{
 		pid: -1,
@@ -38,7 +39,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0xadbf1854e5883eb8aa7baf50705338739e558e5b',
 			pairURL: 'https://polygonscan.com/address/0xadbf1854e5883eb8aa7baf50705338739e558e5b'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 	{
 		pid: -1,
@@ -55,7 +57,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046',
 			pairURL: 'https://polygonscan.com/address/0xf6422b997c7f54d1c6a6e103bcb1499eea0a7046'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 
 	{
@@ -73,7 +76,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0x898386dd8756779a4ba4f1462891b92dd76b78ef',
 			pairURL: 'https://polygonscan.com/address/0x898386dd8756779a4ba4f1462891b92dd76b78ef'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 
 	{
@@ -91,7 +95,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0xf04adbf75cdfc5ed26eea4bbbb991db002036bdd',
 			pairURL: 'https://polygonscan.com/address/0xf04adbf75cdfc5ed26eea4bbbb991db002036bdd'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 
 	{
@@ -109,7 +114,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0x604229c960e5cacf2aaeac8be68ac07ba9df81c3',
 			pairURL: 'https://polygonscan.com/address/0x604229c960e5cacf2aaeac8be68ac07ba9df81c3'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 
 	{
@@ -127,7 +133,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0x019ba0325f1988213d448b3472fa1cf8d07618d7',
 			pairURL: 'https://polygonscan.com/address/0x604229c960e5cacf2aaeac8be68ac07ba9df81c3'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 
 	{
@@ -145,7 +152,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0x5ca6ca6c3709e1e6cfe74a50cf6b2b6ba2dadd67',
 			pairURL: 'https://polygonscan.com/address/0x5ca6ca6c3709e1e6cfe74a50cf6b2b6ba2dadd67'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 
 	{
@@ -163,7 +171,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0xb56843b5550e3f78613ca5abf6bd6ae6f84cd11e',
 			pairURL: 'https://polygonscan.com/address/0xb56843b5550e3f78613ca5abf6bd6ae6f84cd11e'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 	{
 		pid: -1,
@@ -180,7 +189,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0x59153f27eefe07e5ece4f9304ebba1da6f53ca88',
 			pairURL: 'https://polygonscan.com/address/0x59153f27eefe07e5ece4f9304ebba1da6f53ca88'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	},
 
 	{
@@ -198,7 +208,8 @@ export const quickVaults: VaultInfo[] = [
 			pairContract: '0x1f1e4c845183ef6d50e9609f16f6f9cae43bc9cb',
 			pairURL: 'https://polygonscan.com/address/0x1f1e4c845183ef6d50e9609f16f6f9cae43bc9cb'
 		},
-		strategyContractAddress: 'LF'
+		strategyContractAddress: 'LF',
+		dualRewarding:false
 	}
 ];
 

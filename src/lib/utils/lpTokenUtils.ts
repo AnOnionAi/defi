@@ -98,3 +98,4 @@ export const getLpPrice = (totalValueOfLiquidityPool:number,circulatingSupply:nu
  return totalValueOfLiquidityPool / circulatingSupply
 }
 
+

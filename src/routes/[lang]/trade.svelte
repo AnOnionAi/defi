@@ -6,13 +6,21 @@
 import { onMount } from 'svelte';
 import { getErc20TokenUsdPrice, getLpTokenUsdWorth, getMaticUsdPrice } from '$lib/utils/tokensPrice';
 import { Token } from '$lib/ts/types';
-import { getSushiSwapApyFromVaultChefPoolId } from '$lib/utils/apyVaultsUtils';
+import { getDragonQuickTokenPrice, getQuickswapSingleStakingAPY, getQuickwapApyFromPairAddress, getSushiSwapApyFromVaultChefPoolId } from '$lib/utils/apyVaultsUtils';
 import { getCirculatingSupply, getReservesFromPair } from '$lib/utils/lpTokenUtils';
+import { ethers } from 'ethers';
+import { getQuickSwapStakingContractAddress } from '$lib/utils/contractHelpers';
+import { getQuickswapLPTokenPrice, getTokenPriceUSDQuickSwap} from '$lib/utils/quickSwapDexHelpers';
 </script>
 
 <script lang="ts">
 	onMount(async()=>{
-		await getSushiSwapApyFromVaultChefPoolId(3)
+		/*  const genesis = await getQuickswapSingleStakingAPY("0x853ee4b2a13f8a742d64c8f088be7ba2131f670d","")
+		console.log(genesis)  */
+		/* console.log(await getQuickSwapStakingContractAddress("0x853ee4b2a13f8a742d64c8f088be7ba2131f670d")) */
+		/* await getDragonQuickTokenPrice() */
+		console.log(await getQuickswapLPTokenPrice("0xadbf1854e5883eb8aa7baf50705338739e558e5b"))
+		
 	})
 </script>
 
