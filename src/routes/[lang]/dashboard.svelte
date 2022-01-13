@@ -5,6 +5,7 @@
 </script>
 
 <script lang="ts">
+	import Line from "svelte-chartjs/src/Line.svelte"
 	import { fade } from 'svelte/transition';
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
 	import { MasterChef } from '$lib/utils/masterc';
@@ -12,7 +13,54 @@
 	import { BigNumber, ethers } from 'ethers';
 	import { mushPerBlock, totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
+
+	let priceData = [];
+	let dataLine;
+
+	onMount(() => {
+
+		fetch('https://api2.sushipro.io/?chainID=137&action=get_pairs_by_token&token=0x627F699300A9D693FBB84F9Be0118D17A1387D4e')
+			.then( res => res.json() )
+			.then( data => {
+				
+				priceData.push( data[1][0].Token_1_price )
+				
+				let priceDataToChart = [priceData[0].toFixed(9), priceData[0]];
+
+				dataLine = {
+					labels: ["December", "January"],
+					datasets: [
+					{
+						label: "Mush Price",
+						scaleOverride : true,
+						scaleStartValue : 0.0001,
+						fill: true,
+						lineTension: 0,
+						backgroundColor: "rgba(225, 204,230, .3)",
+						borderColor: 'rgb(75, 192, 192)',
+						borderCapStyle: "butt",
+						borderDash: [],
+						borderDashOffset: 0.0,
+						borderJoinStyle: "miter",
+						pointBorderColor: "rgba(222, 125, 228, 1)",
+						pointBackgroundColor: 'rgb(75, 192, 192)',
+						pointBorderWidth: 10,
+						pointHoverRadius: 0.5,
+						pointHoverBackgroundColor: "rgba(222, 125, 228, 1)",
+						pointHoverBorderColor: "rgba(222, 125, 228, 1)",
+						pointHoverBorderWidth: 2,
+						pointRadius: 0.5,
+						pointHitRadius: 10,
+						data: priceDataToChart		// [65, 59, 80, 81, 56, 55, 40]
+					}
+					],
+					
+				};
+			} )
+	});
+
 </script>
+
 
 <div in:fade={{ duration: 300 }}>
 	<div class=" max-w-screen-xl   mx-auto  p-2 mt-10">
@@ -251,9 +299,9 @@
 				<div class="w-full lg:w-18/24 ">
 					<div class="p-4 pb-2 lg:p-5 h-full">
 						<div
-							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-6 border border-gray-300 dark:border-green-500 shadow-md"
+							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-2 border border-gray-300 dark:border-green-500 shadow-md"
 						>
-							<img src="/graphSample.jpg" class="h-full w-full" alt="sample" />
+							<Line data={dataLine} options={{ responsive: true }}/>
 						</div>
 					</div>
 				</div>
