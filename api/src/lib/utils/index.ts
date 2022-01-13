@@ -1,0 +1,1 @@
+export const hasContractLength = (contractAddress:string) => contractAddress.length == 42;

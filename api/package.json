@@ -1,0 +1,32 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/node": "^17.0.8",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@ethersproject/address": "^5.5.0",
+    "@ethersproject/contracts": "^5.5.0",
+    "@ethersproject/networks": "^5.5.2",
+    "@ethersproject/providers": "^5.5.2",
+    "@ethersproject/solidity": "^5.5.0",
+    "@types/express": "^4.17.13",
+    "cors": "^2.8.5",
+    "ethers": "^5.5.3",
+    "express": "^4.17.2",
+    "quickswap-sdk": "^3.0.8",
+    "sushiswap-sdk": "^1.0.0"
+  }
+}
