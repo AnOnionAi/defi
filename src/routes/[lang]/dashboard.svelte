@@ -295,7 +295,7 @@
 			>
 				{$_('dashboard.price')}
 			</p>
-			<div class="w-full h-auto flex flex-wrap">
+			<div class="w-full h-auto flex flex-col lg:flex-row flex-wrap">
 				<div class="w-full lg:w-18/24 ">
 					<div class="p-4 pb-2 lg:p-5 h-full">
 						<div
