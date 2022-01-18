@@ -55,11 +55,13 @@
 	};
 
 	const handlePlatformFilter = () => {
+		//Everytime the platform chahges, we delete the previous filter.
 		const newFilterSet = filtersApplied.filter(
 			(vaultFilter) => vaultFilter.criteria != Criteria.PLATFORM
 		);
 		filtersApplied = [...newFilterSet];
 
+		//Add the only sushiswap filter.
 		if (platformSelected == 'SushiSwap') {
 			const sushiSwapOnly: VaultFilterFunction = {
 				filterFunction: sushiswapOnlyFilter,
@@ -68,7 +70,6 @@
 			const newFilterSet = [...filtersApplied, sushiSwapOnly];
 			filtersApplied = [...newFilterSet];
 		} else if (platformSelected == 'QuickSwap') {
-			console.log('im here');
 			const quickswapOnly: VaultFilterFunction = {
 				filterFunction: quickswapOnlyFilter,
 				criteria: Criteria.PLATFORM
@@ -79,18 +80,19 @@
 	};
 
 	const handleSearchByName = () => {
+		//Everytime the input changes, this will clean the previous name filter.
 		const newFilterSet = filtersApplied.filter(
 			(vaultFilter) => vaultFilter.criteria != Criteria.NAME
 		);
 		filtersApplied = [...newFilterSet];
-
-		if (statement.length > 1) {
+		//If the input is not a void string, we're going to create a function that returns true as the search input  matches a vault name.
+		if (statement.length >= 1) {
 			const searchBarFilter = (vault) => {
 				const searchStatement = statement;
 				const vaultName = `${vault.pair.token0Name}-${vault.pair.token1Name}`;
 				return vaultName.toLowerCase().includes(searchStatement.toLowerCase());
 			};
-
+			//We add this function as a vault Filter.
 			const search: VaultFilterFunction = {
 				filterFunction: searchBarFilter,
 				criteria: Criteria.NAME

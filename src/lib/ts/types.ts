@@ -51,6 +51,13 @@ export interface VaultInfo {
 	strategyContractAddress: string;
 }
 
+export interface VaultState extends VaultInfo{
+	tvl:number;
+	apy:number;
+	stakedAmount:number;
+	userWalletBalance:number;
+}
+
 export interface Platform {
 	name: string;
 	brandColor: string;
@@ -125,6 +132,7 @@ export interface VaultFilterFunction {
 	filterFunction(...args: any): boolean;
 	criteria: Criteria;
 }
+
 
 export enum Criteria {
 	PLATFORM = 'PLATFORM',
