@@ -25,7 +25,7 @@
 	let platformSelected: string;
 	let hideZeroBalances: boolean;
 	let stakedOnly: boolean;
-	let statement;
+	let statement:string;
 	let sortBy:string;
 	let filterBy:string;
 	let filtersApplied: Array<VaultFilterFunction> = [];
