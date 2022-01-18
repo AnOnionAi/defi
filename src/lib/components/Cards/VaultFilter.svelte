@@ -1,16 +1,105 @@
-<script>
+<script lang="ts">
+	import { Criteria } from '$lib/ts/types';
+	import type { VaultFilterFunction } from '$lib/ts/types';
+	import {
+		hideZeroBalancesFilter,
+		stakedOnlyFilter,
+		quickswapOnlyFilter,
+		sushiswapOnlyFilter
+	} from '$lib/utils/filterFunctions';
+
 	let ordering = false;
+	export let filtersApplied: Array<VaultFilterFunction> = [];
 	export let platformSelected = 'All';
-	export let zeroBalance = false;
+	export let hideZeroBalances = false;
 	export let stakedOnly = false;
 	export let statement = '';
-
-	export let sortby = 'Descending';
+	export let filterBy = "TVL"
+	export let sortBy = 'Descending';
 	import { _ } from 'svelte-i18n';
-	import { createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
 
-	const select = () => dispatch('staked');
+	const handleHideZeroBalancesFilter = () => {
+		hideZeroBalances = !hideZeroBalances; //Toggles the state
+		if (hideZeroBalances) {
+			//If the hide zero option is enabled, we're going to add the filter to the array.
+			const zeroBalancesFilter: VaultFilterFunction = {
+				filterFunction: hideZeroBalancesFilter,
+				criteria: Criteria.BALANCE
+			};
+			const newFilterSet = [...filtersApplied, zeroBalancesFilter];
+			filtersApplied = [...newFilterSet];
+		} else {
+			const newFilterSet = filtersApplied.filter(
+				(vaultFilter) => vaultFilter.criteria != Criteria.BALANCE
+			);
+			filtersApplied = [...newFilterSet];
+		}
+	};
+
+	const handleStakedOnlyFilter = () => {
+		stakedOnly = !stakedOnly;
+		if (stakedOnly) {
+			//If the hide zero option is enabled, we're going to add the filter to the array.
+			const stakedOnly: VaultFilterFunction = {
+				filterFunction: stakedOnlyFilter,
+				criteria: Criteria.STAKED
+			};
+			const newFilterSet = [...filtersApplied, stakedOnly];
+			filtersApplied = [...newFilterSet];
+		} else {
+			const newFilterSet = filtersApplied.filter(
+				(vaultFilter) => vaultFilter.criteria != Criteria.STAKED
+			);
+			filtersApplied = [...newFilterSet];
+		}
+	};
+
+	const handlePlatformFilter = () => {
+		//Everytime the platform chahges, we delete the previous filter.
+		const newFilterSet = filtersApplied.filter(
+			(vaultFilter) => vaultFilter.criteria != Criteria.PLATFORM
+		);
+		filtersApplied = [...newFilterSet];
+
+		//Add the only sushiswap filter.
+		if (platformSelected == 'SushiSwap') {
+			const sushiSwapOnly: VaultFilterFunction = {
+				filterFunction: sushiswapOnlyFilter,
+				criteria: Criteria.PLATFORM
+			};
+			const newFilterSet = [...filtersApplied, sushiSwapOnly];
+			filtersApplied = [...newFilterSet];
+		} else if (platformSelected == 'QuickSwap') {
+			const quickswapOnly: VaultFilterFunction = {
+				filterFunction: quickswapOnlyFilter,
+				criteria: Criteria.PLATFORM
+			};
+			const newFilterSet = [...filtersApplied, quickswapOnly];
+			filtersApplied = [...newFilterSet];
+		}
+	};
+
+	const handleSearchByName = () => {
+		//Everytime the input changes, this will clean the previous name filter.
+		const newFilterSet = filtersApplied.filter(
+			(vaultFilter) => vaultFilter.criteria != Criteria.NAME
+		);
+		filtersApplied = [...newFilterSet];
+		//If the input is not a void string, we're going to create a function that returns true as the search input  matches a vault name.
+		if (statement.length >= 1) {
+			const searchBarFilter = (vault) => {
+				const searchStatement = statement;
+				const vaultName = `${vault.pair.token0Name}-${vault.pair.token1Name}`;
+				return vaultName.toLowerCase().includes(searchStatement.toLowerCase());
+			};
+			//We add this function as a vault Filter.
+			const search: VaultFilterFunction = {
+				filterFunction: searchBarFilter,
+				criteria: Criteria.NAME
+			};
+			filtersApplied = [...filtersApplied, search];
+		}
+	};
 </script>
 
 <div
@@ -20,7 +109,13 @@
 		<div class="flex lg:flex-row flex-col w-full max-w-6xl m-auto sm:justify-between ">
 			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
 				<span class="checkbox__input">
-					<input name="checkbox_p" type="radio" value="All" bind:group={platformSelected} />
+					<input
+						name="checkbox_p"
+						type="radio"
+						value="All"
+						bind:group={platformSelected}
+						on:change={handlePlatformFilter}
+					/>
 					<span class="checkbox__control">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +138,13 @@
 
 			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
 				<span class="checkbox__input">
-					<input name="checkbox_p" type="radio" value="SushiSwap" bind:group={platformSelected} />
+					<input
+						name="checkbox_p"
+						type="radio"
+						value="SushiSwap"
+						bind:group={platformSelected}
+						on:change={handlePlatformFilter}
+					/>
 					<span class="checkbox__control">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +168,13 @@
 
 			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
 				<span class="checkbox__input">
-					<input name="checkbox_p" type="radio" value="QuickSwap" bind:group={platformSelected} />
+					<input
+						name="checkbox_p"
+						type="radio"
+						value="QuickSwap"
+						bind:group={platformSelected}
+						on:change={handlePlatformFilter}
+					/>
 					<span class="checkbox__control">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +198,7 @@
 
 			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
 				<span class="checkbox__input">
-					<input name="checkbox" type="checkbox" bind:checked={zeroBalance} />
+					<input name="checkbox" type="checkbox" on:change={handleHideZeroBalancesFilter} />
 					<span class="checkbox__control">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +226,7 @@
 				{$_('vaultFilter.filterby')}
 			</div>
 			<div class="content-select">
-				<select class="dark:bg-dark-500">
+				<select class="dark:bg-dark-500" bind:value={filterBy}>
 					<option value="TVL">TVL</option>
 					<option value="APY">APY</option>
 				</select>
@@ -132,7 +239,7 @@
 				{$_('vaultFilter.sortby')}
 			</div>
 			<div class="content-select">
-				<select bind:value={sortby}>
+				<select bind:value={sortBy}>
 					<option class="min-w-7xl" value="Descending">{$_('vaultFilter.desceding')}</option>
 					<option value="Ascending">{$_('vaultFilter.ascending')}</option>
 				</select>
@@ -145,7 +252,12 @@
 				{$_('vaultFilter.search')}
 			</div>
 			<div class="content-input">
-				<input type="text" placeholder={$_('vaultFilter.searchvaults')} bind:value={statement} />
+				<input
+					type="text"
+					placeholder={$_('vaultFilter.searchvaults')}
+					bind:value={statement}
+					on:input={handleSearchByName}
+				/>
 			</div>
 		</div>
 
@@ -153,7 +265,7 @@
 			<button
 				class:active={stakedOnly}
 				class="bg-green-400 rounded-md text-white capitalize"
-				on:click={select}>{$_('vaultFilter.stakedonly')}</button
+				on:click={handleStakedOnlyFilter}>{$_('vaultFilter.stakedonly')}</button
 			>
 		</div>
 	</div>
