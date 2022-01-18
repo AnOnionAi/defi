@@ -120,3 +120,17 @@ export type Notification = {
 	type: String;
 	removeAfter: number;
 };
+
+export interface VaultFilterFunction {
+	filterFunction(...args: any): boolean;
+	criteria: Criteria;
+}
+
+export enum Criteria {
+	PLATFORM = 'PLATFORM',
+	BALANCE = 'BALANCE',
+	STAKED = 'STAKED',
+	NAME = 'NAME',
+	ORDER = 'ORDER',
+	YIELD = 'YIELD'
+}
