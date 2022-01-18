@@ -26,6 +26,7 @@ specifiers:
   prettier: ^2.5.1
   prettier-plugin-svelte: ^2.5.1
   svelte: ^3.44.3
+  svelte-chartjs: ^1.1.3
   svelte-fa: ^2.3.3
   svelte-i18n: ^3.3.9
   svelte-loading-spinners: ^0.1.7
@@ -48,6 +49,7 @@ dependencies:
   dotenv: 10.0.0
   ethers: 5.5.1
   path: 0.12.7
+  svelte-chartjs: 1.1.3
   svelte-fa: 2.4.0
   svelte-i18n: 3.3.13_svelte@3.44.3
   svelte-loading-spinners: 0.1.7
@@ -2299,6 +2301,13 @@ packages:
       }
     engines: { node: '>=10' }
     dev: true
+
+  /chart.js/3.7.0:
+    resolution:
+      {
+        integrity: sha512-31gVuqqKp3lDIFmzpKIrBeum4OpZsQjSIAqlOpgjosHDJZlULtvwLEZKtEhIAZc7JMPaHlYMys40Qy9Mf+1AAg==
+      }
+    dev: false
 
   /cheap-watch/1.0.4:
     resolution:
@@ -6042,6 +6051,15 @@ packages:
       has-flag: 4.0.0
       supports-color: 7.2.0
     dev: true
+
+  /svelte-chartjs/1.1.3:
+    resolution:
+      {
+        integrity: sha512-L6q5zgviWscla5cKEuPJimglfCb13epw/dY8e6t5W0uP3gPGb3JggUJGUSoR3eSadWRgoV3KNsmz47ddW0soUQ==
+      }
+    dependencies:
+      chart.js: 3.7.0
+    dev: false
 
   /svelte-fa/2.4.0:
     resolution:
