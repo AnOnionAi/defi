@@ -11,14 +11,7 @@
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import BottomList from '$lib/components/Cards/BottomList.svelte';
 	import { onMount } from 'svelte';
-	import { onDestroy } from 'svelte';
-	import { getTokenBalance, isNotZero } from '$lib/utils/erc20';
-	import { stakedWantTokens } from '$lib/utils/vaultChef';
-	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
-	import { BigNumber } from 'ethers';
 	import { generateRandomBalance,reduceFilters } from '$lib/utils/filterFunctions';
-
-
 	
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
