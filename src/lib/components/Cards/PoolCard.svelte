@@ -38,6 +38,8 @@
 	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	import DepositWithdraw from '../Modals/DepositWithdraw.svelte';
+	import SushiswapBadge from '../Badges/SushiswapBadge.svelte';
+	import MultiplierBadge from '../Badges/MultiplierBadge.svelte';
 
 	interface LoadingState {
 		loadingApproval: boolean;
@@ -166,8 +168,8 @@
 	const onHarvest = async () => {
 		loadingState.loadingHarvest = true;
 		try {
-			const tx = await deposit(info.pid, '0');
 			addNotification(transactionSend);
+			const tx = await deposit(info.pid, '0');
 			await tx.wait();
 			addNotification(transactionCompleted);
 			userEarnings = ethers.constants.Zero;
@@ -238,14 +240,13 @@
 	};
 
 	const showPoolInfo = () => {
-		isHidden ? (isHidden = false) : (isHidden = true);
+		isHidden = !isHidden
 	};
 	const approveHandler = async () => {
 		loadingState.loadingApproval = true;
 
 		try {
 			const tx = await approveToken(info.tokenAddr, getContractAddress(Token.MASTERCHEF));
-
 			await tx.wait();
 			addNotification(transactionCompleted);
 			tokenApproved = true;
@@ -267,17 +268,15 @@
 <div
 	class="self-start min-w-84 max-w-84  bg-white dark:bg-dark-900 {!$darkMode &&
 		'shadow-xl'} {$darkMode &&
-		'border-2 border-green-500'} rounded-2xl relative transform transition duration-300 hover:scale-102"
+		'border-2 border-green-500'} rounded-2xl relative transform transition duration-300 hover:scale-101 select-none"
 >
 	<div class="absolute flex flex-row-reverse p-4 w-full">
-		{#if isFarm}
-			<div
-				class="flex items-center border-2 border-pink-400 text-pink-400 font-medium  px-1 rounded-full text-xs"
-			>
-				<img src="/sushi.png" alt="SushiSwap Logo" class="w-3 h-3 " />
-				<p class="px-1">SushiSwap</p>
-			</div>
+		<div>
+			{#if isFarm}
+			<SushiswapBadge/>
 		{/if}
+		<MultiplierBadge/>
+		</div>
 	</div>
 	<div class="py-4 px-8 flex flex-col h-124">
 		<img src={info.tokenImagePath} alt={info.tokenName} class="w-30 h-30 self-center my-2" />
@@ -322,11 +321,9 @@
 					<p class="text-xl flex items-center dark:text-white">0</p>
 				{/if}
 				<button
-					disabled={!canHarvest}
+					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="text-sm py-2 px-4 rounded-lg {canHarvest
-						? 'bg-green-500 hover:bg-green-600'
-						: 'bg-gray-400 cursor-not-allowed'}  text-white font-semibold tracking-wide "
+					class="text-sm py-2 px-4 rounded-lg bg-green-500 text-white font-semibold tracking-wide disabled:bg-gray-400"
 					>{$_('actions.harvest')}</button
 				>
 			</div>

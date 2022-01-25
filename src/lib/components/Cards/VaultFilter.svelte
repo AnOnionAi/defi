@@ -347,11 +347,9 @@
 		border: 0;
 		border-radius: 0;
 		background: #f0f0f0;
-		color: #7b7b7b;
 		font-size: 1.1em;
 		font-weight: 400;
 		color: #999;
-
 		border: 2px solid rgba(0, 0, 0, 0.2);
 		border-radius: 12px;
 		position: relative;
@@ -363,7 +361,6 @@
 	}
 
 	select option {
-		background-color: white;
 		min-width: 200px;
 		min-height: 200px;
 		cursor: pointer;

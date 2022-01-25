@@ -43,7 +43,7 @@
 
 <div
 	style="border-color: {secondaryColor};"
-	class="flex rounded-lg bg-white {$darkMode && 'bg-dark-900'} border-2 -m-4  "
+	class="flex rounded-lg bg-white {$darkMode && 'bg-dark-900'} border-2 -m-4 "
 >
 	<div class="py-8 w-full flex flex-col">
 		<div>
@@ -105,12 +105,12 @@
 						/>
 					</div>
 					<div class="flex">
-						<p style="color: {primaryTextColor};" class="text-medium text-lg">USDC</p>
+						<p style="color: {primaryTextColor};" class="text-medium ">{info.tokenName}</p>
 					</div>
 				</div>
 			</div>
 			<div class="mt-5">
-				<p style="color: {primaryTextColor};" class="font-semibold">Otras Opciones:</p>
+				<p style="color: {primaryTextColor};" class="font-semibold">{$_("modals.otherOptions")}</p>
 			</div>
 			<div class="mt-3 w-full flex justify-between">
 				{#if action === 'DEPOSIT'}
@@ -170,14 +170,14 @@
 				{#if action === 'DEPOSIT'}
 					<button
 						on:click={startDeposit}
-						class="block w-full py-3 bg-green-500 hover:bg-green-400 text-md text-white font-medium tracking-widest rounded-xl "
-						>DEPOSIT {info.tokenName}</button
+						class="block w-full py-3 bg-green-500 hover:bg-green-400 text-md uppercase 	text-white font-medium tracking-widest rounded-xl "
+						>{$_("actions.deposit")} {info.tokenName}</button
 					>
 				{:else if action === 'WITHDRAW'}
 					<button
 						on:click={startWithdraw}
-						class="block w-full py-3 bg-red-500 hover:bg-red-400 text-md text-white font-medium tracking-widest rounded-xl "
-						>WITHDRAW {info.tokenName}</button
+						class="block w-full py-3 bg-red-500 hover:bg-red-400 text-md uppercase 	text-white font-medium tracking-widest rounded-xl "
+						>{$_("actions.withdraw")} {info.tokenName}</button
 					>
 				{/if}
 			</div>

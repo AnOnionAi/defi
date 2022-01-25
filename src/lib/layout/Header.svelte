@@ -4,13 +4,11 @@
 
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
-	import { onDestroy, onMount } from 'svelte';
 	import ConnectButton from '$lib/components/Buttons/ConnectButton.svelte';
 	import LangPicker from '$lib/components/Dropdowns/LangPicker.svelte';
 	import DarkModeButton from '$lib/components/Buttons/DarkModeButton.svelte';

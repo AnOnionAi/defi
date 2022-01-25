@@ -1,12 +1,21 @@
 import { writable } from 'svelte/store';
+import { browser } from '$app/env';
 
 export const darkMode = writable(false);
-let date: Date;
-const autoDark = setInterval(() => {
-	date = new Date();
-	if (date.getHours() >= 20 || date.getHours() <= 8) {
+
+const updateDarkMode = (callback) => {
+	if (now >= 18 || now <= 6) {
 		console.log('Dark mode: on');
 		darkMode.set(true);
-		clearInterval(autoDark);
+		callback();
 	}
+}
+
+let now = new Date().getHours();
+updateDarkMode(()=>{});
+
+const autoDark = setInterval(() => {
+	updateDarkMode(() => {
+		clearInterval(autoDark);
+	})
 }, 1000);
