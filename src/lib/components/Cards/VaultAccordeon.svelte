@@ -26,8 +26,8 @@
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 
 	const { addNotification } = getNotificationsContext();
-	export let hasRoundedBorder = false;
-	export let vaultConfig: VaultInfo;
+
+	export let vaultConfig;
 	let allImages = [...quickImages, ...sushiImages];
 	let userAcc: string;
 	let isHidden: boolean = true;
@@ -132,7 +132,7 @@
 	}
 </script>
 
-<div in:fly={{ y: 200, duration: 300 }} class="mb-5">
+<div in:fly={{ y: 200, duration: 100 }} class="mb-5">
 	<div
 		on:click={openAccordeon}
 		class="max-w-8xl {!$darkMode && 'sideShadow'} bg-white mx-auto py-6 rounded-lg  	{!isHidden &&
@@ -190,19 +190,20 @@
 				<div class="flex w-10/12 justify-around ">
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">APY</p>
-						<p class="dark:text-white">1.12K%</p>
+						<p class="dark:text-white">{vaultConfig.apy.toFixed(2)}</p>
 					</div>
 					<div>
-						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Daily</p>
-						<p class="dark:text-white">7%</p>
+						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Staked</p>
+						<p class="dark:text-white">{vaultConfig.stakedAmount.toFixed(2)}</p>
+						<p />
 					</div>
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Wallet</p>
-						<p class="dark:text-white">0.0001</p>
+						<p class="dark:text-white">{vaultConfig.userWalletBalance.toFixed(2)}</p>
 					</div>
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">TVL</p>
-						<p class="dark:text-white">$1,254</p>
+						<p class="dark:text-white">{vaultConfig.tvl.toFixed(2)}</p>
 					</div>
 				</div>
 				<div class="dark:text-white">
