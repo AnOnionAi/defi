@@ -18,6 +18,7 @@
 	
 	let value = 0
 	let lastPrice;
+	let peak;
 	let dataLine;
 	let myChart;
 	let historicalData;
@@ -116,7 +117,9 @@
 					return {...e, shortDate }
 				} )
 				
-				lastPrice = historicalData[ historicalData.length - 1 ];				
+				lastPrice = historicalData.reverse()[ historicalData.length - 1 ].price.toFixed(5);
+				let tempPrices = historicalData.map( e => e.price).reverse()
+				peak = Math.max(...tempPrices).toFixed(5)
 				
 				dataLine = {
 				labels: historicalData.map( e => e.shortDate).reverse(),
@@ -430,7 +433,7 @@
 								{$_('dashboard.today')}
 							</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-medium  md:text-2xl dark:text-white">$0.00001</p>
+								<p class="font-medium  md:text-2xl dark:text-white">${lastPrice}</p>
 							</div>
 						</div>
 
@@ -441,7 +444,7 @@
 								{$_('dashboard.peak')}
 							</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-medium  md:text-2xl dark:text-white">$0.00002</p>
+								<p class="font-medium  md:text-2xl dark:text-white">${peak}</p>
 							</div>
 						</div>
 
