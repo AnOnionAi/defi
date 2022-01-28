@@ -20,13 +20,6 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
-	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
-	let num = 3820324.45
-
-	console.log($mushMarketCap);
-	
-	console.log(num.toLocaleString("es-ES"), $mushMarketCap.toLocaleString("es-ES"));
-	console.log(num.toLocaleString('en-US'), $mushMarketCap.toLocaleString('en-US'));
 	
 
 	isHomescreen.set(true);
