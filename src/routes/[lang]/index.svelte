@@ -20,7 +20,6 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
-	
 
 	isHomescreen.set(true);
 	let canvas;
