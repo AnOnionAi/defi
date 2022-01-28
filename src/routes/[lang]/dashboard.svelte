@@ -46,13 +46,12 @@
 				ctx.lineWidth = 2
 				ctx.strokeStyle = 'rgba(222, 125, 228, 1)'
 				ctx.stroke()
-				ctx.restore()
 
 				ctx.beginPath();
 				ctx.setLineDash([5, 7])
 				ctx.moveTo(chart.chartArea.left, activePoint.element.y);
 				ctx.lineTo(chart.chartArea.right, activePoint.element.y);
-				ctx.lineWidth = 1.5
+				ctx.lineWidth = 1
 				ctx.strokeStyle = 'rgba(222, 125, 228, 1)'
 				ctx.stroke();
 				ctx.restore()
@@ -65,6 +64,11 @@
 		responsive: true,
 		maintainAspectRatio: false,
 		scales: {
+			plugins: {
+				tooltip: {
+					yAlign: 'bottom'
+				}
+			},
 			y: {
 				beginAtZero: true
 			}
