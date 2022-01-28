@@ -18,7 +18,7 @@
 	</h1>
 	<div class="mt-5 space-y-4 pools background  {$darkMode && 'background__dark'}">
 		<div
-			class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap max-w-7xl mx-auto "
+			class="flex flex-row justify-center gap-y-9 gap-x-6 p-8 text-center flex-wrap max-w-7xl mx-auto "
 		>
 			{#each pools as pool}
 				<PoolCard info={pool} />

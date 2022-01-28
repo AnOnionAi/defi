@@ -44,7 +44,7 @@ export let pools: PoolInfo[] = [
 	pid:7,
 	tokenName:"CRYSTL",
 	tokenAddr: getContractAddress(Token.CRYSTL),
-	tokenImagePath: "/vaultTokensIcons/crystl.png"
+	tokenImagePath: "/vaultTokensIcons/	crystl.png"
 }
  
 ];
