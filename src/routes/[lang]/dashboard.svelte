@@ -17,8 +17,8 @@
 	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte'
 	
 	let value = 0
-	let lastPrice;
-	let peak;
+	let lastPrice = 0;
+	let peak = 0;
 	let dataLine;
 	let myChart;
 	let historicalData;
