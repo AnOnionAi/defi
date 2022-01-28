@@ -11,20 +11,20 @@
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import BottomList from '$lib/components/Cards/BottomList.svelte';
 	import { onMount } from 'svelte';
-	import { generateRandomBalance,reduceFilters } from '$lib/utils/filterFunctions';
-	
+	import { generateRandomBalance, reduceFilters } from '$lib/utils/filterFunctions';
+
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
 	let platformSelected: string;
 	let hideZeroBalances: boolean;
 	let stakedOnly: boolean;
-	let statement:string;
-	let sortBy:string;
-	let filterBy:string;
+	let statement: string;
+	let sortBy: string;
+	let filterBy: string;
 	let filtersApplied: Array<VaultFilterFunction> = [];
 
 	onMount(() => {
-		const vaultsData:Array<VaultInfo> = [...quickVaults, ...sushiVaults];
+		const vaultsData: Array<VaultInfo> = [...quickVaults, ...sushiVaults];
 		allVaults = vaultsData.map((vault) => {
 			return {
 				...vault,
@@ -35,8 +35,6 @@
 			};
 		});
 	});
-
-
 
 	$: {
 		if (filtersApplied.length >= 1) {
@@ -49,31 +47,28 @@
 		}
 	}
 
-	$:{
-		if(sortBy || filterBy){ //This will trigger the sorting everytime a state variable is updated.
+	$: {
+		if (sortBy || filterBy) {
+			//This will trigger the sorting everytime a state variable is updated.
 			handleFilerAndSort();
 		}
 	}
 
-	const handleFilerAndSort = ()  => { 
-		if(sortBy == "Descending" && filterBy == "TVL"){
-			const sortedVaults = filteredVaults.sort((vaultA,vaultB) => vaultB.tvl - vaultA.tvl)
-			filteredVaults = [...sortedVaults]
+	const handleFilerAndSort = () => {
+		if (sortBy == 'Descending' && filterBy == 'TVL') {
+			const sortedVaults = filteredVaults.sort((vaultA, vaultB) => vaultB.tvl - vaultA.tvl);
+			filteredVaults = [...sortedVaults];
+		} else if (sortBy == 'Ascending' && filterBy == 'TVL') {
+			const sortedVaults = filteredVaults.sort((vaultA, vaultB) => vaultA.tvl - vaultB.tvl);
+			filteredVaults = [...sortedVaults];
+		} else if (sortBy == 'Descending' && filterBy == 'APY') {
+			const sortedVaults = filteredVaults.sort((vaultA, vaultB) => vaultB.apy - vaultA.apy);
+			filteredVaults = [...sortedVaults];
+		} else if (sortBy == 'Ascending' && filterBy == 'APY') {
+			const sortedVaults = filteredVaults.sort((vaultA, vaultB) => vaultA.apy - vaultB.apy);
+			filteredVaults = [...sortedVaults];
 		}
-		else if (sortBy =="Ascending" && filterBy == "TVL"){
-			const sortedVaults = filteredVaults.sort((vaultA,vaultB) => vaultA.tvl - vaultB.tvl)
-			filteredVaults = [...sortedVaults]
-		}
-		else if (sortBy =="Descending" && filterBy == "APY"){
-			const sortedVaults = filteredVaults.sort((vaultA,vaultB) => vaultB.apy - vaultA.apy)
-			filteredVaults = [...sortedVaults]
-		}
-		else if (sortBy =="Ascending" && filterBy == "APY"){
-			const sortedVaults = filteredVaults.sort((vaultA,vaultB) => vaultA.apy - vaultB.apy)
-			filteredVaults = [...sortedVaults]
-		}
-	}
-
+	};
 </script>
 
 <section class="pb-3 ">
@@ -95,11 +90,9 @@
 			/>
 		</div>
 
-	
-			{#each filteredVaults as vault, index}
-				<VaultAccordeon vaultConfig={vault} />
-			{/each}
-		
+		{#each filteredVaults as vault, index}
+			<VaultAccordeon vaultConfig={vault} />
+		{/each}
 
 		<BottomList />
 	</div>
