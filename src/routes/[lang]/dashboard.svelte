@@ -12,28 +12,78 @@
 	import { onMount } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
 	import { mushPerBlock, totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
+	import { page } from '$app/stores';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 
-	let priceData = [];
+	let lastPrice;
 	let dataLine;
+	let myChart;
+	let historicalData;
+	let prices;
+	let dates;
+
+	let options = {
+		responsive: true,
+		maintainAspectRatio: false
+ 
+	}
+
+	function handleMonth(){
+		filterOption(31);
+
+		myChart.config.data.datasets[0].data = prices;
+		myChart.config.data.labels = dates.map( e => e[1]);
+		myChart.update();
+	}
+
+	function handleDay(){
+		filterOption(2);
+
+		myChart.config.data.datasets[0].data = prices;
+		myChart.config.data.labels = dates.map( e => e[1]);
+		myChart.update();
+	}
+
+	function handleWeek(){
+		filterOption(7);
+
+		myChart.config.data.datasets[0].data = prices;		
+		myChart.config.data.labels = dates.map( e => e[1]);
+		myChart.update();
+		
+	}
+
+	function filterOption( range ) {
+		dates = historicalData.filter( (e, i) => i < range).map( e => [e.date, e.shortDate] ).reverse()
+		prices = historicalData.filter( (e, i) => i < range).map( e => e.price ).reverse()
+	}
 
 	onMount(() => {
-		fetch(
-			'https://api2.sushipro.io/?chainID=137&action=get_pairs_by_token&token=0x627F699300A9D693FBB84F9Be0118D17A1387D4e'
-		)
-			.then((res) => res.json())
-			.then((data) => {
-				priceData.push(data[1][0].Token_1_price);
 
-				let priceDataToChart = [priceData[0].toFixed(9), priceData[0]];
+		const APIURL = 'https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17';
 
+		fetch( APIURL )
+			.then( res => res.json() )
+			.then( res => {
+				let monthsName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				
+				historicalData = res.data[0].prices.map( (e, i) => {
+					let shortDate = monthsName[e.date.split('-')[1] - 1]  + '-' + e.date.split('-')[2];										
+					return {...e, shortDate }
+				} )
+				
+				lastPrice = historicalData[ historicalData.length - 1 ];
+
+				console.log('HIS', historicalData);
+				
+				
 				dataLine = {
-					labels: ['December', 'January'],
+				labels: historicalData.map( e => e.shortDate),
 					datasets: [
 						{
 							label: 'Mush Price',
 							scaleOverride: true,
-							scaleStartValue: 0.0001,
+							scaleStartValue: 0.00001,
 							fill: true,
 							lineTension: 0,
 							backgroundColor: 'rgba(225, 204,230, .3)',
@@ -51,11 +101,25 @@
 							pointHoverBorderWidth: 2,
 							pointRadius: 0.5,
 							pointHitRadius: 10,
-							data: priceDataToChart // [65, 59, 80, 81, 56, 55, 40]
+							data: historicalData.map( e => e.price)
 						}
 					]
 				};
-			});
+
+				let config = {
+					type: 'line',
+					data: dataLine,
+					options: options
+				};				
+
+				myChart = new Chart(
+								document.getElementById('mush-chart'),
+								config
+							);
+				handleMonth();
+
+				
+			} )
 	});
 </script>
 
@@ -240,7 +304,7 @@
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
 								<p class="text-2xl tracking-tighter font-semibold">
-									${shortLargeAmount($mushMarketCap)} USD
+									${($page.params.lang == 'es') ? $mushMarketCap.toLocaleString("es-ES") : $mushMarketCap.toLocaleString('en-US')} USD
 								</p>
 							</div>
 						</div>
@@ -292,16 +356,34 @@
 			>
 				{$_('dashboard.price')}
 			</p>
+
+			<div class="grahp-options px-5 flex flex-row">
+				<button on:click={handleMonth} class="border border-green-500 rounded-l py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Month</p></button>
+				<button on:click={handleWeek} class="border border-green-500 py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Week</p></button>
+				<button on:click={handleDay} class="border border-green-500 rounded-r py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Day</p></button>
+			</div>
+			
 			<div class="w-full h-auto flex flex-col lg:flex-row flex-wrap">
 				<div class="w-full lg:w-18/24 ">
 					<div class="p-4 pb-2 lg:p-5 h-full">
+
 						<div
-							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-2 border border-gray-300 dark:border-green-500 shadow-md"
+							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-2 border border-gray-300 dark:border-green-500 shadow-md" 
 						>
-							<Line data={dataLine} options={{ responsive: true }} />
+						
+					
+							<canvas id="mush-chart"></canvas>
+
+							
+							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 						</div>
+						
+						
 					</div>
+					
 				</div>
+
 				<div class="w-full lg:w-6/24  ">
 					<div class="w-full  h-26 md:h-36 lg:h-full flex lg:flex-col justify-around p-4 gap-2">
 						<div
