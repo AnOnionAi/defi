@@ -24,9 +24,51 @@
 	let prices;
 	let dates;
 
+	let tooltipLine = {
+		id: 'tooltipLine',
+		beforeDraw: chart => {
+			if (chart.tooltip._active && chart.tooltip._active.length) {
+				const ctx = chart.ctx;
+				ctx.save();
+				const activePoint = chart.tooltip._active[0];
+
+				ctx.beginPath();
+				ctx.setLineDash([5, 7])
+				ctx.moveTo(activePoint.element.x, chart.chartArea.top)
+				ctx.lineTo(activePoint.element.x, activePoint.element.y)
+				ctx.lineWidth = 2
+				ctx.strokeStyle = 'red'
+				ctx.stroke()
+
+				ctx.beginPath();
+				ctx.moveTo(activePoint.element.x, activePoint.element.y)
+				ctx.lineTo(activePoint.element.x, chart.chartArea.bottom)
+				ctx.lineWidth = 2
+				ctx.strokeStyle = 'rgba(222, 125, 228, 1)'
+				ctx.stroke()
+				ctx.restore()
+
+				ctx.beginPath();
+				ctx.setLineDash([5, 7])
+				ctx.moveTo(chart.chartArea.left, activePoint.element.y);
+				ctx.lineTo(chart.chartArea.right, activePoint.element.y);
+				ctx.lineWidth = 1.5
+				ctx.strokeStyle = 'rgba(222, 125, 228, 1)'
+				ctx.stroke();
+				ctx.restore()
+			}
+
+		}
+	}
+
 	let options = {
 		responsive: true,
-		maintainAspectRatio: false
+		maintainAspectRatio: false,
+		scales: {
+			y: {
+				beginAtZero: true
+			}
+		},
  
 	}
 
@@ -109,7 +151,9 @@
 				let config = {
 					type: 'line',
 					data: dataLine,
-					options: options
+					options: options,
+					plugins: [tooltipLine]
+
 				};				
 
 				myChart = new Chart(
