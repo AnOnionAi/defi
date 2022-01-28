@@ -90,6 +90,7 @@ export enum Token {
 	DOGE = 'DOGE',
 	USDC = 'USDC',
 	USDT = 'USDT',
+	CRYSTL = 'CRYSTL',
 	VAULTCHEF = 'VAULTCHEF',
 	DIVIDENDS = 'DIVIDENDS',
 	IBBTC = 'IBBTC',
