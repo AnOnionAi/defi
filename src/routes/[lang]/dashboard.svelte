@@ -64,11 +64,6 @@
 		responsive: true,
 		maintainAspectRatio: false,
 		scales: {
-			plugins: {
-				tooltip: {
-					yAlign: 'bottom'
-				}
-			},
 			y: {
 				beginAtZero: true
 			}
