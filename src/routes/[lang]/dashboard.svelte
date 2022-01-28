@@ -14,6 +14,9 @@
 	import { page } from '$app/stores';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 
+	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte'
+	
+	let value = 0
 	let lastPrice;
 	let dataLine;
 	let myChart;
@@ -27,17 +30,18 @@
  
 	}
 
-	function handleOption(option) {
-		let range;
+	function handleOption(e) {
+		value = e.detail.value;
+		let range = 31;
 
-		switch (option) {
-			case 'week':
-				range = 7;
+		switch (value) {
+			case 0:
+				range = 31;
 				break;
-			case 'month':
-				range = 31
+			case 1:
+				range = 7
 				break;
-			case 'day':
+			case 2:
 				range = 2
 				break;
 		
@@ -351,11 +355,7 @@
 				{$_('dashboard.price')}
 			</p>
 
-			<div class="grahp-options px-5 flex flex-row">
-				<button on:click={() => handleOption('month')} class="border border-green-500 rounded-l py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Month</p></button>
-				<button on:click={() => handleOption('week')} class="border border-green-500 py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Week</p></button>
-				<button on:click={() => handleOption('day')} class="border border-green-500 rounded-r py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Day</p></button>
-			</div>
+				<ButtonGroup options={[{ id: 0, name: 'Month' }, { id: 1, name: 'Week' }, { id: 2, name: 'Day' }]} selected={value} on:change={handleOption} />
 			
 			<div class="w-full h-auto flex flex-col lg:flex-row flex-wrap">
 				<div class="w-full lg:w-18/24 ">
