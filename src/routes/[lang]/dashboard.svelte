@@ -117,8 +117,8 @@
 					return {...e, shortDate }
 				} )
 				
-				lastPrice = historicalData.reverse()[ historicalData.length - 1 ].price.toFixed(5);
-				let tempPrices = historicalData.map( e => e.price).reverse()
+				lastPrice = [...historicalData].reverse()[ historicalData.length - 1 ].price.toFixed(5);
+				let tempPrices =[...historicalData].map( e => e.price).reverse()
 				peak = Math.max(...tempPrices).toFixed(5)
 				
 				dataLine = {
