@@ -1,10 +1,6 @@
 {
 	"name": "defi",
 	"version": "0.1.0",
-	"engines": {
-		"node": ">=16",
-		"pnpm": ">=6"
-	},
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"testnet": "export VITE_NODE_ENV=dev && svelte-kit dev",
@@ -17,8 +13,8 @@
 		"test": "cd tests && jest"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-netlify": "^1.0.0-next.32",
-		"@sveltejs/kit": "1.0.0-next.202",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.43",
+		"@sveltejs/kit": "1.0.0-next.240",
 		"@types/three": "^0.135.0",
 		"@typescript-eslint/eslint-plugin": "^4.33.0",
 		"@typescript-eslint/parser": "^4.33.0",

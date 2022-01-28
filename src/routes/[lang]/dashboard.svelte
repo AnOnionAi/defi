@@ -14,9 +14,9 @@
 	import { page } from '$app/stores';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 
-	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte'
-	
-	let value = 0
+	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
+
+	let value = 0;
 	let lastPrice = 0;
 	let peak = 0;
 	let dataLine;
@@ -27,39 +27,38 @@
 
 	let tooltipLine = {
 		id: 'tooltipLine',
-		beforeDraw: chart => {
+		beforeDraw: (chart) => {
 			if (chart.tooltip._active && chart.tooltip._active.length) {
 				const ctx = chart.ctx;
 				ctx.save();
 				const activePoint = chart.tooltip._active[0];
 
 				ctx.beginPath();
-				ctx.setLineDash([5, 7])
-				ctx.moveTo(activePoint.element.x, chart.chartArea.top)
-				ctx.lineTo(activePoint.element.x, activePoint.element.y)
-				ctx.lineWidth = 2
-				ctx.strokeStyle = 'red'
-				ctx.stroke()
+				ctx.setLineDash([5, 7]);
+				ctx.moveTo(activePoint.element.x, chart.chartArea.top);
+				ctx.lineTo(activePoint.element.x, activePoint.element.y);
+				ctx.lineWidth = 2;
+				ctx.strokeStyle = 'red';
+				ctx.stroke();
 
 				ctx.beginPath();
-				ctx.moveTo(activePoint.element.x, activePoint.element.y)
-				ctx.lineTo(activePoint.element.x, chart.chartArea.bottom)
-				ctx.lineWidth = 2
-				ctx.strokeStyle = 'rgba(222, 125, 228, 1)'
-				ctx.stroke()
+				ctx.moveTo(activePoint.element.x, activePoint.element.y);
+				ctx.lineTo(activePoint.element.x, chart.chartArea.bottom);
+				ctx.lineWidth = 2;
+				ctx.strokeStyle = 'rgba(222, 125, 228, 1)';
+				ctx.stroke();
 
 				ctx.beginPath();
-				ctx.setLineDash([5, 7])
+				ctx.setLineDash([5, 7]);
 				ctx.moveTo(chart.chartArea.left, activePoint.element.y);
 				ctx.lineTo(chart.chartArea.right, activePoint.element.y);
-				ctx.lineWidth = 1
-				ctx.strokeStyle = 'rgba(222, 125, 228, 1)'
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = 'rgba(222, 125, 228, 1)';
 				ctx.stroke();
-				ctx.restore()
+				ctx.restore();
 			}
-
 		}
-	}
+	};
 
 	let options = {
 		responsive: true,
@@ -68,9 +67,8 @@
 			y: {
 				beginAtZero: true
 			}
-		},
- 
-	}
+		}
+	};
 
 	function handleOption(e) {
 		value = e.detail.value;
@@ -81,48 +79,67 @@
 				range = 31;
 				break;
 			case 1:
-				range = 7
+				range = 7;
 				break;
 			case 2:
-				range = 2
+				range = 2;
 				break;
-		
+
 			default:
-				range = 31
+				range = 31;
 				break;
 		}
 		filterOption(range);
 
 		myChart.config.data.datasets[0].data = prices;
-		myChart.config.data.labels = dates.map( e => e[1]);
+		myChart.config.data.labels = dates.map((e) => e[1]);
 		myChart.update();
 	}
 
-	function filterOption( range ) {
-		dates = historicalData.filter( (e, i) => i < range).map( e => [e.date, e.shortDate] ).reverse()
-		prices = historicalData.filter( (e, i) => i < range).map( e => e.price ).reverse()
+	function filterOption(range) {
+		dates = historicalData
+			.filter((e, i) => i < range)
+			.map((e) => [e.date, e.shortDate])
+			.reverse();
+		prices = historicalData
+			.filter((e, i) => i < range)
+			.map((e) => e.price)
+			.reverse();
 	}
 
 	onMount(() => {
+		const APIURL =
+			'https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17';
 
-		const APIURL = 'https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17';
+		fetch(APIURL)
+			.then((res) => res.json())
+			.then((res) => {
+				let monthsName = [
+					'Jan',
+					'Feb',
+					'Mar',
+					'Apr',
+					'May',
+					'Jun',
+					'Jul',
+					'Aug',
+					'Sep',
+					'Oct',
+					'Nov',
+					'Dec'
+				];
 
-		fetch( APIURL )
-			.then( res => res.json() )
-			.then( res => {
-				let monthsName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-				
-				historicalData = res.data[0].prices.map( (e, i) => {
-					let shortDate = monthsName[e.date.split('-')[1] - 1]  + '-' + e.date.split('-')[2];										
-					return {...e, shortDate }
-				} )
-				
-				lastPrice = [...historicalData].reverse()[ historicalData.length - 1 ].price.toFixed(5);
-				let tempPrices =[...historicalData].map( e => e.price).reverse()
-				peak = Math.max(...tempPrices).toFixed(5)
-				
+				historicalData = res.data[0].prices.map((e, i) => {
+					let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
+					return { ...e, shortDate };
+				});
+
+				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(5);
+				let tempPrices = [...historicalData].map((e) => e.price).reverse();
+				peak = Math.max(...tempPrices).toFixed(5);
+
 				dataLine = {
-				labels: historicalData.map( e => e.shortDate).reverse(),
+					labels: historicalData.map((e) => e.shortDate).reverse(),
 					datasets: [
 						{
 							label: 'Mush Price',
@@ -145,7 +162,7 @@
 							pointHoverBorderWidth: 2,
 							pointRadius: 0.5,
 							pointHitRadius: 10,
-							data: historicalData.map( e => e.price).reverse()
+							data: historicalData.map((e) => e.price).reverse()
 						}
 					]
 				};
@@ -155,15 +172,10 @@
 					data: dataLine,
 					options: options,
 					plugins: [tooltipLine]
+				};
 
-				};				
-
-				myChart = new Chart(
-								document.getElementById('mush-chart'),
-								config
-							);
-				
-			} )
+				myChart = new Chart(document.getElementById('mush-chart'), config);
+			});
 	});
 </script>
 
@@ -348,7 +360,9 @@
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
 								<p class="text-2xl tracking-tighter font-semibold">
-									${($page.params.lang == 'es') ? $mushMarketCap.toLocaleString("es-ES") : $mushMarketCap.toLocaleString('en-US')} USD
+									${$page.params.lang == 'es'
+										? $mushMarketCap.toLocaleString('es-ES')
+										: $mushMarketCap.toLocaleString('en-US')} USD
 								</p>
 							</div>
 						</div>
@@ -401,27 +415,27 @@
 				{$_('dashboard.price')}
 			</p>
 
-				<ButtonGroup options={[{ id: 0, name: 'Month' }, { id: 1, name: 'Week' }, { id: 2, name: 'Day' }]} selected={value} on:change={handleOption} />
-			
+			<ButtonGroup
+				options={[
+					{ id: 0, name: 'Month' },
+					{ id: 1, name: 'Week' },
+					{ id: 2, name: 'Day' }
+				]}
+				selected={value}
+				on:change={handleOption}
+			/>
+
 			<div class="w-full h-auto flex flex-col lg:flex-row flex-wrap">
 				<div class="w-full lg:w-18/24 ">
 					<div class="p-4 pb-2 lg:p-5 h-full">
-
 						<div
-							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-2 border border-gray-300 dark:border-green-500 shadow-md" 
+							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-2 border border-gray-300 dark:border-green-500 shadow-md"
 						>
-						
-					
-							<canvas id="mush-chart"></canvas>
+							<canvas id="mush-chart" />
 
-							
 							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 						</div>
-						
-						
 					</div>
-					
 				</div>
 
 				<div class="w-full lg:w-6/24  ">
