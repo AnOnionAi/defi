@@ -5,7 +5,6 @@
 </script>
 
 <script lang="ts">
-	import Line from 'svelte-chartjs/src/Line.svelte';
 	import { fade } from 'svelte/transition';
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
 	import { MasterChef } from '$lib/utils/masterc';
@@ -28,29 +27,29 @@
  
 	}
 
-	function handleMonth(){
-		filterOption(31);
+	function handleOption(option) {
+		let range;
 
-		myChart.config.data.datasets[0].data = prices;
-		myChart.config.data.labels = dates.map( e => e[1]);
-		myChart.update();
-	}
-
-	function handleDay(){
-		filterOption(2);
-
-		myChart.config.data.datasets[0].data = prices;
-		myChart.config.data.labels = dates.map( e => e[1]);
-		myChart.update();
-	}
-
-	function handleWeek(){
-		filterOption(7);
-
-		myChart.config.data.datasets[0].data = prices;		
-		myChart.config.data.labels = dates.map( e => e[1]);
-		myChart.update();
+		switch (option) {
+			case 'week':
+				range = 7;
+				break;
+			case 'month':
+				range = 31
+				break;
+			case 'day':
+				range = 2
+				break;
 		
+			default:
+				range = 31
+				break;
+		}
+		filterOption(range);
+
+		myChart.config.data.datasets[0].data = prices;
+		myChart.config.data.labels = dates.map( e => e[1]);
+		myChart.update();
 	}
 
 	function filterOption( range ) {
@@ -72,13 +71,10 @@
 					return {...e, shortDate }
 				} )
 				
-				lastPrice = historicalData[ historicalData.length - 1 ];
-
-				console.log('HIS', historicalData);
-				
+				lastPrice = historicalData[ historicalData.length - 1 ];				
 				
 				dataLine = {
-				labels: historicalData.map( e => e.shortDate),
+				labels: historicalData.map( e => e.shortDate).reverse(),
 					datasets: [
 						{
 							label: 'Mush Price',
@@ -101,7 +97,7 @@
 							pointHoverBorderWidth: 2,
 							pointRadius: 0.5,
 							pointHitRadius: 10,
-							data: historicalData.map( e => e.price)
+							data: historicalData.map( e => e.price).reverse()
 						}
 					]
 				};
@@ -116,8 +112,6 @@
 								document.getElementById('mush-chart'),
 								config
 							);
-				handleMonth();
-
 				
 			} )
 	});
@@ -358,9 +352,9 @@
 			</p>
 
 			<div class="grahp-options px-5 flex flex-row">
-				<button on:click={handleMonth} class="border border-green-500 rounded-l py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Month</p></button>
-				<button on:click={handleWeek} class="border border-green-500 py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Week</p></button>
-				<button on:click={handleDay} class="border border-green-500 rounded-r py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Day</p></button>
+				<button on:click={() => handleOption('month')} class="border border-green-500 rounded-l py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Month</p></button>
+				<button on:click={() => handleOption('week')} class="border border-green-500 py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Week</p></button>
+				<button on:click={() => handleOption('day')} class="border border-green-500 rounded-r py-2 px-3 flex items-center hover:text-white hover:bg-green-400"><p class="font-medium pr-1 dark:text-white">Day</p></button>
 			</div>
 			
 			<div class="w-full h-auto flex flex-col lg:flex-row flex-wrap">
