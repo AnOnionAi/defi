@@ -14,7 +14,7 @@
 	export let hideZeroBalances = false;
 	export let stakedOnly = false;
 	export let statement = '';
-	export let filterBy = "TVL"
+	export let filterBy = 'TVL';
 	export let sortBy = 'Descending';
 	import { _ } from 'svelte-i18n';
 

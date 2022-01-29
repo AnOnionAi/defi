@@ -5,6 +5,8 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 
+	import { page } from '$app/stores';
+
 	import spaceDay from '/static/space.webp';
 	import spaceNight from '/static/space35.webp';
 	import moon from '/static/moon.webp';
@@ -16,6 +18,8 @@
 	import { _ } from 'svelte-i18n';
 	import * as THREE from 'three';
 	import { isHomescreen } from '$lib/stores/homescreen';
+
+	import { mushMarketCap } from '$lib/stores/MushMarketStats';
 
 	isHomescreen.set(true);
 	let canvas;
@@ -231,14 +235,16 @@
 	<section class="text-white mr-auto ml-auto w-5/6">
 		<section
 			style="margin-top: 100px;"
-			class="MUSH_about title text-center bg-transparent min-h-screen"
+			class="MUSH_about title text-center bg-transparent min-h-screen group"
 		>
 			<h2 class="relative text-5xl lg:text-9xl"><div>FUNG FINANCIAL</div></h2>
 			<h4 class="relative italic text-4xl"><div>WHERE MONEY GROWS&#127812;</div></h4>
 			<h3
 				class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-10 lg:mt-30 pt-2 pb-2 max-w-screen -ml-10 -mr-10 lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
 			>
-				Market Cap: $10, 000, 000
+				Market Cap: ${$page.params.lang == 'es'
+					? $mushMarketCap.toLocaleString('es-ES')
+					: $mushMarketCap.toLocaleString('en-US')}
 			</h3>
 		</section>
 

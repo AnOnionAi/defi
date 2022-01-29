@@ -5,35 +5,146 @@
 </script>
 
 <script lang="ts">
-	import Line from 'svelte-chartjs/src/Line.svelte';
 	import { fade } from 'svelte/transition';
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
 	import { MasterChef } from '$lib/utils/masterc';
 	import { onMount } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
 	import { mushPerBlock, totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
+	import { page } from '$app/stores';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 
-	let priceData = [];
+	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
+
+	let value = 0;
+	let lastPrice = 0;
+	let peak = 0;
 	let dataLine;
+	let myChart;
+	let historicalData;
+	let prices;
+	let dates;
+
+	let tooltipLine = {
+		id: 'tooltipLine',
+		beforeDraw: (chart) => {
+			if (chart.tooltip._active && chart.tooltip._active.length) {
+				const ctx = chart.ctx;
+				ctx.save();
+				const activePoint = chart.tooltip._active[0];
+
+				ctx.beginPath();
+				ctx.setLineDash([5, 7]);
+				ctx.moveTo(activePoint.element.x, chart.chartArea.top);
+				ctx.lineTo(activePoint.element.x, activePoint.element.y);
+				ctx.lineWidth = 2;
+				ctx.strokeStyle = 'red';
+				ctx.stroke();
+
+				ctx.beginPath();
+				ctx.moveTo(activePoint.element.x, activePoint.element.y);
+				ctx.lineTo(activePoint.element.x, chart.chartArea.bottom);
+				ctx.lineWidth = 2;
+				ctx.strokeStyle = 'rgba(222, 125, 228, 1)';
+				ctx.stroke();
+
+				ctx.beginPath();
+				ctx.setLineDash([5, 7]);
+				ctx.moveTo(chart.chartArea.left, activePoint.element.y);
+				ctx.lineTo(chart.chartArea.right, activePoint.element.y);
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = 'rgba(222, 125, 228, 1)';
+				ctx.stroke();
+				ctx.restore();
+			}
+		}
+	};
+
+	let options = {
+		responsive: true,
+		maintainAspectRatio: false,
+		scales: {
+			y: {
+				beginAtZero: true
+			}
+		}
+	};
+
+	function handleOption(e) {
+		value = e.detail.value;
+		let range = 31;
+
+		switch (value) {
+			case 0:
+				range = 31;
+				break;
+			case 1:
+				range = 7;
+				break;
+			case 2:
+				range = 2;
+				break;
+
+			default:
+				range = 31;
+				break;
+		}
+		filterOption(range);
+
+		myChart.config.data.datasets[0].data = prices;
+		myChart.config.data.labels = dates.map((e) => e[1]);
+		myChart.update();
+	}
+
+	function filterOption(range) {
+		dates = historicalData
+			.filter((e, i) => i < range)
+			.map((e) => [e.date, e.shortDate])
+			.reverse();
+		prices = historicalData
+			.filter((e, i) => i < range)
+			.map((e) => e.price)
+			.reverse();
+	}
 
 	onMount(() => {
-		fetch(
-			'https://api2.sushipro.io/?chainID=137&action=get_pairs_by_token&token=0x627F699300A9D693FBB84F9Be0118D17A1387D4e'
-		)
-			.then((res) => res.json())
-			.then((data) => {
-				priceData.push(data[1][0].Token_1_price);
+		const APIURL =
+			'https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17';
 
-				let priceDataToChart = [priceData[0].toFixed(9), priceData[0]];
+		fetch(APIURL)
+			.then((res) => res.json())
+			.then((res) => {
+				let monthsName = [
+					'Jan',
+					'Feb',
+					'Mar',
+					'Apr',
+					'May',
+					'Jun',
+					'Jul',
+					'Aug',
+					'Sep',
+					'Oct',
+					'Nov',
+					'Dec'
+				];
+
+				historicalData = res.data[0].prices.map((e, i) => {
+					let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
+					return { ...e, shortDate };
+				});
+
+				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(5);
+				let tempPrices = [...historicalData].map((e) => e.price).reverse();
+				peak = Math.max(...tempPrices).toFixed(5);
 
 				dataLine = {
-					labels: ['December', 'January'],
+					labels: historicalData.map((e) => e.shortDate).reverse(),
 					datasets: [
 						{
 							label: 'Mush Price',
 							scaleOverride: true,
-							scaleStartValue: 0.0001,
+							scaleStartValue: 0.00001,
 							fill: true,
 							lineTension: 0,
 							backgroundColor: 'rgba(225, 204,230, .3)',
@@ -51,10 +162,19 @@
 							pointHoverBorderWidth: 2,
 							pointRadius: 0.5,
 							pointHitRadius: 10,
-							data: priceDataToChart // [65, 59, 80, 81, 56, 55, 40]
+							data: historicalData.map((e) => e.price).reverse()
 						}
 					]
 				};
+
+				let config = {
+					type: 'line',
+					data: dataLine,
+					options: options,
+					plugins: [tooltipLine]
+				};
+
+				myChart = new Chart(document.getElementById('mush-chart'), config);
 			});
 	});
 </script>
@@ -240,7 +360,9 @@
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
 								<p class="text-2xl tracking-tighter font-semibold">
-									${shortLargeAmount($mushMarketCap)} USD
+									${$page.params.lang == 'es'
+										? $mushMarketCap.toLocaleString('es-ES')
+										: $mushMarketCap.toLocaleString('en-US')} USD
 								</p>
 							</div>
 						</div>
@@ -292,16 +414,30 @@
 			>
 				{$_('dashboard.price')}
 			</p>
+
+			<ButtonGroup
+				options={[
+					{ id: 0, name: 'Month' },
+					{ id: 1, name: 'Week' },
+					{ id: 2, name: 'Day' }
+				]}
+				selected={value}
+				on:change={handleOption}
+			/>
+
 			<div class="w-full h-auto flex flex-col lg:flex-row flex-wrap">
 				<div class="w-full lg:w-18/24 ">
 					<div class="p-4 pb-2 lg:p-5 h-full">
 						<div
 							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-2 border border-gray-300 dark:border-green-500 shadow-md"
 						>
-							<Line data={dataLine} options={{ responsive: true }} />
+							<canvas id="mush-chart" />
+
+							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 						</div>
 					</div>
 				</div>
+
 				<div class="w-full lg:w-6/24  ">
 					<div class="w-full  h-26 md:h-36 lg:h-full flex lg:flex-col justify-around p-4 gap-2">
 						<div
@@ -311,7 +447,7 @@
 								{$_('dashboard.today')}
 							</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-medium  md:text-2xl dark:text-white">$0.00001</p>
+								<p class="font-medium  md:text-2xl dark:text-white">${lastPrice}</p>
 							</div>
 						</div>
 
@@ -322,7 +458,7 @@
 								{$_('dashboard.peak')}
 							</p>
 							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-medium  md:text-2xl dark:text-white">$0.00002</p>
+								<p class="font-medium  md:text-2xl dark:text-white">${peak}</p>
 							</div>
 						</div>
 
