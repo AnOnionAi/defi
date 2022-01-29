@@ -6,56 +6,67 @@ import { Provider } from './web3Helpers';
 import MasterChefAbi from '$lib/config/abi/MasterChef.json';
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/ts/types';
+import { getSigner } from './helpers';
 
-export const deposit = (
-	pid: number,
-	amount: string,
-	decimals: number = 18,
-	referrer?: string
-): Promise<any> => {
-	if (!referrer) {
-		referrer = ethers.constants.AddressZero;
-	}
-	try {
-		const mc = getMasterChefContract();
-		return mc.deposit(pid, ethers.utils.parseUnits(amount, decimals), referrer);
-	} catch (error) {
-		console.log(error, 'Unable to deposit');
-	}
-};
 
-export const withdraw = async (
-	pid: number,
-	amount: string,
-	decimals: number = 18
-): Promise<any> => {
-	const mc = getMasterChefContract();
-	try {
-		return mc.withdraw(pid, ethers.utils.parseUnits(amount, decimals));
-	} catch (e) {
-		return console.log('Unable to Withdraw');
-	}
-};
+export namespace MasterChef {
+	
+	const masterChefContract = new ethers.Contract(
+		getContractAddress(Token.MASTERCHEF),
+		MasterChefAbi,
+		Provider.getProviderSingleton()
+	);
 
-export const getRewards = async (pid: number, user: string): Promise<any> => {
-	try {
-		const mc = getMasterChefContract();
-		const reward = await mc.pendingFish(pid, user);
-		return reward;
-	} catch (error) {
-		console.log('Unable to fetch user rewards', error);
-	}
-};
+	const masterChefContractSigner = new ethers.Contract(
+		getContractAddress(Token.MASTERCHEF),
+		MasterChefAbi,
+		getSigner()
+	);
 
-export const getStakedTokens = async (pid: number, user: string): Promise<any> => {
-	const mc = getMasterChefContract();
-	try {
-		const [stakedTokens, ...x] = await mc.userInfo(pid, user);
-		return stakedTokens;
-	} catch (e) {
-		return 'Not Avaliable';
-	}
-};
+	export const getDevAddress = async() => masterChefContract.devAddress();
+
+	export const getFeeAddress = async() => masterChefContract.feeAddress();
+
+	export const getMultiplier = async(from:number,to:number) => masterChefContract.getMultiplier(from,to);
+	
+	export const getMarketingAddress = async() => masterChefContract.marketingAddress();
+
+	export const getMushAddress = async() => masterChefContract.mush();
+
+	export const getMushMaxSupply = async() => masterChefContract.mushMaxSupply();
+	
+	export const getMushPerBlock = async() => masterChefContract.mushPerBlock();
+
+	export const owner  = async () => masterChefContract.owner();
+
+	export const getPendingMush = async() => masterChefContract.pendingMush();
+
+	export const poolExistance = async() => masterChefContract.poolExistance();
+
+	export const getPoolInfo = async(pid:number) => masterChefContract.poolInfo(pid);
+
+	export const getPoolLength = async () => masterChefContract.poolLength();
+
+	export const getReferralComissionRate = async() => masterChefContract.referralComissionRate();
+
+	export const getStartBlock = async() => masterChefContract.startBlock();
+
+	export const getTotalAllocPoints = async() => masterChefContract.totalAllocPoint();
+
+	export const getUserInfo = async(pid: number, address: string) => masterChefContract.userInfo(pid, address);
+
+	export const getTokenPerBlock = async() => masterChefContract.mushPerBlock();
+
+	export const getVaultAddress = async() =>masterChefContract.vaultAddress();
+
+	export const deposit = async(pid:number, amount:any, referrer = ethers.constants.AddressZero )=> masterChefContractSigner.deposit(pid,amount,referrer);
+
+	export const withdraw = async(pid:number, amount:any ) => masterChefContractSigner.withdraw(pid,amount)
+
+	export const harvestRewards = async(pid:number) => masterChefContractSigner.deposit(pid,ethers.constants.Zero,ethers.constants.AddressZero);
+
+
+}
 
 export const getPoolWeight = (totalAllocPoints: BigNumber, poolAllocPoints: BigNumber) => {
 	const totalAP = ethersToBigNumber(totalAllocPoints);
@@ -70,35 +81,3 @@ export const getPoolMultiplier = (poolAllocPoints: BigNumber) => {
 	const multiplier = poolAp.toNumber() / 1000;
 	return multiplier;
 };
-
-export namespace MasterChef {
-	const masterChefContract = new ethers.Contract(
-		getContractAddress(Token.MASTERCHEF),
-		MasterChefAbi,
-		Provider.getProviderSingleton()
-	);
-
-	export async function getPoolInfo(pid: number) {
-		return masterChefContract.poolInfo(pid);
-	}
-
-	export async function getUserInfo(pid: number, address: string) {
-		return masterChefContract.userInfo(pid, address);
-	}
-
-	export async function getTokenPerBlock() {
-		return masterChefContract.fishPerBlock();
-	}
-
-	export async function poolExistance() {
-		return masterChefContract.poolExistance();
-	}
-
-	export async function getMushPerBlock() {
-		return masterChefContract.fishPerBlock();
-	}
-
-	export async function getTotalAllocPoint() {
-		return masterChefContract.totalAllocPoint();
-	}
-}
