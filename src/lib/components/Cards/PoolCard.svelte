@@ -14,10 +14,6 @@
 	import Fa from 'svelte-fa';
 	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 	import {
-		deposit,
-		withdraw,
-		getRewards,
-		getStakedTokens,
 		MasterChef,
 		getPoolMultiplier,
 		getPoolWeight
@@ -91,6 +87,7 @@
 	tokenPrice.subscribe((tokenPrice) => {
 		rewardTokenPrice = tokenPrice;
 	});
+
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
