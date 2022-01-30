@@ -59,8 +59,8 @@
 	});
 </script>
 
-<div in:fade={{ duration: 300 }}>
-	<div class=" max-w-screen-xl   mx-auto  p-2 mt-10">
+<div class="background">
+	<div class=" max-w-screen-xl   mx-auto  p-2 pt-10">
 		<h2 class="font-bold  text-4xl md:text-5xl  px-5 text-center lg:text-left dark:text-white">
 			{$_('headers.dashboard.text')}
 		</h2>
@@ -344,4 +344,8 @@
 </div>
 
 <style>
+	.background{
+		background-image: url("/backgrounds/dashboardMushrooms.png");
+		background-size: contain;
+	}
 </style>

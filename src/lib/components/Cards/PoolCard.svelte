@@ -7,7 +7,7 @@
 	import type { PoolInfo } from '$lib/ts/types';
 	import { Token } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
-	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
+	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance, getTokenDecimals, getTokenName } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
@@ -78,30 +78,33 @@
 	let wantWithdrawAmount: any;
 	let idInterval;
 
-	const stakingTokenContract = new ethers.Contract(
-		info.tokenAddr,
-		ERC20ABI,
-		Provider.getProviderSingleton()
-	);
+
+	const { addNotification } = getNotificationsContext();
+	const { open } = getContext('simple-modal');
 
 	tokenPrice.subscribe((tokenPrice) => {
 		rewardTokenPrice = tokenPrice;
 	});
 
 
-	const { addNotification } = getNotificationsContext();
-	const { open } = getContext('simple-modal');
-
 	onMount(async () => {
-		tokenDecimals = await stakingTokenContract.decimals();
-		const totalAllocPoints = await MasterChef.getTotalAllocPoint();
+
+		tokenDecimals = await getTokenDecimals(info.tokenAddr);
+		
+
+		const totalAllocPoints = await MasterChef.getTotalAllocPoints();
+
 		const poolInfo = await MasterChef.getPoolInfo(info.pid);
+		
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
+
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
+		console.log(poolMultiplier)
+
 		stakingTokenPrice = await getStakingTokenPrice();
-		const sta: BigNumber = await stakingTokenContract.balanceOf(
-			getContractAddress(Token.MASTERCHEF)
-		);
+
+		const sta: BigNumber = await getTokenBalance(info.tokenAddr,getContractAddress(Token.MASTERCHEF));
+
 		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, tokenDecimals));
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 		const poolWeightbn = getPoolWeight(totalAllocPoints, poolInfo.allocPoint);
