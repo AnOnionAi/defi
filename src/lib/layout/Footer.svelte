@@ -2,127 +2,67 @@
 	import { darkMode } from '$lib/stores/dark';
 	import { _ } from 'svelte-i18n';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import Fa from 'svelte-fa';
 	import { isHomescreen } from '$lib/stores/homescreen';
-	import { faDiscord, faGit, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
-	import { faInfoCircle, faHandHoldingUsd, faBookOpen } from '@fortawesome/free-solid-svg-icons';
+	import { faDiscord, faGit, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'; 
 	import { faTelegram } from '@fortawesome/free-brands-svg-icons';
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 	import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-	//import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
-	import { logger } from 'ethers';
-	let iconColor;
-
-	$: {
-		iconColor = (!$darkMode && $isHomescreen) || $isHomescreen || (!$isHomescreen && $darkMode);
-	}
-
-	if ($page.params.lang) {
-		setInit($page.params.lang);
-	}
-	const PAGES = [
-		{
-			route: `/${$page.params.lang}/about`,
-			title: $_('pages.about.title')
-		},
-		{
-			route: `/${$page.params.lang}/contact`,
-			title: $_('pages.contact.title')
-		},
-		{
-			route: `/${$page.params.lang}/audits`,
-			title: $_('pages.audits.title')
-		},
-		{
-			route: `/${$page.params.lang}/trade`,
-			title: $_('pages.trade.title')
-		},
-		{
-			route: `https://fung.wiki/`,
-			title: 'Wiki'
-		}
-	];
-
-	const gotoPage = (route: string, home: boolean = false) => {
-		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
-		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
-		console.log($page.params.lang);
-	};
 </script>
 
 <footer
 	class="{$isHomescreen &&
 		'z-20 backdrop-filter backdrop-blur border-none '} border-t-2  border-gray-200 {$darkMode &&
-		'border-dark-200'}"
-	class:dark={$darkMode}
+		'border-dark-200'} {$darkMode && !$isHomescreen && 'bg-dark-500 text-gray-400'}  text-gray-800  {$isHomescreen &&
+				'text-white'} footer-height"
 >
-	<div class="{$darkMode && !$isHomescreen && 'bg-dark-500 '} ">
-		<div
-			class="flex flex-col lg:flex-row  w-full items-center  lg:justify-between px-2 py-5 dark:text-white {$isHomescreen &&
-				'text-white'}"
-		>
-			<div class="w-12" />
+<div class="grid grid-cols-1 md:grid-cols-3 footer-height px-6 py-6 lg:py-1 gap-4">
+<div class="flex  items-center ml-0 lg:ml-5 justify-center lg:justify-start">
+<a href={`https://app.sushi.com/${$page.params.lang}/swap`} target="_blank" class="text-white bg-gray-600 hover:bg-green-400 px-3 py-1 rounded-full font-light text-sm">Buy MUSH</a>
+</div>
 
-			<div class="flex space-x-4 mb-2 lg:mb-0">
-				<p class="cursor-pointer" on:click={() => gotoPage('/about')}>
-					<Fa icon={faInfoCircle} size="lg" />
-				</p>
+<div class="flex items-center justify-center font-light">
+<a href="https://google.com" class="mr-5 hover:text-green-400">Audits</a>
+<a href="https://fung.wiki/" class="mr-5 hover:text-green-400">Wiki</a>
+<a href={`/${$page.params.lang}/about`} class="mr-5 hover:text-green-400">About</a>
+</div>
 
-				<a href="https://github.com/fungfi" aria-label="Github">
-					<Fa icon={faGithub} size="lg" />
-				</a>
 
-				<a href="google.com" aria-label="Audits">
-					{#if $darkMode || $isHomescreen}
-						<img src="/auditsWhite.svg" class="icon_size" alt="" />
-					{:else}
-						<img src="/audits.svg" class="icon_size" alt="" />
-					{/if}
-				</a>
+<div class="flex flex-row-reverse items-center justify-center lg:justify-start  ">
+	<a href="https://github.com/fungfi" class="mr-3 lg:mr-5">
+		<Fa icon={faGithub} size="lg" class="hover:text-green-400"/>
+	</a>
+	<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh" aria-label="Tiktok" class="mr-3 lg:mr-5">
+		<Fa icon={faTiktok} size="lg" class="hover:text-green-400"/>
+	</a>
+	<a href="https://facebook.com" aria-label="Facebook" class="mr-5">
+		<Fa icon={faFacebook} size="lg" class="hover:text-green-400"/>
+	</a>
+	<a href="https://youtube.com" class="mr-3 lg:mr-5">
+		<Fa icon={faYoutube} size="lg" class=" hover:text-green-400"/>
+	</a>
+	<a href="https://twitter.com/fung_fi" aria-label="Twitter" class="mr-3 lg:mr-5">
+		<Fa icon={faTwitter} size="lg" class="hover:text-green-400"/>
+	</a>
+	<a href="https://telegram.com/fungfi" aria-label="Telegram" class="mr-3 lg:mr-5">
+		<Fa icon={faTelegram} size="lg" class="hover:text-green-400"/>
+	</a>
+	<a href="https://discord.gg/b5H9BVCt" class="mr-3 lg:mr-5">
+		<Fa icon={faDiscord} size="lg" class="hover:text-green-400"/>
+	</a>
 
-				<a href="https://app.sushi.com/swap" aria-label="SushiSwap">
-					<Fa icon={faHandHoldingUsd} size="lg" />
-				</a>
-				<a href="https://fung.wiki/" aria-label="Wiki">
-					<Fa icon={faBookOpen} size="lg" />
-				</a>
-				<a href="https://discord.gg/EbvCkxhP" aria-label="Discord">
-					<Fa icon={faDiscord} size="lg" />
-				</a>
-			</div>
+</div>
 
-			<div class="social-media flex space-x-4 " aria-label="Youtube">
-				<a href="https://youtube.com">
-					<Fa icon={faYoutube} size="lg" />
-				</a>
+</div>
 
-				<a href="https://twitter.com/fung_fi" aria-label="Twitter">
-					<Fa icon={faTwitter} size="lg" />
-				</a>
-				<a href="https://telegram.com/fungfi" aria-label="Telegram">
-					<Fa icon={faTelegram} size="lg" />
-				</a>
-				<a href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh" aria-label="Tiktok">
-					<Fa icon={faTiktok} size="lg" />
-				</a>
-				<a href="https://facebook.com" aria-label="Facebook">
-					<Fa icon={faFacebook} size="lg" />
-				</a>
-			</div>
-		</div>
-	</div>
 </footer>
 
 <style>
-	.dark-active {
-		background: #0b1216;
-	}
 
-	.icon_size {
-		height: 22px;
+	.footer-height{
+		min-height:60px;
 	}
 
 	footer {
