@@ -1,5 +1,9 @@
 {
-	"hello": "Welcome to",
+	"home": {
+		"tagline1": "You can’t beat the market but you can make it.",
+		"tagline2": "Be the market maker",
+		"marketCap": "Market Cap"
+	},
 	"pages": {
 		"about": {
 			"title": "About"

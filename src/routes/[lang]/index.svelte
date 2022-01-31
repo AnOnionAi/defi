@@ -234,15 +234,16 @@
 
 	<section class="text-white mr-auto ml-auto w-5/6">
 		<section
-			style="margin-top: 100px;"
+			style="margin-top: 25px;"
 			class="MUSH_about title text-center bg-transparent min-h-screen group"
 		>
-			<h2 class="relative text-5xl lg:text-9xl"><div>FUNG FINANCIAL</div></h2>
-			<h4 class="relative italic text-4xl"><div>WHERE MONEY GROWS&#127812;</div></h4>
+			<h2 class="relative text-5xl lg:text-9xl"><div>FUNGFI DEFI</div></h2>
+			<h4 class="relative pt-35 text-4xl"><div>{$_('home.tagline1')}</div></h4>
+			<h4 class="relative italic text-4xl"><div>{$_('home.tagline2')} &#127812;</div></h4>
 			<h3
-				class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-10 lg:mt-30 pt-2 pb-2 max-w-screen -ml-10 -mr-10 lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
+				class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-2 lg:mt-6  max-w-screen lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
 			>
-				Market Cap: ${$page.params.lang == 'es'
+				MushCoin {$_('home.marketCap')}: ${$page.params.lang == 'es'
 					? $mushMarketCap.toLocaleString('es-ES')
 					: $mushMarketCap.toLocaleString('en-US')}
 			</h3>
