@@ -10,13 +10,31 @@
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 	import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+
+	let textColor = "text-white"
+
+	$:{
+		if($isHomescreen){
+			textColor = "text-white"
+		}
+		else if(!$isHomescreen && $darkMode){
+			textColor = "text-gray-300"
+		}
+		else if(!isHomescreen && !$darkMode){
+			textColor = "text-gray-700"
+		}
+		else{
+			textColor="text-gray-700"
+		}
+	}
+
+	
 </script>
 
 <footer
 	class="{$isHomescreen &&
 		'z-20 backdrop-filter backdrop-blur border-none '} border-t-2  border-gray-200 {$darkMode &&
-		'border-dark-200'} {$darkMode && !$isHomescreen && 'bg-dark-500 text-gray-400'}  text-gray-800  {$isHomescreen &&
-				'text-white'} footer-height"
+		'border-dark-200'} {$darkMode && !$isHomescreen && 'bg-dark-500'} footer-height {textColor} "
 >
 <div class="grid grid-cols-1 md:grid-cols-3 footer-height px-6 py-6 lg:py-1 gap-4">
 <div class="flex  items-center ml-0 lg:ml-5 justify-center lg:justify-start">
