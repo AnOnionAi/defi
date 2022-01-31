@@ -77,7 +77,7 @@
 	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
 		'bg-dark-500 border-dark-200'} backdrop-blur top-0 w-full  {!$isHomescreen &&
-		'border-b-2'} border-gray-200 py-3 "
+		'border-b-2'} border-gray-200 py-2 "
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-3 ">
