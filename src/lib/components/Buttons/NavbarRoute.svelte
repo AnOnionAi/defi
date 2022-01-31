@@ -4,20 +4,21 @@
 	import { goto } from '$app/navigation';
 	export let pageRoute;
 
-	const gotoPage = (route: string, home: boolean = false) => {
-		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
-		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
-	};
+	let isCurrentRoute = false
 
 	$:{
-
+		if($page.path.includes(pageRoute.route)){
+			isCurrentRoute = true;
+		}else{
+			isCurrentRoute = false;
+		}
 	}
 </script>
 
 <a 
 sveltekit:prefetch
 href={`/${$page.params.lang}${pageRoute.route}`}>
-	<span class="hover:text-green-500 {$darkMode && 'hover:text-green-300'}   px-2  py-3 rounded-md">
+	<span class="hover:text-green-500 {$darkMode && 'hover:text-green-300'}   px-2  py-3 rounded-md {isCurrentRoute && "text-green-500"}">
 		{pageRoute.title}
 	</span>
 </a>
