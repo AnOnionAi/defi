@@ -8,6 +8,7 @@
 		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
 		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
 		console.log($page.params.lang);
+		
 	};
 </script>
 

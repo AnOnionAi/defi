@@ -106,7 +106,9 @@
 		const sta: BigNumber = await getTokenBalance(info.tokenAddr,getContractAddress(Token.MASTERCHEF));
 
 		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, tokenDecimals));
+
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
+		
 		const poolWeightbn = getPoolWeight(totalAllocPoints, poolInfo.allocPoint);
 		const tokenPerBlock = await MasterChef.getMushPerBlock();
 		const mushPerBlock: number = parseFloat(ethers.utils.formatEther(tokenPerBlock));
