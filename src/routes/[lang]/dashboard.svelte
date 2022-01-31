@@ -346,6 +346,6 @@
 <style>
 	.background{
 		background-image: url("/backgrounds/dashboardMushrooms.png");
-		background-size: contain;
+		background-size: cover;
 	}
 </style>
