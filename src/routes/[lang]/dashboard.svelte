@@ -13,11 +13,12 @@
 	import { BigNumber, ethers } from 'ethers';
 	import { mushPerBlock, totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
+import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 
 	let priceData = [];
 	let dataLine;
 
-	onMount(() => {
+	onMount(async() => {
 		fetch(
 			'https://api2.sushipro.io/?chainID=137&action=get_pairs_by_token&token=0x627F699300A9D693FBB84F9Be0118D17A1387D4e'
 		)

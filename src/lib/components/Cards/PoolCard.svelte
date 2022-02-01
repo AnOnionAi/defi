@@ -102,6 +102,7 @@
 		console.log(poolMultiplier)
 
 		stakingTokenPrice = await getStakingTokenPrice();
+		console.log(stakingTokenPrice,info.tokenName)
 
 		const sta: BigNumber = await getTokenBalance(info.tokenAddr,getContractAddress(Token.MASTERCHEF));
 
