@@ -327,7 +327,7 @@
 	}
 
 	section blockquote {
-		line-height: 90px;
+		line-height: 150px;
 		font-size: 30px;
 		font-family: 'Fira Sans Condensed', sans-serif;
 		display: inline;
@@ -347,13 +347,13 @@
 	}
 	@media (min-width: 1024px) {
 		section blockquote {
-			font-size: 90px;
+			font-size: 80px;
 		}
 	}
 
 	.MUSH_about {
 		background-color: rgba(15, 15, 15, 0.7);
-		padding: 45px;
+		padding: 25px;
 		--tw-backdrop-blur: blur(1px);
 		margin-bottom: 70vh;
 	}
