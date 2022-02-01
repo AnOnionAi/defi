@@ -237,13 +237,13 @@
 			<h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2>
 			{#if visible}
 				<h4 in:fade={{duration: 1000}} class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
-				<h4 in:fade={{delay: 2000, duration: 3000}} class="relative pt-2 italic text-4xl">{$_('home.tagline2')} 🍄</h4>
-				<h3 in:fade={{delay: 4000, duration: 1000}}
+				<h4 in:fade={{delay: 1500, duration: 3000}} class="relative pt-2 italic text-4xl">{$_('home.tagline2')} 🍄</h4>
+				<h3 in:fade={{delay: 3500, duration: 1000}}
 					class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-2 lg:mt-6 pt-2 max-w-screen lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
 				>
 					{$_('home.marketCap')}
 					{#if $mushMarketCap}
-						<p in:fade={{delay: 4750, duration: 2000}}>
+						<p in:fade={{delay: 4250, duration: 2000}}>
 							${$page.params.lang == 'es'
 							? $mushMarketCap.toLocaleString('es-ES')
 							: $mushMarketCap.toLocaleString('en-US')}
