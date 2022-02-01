@@ -11,7 +11,8 @@
 	import spaceNight from '/static/space35.webp';
 	import moon from '/static/moon.webp';
 	import earth from '/static/earth.webp';
-	import sun from '/static/sun.webp';
+	import earthNite from '/static/earthNite.jpg';
+
 
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
@@ -20,6 +21,8 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
+
+	import { fade } from 'svelte/transition';
 
 	isHomescreen.set(true);
 	let canvas;
@@ -90,32 +93,25 @@
 		}
 
 		const moonTexture = new THREE.TextureLoader().load('textureMoon.webp');
-
-		const floppaTexture = new THREE.TextureLoader().load(moon);
+		const earthTexture	= new THREE.TextureLoader().load('earth_normalmap.jpg');
+		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
 		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
-		const floppaTextureSun = new THREE.TextureLoader().load(sun);
+		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);
+
 
 		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(2, 8, 8),
+			new THREE.SphereGeometry(8, 32, 32),
 			new THREE.MeshStandardMaterial({
-				map: floppaTexture,
+				map: floppaTextureMoon,
 				normalMap: moonTexture
 			})
 		);
 
 		const floppaEarth = new THREE.Mesh(
-			new THREE.SphereGeometry(8, 32, 32),
-			new THREE.MeshStandardMaterial({
-				map: floppaTextureEarth,
-				normalMap: moonTexture
-			})
-		);
-
-		const floppaSun = new THREE.Mesh(
 			new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
-				map: floppaTextureSun,
-				normalMap: moonTexture
+				map: floppaTextureEarth,
+				normalMap: earthTexture
 			})
 		);
 
@@ -136,10 +132,9 @@
 				mushMeshCryp = mushCrypto.scene;
 				mushMeshCryp.scale.set(25, 25, 25);
 				mushMeshCryp.position.set(-340, 0, -1100);
-				floppaMoon.position.set(-45, 0, -150);
-				floppaEarth.position.set(-50, 0, -300);
-				floppaSun.position.set(500, 0, -1000);
-				scene.add(dollarSign, floppaMoon, floppaEarth, floppaSun, mushMeshCryp);
+				floppaMoon.position.set(-50, 0, -300);
+				floppaEarth.position.set(500, 0, -1000);
+				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -163,14 +158,12 @@
 				mushMeshCryp.position.y = -50;
 				mushMeshCryp.position.z = -1000;
 			}
+
 			if (floppaMoon) {
-				floppaMoon.rotation.y += 0.01;
+				floppaMoon.rotation.y += 0.005;
 			}
 			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.01;
-			}
-			if (floppaSun) {
-				floppaSun.rotation.y += 0.005;
+				floppaEarth.rotation.y += 0.005;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
@@ -237,159 +230,93 @@
 			style="margin-top: 25px;"
 			class="MUSH_about title text-center bg-transparent min-h-screen group"
 		>
-			<h2 class="relative text-5xl lg:text-9xl"><div>FUNGFI DEFI</div></h2>
-			<h4 class="relative pt-35 text-4xl"><div>{$_('home.tagline1')}</div></h4>
-			<h4 class="relative italic text-4xl"><div>{$_('home.tagline2')} &#127812;</div></h4>
-			<h3
-				class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-2 lg:mt-6  max-w-screen lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
+			<h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2>
+			<h4 class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
+			<h4 class="relative pt-2 italic text-4xl">{$_('home.tagline2')} 🍄</h4>
+			<h3 
+				class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-2 lg:mt-6 pt-2 max-w-screen lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
 			>
-				MushCoin {$_('home.marketCap')}: ${$page.params.lang == 'es'
-					? $mushMarketCap.toLocaleString('es-ES')
-					: $mushMarketCap.toLocaleString('en-US')}
+				{$_('home.marketCap')}
+				{#if $mushMarketCap}
+					<p transition:fade>
+						${$page.params.lang == 'es'
+						? $mushMarketCap.toLocaleString('es-ES')
+						: $mushMarketCap.toLocaleString('en-US')}
+					</p>
+				{/if}
 			</h3>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen rounded">
-			<h2 class="text-center text-5xl">THE DEAL 📜</h2>
-			<div class="MUSH_main_section text-md lg:text-xl">
-				<p>
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure
-					voluptate, numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel
-					distinctio. Ut, quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo
-					quasi earum distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta
-					sapiente possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates
-					dolorem cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod,
-					enim, tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
-					laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
-					Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
-					exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
-					illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
-					Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
-					dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut
-					earum accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi
-					quia veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
-					reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt.
-					Ipsum magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
-					mollitia a qui aliquam dolore.
-				</p>
-			</div>
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto rounded">
+			<h2 class="text-center text-5xl">{$_('home.introTitle')} 📜</h2>
+			<div class="MUSH_main_section text-md lg:text-xl">{$_('home.intro')}</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto min-h-screen flex text-sm">
+		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex text-sm">
 			<div class="MUSH_main_section">
-				<blockquote>GETTING STARTED</blockquote>
+				<blockquote>{$_('home.wallStreetTitle')} </blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen">
-			<div class="MUSH_main_section text-md lg:text-xl">
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure voluptate,
-				numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel distinctio. Ut,
-				quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo quasi earum
-				distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta sapiente
-				possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates dolorem
-				cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod, enim,
-				tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
-				laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
-				Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
-				exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
-				illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
-				Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
-				dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut earum
-				accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi quia
-				veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
-				reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt. Ipsum
-				magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
-				mollitia a qui aliquam dolore.
-			</div>
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+			<div class="MUSH_main_section text-md lg:text-xl">{$_('home.wallStreetSpeech')}</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto min-h-screen flex">
+		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
 			<div class="MUSH_main_section">
-				<blockquote>YOUR CRYPTO ADVENTURE</blockquote>
+				<blockquote>{$_('home.cryptoAdventureTitle')} </blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen">
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
 			<div class="MUSH_main_section text-md lg:text-xl">
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure voluptate,
-				numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel distinctio. Ut,
-				quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo quasi earum
-				distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta sapiente
-				possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates dolorem
-				cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod, enim,
-				tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
-				laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
-				Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
-				exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
-				illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
-				Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
-				dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut earum
-				accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi quia
-				veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
-				reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt. Ipsum
-				magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
-				mollitia a qui aliquam dolore.
+				{$_('home.cryptoAdventureText')}
 			</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto min-h-screen flex">
+		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
 			<div class="MUSH_main_section">
-				<blockquote>WALL STREET CRYPTO</blockquote>
+				<blockquote>{$_('home.kariosTitle')} ⏰</blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen">
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
 			<div class="MUSH_main_section text-md lg:text-xl">
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure voluptate,
-				numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel distinctio. Ut,
-				quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo quasi earum
-				distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta sapiente
-				possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates dolorem
-				cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod, enim,
-				tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
-				laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
-				Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
-				exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
-				illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
-				Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
-				dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut earum
-				accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi quia
-				veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
-				reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt. Ipsum
-				magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
-				mollitia a qui aliquam dolore.
+				{$_('home.kariosText')}
 			</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto min-h-screen flex">
+		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
 			<div class="MUSH_main_section">
-				<blockquote>THE FUTURE OF CRYPTO IS HERE</blockquote>
+				<blockquote>{$_('home.velocityIdeas')}</blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto min-h-screen">
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
 			<div class="MUSH_main_section text-md lg:text-xl">
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, minus iure voluptate,
-				numquam nostrum blanditiis, dolorum porro laboriosam aut neque modi vel distinctio. Ut,
-				quibusdam iste reprehenderit cupiditate voluptatum libero inventore quo quasi earum
-				distinctio in eveniet, rerum consectetur, eligendi sit laudantium minus dicta sapiente
-				possimus quisquam! Veniam vitae quas aspernatur ad veritatis nobis voluptates dolorem
-				cupiditate numquam doloremque, eligendi ratione, quisquam quasi nemo. Nihil quod, enim,
-				tenetur vero quae libero mollitia labore dolorem dolorum necessitatibus quo veniam
-				laboriosam veritatis praesentium aut nulla a ad fuga. Illo optio nostrum eaque quidem!
-				Laborum, voluptate commodi eaque rem dicta tempora animi cumque dolorum similique quos
-				exercitationem quam, reiciendis voluptatem odit fugit voluptatum qui tenetur officia harum
-				illo minus magni eligendi? Exercitationem, nulla cumque dolor in ullam explicabo eum.
-				Delectus inventore dolore eveniet quam velit deserunt, sunt repellat, possimus unde
-				dignissimos laborum tenetur dolor. Iusto consectetur accusantium suscipit neque, ab ut earum
-				accusamus ratione dolores sapiente placeat, quae eveniet adipisci maxime amet? Sequi quia
-				veritatis maiores cupiditate minima dicta praesentium quisquam voluptatem dolorem,
-				reprehenderit, in quis perferendis porro temporibus saepe, earum omnis sunt deserunt. Ipsum
-				magni ea corrupti! Expedita ipsa in soluta aspernatur dolorem. Magnam quas nam quasi
-				mollitia a qui aliquam dolore.
+				{$_('home.velocityIdeasText')}
+				<br/>
+				<br/>
+				{$_('home.gainzText')} 🤑
+				<br/>
+				<br/>
+				{$_('home.fijiSignature')} 🍄
 			</div>
 		</section>
+
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+			<div class="MUSH_main_section text-md lg:text-xl">
+				{$_('home.psText')}
+				<br/>
+				<br/>
+				{$_('home.powerText')}
+			</div>
+		</section>
+		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+			<div class="MUSH_main_section text-md lg:text-xl">
+				{$_('home.ps2Text')} 🚀
+				</div>
+				</section>
 	</section>
 </section>
 
