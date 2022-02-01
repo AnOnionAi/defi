@@ -190,10 +190,18 @@
 			}
 
 			if ($darkMode) {
-				scene.background = spaceTextureLight; //new THREE.Color(0x000000);
-			} else {
-				scene.background = spaceTexture;
-			}
+                scene.background = spaceTextureLight; //new THREE.Color(0x000000);
+                floppaEarth.material.setValues(new THREE.MeshStandardMaterial({
+					map: floppaTextureEarthNite,
+					normalMap: earthTexture
+				}))
+            } else {
+                scene.background = spaceTexture;
+                floppaEarth.material.setValues(new THREE.MeshStandardMaterial({
+					map: floppaTextureEarth,
+					normalMap: earthTexture
+				}))
+            }
 
 			renderer.render(scene, camera);
 		}
