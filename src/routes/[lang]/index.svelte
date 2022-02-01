@@ -93,11 +93,10 @@
 		}
 
 		const moonTexture = new THREE.TextureLoader().load('textureMoon.webp');
-		const earthTexture	= new THREE.TextureLoader().load('earth_normalmap.jpg');
+		const earthTexture	= new THREE.TextureLoader().load('textureEarth.webp');
 		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
 		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
 		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);
-
 
 		const floppaMoon = new THREE.Mesh(
 			new THREE.SphereGeometry(8, 32, 32),
