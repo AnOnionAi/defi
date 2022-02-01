@@ -243,7 +243,7 @@
 				>
 					{$_('home.marketCap')}
 					{#if $mushMarketCap}
-						<p transition:fade={{delay: 4750, duration: 2000}}>
+						<p in:fade={{delay: 4750, duration: 2000}}>
 							${$page.params.lang == 'es'
 							? $mushMarketCap.toLocaleString('es-ES')
 							: $mushMarketCap.toLocaleString('en-US')}
@@ -294,7 +294,7 @@
 
 		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
 			<div class="MUSH_main_section">
-				<blockquote>{$_('home.velocityIdeas')}</blockquote>
+				<blockquote>{$_('home.velocityIdeas')} 💡</blockquote>
 			</div>
 		</section>
 
