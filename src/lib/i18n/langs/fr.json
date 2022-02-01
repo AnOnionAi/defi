@@ -56,6 +56,13 @@
 			"text": "Responsabilité Cryptographique"
 		}
 	},
+	"about": {
+		"automated-description":"Automated Crypto Market Making (ACMM) allow digital assets to be traded in a permissionless and automatic way by using liquidity pools  rather than a traditional market of buyers and sellers. Users supply liquidity pools with crypto tokens, whose prices are determined by a constant mathematical formula. Instead of trading between buyers and sellers, users trade against a pool of tokens — a liquidity pool. Liquidity providers normally earn a fee for providing tokens to the pool. This fee is paid by traders who interact with the liquidity pool. This allows liquidity providers to be able to earn yield. Dividends.",
+		"farms-description": "Farms are used for yield farming. This is the practice of staking or locking up cryptocurrencies within our blockchain protocol to generate tokenized rewards. Fungfi relys on yield farming to incentivize you to contribute to our network's liquidity. Fungfi does not rely on a centralized market facilitator.",
+		"pools-description": "A liquidity pool is a crowdsourced pool of cryptocurrencies or tokens locked in a smart contract that is used to facilitate trades between the assets on a decentralized exchange (DEX). This allows digital assets to be traded in an automatic and permissionless manner through the use of liquidity pools.",
+		"vaults-description": "A vault is a piece of blockchain architecture used for the storage, deposit, and withdrawal of different types of cryptocurrency assets. For example, when a user stakes, lends, borrows, or mints different crypto assets, Fungfi will automatically exchange the correct number of assets between different parties via smart contracts.",
+		"responsibility-description": "Invest Responsibly. There is incredible potiental for huge gainz in Fungfi Defi, but everything in life carries risk. While every precaution is taken to protect against it. Anything dealing with the Internet or Computers carries the risk of Hackers. You must also be aware of volatility. The crypto markets while being highly rewarding, carry a high amount of volatility. Sometimes this volatility can lead to panic selling, bank runs or impermanent loss. Finally, if you loss your private key or secret statement to your wallet, that crypto is burnt. It is gone forever. So, be careful."
+	},
 	"dashboard": {
 		"wallet": "Dans Votre Portefeuille",
 		"tvl": "Valeur totale verrouillée",
