@@ -143,3 +143,19 @@ export enum Criteria {
 	ORDER = 'ORDER',
 	YIELD = 'YIELD'
 }
+
+
+export interface PoolInfoResponse{
+	accmushPerShare: BigNumber,
+	allocPoint: BigNumber,
+	depositFeeBP: number,
+	lastRewardBlock: BigNumber,
+	lpToken: string
+}
+
+export interface LoadingState {
+	loadingApproval: boolean;
+	loadingDeposit: boolean;
+	loadingWithdraw: boolean;
+	loadingHarvest: boolean;
+}

@@ -39,7 +39,7 @@ export namespace MasterChef {
 
 	export const owner  = async () => masterChefContract.owner();
 
-	export const getPendingMush = async() => masterChefContract.pendingMush();
+	export const getPendingMush = async(pid:number) => masterChefContract.pendingMush(pid);
 
 	export const poolExistance = async() => masterChefContract.poolExistance();
 
@@ -53,19 +53,22 @@ export namespace MasterChef {
 
 	export const getTotalAllocPoints = async() => masterChefContract.totalAllocPoint();
 
-	export const getUserInfo = async(pid: number, address: string) => masterChefContract.userInfo(pid, address);
+	export const getUserInfo = async(pid: number, userAddress: string) => masterChefContract.userInfo(pid, userAddress);
 
 	export const getTokenPerBlock = async() => masterChefContract.mushPerBlock();
 
 	export const getVaultAddress = async() =>masterChefContract.vaultAddress();
 
-	export const deposit = async(pid:number, amount:any, referrer = ethers.constants.AddressZero )=> masterChefContractSigner.deposit(pid,amount,referrer);
+	export const deposit = async(pid:number, amount:any,decimals:number = 18, referrer = ethers.constants.AddressZero)=> masterChefContractSigner.deposit(pid, ethers.utils.parseUnits(amount, decimals), referrer);
 
-	export const withdraw = async(pid:number, amount:any ) => masterChefContractSigner.withdraw(pid,amount)
+	export const withdraw = async(pid:number, amount:any,decimals: number = 18 ) => masterChefContractSigner.withdraw(pid, ethers.utils.parseUnits(amount, decimals));
 
 	export const harvestRewards = async(pid:number) => masterChefContractSigner.deposit(pid,ethers.constants.Zero,ethers.constants.AddressZero);
 
-
+    export const getStakedTokens = async(pid:number, userAddress:string) => {
+		const [stakedTokens] = await getUserInfo(pid,userAddress);
+		return stakedTokens;
+	}
 }
 
 export const getPoolWeight = (totalAllocPoints: BigNumber, poolAllocPoints: BigNumber) => {

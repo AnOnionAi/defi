@@ -16,7 +16,7 @@
 	export let onWithdraw;
 	export let userStakedTokens;
 	export let userBalance;
-	export let tokenDecimals;
+	export let stakingTokenDecimals;
 
 	let wantAmount;
 
@@ -39,6 +39,8 @@
 		onWithdraw(wantAmount);
 		close();
 	};
+
+	
 </script>
 
 <div
@@ -65,13 +67,13 @@
 					<div class="flex">
 						{#if action == 'DEPOSIT'}
 							<button
-								on:click={() => (wantAmount = ethers.utils.formatUnits(userBalance, tokenDecimals))}
+								on:click={() => (wantAmount = ethers.utils.formatUnits(userBalance, stakingTokenDecimals))}
 								class="text-xs  mr-1 text-green-400  rounded-full">MAX</button
 							>
 						{:else if action == 'WITHDRAW'}
 							<button
 								on:click={() =>
-									(wantAmount = ethers.utils.formatUnits(userStakedTokens, tokenDecimals))}
+									(wantAmount = ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals))}
 								class="text-xs p-1 mr-1 text-red-400  rounded-full">MAX</button
 							>
 						{/if}
@@ -84,11 +86,11 @@
 						</p>
 						{#if action == 'DEPOSIT'}
 							<p style="color: {primaryTextColor};">
-								{ethers.utils.formatUnits(userBalance, tokenDecimals)}
+								{ethers.utils.formatUnits(userBalance, stakingTokenDecimals)}
 							</p>
 						{:else if action == 'WITHDRAW'}
 							<p style="color: {primaryTextColor};">
-								{ethers.utils.formatUnits(userStakedTokens, tokenDecimals)}
+								{ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)}
 							</p>
 						{/if}
 					</div>
@@ -116,50 +118,50 @@
 				{#if action === 'DEPOSIT'}
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userBalance.div(10), tokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(userBalance.div(10), stakingTokenDecimals))}
 						class="bg-green-500 py-1 px-3 hover:bg-green-400 rounded-lg text-white text-light"
 						>10%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userBalance.div(4), tokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(userBalance.div(4), stakingTokenDecimals))}
 						class="bg-green-500 py-1 px-3 hover:bg-green-400 rounded-lg text-white text-light"
 						>25%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userBalance.div(2), tokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(userBalance.div(2), stakingTokenDecimals))}
 						class="bg-green-500 py-1 px-3 hover:bg-green-400 rounded-lg text-white text-light"
 						>50%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userBalance.div(4).mul(3), tokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(userBalance.div(4).mul(3), stakingTokenDecimals))}
 						class="bg-green-500 py-1 px-3 hover:bg-green-400 rounded-lg text-white text-light"
 						>75%</button
 					>
 				{:else if action === 'WITHDRAW'}
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(10), tokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(10), stakingTokenDecimals))}
 						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
 						>10%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(4), tokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(4), stakingTokenDecimals))}
 						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
 						>25%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(2), tokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(2), stakingTokenDecimals))}
 						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
 						>50%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(4), tokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(4), stakingTokenDecimals))}
 						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
 						>75%</button
 					>
