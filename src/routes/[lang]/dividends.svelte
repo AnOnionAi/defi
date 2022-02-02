@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
 	export const prerender = false;
 	import { darkMode } from '$lib/stores/dark';
-
 	import { _ } from 'svelte-i18n';
 </script>
 
@@ -15,20 +14,35 @@
 	import { onDestroy, onMount } from 'svelte';
 	import Connect from '$lib/components/Cards/Connect.svelte';
 	import { fade } from 'svelte/transition';
-	import type { Unsubscriber } from 'svelte/store';
-	import type { BigNumber } from 'ethers';
+	import { BigNumber, ethers } from 'ethers';
 	import { approveToken } from '$lib/utils/erc20';
-	import { isHomescreen } from '$lib/stores/homescreen';
-
-	isHomescreen.update((v) => (v = false));
-
+	import { getNotificationsContext } from 'svelte-notifications';
+	import {
+		transactionCompleted,
+		transactionDeniedByTheUser,
+		transactionSend,
+		wrongInput
+	} from '$lib/config/constants/notifications';
+	const { addNotification } = getNotificationsContext();
+	
 	let userAccount: string;
-	let unsubscribe: Unsubscriber;
-	let userMushAllowance: BigNumber;
+	let userMushAllowance: BigNumber = ethers.constants.Zero;
 	let approved: boolean = false;
 	let finishedApprovalFetch: boolean = false;
 
 	let backgroundImage;
+
+	$: userAccount = $accounts?.[0];
+	$: approved = !userMushAllowance.isZero();
+
+	$: if (userAccount) {
+		getTokenAllowance(getContractAddress(Token.MUSHTOKEN),
+				getContractAddress(Token.VAULTCHEF),
+				userAccount).then(response => {
+					userMushAllowance = response;
+					finishedApprovalFetch = true;
+				})
+	}
 
 	darkMode.subscribe((darkEnabled) => {
 		darkEnabled
@@ -36,34 +50,21 @@
 			: (backgroundImage = '/backgrounds/cuteMush.svg');
 	});
 
-	unsubscribe = accounts.subscribe((arrayAccs) => {
-		if (arrayAccs) {
-			userAccount = arrayAccs[0];
-
-			getTokenAllowance(
-				getContractAddress(Token.MUSHTOKEN),
-				getContractAddress(Token.VAULTCHEF),
-				userAccount
-			).then((allowance) => {
-				userMushAllowance = allowance;
-				approved = isNotZero(allowance);
-				finishedApprovalFetch = true;
-			});
-		}
-	});
-
-	onDestroy(unsubscribe);
-
-	async function handleApproval() {
+	const handleApproval =async() => {
 		try {
+			console.log("whats happening")
+			addNotification(transactionSend);
+			
 			const tx = await approveToken(
 				getContractAddress(Token.MUSHTOKEN),
 				getContractAddress(Token.VAULTCHEF)
 			);
 			await tx.wait();
 			approved = true;
+			addNotification(transactionCompleted)
 		} catch (e) {
 			console.log(e);
+			addNotification(transactionDeniedByTheUser)
 		}
 	}
 </script>
