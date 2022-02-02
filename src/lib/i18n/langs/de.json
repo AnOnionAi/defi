@@ -1,5 +1,24 @@
 {
-	"hello": "Willkommen bei",
+	"home": {
+		"tagline1": "You can’t beat the market",
+		"tagline2": "But you can make it",
+		"marketCap": "Mush Market Cap",
+		"introTitle": "Introducing MushCoin",
+		"intro": "The principles we follow in Defi (Decentralized Finance) is based on the philosophy of the Fungi. The Mushrooms are a critical and perhaps most vital organism to the world. They recycle the dead. They take the dead and rotting material and revitalize it. The mushrooms ensure that dead plants and animals are broken down into smaller molecules that can be used by other members of the ecosystem. In the same way, FungFi follows this same principle with financial system. Introducing mushCoin, your key to Defi, to decompose the rot of the financial system and return the vital nutrients. Creating a sustainable cycle.",
+		"wallStreetTitle": "Wall Street of Crypto",
+		"wallStreetSpeech": "Wall Street is a place between Liberty and Nassau Street in Downtown Manhattan. It is mostly a tourist destination today. However, Wall Street is not known around the world because of the physical street. It is an idea. A concept. Wall Street is the representation of real money. The whales, who finance everything and have their hands in every cookie jar. The name of the game is debt. The banks loan out money and make interest on it. They take your savings accounts and loan it out. They finance homes, cars & corporate bonds. In every transaction that exist, they play the role of the middle man and are there every step of the way. However, there exist one particular privilege position within Wall Street, the position of the market makers. They have almost no risk in the market but continue to rake in practically risk free money, providing liquidity. But you or I can not play this game. We are not allowed. There are high capital requirements and many legal barriers to entry. It is a big club and we aren’t in it.",
+		"cryptoAdventureTitle": "Your Crypto Adventure",
+		"cryptoAdventureText": "Until very recently, these ideas and concepts did not even exist. The technology is growing exponentially, faster than any government, corporation or literally anyone can keep up. In Defi, everything is ran by smart contracts, which are algorithms on the decentralized blockchain. Via these algorithms, you can provide liquidity. You now have the tools to play the game only available previously to the elite. You can “stake” a position in these liquidity pools and get rewarded just for providing liquidity. No more do you settle for measly returns in your checking account, you can now participate in this new digital algorithmic economy. Governments & banks are scared of this technology, nor are many capable of understanding it. No longer is a middle man required, and with the tools & smart contracts found here on this site, you can embark on your Defi journey to relish the potential of a market maker.",
+		"kariosTitle": "Karios",
+		"kariosText": "Kairos is an ancient Greek word meaning 'the right, critical, or opportune moment'. The genius of crypto has created that kairos, and it is now. That genius is the ability for all transactions to be peer to peer, person to person. Allowing money to be sent anywhere in the world, and no central bank or banking intermediary required. For there’s no need to fear or hope, but only to look for new technologies. It is only now the true potential of the blockchain has been cracked open. Crypto will continue to exist in this global Internet but the men behind the curtain will want to take this away from you. Emerald City might not last forever.",
+		"velocityIdeas": "The Velocity of Ideas",
+		"velocityIdeasText": "The velocity of ideas is accelerating; everything is changing at an exponential pace. However, community is the bedrock of mankind and on this rock, FungFi will curve its name to serve this community. We will follow the 1’s and 0’s and work to escape corruption. For a computer never lies. With great power, comes great responsibility. However, you are responsible for your crypto assets. Stay vigilant. Do Your Research. Know Thy Self. And Know Thy Risk. Find all our smart contracts on Github. Let us work together to create more value and wealth, for more people, in this global digital economy. As we continue to innovate and push technology further. Together. For the losers now, will be later to win, for the times, they are a-changing’ ",
+		"gainzText": "Come Join Us at Fungi Fantasy! Where the gainz so good, ya think ya dreamin'",
+		"fijiSignature": " - Fiji The Fungi",
+		"psText": "P.S. Don’t forget, money is only an idea. There are many ideas left to be unlocked in the universe.",
+		"powerText": "The power is yours. ",
+		"ps2Text": "P.S.S. MushCoin to the Moon"
+	},
 	"pages": {
 		"about": {
 			"title": "Über"
@@ -36,6 +55,13 @@
 		"crypto-responsibility": {
 			"text": "Krypto-Verantwortung"
 		}
+	},
+	"about": {
+		"automated-description":"Automated Crypto Market Making (ACMM) allow digital assets to be traded in a permissionless and automatic way by using liquidity pools  rather than a traditional market of buyers and sellers. Users supply liquidity pools with crypto tokens, whose prices are determined by a constant mathematical formula. Instead of trading between buyers and sellers, users trade against a pool of tokens — a liquidity pool. Liquidity providers normally earn a fee for providing tokens to the pool. This fee is paid by traders who interact with the liquidity pool. This allows liquidity providers to be able to earn yield. Dividends.",
+		"farms-description": "Farms are used for yield farming. This is the practice of staking or locking up cryptocurrencies within our blockchain protocol to generate tokenized rewards. Fungfi relys on yield farming to incentivize you to contribute to our network's liquidity. Fungfi does not rely on a centralized market facilitator.",
+		"pools-description": "A liquidity pool is a crowdsourced pool of cryptocurrencies or tokens locked in a smart contract that is used to facilitate trades between the assets on a decentralized exchange (DEX). This allows digital assets to be traded in an automatic and permissionless manner through the use of liquidity pools.",
+		"vaults-description": "A vault is a piece of blockchain architecture used for the storage, deposit, and withdrawal of different types of cryptocurrency assets. For example, when a user stakes, lends, borrows, or mints different crypto assets, Fungfi will automatically exchange the correct number of assets between different parties via smart contracts.",
+		"responsibility-description": "Invest Responsibly. There is incredible potiental for huge gainz in Fungfi Defi, but everything in life carries risk. While every precaution is taken to protect against it. Anything dealing with the Internet or Computers carries the risk of Hackers. You must also be aware of volatility. The crypto markets while being highly rewarding, carry a high amount of volatility. Sometimes this volatility can lead to panic selling, bank runs or impermanent loss. Finally, if you loss your private key or secret statement to your wallet, that crypto is burnt. It is gone forever. So, be careful."
 	},
 	"dashboard": {
 		"wallet": "In deinem Portemonnaiet",
