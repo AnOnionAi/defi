@@ -13,7 +13,6 @@
 	import earth from '/static/earth.webp';
 	import earthNite from '/static/earthNite.jpg';
 
-
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
 	import { _ } from 'svelte-i18n';
@@ -23,14 +22,11 @@
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
 
 	import { fade } from 'svelte/transition';
-	
 
 	isHomescreen.set(true);
 	let canvas;
 	let scene;
 	let visible = false;
-
-	
 
 	onDestroy(() => {
 		isHomescreen.set(false);
@@ -98,7 +94,7 @@
 		}
 
 		const moonTexture = new THREE.TextureLoader().load('textureMoon.webp');
-		const earthTexture	= new THREE.TextureLoader().load('textureEarth.webp');
+		const earthTexture = new THREE.TextureLoader().load('textureEarth.webp');
 		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
 		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
 		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);
@@ -190,18 +186,22 @@
 			}
 
 			if ($darkMode) {
-                scene.background = spaceTextureLight; //new THREE.Color(0x000000);
-                floppaEarth.material.setValues(new THREE.MeshStandardMaterial({
-					map: floppaTextureEarthNite,
-					normalMap: earthTexture
-				}))
-            } else {
-                scene.background = spaceTexture;
-                floppaEarth.material.setValues(new THREE.MeshStandardMaterial({
-					map: floppaTextureEarth,
-					normalMap: earthTexture
-				}))
-            }
+				scene.background = spaceTextureLight; //new THREE.Color(0x000000);
+				floppaEarth.material.setValues(
+					new THREE.MeshStandardMaterial({
+						map: floppaTextureEarthNite,
+						normalMap: earthTexture
+					})
+				);
+			} else {
+				scene.background = spaceTexture;
+				floppaEarth.material.setValues(
+					new THREE.MeshStandardMaterial({
+						map: floppaTextureEarth,
+						normalMap: earthTexture
+					})
+				);
+			}
 
 			renderer.render(scene, camera);
 		}
@@ -244,20 +244,23 @@
 		>
 			<h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2>
 			{#if visible}
-				<h4 in:fade={{duration: 1000}} class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
-				<h4 in:fade={{delay: 1500, duration: 3000}} class="relative pt-2 italic text-4xl">{$_('home.tagline2')} 🍄</h4>
-				<h3 in:fade={{delay: 3500, duration: 1000}}
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
+				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
+					{$_('home.tagline2')} 🍄
+				</h4>
+				<h3
+					in:fade={{ delay: 3500, duration: 1000 }}
 					class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-2 lg:mt-6 pt-2 max-w-screen lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
 				>
 					{$_('home.marketCap')}
 					{#if $mushMarketCap}
-						<p in:fade={{delay: 4250, duration: 2000}}>
+						<p in:fade={{ delay: 4250, duration: 2000 }}>
 							${$page.params.lang == 'es'
-							? $mushMarketCap.toLocaleString('es-ES')
-							: $mushMarketCap.toLocaleString('en-US')}
+								? $mushMarketCap.toLocaleString('es-ES')
+								: $mushMarketCap.toLocaleString('en-US')}
 						</p>
 					{/if}
-			</h3>
+				</h3>
 			{/if}
 		</section>
 
@@ -268,7 +271,7 @@
 
 		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex text-sm">
 			<div class="MUSH_main_section">
-				<blockquote>{$_('home.wallStreetTitle')} </blockquote>
+				<blockquote>{$_('home.wallStreetTitle')}</blockquote>
 			</div>
 		</section>
 
@@ -278,7 +281,7 @@
 
 		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
 			<div class="MUSH_main_section">
-				<blockquote>{$_('home.cryptoAdventureTitle')} </blockquote>
+				<blockquote>{$_('home.cryptoAdventureTitle')}</blockquote>
 			</div>
 		</section>
 
@@ -309,11 +312,11 @@
 		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.velocityIdeasText')}
-				<br/>
-				<br/>
+				<br />
+				<br />
 				{$_('home.gainzText')} 🤑
-				<br/>
-				<br/>
+				<br />
+				<br />
 				{$_('home.fijiSignature')} 🍄
 			</div>
 		</section>
@@ -321,16 +324,16 @@
 		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.psText')}
-				<br/>
-				<br/>
+				<br />
+				<br />
 				{$_('home.powerText')}
 			</div>
 		</section>
 		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.ps2Text')} 🚀
-				</div>
-				</section>
+			</div>
+		</section>
 	</section>
 </section>
 
