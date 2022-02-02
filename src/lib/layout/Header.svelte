@@ -51,7 +51,6 @@
 			title: $_('headers.vaults.text')
 		}
 	];
-
 </script>
 
 <svelte:window
@@ -84,10 +83,7 @@
 		<div class="sm:mr-3 flex-1 flex items-center justify-center sm:justify-start">
 			<!-- LOGO -->
 			<div class="flex-shrink-0 flex items-center">
-				<a
-					href={`/${$page.params.lang}/`}
-					class="flex cursor-pointer"
-				>
+				<a href={`/${$page.params.lang}/`} class="flex cursor-pointer">
 					<img class="w-10 " src="/cute/fiji.svg" alt="Fung Finance Logo" />
 					{#if $isHomescreen}
 						<img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
@@ -96,7 +92,7 @@
 					{:else}
 						<img class="mt-1 " src="/cute/fungfiLiteMode.svg" alt="Fung Finance" />
 					{/if}
-			</a>
+				</a>
 			</div>
 			<div class="ml-4 hidden lg:block ">
 				<div

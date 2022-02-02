@@ -4,10 +4,9 @@
 	import { goto } from '$app/navigation';
 	export let pageRoute;
 
+	let isCurrentRoute = false;
 
-	let isCurrentRoute = false
-	
-	$:isCurrentRoute = $page?.url.pathname.includes(pageRoute.route)
+	$: isCurrentRoute = $page?.url.pathname.includes(pageRoute.route);
 </script>
 
 <a sveltekit:prefetch href={`/${$page.params.lang}${pageRoute.route}`}>
