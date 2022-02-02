@@ -15,7 +15,7 @@
 		if (langs.includes(lang)) {
 			return lang;
 		} else {
-			return 'en';
+			return 'es';
 		}
 	};
 

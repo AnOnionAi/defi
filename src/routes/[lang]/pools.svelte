@@ -11,14 +11,14 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 </script>
 
-<section class="">
+<section class="background">
 	<br />
-	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
+	<h1 class="dark:text-white text-5xl tracking-widest font-medium">
 		{$_('headers.pools.text')}
 	</h1>
-	<div class="mt-5 space-y-4 pools background  {$darkMode && 'background__dark'}">
+	<div class="mt-5 space-y-4 pools ">
 		<div
-			class="flex flex-row justify-center gap-y-9 gap-x-4 p-8 text-center flex-wrap max-w-7xl mx-auto "
+			class="flex flex-row justify-center gap-y-9 gap-x-6 p-8 text-center flex-wrap max-w-7xl mx-auto "
 		>
 			{#each pools as pool}
 				<PoolCard info={pool} />
@@ -29,9 +29,11 @@
 
 <style>
 	.background {
+		height: 100%;
 		background-repeat: no-repeat;
 		background-size: cover;
-		background-image: url('/backgrounds/redBrilliantMushPattern.svg');
+		background-position: center center;
+		background-image: url('/backgrounds/fantasyMushCity.jpg');
 	}
 	.background__dark {
 		background-image: url('/backgrounds/redMushPattern.svg');

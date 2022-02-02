@@ -1,44 +1,62 @@
 import ERC20ABI from '$lib/config/abi/ERC20.json';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
+import { Provider } from './web3Helpers';
 
-export const getERC20Contract = (address: string) => {
-	const ercToken = new ethers.Contract(address, ERC20ABI, getSigner());
-	return ercToken;
-};
+export const getERC20Contract = (
+	address: string,
+	signer: ethers.providers.Provider | ethers.Signer
+): ethers.Contract => new ethers.Contract(address, ERC20ABI, signer);
 
 export const getTokenAllowance = async (
-	tknAddr: string,
+	tokenAddress: string,
 	spenderAddr: string,
-	userAddr: string
+	userAddress: string
 ): Promise<BigNumber> => {
-	try {
-		const tokenContract = getERC20Contract(tknAddr);
-		const allowance = await tokenContract.allowance(userAddr, spenderAddr);
-		return allowance;
-	} catch (e) {
-		console.log(e);
-		return ethers.constants.Zero;
-	}
+	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	return tokenContract.allowance(userAddress, spenderAddr);
 };
 
-export const approveToken = async (tknAddr: string, spenderAddr: string) => {
-	try {
-		const tokenContract = getERC20Contract(tknAddr);
-		return await tokenContract.approve(spenderAddr, ethers.constants.MaxUint256);
-	} catch (e) {
-		return 'Unable to approve the transaction';
-	}
+export const getTokenBalance = async (
+	tokenAddress: string,
+	userAddress: string
+): Promise<BigNumber> => {
+	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	return tokenContract.balanceOf(userAddress);
 };
 
-export const getTokenBalance = async (tknAddr: string, userAddr) => {
-	const tokenContract = getERC20Contract(tknAddr);
-	try {
-		const balance = await tokenContract.balanceOf(userAddr);
-		return balance;
-	} catch (e) {
-		return 'N/A';
-	}
+export const getTokenDecimals = async (tokenAddress: string): Promise<number> => {
+	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	return tokenContract.decimals();
+};
+
+export const getTokenName = async (tokenAddress: string): Promise<string> => {
+	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	return tokenContract.name();
+};
+
+export const getTokenSymbol = async (tokenAddress: string): Promise<string> => {
+	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	return tokenContract.symbol();
+};
+
+export const getTokenTotalSupply = async (tokenAddress: string): Promise<BigNumber> => {
+	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	return tokenContract.totalSupply();
+};
+
+export const approveToken = async (
+	tokenAddress: string,
+	spenderAddress: string,
+	approvedAmount = ethers.constants.MaxUint256
+) => {
+	const tokenContract = getERC20Contract(tokenAddress, getSigner());
+	return tokenContract.approve(spenderAddress, approvedAmount);
+};
+
+export const depositToken = async (tokenAddress: string, recipient: string, amount: BigNumber) => {
+	const tokenContract = getERC20Contract(tokenAddress, getSigner());
+	return tokenContract.transfer(recipient, amount);
 };
 
 export const isNotZero = (allowance: BigNumber) => {
