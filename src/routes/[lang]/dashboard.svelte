@@ -10,12 +10,8 @@
 	import { MasterChef } from '$lib/utils/masterc';
 	import { onMount } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
-<<<<<<< HEAD
 	import { totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
-=======
-	import { mushPerBlock, totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
 	import { page } from '$app/stores';
->>>>>>> 716d682de3878ff0e261cd75a735c15275a68cb6
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import { mushPerBlock } from '$lib/stores/MasterChefData';
