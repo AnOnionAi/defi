@@ -7,7 +7,7 @@
 	import type { PoolInfo } from '$lib/ts/types';
 	import { Token } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
-	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance, getTokenDecimals, getTokenName } from '$lib/utils/erc20';
+	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance, getstakingTokenDecimals, getTokenName, getTokenDecimals } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
@@ -37,6 +37,14 @@
 	import SushiswapBadge from '../Badges/SushiswapBadge.svelte';
 	import MultiplierBadge from '../Badges/MultiplierBadge.svelte';
 
+	interface MasterChefPoolData{
+		accmushPerShare: BigNumber,
+		allocPoint: BigNumber,
+		depositFeeBP: number,
+		lastRewardBlock: BigNumber,
+		lpToken: string
+	}
+
 	interface LoadingState {
 		loadingApproval: boolean;
 		loadingDeposit: boolean;
@@ -54,7 +62,7 @@
 	let poolLiquidityUSD: number;
 	let tokenAllocatedPerBlock: number;
 	let poolApr;
-	let tokenDecimals;
+	let stakingTokenDecimals;
 
 	let loadingState: LoadingState = {
 		loadingApproval: false,
@@ -89,24 +97,23 @@
 
 	onMount(async () => {
 
-		tokenDecimals = await getTokenDecimals(info.tokenAddr);
+		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
 		
 
 		const totalAllocPoints = await MasterChef.getTotalAllocPoints();
 
-		const poolInfo = await MasterChef.getPoolInfo(info.pid);
-		
+		const poolInfo:MasterChefPoolData = await MasterChef.getPoolInfo(info.pid);
+		console.log(poolInfo.allocPoint)
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
-		console.log(poolMultiplier)
+		
 
 		stakingTokenPrice = await getStakingTokenPrice();
-		console.log(stakingTokenPrice,info.tokenName)
 
 		const sta: BigNumber = await getTokenBalance(info.tokenAddr,getContractAddress(Token.MASTERCHEF));
 
-		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, tokenDecimals));
+		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, stakingTokenDecimals));
 
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 		
@@ -141,7 +148,7 @@
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await deposit(info.pid, amount, tokenDecimals);
+			const tx = await deposit(info.pid, amount, stakingTokenDecimals);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
@@ -157,7 +164,7 @@
 		wantWithdrawAmount = amount;
 		addNotification(transactionSend);
 		try {
-			const tx = await withdraw(info.pid, wantWithdrawAmount, tokenDecimals);
+			const tx = await withdraw(info.pid, wantWithdrawAmount, stakingTokenDecimals);
 			await tx.wait();
 			loadingState.loadingWithdraw = false;
 			addNotification(transactionCompleted);
@@ -189,7 +196,7 @@
 			{
 				userStakedTokens,
 				userBalance,
-				tokenDecimals,
+				stakingTokenDecimals,
 				info,
 				onDeposit,
 				onWithdraw,
@@ -360,7 +367,7 @@
 				<div class="flex justify-between items-center w-full h-full">
 					{#if userStakedTokens}
 						<p class="flex text-xl dark:text-white">
-							{parseFloat(ethers.utils.formatUnits(userStakedTokens, tokenDecimals)).toPrecision(4)}
+							{parseFloat(ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)).toPrecision(4)}
 						</p>
 					{:else}
 						<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />

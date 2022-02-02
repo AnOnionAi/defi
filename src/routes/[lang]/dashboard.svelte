@@ -18,7 +18,7 @@ import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	let priceData = [];
 	let dataLine;
 
-	onMount(async() => {
+	onMount(() => {
 		fetch(
 			'https://api2.sushipro.io/?chainID=137&action=get_pairs_by_token&token=0x627F699300A9D693FBB84F9Be0118D17A1387D4e'
 		)

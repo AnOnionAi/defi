@@ -22,7 +22,6 @@ export const getPoolTokenPriceUSD = async (addr: ContractAddress) => {
 			`https://api.coingecko.com/api/v3/simple/token_price/polygon-pos?contract_addresses=${addr}&vs_currencies=usd`
 		);
 		const data = await response.json();
-		console.log(data)
 		return data[addr.toLocaleLowerCase()].usd;
 	} catch {
 		console.log('Unable to get token price ');
