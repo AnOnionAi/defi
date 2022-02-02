@@ -7,7 +7,7 @@
 	import type { PoolInfo } from '$lib/ts/types';
 	import { Token } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
-	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance, getstakingTokenDecimals, getTokenName, getTokenDecimals } from '$lib/utils/erc20';
+	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance,  getTokenName, getTokenDecimals } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
@@ -36,6 +36,7 @@
 	import DepositWithdraw from '../Modals/DepositWithdraw.svelte';
 	import SushiswapBadge from '../Badges/SushiswapBadge.svelte';
 	import MultiplierBadge from '../Badges/MultiplierBadge.svelte';
+import { totalAllocPoints } from '$lib/stores/MasterChefData';
 
 	interface MasterChefPoolData{
 		accmushPerShare: BigNumber,
@@ -94,16 +95,15 @@
 		rewardTokenPrice = tokenPrice;
 	});
 
+	const tokenDecimalsPromise = getTokenDecimals(info.tokenAddr)
 
 	onMount(async () => {
 
 		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
 		
-
-		const totalAllocPoints = await MasterChef.getTotalAllocPoints();
+		
 
 		const poolInfo:MasterChefPoolData = await MasterChef.getPoolInfo(info.pid);
-		console.log(poolInfo.allocPoint)
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
@@ -117,7 +117,8 @@
 
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 		
-		const poolWeightbn = getPoolWeight(totalAllocPoints, poolInfo.allocPoint);
+		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
+		console.log(poolWeightbn,"POOL WEIGHT")
 		const tokenPerBlock = await MasterChef.getMushPerBlock();
 		const mushPerBlock: number = parseFloat(ethers.utils.formatEther(tokenPerBlock));
 		tokenAllocatedPerBlock = mushPerBlock * poolWeightbn.toNumber();
