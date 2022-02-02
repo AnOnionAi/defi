@@ -308,11 +308,11 @@
 
 	#switch:checked + label:after {
 	left: calc(100% - 5px);
-	transform: translateX(-100%);
+	transform: translateX(-90%);
 	}
 
 	#switch-label:active:after {
-	width: 60px;
+		width: 20px;
 	}
 
 	img {
