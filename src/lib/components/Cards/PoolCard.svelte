@@ -106,7 +106,6 @@
 	}
 
 	const refreshData = async () => {
-		console.log('data refresh account:', $accounts, userAcc);
 		try {
 			tokenAllowance = await getTokenAllowance(
 				info.tokenAddr,

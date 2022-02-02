@@ -190,7 +190,7 @@
 				<div class="flex w-10/12 justify-around ">
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">APY</p>
-						<p class="dark:text-white">{vaultConfig.apy.toFixed(2)}</p>
+						<p class="dark:text-white">{vaultConfig.apy.toFixed(2)}%</p>
 					</div>
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Staked</p>
@@ -203,7 +203,7 @@
 					</div>
 					<div>
 						<p class="text-gray-600 font-light text-sm dark:text-gray-300">TVL</p>
-						<p class="dark:text-white">{vaultConfig.tvl.toFixed(2)}</p>
+						<p class="dark:text-white">${vaultConfig.tvl.toFixed(2)}</p>
 					</div>
 				</div>
 				<div class="dark:text-white">
