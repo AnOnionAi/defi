@@ -18,9 +18,7 @@
 <section class="green {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
 	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.automated-crypto.text')}</h1>
 	<p class="text-sm p-4 lg:text-2xl lg:p-48">
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias esse eius quis eaque, vero ullam
-		iste ipsam. Obcaecati error odit debitis distinctio quas eos natus recusandae, non mollitia.
-		Cupiditate, error?
+		{$_('about.automated-description')}
 	</p>
 	<div class="curve {$darkMode && 'dark-curve'}" />
 	<img
@@ -34,9 +32,7 @@
 	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.farms.text')}</h1>
 	<div class="columns">
 		<p class="text-sm p-4 lg:text-2xl lg:p-48">
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias fugit eius aspernatur
-			exercitationem tenetur soluta, nam similique. Eveniet quod facilis, animi aliquam iste
-			perferendis asperiores distinctio corrupti voluptatum, itaque amet.
+			{$_('about.farms-description')}
 		</p>
 		<img
 			class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto"
@@ -55,9 +51,7 @@
 			alt="pools"
 		/>
 		<p class="text-sm p-4 lg:text-2xl lg:p-48">
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta recusandae totam
-			asperiores nostrum, quo, id excepturi sint aperiam voluptatum quod quia facere aut! Reiciendis
-			explicabo impedit quod odio excepturi.
+			{$_('about.pools-description')}
 		</p>
 	</div>
 </section>
@@ -65,9 +59,7 @@
 <section class="orange {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
 	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.vaults.text')}</h1>
 	<p class="text-sm p-4 lg:text-2xl lg:p-48">
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt incidunt blanditiis,
-		pariatur quibusdam voluptatibus vel quam quia amet minus dolorem sapiente voluptas facere
-		veritatis voluptatum id placeat repellat nisi.
+		{$_('about.vaults-description')}
 	</p>
 	<img
 		class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto my-4"
@@ -81,9 +73,7 @@
 <section class="crypto-responsibility blue {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
 	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.crypto-responsibility.text')}</h1>
 	<p class="text-sm p-4 lg:text-2xl lg:p-48">
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt incidunt blanditiis,
-		pariatur quibusdam voluptatibus vel quam quia amet minus dolorem sapiente voluptas facere
-		veritatis voluptatum id placeat repellat nisi.
+		{$_('about.responsibility-description')}
 	</p>
 	<img
 		class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto"
