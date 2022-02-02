@@ -152,8 +152,8 @@ export interface PoolInfoResponse {
 }
 
 export interface LoadingState {
-	loadingApproval: boolean;
-	loadingDeposit: boolean;
-	loadingWithdraw: boolean;
-	loadingHarvest: boolean;
+	loadingApproval?: boolean;
+	loadingDeposit?: boolean;
+	loadingWithdraw?: boolean;
+	loadingHarvest?: boolean;
 }

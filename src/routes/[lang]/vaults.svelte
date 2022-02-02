@@ -12,6 +12,7 @@
 	import BottomList from '$lib/components/Cards/BottomList.svelte';
 	import { onMount } from 'svelte';
 	import { generateRandomBalance, reduceFilters } from '$lib/utils/filterFunctions';
+	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
@@ -28,8 +29,8 @@
 		allVaults = vaultsData.map((vault) => {
 			return {
 				...vault,
-				apy: Math.random() * 200,
-				tvl: Math.random() * 1200,
+				apy: Math.random() * $tokenPrice,
+				tvl: Math.random() * $tokenPrice,
 				userWalletBalance: generateRandomBalance(), //TODO: remove this random to the actual api calls.
 				stakedAmount: generateRandomBalance()
 			};
