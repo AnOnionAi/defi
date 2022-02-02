@@ -6,7 +6,6 @@
 	import { _ } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
-	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
 	import ConnectButton from '$lib/components/Buttons/ConnectButton.svelte';
@@ -52,12 +51,6 @@
 			title: $_('headers.vaults.text')
 		}
 	];
-
-	const gotoPage = (route: string, home: boolean = false) => {
-		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
-		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
-		console.log($page.params.lang);
-	};
 </script>
 
 <svelte:window
@@ -90,12 +83,7 @@
 		<div class="sm:mr-3 flex-1 flex items-center justify-center sm:justify-start">
 			<!-- LOGO -->
 			<div class="flex-shrink-0 flex items-center">
-				<span
-					class="flex cursor-pointer"
-					on:click={() => {
-						gotoPage('', true);
-					}}
-				>
+				<a href={`/${$page.params.lang}/`} class="flex cursor-pointer">
 					<img class="w-10 " src="/cute/fiji.svg" alt="Fung Finance Logo" />
 					{#if $isHomescreen}
 						<img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
@@ -104,7 +92,7 @@
 					{:else}
 						<img class="mt-1 " src="/cute/fungfiLiteMode.svg" alt="Fung Finance" />
 					{/if}
-				</span>
+				</a>
 			</div>
 			<div class="ml-4 hidden lg:block ">
 				<div

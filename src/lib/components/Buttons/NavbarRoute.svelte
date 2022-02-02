@@ -6,13 +6,7 @@
 
 	let isCurrentRoute = false;
 
-	$: {
-		if ($page.path.includes(pageRoute.route)) {
-			isCurrentRoute = true;
-		} else {
-			isCurrentRoute = false;
-		}
-	}
+	$: isCurrentRoute = $page?.url.pathname.includes(pageRoute.route);
 </script>
 
 <a sveltekit:prefetch href={`/${$page.params.lang}${pageRoute.route}`}>
