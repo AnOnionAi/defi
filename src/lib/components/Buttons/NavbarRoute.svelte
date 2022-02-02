@@ -5,14 +5,8 @@
 	export let pageRoute;
 
 	let isCurrentRoute = false
-
-	$:{
-		if($page.path.includes(pageRoute.route)){
-			isCurrentRoute = true;
-		}else{
-			isCurrentRoute = false;
-		}
-	}
+	
+	$:isCurrentRoute = $page?.url.pathname.includes(pageRoute.route)
 </script>
 
 <a 
