@@ -18,12 +18,13 @@
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
+import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 	const { addNotification } = getNotificationsContext();
 
 	const numericRegex: RegExp = /^\d+(\.\d+)*$/;
 
-	const mushUsdPrice = 0.000000000001; //todo: change this value to the real mushPrice fetching an api.
+	$:mushUsdPrice = $tokenPrice
 
 	let TVL: BigNumber;
 
@@ -246,9 +247,6 @@
 					</button>
 				</div>
 			</div>
-			<p class="text-xs text-gray-500 dark:text-white pl-1 ">
-				Daily ROI Breakdown: 0.41% from Pools
-			</p>
 
 			<div class="flex flex-col text-sm h-2/6 justify-center">
 				<p class="text-gray-600 dark:text-gray-300 font-semibold ml-1 mb-1">
