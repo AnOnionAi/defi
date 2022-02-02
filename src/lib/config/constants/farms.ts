@@ -9,6 +9,5 @@ export const farms: PoolInfo[] = [
 		tokenImagePath: '/mush-usdc.svg',
 		tokenName: 'MUSH-USDC',
 		tokenAddr: getContractAddress(Token.SUSHILP)
-	},
-	
+	}
 ];

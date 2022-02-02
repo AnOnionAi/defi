@@ -339,7 +339,10 @@
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center">
 								{#if $mushPerBlock}
-									<p in:fade={{duration: 1000}} class="text-2xl tracking-tighter font-semibold dark:text-white">
+									<p
+										in:fade={{ duration: 1000 }}
+										class="text-2xl tracking-tighter font-semibold dark:text-white"
+									>
 										{$mushPerBlock} MUSH
 									</p>
 								{/if}
@@ -352,14 +355,14 @@
 						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 dark:border-green-500 shadow-md"
 					>
 						<div class="p-4">
-							<p 
+							<p
 								class="pl-1 text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
 							>
 								{$_('dashboard.marketcap')}
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
 								{#if $mushMarketCap}
-									<p in:fade={{duration: 1000}} class="text-2xl tracking-tighter font-semibold">
+									<p in:fade={{ duration: 1000 }} class="text-2xl tracking-tighter font-semibold">
 										${$page.params.lang == 'es'
 											? $mushMarketCap.toLocaleString('es-ES')
 											: $mushMarketCap.toLocaleString('en-US')} USD
@@ -384,7 +387,9 @@
 							</p>
 							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
 								{#if $totalMushSupply}
-									<p in:fade={{duration: 1000}} class="text-2xl font-semibold">{shortLargeAmount($totalMushSupply)}</p>
+									<p in:fade={{ duration: 1000 }} class="text-2xl font-semibold">
+										{shortLargeAmount($totalMushSupply)}
+									</p>
 								{/if}
 							</div>
 						</div>
@@ -479,8 +484,8 @@
 </div>
 
 <style>
-	.background{
-		background-image: url("/backgrounds/dashboardMushrooms.png");
+	.background {
+		background-image: url('/backgrounds/dashboardMushrooms.png');
 		background-size: cover;
 	}
 </style>

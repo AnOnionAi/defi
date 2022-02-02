@@ -143,13 +143,12 @@ export enum Criteria {
 	YIELD = 'YIELD'
 }
 
-
-export interface PoolInfoResponse{
-	accmushPerShare: BigNumber,
-	allocPoint: BigNumber,
-	depositFeeBP: number,
-	lastRewardBlock: BigNumber,
-	lpToken: string
+export interface PoolInfoResponse {
+	accmushPerShare: BigNumber;
+	allocPoint: BigNumber;
+	depositFeeBP: number;
+	lastRewardBlock: BigNumber;
+	lpToken: string;
 }
 
 export interface LoadingState {

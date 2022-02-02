@@ -39,8 +39,6 @@
 		onWithdraw(wantAmount);
 		close();
 	};
-
-	
 </script>
 
 <div
@@ -67,7 +65,8 @@
 					<div class="flex">
 						{#if action == 'DEPOSIT'}
 							<button
-								on:click={() => (wantAmount = ethers.utils.formatUnits(userBalance, stakingTokenDecimals))}
+								on:click={() =>
+									(wantAmount = ethers.utils.formatUnits(userBalance, stakingTokenDecimals))}
 								class="text-xs  mr-1 text-green-400  rounded-full">MAX</button
 							>
 						{:else if action == 'WITHDRAW'}
@@ -112,7 +111,7 @@
 				</div>
 			</div>
 			<div class="mt-5">
-				<p style="color: {primaryTextColor};" class="font-semibold">{$_("modals.otherOptions")}</p>
+				<p style="color: {primaryTextColor};" class="font-semibold">{$_('modals.otherOptions')}</p>
 			</div>
 			<div class="mt-3 w-full flex justify-between">
 				{#if action === 'DEPOSIT'}
@@ -136,32 +135,47 @@
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userBalance.div(4).mul(3), stakingTokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(
+								userBalance.div(4).mul(3),
+								stakingTokenDecimals
+							))}
 						class="bg-green-500 py-1 px-3 hover:bg-green-400 rounded-lg text-white text-light"
 						>75%</button
 					>
 				{:else if action === 'WITHDRAW'}
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(10), stakingTokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(
+								userStakedTokens.div(10),
+								stakingTokenDecimals
+							))}
 						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
 						>10%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(4), stakingTokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(
+								userStakedTokens.div(4),
+								stakingTokenDecimals
+							))}
 						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
 						>25%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(2), stakingTokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(
+								userStakedTokens.div(2),
+								stakingTokenDecimals
+							))}
 						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
 						>50%</button
 					>
 					<button
 						on:click={() =>
-							(wantAmount = ethers.utils.formatUnits(userStakedTokens.div(4), stakingTokenDecimals))}
+							(wantAmount = ethers.utils.formatUnits(
+								userStakedTokens.div(4),
+								stakingTokenDecimals
+							))}
 						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
 						>75%</button
 					>
@@ -173,13 +187,13 @@
 					<button
 						on:click={startDeposit}
 						class="block w-full py-3 bg-green-500 hover:bg-green-400 text-md uppercase 	text-white font-medium tracking-widest rounded-xl "
-						>{$_("actions.deposit")} {info.tokenName}</button
+						>{$_('actions.deposit')} {info.tokenName}</button
 					>
 				{:else if action === 'WITHDRAW'}
 					<button
 						on:click={startWithdraw}
 						class="block w-full py-3 bg-red-500 hover:bg-red-400 text-md uppercase 	text-white font-medium tracking-widest rounded-xl "
-						>{$_("actions.withdraw")} {info.tokenName}</button
+						>{$_('actions.withdraw')} {info.tokenName}</button
 					>
 				{/if}
 			</div>
