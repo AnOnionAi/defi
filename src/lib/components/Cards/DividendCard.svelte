@@ -18,28 +18,26 @@
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
-import { tokenPrice } from '$lib/stores/NativeTokenPrice';
+	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 	const { addNotification } = getNotificationsContext();
 
-
-	$:mushUsdPrice = $tokenPrice
+	$: mushUsdPrice = $tokenPrice;
 
 	let pollingInterval;
 
 	let TVL: BigNumber;
-	let userAddress:string;
+	let userAddress: string;
 	let userBalance: BigNumber;
 	let userStakedTokens: BigNumber;
 	let userReward: BigNumber;
 
-	let userCanWithdraw: boolean = false
+	let userCanWithdraw: boolean = false;
 	let userCanHarvest: boolean = false;
 	let userCanDeposit: boolean = false;
 
 	let depositInput: string = '';
 	let withdrawInput: string = '';
-
 
 	let loadingState: LoadingState = {
 		loadingDeposit: false,
@@ -47,36 +45,35 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 		loadingWithdraw: false
 	};
 
-	$:userAddress  = $accounts?.[0]
-	$:userCanDeposit = !userBalance?.isZero();
-	$:userCanWithdraw = !userStakedTokens?.isZero();
-	$:userCanDeposit =  !userReward?.isZero();
+	$: userAddress = $accounts?.[0];
+	$: userCanDeposit = !userBalance?.isZero();
+	$: userCanWithdraw = !userStakedTokens?.isZero();
+	$: userCanDeposit = !userReward?.isZero();
 
-	$: if(userAddress){
+	$: if (userAddress) {
 		refreshUserData();
-		pollingInterval = setInterval(refreshUserData,8000);
-	}else{
+		pollingInterval = setInterval(refreshUserData, 8000);
+	} else {
 		clearInterval(pollingInterval);
 	}
 
-
-	onDestroy(()=>{
-		clearInterval(pollingInterval)
+	onDestroy(() => {
+		clearInterval(pollingInterval);
 	});
-	
-	const refreshUserData = async() => {
+
+	const refreshUserData = async () => {
 		try {
 			userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN), userAddress);
-			console.log(userBalance)
+			console.log(userBalance);
 			userStakedTokens = await stakedWantTokens(2, userAddress);
 			TVL = await getSharesTotal();
 			userReward = await getPendingReward(userAddress);
 		} catch {
 			console.log('Failed on fetching data');
 		}
-	}
+	};
 
-	const handleDeposit = async() => {
+	const handleDeposit = async () => {
 		addNotification(transactionSend);
 		try {
 			loadingState.loadingDeposit = true;
@@ -93,9 +90,9 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 			loadingState.loadingDeposit = false;
 		}
 		loadingState.loadingDeposit = false;
-	}
+	};
 
-	const handleWithdraw = async() => {
+	const handleWithdraw = async () => {
 		addNotification(transactionSend);
 
 		try {
@@ -112,9 +109,9 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 			addNotification(transactionDeniedByTheUser);
 			loadingState.loadingWithdraw = false;
 		}
-	}
+	};
 
-	const handleHarvest = async() => {
+	const handleHarvest = async () => {
 		loadingState.loadingHarvest = true;
 		addNotification(transactionSend);
 		try {
@@ -129,8 +126,7 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 			loadingState.loadingHarvest = false;
 		}
 		loadingState.loadingHarvest = false;
-	}
-
+	};
 </script>
 
 <div class="h-full w-full">

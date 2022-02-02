@@ -24,7 +24,7 @@
 		wrongInput
 	} from '$lib/config/constants/notifications';
 	const { addNotification } = getNotificationsContext();
-	
+
 	let userAccount: string;
 	let userMushAllowance: BigNumber = ethers.constants.Zero;
 	let approved: boolean = false;
@@ -36,12 +36,14 @@
 	$: approved = !userMushAllowance.isZero();
 
 	$: if (userAccount) {
-		getTokenAllowance(getContractAddress(Token.MUSHTOKEN),
-				getContractAddress(Token.VAULTCHEF),
-				userAccount).then(response => {
-					userMushAllowance = response;
-					finishedApprovalFetch = true;
-				})
+		getTokenAllowance(
+			getContractAddress(Token.MUSHTOKEN),
+			getContractAddress(Token.VAULTCHEF),
+			userAccount
+		).then((response) => {
+			userMushAllowance = response;
+			finishedApprovalFetch = true;
+		});
 	}
 
 	darkMode.subscribe((darkEnabled) => {
@@ -50,23 +52,23 @@
 			: (backgroundImage = '/backgrounds/cuteMush.svg');
 	});
 
-	const handleApproval =async() => {
+	const handleApproval = async () => {
 		try {
-			console.log("whats happening")
+			console.log('whats happening');
 			addNotification(transactionSend);
-			
+
 			const tx = await approveToken(
 				getContractAddress(Token.MUSHTOKEN),
 				getContractAddress(Token.VAULTCHEF)
 			);
 			await tx.wait();
 			approved = true;
-			addNotification(transactionCompleted)
+			addNotification(transactionCompleted);
 		} catch (e) {
 			console.log(e);
-			addNotification(transactionDeniedByTheUser)
+			addNotification(transactionDeniedByTheUser);
 		}
-	}
+	};
 </script>
 
 <br />
