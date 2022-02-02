@@ -9,13 +9,13 @@ const updateDarkMode = (callback) => {
 		darkMode.set(true);
 		callback();
 	}
-}
+};
 
 let now = new Date().getHours();
-updateDarkMode(()=>{});
+updateDarkMode(() => {});
 
 const autoDark = setInterval(() => {
 	updateDarkMode(() => {
 		clearInterval(autoDark);
-	})
+	});
 }, 1000);

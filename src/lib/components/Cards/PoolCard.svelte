@@ -7,17 +7,20 @@
 	import type { LoadingState, PoolInfo, PoolInfoResponse } from '$lib/ts/types';
 	import { Token } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
-	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance,  getTokenName, getTokenDecimals } from '$lib/utils/erc20';
+	import {
+		approveToken,
+		getTokenAllowance,
+		isNotZero,
+		getTokenBalance,
+		getTokenName,
+		getTokenDecimals
+	} from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
 	import Fa from 'svelte-fa';
 	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-	import {
-		MasterChef,
-		getPoolMultiplier,
-		getPoolWeight
-	} from '$lib/utils/masterc';
+	import { MasterChef, getPoolMultiplier, getPoolWeight } from '$lib/utils/masterc';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
 	import { Circle } from 'svelte-loading-spinners';
@@ -38,11 +41,8 @@
 	import MultiplierBadge from '../Badges/MultiplierBadge.svelte';
 	import { totalAllocPoints } from '$lib/stores/MasterChefData';
 
-
-
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
-
 
 	export let info: PoolInfo;
 	export let isFarm: boolean = false;
@@ -66,39 +66,37 @@
 	let poolMultiplier: number;
 
 	let isHidden: boolean = true;
-	
+
 	let userAcc: string;
 	let tokenApproved: boolean;
 	let canStake: boolean;
 	let canWithdraw: boolean;
 	let canHarvest: boolean;
-	
-	
+
 	let wantWithdrawAmount: any;
 	let idInterval;
 
-
 	let tokenAllowance: BigNumber = ethers.constants.Zero;
-	let userBalance: BigNumber  = ethers.constants.Zero;
+	let userBalance: BigNumber = ethers.constants.Zero;
 	let userEarnings: BigNumber = ethers.constants.Zero;
 	let userStakedTokens: BigNumber = ethers.constants.Zero;
 
-	$:rewardTokenPrice  = $tokenPrice;
-	$:userAcc = $accounts?.[0];
+	$: rewardTokenPrice = $tokenPrice;
+	$: userAcc = $accounts?.[0];
 
-	$:tokenApproved = !tokenAllowance.isZero()
-	$:canStake = !tokenAllowance.isZero() &&  !userBalance.isZero();
-	$:canWithdraw = !userStakedTokens.isZero();
-	$:canHarvest = !userEarnings.isZero();
+	$: tokenApproved = !tokenAllowance.isZero();
+	$: canStake = !tokenAllowance.isZero() && !userBalance.isZero();
+	$: canWithdraw = !userStakedTokens.isZero();
+	$: canHarvest = !userEarnings.isZero();
 
-	$: if(userAcc){
+	$: if (userAcc) {
 		refreshData();
-		idInterval = setInterval(refreshData,8000);
-	}else{
+		idInterval = setInterval(refreshData, 8000);
+	} else {
 		clearInterval(idInterval);
 	}
 
-	$:{
+	$: {
 		/* console.log({
 				tokenAllowance,
 				userBalance,
@@ -107,33 +105,38 @@
 			}) */
 	}
 
-	const refreshData = async () =>{ 
-		console.log("data refresh account:",$accounts,userAcc)
-		try{
-			tokenAllowance = await getTokenAllowance(info.tokenAddr,getContractAddress(Token.MASTERCHEF),userAcc);
-			if(tokenAllowance.isZero()) return;
-			userBalance = await getTokenBalance(info.tokenAddr,userAcc);
-			if(userBalance.isZero()) return;
-			userStakedTokens = await MasterChef.getStakedTokens(info.pid,userAcc)
-			if(userStakedTokens.isZero()) return;
-			userEarnings = await MasterChef.getPendingMush(info.pid)	
-		}catch(e){
-		}
-		
-	}
+	const refreshData = async () => {
+		console.log('data refresh account:', $accounts, userAcc);
+		try {
+			tokenAllowance = await getTokenAllowance(
+				info.tokenAddr,
+				getContractAddress(Token.MASTERCHEF),
+				userAcc
+			);
+			if (tokenAllowance.isZero()) return;
+			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
+			if (userBalance.isZero()) return;
+			userStakedTokens = await MasterChef.getStakedTokens(info.pid, userAcc);
+			if (userStakedTokens.isZero()) return;
+			userEarnings = await MasterChef.getPendingMush(info.pid);
+		} catch (e) {}
+	};
 
 	onMount(async () => {
 		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
-		const poolInfo:PoolInfoResponse = await MasterChef.getPoolInfo(info.pid);
+		const poolInfo: PoolInfoResponse = await MasterChef.getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
 		stakingTokenPrice = await getStakingTokenPrice();
 
-		const sta: BigNumber = await getTokenBalance(info.tokenAddr,getContractAddress(Token.MASTERCHEF));
+		const sta: BigNumber = await getTokenBalance(
+			info.tokenAddr,
+			getContractAddress(Token.MASTERCHEF)
+		);
 		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, stakingTokenDecimals));
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
-		
+
 		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
 		const tokenPerBlock = await MasterChef.getMushPerBlock();
 		const mushPerBlock: number = parseFloat(ethers.utils.formatEther(tokenPerBlock));
@@ -154,7 +157,6 @@
 		clearInterval(idInterval);
 	});
 
-
 	const getStakingTokenPrice = async () => {
 		if (isFarm) {
 			stakingTokenPrice = await getPriceOfMushPair(info.tokenAddr);
@@ -170,7 +172,7 @@
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await MasterChef.deposit(info.pid, amount,stakingTokenDecimals);
+			const tx = await MasterChef.deposit(info.pid, amount, stakingTokenDecimals);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
@@ -209,20 +211,19 @@
 		loadingState.loadingHarvest = false;
 	};
 
-	const onApprove = async() =>{
-		loadingState.loadingApproval=true;
-		try{
+	const onApprove = async () => {
+		loadingState.loadingApproval = true;
+		try {
 			addNotification(transactionSend);
-			const tx = await approveToken(info.tokenAddr,getContractAddress(Token.MASTERCHEF));
+			const tx = await approveToken(info.tokenAddr, getContractAddress(Token.MASTERCHEF));
 			await tx.wait();
 			addNotification(transactionCompleted);
-		}
-		catch{
+		} catch {
 			addNotification(transactionDeniedByTheUser);
-			console.log("Oops")
+			console.log('Oops');
 		}
 		loadingState.loadingApproval = false;
-	}
+	};
 
 	const openModal = (action: string) => {
 		open(
@@ -243,12 +244,10 @@
 			}
 		);
 	};
-	
 
 	const showPoolInfo = () => {
-		isHidden = !isHidden
+		isHidden = !isHidden;
 	};
-	
 </script>
 
 <div
@@ -259,9 +258,9 @@
 	<div class="absolute flex flex-row-reverse p-4 w-full">
 		<div>
 			{#if isFarm}
-			<SushiswapBadge/>
-		{/if}
-		<MultiplierBadge multiplier={poolMultiplier}/>
+				<SushiswapBadge />
+			{/if}
+			<MultiplierBadge multiplier={poolMultiplier} />
 		</div>
 	</div>
 	<div class="py-4 px-8 flex flex-col h-124">
@@ -343,7 +342,9 @@
 				<div class="flex justify-between items-center w-full h-full">
 					{#if userStakedTokens}
 						<p class="flex text-xl dark:text-white">
-							{parseFloat(ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)).toPrecision(4)}
+							{parseFloat(
+								ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)
+							).toPrecision(4)}
 						</p>
 					{:else}
 						<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />

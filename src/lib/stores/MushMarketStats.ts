@@ -15,8 +15,6 @@ const mushTokenContract = new ethers.Contract(
 	Provider.getProviderSingleton()
 );
 
-
-
 export const totalMushSupply: Readable<number> = readable(undefined, function start(set) {
 	mushTokenContract.totalSupply().then((amountBN) => {
 		const mushSupply = parseFloat(ethers.utils.formatEther(amountBN));

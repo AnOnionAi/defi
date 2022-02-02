@@ -484,8 +484,8 @@
 </div>
 
 <style>
-	.background{
-		background-image: url("/backgrounds/dashboardMushrooms.png");
+	.background {
+		background-image: url('/backgrounds/dashboardMushrooms.png');
 		background-size: cover;
 	}
 </style>
