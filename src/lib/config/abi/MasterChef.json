@@ -3,7 +3,7 @@
 		"inputs": [
 			{
 				"internalType": "contract MushToken",
-				"name": "_fish",
+				"name": "_mush",
 				"type": "address"
 			},
 			{
@@ -14,6 +14,11 @@
 			{
 				"internalType": "address",
 				"name": "_devAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_marketingAddress",
 				"type": "address"
 			},
 			{
@@ -212,7 +217,7 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "fishPerBlock",
+				"name": "mushPerBlock",
 				"type": "uint256"
 			}
 		],
@@ -343,32 +348,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "fish",
-		"outputs": [
-			{
-				"internalType": "contract MushToken",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "fishPerBlock",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -394,9 +373,61 @@
 	},
 	{
 		"inputs": [],
+		"name": "marketingAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "massUpdatePools",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mush",
+		"outputs": [
+			{
+				"internalType": "contract MushToken",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mushMaxSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mushPerBlock",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -425,7 +456,7 @@
 				"type": "address"
 			}
 		],
-		"name": "pendingFish",
+		"name": "pendingMush",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -482,7 +513,7 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "accFishPerShare",
+				"name": "accmushPerShare",
 				"type": "uint256"
 			},
 			{
@@ -671,7 +702,7 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_fishPerBlock",
+				"name": "_mushPerBlock",
 				"type": "uint256"
 			}
 		],

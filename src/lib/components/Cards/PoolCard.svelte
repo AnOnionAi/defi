@@ -4,20 +4,16 @@
 	import { slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import type { PoolInfo } from '$lib/ts/types';
+	import type { LoadingState, PoolInfo, PoolInfoResponse } from '$lib/ts/types';
 	import { Token } from '$lib/ts/types';
 	import { metaMaskCon } from '$lib/utils/helpers';
-	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance } from '$lib/utils/erc20';
+	import { approveToken, getTokenAllowance, isNotZero, getTokenBalance,  getTokenName, getTokenDecimals } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
 	import Fa from 'svelte-fa';
 	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 	import {
-		deposit,
-		withdraw,
-		getRewards,
-		getStakedTokens,
 		MasterChef,
 		getPoolMultiplier,
 		getPoolWeight
@@ -38,13 +34,15 @@
 	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	import DepositWithdraw from '../Modals/DepositWithdraw.svelte';
+	import SushiswapBadge from '../Badges/SushiswapBadge.svelte';
+	import MultiplierBadge from '../Badges/MultiplierBadge.svelte';
+	import { totalAllocPoints } from '$lib/stores/MasterChefData';
 
-	interface LoadingState {
-		loadingApproval: boolean;
-		loadingDeposit: boolean;
-		loadingWithdraw: boolean;
-		loadingHarvest: boolean;
-	}
+
+
+	const { addNotification } = getNotificationsContext();
+	const { open } = getContext('simple-modal');
+
 
 	export let info: PoolInfo;
 	export let isFarm: boolean = false;
@@ -56,7 +54,7 @@
 	let poolLiquidityUSD: number;
 	let tokenAllocatedPerBlock: number;
 	let poolApr;
-	let tokenDecimals;
+	let stakingTokenDecimals = 18;
 
 	let loadingState: LoadingState = {
 		loadingApproval: false,
@@ -68,44 +66,75 @@
 	let poolMultiplier: number;
 
 	let isHidden: boolean = true;
-	let tokenApproved: boolean;
+	
 	let userAcc: string;
-	let tokenAllowance: BigNumber;
+	let tokenApproved: boolean;
 	let canStake: boolean;
 	let canWithdraw: boolean;
 	let canHarvest: boolean;
-	let userStakedTokens: BigNumber;
-	let userEarnings: BigNumber;
-	let userBalance: BigNumber;
+	
+	
 	let wantWithdrawAmount: any;
 	let idInterval;
 
-	const stakingTokenContract = new ethers.Contract(
-		info.tokenAddr,
-		ERC20ABI,
-		Provider.getProviderSingleton()
-	);
 
-	tokenPrice.subscribe((tokenPrice) => {
-		rewardTokenPrice = tokenPrice;
-	});
+	let tokenAllowance: BigNumber = ethers.constants.Zero;
+	let userBalance: BigNumber  = ethers.constants.Zero;
+	let userEarnings: BigNumber = ethers.constants.Zero;
+	let userStakedTokens: BigNumber = ethers.constants.Zero;
 
-	const { addNotification } = getNotificationsContext();
-	const { open } = getContext('simple-modal');
+	$:rewardTokenPrice  = $tokenPrice;
+	$:userAcc = $accounts?.[0];
+
+	$:tokenApproved = !tokenAllowance.isZero()
+	$:canStake = !tokenAllowance.isZero() &&  !userBalance.isZero();
+	$:canWithdraw = !userStakedTokens.isZero();
+	$:canHarvest = !userEarnings.isZero();
+
+	$: if(userAcc){
+		refreshData();
+		idInterval = setInterval(refreshData,8000);
+	}else{
+		clearInterval(idInterval);
+	}
+
+	$:{
+		/* console.log({
+				tokenAllowance,
+				userBalance,
+				userStakedTokens,
+				userEarnings
+			}) */
+	}
+
+	const refreshData = async () =>{ 
+		console.log("data refresh account:",$accounts,userAcc)
+		try{
+			tokenAllowance = await getTokenAllowance(info.tokenAddr,getContractAddress(Token.MASTERCHEF),userAcc);
+			if(tokenAllowance.isZero()) return;
+			userBalance = await getTokenBalance(info.tokenAddr,userAcc);
+			if(userBalance.isZero()) return;
+			userStakedTokens = await MasterChef.getStakedTokens(info.pid,userAcc)
+			if(userStakedTokens.isZero()) return;
+			userEarnings = await MasterChef.getPendingMush(info.pid)	
+		}catch(e){
+		}
+		
+	}
 
 	onMount(async () => {
-		tokenDecimals = await stakingTokenContract.decimals();
-		const totalAllocPoints = await MasterChef.getTotalAllocPoint();
-		const poolInfo = await MasterChef.getPoolInfo(info.pid);
+		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
+		const poolInfo:PoolInfoResponse = await MasterChef.getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
+
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
 		stakingTokenPrice = await getStakingTokenPrice();
-		const sta: BigNumber = await stakingTokenContract.balanceOf(
-			getContractAddress(Token.MASTERCHEF)
-		);
-		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, tokenDecimals));
+
+		const sta: BigNumber = await getTokenBalance(info.tokenAddr,getContractAddress(Token.MASTERCHEF));
+		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, stakingTokenDecimals));
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
-		const poolWeightbn = getPoolWeight(totalAllocPoints, poolInfo.allocPoint);
+		
+		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
 		const tokenPerBlock = await MasterChef.getMushPerBlock();
 		const mushPerBlock: number = parseFloat(ethers.utils.formatEther(tokenPerBlock));
 		tokenAllocatedPerBlock = mushPerBlock * poolWeightbn.toNumber();
@@ -120,6 +149,11 @@
 			poolApr = 'Infinity';
 		}
 	});
+
+	onDestroy(() => {
+		clearInterval(idInterval);
+	});
+
 
 	const getStakingTokenPrice = async () => {
 		if (isFarm) {
@@ -136,7 +170,7 @@
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await deposit(info.pid, amount, tokenDecimals);
+			const tx = await MasterChef.deposit(info.pid, amount,stakingTokenDecimals);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
@@ -144,7 +178,6 @@
 			addNotification(transactionDeniedByTheUser);
 		}
 		loadingState.loadingDeposit = false;
-		userStakedTokens = await getStakedTokens(info.pid, userAcc);
 	};
 
 	const onWithdraw = async (amount) => {
@@ -152,25 +185,23 @@
 		wantWithdrawAmount = amount;
 		addNotification(transactionSend);
 		try {
-			const tx = await withdraw(info.pid, wantWithdrawAmount, tokenDecimals);
+			const tx = await MasterChef.withdraw(info.pid, wantWithdrawAmount, stakingTokenDecimals);
 			await tx.wait();
-			loadingState.loadingWithdraw = false;
 			addNotification(transactionCompleted);
-			userStakedTokens = await getStakedTokens(info.pid, userAcc);
 		} catch (error) {
 			console.log('Internal Error on WithdrawHandler', error);
 			addNotification(transactionDeniedByTheUser);
 		}
+		loadingState.loadingWithdraw = false;
 	};
 
 	const onHarvest = async () => {
 		loadingState.loadingHarvest = true;
 		try {
-			const tx = await deposit(info.pid, '0');
 			addNotification(transactionSend);
+			const tx = await MasterChef.deposit(info.pid, '0');
 			await tx.wait();
 			addNotification(transactionCompleted);
-			userEarnings = ethers.constants.Zero;
 		} catch (error) {
 			addNotification(transactionDeniedByTheUser);
 			console.log('Error: ', error);
@@ -178,13 +209,28 @@
 		loadingState.loadingHarvest = false;
 	};
 
+	const onApprove = async() =>{
+		loadingState.loadingApproval=true;
+		try{
+			addNotification(transactionSend);
+			const tx = await approveToken(info.tokenAddr,getContractAddress(Token.MASTERCHEF));
+			await tx.wait();
+			addNotification(transactionCompleted);
+		}
+		catch{
+			addNotification(transactionDeniedByTheUser);
+			console.log("Oops")
+		}
+		loadingState.loadingApproval = false;
+	}
+
 	const openModal = (action: string) => {
 		open(
 			DepositWithdraw,
 			{
 				userStakedTokens,
 				userBalance,
-				tokenDecimals,
+				stakingTokenDecimals,
 				info,
 				onDeposit,
 				onWithdraw,
@@ -197,87 +243,26 @@
 			}
 		);
 	};
-	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
-		if (arrayAccs) {
-			userAcc = arrayAccs[0];
-			tokenAllowance = await getTokenAllowance(
-				info.tokenAddr,
-				getContractAddress(Token.MASTERCHEF),
-				userAcc
-			);
-			tokenApproved = isNotZero(tokenAllowance);
-			if (tokenApproved) {
-				userBalance = await getTokenBalance(info.tokenAddr, userAcc);
-
-				canStake = isNotZero(userBalance);
-				userEarnings = await getRewards(info.pid, userAcc);
-				canHarvest = isNotZero(userEarnings);
-				userStakedTokens = await getStakedTokens(info.pid, userAcc);
-			}
-			if (canStake) {
-				userStakedTokens = await getStakedTokens(info.pid, userAcc);
-
-				canWithdraw = isNotZero(userStakedTokens);
-			}
-			idInterval = setInterval(async () => {
-				await fetchRecentData();
-			}, 10000);
-		}
-	});
-
-	onDestroy(() => {
-		clearInterval(idInterval);
-	});
-
-	const fetchRecentData = async () => {
-		if (tokenApproved) {
-			userEarnings = await getRewards(info.pid, userAcc);
-			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
-			userStakedTokens = await getStakedTokens(info.pid, userAcc);
-		}
-	};
+	
 
 	const showPoolInfo = () => {
-		isHidden ? (isHidden = false) : (isHidden = true);
+		isHidden = !isHidden
 	};
-	const approveHandler = async () => {
-		loadingState.loadingApproval = true;
-
-		try {
-			const tx = await approveToken(info.tokenAddr, getContractAddress(Token.MASTERCHEF));
-
-			await tx.wait();
-			addNotification(transactionCompleted);
-			tokenApproved = true;
-			canStake = true;
-			tokenAllowance = await getTokenAllowance(
-				info.tokenAddr,
-				getContractAddress(Token.MASTERCHEF),
-				userAcc
-			);
-		} catch (error) {
-			addNotification(transactionDeniedByTheUser);
-			loadingState.loadingApproval = false;
-			console.log('Error on approveHandler🥶', error);
-		}
-		loadingState.loadingApproval = false;
-	};
+	
 </script>
 
 <div
 	class="self-start min-w-84 max-w-84  bg-white dark:bg-dark-900 {!$darkMode &&
 		'shadow-xl'} {$darkMode &&
-		'border-2 border-green-500'} rounded-2xl relative transform transition duration-300 hover:scale-102"
+		'border-2 border-green-500'} rounded-2xl relative transform transition duration-300 hover:scale-101 select-none"
 >
 	<div class="absolute flex flex-row-reverse p-4 w-full">
-		{#if isFarm}
-			<div
-				class="flex items-center border-2 border-pink-400 text-pink-400 font-medium  px-1 rounded-full text-xs"
-			>
-				<img src="/sushi.png" alt="SushiSwap Logo" class="w-3 h-3 " />
-				<p class="px-1">SushiSwap</p>
-			</div>
+		<div>
+			{#if isFarm}
+			<SushiswapBadge/>
 		{/if}
+		<MultiplierBadge multiplier={poolMultiplier}/>
+		</div>
 	</div>
 	<div class="py-4 px-8 flex flex-col h-124">
 		<img src={info.tokenImagePath} alt={info.tokenName} class="w-30 h-30 self-center my-2" />
@@ -322,11 +307,9 @@
 					<p class="text-xl flex items-center dark:text-white">0</p>
 				{/if}
 				<button
-					disabled={!canHarvest}
+					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="text-sm py-2 px-4 rounded-lg {canHarvest
-						? 'bg-green-500 hover:bg-green-600'
-						: 'bg-gray-400 cursor-not-allowed'}  text-white font-semibold tracking-wide "
+					class="text-sm py-2 px-4 rounded-lg bg-green-500 text-white font-semibold tracking-wide disabled:bg-gray-400 disabled:cursor-not-allowed"
 					>{$_('actions.harvest')}</button
 				>
 			</div>
@@ -345,7 +328,7 @@
 				</button>
 			{:else if !tokenApproved}
 				<button
-					on:click={approveHandler}
+					on:click={onApprove}
 					class="flex justify-center items-center bg-green-500 hover:bg-green-600 text-white tracking-wide font-semibold w-full h-full rounded-xl"
 				>
 					{$_('actions.approve')}
@@ -360,7 +343,7 @@
 				<div class="flex justify-between items-center w-full h-full">
 					{#if userStakedTokens}
 						<p class="flex text-xl dark:text-white">
-							{parseFloat(ethers.utils.formatUnits(userStakedTokens, tokenDecimals)).toPrecision(4)}
+							{parseFloat(ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)).toPrecision(4)}
 						</p>
 					{:else}
 						<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
@@ -368,13 +351,15 @@
 
 					<div class="flex space-x-2">
 						<button
+							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white"
+							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
 							>+</button
 						>
 						<button
+							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white"
+							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
 							>-</button
 						>
 					</div>

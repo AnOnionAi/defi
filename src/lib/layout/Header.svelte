@@ -4,13 +4,11 @@
 
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
 	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
-	import { onDestroy, onMount } from 'svelte';
 	import ConnectButton from '$lib/components/Buttons/ConnectButton.svelte';
 	import LangPicker from '$lib/components/Dropdowns/LangPicker.svelte';
 	import DarkModeButton from '$lib/components/Buttons/DarkModeButton.svelte';
@@ -79,7 +77,7 @@
 	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
 		'bg-dark-500 border-dark-200'} backdrop-blur top-0 w-full  {!$isHomescreen &&
-		'border-b-2'} border-gray-200"
+		'border-b-2'} border-gray-200 py-2 "
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-3 ">
