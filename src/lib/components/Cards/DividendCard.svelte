@@ -4,8 +4,8 @@
 	import { getTokenBalance, isNotZero } from '$lib/utils/erc20';
 	import { getPendingReward, getSharesTotal, getUserInfo, harvest } from '$lib/utils/dividends';
 	import { stakedWantTokens, deposit, withdraw } from '$lib/utils/vaultChef';
-	import { Token } from '$lib/ts/types';
-	import { onMount } from 'svelte';
+	import { LoadingState, Token } from '$lib/ts/types';
+	import { onDestroy, onMount } from 'svelte';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { Chasing } from 'svelte-loading-spinners';
 	import { BigNumber, ethers } from 'ethers';
@@ -22,48 +22,61 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 	const { addNotification } = getNotificationsContext();
 
-	const numericRegex: RegExp = /^\d+(\.\d+)*$/;
 
 	$:mushUsdPrice = $tokenPrice
 
-	let TVL: BigNumber;
+	let pollingInterval;
 
+	let TVL: BigNumber;
+	let userAddress:string;
 	let userBalance: BigNumber;
 	let userStakedTokens: BigNumber;
 	let userReward: BigNumber;
+
+	let userCanWithdraw: boolean = false
 	let userCanHarvest: boolean = false;
+	let userCanDeposit: boolean = false;
+
 	let depositInput: string = '';
 	let withdrawInput: string = '';
 
-	interface LoadingState {
-		loadingDeposit: boolean;
-		loadingWithdraw: boolean;
-		loadingHarvest: boolean;
-	}
+
 	let loadingState: LoadingState = {
 		loadingDeposit: false,
 		loadingHarvest: false,
 		loadingWithdraw: false
 	};
 
-	async function refreshUserData() {
+	$:userAddress  = $accounts?.[0]
+	$:userCanDeposit = !userBalance?.isZero();
+	$:userCanWithdraw = !userStakedTokens?.isZero();
+	$:userCanDeposit =  !userReward?.isZero();
+
+	$: if(userAddress){
+		refreshUserData();
+		pollingInterval = setInterval(refreshUserData,8000);
+	}else{
+		clearInterval(pollingInterval);
+	}
+
+
+	onDestroy(()=>{
+		clearInterval(pollingInterval)
+	});
+	
+	const refreshUserData = async() => {
 		try {
-			userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN), $accounts[0]);
-			userStakedTokens = await stakedWantTokens(2, $accounts[0]);
-			const [, rewardDebt] = await getUserInfo($accounts[0]);
+			userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN), userAddress);
+			console.log(userBalance)
+			userStakedTokens = await stakedWantTokens(2, userAddress);
 			TVL = await getSharesTotal();
-			userReward = await getPendingReward($accounts[0]);
-			userCanHarvest = isNotZero(userReward);
+			userReward = await getPendingReward(userAddress);
 		} catch {
 			console.log('Failed on fetching data');
 		}
 	}
 
-	async function handleDeposit() {
-		if (!depositInput.trim().match(numericRegex)) {
-			addNotification(wrongInput);
-			return;
-		}
+	const handleDeposit = async() => {
 		addNotification(transactionSend);
 		try {
 			loadingState.loadingDeposit = true;
@@ -75,7 +88,6 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 				BigNumber.from(ethers.utils.parseEther(depositInput.trim()))
 			);
 			addNotification(transactionCompleted);
-			setTimeout(refreshUserData, 20000);
 		} catch (error) {
 			addNotification(transactionDeniedByTheUser);
 			loadingState.loadingDeposit = false;
@@ -83,11 +95,7 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 		loadingState.loadingDeposit = false;
 	}
 
-	async function handleWithdraw() {
-		if (!withdrawInput.trim().match(numericRegex)) {
-			addNotification(wrongInput);
-			return;
-		}
+	const handleWithdraw = async() => {
 		addNotification(transactionSend);
 
 		try {
@@ -100,14 +108,13 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 				BigNumber.from(ethers.utils.parseEther(withdrawInput.trim()))
 			);
 			loadingState.loadingWithdraw = false;
-			setTimeout(refreshUserData, 20000);
 		} catch (error) {
 			addNotification(transactionDeniedByTheUser);
 			loadingState.loadingWithdraw = false;
 		}
 	}
 
-	async function handleHarvest() {
+	const handleHarvest = async() => {
 		loadingState.loadingHarvest = true;
 		addNotification(transactionSend);
 		try {
@@ -116,7 +123,6 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 			addNotification(transactionCompleted);
 			userCanHarvest = false;
 			userReward = ethers.constants.Zero;
-			setTimeout(refreshUserData, 20000);
 		} catch {
 			console.log('Failed on Harvest');
 			addNotification(transactionDeniedByTheUser);
@@ -125,22 +131,6 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 		loadingState.loadingHarvest = false;
 	}
 
-	onMount(() => {
-		if ($accounts) {
-			getTokenBalance(getContractAddress(Token.MUSHTOKEN), $accounts[0]).then(
-				(balance) => (userBalance = balance)
-			);
-			stakedWantTokens(2, $accounts[0]).then((stakedTokens) => (userStakedTokens = stakedTokens));
-			getSharesTotal().then((totalShares) => {
-				TVL = totalShares;
-			});
-
-			getPendingReward($accounts[0]).then((reward) => {
-				userReward = reward;
-				userCanHarvest = isNotZero(userReward);
-			});
-		}
-	});
 </script>
 
 <div class="h-full w-full">
