@@ -75,6 +75,8 @@
 
 	let wantWithdrawAmount: any;
 	let idInterval;
+	let poolWeightbn;
+	let allocPoints;
 
 	let tokenAllowance: BigNumber = ethers.constants.Zero;
 	let userBalance: BigNumber = ethers.constants.Zero;
@@ -125,7 +127,7 @@
 		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
 		const poolInfo: PoolInfoResponse = await MasterChef.getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
-
+		allocPoints = poolInfo.allocPoint;
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
 		stakingTokenPrice = await getStakingTokenPrice();
 
@@ -136,7 +138,6 @@
 		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, stakingTokenDecimals));
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 
-		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
 		const tokenPerBlock = await MasterChef.getMushPerBlock();
 		const mushPerBlock: number = parseFloat(ethers.utils.formatEther(tokenPerBlock));
 		tokenAllocatedPerBlock = mushPerBlock * poolWeightbn.toNumber();
@@ -151,6 +152,16 @@
 			poolApr = 'Infinity';
 		}
 	});
+
+	$:poolWeightbn = getPoolWeight($totalAllocPoints, allocPoints);
+	
+	$:poolApr = getPoolApr(
+			stakingTokenPrice,
+			rewardTokenPrice,
+			stakingTokenAmount,
+			tokenAllocatedPerBlock
+		);
+
 
 	onDestroy(() => {
 		clearInterval(idInterval);
