@@ -245,7 +245,7 @@
 			class="MUSH_about title text-center bg-transparent min-h-screen group"
 		>
 			<!-- <h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2> -->
-			<img class="relative m-auto" src="title5.png" alt="title">
+			<img class="relative m-auto -mt-20" src="title.webp" alt="title">
 			{#if visible}
 				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
 				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
