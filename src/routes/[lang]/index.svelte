@@ -108,7 +108,7 @@
 		);
 
 		const floppaEarth = new THREE.Mesh(
-			new THREE.SphereGeometry(96, 381, 381),								// new THREE.SphereGeometry(128, 508, 508),
+			new THREE.SphereGeometry(96, 381, 381), // new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureEarth,
 				normalMap: earthTexture
@@ -133,13 +133,8 @@
 				mushMeshCryp.scale.set(25, 25, 25);
 				mushMeshCryp.position.set(-340, 0, -1100);
 				floppaEarth.position.set(150, 0, -250);					
-				// floppaMoon.position.set(100, 0, -700);
 				floppaMoon.position.set(-150, 0, -250);
-
-
-
-				// floppaMoon.position.set(-50, 0, -300);
-				// floppaEarth.position.set(500, 0, -1000);
+				// floppaMoon.position.set(100, 0, -700);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
 			})
 			.catch((err) => {
