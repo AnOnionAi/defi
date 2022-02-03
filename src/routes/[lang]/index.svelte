@@ -132,7 +132,7 @@
 				mushMeshCryp = mushCrypto.scene;
 				mushMeshCryp.scale.set(25, 25, 25);
 				mushMeshCryp.position.set(-340, 0, -1100);
-				floppaEarth.position.set(150, 0, -250);					
+				floppaEarth.position.set(150, 0, -250);
 				floppaMoon.position.set(-150, 0, -250);
 				// floppaMoon.position.set(100, 0, -700);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
@@ -245,7 +245,7 @@
 		>
 			<!-- <h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2> -->
 			<div class="relative">
-				<img class="m-auto" src="title.webp" alt="title">
+				<img class="m-auto" src="title.webp" alt="title" />
 			</div>
 			{#if visible}
 				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
