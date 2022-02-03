@@ -133,7 +133,11 @@
 				mushMeshCryp.scale.set(25, 25, 25);
 				mushMeshCryp.position.set(-340, 0, -1100);
 				floppaEarth.position.set(150, 0, -250);					
-				floppaMoon.position.set(100, 0, -700);
+				// floppaMoon.position.set(100, 0, -700);
+				floppaMoon.position.set(-150, 0, -250);
+
+
+
 				// floppaMoon.position.set(-50, 0, -300);
 				// floppaEarth.position.set(500, 0, -1000);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
@@ -245,7 +249,9 @@
 			class="MUSH_about title text-center bg-transparent min-h-screen group"
 		>
 			<!-- <h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2> -->
-			<img class="relative m-auto -mt-20" src="title.webp" alt="title">
+			<div class="relative">
+				<img class="m-auto" src="title.webp" alt="title">
+			</div>
 			{#if visible}
 				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
 				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
