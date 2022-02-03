@@ -108,7 +108,7 @@
 		);
 
 		const floppaEarth = new THREE.Mesh(
-			new THREE.SphereGeometry(128, 508, 508),
+			new THREE.SphereGeometry(96, 381, 381),								// new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureEarth,
 				normalMap: earthTexture
@@ -132,8 +132,10 @@
 				mushMeshCryp = mushCrypto.scene;
 				mushMeshCryp.scale.set(25, 25, 25);
 				mushMeshCryp.position.set(-340, 0, -1100);
-				floppaMoon.position.set(-50, 0, -300);
-				floppaEarth.position.set(500, 0, -1000);
+				floppaEarth.position.set(150, 0, -250);					
+				floppaMoon.position.set(100, 0, -700);
+				// floppaMoon.position.set(-50, 0, -300);
+				// floppaEarth.position.set(500, 0, -1000);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
 			})
 			.catch((err) => {
@@ -163,7 +165,7 @@
 				floppaMoon.rotation.y += 0.005;
 			}
 			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.005;
+				floppaEarth.rotation.y += 0.002;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
@@ -242,7 +244,8 @@
 			style="margin-top: 25px;"
 			class="MUSH_about title text-center bg-transparent min-h-screen group"
 		>
-			<h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2>
+			<!-- <h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2> -->
+			<img class="relative m-auto" src="title5.png" alt="title">
 			{#if visible}
 				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
 				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
