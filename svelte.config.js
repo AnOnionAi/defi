@@ -1,5 +1,5 @@
+import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
-import netlify from '@sveltejs/adapter-netlify';
 import WindiCSS from 'vite-plugin-windicss';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -7,9 +7,7 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess(),
 	kit: {
-		// hydrate the <div id="svelte"> element in src/app.html
-		adapter: netlify(),
-		target: '#svelte',
+		adapter: adapter(),
 		vite: {
 			plugins: [WindiCSS()]
 		}
