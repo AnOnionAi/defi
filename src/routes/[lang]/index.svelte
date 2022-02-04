@@ -108,7 +108,7 @@
 		);
 
 		const floppaEarth = new THREE.Mesh(
-			new THREE.SphereGeometry(276, 1024, 1024), // new THREE.SphereGeometry(128, 508, 508),
+			new THREE.SphereGeometry(260, 512, 512), // new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureEarth,
 				normalMap: earthTexture
@@ -129,8 +129,8 @@
 				mushMeshCryp = mushCrypto.scene;
 				mushMeshCryp.scale.set(100, 100, 100);
 				mushMeshCryp.position.set(0, 0, 0);
-				floppaMoon.position.set(-200, 0, -250);
-				floppaEarth.position.set(250, 0, -250);
+				floppaMoon.position.set(-10, 0, 500);
+				floppaEarth.position.set(240, 0, -260);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
 			})
 			.catch((err) => {
@@ -149,18 +149,18 @@
 			// 	mushMeshLA.rotateX((Math.PI / 120) * 0.6);
 			// }
 			if (mushMeshCryp) {
-				mushMeshCryp.rotation.y -= 0.01;
+				mushMeshCryp.rotation.y -= 0.005;
 
-				mushMeshCryp.position.x = -340;
-				mushMeshCryp.position.y = -50;
-				mushMeshCryp.position.z = -1000;
+				mushMeshCryp.position.x = -100;
+				mushMeshCryp.position.y = -100;
+				mushMeshCryp.position.z = -1100;
 			}
 
 			if (floppaMoon) {
-				floppaMoon.rotation.y += 0.002;
+				floppaMoon.rotation.y += 0.01;
 			}
 			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.001;
+				floppaEarth.rotation.y += 0.0015;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
@@ -205,7 +205,7 @@
 		function moveCamera() {
 			const t = document.body.getBoundingClientRect().top;
 
-			torusOne.rotation.x += 0.18;
+			torusOne.rotation.x += 0.018;
 
 			camera.position.z = 10 + t * 0.1;
 			camera.position.x = t * 0.00625;
