@@ -132,7 +132,7 @@
 				mushMeshCryp = mushCrypto.scene;
 				mushMeshCryp.scale.set(25, 25, 25);
 				mushMeshCryp.position.set(-340, 0, -1100);
-				floppaEarth.position.set(150, 0, -250);					
+				floppaEarth.position.set(150, 0, -250);
 				floppaMoon.position.set(-150, 0, -250);
 				// floppaMoon.position.set(100, 0, -700);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
