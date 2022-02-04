@@ -236,9 +236,12 @@
 </noscript>
 
 <svelte:head>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet"> 
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
+		rel="stylesheet"
+	/>
 </svelte:head>
 
 <section class="relative">
@@ -254,7 +257,9 @@
 				<img class="m-auto" src="title.webp" alt="title">
 			</div> -->
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 xl:pt-75 text-4xl">{$_('home.tagline1')}</h4>
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 xl:pt-75 text-4xl">
+					{$_('home.tagline1')}
+				</h4>
 				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
 					{$_('home.tagline2')} 🍄
 				</h4>
