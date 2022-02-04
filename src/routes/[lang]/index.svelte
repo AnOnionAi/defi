@@ -100,7 +100,7 @@
 		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);
 
 		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(8, 32, 32),
+			new THREE.SphereGeometry(32, 128, 128),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureMoon,
 				normalMap: moonTexture
@@ -108,7 +108,7 @@
 		);
 
 		const floppaEarth = new THREE.Mesh(
-			new THREE.SphereGeometry(128, 508, 508),
+			new THREE.SphereGeometry(128, 512, 512), // new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureEarth,
 				normalMap: earthTexture
@@ -132,8 +132,9 @@
 				mushMeshCryp = mushCrypto.scene;
 				mushMeshCryp.scale.set(25, 25, 25);
 				mushMeshCryp.position.set(-340, 0, -1100);
-				floppaMoon.position.set(-50, 0, -300);
-				floppaEarth.position.set(500, 0, -1000);
+				floppaEarth.position.set(150, 0, -250);
+				floppaMoon.position.set(-150, 0, -250);
+				// floppaMoon.position.set(100, 0, -700);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
 			})
 			.catch((err) => {
@@ -163,7 +164,7 @@
 				floppaMoon.rotation.y += 0.005;
 			}
 			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.005;
+				floppaEarth.rotation.y += 0.002;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
@@ -234,6 +235,12 @@
 	</div>
 </noscript>
 
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet"> 
+</svelte:head>
+
 <section class="relative">
 	<canvas bind:this={canvas} id="bg" />
 
@@ -243,8 +250,11 @@
 			class="MUSH_about title text-center bg-transparent min-h-screen group"
 		>
 			<h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2>
+			<!-- <div class="relative">
+				<img class="m-auto" src="title.webp" alt="title">
+			</div> -->
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 text-4xl">{$_('home.tagline1')}</h4>
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 xl:pt-75 text-4xl">{$_('home.tagline1')}</h4>
 				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
 					{$_('home.tagline2')} 🍄
 				</h4>
@@ -338,16 +348,13 @@
 </section>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&family=IBM+Plex+Sans:wght@200&family=Roboto:wght@100;400&display=swap');
-
-	section {
-		font-family: 'Fira Sans Condensed', sans-serif;
+	h2 {
+		font-weight: 100;
 	}
 
 	section blockquote {
 		line-height: 170px;
 		font-size: 30px;
-		font-family: 'Fira Sans Condensed', sans-serif;
 		display: inline;
 		background-color: white;
 		-webkit-box-decoration-break: clone;
@@ -389,7 +396,6 @@
 		background-color: transparent;
 		align-items: center;
 		justify-content: center;
-		font-family: 'Roboto Thin', sans-serif;
 	}
 
 	.MUSH_about h2 {
