@@ -34,7 +34,6 @@
 		"vite-plugin-windicss": "1.5.4"
 	},
 	"dependencies": {
-		"@fontsource/fira-mono": "^4.2.2",
 		"@fortawesome/free-brands-svg-icons": "^5.15.3",
 		"@fortawesome/free-regular-svg-icons": "^5.15.3",
 		"@fortawesome/free-solid-svg-icons": "^5.15.3",
