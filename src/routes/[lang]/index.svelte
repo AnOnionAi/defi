@@ -61,7 +61,7 @@
 		const torusOne = new THREE.Mesh(geometryTorusOne, materialTorusOne);
 		scene.add(torusOne);
 
-		torusOne.position.set(-1.5, 0, -47);
+		torusOne.position.set(0, 0, 0);
 		// End Torus
 
 		const lightPoint = new THREE.PointLight(0xffffff);
@@ -100,7 +100,7 @@
 		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);
 
 		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(32, 128, 128),
+			new THREE.SphereGeometry(64, 256, 256),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureMoon,
 				normalMap: moonTexture
@@ -108,7 +108,7 @@
 		);
 
 		const floppaEarth = new THREE.Mesh(
-			new THREE.SphereGeometry(128, 512, 512), // new THREE.SphereGeometry(128, 508, 508),
+			new THREE.SphereGeometry(260, 512, 512), // new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureEarth,
 				normalMap: earthTexture
@@ -118,10 +118,7 @@
 		/**
             Getting gltf models
         */
-		let mushMeshFA;
-
 		let dollarSign;
-		let mushMeshLA;
 		let mushMeshCryp;
 		getMush()
 			.then((mush) => {
@@ -130,11 +127,10 @@
 				// mushMeshLA = lactarius.scene;
 				// mushMeshLA.position.set(-1.5, 0, -47);
 				mushMeshCryp = mushCrypto.scene;
-				mushMeshCryp.scale.set(25, 25, 25);
-				mushMeshCryp.position.set(-340, 0, -1100);
-				floppaEarth.position.set(150, 0, -250);
-				floppaMoon.position.set(-150, 0, -250);
-				// floppaMoon.position.set(100, 0, -700);
+				mushMeshCryp.scale.set(100, 100, 100);
+				mushMeshCryp.position.set(0, 0, 0);
+				floppaMoon.position.set(-10, 0, 500);
+				floppaEarth.position.set(240, 0, -260);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
 			})
 			.catch((err) => {
@@ -146,25 +142,25 @@
 
 			var time = Date.now() * 0.0005;
 
-			torusOne.rotation.y += 0.015;
+			torusOne.rotation.y += 0.0015;
 
 			// if (mushMeshLA) {
 			// 	mushMeshLA.rotateY((Math.PI / 60) * 0.6);
 			// 	mushMeshLA.rotateX((Math.PI / 120) * 0.6);
 			// }
 			if (mushMeshCryp) {
-				mushMeshCryp.rotation.y -= 0.01;
+				mushMeshCryp.rotation.y -= 0.005;
 
-				mushMeshCryp.position.x = -340;
-				mushMeshCryp.position.y = -50;
-				mushMeshCryp.position.z = -1000;
+				mushMeshCryp.position.x = -100;
+				mushMeshCryp.position.y = -100;
+				mushMeshCryp.position.z = -1100;
 			}
 
 			if (floppaMoon) {
-				floppaMoon.rotation.y += 0.005;
+				floppaMoon.rotation.y += 0.01;
 			}
 			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.002;
+				floppaEarth.rotation.y += 0.0015;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
@@ -209,7 +205,7 @@
 		function moveCamera() {
 			const t = document.body.getBoundingClientRect().top;
 
-			torusOne.rotation.x += 0.18;
+			torusOne.rotation.x += 0.018;
 
 			camera.position.z = 10 + t * 0.1;
 			camera.position.x = t * 0.00625;
