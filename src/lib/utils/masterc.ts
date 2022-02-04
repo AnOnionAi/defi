@@ -15,12 +15,6 @@ export namespace MasterChef {
 		Provider.getProviderSingleton()
 	);
 
-	const masterChefContractSigner = new ethers.Contract(
-		getContractAddress(Token.MASTERCHEF),
-		MasterChefAbi,
-		getSigner()
-	);
-
 	export const getDevAddress = async () => masterChefContract.devAddress();
 
 	export const getFeeAddress = async () => masterChefContract.feeAddress();
@@ -64,13 +58,23 @@ export namespace MasterChef {
 		amount: any,
 		decimals: number = 18,
 		referrer = ethers.constants.AddressZero
-	) => masterChefContractSigner.deposit(pid, ethers.utils.parseUnits(amount, decimals), referrer);
+	) => {
+		return masterChefContract
+			.connect(getSigner())
+			.deposit(pid, ethers.utils.parseUnits(amount, decimals), referrer);
+	};
 
-	export const withdraw = async (pid: number, amount: any, decimals: number = 18) =>
-		masterChefContractSigner.withdraw(pid, ethers.utils.parseUnits(amount, decimals));
+	export const withdraw = async (pid: number, amount: any, decimals: number = 18) => {
+		return masterChefContract
+			.connect(getSigner())
+			.withdraw(pid, ethers.utils.parseUnits(amount, decimals));
+	};
 
-	export const harvestRewards = async (pid: number) =>
-		masterChefContractSigner.deposit(pid, ethers.constants.Zero, ethers.constants.AddressZero);
+	export const harvestRewards = async (pid: number) => {
+		return masterChefContract
+			.connect(getSigner())
+			.deposit(pid, ethers.constants.Zero, ethers.constants.AddressZero);
+	};
 
 	export const getStakedTokens = async (pid: number, userAddress: string) => {
 		const [stakedTokens] = await getUserInfo(pid, userAddress);
