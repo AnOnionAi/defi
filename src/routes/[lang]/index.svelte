@@ -254,7 +254,7 @@
 				<img class="m-auto" src="title.webp" alt="title">
 			</div> -->
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 xl:pt-73 text-4xl">{$_('home.tagline1')}</h4>
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 xl:pt-75 text-4xl">{$_('home.tagline1')}</h4>
 				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
 					{$_('home.tagline2')} 🍄
 				</h4>
