@@ -51,11 +51,11 @@ export interface VaultInfo {
 	strategyContractAddress: string;
 }
 
-export interface VaultState extends VaultInfo{
-	tvl:number;
-	apy:number;
-	stakedAmount:number;
-	userWalletBalance:number;
+export interface VaultState extends VaultInfo {
+	tvl: number;
+	apy: number;
+	stakedAmount: number;
+	userWalletBalance: number;
 }
 
 export interface Platform {
@@ -90,6 +90,7 @@ export enum Token {
 	DOGE = 'DOGE',
 	USDC = 'USDC',
 	USDT = 'USDT',
+	CRYSTL = 'CRYSTL',
 	VAULTCHEF = 'VAULTCHEF',
 	DIVIDENDS = 'DIVIDENDS',
 	IBBTC = 'IBBTC',
@@ -133,7 +134,6 @@ export interface VaultFilterFunction {
 	criteria: Criteria;
 }
 
-
 export enum Criteria {
 	PLATFORM = 'PLATFORM',
 	BALANCE = 'BALANCE',
@@ -141,4 +141,19 @@ export enum Criteria {
 	NAME = 'NAME',
 	ORDER = 'ORDER',
 	YIELD = 'YIELD'
+}
+
+export interface PoolInfoResponse {
+	accmushPerShare: BigNumber;
+	allocPoint: BigNumber;
+	depositFeeBP: number;
+	lastRewardBlock: BigNumber;
+	lpToken: string;
+}
+
+export interface LoadingState {
+	loadingApproval?: boolean;
+	loadingDeposit?: boolean;
+	loadingWithdraw?: boolean;
+	loadingHarvest?: boolean;
 }

@@ -4,13 +4,10 @@
 
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { getLocaleFromNavigator } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
-	import { goto } from '$app/navigation';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
-	import { onDestroy, onMount } from 'svelte';
 	import ConnectButton from '$lib/components/Buttons/ConnectButton.svelte';
 	import LangPicker from '$lib/components/Dropdowns/LangPicker.svelte';
 	import DarkModeButton from '$lib/components/Buttons/DarkModeButton.svelte';
@@ -54,12 +51,6 @@
 			title: $_('headers.vaults.text')
 		}
 	];
-
-	const gotoPage = (route: string, home: boolean = false) => {
-		if (home) goto(`/${$page.params.lang}`, { replaceState: true });
-		else goto(`/${$page.params.lang}${route.toLowerCase()}`, { replaceState: true });
-		console.log($page.params.lang);
-	};
 </script>
 
 <svelte:window
@@ -79,7 +70,7 @@
 	class="{isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
 		'bg-dark-500 border-dark-200'} backdrop-blur top-0 w-full  {!$isHomescreen &&
-		'border-b-2'} border-gray-200"
+		'border-b-2'} border-gray-200 py-2 "
 	class:dark={$darkMode}
 >
 	<div class=" flex items-center justify-between h-16 px-3 ">
@@ -92,12 +83,7 @@
 		<div class="sm:mr-3 flex-1 flex items-center justify-center sm:justify-start">
 			<!-- LOGO -->
 			<div class="flex-shrink-0 flex items-center">
-				<span
-					class="flex cursor-pointer"
-					on:click={() => {
-						gotoPage('', true);
-					}}
-				>
+				<a href={`/${$page.params.lang}/`} class="flex cursor-pointer">
 					<img class="w-10 " src="/cute/fiji.svg" alt="Fung Finance Logo" />
 					{#if $isHomescreen}
 						<img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
@@ -106,7 +92,7 @@
 					{:else}
 						<img class="mt-1 " src="/cute/fungfiLiteMode.svg" alt="Fung Finance" />
 					{/if}
-				</span>
+				</a>
 			</div>
 			<div class="ml-4 hidden lg:block ">
 				<div

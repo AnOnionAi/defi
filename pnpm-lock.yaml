@@ -1,13 +1,12 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@fontsource/fira-mono': ^4.2.2
   '@fortawesome/free-brands-svg-icons': ^5.15.3
   '@fortawesome/free-regular-svg-icons': ^5.15.3
   '@fortawesome/free-solid-svg-icons': ^5.15.3
-  '@sveltejs/adapter-netlify': ^1.0.0-next.43
+  '@sveltejs/adapter-auto': 1.0.0-next.18
   '@sveltejs/adapter-static': ^1.0.0-next.0
-  '@sveltejs/kit': 1.0.0-next.240
+  '@sveltejs/kit': 1.0.0-next.260
   '@types/three': ^0.135.0
   '@typescript-eslint/eslint-plugin': ^4.33.0
   '@typescript-eslint/parser': ^4.33.0
@@ -26,7 +25,6 @@ specifiers:
   prettier: ^2.5.1
   prettier-plugin-svelte: ^2.5.1
   svelte: ^3.44.3
-  svelte-chartjs: ^1.1.3
   svelte-fa: ^2.3.3
   svelte-i18n: ^3.3.9
   svelte-loading-spinners: ^0.1.7
@@ -39,7 +37,6 @@ specifiers:
   vite-plugin-windicss: 1.5.4
 
 dependencies:
-  '@fontsource/fira-mono': 4.5.0
   '@fortawesome/free-brands-svg-icons': 5.15.4
   '@fortawesome/free-regular-svg-icons': 5.15.4
   '@fortawesome/free-solid-svg-icons': 5.15.4
@@ -49,7 +46,6 @@ dependencies:
   dotenv: 10.0.0
   ethers: 5.5.1
   path: 0.12.7
-  svelte-chartjs: 1.1.3
   svelte-fa: 2.4.0
   svelte-i18n: 3.3.13_svelte@3.44.3
   svelte-loading-spinners: 0.1.7
@@ -58,8 +54,8 @@ dependencies:
   three: 0.135.0
 
 devDependencies:
-  '@sveltejs/adapter-netlify': 1.0.0-next.43
-  '@sveltejs/kit': 1.0.0-next.240_svelte@3.44.3
+  '@sveltejs/adapter-auto': 1.0.0-next.18
+  '@sveltejs/kit': 1.0.0-next.260_svelte@3.44.3
   '@types/three': 0.135.0
   '@typescript-eslint/eslint-plugin': 4.33.0_3289a875d95a672b97ebf589745c66ef
   '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.4
@@ -745,10 +741,6 @@ packages:
       '@ethersproject/strings': 5.5.0
     dev: false
 
-  /@fontsource/fira-mono/4.5.0:
-    resolution: {integrity: sha512-KE+d3wmgq/YKM0BqgUF7p2yeBNi805Nfof1lC1wJ7E9i2EWoC363sGdKG+MQBVm+ei3GYZu+Bo8Xha1w1pkB7g==}
-    dev: false
-
   /@formatjs/ecma402-abstract/1.11.0:
     resolution: {integrity: sha512-TOp5La9wmSh9G5bqFGN/ApmOXtJDzBGkYW+OTRd3ukY7J32RVGZPpN4O9BD651JUy66nj3g9CIENTNCgm4IRXQ==}
     dependencies:
@@ -1104,8 +1096,22 @@ packages:
       '@sinonjs/commons': 1.8.3
     dev: true
 
-  /@sveltejs/adapter-netlify/1.0.0-next.43:
-    resolution: {integrity: sha512-F/45VpKHDiEUNHdQi/fUNA0SbxNFyUfuZctMEOGvypdYng3R25pyywFHFL8aQFpHUye/CW/fhPr/tSrMp15IPg==}
+  /@sveltejs/adapter-auto/1.0.0-next.18:
+    resolution: {integrity: sha512-hf+oWFhdCsID+0CpjbHD01yH0LFuHsuTUYWYtNDgBdbuG8oxiocah+xns5npRRvmAmzMG2kqeaKFnJkEnMSIBA==}
+    dependencies:
+      '@sveltejs/adapter-cloudflare': 1.0.0-next.9
+      '@sveltejs/adapter-netlify': 1.0.0-next.44
+      '@sveltejs/adapter-vercel': 1.0.0-next.40
+    dev: true
+
+  /@sveltejs/adapter-cloudflare/1.0.0-next.9:
+    resolution: {integrity: sha512-xoPbFinqFbzphVf4rjGqU/6CC/QciXtXpBn6+hp4mChjX/9X5c/fxjkVGHPdpq6moTIfaZiMU/EUKtbBvyTBUw==}
+    dependencies:
+      esbuild: 0.13.15
+    dev: true
+
+  /@sveltejs/adapter-netlify/1.0.0-next.44:
+    resolution: {integrity: sha512-GY3w4K4gW+wXo6lGes7gFcPPaUt9kY2xCfhcNfwDvbOf0PsasZD5WatAPtEE9Xz5WTtQLEEgXljVMqsPkpb75Q==}
     dependencies:
       '@iarna/toml': 2.2.5
       esbuild: 0.13.15
@@ -1116,8 +1122,14 @@ packages:
     resolution: {integrity: sha512-5QYrPSjfqI/Jd2av/WuwhZjRZHaWu8tGmBHM6dh5W7cd4s0PG3eW0p4eASZESHmtCFWGG00PYMRjUUFPPtEcOg==}
     dev: false
 
-  /@sveltejs/kit/1.0.0-next.240_svelte@3.44.3:
-    resolution: {integrity: sha512-cHdxdSKAdCuty2lYlRHXE4rJZuKd4wur9U63JtPwysTaReMEJl+s9J/LVvyBzaLW/13x8vm/kKqx+DDcI0udlA==}
+  /@sveltejs/adapter-vercel/1.0.0-next.40:
+    resolution: {integrity: sha512-HJkfjP+tN0r+3tQZofSN6tCE/60fiIDg5dA7+SD4tNio1DADE1W5YhUZGvMQkjOe8kTSKE8/BdgLbwrqeLmDKg==}
+    dependencies:
+      esbuild: 0.13.15
+    dev: true
+
+  /@sveltejs/kit/1.0.0-next.260_svelte@3.44.3:
+    resolution: {integrity: sha512-0EEkGD0BpZdgRm9UoOnldS8iDFFhT2ixN3oQ/9DblGKNo7cz/FEQmKoYYIOOVYI3XyurwccWORPEpTTA4l9Oew==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -1747,10 +1759,6 @@ packages:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
     engines: {node: '>=10'}
     dev: true
-
-  /chart.js/3.7.0:
-    resolution: {integrity: sha512-31gVuqqKp3lDIFmzpKIrBeum4OpZsQjSIAqlOpgjosHDJZlULtvwLEZKtEhIAZc7JMPaHlYMys40Qy9Mf+1AAg==}
-    dev: false
 
   /ci-info/3.3.0:
     resolution: {integrity: sha512-riT/3vI5YpVH6/qomlDnJow6TBee2PBKSEpx3O32EGPYbWGIRsIlGRms3Sm74wYE1JMo8RnO04Hb12+v1J5ICw==}
@@ -4557,12 +4565,6 @@ packages:
       has-flag: 4.0.0
       supports-color: 7.2.0
     dev: true
-
-  /svelte-chartjs/1.1.3:
-    resolution: {integrity: sha512-L6q5zgviWscla5cKEuPJimglfCb13epw/dY8e6t5W0uP3gPGb3JggUJGUSoR3eSadWRgoV3KNsmz47ddW0soUQ==}
-    dependencies:
-      chart.js: 3.7.0
-    dev: false
 
   /svelte-fa/2.4.0:
     resolution: {integrity: sha512-0bnbMGbsE1LUnlioDcf27tl2O8kjuXlTXMXzIxC7LoIOWmqn0D+zd539HfLiQbdLuOHGTaynwN9V+4ehhEu1Jw==}

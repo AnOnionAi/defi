@@ -15,13 +15,6 @@ const mushTokenContract = new ethers.Contract(
 	Provider.getProviderSingleton()
 );
 
-export const mushPerBlock: Readable<number> = readable(undefined, function start(set) {
-	MasterChef.getMushPerBlock().then((bigNumberResponse) => {
-		const mushPerBlock = parseInt(ethers.utils.formatEther(bigNumberResponse));
-		set(mushPerBlock);
-	});
-});
-
 export const totalMushSupply: Readable<number> = readable(undefined, function start(set) {
 	mushTokenContract.totalSupply().then((amountBN) => {
 		const mushSupply = parseFloat(ethers.utils.formatEther(amountBN));

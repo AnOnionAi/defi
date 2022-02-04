@@ -14,7 +14,7 @@
 	export let hideZeroBalances = false;
 	export let stakedOnly = false;
 	export let statement = '';
-	export let filterBy = "TVL"
+	export let filterBy = 'TVL';
 	export let sortBy = 'Descending';
 	import { _ } from 'svelte-i18n';
 
@@ -215,7 +215,7 @@
 						</svg>
 					</span>
 				</span>
-				<span id="zero" class="radio__label text-base dark:font-normal dark:tracking-wider"
+				<span id="zero" class="radio__label text-base dark:font-normal "
 					>{$_('vaultFilter.hidezero')}</span
 				>
 			</label>
@@ -262,18 +262,62 @@
 		</div>
 
 		<div class="pt-8 pb-4 mt-4 sm:pt-10 m-auto sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-			<button
-				class:active={stakedOnly}
-				class="bg-green-400 rounded-md text-white capitalize"
-				on:click={handleStakedOnlyFilter}>{$_('vaultFilter.stakedonly')}</button
-			>
+			<div class="flex flex-row">
+				<div class="pt-1">
+					<input
+						checked={stakedOnly}
+						type="checkbox"
+						id="switch"
+						on:click={handleStakedOnlyFilter}
+					/><label id="switch-label" for="switch">A</label>
+				</div>
+				<p class="pt-2 pl-2">{$_('vaultFilter.stakedonly')}</p>
+			</div>
 		</div>
 	</div>
 </div>
 
 <style>
-	.active {
-		background-color: rgba(16, 185, 129, var(--tw-bg-opacity));
+	#switch[type='checkbox'] {
+		height: 0;
+		width: 0;
+		visibility: hidden;
+	}
+
+	#switch-label {
+		cursor: pointer;
+		text-indent: -9999px;
+		width: 70px;
+		height: 35px;
+		background: grey;
+		display: block;
+		border-radius: 100px;
+		position: relative;
+	}
+
+	#switch-label:after {
+		content: '';
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		width: 25px;
+		height: 25px;
+		background: #fff;
+		border-radius: 45px;
+		transition: 0.3s;
+	}
+
+	#switch:checked + label {
+		background: rgba(16, 185, 129, var(--tw-bg-opacity));
+	}
+
+	#switch:checked + label:after {
+		left: calc(100% - 5px);
+		transform: translateX(-90%);
+	}
+
+	#switch-label:active:after {
+		width: 20px;
 	}
 
 	img {
@@ -347,11 +391,9 @@
 		border: 0;
 		border-radius: 0;
 		background: #f0f0f0;
-		color: #7b7b7b;
 		font-size: 1.1em;
 		font-weight: 400;
 		color: #999;
-
 		border: 2px solid rgba(0, 0, 0, 0.2);
 		border-radius: 12px;
 		position: relative;
@@ -363,7 +405,6 @@
 	}
 
 	select option {
-		background-color: white;
 		min-width: 200px;
 		min-height: 200px;
 		cursor: pointer;

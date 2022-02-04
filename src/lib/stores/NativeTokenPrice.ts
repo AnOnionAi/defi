@@ -10,7 +10,7 @@ export const tokenPrice: Writable<number> = writable(undefined);
 
 export const fetchNativeTokenPrice = async () => {
 	loading.set(true);
-	const liquidityPair = getLiquidityPairContract('0xE58052500D1Dc2E45E20d9bA39DF2afdd8e0E62d');
+	const liquidityPair = getLiquidityPairContract('0x847c35997a08921b13301532EAB0cd98093BE8CC');
 	try {
 		const [usdcReserve, mushReserve] = await liquidityPair.getReserves();
 		const formattedUsdcReserve = ethers.utils.formatUnits(usdcReserve, 6);
