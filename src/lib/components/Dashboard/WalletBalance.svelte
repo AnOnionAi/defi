@@ -25,33 +25,24 @@
 		fetchBalances(userAccount,$tokenPrice).then(response => {
 			[userMushBalance,userFiatBalance] = response;
 		})
-		console.log(userMushBalance)
-		console.log(userFiatBalance)
 	}
 
 	const fetchBalances = async(userAccount:string,tokenUsdPrice:number):Promise<Array<number>> => {
-		console.log(userAccount,"USER ACCOUNT")
 		const balanceResponse = await getTokenBalance(getContractAddress(Token.MUSHTOKEN),userAccount);
 		const parsedMushBalance = parseFloat(ethers.utils.formatEther(balanceResponse))
 		const fiatBalance = parsedMushBalance * tokenUsdPrice
 		return [parsedMushBalance,fiatBalance];
 	}
-
-
-
-
-	
 		
 </script>
 
 <div
-	class="bg-white dark:bg-dark-900 rounded-2xl p-5 h-55 shadow-xl dark:text-white dark:shadow-none flex flex-col justify-between"
+	class="bg-white dark:bg-dark-900 rounded-2xl p-5 h-55 shadow-xl dark:text-white dark:shadow-none flex flex-col justify-between select-none"
 >
-	<p class="text-3xl pl-3 text-lg text-dark-200 dark:text-white">
+	<p class="text-3xl pl-3 text-lg text-dark-200 dark:text-white tracking-wide">
 		{$_('walletStatus.wallet')}
 	</p>
 	<div class="flex justify-center items-center flex-col gap-3">
-		
 		{#if !$accounts}
 		<p class="text-3xl font-medium text-dark-500 dark:text-white">---- MUSH</p>
 		{:else if userMushBalance != undefined}
@@ -71,7 +62,7 @@
 
 	<button
 	on:click={addTokenToMetamaskWallet}
-	class="flex items-center justify-center  border border-green-500 rounded-lg hover:text-white hover:bg-green-400 w-45 py-2 self-center"
+	class="flex items-center justify-center  border-2 border-green-400 rounded-xl hover:text-white hover:bg-green-400 px-3 py-2 self-center"
 >
 	<p class="mr-1">{$_('actions.add')} MUSH</p>
 	<img src="/metamask.svg" class="h-5" alt="Metamask Icon" />

@@ -17,6 +17,15 @@
 	import { mushPerBlock } from '$lib/stores/MasterChefData';
 
 	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
+import TotalValueLocked from '$lib/components/Dashboard/TotalValueLocked.svelte';
+import HighestApy from '$lib/components/Dashboard/HighestApy.svelte';
+import EarnMoreCard from '$lib/components/Dashboard/EarnMoreCard.svelte';
+import IndexCard from '$lib/components/Dashboard/IndexCard.svelte';
+import IndexSection from '$lib/components/Dashboard/IndexSection.svelte';
+import EarnMoreSection from '$lib/components/Dashboard/EarnMoreSection.svelte';
+import SectionTitle from '$lib/components/Dashboard/SectionTitle.svelte';
+import DashboardSection from '$lib/components/Dashboard/DashboardSection.svelte';
+import DashboardLayout from '$lib/components/Dashboard/DashboardLayout.svelte';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -181,244 +190,63 @@
 	});
 </script>
 
-<div class="background {$darkMode && "background__dark"}">
-	<div class=" max-w-screen-xl   mx-auto  px-2 pt-10">
-		<h2 class="font-bold  text-4xl md:text-5xl  px-5 text-center lg:text-left dark:text-white">
-			{$_('headers.dashboard.text')}
-		</h2>
-		<div class="flex flex-wrap   h-auto mt-5">
-			<div
-				class="flex flex-wrap h-auto   w-full  p-1 mb-5 mx-auto lg:mx-1 lg:justify-between justify-center mb-10"
-			>
-				<div class="w-screen-sm lg:flex-shrink-0 mb-3 lg:mb-0 ">
-					<WalletBalance />
-				</div>
-				<div
-					class="bg-white dark:bg-dark-800 rounded-lg p-6 h-60 w-screen-sm  lg:w-8/24 lg:flex-shrink-0 border border-gray-300   dark:border-green-500 shadow-lg "
-				>
-					<div class="pl-2 flex items-center">
-						<p class=" text-xl text-gray-600 font-light tracking-wide dark:text-white">
-							{$_('dashboard.tvl')} (TVL)
-						</p>
-					</div>
-					<div class="flex  h-10/12 w-full justify-center items-center pt-2">
-						<div class="">
-							<div class="flex w-full justify-center items-center">
-								<p class="text-3xl font-semibold text-center mt-2 dark:text-white">$0</p>
-							</div>
+		<DashboardLayout>
 
-							<p class="mt-1 font-medium text-gray-600 text-sm dark:text-white">
-								{$_('dashboard.across')}
-							</p>
-						</div>
-					</div>
+		<SectionTitle title={$_('headers.dashboard.text')}/>
+		
+			<DashboardSection>
+				<div class="col-start-1 col-end-11 md:col-start-2 md:col-end-10 lg:col-start-3 lg:col-end-9 xl:col-start-1 xl:col-end-5">
+					<WalletBalance/>
 				</div>
-			</div>
-			<h2
-				class="font-bold  px-5 w-full text-center lg:text-left text-4xl md:text-5xl dark:text-white"
-			>
-				{$_('dashboard.earn')}
-			</h2>
-			<div
-				class="  w-full  p-1 mb-5 flex flex-wrap  justify-center lg:justify-between   lg:flex-row lg:w-full mt-5"
-			>
+	
+				<div class="col-start-1 col-end-6 xl:col-start-5 xl:col-end-8">
+					<HighestApy/>
+				</div>
+	
+				<div class="col-start-6 col-end-11 xl:col-start-8 xl:col-end-11">
+					<TotalValueLocked/>
+				</div>
+			</DashboardSection>
+			
+
+			<SectionTitle title={$_('dashboard.earn')}/>
+			
+			<EarnMoreSection>
+				<EarnMoreCard 
+				title={$_('headers.farms.text')} 
+				primaryText={"$300.41"}
+				secondaryText={$_('dashboard.lockedInFarms')}
+				buttonText={$_('dashboard.startFarming')}
+				route=""/>
 				<!-- FarmCard -->
-				<div
-					class=" lg:w-30/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6"
-				>
-					<div
-						class="flex flex-col justify-between bg-white dark:bg-dark-800  rounded-lg px-2 py-5 h-60 border border-gray-300 dark:border-green-500  shadow-md"
-					>
-						<div class="pl-4 flex flex items-center">
-							<img src="/farmerIcon.png" class="h-12 w-12" alt="" />
-							<p class="ml-2 text-gray-600 font-light tracking-wider text-xl dark:text-white">
-								{$_('headers.farms.text')}
-							</p>
-						</div>
-						<div class="flex flex-col items-center pb-3 gap-2">
-							<p class="text-3xl tracking-wide font-semibold dark:text-white">$29,574.12</p>
-							<p class="text-gray-700 font-medium text-sm dark:text-white">
-								{$_('dashboard.lockedInFarms')}
-							</p>
-							<button
-								class="border border-green-500 rounded-lg py-2 px-3  flex items-center hover:text-white hover:bg-green-400"
-							>
-								<p class="font-medium pr-1 dark:text-white">{$_('dashboard.startFarming')}</p>
-								<img src="/hoe.png" alt="farming hoe" />
-							</button>
-						</div>
-					</div>
-				</div>
-				<!-- FarmCard -->
-				<div
-					class="lg:w-30/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6"
-				>
-					<div
-						class="flex flex-col justify-between bg-white dark:bg-dark-800  rounded-lg px-2 py-5 h-60 border border-gray-300 dark:border-green-500 shadow-md"
-					>
-						<div class="pl-4 flex flex items-center">
-							<img src="/poolIcon.png" class="h-12 w-12" alt="" />
-							<p class="ml-2 text-gray-600 font-light text-xl dark:text-white">
-								{$_('headers.pools.text')}
-							</p>
-						</div>
-						<div class="flex flex-col items-center pb-3 gap-2">
-							<p class="text-3xl tracking-wide font-semibold dark:text-white">$40,112.99</p>
-							<p class="text-gray-700 font-medium text-sm dark:text-white">
-								{$_('dashboard.lockedInPools')}
-							</p>
-							<button
-								class="border border-green-500 rounded-lg py-2 px-5  flex items-center hover:text-white hover:bg-green-400"
-							>
-								<p class="font-medium pr-1 dark:text-white">{$_('dashboard.addLiquidity')}</p>
-								<div class="flex relative">
-									<img src="/vaultTokensIcons/wbtc.svg" alt="btc" class="h-5 w-5" />
-									<img
-										src="/vaultTokensIcons/dai.svg"
-										alt="daiToken"
-										class="h-5 w-5 absolute left-3"
-									/>
-								</div>
-							</button>
-						</div>
-					</div>
-				</div>
+				<EarnMoreCard 
+				title={$_('headers.pools.text')} 
+				primaryText={"$300.41"}
+				secondaryText={$_('dashboard.lockedInFarms')}
+				buttonText={$_('dashboard.startFarming')}
+				route=""/>
 				<!--Pool Card-->
-				<div
-					class="lg:w-30/100 max-w-screen-sm  min-w-sm md:min-w-screen-sm md:mx-auto lg:min-w-0 mb-6"
-				>
-					<div
-						class="flex flex-col justify-between bg-white dark:bg-dark-800 rounded-lg px-2 py-5 h-60 border border-gray-300 dark:border-green-500 shadow-md"
-					>
-						<div class="pl-4 flex flex items-center">
-							<img src="/vaultIcon.png" class="h-12 w-12" alt="" />
-							<p class="ml-2 text-gray-600 font-light text-xl dark:text-white ">
-								{$_('headers.vaults.text')}
-							</p>
-						</div>
-						<div class="flex flex-col items-center pb-3 gap-2">
-							<p class="text-3xl tracking-wide font-semibold dark:text-white">$20,907.17</p>
-							<p class="text-gray-700 font-medium text-sm dark:text-white">
-								{$_('dashboard.lockedInVaults')}
-							</p>
-							<button
-								class="border border-green-500 rounded-lg py-2 px-5  flex items-center hover:text-white hover:bg-green-400"
-							>
-								<p class="font-medium pr-1 dark:text-white">{$_('dashboard.goDeposit')}</p>
-								<div class="flex relative">
-									<img src="/vaultTokensIcons/usdc.svg" alt="mushToken" class="h-5 w-5" />
-									<img
-										src="/vaultTokensIcons/usdt.svg"
-										alt="daiToken"
-										class="h-5 w-5 absolute left-3"
-									/>
-								</div>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
+				<EarnMoreCard 
+				title={$_('headers.vaults.text')} 
+				primaryText={"$300.41"}
+				secondaryText={$_('dashboard.lockedInFarms')}
+				buttonText={$_('dashboard.startFarming')}
+				route=""/>
+			</EarnMoreSection>
+				<!-- FarmCard -->
+				
+			<SectionTitle title={$_('dashboard.index')}/>
+			<IndexSection>
+				<IndexCard title="Test" description="Lorem" />
+				<IndexCard title="Test" description="Lorem" />
+				<IndexCard title="Test" description="Lorem" />
+				<IndexCard title="Test" description="Lorem" />
+			</IndexSection>
 
-			<h2
-				class="font-bold text-4xl md:text-5xl px-5 mt-5 mb-5 text-center w-full text-center lg:text-left dark:text-white"
-			>
-				{$_('dashboard.index')}
-			</h2>
-			<div class="  w-full h-auto p-1 mb-5 flex flex-wrap justify-between">
-				<div
-					class="  w-full lg:w-6/12 mb-2 flex flex-wrap justify-around sm:px-1 md:px-8  lg:px-0 "
-				>
-					<div
-						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 dark:border-green-500 shadow-md"
-					>
-						<div class="p-4">
-							<p
-								class="pl-1 text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
-							>
-								{$_('dashboard.mushpb')}
-							</p>
-							<div class="flex flex-col h-21 items-center justify-center">
-								{#if $mushPerBlock}
-									<p
-										in:fade={{ duration: 1000 }}
-										class="text-2xl tracking-tighter font-semibold dark:text-white"
-									>
-										{$mushPerBlock} MUSH
-									</p>
-								{/if}
-								<p class="text-xs font-medium text-gray-600" />
-							</div>
-						</div>
-					</div>
 
-					<div
-						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 dark:border-green-500 shadow-md"
-					>
-						<div class="p-4">
-							<p
-								class="pl-1 text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
-							>
-								{$_('dashboard.marketcap')}
-							</p>
-							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
-								{#if $mushMarketCap}
-									<p in:fade={{ duration: 1000 }} class="text-2xl tracking-tighter font-semibold">
-										${$page.params.lang == 'es'
-											? $mushMarketCap.toLocaleString('es-ES')
-											: $mushMarketCap.toLocaleString('en-US')} USD
-									</p>
-								{/if}
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div
-					class="  w-full lg:w-6/12 mb-2 flex flex-wrap justify-around sm:px-1 md:px-8  lg:px-0 "
-				>
-					<div
-						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300 dark:border-green-500 shadow-md"
-					>
-						<div class="p-4">
-							<p
-								class="pl-1 text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
-							>
-								{$_('dashboard.totalvol')}
-							</p>
-							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
-								{#if $totalMushSupply}
-									<p in:fade={{ duration: 1000 }} class="text-2xl font-semibold">
-										{shortLargeAmount($totalMushSupply)}
-									</p>
-								{/if}
-							</div>
-						</div>
-					</div>
-
-					<div
-						class="bg-white dark:bg-dark-800 rounded w-49/100  max-w-screen-sm md:w-49/100 mb-2 md:mb-0 h-34 border border-gray-300  dark:border-green-500 shadow-md"
-					>
-						<div class="p-4">
-							<p
-								class="pl-1 text-sm text-gray-600 font-light md:text-lg text-md tracking-wide dark:text-white"
-							>
-								{$_('dashboard.maxsupply')}
-							</p>
-							<div class="flex flex-col h-21 items-center justify-center dark:text-white">
-								<p class="text-2xl font-semibold">700 M</p>
-								<p class="text-xs font-medium text-gray-600" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<p
-				class="font-bold text-4xl md:text-5xl px-5 mt-5 mb-5 text-center w-full text-center lg:text-left dark:text-white"
-			>
-				{$_('dashboard.price')}
-			</p>
-
+			
+			<SectionTitle title={$_('dashboard.price')}/>
+			
 			<ButtonGroup
 				options={[
 					{ id: 0, name: 'Month' },
@@ -479,18 +307,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
+		
 
-<style>
-	.background {
-		background-image: url('/backgrounds/dashboardMushrooms.png');
-		background-size: cover;
-	}
+	</DashboardLayout>
 
-	.background__dark{
-		background-image: url('/backgrounds/purpleMush.png');
-		background-size: cover;
-	}
-</style>
