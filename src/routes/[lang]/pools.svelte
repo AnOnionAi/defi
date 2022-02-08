@@ -11,7 +11,7 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 </script>
 
-<section class="background">
+<section class="background {$darkMode && 'background__dark'}">
 	<br />
 	<h1 class="dark:text-white text-5xl tracking-widest font-medium">
 		{$_('headers.pools.text')}
@@ -36,7 +36,9 @@
 		background-image: url('/backgrounds/fantasyMushCity.jpg');
 	}
 	.background__dark {
-		background-image: url('/backgrounds/redMushPattern.svg');
+		background-image: url('/backgrounds/mushVillageDark.jpeg');
+		background-size: cover;
+		background-position: center center;
 	}
 	.pools {
 		min-height: 86vh;

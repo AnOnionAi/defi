@@ -251,8 +251,7 @@
 
 <div
 	class="self-start min-w-84 max-w-84  bg-white dark:bg-dark-900 {!$darkMode &&
-		'shadow-xl'} {$darkMode &&
-		'border-2 border-green-500'} rounded-2xl relative transform transition duration-300 hover:scale-101 select-none"
+		'shadow-xl'}  rounded-3xl relative transform transition duration-300 hover:scale-101 select-none"
 >
 	<div class="absolute flex flex-row-reverse p-4 w-full">
 		<div>

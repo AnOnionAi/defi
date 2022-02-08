@@ -29,7 +29,7 @@
 		allVaults = vaultsData.map((vault) => {
 			return {
 				...vault,
-				apy: Math.random() * $tokenPrice,
+				apy: Math.random() * $tokenPrice * 100,
 				tvl: Math.random() * $tokenPrice,
 				userWalletBalance: generateRandomBalance(), //TODO: remove this random to the actual api calls.
 				stakedAmount: generateRandomBalance()

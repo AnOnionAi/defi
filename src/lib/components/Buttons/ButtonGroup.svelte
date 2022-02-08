@@ -15,12 +15,12 @@
 	}
 </script>
 
-<div class="buttons-wrapper px-5 flex flex-row">
+<div class=" ml-6 h-8 flex rounded-r-md rounded-l-md bg-white dark:bg-dark-900	 w-75 -mb-1 	">
 	{#each options as option, index}
 		<button
 			class="{selected === index
 				? 'selected'
-				: ''}{' border border-green-500 py-2 px-3 flex items-center hover:text-white hover:bg-green-400 font-medium dark:text-white'}"
+				: ''}{'  w-25  flex items-center justify-center   dark:text-white overflow-hidden'}"
 			value={option.id}
 			name={option.name}
 			on:click={setSelected}
@@ -32,6 +32,6 @@
 
 <style>
 	button.selected {
-		border-bottom: 3px solid palevioletred;
+		border-bottom: 2px solid palevioletred;
 	}
 </style>
