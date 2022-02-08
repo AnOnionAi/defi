@@ -5,11 +5,8 @@
 </script>
 
 <script lang="ts">
-	import { fade } from 'svelte/transition';
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
-	import { MasterChef } from '$lib/utils/masterc';
 	import { onMount } from 'svelte';
-	import { BigNumber, ethers } from 'ethers';
 	import { totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
 	import { page } from '$app/stores';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
