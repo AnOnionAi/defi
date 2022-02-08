@@ -131,7 +131,7 @@
 					'Dec'
 				];
 
-				historicalData = res.data[0].prices.map((e, i) => {
+				historicalData = res.data.prices[0].prices.map((e, i) => {
 					let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
 					return { ...e, shortDate };
 				});
