@@ -141,10 +141,10 @@ import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte'
 					'Dec'
 				];
 
-				historicalData = res.data[0].prices.map((e, i) => {
-					let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
-					return { ...e, shortDate };
-				});
+				historicalData = res.data.prices[0].prices.map((e, i) => {
+                    let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
+                    return { ...e, shortDate };
+                });
 
 				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(5);
 				let tempPrices = [...historicalData].map((e) => e.price).reverse();
@@ -258,7 +258,5 @@ import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte'
 				<MushPriceCard title="Peak" display="0.001"/>
 				<MushPriceCard title="" display="3%"/>
 			</MushPriceSide>
-			
-		</MushPriceSection>
-
+	</MushPriceSection>
 </DashboardLayout>
