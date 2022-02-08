@@ -17,15 +17,19 @@
 	import { mushPerBlock } from '$lib/stores/MasterChefData';
 
 	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
-import TotalValueLocked from '$lib/components/Dashboard/TotalValueLocked.svelte';
-import HighestApy from '$lib/components/Dashboard/HighestApy.svelte';
-import EarnMoreCard from '$lib/components/Dashboard/EarnMoreCard.svelte';
-import IndexCard from '$lib/components/Dashboard/IndexCard.svelte';
-import IndexSection from '$lib/components/Dashboard/IndexSection.svelte';
-import EarnMoreSection from '$lib/components/Dashboard/EarnMoreSection.svelte';
-import SectionTitle from '$lib/components/Dashboard/SectionTitle.svelte';
-import DashboardSection from '$lib/components/Dashboard/DashboardSection.svelte';
-import DashboardLayout from '$lib/components/Dashboard/DashboardLayout.svelte';
+	import TotalValueLocked from '$lib/components/Dashboard/TotalValueLocked.svelte';
+	import HighestApy from '$lib/components/Dashboard/HighestApy.svelte';
+	import EarnMoreCard from '$lib/components/Dashboard/EarnMoreCard.svelte';
+	import IndexCard from '$lib/components/Dashboard/IndexCard.svelte';
+	import IndexSection from '$lib/components/Dashboard/IndexSection.svelte';
+	import EarnMoreSection from '$lib/components/Dashboard/EarnMoreSection.svelte';
+	import SectionTitle from '$lib/components/Dashboard/SectionTitle.svelte';
+	import DashboardSection from '$lib/components/Dashboard/DashboardSection.svelte';
+	import DashboardLayout from '$lib/components/Dashboard/DashboardLayout.svelte';
+	import MushPriceGraph from '$lib/components/Dashboard/MushPriceGraph.svelte';
+import MushPriceCard from '$lib/components/Dashboard/MushPriceCard.svelte';
+import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
+import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -36,7 +40,7 @@ import DashboardLayout from '$lib/components/Dashboard/DashboardLayout.svelte';
 	let prices;
 	let dates;
 
-	let tooltipLine = {
+	const tooltipLine = {
 		id: 'tooltipLine',
 		beforeDraw: (chart) => {
 			if (chart.tooltip._active && chart.tooltip._active.length) {
@@ -190,124 +194,74 @@ import DashboardLayout from '$lib/components/Dashboard/DashboardLayout.svelte';
 	});
 </script>
 
-		<DashboardLayout>
+<DashboardLayout>
+	<SectionTitle title={$_('headers.dashboard.text')} />
 
-		<SectionTitle title={$_('headers.dashboard.text')}/>
-		
-			<DashboardSection>
-				<div class="col-start-1 col-end-11 md:col-start-2 md:col-end-10 lg:col-start-3 lg:col-end-9 xl:col-start-1 xl:col-end-5">
-					<WalletBalance/>
-				</div>
-	
-				<div class="col-start-1 col-end-6 xl:col-start-5 xl:col-end-8">
-					<HighestApy/>
-				</div>
-	
-				<div class="col-start-6 col-end-11 xl:col-start-8 xl:col-end-11">
-					<TotalValueLocked/>
-				</div>
-			</DashboardSection>
-			
+	<DashboardSection>
+		<WalletBalance slot="wallet" />
+		<HighestApy slot="apy" />
+		<TotalValueLocked slot="tvl" />
+	</DashboardSection>
 
-			<SectionTitle title={$_('dashboard.earn')}/>
-			
-			<EarnMoreSection>
-				<EarnMoreCard 
-				title={$_('headers.farms.text')} 
-				primaryText={"$300.41"}
-				secondaryText={$_('dashboard.lockedInFarms')}
-				buttonText={$_('dashboard.startFarming')}
-				route=""/>
-				<!-- FarmCard -->
-				<EarnMoreCard 
-				title={$_('headers.pools.text')} 
-				primaryText={"$300.41"}
-				secondaryText={$_('dashboard.lockedInFarms')}
-				buttonText={$_('dashboard.startFarming')}
-				route=""/>
-				<!--Pool Card-->
-				<EarnMoreCard 
-				title={$_('headers.vaults.text')} 
-				primaryText={"$300.41"}
-				secondaryText={$_('dashboard.lockedInFarms')}
-				buttonText={$_('dashboard.startFarming')}
-				route=""/>
-			</EarnMoreSection>
-				<!-- FarmCard -->
-				
-			<SectionTitle title={$_('dashboard.index')}/>
-			<IndexSection>
-				<IndexCard title="Test" description="Lorem" />
-				<IndexCard title="Test" description="Lorem" />
-				<IndexCard title="Test" description="Lorem" />
-				<IndexCard title="Test" description="Lorem" />
-			</IndexSection>
+	<SectionTitle title={$_('dashboard.earn')} />
 
+	<EarnMoreSection>
+		<EarnMoreCard
+			title={$_('headers.farms.text')}
+			primaryText={'$300.41'}
+			secondaryText={$_('dashboard.lockedInFarms')}
+			buttonText={$_('dashboard.startFarming')}
+			route="{`/${$page.params.lang}/farms`}"
+		/>
 
-			
-			<SectionTitle title={$_('dashboard.price')}/>
-			
+		<EarnMoreCard
+			title={$_('headers.pools.text')}
+			primaryText={'$300.41'}
+			secondaryText={$_('dashboard.lockedInPools')}
+			buttonText={$_('dashboard.addLiquidity')}
+			route="{`/${$page.params.lang}/pools`}"
+		/>
+
+		<EarnMoreCard
+			title={$_('headers.vaults.text')}
+			primaryText={'$300.41'}
+			secondaryText={$_('dashboard.lockedInVaults')}
+			buttonText={$_('dashboard.goDeposit')}
+			route="{`/${$page.params.lang}/vaults`}"
+		/>
+	</EarnMoreSection>
+
+	<SectionTitle title={$_('dashboard.index')} />
+	<IndexSection>
+		<IndexCard title={$_('dashboard.mushpb')} description="{$mushPerBlock} MUSH" />
+		<IndexCard title={$_('dashboard.marketcap')} description="${$mushMarketCap}" />
+		<IndexCard title={$_('dashboard.totalvol')} description="{($totalMushSupply)} MUSH" />
+		<IndexCard title={$_('dashboard.maxsupply')} description="100 M" />
+	</IndexSection>
+
+	<SectionTitle title={$_('dashboard.price')} />
+
+	<MushPriceSection>
+
+		<div class="h-92 col-span-9  lg:col-span-6	">
 			<ButtonGroup
-				options={[
-					{ id: 0, name: 'Month' },
-					{ id: 1, name: 'Week' },
-					{ id: 2, name: 'Day' }
-				]}
+			options={[
+				{ id: 0, name: 'Month' },
+				{ id: 1, name: 'Week' },
+				{ id: 2, name: 'Day' }
+			]}
 				selected={value}
 				on:change={handleOption}
-			/>
-
-			<div class="w-full h-auto flex flex-col lg:flex-row flex-wrap">
-				<div class="w-full lg:w-18/24 ">
-					<div class="p-4 pb-2 lg:p-5 h-full">
-						<div
-							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full p-2 border border-gray-300 dark:border-green-500 shadow-md"
-						>
-							<canvas id="mush-chart" />
-
-							<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-						</div>
-					</div>
-				</div>
-
-				<div class="w-full lg:w-6/24  ">
-					<div class="w-full  h-26 md:h-36 lg:h-full flex lg:flex-col justify-around p-4 gap-2">
-						<div
-							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 dark:border-green-500 shadow-md"
-						>
-							<p class="pl-2 font-light h-3/12  text-sm md:text-lg dark:text-white">
-								{$_('dashboard.today')}
-							</p>
-							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-medium  md:text-2xl dark:text-white">${lastPrice}</p>
-							</div>
-						</div>
-
-						<div
-							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 dark:border-green-500 shadow-md"
-						>
-							<p class="pl-2 font-light h-3/12 text-sm md:text-lg dark:text-white">
-								{$_('dashboard.peak')}
-							</p>
-							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-medium  md:text-2xl dark:text-white">${peak}</p>
-							</div>
-						</div>
-
-						<div
-							class="bg-white dark:bg-dark-800 rounded-lg w-full h-full lg:h-3/12 p-3 border border-gray-300 dark:border-green-500 shadow-md"
-						>
-							<p class="pl-2 font-light h-3/12 text-sm md:text-lg dark:text-white">
-								{$_('dashboard.profit')}
-							</p>
-							<div class="flex w-full h-9/12 justify-center items-center">
-								<p class="font-medium  md:text-2xl dark:text-white">3.5%</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				/>
+				<MushPriceGraph/>
 			</div>
-		
+			
+			<MushPriceSide>
+				<MushPriceCard title="Today" display="0.001"/>
+				<MushPriceCard title="Peak" display="0.001"/>
+				<MushPriceCard title="" display="3%"/>
+			</MushPriceSide>
+			
+		</MushPriceSection>
 
-	</DashboardLayout>
-
+</DashboardLayout>

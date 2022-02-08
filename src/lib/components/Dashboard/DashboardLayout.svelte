@@ -1,15 +1,12 @@
 <script lang="ts">
-import { darkMode } from "$lib/stores/dark";
+	import { darkMode } from '$lib/stores/dark';
 </script>
 
-
-<div class="background {$darkMode && "background__dark"}">
+<div class="background {$darkMode && 'background__dark'}">
 	<div class=" max-w-screen-xl   mx-auto  px-2 pt-10">
-        <slot/>
-    </div>
+		<slot />
+	</div>
 </div>
-
-
 
 <style>
 	.background {
@@ -17,7 +14,7 @@ import { darkMode } from "$lib/stores/dark";
 		background-size: cover;
 	}
 
-	.background__dark{
+	.background__dark {
 		background-image: url('/backgrounds/purpleMush.png');
 		background-size: cover;
 	}

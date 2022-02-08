@@ -11,7 +11,7 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 </script>
 
-<section class="background {$darkMode && "background__dark"}">
+<section class="background {$darkMode && 'background__dark'}">
 	<br />
 	<h1 class="dark:text-white text-5xl tracking-widest font-medium">
 		{$_('headers.pools.text')}
