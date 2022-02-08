@@ -17,10 +17,6 @@
 	let currentPath;
 	let lastPath;
 
-	onMount(() => {
-		
-	});
-
 	$: {
 		currentPath = $page.url.pathname;
 		currentPath = currentPath.split('/');
