@@ -24,9 +24,9 @@
 	import DashboardSection from '$lib/components/Dashboard/DashboardSection.svelte';
 	import DashboardLayout from '$lib/components/Dashboard/DashboardLayout.svelte';
 	import MushPriceGraph from '$lib/components/Dashboard/MushPriceGraph.svelte';
-import MushPriceCard from '$lib/components/Dashboard/MushPriceCard.svelte';
-import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
-import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
+	import MushPriceCard from '$lib/components/Dashboard/MushPriceCard.svelte';
+	import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
+	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -142,9 +142,9 @@ import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte'
 				];
 
 				historicalData = res.data.prices[0].prices.map((e, i) => {
-                    let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
-                    return { ...e, shortDate };
-                });
+					let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
+					return { ...e, shortDate };
+				});
 
 				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(5);
 				let tempPrices = [...historicalData].map((e) => e.price).reverse();
@@ -208,7 +208,7 @@ import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte'
 			primaryText={'$300.41'}
 			secondaryText={$_('dashboard.lockedInFarms')}
 			buttonText={$_('dashboard.startFarming')}
-			route="{`/${$page.params.lang}/farms`}"
+			route={`/${$page.params.lang}/farms`}
 		/>
 
 		<EarnMoreCard
@@ -216,7 +216,7 @@ import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte'
 			primaryText={'$300.41'}
 			secondaryText={$_('dashboard.lockedInPools')}
 			buttonText={$_('dashboard.addLiquidity')}
-			route="{`/${$page.params.lang}/pools`}"
+			route={`/${$page.params.lang}/pools`}
 		/>
 
 		<EarnMoreCard
@@ -224,7 +224,7 @@ import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte'
 			primaryText={'$300.41'}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
-			route="{`/${$page.params.lang}/vaults`}"
+			route={`/${$page.params.lang}/vaults`}
 		/>
 	</EarnMoreSection>
 
@@ -232,31 +232,30 @@ import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte'
 	<IndexSection>
 		<IndexCard title={$_('dashboard.mushpb')} description="{$mushPerBlock} MUSH" />
 		<IndexCard title={$_('dashboard.marketcap')} description="${$mushMarketCap}" />
-		<IndexCard title={$_('dashboard.totalvol')} description="{($totalMushSupply)} MUSH" />
+		<IndexCard title={$_('dashboard.totalvol')} description="{$totalMushSupply} MUSH" />
 		<IndexCard title={$_('dashboard.maxsupply')} description="100 M" />
 	</IndexSection>
 
 	<SectionTitle title={$_('dashboard.price')} />
 
 	<MushPriceSection>
-
 		<div class="h-92 col-span-9  lg:col-span-6	">
 			<ButtonGroup
-			options={[
-				{ id: 0, name: 'Month' },
-				{ id: 1, name: 'Week' },
-				{ id: 2, name: 'Day' }
-			]}
+				options={[
+					{ id: 0, name: 'Month' },
+					{ id: 1, name: 'Week' },
+					{ id: 2, name: 'Day' }
+				]}
 				selected={value}
 				on:change={handleOption}
-				/>
-				<MushPriceGraph/>
-			</div>
-			
-			<MushPriceSide>
-				<MushPriceCard title="Today" display="0.001"/>
-				<MushPriceCard title="Peak" display="0.001"/>
-				<MushPriceCard title="" display="3%"/>
-			</MushPriceSide>
+			/>
+			<MushPriceGraph />
+		</div>
+
+		<MushPriceSide>
+			<MushPriceCard title="Today" display="0.001" />
+			<MushPriceCard title="Peak" display="0.001" />
+			<MushPriceCard title="" display="3%" />
+		</MushPriceSide>
 	</MushPriceSection>
 </DashboardLayout>

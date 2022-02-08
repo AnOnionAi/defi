@@ -24,7 +24,8 @@
 	</div>
 
 	<a
-		sveltekit:prefetch href={route}
+		sveltekit:prefetch
+		href={route}
 		class="border border-green-500 rounded-lg py-2 px-3  flex items-center hover:text-white hover:bg-green-400 self-center"
 	>
 		<p class="font-medium dark:text-white">{buttonText}</p>
