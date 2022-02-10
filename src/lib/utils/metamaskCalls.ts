@@ -10,8 +10,7 @@ export const isMetaMaskInstalled = () => {
 
 export const goInstallMetamask = () => {
 	window.open(
-		'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn',
-		'_blank'
+		'https://metamask.io/download'
 	);
 };
 
