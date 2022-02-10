@@ -157,7 +157,7 @@
 
 	"walletStatus": {
 		"wallet": "Wallet",
-		"install": "Metamask",
+		"install": "Install Metamask",
 		"connected": "Connected",
 		"checking": "Checking Metamask..."
 	}
