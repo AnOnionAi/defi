@@ -1,7 +1,7 @@
 <script lang="ts">
 import { totalValueLocked } from '$lib/stores/MushMarketStats';
-
-	import { _ } from 'svelte-i18n';
+import { _ } from 'svelte-i18n';
+import { fade } from 'svelte/transition';
 </script>
 
 <div
@@ -12,9 +12,13 @@ import { totalValueLocked } from '$lib/stores/MushMarketStats';
 	</p>
 
 	<div class="text-center">
-		<p class="font-medium text-dark-800 dark:text-gray-200 text-lg md:text-xl xl:text-2xl">
+		{#if $totalValueLocked}
+		<p
+		in:fade={{ duration: 500 }} 
+		class="font-medium text-dark-800 dark:text-gray-200 text-lg md:text-xl xl:text-2xl">
 			${$totalValueLocked.toFixed(2)}
 		</p>
+		{/if}
 		<p class="text-gray-500 dark:text-gray-300 ">{$_('dashboard.across')}</p>
 	</div>
 	<div />

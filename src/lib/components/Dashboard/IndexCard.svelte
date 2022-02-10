@@ -14,7 +14,7 @@
 	<div class="w-full flex justify-center items-center h-32">
 		{#if !description.includes('undefined')}
 			<p
-				in:fade={{ duration: 1000 }}
+				in:fade={{ duration: 500 }}
 				class="text-dark-900 dark:text-white font-medium text-4xl md:text-2xl  lg:text-2xl"
 			>
 				{description}

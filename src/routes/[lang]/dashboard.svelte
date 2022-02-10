@@ -7,7 +7,7 @@
 <script lang="ts">
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
 	import { onMount } from 'svelte';
-	import { totalMushSupply, mushMarketCap, poolsTVL, vaultsTVL, farmsTVL } from '$lib/stores/MushMarketStats';
+	import { totalMushSupply, mushMarketCap, poolsTVL, vaultsTVL, farmsTVL, maxMushSupply } from '$lib/stores/MushMarketStats';
 	import { page } from '$app/stores';
 	
 	import { mushPerBlock } from '$lib/stores/MasterChefData';
@@ -25,7 +25,8 @@
 	import MushPriceCard from '$lib/components/Dashboard/MushPriceCard.svelte';
 	import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
-import { getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
+	import { getFarmsTVL, getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
+	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -120,6 +121,8 @@ import { getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
 	}
 
 	onMount(() => {
+		getFarmsTVL();
+
 		const APIURL =
 			'https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17';
 
@@ -233,7 +236,7 @@ import { getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
 		<IndexCard title={$_('dashboard.mushpb')} description="{$mushPerBlock} MUSH" />
 		<IndexCard title={$_('dashboard.marketcap')} description="${$mushMarketCap}" />
 		<IndexCard title={$_('dashboard.totalvol')} description="{$totalMushSupply} MUSH" />
-		<IndexCard title={$_('dashboard.maxsupply')} description="100 M" />
+		<IndexCard title={$_('dashboard.maxsupply')} description="{shortLargeAmount($maxMushSupply)} MUSH" />
 	</IndexSection>
 
 	<SectionTitle title={$_('dashboard.price')} />

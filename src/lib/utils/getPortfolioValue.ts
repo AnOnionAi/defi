@@ -1,5 +1,8 @@
+import { Token } from "$lib/ts/types";
 import { ethers } from "ethers";
-import { getMasterChefAddress } from "./addressHelpers";
+import { getContractAddress, getMasterChefAddress } from "./addressHelpers";
+import { getTokenBalance } from "./erc20";
+import { getPriceOfMushPair } from "./lpTokenUtils";
 
 interface TokenBalancesResponse{
     address:string,
@@ -45,3 +48,13 @@ try{
 export const getPoolsTVL = async():Promise<number> =>{
 return getPortfolioValue(getMasterChefAddress())
 }
+
+export const getFarmsTVL = async():Promise<number> => { 
+    const usdcMushPairAddress =getContractAddress(Token.SUSHILP)
+    const pairPricePromise =  getPriceOfMushPair(usdcMushPairAddress);
+    const stakedAmountPromise = getTokenBalance(usdcMushPairAddress,getContractAddress(Token.MASTERCHEF))
+    const [pairPrice,stakedAmount] = await  Promise.all([pairPricePromise,stakedAmountPromise])
+    if (stakedAmount.isZero()) return 0;
+    const parsedStakedAmount = parseFloat(ethers.utils.formatEther(stakedAmount));
+    return pairPrice * parsedStakedAmount;
+} 

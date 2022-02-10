@@ -2,7 +2,7 @@ import { MasterChef } from '$lib/utils/masterc';
 import { ethers } from 'ethers';
 import { readable, derived } from 'svelte/store';
 import { tokenPrice } from './NativeTokenPrice';
-import ERC20ABI from '$lib/config/abi/ERC20.json';
+import CappedERC20 from '$lib/config/abi/CappedERC20.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/ts/types';
 import { Provider } from '$lib/utils/web3Helpers';
@@ -12,7 +12,7 @@ import { getPoolsTVL } from '$lib/utils/getPortfolioValue';
 
 const mushTokenContract = new ethers.Contract(
 	getContractAddress(Token.MUSHTOKEN),
-	ERC20ABI,
+	CappedERC20,
 	Provider.getProviderSingleton()
 );
 
@@ -22,6 +22,12 @@ export const totalMushSupply: Readable<number> = readable(undefined, function st
 		set(mushSupply);
 	});
 });
+
+export const maxMushSupply: Readable<number> = readable(0, function start(set){
+	mushTokenContract.cap().then((amountBN)=>{
+		set(parseFloat(ethers.utils.formatEther(amountBN)));
+	})
+})
 
 export const totalBurnedMush: Readable<number> = readable(undefined, function start(set) {
 	mushTokenContract.balanceOf(BURN_ADDRESS).then((amountBN) => {
@@ -60,3 +66,4 @@ export const totalValueLocked = derived(
 		return $poolsTVL + $farmsTVL + $vaultsTVL
 	}
 );
+
