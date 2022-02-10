@@ -258,7 +258,7 @@
 		<MushPriceSide>
 			<MushPriceCard title="Today" display="${lastPrice}" />
 			<MushPriceCard title="Peak" display="${peak}" />
-			<MushPriceCard title="Growth" display="3%" />
+			<MushPriceCard title="Growth" display="{((peak * 100) / lastPrice) - 100}%" />
 		</MushPriceSide>
 	</MushPriceSection>
 </DashboardLayout>
