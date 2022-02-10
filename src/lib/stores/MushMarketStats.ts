@@ -46,18 +46,18 @@ export const mushMarketCap = derived(
 );
 
 
-export const poolsTVL: Readable<number>  = readable(undefined,function start(set){
+export const poolsTVL: Readable<number>  = readable(0,function start(set){
 	getPoolsTVL().then(TVL => set(TVL))
 })
 
 
 //TODO: Make the farms TVL calculation.
-export const farmsTVL: Readable<number> = readable(undefined,function start(set){
+export const farmsTVL: Readable<number> = readable(0,function start(set){
 	getFarmsTVL().then(TVL => set(TVL))
 })
 
 //TODO: Make the vaults TVL calculation.
-export const vaultsTVL: Readable<number> = readable(undefined,function start(set){
+export const vaultsTVL: Readable<number> = readable(0,function start(set){
 	getPoolsTVL().then(TVL => set(TVL))
 })
 

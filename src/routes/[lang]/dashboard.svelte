@@ -27,6 +27,7 @@
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
 	import { getFarmsTVL, getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
+import { formatComma } from '$lib/utils/formatNumbersByLang';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -208,7 +209,7 @@
 	<EarnMoreSection>
 		<EarnMoreCard
 			title={$_('headers.farms.text')}
-			primaryText={$farmsTVL?.toFixed(2)}
+			primaryText={formatComma($farmsTVL?.toFixed(2),$page.params.lang)}
 			secondaryText={$_('dashboard.lockedInFarms')}
 			buttonText={$_('dashboard.startFarming')}
 			route={`/${$page.params.lang}/farms`}
@@ -216,7 +217,7 @@
 
 		<EarnMoreCard
 			title={$_('headers.pools.text')}
-			primaryText={$poolsTVL?.toFixed(2)}
+			primaryText={formatComma($poolsTVL?.toFixed(2),$page.params.lang)}
 			secondaryText={$_('dashboard.lockedInPools')}
 			buttonText={$_('dashboard.addLiquidity')}
 			route={`/${$page.params.lang}/pools`}
@@ -224,7 +225,7 @@
 
 		<EarnMoreCard
 			title={$_('headers.vaults.text')}
-			primaryText={$vaultsTVL?.toFixed(2)}
+			primaryText={formatComma($vaultsTVL?.toFixed(2),$page.params.lang)}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
 			route={`/${$page.params.lang}/vaults`}
