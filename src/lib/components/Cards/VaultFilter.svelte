@@ -467,7 +467,7 @@
 		opacity: 0;
 		width: 1em;
 		height: 1em;
-		z-index: 999999999;
+		z-index: 2;
 	}
 
 	.checkbox__control {
