@@ -28,6 +28,7 @@
 	import { getFarmsTVL, getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 import { formatComma } from '$lib/utils/formatNumbersByLang';
+import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -240,15 +241,14 @@ import { formatComma } from '$lib/utils/formatNumbersByLang';
 		<IndexCard title={$_('dashboard.maxsupply')} description="{shortLargeAmount($maxMushSupply)} MUSH" />
 	</IndexSection>
 
-	<SectionTitle title={$_('dashboard.price')} />
-
+	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
 	<MushPriceSection>
 		<div class="h-92 col-span-9  lg:col-span-6	">
 			<ButtonGroup
 				options={[
-					{ id: 0, name: 'Month' },
+					{ id: 0, name: 'Day' },
 					{ id: 1, name: 'Week' },
-					{ id: 2, name: 'Day' }
+					{ id: 2, name: 'Month' }
 				]}
 				selected={value}
 				on:change={handleOption}
