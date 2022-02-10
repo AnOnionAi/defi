@@ -1,5 +1,5 @@
 <script>
-	import { goInstallMetamask } from "$lib/utils/metamaskCalls";
+	import { goInstallMetamask } from '$lib/utils/metamaskCalls';
 </script>
 
 <div class="p-5 flex w-full flex flex-col items-center">

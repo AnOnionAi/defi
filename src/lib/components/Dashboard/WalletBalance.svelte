@@ -39,14 +39,11 @@
 	};
 
 	const openModal = () => {
-		open(
-			MetamaskNotInstalled,
-			{
-				closeButton: true,
-				closeOnEsc: true,
-				closeOnOuterClick: true
-			}
-		);
+		open(MetamaskNotInstalled, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
 	};
 </script>
 
@@ -77,7 +74,7 @@
 	</div>
 
 	<button
-		on:click={ isMetaMaskInstalled() ? addTokenToMetamaskWallet : openModal}
+		on:click={isMetaMaskInstalled() ? addTokenToMetamaskWallet : openModal}
 		on:click={addTokenToMetamaskWallet}
 		class="flex items-center justify-center  border-2 border-green-400 rounded-xl hover:text-white hover:bg-green-400 px-3 py-2 self-center"
 	>

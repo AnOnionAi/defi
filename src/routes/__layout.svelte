@@ -9,7 +9,13 @@
 	import 'virtual:windi.css';
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import { chainID, accounts, metamaskConnect, metamaskListeners, metaMaskDisconnect } from '$lib/stores/MetaMaskAccount';
+	import {
+		chainID,
+		accounts,
+		metamaskConnect,
+		metamaskListeners,
+		metaMaskDisconnect
+	} from '$lib/stores/MetaMaskAccount';
 	import WrongNetwork from '$lib/components/Modals/WrongNetwork.svelte';
 	import { POLYGON_CHAIN_ID } from '$lib/config';
 
@@ -20,18 +26,19 @@
 	$: {
 		currentPath = $page.url.pathname;
 		currentPath = currentPath.split('/');
-		
-		if ( typeof (Storage) !== 'undefined' ) {
-			
-			if ( (currentPath.length != 2 && currentPath[2] != 'dashboard') || sessionStorage.getItem('METAMASK_ACCOUNT') ) {		
 
-				if ( !$accounts && JSON.stringify(currentPath) != JSON.stringify(lastPath) ) {		
+		if (typeof Storage !== 'undefined') {
+			if (
+				(currentPath.length != 2 && currentPath[2] != 'dashboard') ||
+				sessionStorage.getItem('METAMASK_ACCOUNT')
+			) {
+				if (!$accounts && JSON.stringify(currentPath) != JSON.stringify(lastPath)) {
 					metamaskConnect();
 					metamaskListeners();
-				} 
-			} 
+				}
+			}
 		}
-		
+
 		lastPath = currentPath;
 	}
 </script>

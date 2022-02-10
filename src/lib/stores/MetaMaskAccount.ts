@@ -41,7 +41,7 @@ export async function metamaskListeners() {
 	} catch {
 		console.log('Error: Error when changing account or network in Metamask');
 	}
-} 
+}
 
 export const requestChainChange = async () => {
 	return window.ethereum.request({

@@ -136,14 +136,11 @@
 	}
 
 	const openModal = () => {
-		open(
-			MetamaskNotInstalled,
-			{
-				closeButton: true,
-				closeOnEsc: true,
-				closeOnOuterClick: true
-			}
-		);
+		open(MetamaskNotInstalled, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
 	};
 </script>
 
@@ -239,7 +236,7 @@
 		>
 			{#if !$accounts}
 				<button
-					on:click={ isMetaMaskInstalled() ? metaMaskCon : openModal}
+					on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
 					class=" block w-10/12 mx-auto  bg-{vaultConfig.platform
 						.brandColor}-500 transform transition duration-300 hover:scale-105 rounded-xl py-2  text-white font-semibold text-xl tracking-wide "
 					>{$_('actions.unlock')}

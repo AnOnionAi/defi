@@ -41,7 +41,7 @@
 	import MultiplierBadge from '../Badges/MultiplierBadge.svelte';
 	import { totalAllocPoints } from '$lib/stores/MasterChefData';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
-import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
+	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
@@ -247,14 +247,11 @@ import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 	};
 
 	const openMetamaskAlertModal = () => {
-		open(
-			MetamaskNotInstalled,
-			{
-				closeButton: true,
-				closeOnEsc: true,
-				closeOnOuterClick: true
-			}
-		);
+		open(MetamaskNotInstalled, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
 	};
 
 	const showPoolInfo = () => {
@@ -331,7 +328,7 @@ import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 		<div class="flex h-10  w-full mb-6 mt-2">
 			{#if !$accounts}
 				<button
-					on:click={ isMetaMaskInstalled() ? metaMaskCon : openMetamaskAlertModal}
+					on:click={isMetaMaskInstalled() ? metaMaskCon : openMetamaskAlertModal}
 					class="bg-green-500 hover:bg-green-600 text-white tracking-wide font-semibold w-full h-full rounded-xl"
 				>
 					{$_('actions.unlock')}
