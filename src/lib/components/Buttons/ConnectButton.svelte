@@ -23,7 +23,7 @@
 					WrongNetwork,
 					{},
 					{
-						closeButton: false,
+						closeButton: true,
 						closeOnEsc: false,
 						closeOnOuterClick: false,
 						styleWindow: { width: '400px' }
