@@ -256,8 +256,8 @@
 		</div>
 
 		<MushPriceSide>
-			<MushPriceCard title="Today" display="0.001" />
-			<MushPriceCard title="Peak" display="0.001" />
+			<MushPriceCard title="Today" display="${lastPrice}" />
+			<MushPriceCard title="Peak" display="${peak}" />
 			<MushPriceCard title="Growth" display="3%" />
 		</MushPriceSide>
 	</MushPriceSection>
