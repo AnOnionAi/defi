@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n';
+import { totalValueLocked } from '$lib/stores/MushMarketStats';
 
-	const totalValueLocked = Math.random() * 10000; //TODO: Change for the real one
+	import { _ } from 'svelte-i18n';
 </script>
 
 <div
@@ -13,7 +13,7 @@
 
 	<div class="text-center">
 		<p class="font-medium text-dark-800 dark:text-gray-200 text-lg md:text-xl xl:text-2xl">
-			${totalValueLocked.toFixed(2)}
+			${$totalValueLocked.toFixed(2)}
 		</p>
 		<p class="text-gray-500 dark:text-gray-300 ">{$_('dashboard.across')}</p>
 	</div>

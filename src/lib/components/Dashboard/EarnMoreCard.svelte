@@ -2,7 +2,7 @@
 	import { _ } from 'svelte-i18n';
 
 	export let title: string;
-	export let primaryText: string;
+	export let primaryText: string | number;
 	export let secondaryText: string;
 	export let buttonText: string;
 	export let route: string;
@@ -17,7 +17,7 @@
 		</p>
 	</div>
 	<div class="flex flex-col items-center pb-3 gap-2">
-		<p class="text-3xl tracking-wide font-semibold dark:text-white">{primaryText}</p>
+		<p class="text-3xl tracking-wide font-semibold dark:text-white">${primaryText}</p>
 		<p class="text-gray-700 font-medium text-sm dark:text-white -mt-1">
 			{secondaryText}
 		</p>

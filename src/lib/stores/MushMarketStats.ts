@@ -8,6 +8,7 @@ import { Token } from '$lib/ts/types';
 import { Provider } from '$lib/utils/web3Helpers';
 import { BURN_ADDRESS } from '$lib/config';
 import type { Readable } from 'svelte/store';
+import { getPoolsTVL } from '$lib/utils/getPortfolioValue';
 
 const mushTokenContract = new ethers.Contract(
 	getContractAddress(Token.MUSHTOKEN),
@@ -34,5 +35,28 @@ export const mushMarketCap = derived(
 	([$tokenPrice, $totalMushSupply]) => {
 		const marketCap = $tokenPrice * $totalMushSupply;
 		return marketCap;
+	}
+);
+
+
+export const poolsTVL: Readable<number>  = readable(undefined,function start(set){
+	getPoolsTVL().then(TVL => set(TVL))
+})
+
+
+//TODO: Make the farms TVL calculation.
+export const farmsTVL: Readable<number> = readable(undefined,function start(set){
+	getPoolsTVL().then(TVL => set(TVL))
+})
+
+//TODO: Make the vaults TVL calculation.
+export const vaultsTVL: Readable<number> = readable(undefined,function start(set){
+	getPoolsTVL().then(TVL => set(TVL))
+})
+
+export const totalValueLocked = derived(
+	[poolsTVL,farmsTVL,vaultsTVL],
+	([$poolsTVL, $farmsTVL,$vaultsTVL]) => {
+		return $poolsTVL + $farmsTVL + $vaultsTVL
 	}
 );

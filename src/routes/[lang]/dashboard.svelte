@@ -7,12 +7,10 @@
 <script lang="ts">
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
 	import { onMount } from 'svelte';
-	import { totalMushSupply, mushMarketCap } from '$lib/stores/MushMarketStats';
+	import { totalMushSupply, mushMarketCap, poolsTVL, vaultsTVL, farmsTVL } from '$lib/stores/MushMarketStats';
 	import { page } from '$app/stores';
-	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
-	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
+	
 	import { mushPerBlock } from '$lib/stores/MasterChefData';
-
 	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
 	import TotalValueLocked from '$lib/components/Dashboard/TotalValueLocked.svelte';
 	import HighestApy from '$lib/components/Dashboard/HighestApy.svelte';
@@ -27,6 +25,7 @@
 	import MushPriceCard from '$lib/components/Dashboard/MushPriceCard.svelte';
 	import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
+import { getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -36,6 +35,7 @@
 	let historicalData;
 	let prices;
 	let dates;
+
 
 	const tooltipLine = {
 		id: 'tooltipLine',
@@ -205,7 +205,7 @@
 	<EarnMoreSection>
 		<EarnMoreCard
 			title={$_('headers.farms.text')}
-			primaryText={'$300.41'}
+			primaryText={$farmsTVL?.toFixed(2)}
 			secondaryText={$_('dashboard.lockedInFarms')}
 			buttonText={$_('dashboard.startFarming')}
 			route={`/${$page.params.lang}/farms`}
@@ -213,7 +213,7 @@
 
 		<EarnMoreCard
 			title={$_('headers.pools.text')}
-			primaryText={'$300.41'}
+			primaryText={$poolsTVL?.toFixed(2)}
 			secondaryText={$_('dashboard.lockedInPools')}
 			buttonText={$_('dashboard.addLiquidity')}
 			route={`/${$page.params.lang}/pools`}
@@ -221,7 +221,7 @@
 
 		<EarnMoreCard
 			title={$_('headers.vaults.text')}
-			primaryText={'$300.41'}
+			primaryText={$vaultsTVL?.toFixed(2)}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
 			route={`/${$page.params.lang}/vaults`}
@@ -255,7 +255,7 @@
 		<MushPriceSide>
 			<MushPriceCard title="Today" display="0.001" />
 			<MushPriceCard title="Peak" display="0.001" />
-			<MushPriceCard title="" display="3%" />
+			<MushPriceCard title="Growth" display="3%" />
 		</MushPriceSide>
 	</MushPriceSection>
 </DashboardLayout>
