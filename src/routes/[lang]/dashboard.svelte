@@ -30,6 +30,7 @@
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
 import { parse } from 'path/posix';
+import { APIKEY, getCovalentApiKey } from '$lib/env';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -133,7 +134,7 @@ import { parse } from 'path/posix';
 
 	onMount(() => {
 		const APIURL =
-			'https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x831753DD7087CaC61aB5644b308642cc1c33Dc13/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17';
+			`https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x831753DD7087CaC61aB5644b308642cc1c33Dc13/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_${APIKEY}`;
 
 		fetch(APIURL)
 			.then((res) => res.json())

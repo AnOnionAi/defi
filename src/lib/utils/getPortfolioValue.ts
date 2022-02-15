@@ -1,3 +1,4 @@
+import { APIKEY } from "$lib/env";
 import { Token } from "$lib/ts/types";
 import { ethers } from "ethers";
 import { getContractAddress, getMasterChefAddress } from "./addressHelpers";
@@ -31,7 +32,7 @@ interface ERC20MetaData {
 }
 
 export const getPortfolioValue = async(address: string):Promise<number> => {
-const APIURL = `https://api.covalenthq.com/v1/137/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=ckey_eb736567482640818e2a7b34eb5`
+const APIURL = `https://api.covalenthq.com/v1/137/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=ckey_${APIKEY}`
 try{
     const response = await fetch(APIURL);
     const {data} = await response.json();

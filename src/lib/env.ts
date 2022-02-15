@@ -36,8 +36,7 @@ const getEnv = () => {
 	return env;
 };
 
-
-
+export const APIKEY = env["VITE_COVALENT_API_KEY"];
 
 export default {
 	...getEnv()
