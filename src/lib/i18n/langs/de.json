@@ -156,7 +156,7 @@
 
 	"walletStatus": {
 		"wallet": "Brieftasche",
-		"install": "Metamask",
+		"install": "Metamask Installieren",
 		"connected": "Verbunden",
 		"checking": "Suche nach Metamask..."
 	}

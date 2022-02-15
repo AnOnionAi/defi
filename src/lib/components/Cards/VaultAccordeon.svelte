@@ -16,6 +16,9 @@
 	import { quickImages, sushiImages } from '$lib/config/constants/vaultsImages';
 	import { Chasing } from 'svelte-loading-spinners';
 	import { providers, ethers } from 'ethers';
+	import { getContext } from 'svelte';
+	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
+	const { open } = getContext('simple-modal');
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
@@ -24,6 +27,7 @@
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
+	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 
 	const { addNotification } = getNotificationsContext();
 
@@ -130,6 +134,14 @@
 			});
 		}
 	}
+
+	const openModal = () => {
+		open(MetamaskNotInstalled, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
+	};
 </script>
 
 <div in:fly={{ y: 200, duration: 100 }} class="mb-5">
@@ -224,7 +236,7 @@
 		>
 			{#if !$accounts}
 				<button
-					on:click={metaMaskCon}
+					on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
 					class=" block w-10/12 mx-auto  bg-{vaultConfig.platform
 						.brandColor}-500 transform transition duration-300 hover:scale-105 rounded-xl py-2  text-white font-semibold text-xl tracking-wide "
 					>{$_('actions.unlock')}
