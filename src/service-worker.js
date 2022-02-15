@@ -38,7 +38,7 @@ worker.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-	console.log('[ServiceWorker] Fetch', event.request.url);
+	/* console.log('[ServiceWorker] Fetch', event.request.url); */
 	if (event.request.mode !== 'navigate') {
 		return;
 	}
