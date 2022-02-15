@@ -4,6 +4,7 @@
 	import Fa from "svelte-fa"
 	import {faCaretDown,faCaretUp} from "@fortawesome/free-solid-svg-icons" 
 import { formatComma } from "$lib/utils/formatNumbersByLang";
+import { _ } from "svelte-i18n";
 	export let title: string;
 	export let display: number = 0;
 	export let isPercentage = false;
@@ -34,7 +35,7 @@ import { formatComma } from "$lib/utils/formatNumbersByLang";
 	
 	{/if}
 	{#if display === null}
-		<p class="text-lg text-center">Not Avaliable</p>
+		<p class="text-lg text-center">{$_("actions.notAvaliable")}</p>
 	{/if}
 	<p></p>
 </div>

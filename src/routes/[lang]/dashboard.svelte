@@ -134,7 +134,7 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 
 	onMount(() => {
 		const APIURL =
-			`https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x831753DD7087CaC61aB5644b308642cc1c33Dc13/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_${APIKEY}`;
+			`https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_${APIKEY}`;
 
 		fetch(APIURL)
 			.then((res) => res.json())
@@ -164,8 +164,7 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(2);
 
 				let tempPrices = [...historicalData].map((e) => e.price).reverse();
-				peak = Math.max(...tempPrices).toFixed(2);
-
+				peak = Math.max(...tempPrices).toFixed(5);
 				dataLine = {
 					labels: historicalData.map((e) => e.shortDate).reverse(),
 					datasets: [
