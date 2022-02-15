@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-
+	import { fade } from 'svelte/transition';
 	export let title: string;
-	export let primaryText: string;
+	export let primaryText: string | number;
 	export let secondaryText: string;
 	export let buttonText: string;
 	export let route: string;
 </script>
 
 <div
-	class="flex flex-col justify-between bg-white dark:bg-dark-900  rounded-2xl p-5 h-55 shadow-md col-span-6 md:col-span-3 select-none"
+	class="flex flex-col justify-between bg-white dark:bg-dark-900  rounded-2xl p-5 h-55 shadow-md col-span-6 md:col-span-3 select-none transition duration-300"
 >
 	<div class="flex flex items-center">
 		<p class="ml-2 text-gray-600 font-light tracking-wider text-xl dark:text-white">
@@ -17,7 +17,11 @@
 		</p>
 	</div>
 	<div class="flex flex-col items-center pb-3 gap-2">
-		<p class="text-3xl tracking-wide font-semibold dark:text-white">{primaryText}</p>
+		{#if primaryText}
+			<p in:fade={{ duration: 500 }} class="text-3xl tracking-wide font-semibold dark:text-white">
+				${primaryText}
+			</p>
+		{/if}
 		<p class="text-gray-700 font-medium text-sm dark:text-white -mt-1">
 			{secondaryText}
 		</p>

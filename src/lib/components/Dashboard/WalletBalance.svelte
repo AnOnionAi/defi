@@ -11,6 +11,9 @@
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
 	import { width } from '@fortawesome/free-solid-svg-icons/faChevronUp';
+	import { page } from '$app/stores';
+	import { formatComma } from '$lib/utils/formatNumbersByLang';
+
 	import { getContext } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	const { open } = getContext('simple-modal');
@@ -22,7 +25,6 @@
 	$: userAccount = $accounts?.[0];
 
 	$: if (userAccount && $tokenPrice) {
-		console.log('ENTRTEEE', userAccount, $tokenPrice);
 		fetchBalances(userAccount, $tokenPrice).then((response) => {
 			[userMushBalance, userFiatBalance] = response;
 		});
@@ -48,7 +50,7 @@
 </script>
 
 <div
-	class="bg-white dark:bg-dark-900 rounded-2xl p-5 h-55 shadow-xl dark:text-white dark:shadow-none flex flex-col justify-between select-none"
+	class="bg-white dark:bg-dark-900 rounded-2xl p-5 h-55 shadow-xl dark:text-white dark:shadow-none flex flex-col justify-between select-none transition duration-300"
 >
 	<p class="text-3xl pl-3 text-lg text-dark-200 dark:text-white tracking-wide">
 		{$_('walletStatus.wallet')}
@@ -57,7 +59,9 @@
 		{#if !$accounts}
 			<p class="text-3xl font-medium text-dark-500 dark:text-white">---- MUSH</p>
 		{:else if userMushBalance != undefined}
-			<p class="text-3xl font-medium text-dark-500 dark:text-white">{userMushBalance} MUSH</p>
+			<p class="text-3xl font-medium text-dark-500 dark:text-white">
+				{formatComma(userMushBalance, $page.params.lang)} MUSH
+			</p>
 		{:else}
 			<LoadingSkeleton styles={{ height: '35px', width: '120px' }} />
 		{/if}
@@ -65,7 +69,7 @@
 		{#if $accounts}
 			{#if userMushBalance != undefined}
 				<p class="text-lg font-medium text-gray-600 dark:text-gray-400 -mt-2 ">
-					~ ${userFiatBalance}
+					~ ${formatComma(userFiatBalance, $page.params.lang)}
 				</p>
 			{:else}
 				<LoadingSkeleton styles={{ height: '20px', width: '100px' }} />

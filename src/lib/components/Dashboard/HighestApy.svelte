@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="bg-white dark:bg-dark-900 rounded-2xl p-5 h-55 shadow-xl flex flex-col justify-between select-none"
+	class="bg-white dark:bg-dark-900 rounded-2xl p-5 h-55 shadow-xl flex flex-col justify-between select-none transition duration-300"
 >
 	<p class="text-center text-sm md:text-left md:text-xl text-gray-600  dark:text-white">
 		Earn Interest Up To
