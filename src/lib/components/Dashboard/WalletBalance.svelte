@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { addTokenToMetamaskWallet } from '$lib/utils/metamaskCalls';
+	import { addTokenToMetamaskWallet, isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 	import { getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { Token } from '$lib/ts/types';
@@ -11,6 +11,9 @@
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
 	import { width } from '@fortawesome/free-solid-svg-icons/faChevronUp';
+	import { getContext } from 'svelte';
+	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
+	const { open } = getContext('simple-modal');
 
 	let userAccount: string;
 	let userMushBalance: number;
@@ -33,6 +36,14 @@
 		const parsedMushBalance = parseFloat(ethers.utils.formatEther(balanceResponse));
 		const fiatBalance = parsedMushBalance * tokenUsdPrice;
 		return [parsedMushBalance, fiatBalance];
+	};
+
+	const openModal = () => {
+		open(MetamaskNotInstalled, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
 	};
 </script>
 
@@ -63,6 +74,7 @@
 	</div>
 
 	<button
+		on:click={isMetaMaskInstalled() ? addTokenToMetamaskWallet : openModal}
 		on:click={addTokenToMetamaskWallet}
 		class="flex items-center justify-center  border-2 border-green-400 rounded-xl hover:text-white hover:bg-green-400 px-3 py-2 self-center"
 	>

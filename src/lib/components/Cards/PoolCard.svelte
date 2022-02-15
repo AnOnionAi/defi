@@ -40,6 +40,8 @@
 	import SushiswapBadge from '../Badges/SushiswapBadge.svelte';
 	import MultiplierBadge from '../Badges/MultiplierBadge.svelte';
 	import { totalAllocPoints } from '$lib/stores/MasterChefData';
+	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
+	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
@@ -244,6 +246,14 @@
 		);
 	};
 
+	const openMetamaskAlertModal = () => {
+		open(MetamaskNotInstalled, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
+	};
+
 	const showPoolInfo = () => {
 		isHidden = !isHidden;
 	};
@@ -318,7 +328,7 @@
 		<div class="flex h-10  w-full mb-6 mt-2">
 			{#if !$accounts}
 				<button
-					on:click={metaMaskCon}
+					on:click={isMetaMaskInstalled() ? metaMaskCon : openMetamaskAlertModal}
 					class="bg-green-500 hover:bg-green-600 text-white tracking-wide font-semibold w-full h-full rounded-xl"
 				>
 					{$_('actions.unlock')}
