@@ -7,7 +7,14 @@
 <script lang="ts">
 	import WalletBalance from '$lib/components/Dashboard/WalletBalance.svelte';
 	import { onMount } from 'svelte';
-	import { totalMushSupply, mushMarketCap, poolsTVL, vaultsTVL, farmsTVL, maxMushSupply } from '$lib/stores/MushMarketStats';
+	import {
+		totalMushSupply,
+		mushMarketCap,
+		poolsTVL,
+		vaultsTVL,
+		farmsTVL,
+		maxMushSupply
+	} from '$lib/stores/MushMarketStats';
 	import { page } from '$app/stores';
 	import { mushPerBlock } from '$lib/stores/MasterChefData';
 	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
@@ -28,13 +35,13 @@
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
-import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
-import { parse } from 'path/posix';
-import { APIKEY, getCovalentApiKey } from '$lib/env';
+	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
+	import { parse } from 'path/posix';
+	import { APIKEY, getCovalentApiKey } from '$lib/env';
 
 	let value = 0;
 	let lastPrice = 0;
-	let peak:string | number = 0;
+	let peak: string | number = 0;
 	let dataLine;
 	let myChart;
 	let historicalData;
@@ -42,12 +49,12 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 	let dates;
 
 	let growthInfo: GrowthInfo = {
-		yesterdayPrice:  undefined,
-    todayGrowth:  undefined,
-    oneWeekAgoPrice:  undefined,
-    weeklyGrowth:  undefined,
-    oneMonthAgoPrice:  undefined,
-    monthlyGrowth:  undefined
+		yesterdayPrice: undefined,
+		todayGrowth: undefined,
+		oneWeekAgoPrice: undefined,
+		weeklyGrowth: undefined,
+		oneMonthAgoPrice: undefined,
+		monthlyGrowth: undefined
 	};
 
 	const tooltipLine = {
@@ -133,8 +140,7 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 	}
 
 	onMount(() => {
-		const APIURL =
-			`https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_${APIKEY}`;
+		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_${APIKEY}`;
 
 		fetch(APIURL)
 			.then((res) => res.json())
@@ -220,7 +226,7 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 	<EarnMoreSection>
 		<EarnMoreCard
 			title={$_('headers.farms.text')}
-			primaryText={formatComma($farmsTVL,$page.params.lang)}
+			primaryText={formatComma($farmsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInFarms')}
 			buttonText={$_('dashboard.startFarming')}
 			route={`/${$page.params.lang}/farms`}
@@ -228,7 +234,7 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 
 		<EarnMoreCard
 			title={$_('headers.pools.text')}
-			primaryText={formatComma($poolsTVL,$page.params.lang)}
+			primaryText={formatComma($poolsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInPools')}
 			buttonText={$_('dashboard.addLiquidity')}
 			route={`/${$page.params.lang}/pools`}
@@ -236,7 +242,7 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 
 		<EarnMoreCard
 			title={$_('headers.vaults.text')}
-			primaryText={formatComma($vaultsTVL,$page.params.lang)}
+			primaryText={formatComma($vaultsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
 			route={`/${$page.params.lang}/vaults`}
@@ -245,10 +251,22 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 
 	<SectionTitle title={$_('dashboard.index')} />
 	<IndexSection>
-		<IndexCard title={$_('dashboard.mushpb')} description="{formatComma($mushPerBlock,$page.params.lang)} MUSH" />
-		<IndexCard title={$_('dashboard.marketcap')} description="${formatComma($mushMarketCap,$page.params.lang)}" />
-		<IndexCard title={$_('dashboard.totalvol')} description="{formatComma($totalMushSupply,$page.params.lang)} MUSH"  />
-		<IndexCard title={$_('dashboard.maxsupply')} description="{formatComma($maxMushSupply,$page.params.lang)} MUSH"/>
+		<IndexCard
+			title={$_('dashboard.mushpb')}
+			description="{formatComma($mushPerBlock, $page.params.lang)} MUSH"
+		/>
+		<IndexCard
+			title={$_('dashboard.marketcap')}
+			description="${formatComma($mushMarketCap, $page.params.lang)}"
+		/>
+		<IndexCard
+			title={$_('dashboard.totalvol')}
+			description="{formatComma($totalMushSupply, $page.params.lang)} MUSH"
+		/>
+		<IndexCard
+			title={$_('dashboard.maxsupply')}
+			description="{formatComma($maxMushSupply, $page.params.lang)} MUSH"
+		/>
 	</IndexSection>
 
 	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
@@ -267,10 +285,10 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 		</div>
 
 		<MushPriceSide>
-			<MushPriceCard title="Today" display={growthInfo.todayGrowth} isPercentage={true}/>
-			<MushPriceCard title="Weekly" display={growthInfo.weeklyGrowth} isPercentage={true}/>
+			<MushPriceCard title="Today" display={growthInfo.todayGrowth} isPercentage={true} />
+			<MushPriceCard title="Weekly" display={growthInfo.weeklyGrowth} isPercentage={true} />
 			<MushPriceCard title="Monthly" display={growthInfo.monthlyGrowth} isPercentage={true} />
-			<MushPriceCard title="Peak" display={parseFloat(peak)}/>
+			<MushPriceCard title="Peak" display={parseFloat(peak)} />
 		</MushPriceSide>
 	</MushPriceSection>
 </DashboardLayout>

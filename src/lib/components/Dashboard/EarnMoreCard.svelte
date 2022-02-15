@@ -17,10 +17,10 @@
 		</p>
 	</div>
 	<div class="flex flex-col items-center pb-3 gap-2">
-		{#if primaryText }
-		<p
-		in:fade={{ duration: 500 }}
-		class="text-3xl tracking-wide font-semibold dark:text-white">${primaryText}</p>
+		{#if primaryText}
+			<p in:fade={{ duration: 500 }} class="text-3xl tracking-wide font-semibold dark:text-white">
+				${primaryText}
+			</p>
 		{/if}
 		<p class="text-gray-700 font-medium text-sm dark:text-white -mt-1">
 			{secondaryText}

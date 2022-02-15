@@ -23,11 +23,11 @@ export const totalMushSupply: Readable<number> = readable(undefined, function st
 	});
 });
 
-export const maxMushSupply: Readable<number> = readable(0, function start(set){
-	mushTokenContract.cap().then((amountBN)=>{
+export const maxMushSupply: Readable<number> = readable(0, function start(set) {
+	mushTokenContract.cap().then((amountBN) => {
 		set(parseFloat(ethers.utils.formatEther(amountBN)));
-	})
-})
+	});
+});
 
 export const totalBurnedMush: Readable<number> = readable(undefined, function start(set) {
 	mushTokenContract.balanceOf(BURN_ADDRESS).then((amountBN) => {
@@ -39,32 +39,29 @@ export const totalBurnedMush: Readable<number> = readable(undefined, function st
 export const mushMarketCap = derived(
 	[tokenPrice, totalMushSupply],
 	([$tokenPrice, $totalMushSupply]) => {
-		if(!$tokenPrice || !$totalMushSupply) return undefined;
+		if (!$tokenPrice || !$totalMushSupply) return undefined;
 		const marketCap = $tokenPrice * $totalMushSupply;
 		return marketCap;
 	}
 );
 
-
-export const poolsTVL: Readable<number>  = readable(0,function start(set){
-	getPoolsTVL().then(TVL => set(TVL))
-})
-
+export const poolsTVL: Readable<number> = readable(0, function start(set) {
+	getPoolsTVL().then((TVL) => set(TVL));
+});
 
 //TODO: Make the farms TVL calculation.
-export const farmsTVL: Readable<number> = readable(0,function start(set){
-	getFarmsTVL().then(TVL => set(TVL))
-})
+export const farmsTVL: Readable<number> = readable(0, function start(set) {
+	getFarmsTVL().then((TVL) => set(TVL));
+});
 
 //TODO: Make the vaults TVL calculation.
-export const vaultsTVL: Readable<number> = readable(0,function start(set){
-	getPoolsTVL().then(TVL => set(TVL))
-})
+export const vaultsTVL: Readable<number> = readable(0, function start(set) {
+	getPoolsTVL().then((TVL) => set(TVL));
+});
 
 export const totalValueLocked = derived(
-	[poolsTVL,farmsTVL,vaultsTVL],
-	([$poolsTVL, $farmsTVL,$vaultsTVL]) => {
-		return $poolsTVL + $farmsTVL + $vaultsTVL
+	[poolsTVL, farmsTVL, vaultsTVL],
+	([$poolsTVL, $farmsTVL, $vaultsTVL]) => {
+		return $poolsTVL + $farmsTVL + $vaultsTVL;
 	}
 );
-

@@ -13,7 +13,7 @@
 	import { width } from '@fortawesome/free-solid-svg-icons/faChevronUp';
 	import { page } from '$app/stores';
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
-	
+
 	import { getContext } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	const { open } = getContext('simple-modal');
@@ -59,7 +59,9 @@
 		{#if !$accounts}
 			<p class="text-3xl font-medium text-dark-500 dark:text-white">---- MUSH</p>
 		{:else if userMushBalance != undefined}
-			<p class="text-3xl font-medium text-dark-500 dark:text-white">{formatComma(userMushBalance,$page.params.lang)} MUSH</p>
+			<p class="text-3xl font-medium text-dark-500 dark:text-white">
+				{formatComma(userMushBalance, $page.params.lang)} MUSH
+			</p>
 		{:else}
 			<LoadingSkeleton styles={{ height: '35px', width: '120px' }} />
 		{/if}
@@ -67,7 +69,7 @@
 		{#if $accounts}
 			{#if userMushBalance != undefined}
 				<p class="text-lg font-medium text-gray-600 dark:text-gray-400 -mt-2 ">
-					~ ${formatComma(userFiatBalance,$page.params.lang)}
+					~ ${formatComma(userFiatBalance, $page.params.lang)}
 				</p>
 			{:else}
 				<LoadingSkeleton styles={{ height: '20px', width: '100px' }} />

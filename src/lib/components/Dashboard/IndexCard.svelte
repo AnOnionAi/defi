@@ -2,7 +2,6 @@
 	import { fade } from 'svelte/transition';
 	export let title: string;
 	export let description: string;
-
 </script>
 
 <div

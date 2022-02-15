@@ -1,10 +1,9 @@
 <script lang="ts">
-import { page } from '$app/stores';
-import { totalValueLocked } from '$lib/stores/MushMarketStats';
-import { formatComma } from '$lib/utils/formatNumbersByLang';
-import { _ } from 'svelte-i18n';
-import { fade } from 'svelte/transition';
-
+	import { page } from '$app/stores';
+	import { totalValueLocked } from '$lib/stores/MushMarketStats';
+	import { formatComma } from '$lib/utils/formatNumbersByLang';
+	import { _ } from 'svelte-i18n';
+	import { fade } from 'svelte/transition';
 </script>
 
 <div
@@ -16,11 +15,12 @@ import { fade } from 'svelte/transition';
 
 	<div class="text-center">
 		{#if $totalValueLocked}
-		<p
-		in:fade={{ duration: 500 }} 
-		class="font-medium text-dark-800 dark:text-gray-200 text-lg md:text-xl xl:text-2xl">
-			${formatComma($totalValueLocked,$page.params.lang)}
-		</p>
+			<p
+				in:fade={{ duration: 500 }}
+				class="font-medium text-dark-800 dark:text-gray-200 text-lg md:text-xl xl:text-2xl"
+			>
+				${formatComma($totalValueLocked, $page.params.lang)}
+			</p>
 		{/if}
 		<p class="text-gray-500 dark:text-gray-300 ">{$_('dashboard.across')}</p>
 	</div>
