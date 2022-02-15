@@ -268,10 +268,10 @@ import { APIKEY, getCovalentApiKey } from '$lib/env';
 		</div>
 
 		<MushPriceSide>
-			<MushPriceCard title="Peak" display={parseFloat(peak)}/>
-			<MushPriceCard title="Monthly" display={growthInfo.monthlyGrowth} isPercentage={true} />
 			<MushPriceCard title="Today" display={growthInfo.todayGrowth} isPercentage={true}/>
 			<MushPriceCard title="Weekly" display={growthInfo.weeklyGrowth} isPercentage={true}/>
+			<MushPriceCard title="Monthly" display={growthInfo.monthlyGrowth} isPercentage={true} />
+			<MushPriceCard title="Peak" display={parseFloat(peak)}/>
 		</MushPriceSide>
 	</MushPriceSection>
 </DashboardLayout>
