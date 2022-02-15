@@ -12,7 +12,7 @@
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
 	import { width } from '@fortawesome/free-solid-svg-icons/faChevronUp';
 	import { page } from '$app/stores';
-import { formatComma } from '$lib/utils/formatNumbersByLang';
+	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	
 	import { getContext } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
