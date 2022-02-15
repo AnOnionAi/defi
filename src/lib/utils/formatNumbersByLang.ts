@@ -1,7 +1,8 @@
-export const formatComma = (amount:string,lang:string) => {
+
+export const formatComma = (amount:number,lang: string):string  => {
     const commaFormatLangs = ["fr","de"];
     if(!commaFormatLangs.includes(lang)){
-        return amount;
+        return amount?.toLocaleString("us-US",{maximumFractionDigits:2})
     }
-    return amount.replace(".",",");
+    return amount?.toLocaleString("de-DE",{maximumFractionDigits:2})
 }

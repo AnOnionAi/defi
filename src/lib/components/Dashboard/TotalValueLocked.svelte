@@ -19,7 +19,7 @@ import { fade } from 'svelte/transition';
 		<p
 		in:fade={{ duration: 500 }} 
 		class="font-medium text-dark-800 dark:text-gray-200 text-lg md:text-xl xl:text-2xl">
-			${formatComma($totalValueLocked.toFixed(2),$page.params.lang)}
+			${formatComma($totalValueLocked,$page.params.lang)}
 		</p>
 		{/if}
 		<p class="text-gray-500 dark:text-gray-300 ">{$_('dashboard.across')}</p>

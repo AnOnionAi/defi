@@ -47,7 +47,7 @@ import { formatComma } from '$lib/utils/formatNumbersByLang';
 		{#if !$accounts}
 			<p class="text-3xl font-medium text-dark-500 dark:text-white">---- MUSH</p>
 		{:else if userMushBalance != undefined}
-			<p class="text-3xl font-medium text-dark-500 dark:text-white">{formatComma(userMushBalance.toFixed(2),$page.params.lang)} MUSH</p>
+			<p class="text-3xl font-medium text-dark-500 dark:text-white">{formatComma(userMushBalance,$page.params.lang)} MUSH</p>
 		{:else}
 			<LoadingSkeleton styles={{ height: '35px', width: '120px' }} />
 		{/if}
@@ -55,7 +55,7 @@ import { formatComma } from '$lib/utils/formatNumbersByLang';
 		{#if $accounts}
 			{#if userMushBalance != undefined}
 				<p class="text-lg font-medium text-gray-600 dark:text-gray-400 -mt-2 ">
-					~ ${formatComma(userFiatBalance.toFixed(2),$page.params.lang)}
+					~ ${formatComma(userFiatBalance,$page.params.lang)}
 				</p>
 			{:else}
 				<LoadingSkeleton styles={{ height: '20px', width: '100px' }} />

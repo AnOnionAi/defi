@@ -1,14 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { fade } from 'svelte/transition';
 	export let title: string;
 	export let description: string;
 
-	let formattedDescription
-	$:if(description){
-		formattedDescription = formatComma(description,$page.params.lang)
-	}
 </script>
 
 <div
@@ -18,12 +12,12 @@ import { formatComma } from '$lib/utils/formatNumbersByLang';
 		<p class="text-dark-500 dark:text-gray-100 text-xl md:text-2xl  lg:text-xl">{title}</p>
 	</div>
 	<div class="w-full flex justify-center items-center h-32">
-		{#if !description.includes('undefined')}
+		{#if true}
 			<p
 				in:fade={{ duration: 500 }}
 				class="text-dark-900 dark:text-white font-medium text-4xl md:text-2xl  lg:text-2xl"
 			>
-				{formattedDescription}
+				{description}
 			</p>
 		{/if}
 	</div>

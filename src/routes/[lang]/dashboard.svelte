@@ -9,7 +9,6 @@
 	import { onMount } from 'svelte';
 	import { totalMushSupply, mushMarketCap, poolsTVL, vaultsTVL, farmsTVL, maxMushSupply } from '$lib/stores/MushMarketStats';
 	import { page } from '$app/stores';
-	
 	import { mushPerBlock } from '$lib/stores/MasterChefData';
 	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
 	import TotalValueLocked from '$lib/components/Dashboard/TotalValueLocked.svelte';
@@ -27,18 +26,28 @@
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
 	import { getFarmsTVL, getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
-import { formatComma } from '$lib/utils/formatNumbersByLang';
-import { tokenPrice } from '$lib/stores/NativeTokenPrice';
+	import { formatComma } from '$lib/utils/formatNumbersByLang';
+	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
+import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
+import { parse } from 'path/posix';
 
 	let value = 0;
 	let lastPrice = 0;
-	let peak = 0;
+	let peak:string | number = 0;
 	let dataLine;
 	let myChart;
 	let historicalData;
 	let prices;
 	let dates;
 
+	let growthInfo: GrowthInfo = {
+		yesterdayPrice:  undefined,
+    todayGrowth:  undefined,
+    oneWeekAgoPrice:  undefined,
+    weeklyGrowth:  undefined,
+    oneMonthAgoPrice:  undefined,
+    monthlyGrowth:  undefined
+	};
 
 	const tooltipLine = {
 		id: 'tooltipLine',
@@ -75,7 +84,7 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 		}
 	};
 
-	let options = {
+	const options = {
 		responsive: true,
 		maintainAspectRatio: false,
 		scales: {
@@ -123,15 +132,13 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	}
 
 	onMount(() => {
-		getFarmsTVL();
-
 		const APIURL =
-			'https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17';
+			'https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x831753DD7087CaC61aB5644b308642cc1c33Dc13/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17';
 
 		fetch(APIURL)
 			.then((res) => res.json())
 			.then((res) => {
-				let monthsName = [
+				const monthsName = [
 					'Jan',
 					'Feb',
 					'Mar',
@@ -151,9 +158,12 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 					return { ...e, shortDate };
 				});
 
-				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(5);
+				growthInfo = calculateGrowth(historicalData);
+
+				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(2);
+
 				let tempPrices = [...historicalData].map((e) => e.price).reverse();
-				peak = Math.max(...tempPrices).toFixed(5);
+				peak = Math.max(...tempPrices).toFixed(2);
 
 				dataLine = {
 					labels: historicalData.map((e) => e.shortDate).reverse(),
@@ -210,7 +220,7 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	<EarnMoreSection>
 		<EarnMoreCard
 			title={$_('headers.farms.text')}
-			primaryText={formatComma($farmsTVL?.toFixed(2),$page.params.lang)}
+			primaryText={formatComma($farmsTVL,$page.params.lang)}
 			secondaryText={$_('dashboard.lockedInFarms')}
 			buttonText={$_('dashboard.startFarming')}
 			route={`/${$page.params.lang}/farms`}
@@ -218,7 +228,7 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 		<EarnMoreCard
 			title={$_('headers.pools.text')}
-			primaryText={formatComma($poolsTVL?.toFixed(2),$page.params.lang)}
+			primaryText={formatComma($poolsTVL,$page.params.lang)}
 			secondaryText={$_('dashboard.lockedInPools')}
 			buttonText={$_('dashboard.addLiquidity')}
 			route={`/${$page.params.lang}/pools`}
@@ -226,7 +236,7 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 		<EarnMoreCard
 			title={$_('headers.vaults.text')}
-			primaryText={formatComma($vaultsTVL?.toFixed(2),$page.params.lang)}
+			primaryText={formatComma($vaultsTVL,$page.params.lang)}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
 			route={`/${$page.params.lang}/vaults`}
@@ -235,10 +245,10 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 	<SectionTitle title={$_('dashboard.index')} />
 	<IndexSection>
-		<IndexCard title={$_('dashboard.mushpb')} description="{$mushPerBlock} MUSH" />
-		<IndexCard title={$_('dashboard.marketcap')} description="${$mushMarketCap}" />
-		<IndexCard title={$_('dashboard.totalvol')} description="{$totalMushSupply} MUSH" />
-		<IndexCard title={$_('dashboard.maxsupply')} description="{shortLargeAmount($maxMushSupply)} MUSH" />
+		<IndexCard title={$_('dashboard.mushpb')} description="{formatComma($mushPerBlock,$page.params.lang)} MUSH" />
+		<IndexCard title={$_('dashboard.marketcap')} description="${formatComma($mushMarketCap,$page.params.lang)}" />
+		<IndexCard title={$_('dashboard.totalvol')} description="{formatComma($totalMushSupply,$page.params.lang)} MUSH"  />
+		<IndexCard title={$_('dashboard.maxsupply')} description="{formatComma($maxMushSupply,$page.params.lang)} MUSH"/>
 	</IndexSection>
 
 	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
@@ -257,9 +267,10 @@ import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 		</div>
 
 		<MushPriceSide>
-			<MushPriceCard title="Today" display="${lastPrice}" />
-			<MushPriceCard title="Peak" display="${peak}" />
-			<MushPriceCard title="Growth" display="{((peak * 100) / lastPrice) - 100}%" />
+			<MushPriceCard title="Peak" display={parseFloat(peak)}/>
+			<MushPriceCard title="Monthly" display={growthInfo.monthlyGrowth} isPercentage={true} />
+			<MushPriceCard title="Today" display={growthInfo.todayGrowth} isPercentage={true}/>
+			<MushPriceCard title="Weekly" display={growthInfo.weeklyGrowth} isPercentage={true}/>
 		</MushPriceSide>
 	</MushPriceSection>
 </DashboardLayout>
