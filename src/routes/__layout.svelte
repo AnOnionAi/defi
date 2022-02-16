@@ -5,19 +5,14 @@
 	import Notifications from 'svelte-notifications';
 	import { navigating, page } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
-	import Modal from 'svelte-simple-modal';
-	import 'virtual:windi.css';
+	import Modal from 'svelte-simple-modal';	
 	import '../app.css';
-	import { onMount } from 'svelte';
 	import {
 		chainID,
 		accounts,
 		metamaskConnect,
 		metamaskListeners,
-		metaMaskDisconnect
 	} from '$lib/stores/MetaMaskAccount';
-	import WrongNetwork from '$lib/components/Modals/WrongNetwork.svelte';
-	import { POLYGON_CHAIN_ID } from '$lib/config';
 
 	let currentChain;
 	let currentPath;
