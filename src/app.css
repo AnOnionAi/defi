@@ -21,6 +21,7 @@ body {
 	background-color: var(--light-background);
 }
 
+
 #svelte {
 	min-height: 100vh;
 	display: flex;

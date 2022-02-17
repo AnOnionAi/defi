@@ -76,7 +76,7 @@
 <div class="my-6">
 	<div style="background-image:url({backgroundImage});" class="dividends-wrapper">
 		<div
-			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
+			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-neutral-900 dark:border-green-500 "
 		>
 			{#if approved}
 				<div in:fade={{ duration: 1000 }} class="h-full">

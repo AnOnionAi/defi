@@ -12,7 +12,7 @@
 
 <div
 	style="width:{styles.width}; height:{styles.height}; "
-	class="pulse bg-gray-200 dark:bg-dark-400 rounded-lg"
+	class="pulse bg-neutral-200 dark:bg-neutral-400 rounded-lg"
 />
 
 <style>

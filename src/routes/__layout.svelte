@@ -46,7 +46,7 @@
 				<LinearBar />
 			</div>
 		{/if}
-		<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'bg-dark-500'} ">
+		<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-900'} ">
 			<slot />
 		</main>
 		<Footer />

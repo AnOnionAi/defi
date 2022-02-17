@@ -260,7 +260,7 @@
 </script>
 
 <div
-	class="self-start min-w-84 max-w-84  bg-white dark:bg-dark-900 {!$darkMode &&
+	class="self-start min-w-84 max-w-84  bg-white dark:bg-neutral-900 {!$darkMode &&
 		'shadow-xl'}  rounded-3xl relative transform transition duration-300 hover:scale-101 select-none"
 >
 	<div class="absolute flex flex-row-reverse p-4 w-full">
@@ -283,7 +283,7 @@
 			{:else if poolApr}
 				<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
 			{:else}
-				<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+				<p class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
@@ -297,7 +297,7 @@
 			{#if poolFeePercentage != null}
 				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
 			{:else}
-				<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+				<p class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
@@ -316,7 +316,7 @@
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="text-sm py-2 px-4 rounded-lg bg-green-500 text-white font-semibold tracking-wide disabled:bg-gray-400 disabled:cursor-not-allowed"
+					class="text-sm py-2 px-4 rounded-lg bg-green-500 text-white font-semibold tracking-wide disabled:bg-neutral-400 disabled:cursor-not-allowed"
 					>{$_('actions.harvest')}</button
 				>
 			</div>
@@ -355,20 +355,20 @@
 							).toPrecision(4)}
 						</p>
 					{:else}
-						<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+						<p class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 					{/if}
 
 					<div class="flex space-x-2">
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-400 disabled:cursor-not-allowed"
 							>+</button
 						>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-400 disabled:cursor-not-allowed"
 							>-</button
 						>
 					</div>

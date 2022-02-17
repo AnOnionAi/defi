@@ -50,7 +50,7 @@
 </script>
 
 <div
-	class="bg-white dark:bg-dark-900 rounded-2xl p-5 h-55 shadow-xl dark:text-white dark:shadow-none flex flex-col justify-between select-none transition duration-300"
+	class="bg-white dark:bg-neutral-900 rounded-2xl p-5 h-56 shadow-xl dark:text-white dark:shadow-none flex flex-col justify-between select-none transition duration-300"
 >
 	<p class="text-3xl pl-3 text-lg text-dark-200 dark:text-white tracking-wide">
 		{$_('walletStatus.wallet')}

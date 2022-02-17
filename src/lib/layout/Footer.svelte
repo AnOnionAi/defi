@@ -28,15 +28,15 @@
 
 <footer
 	class="{$isHomescreen &&
-		'z-20 backdrop-filter backdrop-blur border-none '} border-t-2  border-gray-200 {$darkMode &&
-		'border-dark-200'} {$darkMode && !$isHomescreen && 'bg-dark-500'} footer-height {textColor} "
+		'z-20 backdrop-filter backdrop-blur border-none '}  {$darkMode &&
+		'border-dark-200'} {$darkMode && !$isHomescreen && 'bg-zinc-900'} footer-height {textColor} "
 >
 	<div class="grid grid-cols-1 md:grid-cols-3 footer-height px-6 py-6 lg:py-1 gap-4">
 		<div class="flex  items-center ml-0 lg:ml-5 justify-center lg:justify-start">
 			<a
 				href={`https://app.sushi.com/${$page.params.lang}/swap`}
 				target="_blank"
-				class="text-white bg-gray-600 hover:bg-green-400 px-3 py-1 rounded-full font-light text-sm"
+				class="text-white bg-neutral-600 hover:bg-green-400 px-3 py-1 rounded-full font-light text-sm"
 				>Buy MUSH</a
 			>
 		</div>

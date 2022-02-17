@@ -103,7 +103,7 @@
 </script>
 
 <div
-	class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white my-4 px-4 pb-4 pt-6 dark:bg-dark-800 dark:text-white border border-white"
+	class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white my-4 px-4 pb-4 pt-6 dark:bg-neutral-900 dark:text-white border border-white"
 >
 	<div class="flex flex-row flex-wrap w-auto justify-around relative">
 		<div class="flex lg:flex-row flex-col w-full max-w-6xl m-auto sm:justify-between ">
@@ -226,7 +226,7 @@
 				{$_('vaultFilter.filterby')}
 			</div>
 			<div class="content-select">
-				<select class="dark:bg-dark-500" bind:value={filterBy}>
+				<select class="dark:bg-neutral-500" bind:value={filterBy}>
 					<option value="TVL">TVL</option>
 					<option value="APY">APY</option>
 				</select>

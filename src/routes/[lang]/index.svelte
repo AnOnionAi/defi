@@ -23,7 +23,7 @@
 
 	import { fade } from 'svelte/transition';
 
-	isHomescreen.set(true);
+	
 	let canvas;
 	let scene;
 	let visible = false;
@@ -33,6 +33,7 @@
 	});
 
 	onMount(() => {
+		isHomescreen.set(true);
 		scene = new THREE.Scene();
 		visible = true;
 		const camera = new THREE.PerspectiveCamera(

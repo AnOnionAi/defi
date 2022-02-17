@@ -13,7 +13,7 @@
 		/>
 		<p class="pl-2 font-medium  ">${$tokenPrice.toPrecision(6)}</p>
 	{:else}
-		<div class="h-8 w-24 rounded-lg bg-gray-200 dark:bg-dark-400 animate-pulse" />
+		<div class="h-8 w-24 rounded-lg bg-neutral-200 dark:bg-neutral-400 animate-pulse" />
 	{/if}
 </a>
 

@@ -210,7 +210,7 @@
 				</p>
 
 				<div
-					class="bg-gray-200 dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
+					class="bg-neutral-200 dark:bg-neutral-900 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
 				>
 					<input
 						on:keypress={onyAllowFloatNumbers}
@@ -247,7 +247,7 @@
 				</p>
 
 				<div
-					class="bg-gray-200  dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
+					class="bg-neutral-200  dark:bg-neutral-900 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
 				>
 					<input
 						type="text"
@@ -278,7 +278,7 @@
 				</p>
 
 				<div
-					class="bg-gray-200 dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
+					class="bg-neutral-200 dark:bg-neutral-900 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
 				>
 					<p
 						class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12 flex items-center"

@@ -43,7 +43,7 @@
 
 <div
 	style="border-color: {secondaryColor};"
-	class="flex rounded-lg bg-white {$darkMode && 'bg-dark-900'} border-2 -m-4 "
+	class="flex rounded-lg bg-white {$darkMode && 'bg-neutral-900'} border-2 -m-4 "
 >
 	<div class="py-8 w-full flex flex-col">
 		<div>

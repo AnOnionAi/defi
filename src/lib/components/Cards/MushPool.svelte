@@ -5,7 +5,7 @@
 	>
 		<p class="text-8xl font-bold text-white">MUSH</p>
 		<br />
-		<div class="px-5 bg-gray-50 bg-gradient-to-tl rounded-md">
+		<div class="px-5 bg-neutral-50 bg-gradient-to-tl rounded-md">
 			<div class="flex justify-between">
 				<p class="font-black text-black">APY</p>
 				<p class="font-black text-black">999%</p>

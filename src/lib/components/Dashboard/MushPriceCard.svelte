@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="bg-white p-3 dark:bg-dark-900  rounded-xl w-full  flex flex-col justify-between  dark:text-white shadow-md dark:shadow-none overflow-hidden"
+	class="bg-white p-3 dark:bg-neutral-900  rounded-xl w-full  flex flex-col justify-between  dark:text-white shadow-md dark:shadow-none overflow-hidden"
 >
 	<h3 class="font-semibold text-center ">{title}</h3>
 	{#if display && $page.params.lang}

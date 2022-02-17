@@ -148,7 +148,7 @@
 	<div
 		on:click={openAccordeon}
 		class="max-w-8xl {!$darkMode && 'sideShadow'} bg-white mx-auto py-6 rounded-lg  	{!isHidden &&
-			'rounded-t-lg'} hover:cursor-pointer  dark:bg-dark-800 hover:bg-gray-100 dark:hover:bg-dark-600 dark:border-green-500"
+			'rounded-t-lg'} hover:cursor-pointer  dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-600 dark:border-green-500"
 	>
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
 			<div class="flex justify-center items-center">
@@ -232,7 +232,7 @@
 		<div
 			in:slide={{ duration: 400 }}
 			out:slide={{ duration: 400 }}
-			class="bg-gray-200 max-w-8xl mx-auto dark:bg-dark-300 rounded-b-lg px-5 py-5"
+			class="bg-neutral-200 max-w-8xl mx-auto dark:bg-neutral-300 rounded-b-lg px-5 py-5"
 		>
 			{#if !$accounts}
 				<button
@@ -261,13 +261,13 @@
 							{/if}
 						</div>
 						<div
-							class="flex my-2 py-2 px-3 bg-gray-300 dark:bg-dark-500 rounded-lg  lg:w-11/12 justify-between"
+							class="flex my-2 py-2 px-3 bg-neutral-300 dark:bg-neutral-500 rounded-lg  lg:w-11/12 justify-between"
 						>
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userDepositAmount}
 								placeholder="Enter Value"
-								class="bg-gray-300  text-gray-900 font-bold w-8/12 dark:bg-dark-500	dark:text-white"
+								class="bg-neutral-300  text-gray-900 font-bold w-8/12 dark:bg-neutral-500	dark:text-white"
 								type="text"
 							/>
 							{#if isApproved}
@@ -338,13 +338,13 @@
 							{/if}
 						</div>
 						<div
-							class="flex justify-between my-2 py-2 px-3 bg-gray-300 rounded-lg  dark:bg-dark-500 lg:w-11/12 "
+							class="flex justify-between my-2 py-2 px-3 bg-neutral-300 rounded-lg  dark:bg-neutral-500 lg:w-11/12 "
 						>
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userWithdrawAmount}
 								placeholder="Enter Value"
-								class="bg-gray-300 text-gray-900 font-bold w-8/12 dark:bg-dark-500 dark:text-white"
+								class="bg-neutral-300 text-gray-900 font-bold w-8/12 dark:bg-neutral-500 dark:text-white"
 								type="text"
 							/>
 							<button

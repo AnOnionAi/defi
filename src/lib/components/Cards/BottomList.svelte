@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class="mx-auto max-w-8xl py-3 mb-4 rounded-b-lg bg-white flex justify-center items-center dark:bg-dark-800 "
+	class="mx-auto max-w-8xl py-3 mb-4 rounded-b-lg bg-white flex justify-center items-center dark:bg-neutral-900 "
 >
 	<div on:click={scrollTop} class="flex px-5 cursor-pointer">
 		<p class="text-xl font-semibold text-gray-500">To Top</p>
