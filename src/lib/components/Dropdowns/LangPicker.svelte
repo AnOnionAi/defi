@@ -32,7 +32,7 @@
 	<div
 	in:scale={{ duration: 150, start: 0.95 }}
 	out:scale={{ duration: 100, start: 0.95 }}
-	class=" {$isHomescreen && ""}absolute  bg-white dark:bg-neutral-900 rounded-md text-black dark:text-white">
+	class=" {$isHomescreen && "z-20"} absolute  bg-white dark:bg-neutral-900 rounded-md text-black dark:text-white">
 		<a  class=" px-5 py-2 font-light flex items-center justify-center hover:bg-gray-200 dark:hover:bg-neutral-700" href="/en">English</a>
 		<a  class=" px-5 py-2 font-light flex items-center justify-center hover:bg-gray-200 dark:hover:bg-neutral-700" href="/de">Deutsche</a>
 		<a  class=" px-5 py-2 font-light flex items-center justify-center hover:bg-gray-200 dark:hover:bg-neutral-700" href="/es">Español</a>

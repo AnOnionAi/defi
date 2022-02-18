@@ -272,7 +272,7 @@
 
 	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
 	<MushPriceSection>
-		<div class="h-92 col-span-9  lg:col-span-6	">
+		<div class="h-80 col-span-9  lg:col-span-6	">
 			<ButtonGroup
 				options={[
 					{ id: 0, name: 'Day' },
