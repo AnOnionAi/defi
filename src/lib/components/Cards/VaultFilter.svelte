@@ -346,17 +346,6 @@
 		opacity: 1;
 	}
 
-	button {
-		display: inline-block;
-		width: 100%;
-		max-width: 200px;
-		min-width: 200px;
-		padding: 7px 10px;
-		height: 42px;
-		font-size: 1em;
-		font-weight: 600;
-	}
-
 	.title {
 		font-size: 15px;
 		font-weight: 400;
