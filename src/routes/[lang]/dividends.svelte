@@ -1,6 +1,5 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-	import { darkMode } from '$lib/stores/dark';
 	import { _ } from 'svelte-i18n';
 </script>
 
@@ -23,6 +22,7 @@
 		transactionSend,
 		wrongInput
 	} from '$lib/config/constants/notifications';
+	import { darkMode } from '$lib/stores/dark';
 	const { addNotification } = getNotificationsContext();
 
 	let userAccount: string;
@@ -76,10 +76,10 @@
 <div class="my-6">
 	<div style="background-image:url({backgroundImage});" class="dividends-wrapper">
 		<div
-			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-neutral-900 dark:border-green-500 "
+			class="h-full dividends  w-full max-w-lg p-5  rounded-2xl {!$darkMode && "shadow-xl"} bg-white dark:bg-neutral-900 "
 		>
 			{#if approved}
-				<div in:fade={{ duration: 1000 }} class="h-full">
+				<div in:fade={{ duration: 200 }} class="h-full">
 					<DividendCard />
 				</div>
 			{:else if $accounts && finishedApprovalFetch}

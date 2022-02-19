@@ -20,16 +20,21 @@
 			closeOnOuterClick: true
 		});
 	};
+
+	const dispatchClick = () => {
+		if(isMetaMaskInstalled()) return metaMaskCon()
+		return openModal();
+	}
 </script>
 
 <div
-	class="h-12/12 w-full flex justify-center items-center cursor-pointer"
-	on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
+	class="h-full w-full flex justify-center items-center cursor-pointer"
+	on:click={dispatchClick}
 >
 	<div class="w-6/12 h-12/12 flex flex-col justify-center ">
-		<img src="/metamask.svg" alt="Metamask Fox" class="w-40 self-center mb-5" />
+		<img src="/metamask.svg" alt="Metamask Fox" class="w-40 self-center mb-5 hover:scale-125 transform transition duration-300" />
 		<p
-			class="text-xl text-center bg-black text-white font-medium rounded-full p-1  dark:border-green-500 dark:border-3"
+			class="text-xl text-center bg-black hover:bg-gray-600 dark:bg-emerald-500 dark:hover:bg-emerald-300 text-white font-medium rounded-full p-3 "
 		>
 			{$_('dividendsPage.cyw')}
 		</p>
