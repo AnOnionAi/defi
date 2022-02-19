@@ -32,12 +32,10 @@
 	import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
 	import { getFarmsTVL, getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
-	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
-	import { parse } from 'path/posix';
-	import { APIKEY, getCovalentApiKey } from '$lib/env';
+	import { APIKEY } from '$lib/env';
 
 	let value = 0;
 	let lastPrice = 0;

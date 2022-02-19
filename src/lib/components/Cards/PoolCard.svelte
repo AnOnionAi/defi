@@ -31,7 +31,6 @@
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { getPoolApr } from '$lib/utils/yieldCalculator';
-	import BN from 'bignumber.js';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
 	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
