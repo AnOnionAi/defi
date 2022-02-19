@@ -128,8 +128,8 @@
 				// mushMeshLA.position.set(-1.5, 0, -47);
 				mushMeshCryp = mushCrypto.scene;
 				mushMeshCryp.scale.set(100, 100, 100);
-				mushMeshCryp.position.set(0, 0, 0);
-				floppaMoon.position.set(-10, 0, 500);
+				mushMeshCryp.position.set(0, 50, 0);
+				floppaMoon.position.set(440, 0, -500);
 				floppaEarth.position.set(240, 0, -260);
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
 			})
@@ -157,10 +157,10 @@
 			}
 
 			if (floppaMoon) {
-				floppaMoon.rotation.y += 0.01;
+				floppaMoon.rotation.y += 0.002;
 			}
 			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.0015;
+				floppaEarth.rotation.y += 0.0005;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
