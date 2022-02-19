@@ -28,5 +28,5 @@ jobs:
       - name: Build Project 
         run: pnpm run build
         
-      - name: Jest & Playwright Tests
+      - name: Playwright Tests
         run: pnpm run test
