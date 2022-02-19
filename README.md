@@ -1,4 +1,4 @@
-# Defi 
+# Defi
 
 ### fungfi.dev [![Netlify Status](https://api.netlify.com/api/v1/badges/ae6c8e6d-a9c1-4ee7-b901-82f612ffa438/deploy-status)](https://app.netlify.com/sites/fungfi-dev/deploys)
 
@@ -16,10 +16,10 @@ pnpm run dev
 
 ## Building
 
-```pnpm run build```
+`pnpm run build`
 
 ## Preview
 
-You can preview the built app to see how production will perform. 
+You can preview the built app to see how production will perform.
 
-```npm run preview```
+`npm run preview`
