@@ -6,8 +6,6 @@
 
 ### fungfi.com [![Netlify Status](https://api.netlify.com/api/v1/badges/20fe0398-65b4-4880-a63b-b328a9364b6b/deploy-status)](https://app.netlify.com/sites/fungfi/deploys)
 
-
-
 ## Starting the project
 
 ```
