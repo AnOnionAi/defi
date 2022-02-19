@@ -153,15 +153,14 @@
 		}
 	});
 
-	$:poolWeightbn = getPoolWeight($totalAllocPoints, allocPoints);
-	
-	$:poolApr = getPoolApr(
-			stakingTokenPrice,
-			rewardTokenPrice,
-			stakingTokenAmount,
-			tokenAllocatedPerBlock
-		);
+	$: poolWeightbn = getPoolWeight($totalAllocPoints, allocPoints);
 
+	$: poolApr = getPoolApr(
+		stakingTokenPrice,
+		rewardTokenPrice,
+		stakingTokenAmount,
+		tokenAllocatedPerBlock
+	);
 
 	onDestroy(() => {
 		clearInterval(idInterval);
