@@ -1,4 +1,4 @@
-# FungFi Defi 
+# Defi 
 
 ### fungfi.dev [![Netlify Status](https://api.netlify.com/api/v1/badges/ae6c8e6d-a9c1-4ee7-b901-82f612ffa438/deploy-status)](https://app.netlify.com/sites/fungfi-dev/deploys)
 
@@ -18,8 +18,10 @@ pnpm run dev
 
 ## Building
 
-```bash
-pnpm run build
-```
+```pnpm run build```
 
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+## Preview
+
+You can preview the built app to see how production will perform. 
+
+```npm run preview```
