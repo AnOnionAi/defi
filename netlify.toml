@@ -1,5 +1,0 @@
-[context.master]
-  environment = { VITE_NODE_ENV = "production" }
-  
-[context."release/**"]
-  environment = { VITE_NODE_ENV = "qa" }
