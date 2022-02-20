@@ -144,11 +144,11 @@
 	};
 </script>
 
-<div in:fly={{ y: 200, duration: 100 }} class="mb-5">
+<div in:fly={{ y: 200, duration: 100 }} class="mb-5 max-w-6xl mx-auto sm:px-4 md:px-2 lg:px-0">
 	<div
 		on:click={openAccordeon}
-		class="max-w-8xl {!$darkMode && 'sideShadow'} bg-white mx-auto py-6 rounded-lg  	{!isHidden &&
-			'rounded-t-lg'} hover:cursor-pointer  dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-600 dark:border-green-500"
+		class="{!$darkMode && 'sideShadow'} bg-white mx-auto py-6 rounded-lg  	{!isHidden &&
+			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-100  dark:bg-neutral-900  dark:hover:bg-neutral-700 dark:border-green-500"
 	>
 		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
 			<div class="flex justify-center items-center">
@@ -190,7 +190,7 @@
 					</div>
 
 					<div
-						class="flex justify-center  items-center font-medium border border-2 tracking-wide rounded-full border-{vaultConfig
+						class="flex justify-center  items-center font-medium  border-2 tracking-wide rounded-full border-{vaultConfig
 							.platform.brandColor}-500 text-{vaultConfig.platform
 							.brandColor}-500  text-xs w-20 h-6"
 					>
@@ -232,7 +232,7 @@
 		<div
 			in:slide={{ duration: 400 }}
 			out:slide={{ duration: 400 }}
-			class="bg-neutral-200 max-w-8xl mx-auto dark:bg-neutral-300 rounded-b-lg px-5 py-5"
+			class="bg-neutral-200 max-w-8xl mx-auto dark:bg-neutral-800 rounded-b-lg px-5 py-5"
 		>
 			{#if !$accounts}
 				<button

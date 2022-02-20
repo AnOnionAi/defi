@@ -94,8 +94,6 @@
 		{#each filteredVaults as vault, index}
 			<VaultAccordeon vaultConfig={vault} />
 		{/each}
-
-		<BottomList />
 	</div>
 </section>
 
