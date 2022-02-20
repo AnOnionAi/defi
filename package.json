@@ -13,7 +13,7 @@
 		"mainnet": "export VITE_NODE_ENV=production && svelte-kit dev",
 		"check:eslint": "eslint --fix --ignore-path .gitignore .",
 		"check:prettier": "prettier --check --plugin-search-dir=. .",
-		"check:svelte": "svelte-check --tsconfig tsconfig.json",
+		"check:svelte": "tsc && svelte-check --tsconfig tsconfig.json",
 		"lint": "pnpm run check:prettier && pnpm run check:svelte && pnpm run check:eslint",
 		"test": "playwright test"
 	},
