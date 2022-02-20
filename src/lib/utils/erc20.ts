@@ -13,7 +13,10 @@ export const getTokenAllowance = async (
 	spenderAddr: string,
 	userAddress: string
 ): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	const tokenContract = getERC20Contract(
+		tokenAddress,
+		Provider.getProviderSingleton()
+	);
 	return tokenContract.allowance(userAddress, spenderAddr);
 };
 
@@ -21,27 +24,46 @@ export const getTokenBalance = async (
 	tokenAddress: string,
 	userAddress: string
 ): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	const tokenContract = getERC20Contract(
+		tokenAddress,
+		Provider.getProviderSingleton()
+	);
 	return tokenContract.balanceOf(userAddress);
 };
 
-export const getTokenDecimals = async (tokenAddress: string): Promise<number> => {
-	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+export const getTokenDecimals = async (
+	tokenAddress: string
+): Promise<number> => {
+	const tokenContract = getERC20Contract(
+		tokenAddress,
+		Provider.getProviderSingleton()
+	);
 	return tokenContract.decimals();
 };
 
 export const getTokenName = async (tokenAddress: string): Promise<string> => {
-	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	const tokenContract = getERC20Contract(
+		tokenAddress,
+		Provider.getProviderSingleton()
+	);
 	return tokenContract.name();
 };
 
 export const getTokenSymbol = async (tokenAddress: string): Promise<string> => {
-	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+	const tokenContract = getERC20Contract(
+		tokenAddress,
+		Provider.getProviderSingleton()
+	);
 	return tokenContract.symbol();
 };
 
-export const getTokenTotalSupply = async (tokenAddress: string): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, Provider.getProviderSingleton());
+export const getTokenTotalSupply = async (
+	tokenAddress: string
+): Promise<BigNumber> => {
+	const tokenContract = getERC20Contract(
+		tokenAddress,
+		Provider.getProviderSingleton()
+	);
 	return tokenContract.totalSupply();
 };
 
@@ -54,7 +76,11 @@ export const approveToken = async (
 	return tokenContract.approve(spenderAddress, approvedAmount);
 };
 
-export const depositToken = async (tokenAddress: string, recipient: string, amount: BigNumber) => {
+export const depositToken = async (
+	tokenAddress: string,
+	recipient: string,
+	amount: BigNumber
+) => {
 	const tokenContract = getERC20Contract(tokenAddress, getSigner());
 	return tokenContract.transfer(recipient, amount);
 };

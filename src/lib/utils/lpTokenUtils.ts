@@ -15,11 +15,19 @@ tokenPrice.subscribe((tokenPrice) => {
 });
 
 const getTokenContract = (address: string) => {
-	return new ethers.Contract(address, ERC20ABI, Provider.getProviderSingleton());
+	return new ethers.Contract(
+		address,
+		ERC20ABI,
+		Provider.getProviderSingleton()
+	);
 };
 
 export const getUniPairTokenContract = (address: string) => {
-	return new ethers.Contract(address, UNIV2ABI, Provider.getProviderSingleton());
+	return new ethers.Contract(
+		address,
+		UNIV2ABI,
+		Provider.getProviderSingleton()
+	);
 };
 
 export const getPriceOfMushPair = async (address: string) => {
@@ -42,7 +50,9 @@ export const getPriceOfMushPair = async (address: string) => {
 
 	const mushToken = token0.address == mushAddress ? token0 : token1;
 
-	const mushReserveNumber = parseFloat(ethers.utils.formatEther(mushToken.reserve));
+	const mushReserveNumber = parseFloat(
+		ethers.utils.formatEther(mushToken.reserve)
+	);
 	const totalValueOfLiquidityPool = mushReserveNumber * mushTokenPriceUSD * 2;
 	const totalSupplyNumber = totalSupply / 1e18;
 	const oneLpTokenPrice = totalValueOfLiquidityPool / totalSupplyNumber;

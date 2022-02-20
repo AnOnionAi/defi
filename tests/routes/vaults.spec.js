@@ -8,7 +8,9 @@ test.describe('vaults page functionality', () => {
 		const title = page.locator('h1');
 		await expect(title).toHaveText('Vaults');
 
-		await page.waitForSelector('.main > .pb-3 > .mainContainer > .mb-5:nth-child(2) > .max-w-8xl');
+		await page.waitForSelector(
+			'.main > .pb-3 > .mainContainer > .mb-5:nth-child(2) > .max-w-8xl'
+		);
 
 		await page.screenshot({
 			path: `tests/screenshots/vaults/vaults-${browserName}.png`,
@@ -33,6 +35,8 @@ test.describe('vaults page functionality', () => {
 		await vaultAccordeonButtonLocator.click();
 
 		await page.waitForTimeout(500);
-		await page.screenshot({ path: `tests/screenshots/vaults/vaults-metamask-${browserName}.png` });
+		await page.screenshot({
+			path: `tests/screenshots/vaults/vaults-metamask-${browserName}.png`
+		});
 	});
 });

@@ -27,7 +27,10 @@ export const generateRandomBalance = () => {
  * @param vault A vault from the list of vaults.
  * @returns true if the vault satisfies all the filter's criterias whitin the Array of Filters
  */
-export const reduceFilters = (filterList: Array<VaultFilterFunction>, vault: VaultState) => {
+export const reduceFilters = (
+	filterList: Array<VaultFilterFunction>,
+	vault: VaultState
+) => {
 	return filterList
 		.map((vaultFilter) => vaultFilter.filterFunction(vault))
 		.reduce((prev, actual) => prev && actual);

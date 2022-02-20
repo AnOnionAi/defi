@@ -13,13 +13,12 @@
 
 <section class="background {$darkMode && 'background__dark'}">
 	<br />
-	<h1 class="dark:text-white text-5xl tracking-widest font-medium">
+	<h1 class="text-5xl font-medium tracking-widest dark:text-white">
 		{$_('headers.pools.text')}
 	</h1>
-	<div class="mt-5 space-y-4 pools ">
+	<div class="pools mt-5 space-y-4 ">
 		<div
-			class="flex flex-row justify-center gap-y-9 gap-x-6 p-8 text-center flex-wrap max-w-7xl mx-auto "
-		>
+			class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-8 text-center ">
 			{#each pools as pool}
 				<PoolCard info={pool} />
 			{/each}

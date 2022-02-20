@@ -26,6 +26,8 @@ test.describe('pools page functionality', () => {
 		);
 		await locator.click();
 		await page.waitForTimeout(500);
-		await page.screenshot({ path: `tests/screenshots/pools/pools-metamask-${browserName}.png` });
+		await page.screenshot({
+			path: `tests/screenshots/pools/pools-metamask-${browserName}.png`
+		});
 	});
 });

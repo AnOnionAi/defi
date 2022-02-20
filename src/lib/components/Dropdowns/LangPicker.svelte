@@ -44,9 +44,10 @@
 		on:click={() => {
 			showDropDownMenu = !showDropDownMenu;
 		}}
-		class="dark:border dark:rounded-md dark:hover:bg-dark-300 focus:outline-none font-medium flex p-2 items-center "
-	>
-		<p class="m-0 font-semibold {$darkMode && 'text-white'} {$isHomescreen && 'text-white'}">
+		class="dark:hover:bg-dark-300 flex items-center p-2 font-medium focus:outline-none dark:rounded-md dark:border ">
+		<p
+			class="m-0 font-semibold {$darkMode && 'text-white'} {$isHomescreen &&
+				'text-white'}">
 			{$page.params.lang ? validLang($page.params.lang) : '...'}
 		</p>
 	</button>
@@ -54,21 +55,23 @@
 		<div
 			in:scale={{ duration: 100, start: 0.95 }}
 			out:scale={{ duration: 75, start: 0.95 }}
-			class="dark:bg-dark-900 title z-10 sm:origin-top-right sm:left-0 absolute w-auto rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
-		>
+			class="dark:bg-dark-900 title absolute z-10 w-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 sm:left-0 sm:origin-top-right">
 			{#each LANGUAGES as l}
 				<button
 					on:click={() => {
 						goto(`/${l.code}`);
 						setInit(l.code);
-						window.location.replace(window.location.origin + `/${l.code.toLowerCase()}/`);
+						window.location.replace(
+							window.location.origin + `/${l.code.toLowerCase()}/`
+						);
 					}}
-					style="background-color: {home ? ($darkMode ? 'black' : '#F3F4F6') : ''}; {$darkMode
-						? 'color:white'
-						: ''};"
+					style="background-color: {home
+						? $darkMode
+							? 'black'
+							: '#F3F4F6'
+						: ''}; {$darkMode ? 'color:white' : ''};"
 					class:navbar_item_home={home}
-					class="dark:hover:bg-dark-600 dark:text-white border-none block w-full px-4 py-2 text-dark-200 hover:bg-gray-100"
-				>
+					class="dark:hover:bg-dark-600 text-dark-200 block w-full border-none px-4 py-2 hover:bg-gray-100 dark:text-white">
 					{l.lang}
 				</button>
 			{/each}

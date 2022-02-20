@@ -123,9 +123,9 @@ export enum TokenQuotes {
 }
 
 export type Notification = {
-	text: String;
-	position: String;
-	type: String;
+	text: string;
+	position: string;
+	type: string;
 	removeAfter: number;
 };
 

@@ -103,10 +103,10 @@
 </script>
 
 <div
-	class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white my-4 px-4 pb-4 pt-6 dark:bg-dark-800 dark:text-white border border-white"
->
-	<div class="flex flex-row flex-wrap w-auto justify-around relative">
-		<div class="flex lg:flex-row flex-col w-full max-w-6xl m-auto sm:justify-between ">
+	class="overflow-right-hidden dark:bg-dark-800 m-auto my-4 w-full max-w-7xl rounded-2xl border border-white bg-white px-4 pb-4 pt-6 shadow dark:text-white">
+	<div class="relative flex w-auto flex-row flex-wrap justify-around">
+		<div
+			class="m-auto flex w-full max-w-6xl flex-col sm:justify-between lg:flex-row ">
 			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
 				<span class="checkbox__input">
 					<input
@@ -114,26 +114,25 @@
 						type="radio"
 						value="All"
 						bind:group={platformSelected}
-						on:change={handlePlatformFilter}
-					/>
+						on:change={handlePlatformFilter} />
 					<span class="checkbox__control">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
 							aria-hidden="true"
-							focusable="false"
-						>
+							focusable="false">
 							<path
 								fill="none"
 								stroke="currentColor"
 								stroke-width="3"
-								d="M1.73 12.91l6.37 6.37L22.79 4.59"
-							/>
+								d="M1.73 12.91l6.37 6.37L22.79 4.59" />
 						</svg>
 					</span>
 				</span>
-				<span id="all" class="radio__label text-base dark:font-normal dark:tracking-wider">All</span
-				>
+				<span
+					id="all"
+					class="radio__label text-base dark:font-normal dark:tracking-wider"
+					>All</span>
 			</label>
 
 			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
@@ -143,25 +142,22 @@
 						type="radio"
 						value="SushiSwap"
 						bind:group={platformSelected}
-						on:change={handlePlatformFilter}
-					/>
+						on:change={handlePlatformFilter} />
 					<span class="checkbox__control">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
 							aria-hidden="true"
-							focusable="false"
-						>
+							focusable="false">
 							<path
 								fill="none"
 								stroke="currentColor"
 								stroke-width="3"
-								d="M1.73 12.91l6.37 6.37L22.79 4.59"
-							/>
+								d="M1.73 12.91l6.37 6.37L22.79 4.59" />
 						</svg>
 					</span>
 				</span>
-				<span class="radio__label text-pink-700 text-base">
+				<span class="radio__label text-base text-pink-700">
 					<img src="/sushi.png" alt="SushiSwap" />
 				</span>
 			</label>
@@ -173,56 +169,54 @@
 						type="radio"
 						value="QuickSwap"
 						bind:group={platformSelected}
-						on:change={handlePlatformFilter}
-					/>
+						on:change={handlePlatformFilter} />
 					<span class="checkbox__control">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
 							aria-hidden="true"
-							focusable="false"
-						>
+							focusable="false">
 							<path
 								fill="none"
 								stroke="currentColor"
 								stroke-width="3"
-								d="M1.73 12.91l6.37 6.37L22.79 4.59"
-							/>
+								d="M1.73 12.91l6.37 6.37L22.79 4.59" />
 						</svg>
 					</span>
 				</span>
-				<span class="radio__label text-blue-700 text-base">
+				<span class="radio__label text-base text-blue-700">
 					<img src="/vaultTokensIcons/quick.svg" alt="QuickSwap" />
 				</span>
 			</label>
 
 			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
 				<span class="checkbox__input">
-					<input name="checkbox" type="checkbox" on:change={handleHideZeroBalancesFilter} />
+					<input
+						name="checkbox"
+						type="checkbox"
+						on:change={handleHideZeroBalancesFilter} />
 					<span class="checkbox__control">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
 							aria-hidden="true"
-							focusable="false"
-						>
+							focusable="false">
 							<path
 								fill="none"
 								stroke="currentColor"
 								stroke-width="3"
-								d="M1.73 12.91l6.37 6.37L22.79 4.59"
-							/>
+								d="M1.73 12.91l6.37 6.37L22.79 4.59" />
 						</svg>
 					</span>
 				</span>
 				<span id="zero" class="radio__label text-base dark:font-normal "
-					>{$_('vaultFilter.hidezero')}</span
-				>
+					>{$_('vaultFilter.hidezero')}</span>
 			</label>
 		</div>
 
-		<div class=" pt-4 pb-4 mt-2 max-w-7xl m-auto sm:ml-0 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-			<div class="text-sm pl-2 pb-2 title uppercase">
+		<div
+			class=" m-auto mt-2 inline-block max-w-7xl pt-4 pb-4 sm:ml-0 sm:mb-0 sm:mr-0 sm:mt-2	">
+			<div class="title pl-2 pb-2 text-sm uppercase">
 				{$_('vaultFilter.filterby')}
 			</div>
 			<div class="content-select">
@@ -234,21 +228,24 @@
 			</div>
 		</div>
 
-		<div class=" pt-4 pb-4 mt-2 m-auto sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
-			<div class="text-sm pl-2 pb-2 title uppercase">
+		<div
+			class=" m-auto mt-2 inline-block pt-4 pb-4 sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2	">
+			<div class="title pl-2 pb-2 text-sm uppercase">
 				{$_('vaultFilter.sortby')}
 			</div>
 			<div class="content-select">
 				<select bind:value={sortBy}>
-					<option class="min-w-7xl" value="Descending">{$_('vaultFilter.desceding')}</option>
+					<option class="min-w-7xl" value="Descending"
+						>{$_('vaultFilter.desceding')}</option>
 					<option value="Ascending">{$_('vaultFilter.ascending')}</option>
 				</select>
 				<i />
 			</div>
 		</div>
 
-		<div class=" pt-4 pb-4 mt-2 m-auto sm:ml-2 sm:mb-0 sm:mr-2 sm:mt-2 inline-block	">
-			<div class="text-sm pl-2 pb-2 title uppercase">
+		<div
+			class=" m-auto mt-2 inline-block pt-4 pb-4 sm:ml-2 sm:mb-0 sm:mr-2 sm:mt-2	">
+			<div class="title pl-2 pb-2 text-sm uppercase">
 				{$_('vaultFilter.search')}
 			</div>
 			<div class="content-input">
@@ -256,20 +253,21 @@
 					type="text"
 					placeholder={$_('vaultFilter.searchvaults')}
 					bind:value={statement}
-					on:input={handleSearchByName}
-				/>
+					on:input={handleSearchByName} />
 			</div>
 		</div>
 
-		<div class="pt-8 pb-4 mt-4 sm:pt-10 m-auto sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 inline-block	">
+		<div
+			class="m-auto mt-4 inline-block pt-8 pb-4 sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 sm:pt-10	">
 			<div class="flex flex-row">
 				<div class="pt-1">
 					<input
 						checked={stakedOnly}
 						type="checkbox"
 						id="switch"
-						on:click={handleStakedOnlyFilter}
-					/><label id="switch-label" for="switch">A</label>
+						on:click={handleStakedOnlyFilter} /><label
+						id="switch-label"
+						for="switch">A</label>
 				</div>
 				<p class="pt-2 pl-2">{$_('vaultFilter.stakedonly')}</p>
 			</div>

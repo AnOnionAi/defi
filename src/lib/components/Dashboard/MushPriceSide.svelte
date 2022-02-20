@@ -1,5 +1,4 @@
 <div
-	class="h-60 md:h-30 lg:h-91 pt-1 lg:pt-6  col-span-9 md:col-span-9 lg:col-span-3 overflow-hidden grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-2"
->
+	class="md:h-30 lg:h-91 col-span-9 grid h-60  grid-cols-2 gap-2 overflow-hidden pt-1 md:col-span-9 md:grid-cols-4 lg:col-span-3 lg:grid-cols-2 lg:pt-6">
 	<slot />
 </div>

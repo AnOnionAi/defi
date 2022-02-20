@@ -4,7 +4,10 @@ import { devices } from '@playwright/test';
 const iPhone = devices['iPhone 11 Pro'];
 
 test.describe('mobile functionality', () => {
-	test('should open hamburger menu correctly', async ({ browser, browserName }) => {
+	test('should open hamburger menu correctly', async ({
+		browser,
+		browserName
+	}) => {
 		// this feature is not supported in firefox
 		if (browserName === 'firefox') {
 			return expect(browserName).toBe('firefox');
@@ -21,11 +24,19 @@ test.describe('mobile functionality', () => {
 		await page.goto('http://127.0.0.1:3000/en/dashboard', { timeout: 180000 });
 
 		page.waitForLoadState();
-		await page.screenshot({ path: `tests/screenshots/mobile/close-hamburguer-${browserName}.png` });
+		await page.screenshot({
+			path: `tests/screenshots/mobile/close-hamburguer-${browserName}.png`
+		});
 
-		await page.waitForSelector('.z-10 > .flex > .float-0 > #btn_hamburger_navbar > .svelte-fa');
-		await page.click('.z-10 > .flex > .float-0 > #btn_hamburger_navbar > .svelte-fa');
+		await page.waitForSelector(
+			'.z-10 > .flex > .float-0 > #btn_hamburger_navbar > .svelte-fa'
+		);
+		await page.click(
+			'.z-10 > .flex > .float-0 > #btn_hamburger_navbar > .svelte-fa'
+		);
 
-		await page.screenshot({ path: `tests/screenshots/mobile/open-hamburguer-${browserName}.png` });
+		await page.screenshot({
+			path: `tests/screenshots/mobile/open-hamburguer-${browserName}.png`
+		});
 	});
 });

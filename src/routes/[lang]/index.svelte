@@ -57,7 +57,10 @@
 			8,
 			25
 		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
-		const materialTorusOne = new THREE.MeshStandardMaterial({ color: 0xff6347, wireframe: true });
+		const materialTorusOne = new THREE.MeshStandardMaterial({
+			color: 0xff6347,
+			wireframe: true
+		});
 		const torusOne = new THREE.Mesh(geometryTorusOne, materialTorusOne);
 		scene.add(torusOne);
 
@@ -236,33 +239,34 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link
 		href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
-		rel="stylesheet"
-	/>
+		rel="stylesheet" />
 </svelte:head>
 
 <section class="relative">
 	<canvas bind:this={canvas} id="bg" />
 
-	<section class="text-white mr-auto ml-auto w-5/6">
+	<section class="mr-auto ml-auto w-5/6 text-white">
 		<section
 			style="margin-top: 25px;"
-			class="MUSH_about title text-center bg-transparent min-h-screen group"
-		>
+			class="MUSH_about title group min-h-screen bg-transparent text-center">
 			<h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2>
 			<!-- <div class="relative">
 				<img class="m-auto" src="title.webp" alt="title">
 			</div> -->
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 xl:pt-75 text-4xl">
+				<h4
+					in:fade={{ duration: 1000 }}
+					class="pt-33 xl:pt-75 relative text-4xl">
 					{$_('home.tagline1')}
 				</h4>
-				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
+				<h4
+					in:fade={{ delay: 1500, duration: 3000 }}
+					class="relative pt-2 text-4xl italic">
 					{$_('home.tagline2')} 🍄
 				</h4>
 				<h3
 					in:fade={{ delay: 3500, duration: 1000 }}
-					class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-2 lg:mt-6 pt-2 max-w-screen lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
-				>
+					class="market-cap max-w-screen relative m-auto mt-2 pt-2 text-3xl font-bold text-green-500 lg:mt-6 lg:ml-auto lg:mr-auto lg:max-w-screen-md lg:text-6xl">
 					{$_('home.marketCap')}
 					{#if $mushMarketCap}
 						<p in:fade={{ delay: 4250, duration: 2000 }}>
@@ -275,52 +279,56 @@
 			{/if}
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto rounded">
+		<section
+			class="MUSH_about m-auto max-w-3xl rounded shadow-md backdrop-filter">
 			<h2 class="text-center text-5xl">{$_('home.introTitle')} 📜</h2>
 			<div class="MUSH_main_section text-md lg:text-xl">{$_('home.intro')}</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex text-sm">
+		<section
+			class="MUSH_about subtitle m-auto flex max-w-3xl text-sm backdrop-filter">
 			<div class="MUSH_main_section">
 				<blockquote>{$_('home.wallStreetTitle')}</blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
-			<div class="MUSH_main_section text-md lg:text-xl">{$_('home.wallStreetSpeech')}</div>
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
+			<div class="MUSH_main_section text-md lg:text-xl">
+				{$_('home.wallStreetSpeech')}
+			</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
+		<section class="MUSH_about subtitle m-auto flex max-w-3xl backdrop-filter">
 			<div class="MUSH_main_section">
 				<blockquote>{$_('home.cryptoAdventureTitle')}</blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.cryptoAdventureText')}
 			</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
+		<section class="MUSH_about subtitle m-auto flex max-w-3xl backdrop-filter">
 			<div class="MUSH_main_section">
 				<blockquote>{$_('home.kariosTitle')} ⏰</blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.kariosText')}
 			</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
+		<section class="MUSH_about subtitle m-auto flex max-w-3xl backdrop-filter">
 			<div class="MUSH_main_section">
 				<blockquote>{$_('home.velocityIdeas')} 💡</blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.velocityIdeasText')}
 				<br />
@@ -332,7 +340,7 @@
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.psText')}
 				<br />
@@ -340,7 +348,7 @@
 				{$_('home.powerText')}
 			</div>
 		</section>
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.ps2Text')} 🚀
 			</div>

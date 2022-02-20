@@ -5,7 +5,9 @@ test.describe('farms page functionality', () => {
 		await page.goto('http://127.0.0.1:3000/en/farms', { timeout: 180000 });
 		await page.waitForSelector('.flex > .sm\\:mr-3 > .hidden > .flex > .pl-2');
 
-		const title = page.locator('body > #svelte > .main > .farms > .text-dark-200');
+		const title = page.locator(
+			'body > #svelte > .main > .farms > .text-dark-200'
+		);
 		await expect(title).toHaveText('Farms');
 
 		await page.screenshot({
@@ -21,9 +23,13 @@ test.describe('farms page functionality', () => {
 		await page.goto('http://127.0.0.1:3000/en/farms');
 		await page.waitForSelector('.flex > .sm\\:mr-3 > .hidden > .flex > .pl-2');
 
-		const locator = page.locator('.flex > .self-start > .py-4 > .flex > .bg-green-500');
+		const locator = page.locator(
+			'.flex > .self-start > .py-4 > .flex > .bg-green-500'
+		);
 		await locator.click();
 		await page.waitForTimeout(500);
-		await page.screenshot({ path: `tests/screenshots/farms/farms-metamask-${browserName}.png` });
+		await page.screenshot({
+			path: `tests/screenshots/farms/farms-metamask-${browserName}.png`
+		});
 	});
 });

@@ -20,11 +20,12 @@
 
 <section class="farms" style="background:url({backgroundImage});">
 	<br />
-	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
+	<h1 class="text-dark-200 text-4xl tracking-widest dark:text-white">
 		{$_('headers.farms.text')}
 	</h1>
-	<div class="w-23/24  mx-auto rounded-xl max-w-7xl ">
-		<div class="flex flex-row justify-center gap-6 p-8 text-center flex-wrap   rounded-xl">
+	<div class="w-23/24  mx-auto max-w-7xl rounded-xl ">
+		<div
+			class="flex flex-row flex-wrap justify-center gap-6 rounded-xl p-8   text-center">
 			<!--Start Farms-->
 			{#each farms as farm}
 				<PoolCard info={farm} isFarm={true} />

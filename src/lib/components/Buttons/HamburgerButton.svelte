@@ -8,12 +8,11 @@
 	<button
 		aria-label="Menu"
 		id="btn_hamburger_navbar"
-		class="dark:text-light-600 focus:outline-none inline-flex items-center justify-center p-2 rounded-md
-  text-gray-500"
+		class="dark:text-light-600 inline-flex items-center justify-center rounded-md p-2 text-gray-500
+  focus:outline-none"
 		on:click={() => {
 			navbarMenuIsOpen = !navbarMenuIsOpen;
-		}}
-	>
+		}}>
 		{#if !navbarMenuIsOpen}
 			<Icon icon={faBars} />
 		{:else}

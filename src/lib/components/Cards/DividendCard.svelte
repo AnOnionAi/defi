@@ -2,14 +2,22 @@
 	import { _ } from 'svelte-i18n';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { getTokenBalance, isNotZero } from '$lib/utils/erc20';
-	import { getPendingReward, getSharesTotal, getUserInfo, harvest } from '$lib/utils/dividends';
+	import {
+		getPendingReward,
+		getSharesTotal,
+		getUserInfo,
+		harvest
+	} from '$lib/utils/dividends';
 	import { stakedWantTokens, deposit, withdraw } from '$lib/utils/vaultChef';
 	import { LoadingState, Token } from '$lib/ts/types';
 	import { onDestroy, onMount } from 'svelte';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { Chasing } from 'svelte-loading-spinners';
 	import { BigNumber, ethers } from 'ethers';
-	import { parseBigNumberToDecimal, parseBigNumberToString } from '$lib/utils/balanceParsers';
+	import {
+		parseBigNumberToDecimal,
+		parseBigNumberToString
+	} from '$lib/utils/balanceParsers';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
@@ -63,7 +71,10 @@
 
 	const refreshUserData = async () => {
 		try {
-			userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN), userAddress);
+			userBalance = await getTokenBalance(
+				getContractAddress(Token.MUSHTOKEN),
+				userAddress
+			);
 			console.log(userBalance);
 			userStakedTokens = await stakedWantTokens(2, userAddress);
 			TVL = await getSharesTotal();
@@ -80,7 +91,9 @@
 			const tx = await deposit(2, depositInput.trim());
 			await tx.wait();
 			loadingState.loadingDeposit = false;
-			userBalance = userBalance.sub(BigNumber.from(ethers.utils.parseEther(depositInput.trim())));
+			userBalance = userBalance.sub(
+				BigNumber.from(ethers.utils.parseEther(depositInput.trim()))
+			);
 			userStakedTokens = userStakedTokens.add(
 				BigNumber.from(ethers.utils.parseEther(depositInput.trim()))
 			);
@@ -100,7 +113,9 @@
 			const tx = await withdraw(2, withdrawInput.trim());
 			await tx.wait();
 			addNotification(transactionCompleted);
-			userBalance = userBalance.add(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())));
+			userBalance = userBalance.add(
+				BigNumber.from(ethers.utils.parseEther(withdrawInput.trim()))
+			);
 			userStakedTokens = userStakedTokens.sub(
 				BigNumber.from(ethers.utils.parseEther(withdrawInput.trim()))
 			);
@@ -131,31 +146,34 @@
 
 <div class="h-full w-full">
 	<div class="h-full w-full">
-		<div class="flex flex-col justify-around w-full h-4/12">
-			<div class="flex w-23/24 mx-auto justify-between items-center">
+		<div class="h-4/12 flex w-full flex-col justify-around">
+			<div class="w-23/24 mx-auto flex items-center justify-between">
 				<div class="flex items-center">
 					<img src="/mushRound.png" alt="Mush Token Icon" class="w-10" />
-					<h2 class="text-2xl font-bold pl-2  dark:text-white">MUSH</h2>
+					<h2 class="pl-2 text-2xl font-bold  dark:text-white">MUSH</h2>
 				</div>
 				<div>
 					<p
-						class="rounded-full flex py-1 px-4  border-2 border-blue-500 text-blue-500 inline text-xs font-semibold dark:border-blue-400 dark:text-blue-400"
-					>
+						class="inline flex rounded-full border-2  border-blue-500 py-1 px-4 text-xs font-semibold text-blue-500 dark:border-blue-400 dark:text-blue-400">
 						<span class="mr-1">{$_('actions.earn')} USDC </span>
 						<img src="/vaultTokensIcons/usdc.svg" alt="" class="w-4" />
 					</p>
 				</div>
 			</div>
 
-			<div class="w-full h-26 flex flex-col justify-between ">
-				<div class="flex w-full h-12 text-center">
+			<div class="h-26 flex w-full flex-col justify-between ">
+				<div class="flex h-12 w-full text-center">
 					<div class="w-6/12">
-						<p class="text-xs text-gray-600 font-semibold dark:text-gray-300">APR</p>
+						<p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
+							APR
+						</p>
 						<p class="font-medium dark:text-white">185.4%</p>
 					</div>
 
 					<div class="w-6/12">
-						<p class="text-xs text-gray-600 font-semibold dark:text-gray-300">TVL🍄</p>
+						<p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
+							TVL🍄
+						</p>
 						<p class="font-medium dark:text-white">
 							{#if TVL}
 								{parseBigNumberToString(TVL)}
@@ -166,9 +184,9 @@
 					</div>
 				</div>
 
-				<div class="flex w-full h-12 text-center">
+				<div class="flex h-12 w-full text-center">
 					<div class="w-6/12">
-						<p class="text-xs text-gray-600 font-semibold dark:text-gray-300 ">
+						<p class="text-xs font-semibold text-gray-600 dark:text-gray-300 ">
 							{$_('actions.wallet')}
 						</p>
 						<p class="font-medium dark:text-white">
@@ -181,7 +199,7 @@
 					</div>
 
 					<div class="w-6/12">
-						<p class="text-xs text-gray-600 font-semibold dark:text-gray-300">
+						<p class="text-xs font-semibold text-gray-600 dark:text-gray-300">
 							{$_('actions.deposit')}
 						</p>
 						<p class="font-medium dark:text-white">
@@ -196,9 +214,9 @@
 			</div>
 		</div>
 
-		<div class="w-full h-8/12 flex flex-col justify-around">
-			<div class="flex flex-col text-sm h-2/6 justify-center">
-				<p class="text-gray-600 font-semibold mb-1 ml-1 dark:text-gray-300">
+		<div class="h-8/12 flex w-full flex-col justify-around">
+			<div class="flex h-2/6 flex-col justify-center text-sm">
+				<p class="mb-1 ml-1 font-semibold text-gray-600 dark:text-gray-300">
 					{$_('your.wallet')}:
 					<span class="text-black dark:text-white">
 						{#if userBalance}
@@ -210,20 +228,17 @@
 				</p>
 
 				<div
-					class="bg-gray-200 dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
-				>
+					class="max-h-17 flex h-5/6 justify-between rounded-xl bg-gray-200 py-2 px-4 dark:bg-gray-800">
 					<input
 						on:keypress={onyAllowFloatNumbers}
 						bind:value={depositInput}
 						type="text"
-						class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12"
-					/>
+						class="h-full w-7/12 bg-transparent text-xl font-bold text-gray-700  dark:text-gray-200" />
 					<button
 						disabled={loadingState.loadingDeposit}
 						on:click={handleDeposit}
-						class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5 {loadingState.loadingDeposit &&
-							'cursor-not-allowed'} disabled:opacity-50 disabled:bg-green-500"
-					>
+						class="flex h-full items-center justify-center rounded-xl bg-black px-3 text-lg font-semibold text-white  hover:bg-green-500 md:px-5 {loadingState.loadingDeposit &&
+							'cursor-not-allowed'} disabled:bg-green-500 disabled:opacity-50">
 						<p>{$_('actions.deposit')}</p>
 						{#if loadingState.loadingDeposit}
 							<div class="pl-3">
@@ -234,8 +249,8 @@
 				</div>
 			</div>
 
-			<div class="flex flex-col text-sm h-2/6 justify-center">
-				<p class="text-gray-600 dark:text-gray-300 font-semibold ml-1 mb-1">
+			<div class="flex h-2/6 flex-col justify-center text-sm">
+				<p class="ml-1 mb-1 font-semibold text-gray-600 dark:text-gray-300">
 					Deposited:
 					<span class="text-black dark:text-white">
 						{#if userStakedTokens}
@@ -247,20 +262,17 @@
 				</p>
 
 				<div
-					class="bg-gray-200  dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
-				>
+					class="max-h-17  flex h-5/6 justify-between rounded-xl bg-gray-200 py-2 px-4 dark:bg-gray-800">
 					<input
 						type="text"
 						on:keypress={onyAllowFloatNumbers}
 						bind:value={withdrawInput}
-						class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12"
-					/>
+						class="h-full w-7/12 bg-transparent text-xl font-bold text-gray-700  dark:text-gray-200" />
 					<button
 						on:click={handleWithdraw}
 						disabled={loadingState.loadingWithdraw}
-						class="hover:bg-green-500 bg-black h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5 {loadingState.loadingWithdraw &&
-							'cursor-not-allowed'} disabled:opacity-50 disabled:bg-green-500"
-					>
+						class="flex h-full items-center justify-center rounded-xl bg-black px-3 text-lg font-semibold text-white  hover:bg-green-500 md:px-5 {loadingState.loadingWithdraw &&
+							'cursor-not-allowed'} disabled:bg-green-500 disabled:opacity-50">
 						<p>{$_('actions.withdraw')}</p>
 						{#if loadingState.loadingWithdraw}
 							<div class="pl-3">
@@ -271,18 +283,16 @@
 				</div>
 			</div>
 
-			<div class="flex flex-col text-sm h-2/6 justify-center">
-				<p class="text-gray-600 dark:text-gray-300 font-semibold mb-1 ml-1">
+			<div class="flex h-2/6 flex-col justify-center text-sm">
+				<p class="mb-1 ml-1 font-semibold text-gray-600 dark:text-gray-300">
 					USDC {$_('pastActions.earned')}:
 					<span class="text-black" />
 				</p>
 
 				<div
-					class="bg-gray-200 dark:bg-gray-800 rounded-xl h-5/6 max-h-17 py-2 flex justify-between px-4"
-				>
+					class="max-h-17 flex h-5/6 justify-between rounded-xl bg-gray-200 py-2 px-4 dark:bg-gray-800">
 					<p
-						class="bg-transparent h-full text-xl font-bold text-gray-700 dark:text-gray-200  w-7/12 flex items-center"
-					>
+						class="flex h-full w-7/12 items-center bg-transparent text-xl  font-bold text-gray-700 dark:text-gray-200">
 						{#if userReward}
 							{parseBigNumberToString(userReward)}
 						{:else}
@@ -293,10 +303,9 @@
 						disabled={!userCanHarvest}
 						on:click={handleHarvest}
 						class="{userCanHarvest &&
-							'hover:bg-green-500'} bg-black  h-full rounded-xl text-white font-semibold text-lg flex items-center justify-center  px-3 md:px-5 {!userCanHarvest &&
+							'hover:bg-green-500'} flex  h-full items-center justify-center rounded-xl bg-black px-3 text-lg font-semibold  text-white md:px-5 {!userCanHarvest &&
 							'cursor-not-allowed'} disabled:opacity-50 {loadingState.loadingHarvest &&
-							'bg-green-500'}"
-					>
+							'bg-green-500'}">
 						<p>{$_('actions.harvest')}</p>
 						{#if loadingState.loadingHarvest}
 							<div class="pl-3">

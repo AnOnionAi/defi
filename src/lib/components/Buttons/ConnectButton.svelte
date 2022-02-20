@@ -4,7 +4,11 @@
 	import { accounts, chainID } from '$lib/stores/MetaMaskAccount';
 	import { formatAddress } from '$lib/utils/addressHelpers';
 	import { getContext, onMount } from 'svelte';
-	import { isMetaMaskInstalled, goInstallMetamask, metaMaskCon } from '$lib/utils/metamaskCalls';
+	import {
+		isMetaMaskInstalled,
+		goInstallMetamask,
+		metaMaskCon
+	} from '$lib/utils/metamaskCalls';
 	import { POLYGON_CHAIN_ID } from '$lib/config';
 	import WrongNetwork from '../Modals/WrongNetwork.svelte';
 	import { fade, fly } from 'svelte/transition';
@@ -48,15 +52,17 @@
 
 <button
 	on:click={() => onClickDispatcher(isInstalled)}
-	class="px-3 rounded-md  hover:bg-green-400 {$accounts && 'bg-green-400'} {!$accounts &&
-		'bg-green-600'} {!$darkMode && 'shadow-md'}"
->
-	<p class=" text-white font-light flex items-center ">
+	class="rounded-md px-3  hover:bg-green-400 {$accounts &&
+		'bg-green-400'} {!$accounts && 'bg-green-600'} {!$darkMode && 'shadow-md'}">
+	<p class=" flex items-center font-light text-white ">
 		{#if isInstalled == 'checking'}
 			{$_('walletStatus.checking')}
 		{:else if $accounts}
 			<span class="flex items-center">{formatAddress($accounts)}</span>
-			<img src="/tinyRedMush.png" alt="Mush for the family" class="w-6 h-6 ml-2" />
+			<img
+				src="/tinyRedMush.png"
+				alt="Mush for the family"
+				class="w-6 h-6 ml-2" />
 		{:else if isInstalled == 'isInstalled'}
 			{$_('dividendsPage.cyw')}
 		{:else if isInstalled == 'notInstalled'}
