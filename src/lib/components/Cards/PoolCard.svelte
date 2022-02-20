@@ -260,7 +260,7 @@
 </script>
 
 <div
-	class="self-start min-w-84 max-w-84  bg-white dark:bg-neutral-900 {!$darkMode &&
+	class="self-start   bg-white dark:bg-neutral-900 {!$darkMode &&
 		'shadow-xl'}  rounded-3xl relative transform transition duration-300 hover:scale-101 select-none"
 >
 	<div class="absolute flex flex-row-reverse p-4 w-full">
@@ -271,8 +271,8 @@
 			<MultiplierBadge multiplier={poolMultiplier} />
 		</div>
 	</div>
-	<div class="py-4 px-8 flex flex-col h-124">
-		<img src={info.tokenImagePath} alt={info.tokenName} class="w-30 h-30 self-center my-2" />
+	<div class="py-4 px-8 cardContainer flex flex-col h-full">
+		<img src={info.tokenImagePath} alt={info.tokenName} class="self-center my-2" />
 		<div>
 			<p class="font-bold dark:text-white text-lg mb-3">{info.tokenName}</p>
 		</div>
@@ -378,13 +378,17 @@
 
 		<div
 			on:click={showPoolInfo}
-			class="flex items-center justify-center dark:text-white cursor-pointer hover:text-green-500"
+			class="flex items-center dark:text-white justify-center cursor-pointer group"
 		>
-			<p class="font-medium mr-2">{$_('poolCard.details')}</p>
+			<p class="font-medium mr-2  group-hover:text-green-500 {!isHidden && "text-green-500"} ">{$_('poolCard.details')}</p>
 			{#if isHidden}
-				<Fa icon={faChevronDown} size="xs" translateY={0.15} />
+				<div class="group-hover:text-green-500 {!isHidden && "text-green-500"}">
+					<Fa icon={faChevronDown} size="xs" translateY={0.15} />
+				</div>
 			{:else}
-				<Fa icon={faChevronUp} size="xs" translateY={0.15} />
+				<div class="group-hover:text-green-500 {!isHidden && "text-green-500"}">
+					<Fa icon={faChevronUp} size="xs" translateY={0.15} />
+				</div>
 			{/if}
 		</div>
 	</div>
@@ -414,3 +418,17 @@
 		</div>
 	{/if}
 </div>
+
+
+<style>
+	.cardContainer {
+		width: 336px;
+		height: 496px;
+	}
+
+	img{
+		width: 120px;
+		height: 120px;
+	}
+</style>
+
