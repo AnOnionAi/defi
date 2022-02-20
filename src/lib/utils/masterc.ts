@@ -70,11 +70,7 @@ export namespace MasterChef {
 			.deposit(pid, ethers.utils.parseUnits(amount, decimals), referrer);
 	};
 
-	export const withdraw = async (
-		pid: number,
-		amount: any,
-		decimals = 18
-	) => {
+	export const withdraw = async (pid: number, amount: any, decimals = 18) => {
 		return masterChefContract
 			.connect(getSigner())
 			.withdraw(pid, ethers.utils.parseUnits(amount, decimals));
