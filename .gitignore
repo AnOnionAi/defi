@@ -2,7 +2,6 @@ node_modules
 /.svelte-kit
 /build
 /functions
-
 .netlify
 /tests/~
 
@@ -33,6 +32,20 @@ coverage
 
 # nyc test coverage
 .nyc_output
+
+# Unit test / coverage reports
+test/screenshots
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
 
 # Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -77,10 +90,10 @@ web_modules/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file - private repo with automated deploy, don't need in repo atm
-# .envv
-#.env.test
-#.env.production
+# Environments
+# .env
+env.test
+env.production
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

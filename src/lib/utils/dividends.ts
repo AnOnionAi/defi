@@ -2,7 +2,9 @@ import type { BigNumber } from 'ethers';
 import { getMushStrategyContract } from './contracts';
 import { ethers } from 'ethers';
 
-export const getUserInfo = async (address: string): Promise<Array<BigNumber>> => {
+export const getUserInfo = async (
+	address: string
+): Promise<Array<BigNumber>> => {
 	const mushStrategy = getMushStrategyContract();
 	const [shares, rewardDebt] = await mushStrategy.userInfo(address);
 	return [shares, rewardDebt];
@@ -44,7 +46,10 @@ export const getPendingReward = async (address: string) => {
 	]);
 	const [userShares, rewardDebt] = userInfo;
 
-	const pending = userShares.mul(usdcPerShare).div(ethers.utils.parseEther('1')).sub(rewardDebt);
+	const pending = userShares
+		.mul(usdcPerShare)
+		.div(ethers.utils.parseEther('1'))
+		.sub(rewardDebt);
 
 	return pending;
 };

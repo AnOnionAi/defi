@@ -42,8 +42,12 @@ export const getPortfolioValue = async (address: string): Promise<number> => {
 			.map((tokenData) =>
 				tokenData.quote_rate == 0
 					? 0
-					: parseFloat(ethers.utils.formatUnits(tokenData.balance, tokenData.contract_decimals)) *
-					  tokenData.quote_rate
+					: parseFloat(
+							ethers.utils.formatUnits(
+								tokenData.balance,
+								tokenData.contract_decimals
+							)
+					  ) * tokenData.quote_rate
 			)
 			.reduce((prev, current) => prev + current);
 	} catch {
@@ -62,7 +66,10 @@ export const getFarmsTVL = async (): Promise<number> => {
 		usdcMushPairAddress,
 		getContractAddress(Token.MASTERCHEF)
 	);
-	const [pairPrice, stakedAmount] = await Promise.all([pairPricePromise, stakedAmountPromise]);
+	const [pairPrice, stakedAmount] = await Promise.all([
+		pairPricePromise,
+		stakedAmountPromise
+	]);
 	if (stakedAmount.isZero()) return 0;
 	const parsedStakedAmount = parseFloat(ethers.utils.formatEther(stakedAmount));
 	return pairPrice * parsedStakedAmount;

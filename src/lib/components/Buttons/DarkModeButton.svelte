@@ -14,9 +14,9 @@
 
 <span
 	on:click={changeDark}
-	class=" {$darkMode && ''} block px-2 py-3 rounded-md font-medium {!$darkMode &&
-		'spinner'} cursor-pointer  hover:text-yellow-300 "
->
+	class=" {$darkMode &&
+		''} block rounded-md px-2 py-3 font-medium {!$darkMode &&
+		'spinner'} cursor-pointer  hover:text-yellow-300 ">
 	{#if $darkMode}
 		<Icon icon={faMoon} />
 	{:else}

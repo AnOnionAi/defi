@@ -1,11 +1,10 @@
-<div id="mush" class="flex justify-center p-5 text-center rounded-md">
+<div id="mush" class="flex justify-center rounded-md p-5 text-center">
 	<br />
 	<div
-		class="mush-w p-2 text-2xl space-y-3 flex flex-col justify-around rounded-md backdrop-filter bg-transparent"
-	>
+		class="mush-w flex flex-col justify-around space-y-3 rounded-md bg-transparent p-2 text-2xl backdrop-filter">
 		<p class="text-8xl font-bold text-white">MUSH</p>
 		<br />
-		<div class="px-5 bg-gray-50 bg-gradient-to-tl rounded-md">
+		<div class="rounded-md bg-gray-50 bg-gradient-to-tl px-5">
 			<div class="flex justify-between">
 				<p class="font-black text-black">APY</p>
 				<p class="font-black text-black">999%</p>
@@ -25,8 +24,7 @@
 		</div>
 		<a
 			href="#"
-			class="block bg-green-400 text-white font-bold p-1 rounded-md w-full hover:bg-green-600"
-		>
+			class="block w-full rounded-md bg-green-400 p-1 font-bold text-white hover:bg-green-600">
 			Unlock
 		</a>
 	</div>

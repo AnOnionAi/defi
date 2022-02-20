@@ -1,37 +1,40 @@
-name: Format
+name: Lint
 
 on: [pull_request]
 
 jobs:
-  format:
-    name: Format and Lint
+  lint:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.head_ref }}
 
       - name: Setup Node 16
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  
+          node-version: '16'
 
       - name: Install pnpm
         run: sudo npm install -g pnpm
 
       - name: Install dependencies
         run: |
-          pnpm install -D svelte prettier prettier-plugin-svelte eslint eslint-config-google typescript
-          pnpm install -D eslint-config-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin
-      - name: Format
-        run: pnpm run format
+          pnpm add svelte typescript
+          pnpm add -D prettier prettier-plugin-tailwindcss eslint
+          pnpm add -D @typescript-eslint/parser @typescript-eslint/eslint-plugin
 
-      # - name: Lint
-      #   run: npm run lint
+      - name: Format
+        run: pnpm format
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4.1.2
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply formatting changes
+          branch: ${{ github.head_ref }}
+
+      - name: Lint
+        run: pnpm lint

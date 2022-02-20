@@ -23,14 +23,12 @@
 </script>
 
 <div
-	class="h-12/12 w-full flex justify-center items-center cursor-pointer"
-	on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
->
-	<div class="w-6/12 h-12/12 flex flex-col justify-center ">
-		<img src="/metamask.svg" alt="Metamask Fox" class="w-40 self-center mb-5" />
+	class="h-12/12 flex w-full cursor-pointer items-center justify-center"
+	on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}>
+	<div class="h-12/12 flex w-6/12 flex-col justify-center ">
+		<img src="/metamask.svg" alt="Metamask Fox" class="mb-5 w-40 self-center" />
 		<p
-			class="text-xl text-center bg-black text-white font-medium rounded-full p-1  dark:border-green-500 dark:border-3"
-		>
+			class="dark:border-3 rounded-full bg-black p-1 text-center text-xl font-medium  text-white dark:border-green-500">
 			{$_('dividendsPage.cyw')}
 		</p>
 	</div>

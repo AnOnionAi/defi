@@ -39,18 +39,24 @@ export const calculateGrowth = (historicalData: Array<any>): GrowthInfo => {
 	if (wantedLogs.length == 0) return errorHistoryNotFound;
 
 	const yesterdayLog =
-		wantedLogs.find((log) => new Date(log.date).getTime() == oneDayBeforeLastDate.getTime()) ||
-		null;
+		wantedLogs.find(
+			(log) => new Date(log.date).getTime() == oneDayBeforeLastDate.getTime()
+		) || null;
 	const lastWeekLog =
-		wantedLogs.find((log) => new Date(log.date).getTime() == oneWeekBeforeLastDate.getTime()) ||
-		null;
+		wantedLogs.find(
+			(log) => new Date(log.date).getTime() == oneWeekBeforeLastDate.getTime()
+		) || null;
 	const lastMonthLog =
-		wantedLogs.find((log) => new Date(log.date).getTime() == oneMonthBeforeLastDate.getTime()) ||
-		null;
+		wantedLogs.find(
+			(log) => new Date(log.date).getTime() == oneMonthBeforeLastDate.getTime()
+		) || null;
 
-	const todayGrowth = ((lastDayLog.price - yesterdayLog.price) / yesterdayLog.price) * 100;
-	const weeklyGrowth = ((lastDayLog.price - lastWeekLog.price) / lastWeekLog.price) * 100;
-	const monthlyGrowth = ((lastDayLog.price - lastMonthLog.price) / lastMonthLog.price) * 100;
+	const todayGrowth =
+		((lastDayLog.price - yesterdayLog.price) / yesterdayLog.price) * 100;
+	const weeklyGrowth =
+		((lastDayLog.price - lastWeekLog.price) / lastWeekLog.price) * 100;
+	const monthlyGrowth =
+		((lastDayLog.price - lastMonthLog.price) / lastMonthLog.price) * 100;
 
 	return {
 		yesterdayPrice: yesterdayLog.price,

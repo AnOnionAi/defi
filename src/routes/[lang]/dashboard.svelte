@@ -31,13 +31,15 @@
 	import MushPriceCard from '$lib/components/Dashboard/MushPriceCard.svelte';
 	import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
-	import { getFarmsTVL, getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
-	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
+	import {
+		getFarmsTVL,
+		getPoolsTVL,
+		getPortfolioValue
+	} from '$lib/utils/getPortfolioValue';
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
-	import { parse } from 'path/posix';
-	import { APIKEY, getCovalentApiKey } from '$lib/env';
+	import { APIKEY } from '$lib/env';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -161,13 +163,16 @@
 				];
 
 				historicalData = res.data.prices[0].prices.map((e, i) => {
-					let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
+					let shortDate =
+						monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
 					return { ...e, shortDate };
 				});
 
 				growthInfo = calculateGrowth(historicalData);
 
-				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(2);
+				lastPrice = [...historicalData]
+					.reverse()
+					[historicalData.length - 1].price.toFixed(2);
 
 				let tempPrices = [...historicalData].map((e) => e.price).reverse();
 				peak = Math.max(...tempPrices).toFixed(5);
@@ -229,44 +234,37 @@
 			primaryText={formatComma($farmsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInFarms')}
 			buttonText={$_('dashboard.startFarming')}
-			route={`/${$page.params.lang}/farms`}
-		/>
+			route={`/${$page.params.lang}/farms`} />
 
 		<EarnMoreCard
 			title={$_('headers.pools.text')}
 			primaryText={formatComma($poolsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInPools')}
 			buttonText={$_('dashboard.addLiquidity')}
-			route={`/${$page.params.lang}/pools`}
-		/>
+			route={`/${$page.params.lang}/pools`} />
 
 		<EarnMoreCard
 			title={$_('headers.vaults.text')}
 			primaryText={formatComma($vaultsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
-			route={`/${$page.params.lang}/vaults`}
-		/>
+			route={`/${$page.params.lang}/vaults`} />
 	</EarnMoreSection>
 
 	<SectionTitle title={$_('dashboard.index')} />
 	<IndexSection>
 		<IndexCard
 			title={$_('dashboard.mushpb')}
-			description="{formatComma($mushPerBlock, $page.params.lang)} MUSH"
-		/>
+			description="{formatComma($mushPerBlock, $page.params.lang)} MUSH" />
 		<IndexCard
 			title={$_('dashboard.marketcap')}
-			description="${formatComma($mushMarketCap, $page.params.lang)}"
-		/>
+			description="${formatComma($mushMarketCap, $page.params.lang)}" />
 		<IndexCard
 			title={$_('dashboard.totalvol')}
-			description="{formatComma($totalMushSupply, $page.params.lang)} MUSH"
-		/>
+			description="{formatComma($totalMushSupply, $page.params.lang)} MUSH" />
 		<IndexCard
 			title={$_('dashboard.maxsupply')}
-			description="{formatComma($maxMushSupply, $page.params.lang)} MUSH"
-		/>
+			description="{formatComma($maxMushSupply, $page.params.lang)} MUSH" />
 	</IndexSection>
 
 	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
@@ -279,15 +277,23 @@
 					{ id: 2, name: 'Month' }
 				]}
 				selected={value}
-				on:change={handleOption}
-			/>
+				on:change={handleOption} />
 			<MushPriceGraph />
 		</div>
 
 		<MushPriceSide>
-			<MushPriceCard title="Today" display={growthInfo.todayGrowth} isPercentage={true} />
-			<MushPriceCard title="Weekly" display={growthInfo.weeklyGrowth} isPercentage={true} />
-			<MushPriceCard title="Monthly" display={growthInfo.monthlyGrowth} isPercentage={true} />
+			<MushPriceCard
+				title="Today"
+				display={growthInfo.todayGrowth}
+				isPercentage={true} />
+			<MushPriceCard
+				title="Weekly"
+				display={growthInfo.weeklyGrowth}
+				isPercentage={true} />
+			<MushPriceCard
+				title="Monthly"
+				display={growthInfo.monthlyGrowth}
+				isPercentage={true} />
 			<MushPriceCard title="Peak" display={parseFloat(peak)} />
 		</MushPriceSide>
 	</MushPriceSection>

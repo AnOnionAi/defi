@@ -72,12 +72,15 @@
 </script>
 
 <br />
-<h1 class="tracking-widest  text-4xl dark:text-white">{$_('headers.dividends.text')}</h1>
+<h1 class="text-4xl  tracking-widest dark:text-white">
+	{$_('headers.dividends.text')}
+</h1>
 <div class="my-6">
-	<div style="background-image:url({backgroundImage});" class="dividends-wrapper">
+	<div
+		style="background-image:url({backgroundImage});"
+		class="dividends-wrapper">
 		<div
-			class="h-6/6 dividends  w-95/100 max-w-lg p-5 	dark:border-2 rounded-2xl shadow-xl bg-white dark:bg-dark-900 dark:border-green-500 "
-		>
+			class="h-6/6 dividends  w-95/100 dark:bg-dark-900 max-w-lg 	rounded-2xl bg-white p-5 shadow-xl dark:border-2 dark:border-green-500 ">
 			{#if approved}
 				<div in:fade={{ duration: 1000 }} class="h-full">
 					<DividendCard />
