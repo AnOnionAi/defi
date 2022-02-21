@@ -1,16 +1,3 @@
-<script>
-	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker
-			.register('service-worker.ts')
-			.then((reg) => {
-				console.log('service worker REGISTERED', reg);
-			})
-			.catch((err) => {
-				console.log('service worker not REGISTERED', err);
-			});
-	}
-</script>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -20,10 +7,10 @@
 
 		<!--SEO CONFIGURATION-->
 
-		<link rel="alternate" hreflang="en" href="https://zyber.netlify.app/en" />
-		<link rel="alternate" hreflang="es" href="https://zyber.netlify.app/es" />
-		<link rel="alternate" hreflang="de" href="https://zyber.netlify.app/de" />
-		<link rel="alternate" hreflang="fr" href="https://zyber.netlify.app/fr" />
+		<link rel="alternate" hreflang="en" href="https://fungfi.com/en" />
+		<link rel="alternate" hreflang="es" href="https://fungfi.com/es" />
+		<link rel="alternate" hreflang="de" href="https://fungfi.com/de" />
+		<link rel="alternate" hreflang="fr" href="https://fungfi.com/fr" />
 
 		<title>Fung Fi Decentralized Finance</title>
 		%svelte.head%
@@ -67,4 +54,16 @@
 	<body>
 		<div id="svelte">%svelte.body%</div>
 	</body>
+	<script>
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker
+			.register('service-worker.ts')
+			.then((reg) => {
+				console.log('service worker REGISTERED', reg);
+			})
+			.catch((err) => {
+				console.log('service worker not REGISTERED', err);
+			});
+	}
+</script>
 </html>
