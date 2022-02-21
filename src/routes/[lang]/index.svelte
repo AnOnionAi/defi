@@ -232,14 +232,14 @@
 	</div>
 </noscript>
 
-<svelte:head>
+<!-- <svelte:head>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link
 		href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
 		rel="stylesheet"
 	/>
-</svelte:head>
+</svelte:head> -->
 
 <section class="relative">
 	<canvas bind:this={canvas} id="bg" />
