@@ -103,6 +103,6 @@
 	}
 
 	.background__lite {
-		background-image: url('/backgrounds/vaultsBackground2.png');
+		background-image: url('/theme/vaults/vaultsBackground2.png');
 	}
 </style>

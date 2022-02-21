@@ -48,8 +48,8 @@
 
 	darkMode.subscribe((darkEnabled) => {
 		darkEnabled
-			? (backgroundImage = '/backgrounds/mushHouse.svg')
-			: (backgroundImage = '/backgrounds/cuteMush.svg');
+			? (backgroundImage = '/theme/dividends/mushHouse.svg')
+			: (backgroundImage = '/theme/dividends/cuteMush.svg');
 	});
 
 	const handleApproval = async () => {

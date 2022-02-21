@@ -33,10 +33,10 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
-		background-image: url('/backgrounds/fantasyMushCity.jpg');
+		background-image: url('/theme/pools/fantasyMushCity.jpg');
 	}
 	.background__dark {
-		background-image: url('/backgrounds/mushVillageDark.jpeg');
+		background-image: url('/theme/pools/mushVillageDark.jpeg');
 		background-size: cover;
 		background-position: center center;
 	}

@@ -23,7 +23,7 @@
 	<div class="curve {$darkMode && 'dark-curve'}" />
 	<img
 		class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto z-0"
-		src="/crypto-market.png"
+		src="/assets/crypto-market.png"
 		alt="crypto-market"
 	/>
 </section>
@@ -36,7 +36,7 @@
 		</p>
 		<img
 			class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto"
-			src="/farms.png"
+			src="/assets/farms.png"
 			alt="farms"
 		/>
 	</div>
@@ -63,7 +63,7 @@
 	</p>
 	<img
 		class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto my-4"
-		src="/vaults.png"
+		src="/assets/vaults.png"
 		alt="vaults"
 	/>
 </section>
@@ -77,7 +77,7 @@
 	</p>
 	<img
 		class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto"
-		src="/crypto-responsibility.png"
+		src="/assets/crypto-responsibility.png"
 		alt="crypto-responsibility"
 	/>
 </section>
@@ -241,7 +241,7 @@
 	}
 
 	.layer1 {
-		background-image: url('/static/layer1.svg');
+		background-image: url('/static/assets/layer1.svg');
 	}
 
 	.flip {

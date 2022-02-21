@@ -135,7 +135,7 @@ import InputWithButton from '../Dividends/InputWithButton.svelte';
 	<div class="h-full w-full flex flex-col p-2">
 		<div class="flex justify-between w-full mb-10">
 			<div class="flex items-center select-none">
-				<img src="/mushRound.png" alt="Mush Token Icon" class="w-8" />
+				<img src="/assets/mushRound.png" alt="Mush Token Icon" class="w-8" />
 				<h2 class="text-2xl font-semibold pl-2  dark:text-white">MUSH</h2>
 			</div>
 
@@ -144,7 +144,7 @@ import InputWithButton from '../Dividends/InputWithButton.svelte';
 					class="rounded-full flex py-1 px-4 select-none  border-2 border-blue-500 text-blue-500  text-xs font-semibold dark:border-blue-400 dark:text-blue-400"
 				>
 					<span class="mr-1">{$_('actions.earn')} USDC</span>
-					<img src="/vaultTokensIcons/usdc.svg" alt="" class="w-4" />
+					<img src="/icons/usdc.svg" alt="" class="w-4" />
 				</p>
 			</div>
 		</div>

@@ -6,13 +6,13 @@ import { isHomescreen } from "$lib/stores/homescreen";
 
 <div class="flex-shrink-0 flex items-center">
     <a href={`/${$page.params.lang}/`} class="flex cursor-pointer">
-        <img class="w-10 " src="/cute/fiji.svg" alt="Fung Finance Logo" />
+        <img class="w-10 " src="/theme/fiji.svg" alt="Fung Finance Logo" />
         {#if $isHomescreen}
-            <img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
+            <img class="mt-1 " src="/theme/fungfiDarkMode.svg" alt="Fung Finance" />
         {:else if $darkMode}
-            <img class="mt-1 " src="/cute/fungfiDarkMode.svg" alt="Fung Finance" />
+            <img class="mt-1 " src="/theme/fungfiDarkMode.svg" alt="Fung Finance" />
         {:else}
-            <img class="mt-1 " src="/cute/fungfiLiteMode.svg" alt="Fung Finance" />
+            <img class="mt-1 " src="/theme/fungfiLiteMode.svg" alt="Fung Finance" />
         {/if}
     </a>
 </div>

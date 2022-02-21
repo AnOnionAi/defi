@@ -7,11 +7,11 @@
 
 	import { page } from '$app/stores';
 
-	import spaceDay from '/static/space.webp';
-	import spaceNight from '/static/space35.webp';
-	import moon from '/static/moon.webp';
-	import earth from '/static/earth.webp';
-	import earthNite from '/static/earthNite.jpg';
+	import spaceDay from '/static/animation/space.webp';
+	import spaceNight from '/static/animation/space35.webp';
+	import moon from '/static/animation/moon.webp';
+	import earth from '/static/animation/earth.webp';
+	import earthNite from '/static/animation/earthNite.jpg';
 
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
@@ -94,8 +94,8 @@
 			scene.background = spaceTexture;
 		}
 
-		const moonTexture = new THREE.TextureLoader().load('textureMoon.webp');
-		const earthTexture = new THREE.TextureLoader().load('textureEarth.webp');
+		const moonTexture = new THREE.TextureLoader().load('/static/animation/textureMoon.webp');
+		const earthTexture = new THREE.TextureLoader().load('/static/animation/textureEarth.webp');
 		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
 		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
 		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);

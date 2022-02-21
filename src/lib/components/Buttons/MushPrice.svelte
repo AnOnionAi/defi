@@ -7,7 +7,7 @@
 <a href={swapperURL} target="_blank" class="flex items-center group">
 	{#if $tokenPrice}
 		<img
-			src="/mushRound.png"
+			src="/assets/mushRound.png"
 			alt=""
 			class="w-6  transform transition duration-300 group-hover:scale-125"
 		/>

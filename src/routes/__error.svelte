@@ -1,5 +1,5 @@
 <div class="container">
-	<img src="/404Mush.svg" alt="" />
+	<img src="/assets/404Mush.svg" alt="" />
 	<div class="text_wrapper">
 		<h2 class="text-4xl font-semibold text-center text-green-500">We are sorry :(</h2>
 		<p class="dark:text-white">The page that you are looking for is not avaliable</p>

@@ -162,7 +162,7 @@
 					</span>
 				</span>
 				<span class="radio__label text-pink-700 text-base">
-					<img src="/sushi.png" alt="SushiSwap" />
+					<img src="/icons/sushi.png" alt="SushiSwap" />
 				</span>
 			</label>
 
@@ -192,7 +192,7 @@
 					</span>
 				</span>
 				<span class="radio__label text-blue-700 text-base">
-					<img src="/vaultTokensIcons/quick.svg" alt="QuickSwap" />
+					<img src="/icons/quick.svg" alt="QuickSwap" />
 				</span>
 			</label>
 

@@ -83,6 +83,6 @@
 		class="flex items-center justify-center  border-2 border-green-400 rounded-xl hover:text-white hover:bg-green-400 px-3 py-2 self-center"
 	>
 		<p class="mr-1">{$_('actions.add')} MUSH</p>
-		<img src="/metamask.svg" class="h-5" alt="Metamask Icon" />
+		<img src="/assets/metamask.svg" class="h-5" alt="Metamask Icon" />
 	</button>
 </div>

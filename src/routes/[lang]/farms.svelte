@@ -13,8 +13,8 @@
 
 	darkMode.subscribe((darkEnabled) => {
 		darkEnabled
-			? (backgroundImage = '/backgrounds/niceDarkMush.svg')
-			: (backgroundImage = '/backgrounds/niceMush.svg');
+			? (backgroundImage = '/theme/farms/niceDarkMush.svg')
+			: (backgroundImage = '/theme/farms/niceMush.svg');
 	});
 </script>
 
