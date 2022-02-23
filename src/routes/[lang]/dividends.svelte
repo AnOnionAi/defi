@@ -74,7 +74,9 @@
 <br />
 <h1 class="dark:text-white text-5xl text-center tracking-wide">{$_('headers.dividends.text')}</h1>
 <div class="my-6">
-	<div style="background-image:url({backgroundImage});" class="dividends-wrapper">
+	<div
+		style="background-image:url({backgroundImage});"
+		class="dividends-wrapper">
 		<div
 			class="h-full dividends  w-full max-w-lg p-5  rounded-2xl {!$darkMode && "shadow-xl"} bg-white dark:bg-neutral-900 "
 		>

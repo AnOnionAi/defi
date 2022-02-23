@@ -48,8 +48,7 @@
 		if (e.code === 'Escape') {
 			showDropDownMenu = false;
 		}
-	}}
-/>
+	}} />
 
 <NavbarLayout>
 	<NavContainer>

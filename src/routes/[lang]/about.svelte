@@ -10,14 +10,16 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
 	<link
 		href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;900&display=swap"
-		rel="stylesheet"
-	/>
-	<script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
+		rel="stylesheet" />
+	<script
+		src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
 </svelte:head>
 
 <section class="green {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.automated-crypto.text')}</h1>
-	<p class="text-sm p-4 lg:text-2xl lg:p-48">
+	<h1 class="my-6 text-4xl lg:text-6xl">
+		{$_('headers.automated-crypto.text')}
+	</h1>
+	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
 		{$_('about.automated-description')}
 	</p>
 	<div class="curve {$darkMode && 'dark-curve'}" />
@@ -29,9 +31,9 @@
 </section>
 
 <section class="farms {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.farms.text')}</h1>
+	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.farms.text')}</h1>
 	<div class="columns">
-		<p class="text-sm p-4 lg:text-2xl lg:p-48">
+		<p class="p-4 text-sm lg:p-48 lg:text-2xl">
 			{$_('about.farms-description')}
 		</p>
 		<img
@@ -43,22 +45,21 @@
 </section>
 
 <section class="pools bubble {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.pools.text')}</h1>
+	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.pools.text')}</h1>
 	<div class="columns">
 		<img
-			class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto"
+			class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
 			src="/pools.png"
-			alt="pools"
-		/>
-		<p class="text-sm p-4 lg:text-2xl lg:p-48">
+			alt="pools" />
+		<p class="p-4 text-sm lg:p-48 lg:text-2xl">
 			{$_('about.pools-description')}
 		</p>
 	</div>
 </section>
 
 <section class="orange {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.vaults.text')}</h1>
-	<p class="text-sm p-4 lg:text-2xl lg:p-48">
+	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.vaults.text')}</h1>
+	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
 		{$_('about.vaults-description')}
 	</p>
 	<img
@@ -70,9 +71,13 @@
 
 <div class="spacer layer1 flip" />
 
-<section class="crypto-responsibility blue {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="text-4xl my-6 lg:text-6xl">{$_('headers.crypto-responsibility.text')}</h1>
-	<p class="text-sm p-4 lg:text-2xl lg:p-48">
+<section
+	class="crypto-responsibility blue {$darkMode &&
+		'font-darkmode'} h-100 sm:h-auto">
+	<h1 class="my-6 text-4xl lg:text-6xl">
+		{$_('headers.crypto-responsibility.text')}
+	</h1>
+	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
 		{$_('about.responsibility-description')}
 	</p>
 	<img

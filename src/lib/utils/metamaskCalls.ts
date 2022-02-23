@@ -14,7 +14,9 @@ export const goInstallMetamask = () => {
 
 export const metaMaskCon = async () => {
 	try {
-		const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+		const user_accounts = await window.ethereum.request({
+			method: 'eth_requestAccounts'
+		});
 		accounts.set(user_accounts);
 		sessionStorage.setItem('METAMASK_ACCOUNT', user_accounts);
 	} catch {

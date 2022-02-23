@@ -16,12 +16,15 @@ const mushTokenContract = new ethers.Contract(
 	Provider.getProviderSingleton()
 );
 
-export const totalMushSupply: Readable<number> = readable(undefined, function start(set) {
-	mushTokenContract.totalSupply().then((amountBN) => {
-		const mushSupply = parseFloat(ethers.utils.formatEther(amountBN));
-		set(mushSupply);
-	});
-});
+export const totalMushSupply: Readable<number> = readable(
+	undefined,
+	function start(set) {
+		mushTokenContract.totalSupply().then((amountBN) => {
+			const mushSupply = parseFloat(ethers.utils.formatEther(amountBN));
+			set(mushSupply);
+		});
+	}
+);
 
 export const maxMushSupply: Readable<number> = readable(0, function start(set) {
 	mushTokenContract.cap().then((amountBN) => {
@@ -29,12 +32,15 @@ export const maxMushSupply: Readable<number> = readable(0, function start(set) {
 	});
 });
 
-export const totalBurnedMush: Readable<number> = readable(undefined, function start(set) {
-	mushTokenContract.balanceOf(BURN_ADDRESS).then((amountBN) => {
-		const burnedMUSH = parseFloat(ethers.utils.formatEther(amountBN));
-		set(burnedMUSH);
-	});
-});
+export const totalBurnedMush: Readable<number> = readable(
+	undefined,
+	function start(set) {
+		mushTokenContract.balanceOf(BURN_ADDRESS).then((amountBN) => {
+			const burnedMUSH = parseFloat(ethers.utils.formatEther(amountBN));
+			set(burnedMUSH);
+		});
+	}
+);
 
 export const mushMarketCap = derived(
 	[tokenPrice, totalMushSupply],

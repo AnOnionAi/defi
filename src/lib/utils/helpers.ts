@@ -21,7 +21,9 @@ export const getSigner = () => {
 
 export const metaMaskCon = async () => {
 	try {
-		const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+		const user_accounts = await window.ethereum.request({
+			method: 'eth_requestAccounts'
+		});
 		accounts.set(user_accounts);
 	} catch {
 		console.log('failed');

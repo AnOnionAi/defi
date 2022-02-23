@@ -2,14 +2,28 @@
 	import { _ } from 'svelte-i18n';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { getTokenBalance, isNotZero } from '$lib/utils/erc20';
-	import { getPendingReward, getSharesTotal, getUserInfo, harvest } from '$lib/utils/dividends';
+	import {
+		getPendingReward,
+		getSharesTotal,
+		getUserInfo,
+		harvest
+	} from '$lib/utils/dividends';
 	import { stakedWantTokens, deposit, withdraw } from '$lib/utils/vaultChef';
 	import { LoadingState, Token } from '$lib/ts/types';
 	import { onDestroy, onMount } from 'svelte';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
+<<<<<<< HEAD
 	
 	import { BigNumber, ethers, utils } from 'ethers';
 	import { parseBigNumberToDecimal, parseBigNumberToString } from '$lib/utils/balanceParsers';
+=======
+	import { Chasing } from 'svelte-loading-spinners';
+	import { BigNumber, ethers } from 'ethers';
+	import {
+		parseBigNumberToDecimal,
+		parseBigNumberToString
+	} from '$lib/utils/balanceParsers';
+>>>>>>> develop
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
@@ -65,7 +79,10 @@ import InputWithButton from '../Dividends/InputWithButton.svelte';
 
 	const refreshUserData = async () => {
 		try {
-			userBalance = await getTokenBalance(getContractAddress(Token.MUSHTOKEN), userAddress);
+			userBalance = await getTokenBalance(
+				getContractAddress(Token.MUSHTOKEN),
+				userAddress
+			);
 			console.log(userBalance);
 			userStakedTokens = await stakedWantTokens(2, userAddress);
 			TVL = await getSharesTotal();
@@ -82,7 +99,9 @@ import InputWithButton from '../Dividends/InputWithButton.svelte';
 			const tx = await deposit(2, depositInput.trim());
 			await tx.wait();
 			loadingState.loadingDeposit = false;
-			userBalance = userBalance.sub(BigNumber.from(ethers.utils.parseEther(depositInput.trim())));
+			userBalance = userBalance.sub(
+				BigNumber.from(ethers.utils.parseEther(depositInput.trim()))
+			);
 			userStakedTokens = userStakedTokens.add(
 				BigNumber.from(ethers.utils.parseEther(depositInput.trim()))
 			);
@@ -102,7 +121,9 @@ import InputWithButton from '../Dividends/InputWithButton.svelte';
 			const tx = await withdraw(2, withdrawInput.trim());
 			await tx.wait();
 			addNotification(transactionCompleted);
-			userBalance = userBalance.add(BigNumber.from(ethers.utils.parseEther(withdrawInput.trim())));
+			userBalance = userBalance.add(
+				BigNumber.from(ethers.utils.parseEther(withdrawInput.trim()))
+			);
 			userStakedTokens = userStakedTokens.sub(
 				BigNumber.from(ethers.utils.parseEther(withdrawInput.trim()))
 			);

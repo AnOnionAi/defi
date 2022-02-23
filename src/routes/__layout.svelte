@@ -27,7 +27,10 @@
 				(currentPath.length != 2 && currentPath[2] != 'dashboard') ||
 				sessionStorage.getItem('METAMASK_ACCOUNT')
 			) {
-				if (!$accounts && JSON.stringify(currentPath) != JSON.stringify(lastPath)) {
+				if (
+					!$accounts &&
+					JSON.stringify(currentPath) != JSON.stringify(lastPath)
+				) {
 					metamaskConnect();
 					metamaskListeners();
 				}
@@ -42,7 +45,7 @@
 	<Modal>
 		<Header />
 		{#if $navigating}
-			<div class="absolute left-0 top-0 w-screen z-10">
+			<div class="absolute left-0 top-0 z-10 w-screen">
 				<LinearBar />
 			</div>
 		{/if}

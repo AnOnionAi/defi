@@ -16,20 +16,26 @@
 	<h3 class="font-semibold text-center ">{title}</h3>
 	{#if display && $page.params.lang}
 		{#if isPercentage && isPercentage != null}
-			<div in:fade={{ duration: 500 }} class="flex items-center justify-center ">
+			<div
+				in:fade={{ duration: 500 }}
+				class="flex items-center justify-center ">
 				{#if display < 0}
 					<Fa icon={faCaretDown} size={'2x'} color="#ef4444" />
 				{:else if display > 0}
 					<Fa icon={faCaretUp} size={'2x'} color="#22c55e" />
 				{/if}
-				<p class="ml-1 text-2xl">{formatComma(Math.abs(display), $page.params.lang)}%</p>
+				<p class="ml-1 text-2xl">
+					{formatComma(Math.abs(display), $page.params.lang)}%
+				</p>
 			</div>
 		{:else}
-			<p class="text-center text-2xl">${formatComma(display, $page.params.lang)}</p>
+			<p class="text-center text-2xl">
+				${formatComma(display, $page.params.lang)}
+			</p>
 		{/if}
 	{/if}
 	{#if display === null}
-		<p class="text-lg text-center">{$_('actions.notAvaliable')}</p>
+		<p class="text-center text-lg">{$_('actions.notAvaliable')}</p>
 	{/if}
 	<p />
 </div>

@@ -7,7 +7,9 @@ export const chainID = writable(undefined);
 
 export async function metamaskConnect() {
 	try {
-		const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+		const user_accounts = await window.ethereum.request({
+			method: 'eth_requestAccounts'
+		});
 		accounts.set(user_accounts);
 		sessionStorage.setItem('METAMASK_ACCOUNT', user_accounts);
 
@@ -26,18 +28,21 @@ export async function metamaskListeners() {
 			chainID.set(_chainID);
 		});
 
-		window.ethereum.on('accountsChanged', (addresses: Array<string> | undefined) => {
-			console.log('ACCOUNTS CHANGED');
-			console.log(addresses, 'THE ADDRESSES');
-			if (addresses.length > 0) {
-				accounts.set(addresses);
-				sessionStorage.setItem('METAMASK_ACCOUNT', JSON.stringify(addresses));
-			} else {
-				console.log('LOGGED OUT');
-				accounts.set(undefined);
-				sessionStorage.removeItem('METAMASK_ACCOUNT');
+		window.ethereum.on(
+			'accountsChanged',
+			(addresses: Array<string> | undefined) => {
+				console.log('ACCOUNTS CHANGED');
+				console.log(addresses, 'THE ADDRESSES');
+				if (addresses.length > 0) {
+					accounts.set(addresses);
+					sessionStorage.setItem('METAMASK_ACCOUNT', JSON.stringify(addresses));
+				} else {
+					console.log('LOGGED OUT');
+					accounts.set(undefined);
+					sessionStorage.removeItem('METAMASK_ACCOUNT');
+				}
 			}
-		});
+		);
 	} catch {
 		console.log('Error: Error when changing account or network in Metamask');
 	}

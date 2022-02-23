@@ -10,8 +10,12 @@
 	</p>
 
 	<div class="text-center">
-		<p class="font-medium text-dark-800 dark:text-gray-200 text-4xl md:text-6xl lg:text-7xl">∞</p>
-		<p class="text-gray-500 dark:text-gray-300 text-sm md:text-base lg:text-lg md:-mt-2 lg:-mt-4">
+		<p
+			class="text-dark-800 text-4xl font-medium dark:text-gray-200 md:text-6xl lg:text-7xl">
+			∞
+		</p>
+		<p
+			class="text-sm text-gray-500 dark:text-gray-300 md:-mt-2 md:text-base lg:-mt-4 lg:text-lg">
 			{$_('dashboard.across')}
 		</p>
 	</div>

@@ -3,7 +3,7 @@ import addresses from './addresses.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/ts/types';
 
-export let pools: PoolInfo[] = [
+export const pools: PoolInfo[] = [
 	{
 		pid: 1,
 		tokenName: 'USDC',

@@ -43,7 +43,11 @@ export const getERC20Contract = (address: string) => {
 };
 
 export const getUniRouterContract = () => {
-	const router = new ethers.Contract(getContractAddress(Token.UNIROUTER), routerABI, getSigner());
+	const router = new ethers.Contract(
+		getContractAddress(Token.UNIROUTER),
+		routerABI,
+		getSigner()
+	);
 	return router;
 };
 
@@ -57,7 +61,9 @@ export const getUniFactoryContract = () => {
 };
 
 export const getLiquidityPairContract = (address: string) => {
-	const provider = new ethers.providers.JsonRpcProvider('https://polygon-rpc.com/');
+	const provider = new ethers.providers.JsonRpcProvider(
+		'https://polygon-rpc.com/'
+	);
 	const univ2Pair = new ethers.Contract(address, pairABI, provider);
 	return univ2Pair;
 };
@@ -68,20 +74,31 @@ export const getMushAllowance = async (userAddr: string) => {
 		ERC20ABI,
 		getSigner()
 	);
-	return await mushContract.allowance(userAddr, '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506');
+	return await mushContract.allowance(
+		userAddr,
+		'0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506'
+	);
 };
 
-export const getTokenAllowance = async (tknAddr: string, spenderAddr: string, userAddr: string) => {
+export const getTokenAllowance = async (
+	tknAddr: string,
+	spenderAddr: string,
+	userAddr: string
+) => {
 	const tokenContract = new ethers.Contract(tknAddr, ERC20ABI, getSigner());
 	return await tokenContract.allowance(userAddr, spenderAddr);
 };
 
-export const approveToken = async (tknAddr: string, spenderAddr: string, userAddr: string) => {
+export const approveToken = async (
+	tknAddr: string,
+	spenderAddr: string,
+	userAddr: string
+) => {
 	const tokenContract = new ethers.Contract(tknAddr, ERC20ABI, getSigner());
 	return await tokenContract.approve(spenderAddr, userAddr);
 };
 
-export const isApproved = (allowance: BigNumber): Boolean => {
+export const isApproved = (allowance: BigNumber): boolean => {
 	return allowance._hex !== ethers.constants.Zero._hex;
 };
 
@@ -96,10 +113,22 @@ export const addLiquidityPool = async (
 	deadline: string
 ) => {
 	const router = getUniRouterContract();
-	await router.addLiquidity(tokenA, tokenB, amountA, amountB, amountAmin, amountBmin, to, deadline);
+	await router.addLiquidity(
+		tokenA,
+		tokenB,
+		amountA,
+		amountB,
+		amountAmin,
+		amountBmin,
+		to,
+		deadline
+	);
 };
 
-export const getTokenPairAddress = async (tkn0Addr: string, tkn1Addr: string) => {
+export const getTokenPairAddress = async (
+	tkn0Addr: string,
+	tkn1Addr: string
+) => {
 	const factory = getUniFactoryContract();
 	return await factory.getPair(tkn0Addr, tkn1Addr);
 };

@@ -8,7 +8,6 @@
 	<p class="text-sm -mt-1">To complete this action you need to have metamask in your browser</p>
 	<button
 		on:click={goInstallMetamask}
-		class="mt-4 py-2 px-4 bg-green-500 hover:bg-green-400 bg-green-400 rounded-lg text-white text-sm"
-		>Install Metamask</button
-	>
+		class="mt-4 rounded-lg bg-green-500 bg-green-400 py-2 px-4 text-sm text-white hover:bg-green-400"
+		>Install Metamask</button>
 </div>

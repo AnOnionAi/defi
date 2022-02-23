@@ -6,12 +6,19 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { quickVaults, sushiVaults } from '$lib/config/constants/vaults';
-	import type { VaultFilterFunction, VaultInfo, VaultState } from '$lib/ts/types';
+	import type {
+		VaultFilterFunction,
+		VaultInfo,
+		VaultState
+	} from '$lib/ts/types';
 	import VaultAccordeon from '$lib/components/Cards/VaultAccordeon.svelte';
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import BottomList from '$lib/components/Cards/BottomList.svelte';
 	import { onMount } from 'svelte';
-	import { generateRandomBalance, reduceFilters } from '$lib/utils/filterFunctions';
+	import {
+		generateRandomBalance,
+		reduceFilters
+	} from '$lib/utils/filterFunctions';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 	let allVaults: Array<VaultState> = [];
@@ -57,16 +64,24 @@
 
 	const handleFilerAndSort = () => {
 		if (sortBy == 'Descending' && filterBy == 'TVL') {
-			const sortedVaults = filteredVaults.sort((vaultA, vaultB) => vaultB.tvl - vaultA.tvl);
+			const sortedVaults = filteredVaults.sort(
+				(vaultA, vaultB) => vaultB.tvl - vaultA.tvl
+			);
 			filteredVaults = [...sortedVaults];
 		} else if (sortBy == 'Ascending' && filterBy == 'TVL') {
-			const sortedVaults = filteredVaults.sort((vaultA, vaultB) => vaultA.tvl - vaultB.tvl);
+			const sortedVaults = filteredVaults.sort(
+				(vaultA, vaultB) => vaultA.tvl - vaultB.tvl
+			);
 			filteredVaults = [...sortedVaults];
 		} else if (sortBy == 'Descending' && filterBy == 'APY') {
-			const sortedVaults = filteredVaults.sort((vaultA, vaultB) => vaultB.apy - vaultA.apy);
+			const sortedVaults = filteredVaults.sort(
+				(vaultA, vaultB) => vaultB.apy - vaultA.apy
+			);
 			filteredVaults = [...sortedVaults];
 		} else if (sortBy == 'Ascending' && filterBy == 'APY') {
-			const sortedVaults = filteredVaults.sort((vaultA, vaultB) => vaultA.apy - vaultB.apy);
+			const sortedVaults = filteredVaults.sort(
+				(vaultA, vaultB) => vaultA.apy - vaultB.apy
+			);
 			filteredVaults = [...sortedVaults];
 		}
 	};
@@ -78,7 +93,7 @@
 		{$_('headers.vaults.text')}
 	</h1>
 
-	<div class="mainContainer 	pt-10 sideShadow background__lite">
+	<div class="mainContainer 	sideShadow background__lite pt-10">
 		<div in:fade={{ duration: 200 }}>
 			<VaultFilter
 				bind:filtersApplied
@@ -87,8 +102,7 @@
 				bind:filterBy
 				bind:sortBy
 				bind:hideZeroBalances
-				bind:statement
-			/>
+				bind:statement />
 		</div>
 
 		{#each filteredVaults as vault, index}

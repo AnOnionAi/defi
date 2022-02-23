@@ -1,4 +1,6 @@
 // based on https://github.com/tretapey/svelte-pwa/blob/master/public/service-worker.js
+declare var self: ServiceWorkerGlobalScope;
+
 import { build, files, timestamp } from '$service-worker';
 
 const worker = self;
@@ -6,7 +8,7 @@ const CACHE_NAME = `static-cache-${timestamp}`;
 
 const to_cache = build.concat(files);
 
-worker.addEventListener('install', (event) => {
+worker.addEventListener('install', (event: any) => {
 	console.log('[ServiceWorker] Install');
 
 	event.waitUntil(
@@ -19,7 +21,7 @@ worker.addEventListener('install', (event) => {
 	);
 });
 
-worker.addEventListener('activate', (event) => {
+worker.addEventListener('activate', (event: any) => {
 	console.log('[ServiceWorker] Activate');
 	// Remove previous cached data from disk
 	event.waitUntil(
@@ -37,7 +39,7 @@ worker.addEventListener('activate', (event) => {
 	worker.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', (event: any) => {
 	/* console.log('[ServiceWorker] Fetch', event.request.url); */
 	if (event.request.mode !== 'navigate') {
 		return;

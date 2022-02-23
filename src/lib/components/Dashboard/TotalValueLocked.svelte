@@ -17,8 +17,7 @@
 		{#if $totalValueLocked}
 			<p
 				in:fade={{ duration: 500 }}
-				class="font-medium text-dark-800 dark:text-gray-200 text-lg md:text-xl xl:text-2xl"
-			>
+				class="text-dark-800 text-lg font-medium dark:text-gray-200 md:text-xl xl:text-2xl">
 				${formatComma($totalValueLocked, $page.params.lang)}
 			</p>
 		{/if}

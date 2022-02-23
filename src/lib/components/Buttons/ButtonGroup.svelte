@@ -23,8 +23,7 @@
 				: ''}{'  w-24  flex items-center justify-center   dark:text-white overflow-hidden'}"
 			value={option.id}
 			name={option.name}
-			on:click={setSelected}
-		>
+			on:click={setSelected}>
 			{option.name}
 		</button>
 	{/each}

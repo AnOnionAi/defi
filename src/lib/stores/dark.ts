@@ -11,7 +11,7 @@ const updateDarkMode = (callback) => {
 	}
 };
 
-let now = new Date().getHours();
+const now = new Date().getHours();
 updateDarkMode(() => {});
 
 const autoDark = setInterval(() => {

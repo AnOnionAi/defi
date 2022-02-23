@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { addTokenToMetamaskWallet, isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
+	import {
+		addTokenToMetamaskWallet,
+		isMetaMaskInstalled
+	} from '$lib/utils/metamaskCalls';
 	import { getTokenBalance } from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { Token } from '$lib/ts/types';
@@ -34,8 +37,13 @@
 		userAccount: string,
 		tokenUsdPrice: number
 	): Promise<Array<number>> => {
-		const balanceResponse = await getTokenBalance(getContractAddress(Token.MUSHTOKEN), userAccount);
-		const parsedMushBalance = parseFloat(ethers.utils.formatEther(balanceResponse));
+		const balanceResponse = await getTokenBalance(
+			getContractAddress(Token.MUSHTOKEN),
+			userAccount
+		);
+		const parsedMushBalance = parseFloat(
+			ethers.utils.formatEther(balanceResponse)
+		);
 		const fiatBalance = parsedMushBalance * tokenUsdPrice;
 		return [parsedMushBalance, fiatBalance];
 	};
@@ -55,9 +63,11 @@
 	<p class="text-3xl pl-3 text-lg text-dark-200 dark:text-white tracking-wide">
 		{$_('walletStatus.wallet')}
 	</p>
-	<div class="flex justify-center items-center flex-col gap-3">
+	<div class="flex flex-col items-center justify-center gap-3">
 		{#if !$accounts}
-			<p class="text-3xl font-medium text-dark-500 dark:text-white">---- MUSH</p>
+			<p class="text-dark-500 text-3xl font-medium dark:text-white">
+				---- MUSH
+			</p>
 		{:else if userMushBalance != undefined}
 			<p class="text-3xl font-medium text-dark-500 dark:text-white">
 				{formatComma(userMushBalance, $page.params.lang)} MUSH
@@ -68,7 +78,7 @@
 
 		{#if $accounts}
 			{#if userMushBalance != undefined}
-				<p class="text-lg font-medium text-gray-600 dark:text-gray-400 -mt-2 ">
+				<p class="-mt-2 text-lg font-medium text-gray-600 dark:text-gray-400 ">
 					~ ${formatComma(userFiatBalance, $page.params.lang)}
 				</p>
 			{:else}
@@ -80,8 +90,7 @@
 	<button
 		on:click={isMetaMaskInstalled() ? addTokenToMetamaskWallet : openModal}
 		on:click={addTokenToMetamaskWallet}
-		class="flex items-center justify-center  border-2 border-green-400 rounded-xl hover:text-white hover:bg-green-400 px-3 py-2 self-center"
-	>
+		class="flex items-center justify-center  self-center rounded-xl border-2 border-green-400 px-3 py-2 hover:bg-green-400 hover:text-white">
 		<p class="mr-1">{$_('actions.add')} MUSH</p>
 		<img src="/assets/metamask.svg" class="h-5" alt="Metamask Icon" />
 	</button>

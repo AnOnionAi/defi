@@ -1,15 +1,26 @@
 <script lang="ts">
 	import { fly, slide } from 'svelte/transition';
 	import Fa from 'svelte-fa';
-	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+	import {
+		faChevronUp,
+		faChevronDown
+	} from '@fortawesome/free-solid-svg-icons';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { LPair, VaultInfo } from '$lib/ts/types';
-	import { getTokenBalance, approveToken, getTokenAllowance, isNotZero } from '$lib/utils/erc20';
+	import {
+		getTokenBalance,
+		approveToken,
+		getTokenAllowance,
+		isNotZero
+	} from '$lib/utils/erc20';
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { Token } from '$lib/ts/types';
-	import { parseBigNumberToString, parseBigNumberToDecimal } from '$lib/utils/balanceParsers';
+	import {
+		parseBigNumberToString,
+		parseBigNumberToDecimal
+	} from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import { BigNumber } from 'ethers';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
@@ -62,7 +73,10 @@
 	const openAccordeon = (): void => {
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
-	const handleTransaction = async (transaction: Promise<any>, transactionName: string) => {
+	const handleTransaction = async (
+		transaction: Promise<any>,
+		transactionName: string
+	) => {
 		loadingState.something = true;
 		loadingState[transactionName] = true;
 		addNotification(transactionSend);
@@ -84,7 +98,9 @@
 			}
 
 			if (transactionName == 'deposit') {
-				const bnDepositedTokens = BigNumber.from(ethers.utils.parseEther(userDepositAmount.trim()));
+				const bnDepositedTokens = BigNumber.from(
+					ethers.utils.parseEther(userDepositAmount.trim())
+				);
 				stakedTokens = stakedTokens.add(bnDepositedTokens);
 				userTokens = userTokens.sub(bnDepositedTokens);
 			}
@@ -97,9 +113,11 @@
 			}
 
 			setTimeout(() => {
-				getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
-					userTokens = balance;
-				});
+				getTokenBalance(vaultConfig.pair.pairContract, userAcc).then(
+					(balance) => {
+						userTokens = balance;
+					}
+				);
 				stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
 					stakedTokens = stakedAmount;
 				});
@@ -120,9 +138,11 @@
 			).then((res) => {
 				isApproved = isNotZero(res);
 			});
-			getTokenBalance(vaultConfig.pair.pairContract, userAcc).then((balance) => {
-				userTokens = balance;
-			});
+			getTokenBalance(vaultConfig.pair.pairContract, userAcc).then(
+				(balance) => {
+					userTokens = balance;
+				}
+			);
 			stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
 				stakedTokens = stakedAmount;
 			});
@@ -155,21 +175,24 @@
 				<div class="flex relative h-11 w-12">
 					<img
 						src={[
-							...allImages.filter(({ pair }) => pair.token0Name === vaultConfig.pair.token0Name)
+							...allImages.filter(
+								({ pair }) => pair.token0Name === vaultConfig.pair.token0Name
+							)
 						][0].pair.token0ImagePath}
 						alt={'Token 1: ' + vaultConfig.pair.token0Name}
-						class="h-7 w-7"
-					/>
+						class="h-7 w-7" />
 					<img
 						src={[
-							...allImages.filter(({ pair }) => pair.token1Name === vaultConfig.pair.token1Name)
+							...allImages.filter(
+								({ pair }) => pair.token1Name === vaultConfig.pair.token1Name
+							)
 						][0].pair.token1ImagePath}
 						alt={'Token 2: ' + vaultConfig.pair.token1Name}
-						class="h-7 w-7 absolute bottom-0 right-1"
-					/>
+						class="absolute bottom-0 right-1 h-7 w-7" />
 				</div>
 				<div class="ml-2">
-					<p class="font-medium uppercase smaller-font text-gray-600 dark:text-gray-400">
+					<p
+						class="smaller-font font-medium uppercase text-gray-600 dark:text-gray-400">
 						{$_('actions.earn')}
 						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
 					</p>
@@ -178,13 +201,11 @@
 					</p>
 					<div class="hidden">
 						<p
-							class="bg-blue-500 text-blue-500 border-blue-500 hover:bg-blue-500 active:bg-blue-500"
-						>
+							class="border-blue-500 bg-blue-500 text-blue-500 hover:bg-blue-500 active:bg-blue-500">
 							.
 						</p>
 						<p
-							class="bg-pink-500 text-pink-500 border-pink-500 hover:bg-pink-500 active:bg-pink-500"
-						>
+							class="border-pink-500 bg-pink-500 text-pink-500 hover:bg-pink-500 active:bg-pink-500">
 							.
 						</p>
 					</div>
@@ -192,29 +213,39 @@
 					<div
 						class="flex justify-center  items-center font-medium  border-2 tracking-wide rounded-full border-{vaultConfig
 							.platform.brandColor}-500 text-{vaultConfig.platform
-							.brandColor}-500  text-xs w-20 h-6"
-					>
+							.brandColor}-500  h-6 w-20 text-xs">
 						{vaultConfig.platform.name}
 					</div>
 				</div>
 			</div>
-			<div class="flex items-center justify-between w-8/12 h-20 mx-auto lg:mx-0">
+			<div
+				class="mx-auto flex h-20 w-8/12 items-center justify-between lg:mx-0">
 				<div class="flex w-10/12 justify-around ">
 					<div>
-						<p class="text-gray-600 font-light text-sm dark:text-gray-300">APY</p>
+						<p class="text-sm font-light text-gray-600 dark:text-gray-300">
+							APY
+						</p>
 						<p class="dark:text-white">{vaultConfig.apy.toFixed(2)}%</p>
 					</div>
 					<div>
-						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Staked</p>
+						<p class="text-sm font-light text-gray-600 dark:text-gray-300">
+							Staked
+						</p>
 						<p class="dark:text-white">{vaultConfig.stakedAmount.toFixed(2)}</p>
 						<p />
 					</div>
 					<div>
-						<p class="text-gray-600 font-light text-sm dark:text-gray-300">Wallet</p>
-						<p class="dark:text-white">{vaultConfig.userWalletBalance.toFixed(2)}</p>
+						<p class="text-sm font-light text-gray-600 dark:text-gray-300">
+							Wallet
+						</p>
+						<p class="dark:text-white">
+							{vaultConfig.userWalletBalance.toFixed(2)}
+						</p>
 					</div>
 					<div>
-						<p class="text-gray-600 font-light text-sm dark:text-gray-300">TVL</p>
+						<p class="text-sm font-light text-gray-600 dark:text-gray-300">
+							TVL
+						</p>
 						<p class="dark:text-white">${vaultConfig.tvl.toFixed(2)}</p>
 					</div>
 				</div>
@@ -237,15 +268,16 @@
 			{#if !$accounts}
 				<button
 					on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
-					class=" block w-10/12 mx-auto  bg-{vaultConfig.platform
-						.brandColor}-500 transform transition duration-300 hover:scale-105 rounded-xl py-2  text-white font-semibold text-xl tracking-wide "
+					class=" mx-auto block w-10/12  bg-{vaultConfig.platform
+						.brandColor}-500 transform rounded-xl py-2 text-xl font-semibold tracking-wide  text-white transition duration-300 hover:scale-105 "
 					>{$_('actions.unlock')}
 				</button>
 			{:else}
 				<div class="flex flex-col  lg:flex-row flex-wrapper justify-around">
 					<div class="lg:w-4/12">
 						<div class="flex items-center">
-							<p class="text-gray-600 font-medium dark:text-white tracking-tight">
+							<p
+								class="text-gray-600 font-medium dark:text-white tracking-tight">
 								{$_('actions.wallet')}:
 							</p>
 							{#if userTokens}
@@ -275,11 +307,13 @@
 									class:cursor-not-allowed={loadingState.something}
 									disabled={loadingState.something}
 									on:click={async () =>
-										handleTransaction(deposit(vaultConfig.pid, userDepositAmount), 'deposit')}
+										handleTransaction(
+											deposit(vaultConfig.pid, userDepositAmount),
+											'deposit'
+										)}
 									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig
 										.platform.brandColor}-500 {loadingState.deposit &&
-										`bg-${vaultConfig.platform.brandColor}-500`}"
-								>
+										`bg-${vaultConfig.platform.brandColor}-500`}">
 									<p>{$_('actions.deposit')}</p>
 									{#if loadingState.deposit}
 										<div class="pl-2">
@@ -302,8 +336,7 @@
 									class="flex items-center bg-black  disabled:opacity-50 {loadingState.something &&
 										'cursor-not-allowed'} text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig
 										.platform.brandColor}-500 {loadingState.approve &&
-										`bg-${vaultConfig.platform.brandColor}-500`}"
-								>
+										`bg-${vaultConfig.platform.brandColor}-500`}">
 									<p>{$_('actions.approve')}</p>
 									{#if loadingState.approve}
 										<div class="pl-2">
@@ -317,7 +350,9 @@
 							<p class="pl-1 text-gray-500  dark:text-white font-medium">
 								{$_('actions.depositfee')}:
 							</p>
-							<p class="px-1   dark:text-white font-medium">{vaultConfig.depositFee}%</p>
+							<p class="px-1   dark:text-white font-medium">
+								{vaultConfig.depositFee}%
+							</p>
 						</div>
 					</div>
 
@@ -333,7 +368,8 @@
 								</p>
 							{:else}
 								<p class="font-medium pl-1 dark:text-white">
-									0 {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
+									0 {vaultConfig.pair.token0quote}-{vaultConfig.pair
+										.token1quote}
 								</p>
 							{/if}
 						</div>
@@ -356,8 +392,7 @@
 									)}
 								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig
 									.platform.brandColor}-500 {loadingState.withdraw &&
-									`bg-${vaultConfig.platform.brandColor}-500`}"
-							>
+									`bg-${vaultConfig.platform.brandColor}-500`}">
 								<p>{$_('actions.withdraw')}</p>
 								{#if loadingState.withdraw}
 									<div class="pl-2">
@@ -367,7 +402,9 @@
 							</button>
 						</div>
 						<div class="flex dark:text-white font-medium">
-							<p class="mr-1 text-gray-500 dark:text-white	 ">{$_('actions.withdrawalfee')}:</p>
+							<p class="mr-1 text-gray-500 dark:text-white	 ">
+								{$_('actions.withdrawalfee')}:
+							</p>
 							{#if vaultConfig.withdrawalFee}
 								<p class="">{vaultConfig.withdrawalFee}%</p>
 							{:else}
@@ -385,14 +422,18 @@
 								{#if tkn0Price}
 									{vaultConfig.pair.token0quote}: ${tkn0Price}
 								{:else}
-									{vaultConfig.pair.token0quote}: {$_('vaultAccordeon.loading')}...
+									{vaultConfig.pair.token0quote}: {$_(
+										'vaultAccordeon.loading'
+									)}...
 								{/if}
 							</p>
 							<p class="font-light dark:text-white">
 								{#if tkn1Price}
 									{vaultConfig.pair.token1quote}: ${tkn1Price}
 								{:else}
-									{vaultConfig.pair.token1quote}: {$_('vaultAccordeon.loading')}...
+									{vaultConfig.pair.token1quote}: {$_(
+										'vaultAccordeon.loading'
+									)}...
 								{/if}
 							</p>
 							<div class="py-2">
@@ -401,13 +442,11 @@
 									class="block text-gray-600 font-medium hover:text-green-500 dark:text-gray-400"
 									href={vaultConfig.platform.swapperURL}
 									>{$_('actions.get')}
-									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a
-								>
+									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a>
 								<a
 									target="_blank"
 									class="block text-gray-600 font-medium  dark:text-gray-400"
-									href={vaultConfig.pair.pairURL}
-								>
+									href={vaultConfig.pair.pairURL}>
 									<span class="hover:text-green-500">
 										{$_('vaultAccordeon.viewInfo')}
 									</span>
@@ -423,9 +462,12 @@
 
 <style>
 	.sideShadow {
-		box-shadow: 6px 6px 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
-		-moz-box-shadow: 6px 6px 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
-		-webkit-box-shadow: 6px 6px 4px -4px rgb(197, 199, 197), -6px 0 4px -4px rgb(197, 199, 197);
+		box-shadow: 6px 6px 4px -4px rgb(197, 199, 197),
+			-6px 0 4px -4px rgb(197, 199, 197);
+		-moz-box-shadow: 6px 6px 4px -4px rgb(197, 199, 197),
+			-6px 0 4px -4px rgb(197, 199, 197);
+		-webkit-box-shadow: 6px 6px 4px -4px rgb(197, 199, 197),
+			-6px 0 4px -4px rgb(197, 199, 197);
 	}
 	input {
 		font-size: 18px;
@@ -444,6 +486,7 @@
 		font-size: 0.62rem;
 	}
 	.side-shadows {
-		box-shadow: 12px 0 15px -4px rgba(0, 55, 162, 0.97), -12px 0 8px -4px rgba(0, 55, 162, 0.97);
+		box-shadow: 12px 0 15px -4px rgba(0, 55, 162, 0.97),
+			-12px 0 8px -4px rgba(0, 55, 162, 0.97);
 	}
 </style>

@@ -2,7 +2,7 @@
 	export let multiplier = 1;
 </script>
 
-<div class="bg-blue-400 rounded-full text-xs w-10 mt-1 text-white font-medium">
+<div class="mt-1 w-10 rounded-full bg-blue-400 text-xs font-medium text-white">
 	<div>
 		<p>{multiplier}x</p>
 	</div>
