@@ -10,14 +10,10 @@
 	--light-secondary: #fff;
 	--dark-background: #172029;
 	--dark-secondary: #1c1f28;
-	--dark-thirty: rgba(25, 25, 25, 1);
 }
 
 body {
 	font-family: 'Poppins', sans-serif;
-	min-height: 100vh;
-	margin: 0;
-	background-color: var(--light-background);
 }
 
 
@@ -29,11 +25,6 @@ body {
 
 
 
-input,
-button {
-	font-size: inherit;
-	font-family: inherit;
-}
 
 input:focus,
 select:focus,
