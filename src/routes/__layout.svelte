@@ -6,18 +6,13 @@
 	import { navigating, page } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
 	import Modal from 'svelte-simple-modal';
-	import 'virtual:windi.css';
 	import '../app.css';
-	import { onMount } from 'svelte';
 	import {
 		chainID,
 		accounts,
 		metamaskConnect,
-		metamaskListeners,
-		metaMaskDisconnect
+		metamaskListeners
 	} from '$lib/stores/MetaMaskAccount';
-	import WrongNetwork from '$lib/components/Modals/WrongNetwork.svelte';
-	import { POLYGON_CHAIN_ID } from '$lib/config';
 
 	let currentChain;
 	let currentPath;
@@ -56,7 +51,8 @@
 		{/if}
 		<main
 			class:dark={$darkMode}
-			class="main  background_pattern  {$darkMode && 'bg-dark-500'} ">
+			class="main  background_pattern  {$darkMode &&
+				'bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-900'} ">
 			<slot />
 		</main>
 		<Footer />
@@ -69,8 +65,5 @@
 		width: 100%;
 		height: 100%;
 		margin: 0 auto;
-	}
-	.dark-active {
-		background: linear-gradient(to bottom, rgb(45, 55, 63) 0, #0b1216 500px);
 	}
 </style>

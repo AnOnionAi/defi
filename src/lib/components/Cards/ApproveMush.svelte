@@ -5,7 +5,7 @@
 
 <div class="h-12/12 flex w-full items-center justify-center">
 	<div class="h-8/12 flex w-9/12 flex-col  items-center justify-around">
-		<img src="/mushRound.png" alt="The mush token icon" class="w-36  " />
+		<img src="/assets/mushRound.png" alt="The mush token icon" class="w-36  " />
 		<div>
 			<p class="mb-2 text-center text-xl font-medium dark:text-white">
 				{$_('dividendsPage.approval')}

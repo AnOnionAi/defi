@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class="dark:bg-dark-900 h-55 col-span-6 flex select-none  flex-col justify-between rounded-2xl bg-white p-5 shadow-md transition duration-300 md:col-span-3">
+	class="h-55 col-span-6 flex select-none flex-col  justify-between rounded-2xl bg-white p-5 shadow-md transition duration-300 dark:bg-neutral-900 md:col-span-3">
 	<div class="flex flex items-center">
 		<p
 			class="ml-2 text-xl font-light tracking-wider text-gray-600 dark:text-white">

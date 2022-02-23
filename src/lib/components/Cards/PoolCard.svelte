@@ -281,8 +281,8 @@
 </script>
 
 <div
-	class="min-w-84 max-w-84 dark:bg-dark-900  self-start bg-white {!$darkMode &&
-		'shadow-xl'}  hover:scale-101 relative transform select-none rounded-3xl transition duration-300">
+	class="self-start   bg-white dark:bg-neutral-900 {!$darkMode &&
+		'shadow-xl'}  relative transform select-none rounded-3xl transition duration-300 hover:scale-105">
 	<div class="absolute flex w-full flex-row-reverse p-4">
 		<div>
 			{#if isFarm}
@@ -291,11 +291,11 @@
 			<MultiplierBadge multiplier={poolMultiplier} />
 		</div>
 	</div>
-	<div class="h-124 flex flex-col py-4 px-8">
+	<div class="cardContainer flex h-full flex-col py-4 px-8">
 		<img
 			src={info.tokenImagePath}
 			alt={info.tokenName}
-			class="w-30 h-30 my-2 self-center" />
+			class="my-2 self-center" />
 		<div>
 			<p class="mb-3 text-lg font-bold dark:text-white">{info.tokenName}</p>
 		</div>
@@ -307,7 +307,7 @@
 				<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
 			{:else}
 				<p
-					class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
@@ -326,7 +326,7 @@
 				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
 			{:else}
 				<p
-					class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
@@ -345,7 +345,7 @@
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="rounded-lg bg-green-500 py-2 px-4 text-sm font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:bg-gray-400"
+					class="rounded-lg bg-green-500 py-2 px-4 text-sm font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:bg-neutral-400"
 					>{$_('actions.harvest')}</button>
 			</div>
 		</div>
@@ -386,19 +386,19 @@
 						</p>
 					{:else}
 						<p
-							class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+							class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 					{/if}
 
 					<div class="flex space-x-2">
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-400 disabled:cursor-not-allowed"
 							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-400 disabled:cursor-not-allowed"
 							>-</button>
 					</div>
 				</div>
@@ -407,12 +407,20 @@
 
 		<div
 			on:click={showPoolInfo}
-			class="flex cursor-pointer items-center justify-center hover:text-green-500 dark:text-white">
-			<p class="mr-2 font-medium">{$_('poolCard.details')}</p>
+			class="group flex cursor-pointer items-center justify-center dark:text-white">
+			<p
+				class="mr-2 font-medium  group-hover:text-green-500 {!isHidden &&
+					'text-green-500'} ">
+				{$_('poolCard.details')}
+			</p>
 			{#if isHidden}
-				<Fa icon={faChevronDown} size="xs" translateY={0.15} />
+				<div class="group-hover:text-green-500 {!isHidden && 'text-green-500'}">
+					<Fa icon={faChevronDown} size="xs" translateY={0.15} />
+				</div>
 			{:else}
-				<Fa icon={faChevronUp} size="xs" translateY={0.15} />
+				<div class="group-hover:text-green-500 {!isHidden && 'text-green-500'}">
+					<Fa icon={faChevronUp} size="xs" translateY={0.15} />
+				</div>
 			{/if}
 		</div>
 	</div>
@@ -440,3 +448,15 @@
 		</div>
 	{/if}
 </div>
+
+<style>
+	.cardContainer {
+		width: 336px;
+		height: 496px;
+	}
+
+	img {
+		width: 120px;
+		height: 120px;
+	}
+</style>

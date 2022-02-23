@@ -103,7 +103,7 @@
 </script>
 
 <div
-	class="overflow-right-hidden dark:bg-dark-800 m-auto my-4 w-full max-w-7xl rounded-2xl border border-white bg-white px-4 pb-4 pt-6 shadow dark:text-white">
+	class="overflow-right-hidden m-auto my-4 w-full max-w-7xl rounded-2xl border border-white bg-white px-4 pb-4 pt-6 shadow dark:bg-neutral-900 dark:text-white">
 	<div class="relative flex w-auto flex-row flex-wrap justify-around">
 		<div
 			class="m-auto flex w-full max-w-6xl flex-col sm:justify-between lg:flex-row ">
@@ -158,7 +158,7 @@
 					</span>
 				</span>
 				<span class="radio__label text-base text-pink-700">
-					<img src="/sushi.png" alt="SushiSwap" />
+					<img src="/icons/sushi.png" alt="SushiSwap" />
 				</span>
 			</label>
 
@@ -185,7 +185,7 @@
 					</span>
 				</span>
 				<span class="radio__label text-base text-blue-700">
-					<img src="/vaultTokensIcons/quick.svg" alt="QuickSwap" />
+					<img src="/icons/quick.svg" alt="QuickSwap" />
 				</span>
 			</label>
 
@@ -220,7 +220,7 @@
 				{$_('vaultFilter.filterby')}
 			</div>
 			<div class="content-select">
-				<select class="dark:bg-dark-500" bind:value={filterBy}>
+				<select class="dark:bg-neutral-500" bind:value={filterBy}>
 					<option value="TVL">TVL</option>
 					<option value="APY">APY</option>
 				</select>

@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class="dark:bg-dark-900 h-55 flex select-none flex-col justify-between rounded-2xl bg-white p-5 shadow-xl transition duration-300">
+	class="flex h-56 select-none flex-col justify-between rounded-2xl bg-white p-5 shadow-xl transition duration-300 dark:bg-neutral-900">
 	<p class="text-sm text-gray-600 dark:text-white md:text-base  lg:text-xl">
 		{$_('dashboard.tvl')} (TVL)
 	</p>

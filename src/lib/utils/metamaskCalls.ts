@@ -25,7 +25,7 @@ export const metaMaskCon = async () => {
 };
 
 export const addTokenToMetamaskWallet = () => {
-	return ethereum
+	return window.ethereum
 		.request({
 			method: 'wallet_watchAsset',
 			params: {
@@ -34,7 +34,7 @@ export const addTokenToMetamaskWallet = () => {
 					address: getContractAddress(Token.MUSHTOKEN),
 					symbol: 'MUSH',
 					decimals: 18,
-					image: 'https://zyber-dev.netlify.app/mushRound.png'
+					image: 'https://zyber-dev.netlify.app/assets/mushRound.png'
 				}
 			}
 		})

@@ -33,10 +33,10 @@
 
 <footer
 	class="{$isHomescreen &&
-		'z-20 border-none backdrop-blur backdrop-filter '} border-t-2  border-gray-200 {$darkMode &&
+		'z-20 border-none backdrop-blur backdrop-filter '}  {$darkMode &&
 		'border-dark-200'} {$darkMode &&
 		!$isHomescreen &&
-		'bg-dark-500'} footer-height {textColor} ">
+		'bg-zinc-900'} footer-height {textColor} ">
 	<div
 		class="footer-height grid grid-cols-1 gap-4 px-6 py-6 md:grid-cols-3 lg:py-1">
 		<div
@@ -44,7 +44,7 @@
 			<a
 				href={`https://app.sushi.com/${$page.params.lang}/swap`}
 				target="_blank"
-				class="rounded-full bg-gray-600 px-3 py-1 text-sm font-light text-white hover:bg-green-400"
+				class="rounded-full bg-neutral-600 px-3 py-1 text-sm font-light text-white hover:bg-green-400"
 				>Buy MUSH</a>
 		</div>
 

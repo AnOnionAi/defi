@@ -6,7 +6,7 @@ import { Token } from '$lib/ts/types';
 export const farms: PoolInfo[] = [
 	{
 		pid: 0,
-		tokenImagePath: '/mush-usdc.svg',
+		tokenImagePath: '/icons/mush-usdc.svg',
 		tokenName: 'MUSH-USDC',
 		tokenAddr: getContractAddress(Token.SUSHILP)
 	}

@@ -1,5 +1,5 @@
 <div class="container">
-	<img src="/404Mush.svg" alt="" />
+	<img src="/assets/404Mush.svg" alt="" />
 	<div class="text_wrapper">
 		<h2 class="text-center text-4xl font-semibold text-green-500">
 			We are sorry :(

@@ -89,7 +89,7 @@
 
 <section class="pb-3 ">
 	<br />
-	<h1 class="text-dark-200 text-4xl tracking-widest dark:text-white">
+	<h1 class="text-center text-5xl tracking-wide dark:text-white">
 		{$_('headers.vaults.text')}
 	</h1>
 
@@ -108,8 +108,6 @@
 		{#each filteredVaults as vault, index}
 			<VaultAccordeon vaultConfig={vault} />
 		{/each}
-
-		<BottomList />
 	</div>
 </section>
 
@@ -119,6 +117,6 @@
 	}
 
 	.background__lite {
-		background-image: url('/backgrounds/vaultsBackground2.png');
+		background-image: url('/theme/vaults/vaultsBackground2.png');
 	}
 </style>

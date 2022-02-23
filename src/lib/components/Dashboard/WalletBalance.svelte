@@ -58,7 +58,7 @@
 </script>
 
 <div
-	class="dark:bg-dark-900 h-55 flex select-none flex-col justify-between rounded-2xl bg-white p-5 shadow-xl transition duration-300 dark:text-white dark:shadow-none">
+	class="flex h-56 select-none flex-col justify-between rounded-2xl bg-white p-5 shadow-xl transition duration-300 dark:bg-neutral-900 dark:text-white dark:shadow-none">
 	<p class="text-dark-200 pl-3 text-3xl text-lg tracking-wide dark:text-white">
 		{$_('walletStatus.wallet')}
 	</p>
@@ -91,6 +91,6 @@
 		on:click={addTokenToMetamaskWallet}
 		class="flex items-center justify-center  self-center rounded-xl border-2 border-green-400 px-3 py-2 hover:bg-green-400 hover:text-white">
 		<p class="mr-1">{$_('actions.add')} MUSH</p>
-		<img src="/metamask.svg" class="h-5" alt="Metamask Icon" />
+		<img src="/assets/metamask.svg" class="h-5" alt="Metamask Icon" />
 	</button>
 </div>

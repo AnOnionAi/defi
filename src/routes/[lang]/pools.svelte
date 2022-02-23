@@ -13,7 +13,7 @@
 
 <section class="background {$darkMode && 'background__dark'}">
 	<br />
-	<h1 class="text-5xl font-medium tracking-widest dark:text-white">
+	<h1 class="text-center text-5xl tracking-wide dark:text-white">
 		{$_('headers.pools.text')}
 	</h1>
 	<div class="pools mt-5 space-y-4 ">
@@ -32,10 +32,10 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
-		background-image: url('/backgrounds/fantasyMushCity.jpg');
+		background-image: url('/theme/pools/fantasyMushCity.jpg');
 	}
 	.background__dark {
-		background-image: url('/backgrounds/mushVillageDark.jpeg');
+		background-image: url('/theme/pools/mushVillageDark.jpeg');
 		background-size: cover;
 		background-position: center center;
 	}

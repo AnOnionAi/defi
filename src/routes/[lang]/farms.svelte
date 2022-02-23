@@ -13,14 +13,14 @@
 
 	darkMode.subscribe((darkEnabled) => {
 		darkEnabled
-			? (backgroundImage = '/backgrounds/niceDarkMush.svg')
-			: (backgroundImage = '/backgrounds/niceMush.svg');
+			? (backgroundImage = '/theme/farms/niceDarkMush.svg')
+			: (backgroundImage = '/theme/farms/niceMush.svg');
 	});
 </script>
 
 <section class="farms" style="background:url({backgroundImage});">
 	<br />
-	<h1 class="text-dark-200 text-4xl tracking-widest dark:text-white">
+	<h1 class=" text-center text-5xl tracking-wide dark:text-white">
 		{$_('headers.farms.text')}
 	</h1>
 	<div class="w-23/24  mx-auto max-w-7xl rounded-xl ">

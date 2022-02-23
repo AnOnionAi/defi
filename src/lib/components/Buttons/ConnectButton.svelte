@@ -60,7 +60,7 @@
 		{:else if $accounts}
 			<span class="flex items-center">{formatAddress($accounts)}</span>
 			<img
-				src="/tinyRedMush.png"
+				src="/assets/tinyRedMush.png"
 				alt="Mush for the family"
 				class="w-6 h-6 ml-2" />
 		{:else if isInstalled == 'isInstalled'}

@@ -164,12 +164,14 @@
 	};
 </script>
 
-<div in:fly={{ y: 200, duration: 100 }} class="mb-5">
+<div
+	in:fly={{ y: 200, duration: 100 }}
+	class="mx-auto mb-5 max-w-6xl sm:px-4 md:px-2 lg:px-0">
 	<div
 		on:click={openAccordeon}
-		class="max-w-8xl {!$darkMode &&
+		class="{!$darkMode &&
 			'sideShadow'} mx-auto rounded-lg bg-white py-6  	{!isHidden &&
-			'rounded-t-lg'} dark:bg-dark-800  dark:hover:bg-dark-600 hover:cursor-pointer hover:bg-gray-100 dark:border-green-500">
+			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-100  dark:border-green-500  dark:bg-neutral-900 dark:hover:bg-neutral-700">
 		<div class="sm:mx-20 sm:flex sm:items-center sm:justify-between">
 			<div class="flex items-center justify-center">
 				<div class="relative flex h-11 w-12">
@@ -211,7 +213,7 @@
 					</div>
 
 					<div
-						class="flex items-center  justify-center rounded-full border border-2 font-medium tracking-wide border-{vaultConfig
+						class="flex items-center  justify-center rounded-full  border-2 font-medium tracking-wide border-{vaultConfig
 							.platform.brandColor}-500 text-{vaultConfig.platform
 							.brandColor}-500  h-6 w-20 text-xs">
 						{vaultConfig.platform.name}
@@ -263,7 +265,7 @@
 		<div
 			in:slide={{ duration: 400 }}
 			out:slide={{ duration: 400 }}
-			class="max-w-8xl dark:bg-dark-300 mx-auto rounded-b-lg bg-gray-200 px-5 py-5">
+			class="max-w-8xl mx-auto rounded-b-lg bg-neutral-200 px-5 py-5 dark:bg-neutral-800">
 			{#if !$accounts}
 				<button
 					on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
@@ -292,12 +294,12 @@
 							{/if}
 						</div>
 						<div
-							class="flex my-2 py-2 px-3 bg-gray-300 dark:bg-dark-500 rounded-lg  lg:w-11/12 justify-between">
+							class="flex my-2 py-2 px-3 bg-neutral-300 dark:bg-neutral-500 rounded-lg  lg:w-11/12 justify-between">
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userDepositAmount}
 								placeholder="Enter Value"
-								class="bg-gray-300  text-gray-900 font-bold w-8/12 dark:bg-dark-500	dark:text-white"
+								class="bg-neutral-300  text-gray-900 font-bold w-8/12 dark:bg-neutral-500	dark:text-white"
 								type="text" />
 							{#if isApproved}
 								<button
@@ -371,12 +373,12 @@
 							{/if}
 						</div>
 						<div
-							class="flex justify-between my-2 py-2 px-3 bg-gray-300 rounded-lg  dark:bg-dark-500 lg:w-11/12 ">
+							class="flex justify-between my-2 py-2 px-3 bg-neutral-300 rounded-lg  dark:bg-neutral-500 lg:w-11/12 ">
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userWithdrawAmount}
 								placeholder="Enter Value"
-								class="bg-gray-300 text-gray-900 font-bold w-8/12 dark:bg-dark-500 dark:text-white"
+								class="bg-neutral-300 text-gray-900 font-bold w-8/12 dark:bg-neutral-500 dark:text-white"
 								type="text" />
 							<button
 								disabled={loadingState.something}

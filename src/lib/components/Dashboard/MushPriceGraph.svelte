@@ -1,7 +1,8 @@
 <script lang="ts">
 </script>
 
-<div class="dark:bg-dark-900 h-84 w-full rounded-xl bg-white p-2  shadow-md">
+<div
+	class="h-72 w-full rounded-xl bg-white p-2  shadow-md  dark:bg-neutral-900">
 	<canvas id="mush-chart" />
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -142,11 +142,12 @@
 	}
 
 	onMount(() => {
-		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_${APIKEY}`;
+		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17`;
 
 		fetch(APIURL)
 			.then((res) => res.json())
 			.then((res) => {
+				console.log(res);
 				const monthsName = [
 					'Jan',
 					'Feb',
@@ -269,7 +270,7 @@
 
 	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
 	<MushPriceSection>
-		<div class="h-92 col-span-9  lg:col-span-6	">
+		<div class="col-span-9 h-80  lg:col-span-6	">
 			<ButtonGroup
 				options={[
 					{ id: 0, name: 'Day' },
