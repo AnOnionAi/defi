@@ -12,18 +12,9 @@
 	import { LoadingState, Token } from '$lib/ts/types';
 	import { onDestroy, onMount } from 'svelte';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-<<<<<<< HEAD
 	
 	import { BigNumber, ethers, utils } from 'ethers';
 	import { parseBigNumberToDecimal, parseBigNumberToString } from '$lib/utils/balanceParsers';
-=======
-	import { Chasing } from 'svelte-loading-spinners';
-	import { BigNumber, ethers } from 'ethers';
-	import {
-		parseBigNumberToDecimal,
-		parseBigNumberToString
-	} from '$lib/utils/balanceParsers';
->>>>>>> develop
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
