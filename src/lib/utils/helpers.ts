@@ -1,14 +1,8 @@
 import { BigNumber, ethers } from 'ethers';
 import { accounts } from '$lib/stores/MetaMaskAccount';
 
-export const getEthersProvider = () => {
-	try {
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		return provider;
-	} catch (e) {
-		return console.log(e, "The Web Browser doesn't have web3");
-	}
-};
+export const getEthersProvider = () =>
+	new ethers.providers.Web3Provider(window.ethereum);
 
 export const getSigner = () => {
 	try {

@@ -25,7 +25,7 @@ export const metaMaskCon = async () => {
 };
 
 export const addTokenToMetamaskWallet = () => {
-	return ethereum
+	return window.ethereum
 		.request({
 			method: 'wallet_watchAsset',
 			params: {
