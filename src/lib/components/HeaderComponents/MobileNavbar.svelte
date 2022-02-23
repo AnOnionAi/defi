@@ -1,4 +1,4 @@
-<script src="ts">
+<script lang="ts">
 import { slide } from "svelte/transition";
 import NavbarRoute from "../Buttons/NavbarRoute.svelte";
 import { _ } from "svelte-i18n";

@@ -17,6 +17,7 @@ specifiers:
   playwright: ^1.19.0
   postcss: ^8.4.6
   prettier: ^2.5.1
+  prettier-plugin-tailwindcss: ^0.1.7
   svelte: ^3.44.3
   svelte-fa: ^2.3.3
   svelte-i18n: ^3.3.9
@@ -54,6 +55,7 @@ devDependencies:
   playwright: 1.19.1
   postcss: 8.4.6
   prettier: 2.5.1
+  prettier-plugin-tailwindcss: 0.1.7_prettier@2.5.1
   svelte: 3.44.3
   svelte-preprocess: 4.10.1_c198867e11ac409229a63626be09e383
   tailwindcss: 3.0.22_autoprefixer@10.4.2
@@ -3232,6 +3234,15 @@ packages:
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+    dev: true
+
+  /prettier-plugin-tailwindcss/0.1.7_prettier@2.5.1:
+    resolution: {integrity: sha512-tmBr45hCLuit2Cz9Pwow0/Jl1bGivYGsfcF29O+3sKcE++ybjz9dfie565S3ZsvAeV8uYer9SRMBWDsHPly2Lg==}
+    engines: {node: '>=12.17.0'}
+    peerDependencies:
+      prettier: '>=2.2.0'
+    dependencies:
+      prettier: 2.5.1
     dev: true
 
   /prettier/2.5.1:
