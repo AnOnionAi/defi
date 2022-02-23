@@ -3,18 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--text-color: #444444;
-	--logo-color: rgba(27, 160, 133, 1);
-	--light-background: #f9f8f9;
-	--light-secondary: #fff;
-	--dark-background: #172029;
-	--dark-secondary: #1c1f28;
-}
-
-body {
-	
-}
 
 
 #svelte {
@@ -23,9 +11,6 @@ body {
 	display: flex;
 	flex-direction: column;
 }
-
-
-
 
 input:focus,
 select:focus,
