@@ -15,12 +15,13 @@
 	}
 </script>
 
-<div class=" ml-6 h-8 flex rounded-r-md rounded-l-md bg-white dark:bg-neutral-900 w-72 -mb-1">
+<div
+	class=" ml-6 -mb-1 flex h-8 w-72 rounded-r-md rounded-l-md bg-white dark:bg-neutral-900">
 	{#each options as option, index}
 		<button
 			class="{selected === index
 				? 'selected'
-				: ''}{'  w-24  flex items-center justify-center   dark:text-white overflow-hidden'}"
+				: ''}{'  flex  w-24 items-center justify-center   overflow-hidden dark:text-white'}"
 			value={option.id}
 			name={option.name}
 			on:click={setSelected}>

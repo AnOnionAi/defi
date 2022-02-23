@@ -282,9 +282,8 @@
 
 <div
 	class="self-start   bg-white dark:bg-neutral-900 {!$darkMode &&
-		'shadow-xl'}  rounded-3xl relative transform transition duration-300 hover:scale-105 select-none"
->
-	<div class="absolute flex flex-row-reverse p-4 w-full">
+		'shadow-xl'}  relative transform select-none rounded-3xl transition duration-300 hover:scale-105">
+	<div class="absolute flex w-full flex-row-reverse p-4">
 		<div>
 			{#if isFarm}
 				<SushiswapBadge />
@@ -292,8 +291,11 @@
 			<MultiplierBadge multiplier={poolMultiplier} />
 		</div>
 	</div>
-	<div class="py-4 px-8 cardContainer flex flex-col h-full">
-		<img src={info.tokenImagePath} alt={info.tokenName} class="self-center my-2" />
+	<div class="cardContainer flex h-full flex-col py-4 px-8">
+		<img
+			src={info.tokenImagePath}
+			alt={info.tokenName}
+			class="my-2 self-center" />
 		<div>
 			<p class="mb-3 text-lg font-bold dark:text-white">{info.tokenName}</p>
 		</div>
@@ -304,7 +306,8 @@
 			{:else if poolApr}
 				<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
 			{:else}
-				<p class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
+				<p
+					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
@@ -322,7 +325,8 @@
 			{#if poolFeePercentage != null}
 				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
 			{:else}
-				<p class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
+				<p
+					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
@@ -341,9 +345,8 @@
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="text-sm py-2 px-4 rounded-lg bg-green-500 text-white font-semibold tracking-wide disabled:bg-neutral-400 disabled:cursor-not-allowed"
-					>{$_('actions.harvest')}</button
-				>
+					class="rounded-lg bg-green-500 py-2 px-4 text-sm font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:bg-neutral-400"
+					>{$_('actions.harvest')}</button>
 			</div>
 		</div>
 
@@ -382,7 +385,8 @@
 							).toPrecision(4)}
 						</p>
 					{:else}
-						<p class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
+						<p
+							class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 					{/if}
 
 					<div class="flex space-x-2">
@@ -390,14 +394,12 @@
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
 							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-400 disabled:cursor-not-allowed"
-							>+</button
-						>
+							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
 							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-400 disabled:cursor-not-allowed"
-							>-</button
-						>
+							>-</button>
 					</div>
 				</div>
 			{/if}
@@ -405,15 +407,18 @@
 
 		<div
 			on:click={showPoolInfo}
-			class="flex items-center dark:text-white justify-center cursor-pointer group"
-		>
-			<p class="font-medium mr-2  group-hover:text-green-500 {!isHidden && "text-green-500"} ">{$_('poolCard.details')}</p>
+			class="group flex cursor-pointer items-center justify-center dark:text-white">
+			<p
+				class="mr-2 font-medium  group-hover:text-green-500 {!isHidden &&
+					'text-green-500'} ">
+				{$_('poolCard.details')}
+			</p>
 			{#if isHidden}
-				<div class="group-hover:text-green-500 {!isHidden && "text-green-500"}">
+				<div class="group-hover:text-green-500 {!isHidden && 'text-green-500'}">
 					<Fa icon={faChevronDown} size="xs" translateY={0.15} />
 				</div>
 			{:else}
-				<div class="group-hover:text-green-500 {!isHidden && "text-green-500"}">
+				<div class="group-hover:text-green-500 {!isHidden && 'text-green-500'}">
 					<Fa icon={faChevronUp} size="xs" translateY={0.15} />
 				</div>
 			{/if}
@@ -444,16 +449,14 @@
 	{/if}
 </div>
 
-
 <style>
 	.cardContainer {
 		width: 336px;
 		height: 496px;
 	}
 
-	img{
+	img {
 		width: 120px;
 		height: 120px;
 	}
 </style>
-

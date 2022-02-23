@@ -45,9 +45,9 @@
 
 <div
 	style="border-color: {secondaryColor};"
-	class="flex rounded-lg bg-white {$darkMode && 'bg-neutral-900'} border-2 -m-4 "
->
-	<div class="py-8 w-full flex flex-col">
+	class="flex rounded-lg bg-white {$darkMode &&
+		'bg-neutral-900'} -m-4 border-2 ">
+	<div class="flex w-full flex-col py-8">
 		<div>
 			<h1
 				style="color: {primaryTextColor};"

@@ -22,20 +22,21 @@
 	};
 
 	const dispatchClick = () => {
-		if(isMetaMaskInstalled()) return metaMaskCon()
+		if (isMetaMaskInstalled()) return metaMaskCon();
 		return openModal();
-	}
+	};
 </script>
 
 <div
-	class="h-full w-full flex justify-center items-center cursor-pointer"
-	on:click={dispatchClick}
->
-	<div class="w-6/12 h-12/12 flex flex-col justify-center ">
-		<img src="/assets/metamask.svg" alt="Metamask Fox" class="w-40 self-center mb-5 hover:scale-125 transform transition duration-300" />
+	class="flex h-full w-full cursor-pointer items-center justify-center"
+	on:click={dispatchClick}>
+	<div class="h-12/12 flex w-6/12 flex-col justify-center ">
+		<img
+			src="/assets/metamask.svg"
+			alt="Metamask Fox"
+			class="mb-5 w-40 transform self-center transition duration-300 hover:scale-125" />
 		<p
-			class="text-xl text-center bg-black hover:bg-gray-600 dark:bg-emerald-500 dark:hover:bg-emerald-300 text-white font-medium rounded-full p-3 "
-		>
+			class="rounded-full bg-black p-3 text-center text-xl font-medium text-white hover:bg-gray-600 dark:bg-emerald-500 dark:hover:bg-emerald-300 ">
 			{$_('dividendsPage.cyw')}
 		</p>
 	</div>

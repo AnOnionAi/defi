@@ -164,15 +164,17 @@
 	};
 </script>
 
-<div in:fly={{ y: 200, duration: 100 }} class="mb-5 max-w-6xl mx-auto sm:px-4 md:px-2 lg:px-0">
+<div
+	in:fly={{ y: 200, duration: 100 }}
+	class="mx-auto mb-5 max-w-6xl sm:px-4 md:px-2 lg:px-0">
 	<div
 		on:click={openAccordeon}
-		class="{!$darkMode && 'sideShadow'} bg-white mx-auto py-6 rounded-lg  	{!isHidden &&
-			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-100  dark:bg-neutral-900  dark:hover:bg-neutral-700 dark:border-green-500"
-	>
-		<div class="sm:flex sm:justify-between sm:items-center sm:mx-20">
-			<div class="flex justify-center items-center">
-				<div class="flex relative h-11 w-12">
+		class="{!$darkMode &&
+			'sideShadow'} mx-auto rounded-lg bg-white py-6  	{!isHidden &&
+			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-100  dark:border-green-500  dark:bg-neutral-900 dark:hover:bg-neutral-700">
+		<div class="sm:mx-20 sm:flex sm:items-center sm:justify-between">
+			<div class="flex items-center justify-center">
+				<div class="relative flex h-11 w-12">
 					<img
 						src={[
 							...allImages.filter(
@@ -211,7 +213,7 @@
 					</div>
 
 					<div
-						class="flex justify-center  items-center font-medium  border-2 tracking-wide rounded-full border-{vaultConfig
+						class="flex items-center  justify-center rounded-full  border-2 font-medium tracking-wide border-{vaultConfig
 							.platform.brandColor}-500 text-{vaultConfig.platform
 							.brandColor}-500  h-6 w-20 text-xs">
 						{vaultConfig.platform.name}
@@ -263,8 +265,7 @@
 		<div
 			in:slide={{ duration: 400 }}
 			out:slide={{ duration: 400 }}
-			class="bg-neutral-200 max-w-8xl mx-auto dark:bg-neutral-800 rounded-b-lg px-5 py-5"
-		>
+			class="max-w-8xl mx-auto rounded-b-lg bg-neutral-200 px-5 py-5 dark:bg-neutral-800">
 			{#if !$accounts}
 				<button
 					on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
@@ -293,15 +294,13 @@
 							{/if}
 						</div>
 						<div
-							class="flex my-2 py-2 px-3 bg-neutral-300 dark:bg-neutral-500 rounded-lg  lg:w-11/12 justify-between"
-						>
+							class="flex my-2 py-2 px-3 bg-neutral-300 dark:bg-neutral-500 rounded-lg  lg:w-11/12 justify-between">
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userDepositAmount}
 								placeholder="Enter Value"
 								class="bg-neutral-300  text-gray-900 font-bold w-8/12 dark:bg-neutral-500	dark:text-white"
-								type="text"
-							/>
+								type="text" />
 							{#if isApproved}
 								<button
 									class:cursor-not-allowed={loadingState.something}
@@ -374,15 +373,13 @@
 							{/if}
 						</div>
 						<div
-							class="flex justify-between my-2 py-2 px-3 bg-neutral-300 rounded-lg  dark:bg-neutral-500 lg:w-11/12 "
-						>
+							class="flex justify-between my-2 py-2 px-3 bg-neutral-300 rounded-lg  dark:bg-neutral-500 lg:w-11/12 ">
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userWithdrawAmount}
 								placeholder="Enter Value"
 								class="bg-neutral-300 text-gray-900 font-bold w-8/12 dark:bg-neutral-500 dark:text-white"
-								type="text"
-							/>
+								type="text" />
 							<button
 								disabled={loadingState.something}
 								on:click={async () =>

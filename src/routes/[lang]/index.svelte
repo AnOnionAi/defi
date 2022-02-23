@@ -23,7 +23,6 @@
 
 	import { fade } from 'svelte/transition';
 
-	
 	let canvas;
 	let scene;
 	let visible = false;
@@ -97,8 +96,12 @@
 			scene.background = spaceTexture;
 		}
 
-		const moonTexture = new THREE.TextureLoader().load('/static/animation/textureMoon.webp');
-		const earthTexture = new THREE.TextureLoader().load('/static/animation/textureEarth.webp');
+		const moonTexture = new THREE.TextureLoader().load(
+			'/static/animation/textureMoon.webp'
+		);
+		const earthTexture = new THREE.TextureLoader().load(
+			'/static/animation/textureEarth.webp'
+		);
 		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
 		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
 		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);
@@ -256,7 +259,9 @@
 				<img class="m-auto" src="title.webp" alt="title">
 			</div> -->
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-36 xl:pt-72 text-4xl">
+				<h4
+					in:fade={{ duration: 1000 }}
+					class="relative pt-36 text-4xl xl:pt-72">
 					{$_('home.tagline1')}
 				</h4>
 				<h4

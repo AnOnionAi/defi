@@ -5,8 +5,7 @@
 </script>
 
 <div
-	class="bg-white dark:bg-neutral-900 rounded-2xl p-6 h-40 col-span-3 dark:text-white flex flex-col shadow-lg dark:shadow-none select-none transition duration-300"
->
+	class="col-span-3 flex h-40 select-none flex-col rounded-2xl bg-white p-6 shadow-lg transition duration-300 dark:bg-neutral-900 dark:text-white dark:shadow-none">
 	<div>
 		<p class="text-dark-500 text-xl dark:text-gray-100 md:text-2xl  lg:text-xl">
 			{title}

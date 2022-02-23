@@ -147,7 +147,7 @@
 		fetch(APIURL)
 			.then((res) => res.json())
 			.then((res) => {
-				console.log(res)
+				console.log(res);
 				const monthsName = [
 					'Jan',
 					'Feb',
@@ -270,7 +270,7 @@
 
 	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
 	<MushPriceSection>
-		<div class="h-80 col-span-9  lg:col-span-6	">
+		<div class="col-span-9 h-80  lg:col-span-6	">
 			<ButtonGroup
 				options={[
 					{ id: 0, name: 'Day' },

@@ -13,7 +13,7 @@
 
 <section class="background {$darkMode && 'background__dark'}">
 	<br />
-	<h1 class="dark:text-white text-5xl text-center tracking-wide">
+	<h1 class="text-center text-5xl tracking-wide dark:text-white">
 		{$_('headers.pools.text')}
 	</h1>
 	<div class="pools mt-5 space-y-4 ">

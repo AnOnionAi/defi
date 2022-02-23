@@ -12,9 +12,12 @@
 	import { LoadingState, Token } from '$lib/ts/types';
 	import { onDestroy, onMount } from 'svelte';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	
+
 	import { BigNumber, ethers, utils } from 'ethers';
-	import { parseBigNumberToDecimal, parseBigNumberToString } from '$lib/utils/balanceParsers';
+	import {
+		parseBigNumberToDecimal,
+		parseBigNumberToString
+	} from '$lib/utils/balanceParsers';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
@@ -24,8 +27,8 @@
 	import { getNotificationsContext } from 'svelte-notifications';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
-import DividendsInfoItem from '../Dividends/DividendsInfoItem.svelte';
-import InputWithButton from '../Dividends/InputWithButton.svelte';
+	import DividendsInfoItem from '../Dividends/DividendsInfoItem.svelte';
+	import InputWithButton from '../Dividends/InputWithButton.svelte';
 
 	const { addNotification } = getNotificationsContext();
 
@@ -143,63 +146,68 @@ import InputWithButton from '../Dividends/InputWithButton.svelte';
 	};
 </script>
 
-
-	<div class="h-full w-full flex flex-col p-2">
-		<div class="flex justify-between w-full mb-10">
-			<div class="flex items-center select-none">
-				<img src="/assets/mushRound.png" alt="Mush Token Icon" class="w-8" />
-				<h2 class="text-2xl font-semibold pl-2  dark:text-white">MUSH</h2>
-			</div>
-
-			<div>
-				<p
-					class="rounded-full flex py-1 px-4 select-none  border-2 border-blue-500 text-blue-500  text-xs font-semibold dark:border-blue-400 dark:text-blue-400"
-				>
-					<span class="mr-1">{$_('actions.earn')} USDC</span>
-					<img src="/icons/usdc.svg" alt="" class="w-4" />
-				</p>
-			</div>
+<div class="flex h-full w-full flex-col p-2">
+	<div class="mb-10 flex w-full justify-between">
+		<div class="flex select-none items-center">
+			<img src="/assets/mushRound.png" alt="Mush Token Icon" class="w-8" />
+			<h2 class="pl-2 text-2xl font-semibold  dark:text-white">MUSH</h2>
 		</div>
 
-		<div class="grid grid-cols-2 gap-y-3 mb-6">
-			<DividendsInfoItem name={"APR"} info={96.17} thirdText="%"/>
-			<DividendsInfoItem name={"TVL"} info={parseFloat(ethers.utils.formatEther(TVL))} secondText="$"/>
-			<DividendsInfoItem name={"Wallet"} info={parseFloat(ethers.utils.formatEther(userBalance))} thirdText="MUSH"/>
-			<DividendsInfoItem name={$_("pastActions.deposited")} info={parseFloat(ethers.utils.formatEther(userStakedTokens))} thirdText=" MUSH"/>
+		<div>
+			<p
+				class="flex select-none rounded-full border-2 border-blue-500  py-1 px-4 text-xs  font-semibold text-blue-500 dark:border-blue-400 dark:text-blue-400">
+				<span class="mr-1">{$_('actions.earn')} USDC</span>
+				<img src="/icons/usdc.svg" alt="" class="w-4" />
+			</p>
 		</div>
-		
-		<div class="flex-1 flex flex-col justify-around">
-			<InputWithButton
-			bind:inputValue={depositInput} 
+	</div>
+
+	<div class="mb-6 grid grid-cols-2 gap-y-3">
+		<DividendsInfoItem name={'APR'} info={96.17} thirdText="%" />
+		<DividendsInfoItem
+			name={'TVL'}
+			info={parseFloat(ethers.utils.formatEther(TVL))}
+			secondText="$" />
+		<DividendsInfoItem
+			name={'Wallet'}
+			info={parseFloat(ethers.utils.formatEther(userBalance))}
+			thirdText="MUSH" />
+		<DividendsInfoItem
+			name={$_('pastActions.deposited')}
+			info={parseFloat(ethers.utils.formatEther(userStakedTokens))}
+			thirdText=" MUSH" />
+	</div>
+
+	<div class="flex flex-1 flex-col justify-around">
+		<InputWithButton
+			bind:inputValue={depositInput}
 			buttonDisabled={!userCanDeposit}
-			isLoading = {loadingState.loadingDeposit}
+			isLoading={loadingState.loadingDeposit}
 			handleButton={handleDeposit}
 			placeholderText={$_('actions.wallet')}
 			displayNumber={parseFloat(ethers.utils.formatEther(userBalance))}
 			afterText=" MUSH"
-			buttonText={$_('actions.deposit')}/>
+			buttonText={$_('actions.deposit')} />
 
-			<InputWithButton
-			bind:inputValue={withdrawInput} 
-			buttonDisabled={!userCanWithdraw} 
+		<InputWithButton
+			bind:inputValue={withdrawInput}
+			buttonDisabled={!userCanWithdraw}
 			isLoading={loadingState.loadingWithdraw}
 			handleButton={handleWithdraw}
-			placeholderText={$_('pastActions.deposited')} 
-			displayNumber={parseFloat(ethers.utils.formatEther(userStakedTokens))} 
+			placeholderText={$_('pastActions.deposited')}
+			displayNumber={parseFloat(ethers.utils.formatEther(userStakedTokens))}
 			afterText=" MUSH"
-			buttonText={$_('actions.withdraw')}/>
+			buttonText={$_('actions.withdraw')} />
 
-			<InputWithButton
-			bind:inputValue={userReward} 
+		<InputWithButton
+			bind:inputValue={userReward}
 			buttonDisabled={!userCanHarvest}
 			disableInput={true}
 			isLoading={loadingState.loadingHarvest}
-			handleButton={handleHarvest} 
-			placeholderText={$_('pastActions.earned')} 
-			displayNumber={parseFloat(ethers.utils.formatUnits(userReward,6))}
-			afterText=" USDC" 
-			buttonText={$_('actions.earn')}/>
-		</div>
+			handleButton={handleHarvest}
+			placeholderText={$_('pastActions.earned')}
+			displayNumber={parseFloat(ethers.utils.formatUnits(userReward, 6))}
+			afterText=" USDC"
+			buttonText={$_('actions.earn')} />
 	</div>
-
-	
+</div>

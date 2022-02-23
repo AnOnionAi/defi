@@ -24,10 +24,9 @@
 	</p>
 	<div class="curve {$darkMode && 'dark-curve'}" />
 	<img
-		class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto z-0"
+		class="{$darkMode && 'img-darkmode'} z-0 h-32 w-32 lg:h-auto lg:w-auto"
 		src="/assets/crypto-market.png"
-		alt="crypto-market"
-	/>
+		alt="crypto-market" />
 </section>
 
 <section class="farms {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
@@ -37,10 +36,9 @@
 			{$_('about.farms-description')}
 		</p>
 		<img
-			class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto"
+			class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
 			src="/assets/farms.png"
-			alt="farms"
-		/>
+			alt="farms" />
 	</div>
 </section>
 
@@ -63,10 +61,9 @@
 		{$_('about.vaults-description')}
 	</p>
 	<img
-		class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto my-4"
+		class="{$darkMode && 'img-darkmode'} my-4 h-32 w-32 lg:h-auto lg:w-auto"
 		src="/assets/vaults.png"
-		alt="vaults"
-	/>
+		alt="vaults" />
 </section>
 
 <div class="spacer layer1 flip" />
@@ -81,10 +78,9 @@
 		{$_('about.responsibility-description')}
 	</p>
 	<img
-		class="{$darkMode && 'img-darkmode'} w-32 h-32 lg:w-auto lg:h-auto"
+		class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
 		src="/assets/crypto-responsibility.png"
-		alt="crypto-responsibility"
-	/>
+		alt="crypto-responsibility" />
 </section>
 
 <style>

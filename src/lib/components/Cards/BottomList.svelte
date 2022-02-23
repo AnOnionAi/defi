@@ -7,9 +7,8 @@
 </script>
 
 <div
-	class="mx-auto max-w-8xl py-3 mb-4 rounded-b-lg bg-white flex justify-center items-center dark:bg-neutral-900 "
->
-	<div on:click={scrollTop} class="flex px-5 cursor-pointer">
+	class="max-w-8xl mx-auto mb-4 flex items-center justify-center rounded-b-lg bg-white py-3 dark:bg-neutral-900 ">
+	<div on:click={scrollTop} class="flex cursor-pointer px-5">
 		<p class="text-xl font-semibold text-gray-500">To Top</p>
 		<Fa
 			icon={faChevronUp}

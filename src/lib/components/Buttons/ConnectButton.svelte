@@ -59,7 +59,10 @@
 			{$_('walletStatus.checking')}
 		{:else if $accounts}
 			<span class="flex items-center">{formatAddress($accounts)}</span>
-			<img src="/assets/tinyRedMush.png" alt="Mush for the family" class="w-6 h-6 ml-2" />
+			<img
+				src="/assets/tinyRedMush.png"
+				alt="Mush for the family"
+				class="w-6 h-6 ml-2" />
 		{:else if isInstalled == 'isInstalled'}
 			{$_('dividendsPage.cyw')}
 		{:else if isInstalled == 'notInstalled'}

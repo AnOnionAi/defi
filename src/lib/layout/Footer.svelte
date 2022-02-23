@@ -33,17 +33,19 @@
 
 <footer
 	class="{$isHomescreen &&
-		'z-20 backdrop-filter backdrop-blur border-none '}  {$darkMode &&
-		'border-dark-200'} {$darkMode && !$isHomescreen && 'bg-zinc-900'} footer-height {textColor} "
->
-	<div class="grid grid-cols-1 md:grid-cols-3 footer-height px-6 py-6 lg:py-1 gap-4">
-		<div class="flex  items-center ml-0 lg:ml-5 justify-center lg:justify-start">
+		'z-20 border-none backdrop-blur backdrop-filter '}  {$darkMode &&
+		'border-dark-200'} {$darkMode &&
+		!$isHomescreen &&
+		'bg-zinc-900'} footer-height {textColor} ">
+	<div
+		class="footer-height grid grid-cols-1 gap-4 px-6 py-6 md:grid-cols-3 lg:py-1">
+		<div
+			class="ml-0  flex items-center justify-center lg:ml-5 lg:justify-start">
 			<a
 				href={`https://app.sushi.com/${$page.params.lang}/swap`}
 				target="_blank"
-				class="text-white bg-neutral-600 hover:bg-green-400 px-3 py-1 rounded-full font-light text-sm"
-				>Buy MUSH</a
-			>
+				class="rounded-full bg-neutral-600 px-3 py-1 text-sm font-light text-white hover:bg-green-400"
+				>Buy MUSH</a>
 		</div>
 
 		<div class="flex items-center justify-center font-light">

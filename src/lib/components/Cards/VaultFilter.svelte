@@ -103,10 +103,10 @@
 </script>
 
 <div
-	class="w-full max-w-7xl m-auto overflow-right-hidden shadow rounded-2xl bg-white my-4 px-4 pb-4 pt-6 dark:bg-neutral-900 dark:text-white border border-white"
->
-	<div class="flex flex-row flex-wrap w-auto justify-around relative">
-		<div class="flex lg:flex-row flex-col w-full max-w-6xl m-auto sm:justify-between ">
+	class="overflow-right-hidden m-auto my-4 w-full max-w-7xl rounded-2xl border border-white bg-white px-4 pb-4 pt-6 shadow dark:bg-neutral-900 dark:text-white">
+	<div class="relative flex w-auto flex-row flex-wrap justify-around">
+		<div
+			class="m-auto flex w-full max-w-6xl flex-col sm:justify-between lg:flex-row ">
 			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
 				<span class="checkbox__input">
 					<input
@@ -157,7 +157,7 @@
 						</svg>
 					</span>
 				</span>
-				<span class="radio__label text-pink-700 text-base">
+				<span class="radio__label text-base text-pink-700">
 					<img src="/icons/sushi.png" alt="SushiSwap" />
 				</span>
 			</label>
@@ -184,7 +184,7 @@
 						</svg>
 					</span>
 				</span>
-				<span class="radio__label text-blue-700 text-base">
+				<span class="radio__label text-base text-blue-700">
 					<img src="/icons/quick.svg" alt="QuickSwap" />
 				</span>
 			</label>

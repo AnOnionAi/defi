@@ -58,9 +58,8 @@
 </script>
 
 <div
-	class="bg-white dark:bg-neutral-900 rounded-2xl p-5 h-56 shadow-xl dark:text-white dark:shadow-none flex flex-col justify-between select-none transition duration-300"
->
-	<p class="text-3xl pl-3 text-lg text-dark-200 dark:text-white tracking-wide">
+	class="flex h-56 select-none flex-col justify-between rounded-2xl bg-white p-5 shadow-xl transition duration-300 dark:bg-neutral-900 dark:text-white dark:shadow-none">
+	<p class="text-dark-200 pl-3 text-3xl text-lg tracking-wide dark:text-white">
 		{$_('walletStatus.wallet')}
 	</p>
 	<div class="flex flex-col items-center justify-center gap-3">

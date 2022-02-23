@@ -89,7 +89,7 @@
 
 <section class="pb-3 ">
 	<br />
-	<h1 class="dark:text-white text-5xl text-center tracking-wide">
+	<h1 class="text-center text-5xl tracking-wide dark:text-white">
 		{$_('headers.vaults.text')}
 	</h1>
 

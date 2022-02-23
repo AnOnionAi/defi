@@ -4,7 +4,7 @@
 		class="mush-w flex flex-col justify-around space-y-3 rounded-md bg-transparent p-2 text-2xl backdrop-filter">
 		<p class="text-8xl font-bold text-white">MUSH</p>
 		<br />
-		<div class="px-5 bg-neutral-50 bg-gradient-to-tl rounded-md">
+		<div class="rounded-md bg-neutral-50 bg-gradient-to-tl px-5">
 			<div class="flex justify-between">
 				<p class="font-black text-black">APY</p>
 				<p class="font-black text-black">999%</p>

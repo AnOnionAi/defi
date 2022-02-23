@@ -3,8 +3,8 @@
 	import { _ } from 'svelte-i18n';
 </script>
 
-<div class="h-12/12 w-full flex items-center justify-center">
-	<div class="w-9/12 h-8/12 flex flex-col  justify-around items-center">
+<div class="h-12/12 flex w-full items-center justify-center">
+	<div class="h-8/12 flex w-9/12 flex-col  items-center justify-around">
 		<img src="/assets/mushRound.png" alt="The mush token icon" class="w-36  " />
 		<div>
 			<p class="mb-2 text-center text-xl font-medium dark:text-white">

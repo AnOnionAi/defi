@@ -5,13 +5,13 @@
 	import Notifications from 'svelte-notifications';
 	import { navigating, page } from '$app/stores';
 	import LinearBar from '$lib/layout/LinearBar.svelte';
-	import Modal from 'svelte-simple-modal';	
+	import Modal from 'svelte-simple-modal';
 	import '../app.css';
 	import {
 		chainID,
 		accounts,
 		metamaskConnect,
-		metamaskListeners,
+		metamaskListeners
 	} from '$lib/stores/MetaMaskAccount';
 
 	let currentChain;
@@ -49,7 +49,10 @@
 				<LinearBar />
 			</div>
 		{/if}
-		<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-900'} ">
+		<main
+			class:dark={$darkMode}
+			class="main  background_pattern  {$darkMode &&
+				'bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-900'} ">
 			<slot />
 		</main>
 		<Footer />
@@ -63,5 +66,4 @@
 		height: 100%;
 		margin: 0 auto;
 	}
-	
 </style>
