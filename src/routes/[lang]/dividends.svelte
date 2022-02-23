@@ -72,7 +72,7 @@
 </script>
 
 <br />
-<h1 class="tracking-widest  text-4xl dark:text-white">{$_('headers.dividends.text')}</h1>
+<h1 class="dark:text-white text-5xl text-center tracking-wide">{$_('headers.dividends.text')}</h1>
 <div class="my-6">
 	<div style="background-image:url({backgroundImage});" class="dividends-wrapper">
 		<div

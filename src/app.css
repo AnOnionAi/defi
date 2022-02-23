@@ -13,12 +13,13 @@
 }
 
 body {
-	font-family: 'Poppins', sans-serif;
+	
 }
 
 
 #svelte {
 	min-height: 100vh;
+	font-family: 'Poppins', sans-serif;
 	display: flex;
 	flex-direction: column;
 }

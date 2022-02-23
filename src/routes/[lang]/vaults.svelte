@@ -74,7 +74,7 @@
 
 <section class="pb-3 ">
 	<br />
-	<h1 class="text-dark-200 dark:text-white text-4xl tracking-widest">
+	<h1 class="dark:text-white text-5xl text-center tracking-wide">
 		{$_('headers.vaults.text')}
 	</h1>
 
