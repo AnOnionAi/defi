@@ -5,12 +5,11 @@
 
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import { getTokenAllowance, isNotZero } from '$lib/utils/erc20';
+	import { getTokenAllowance} from '$lib/utils/erc20';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import ApproveMush from '$lib/components/Cards/ApproveMush.svelte';
 	import { Token } from '$lib/ts/types';
 	import DividendCard from '$lib/components/Cards/DividendCard.svelte';
-	import { onDestroy, onMount } from 'svelte';
 	import Connect from '$lib/components/Cards/Connect.svelte';
 	import { fade } from 'svelte/transition';
 	import { BigNumber, ethers } from 'ethers';
@@ -20,7 +19,6 @@
 		transactionCompleted,
 		transactionDeniedByTheUser,
 		transactionSend,
-		wrongInput
 	} from '$lib/config/constants/notifications';
 	import { darkMode } from '$lib/stores/dark';
 	const { addNotification } = getNotificationsContext();
@@ -30,7 +28,7 @@
 	let approved: boolean = false;
 	let finishedApprovalFetch: boolean = false;
 
-	let backgroundImage;
+	let backgroundImage:string;
 
 	$: userAccount = $accounts?.[0];
 	$: approved = !userMushAllowance.isZero();
