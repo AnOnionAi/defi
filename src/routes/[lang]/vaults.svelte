@@ -13,7 +13,6 @@
 	} from '$lib/ts/types';
 	import VaultAccordeon from '$lib/components/Cards/VaultAccordeon.svelte';
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
-	import BottomList from '$lib/components/Cards/BottomList.svelte';
 	import { onMount } from 'svelte';
 	import {
 		generateRandomBalance,
