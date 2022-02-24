@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Provider } from '$lib/utils/web3Helpers';
-	import ERC20ABI from '$lib/config/abi/ERC20.json';
 	import { slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
@@ -10,9 +8,7 @@
 	import {
 		approveToken,
 		getTokenAllowance,
-		isNotZero,
 		getTokenBalance,
-		getTokenName,
 		getTokenDecimals
 	} from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
@@ -53,7 +49,7 @@
 	const { open } = getContext('simple-modal');
 
 	export let info: PoolInfo;
-	export let isFarm: boolean = false;
+	export let isFarm = false;
 
 	let poolFeePercentage: number = null;
 	let stakingTokenPrice: number;
@@ -73,7 +69,7 @@
 
 	let poolMultiplier: number;
 
-	let isHidden: boolean = true;
+	let isHidden = true;
 
 	let userAcc: string;
 	let tokenApproved: boolean;
@@ -104,14 +100,6 @@
 		clearInterval(idInterval);
 	}
 
-	$: {
-		/* console.log({
-				tokenAllowance,
-				userBalance,
-				userStakedTokens,
-				userEarnings
-			}) */
-	}
 
 	const refreshData = async () => {
 		try {
@@ -126,7 +114,9 @@
 			userStakedTokens = await MasterChef.getStakedTokens(info.pid, userAcc);
 			if (userStakedTokens.isZero()) return;
 			userEarnings = await MasterChef.getPendingMush(info.pid);
-		} catch (e) {}
+		} catch (e) {
+			console.log('Failed to refresh pool Data');
+		}
 	};
 
 	onMount(async () => {

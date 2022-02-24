@@ -25,8 +25,8 @@
 
 	let userAccount: string;
 	let userMushAllowance: BigNumber = ethers.constants.Zero;
-	let approved: boolean = false;
-	let finishedApprovalFetch: boolean = false;
+	let approved = false;
+	let finishedApprovalFetch = false;
 
 	let backgroundImage: string;
 

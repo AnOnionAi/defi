@@ -45,14 +45,14 @@
 	export let vaultConfig;
 	let allImages = [...quickImages, ...sushiImages];
 	let userAcc: string;
-	let isHidden: boolean = true;
+	let isHidden = true;
 	let isApproved: boolean;
 	let stakedTokens;
 	let userTokens: BigNumber;
 	let apy: string;
 	let tvl: string;
 	let daily: string;
-	let borderStyle: string = 'rounded-lg';
+	let borderStyle = 'rounded-lg';
 	let tkn0Price: number;
 	let tkn1Price: number;
 	let userApproveAmount;

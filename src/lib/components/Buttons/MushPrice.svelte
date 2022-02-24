@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {
-		loading,
 		fetchNativeTokenPrice,
 		tokenPrice
 	} from '$lib/stores/NativeTokenPrice';

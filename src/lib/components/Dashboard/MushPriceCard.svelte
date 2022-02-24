@@ -6,7 +6,7 @@
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { _ } from 'svelte-i18n';
 	export let title: string;
-	export let display: number = 0;
+	export let display = 0;
 	export let isPercentage = false;
 </script>
 
