@@ -17,14 +17,12 @@
 	import NavbarLayout from '$lib/components/HeaderComponents/NavbarLayout.svelte';
 	import NavContainer from '$lib/components/HeaderComponents/NavContainer.svelte';
 	import MobileNavbar from '$lib/components/HeaderComponents/MobileNavbar.svelte';
-import { currentRoute } from '$lib/stores/currentRoute';
 
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;
 
 	let menu;
 
-	
 	if (!$page.params.lang) {
 		setInit('en');
 	}

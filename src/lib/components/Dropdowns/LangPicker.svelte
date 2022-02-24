@@ -11,31 +11,29 @@
 	export let isShowing = false;
 
 	let langPickerText = 'en';
-	let currentRoute = "/"
+	let currentRoute = '/';
 
 	$: langPickerText = validLang($page.params.lang);
-	$:currentRoute  = getCurrentRoute($page.url.pathname)
+	$: currentRoute = getCurrentRoute($page.url.pathname);
 	const toggleDropDownMenu = () => {
 		isShowing = !isShowing;
 	};
 
-	const getCurrentRoute = (pathname:string):string => {
-		const splittedPath = pathname.split("/")
-		const pageName = splittedPath[splittedPath.length-1]
+	const getCurrentRoute = (pathname: string): string => {
+		const splittedPath = pathname.split('/');
+		const pageName = splittedPath[splittedPath.length - 1];
 
-		if(pageName.length == 2){
-			return ""
+		if (pageName.length == 2) {
+			return '';
 		}
-		
-		return pageName;
-	}
 
-	const handleNewLangSelect = (lang:string) => {
+		return pageName;
+	};
+
+	const handleNewLangSelect = (lang: string) => {
 		setInit(lang);
 		isShowing = false;
-	}
-
-	
+	};
 </script>
 
 <div class="relative  ml-1 lg:inline-block">
