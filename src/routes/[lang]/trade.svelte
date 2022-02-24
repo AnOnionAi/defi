@@ -1,9 +1,6 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-
 </script>
-
-
 
 <section>
 	<br />

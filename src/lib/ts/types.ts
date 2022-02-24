@@ -4,6 +4,10 @@ declare global {
 	interface Window {
 		ethereum: any;
 	}
+
+	class Chart{
+		constructor(node:HTMLElement,config:any)
+	}
 }
 
 export interface FarmConfig {

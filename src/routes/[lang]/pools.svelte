@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-	import { _ } from 'svelte-i18n';	
+	import { _ } from 'svelte-i18n';
 </script>
 
 <script lang="ts">

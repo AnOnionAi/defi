@@ -5,7 +5,7 @@
 
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import { getTokenAllowance} from '$lib/utils/erc20';
+	import { getTokenAllowance } from '$lib/utils/erc20';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import ApproveMush from '$lib/components/Cards/ApproveMush.svelte';
 	import { Token } from '$lib/ts/types';
@@ -18,7 +18,7 @@
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
-		transactionSend,
+		transactionSend
 	} from '$lib/config/constants/notifications';
 	import { darkMode } from '$lib/stores/dark';
 	const { addNotification } = getNotificationsContext();
@@ -28,7 +28,7 @@
 	let approved: boolean = false;
 	let finishedApprovalFetch: boolean = false;
 
-	let backgroundImage:string;
+	let backgroundImage: string;
 
 	$: userAccount = $accounts?.[0];
 	$: approved = !userMushAllowance.isZero();

@@ -31,11 +31,6 @@
 	import MushPriceCard from '$lib/components/Dashboard/MushPriceCard.svelte';
 	import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
-	import {
-		getFarmsTVL,
-		getPoolsTVL,
-		getPortfolioValue
-	} from '$lib/utils/getPortfolioValue';
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
@@ -43,7 +38,7 @@
 
 	let value = 0;
 	let lastPrice = 0;
-	let peak: string | number = 0;
+	let peak: number = 0;
 	let dataLine;
 	let myChart;
 	let historicalData;
@@ -176,7 +171,7 @@
 					[historicalData.length - 1].price.toFixed(2);
 
 				let tempPrices = [...historicalData].map((e) => e.price).reverse();
-				peak = Math.max(...tempPrices).toFixed(5);
+				peak = Math.max(...tempPrices);
 				dataLine = {
 					labels: historicalData.map((e) => e.shortDate).reverse(),
 					datasets: [
@@ -213,7 +208,8 @@
 					plugins: [tooltipLine]
 				};
 
-				myChart = new Chart(document.getElementById('mush-chart'), config);
+				const node = document.getElementById("mushChart")
+				myChart = new Chart(node, config);
 			});
 	});
 </script>
@@ -295,7 +291,7 @@
 				title="Monthly"
 				display={growthInfo.monthlyGrowth}
 				isPercentage={true} />
-			<MushPriceCard title="Peak" display={parseFloat(peak)} />
+			<MushPriceCard title="Peak" display={peak} />
 		</MushPriceSide>
 	</MushPriceSection>
 </DashboardLayout>
