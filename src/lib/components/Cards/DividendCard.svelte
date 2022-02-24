@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
-	import { getTokenBalance  } from '$lib/utils/erc20';
+	import { getTokenBalance } from '$lib/utils/erc20';
 	import {
 		getPendingReward,
 		getSharesTotal,
@@ -16,7 +16,7 @@
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
-		transactionSend,
+		transactionSend
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';

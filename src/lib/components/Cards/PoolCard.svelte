@@ -100,7 +100,6 @@
 		clearInterval(idInterval);
 	}
 
-
 	const refreshData = async () => {
 		try {
 			tokenAllowance = await getTokenAllowance(

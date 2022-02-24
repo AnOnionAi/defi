@@ -1,5 +1,4 @@
 import { POLYGON_CHAIN_ID } from '$lib/config';
-import { getContext } from 'svelte';
 import { writable } from 'svelte/store';
 
 export const accounts = writable(undefined);

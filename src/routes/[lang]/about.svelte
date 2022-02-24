@@ -1,6 +1,8 @@
 <script context="module" lang="ts">
 	export const prerender = true;
+</script>
 
+<script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
 </script>
