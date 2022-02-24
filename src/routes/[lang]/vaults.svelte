@@ -105,7 +105,7 @@
 				bind:statement />
 		</div>
 
-		{#each filteredVaults as vault, index}
+		{#each filteredVaults as vault}
 			<VaultAccordeon vaultConfig={vault} />
 		{/each}
 	</div>
