@@ -208,7 +208,7 @@
 					plugins: [tooltipLine]
 				};
 
-				const node = document.getElementById("mushChart")
+				const node = document.getElementById('mushChart');
 				myChart = new Chart(node, config);
 			});
 	});

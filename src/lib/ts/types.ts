@@ -5,8 +5,8 @@ declare global {
 		ethereum: any;
 	}
 
-	class Chart{
-		constructor(node:HTMLElement,config:any)
+	class Chart {
+		constructor(node: HTMLElement, config: any);
 	}
 }
 
