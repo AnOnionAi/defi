@@ -1,12 +1,10 @@
-import { ethers, BigNumber } from 'ethers';
+import { ethers } from 'ethers';
 import UNIV2ABI from '$lib/config/abi/IUniswapV2Pair.json';
 import ERC20ABI from '$lib/config/abi/ERC20.json';
 import { Provider } from './web3Helpers';
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/ts/types';
 import { tokenPrice } from '$lib/stores/NativeTokenPrice';
-import { MUSHSYMBOL } from '$lib/config';
-import { getTokenPriceUSD } from './coinGecko';
 
 let mushTokenPriceUSD = 0;
 
@@ -22,7 +20,7 @@ const getTokenContract = (address: string) => {
 	);
 };
 
-export const getUniPairTokenContract = (address: string) => {
+export const getUniPairTokenContract = (address: string): ethers.Contract => {
 	return new ethers.Contract(
 		address,
 		UNIV2ABI,
@@ -30,7 +28,7 @@ export const getUniPairTokenContract = (address: string) => {
 	);
 };
 
-export const getPriceOfMushPair = async (address: string) => {
+export const getPriceOfMushPair = async (address: string): Promise<number> => {
 	const mushAddress = getContractAddress(Token.MUSHTOKEN);
 	const pairContract = getUniPairTokenContract(address);
 	const totalSupply = await pairContract.totalSupply();
@@ -59,7 +57,9 @@ export const getPriceOfMushPair = async (address: string) => {
 	return oneLpTokenPrice;
 };
 
-export const getTokenInformation = async (tokenAdress: string) => {
+export const getTokenInformation = async (
+	tokenAdress: string
+): Promise<{ tokenDecimals: number; tokenSymbol: string }> => {
 	const tokenContract = getTokenContract(tokenAdress);
 	const decimals = tokenContract.decimals();
 	const symbol = tokenContract.name();
@@ -67,7 +67,9 @@ export const getTokenInformation = async (tokenAdress: string) => {
 	return { tokenDecimals: tokenInfo[0], tokenSymbol: tokenInfo[1] };
 };
 
-export const getTokensFromPair = async (pairAddress) => {
+export const getTokensFromPair = async (
+	pairAddress
+): Promise<Array<string>> => {
 	const pairContract = getUniPairTokenContract(pairAddress);
 	const tkn0 = pairContract.token0();
 	const tkn1 = pairContract.token1();

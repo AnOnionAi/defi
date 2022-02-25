@@ -5,7 +5,7 @@ import { ethersToBigNumber } from './bigNumber';
 import { Provider } from './web3Helpers';
 import MasterChefAbi from '$lib/config/abi/MasterChef.json';
 import { getContractAddress } from './addressHelpers';
-import { Token } from '$lib/ts/types';
+import { PoolInfoResponse, Token } from '$lib/ts/types';
 import { getSigner } from './helpers';
 
 export namespace MasterChef {
@@ -15,49 +15,63 @@ export namespace MasterChef {
 		Provider.getProviderSingleton()
 	);
 
-	export const getDevAddress = async () => masterChefContract.devAddress();
+	export const getDevAddress = async (): Promise<string> =>
+		masterChefContract.devAddress();
 
-	export const getFeeAddress = async () => masterChefContract.feeAddress();
+	export const getFeeAddress = async (): Promise<string> =>
+		masterChefContract.feeAddress();
 
-	export const getMultiplier = async (from: number, to: number) =>
-		masterChefContract.getMultiplier(from, to);
+	export const getMultiplier = async (
+		from: number,
+		to: number
+	): Promise<BigNumber> => masterChefContract.getMultiplier(from, to);
 
-	export const getMarketingAddress = async () =>
+	export const getMarketingAddress = async (): Promise<string> =>
 		masterChefContract.marketingAddress();
 
-	export const getMushAddress = async () => masterChefContract.mush();
+	export const getMushAddress = async (): Promise<string> =>
+		masterChefContract.mush();
 
 	export const getMushMaxSupply = async () =>
 		masterChefContract.mushMaxSupply();
 
-	export const getMushPerBlock = async () => masterChefContract.mushPerBlock();
+	export const getMushPerBlock = async (): Promise<BigNumber> =>
+		masterChefContract.mushPerBlock();
 
-	export const owner = async () => masterChefContract.owner();
+	export const owner = async (): Promise<string> => masterChefContract.owner();
 
-	export const getPendingMush = async (pid: number) =>
+	export const getPendingMush = async (pid: number): Promise<BigNumber> =>
 		masterChefContract.pendingMush(pid);
 
-	export const poolExistance = async () => masterChefContract.poolExistance();
+	export const poolExistance = async (): Promise<boolean> =>
+		masterChefContract.poolExistance();
 
-	export const getPoolInfo = async (pid: number) =>
+	export const getPoolInfo = async (pid: number): Promise<PoolInfoResponse> =>
 		masterChefContract.poolInfo(pid);
 
-	export const getPoolLength = async () => masterChefContract.poolLength();
+	export const getPoolLength = async (): Promise<BigNumber> =>
+		masterChefContract.poolLength();
 
-	export const getReferralComissionRate = async () =>
-		masterChefContract.referralComissionRate();
+	export const getReferralComissionRate = async (): Promise<number> =>
+		masterChefContract.referralCommissionRate();
 
-	export const getStartBlock = async () => masterChefContract.startBlock();
+	export const getStartBlock = async (): Promise<BigNumber> =>
+		masterChefContract.startBlock();
 
-	export const getTotalAllocPoints = async () =>
+	export const getTotalAllocPoints = async (): Promise<BigNumber> =>
 		masterChefContract.totalAllocPoint();
 
-	export const getUserInfo = async (pid: number, userAddress: string) =>
+	export const getUserInfo = async (
+		pid: number,
+		userAddress: string
+	): Promise<{ amount: BigNumber; rewardDebt: BigNumber }> =>
 		masterChefContract.userInfo(pid, userAddress);
 
-	export const getTokenPerBlock = async () => masterChefContract.mushPerBlock();
+	export const getTokenPerBlock = async (): Promise<BigNumber> =>
+		masterChefContract.mushPerBlock();
 
-	export const getVaultAddress = async () => masterChefContract.vaultAddress();
+	export const getVaultAddress = async (): Promise<string> =>
+		masterChefContract.vaultAddress();
 
 	export const deposit = async (
 		pid: number,
@@ -82,9 +96,12 @@ export namespace MasterChef {
 			.deposit(pid, ethers.constants.Zero, ethers.constants.AddressZero);
 	};
 
-	export const getStakedTokens = async (pid: number, userAddress: string) => {
-		const [stakedTokens] = await getUserInfo(pid, userAddress);
-		return stakedTokens;
+	export const getStakedTokens = async (
+		pid: number,
+		userAddress: string
+	): Promise<BigNumber> => {
+		const { amount } = await getUserInfo(pid, userAddress);
+		return amount;
 	};
 }
 
@@ -99,7 +116,7 @@ export const getPoolWeight = (
 	return poolWeight;
 };
 
-export const getPoolMultiplier = (poolAllocPoints: BigNumber) => {
+export const getPoolMultiplier = (poolAllocPoints: BigNumber): number => {
 	const poolAp = ethersToBigNumber(poolAllocPoints);
 	const multiplier = poolAp.toNumber() / 1000;
 	return multiplier;

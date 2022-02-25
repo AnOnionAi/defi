@@ -77,7 +77,7 @@
 	let canWithdraw: boolean;
 	let canHarvest: boolean;
 
-	let wantWithdrawAmount: any;
+	let wantWithdrawAmount: string;
 	let idInterval;
 
 	let tokenAllowance: BigNumber = ethers.constants.Zero;
