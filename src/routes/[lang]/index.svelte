@@ -83,7 +83,6 @@
 				.fill(0)
 				.map(() => THREE.MathUtils.randFloatSpread(2500));
 
-			console.log('XYZ ', [x, y, z]);
 			star.position.set(x, y, z);
 			scene.add(star);
 		}

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n';
 	import { scale } from 'svelte/transition';
 	import { page } from '$app/stores';
 	import { setInit } from '$lib/i18n/init';

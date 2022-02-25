@@ -4,7 +4,7 @@ import { writable } from 'svelte/store';
 export const accounts = writable(undefined);
 export const chainID = writable(undefined);
 
-export async function metamaskConnect() {
+export async function metamaskConnect():Promise<void> {
 	try {
 		const user_accounts = await window.ethereum.request({
 			method: 'eth_requestAccounts'
@@ -20,7 +20,7 @@ export async function metamaskConnect() {
 	}
 }
 
-export async function metamaskListeners() {
+export async function metamaskListeners():Promise<void> {
 	try {
 		window.ethereum.on('chainChanged', (_chainID) => {
 			console.log(_chainID);
@@ -47,7 +47,7 @@ export async function metamaskListeners() {
 	}
 }
 
-export const requestChainChange = async () => {
+export const requestChainChange = async ():Promise<void> => {
 	return window.ethereum.request({
 		method: 'wallet_switchEthereumChain',
 		params: [{ chainId: POLYGON_CHAIN_ID }] // chainId must be in hexadecimal numbers

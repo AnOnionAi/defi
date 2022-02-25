@@ -34,7 +34,6 @@
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
-	import { APIKEY } from '$lib/env';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -136,14 +135,13 @@
 			.reverse();
 	}
 
-	onMount(() => {
+	onMount(async() => {
 		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17`;
-
-		fetch(APIURL)
-			.then((res) => res.json())
-			.then((res) => {
-				console.log(res);
-				const monthsName = [
+		const response = await fetch(APIURL);
+		const {data} = await response.json();
+		const tokenData = data[0];
+		
+		const monthsName = [
 					'Jan',
 					'Feb',
 					'Mar',
@@ -157,21 +155,26 @@
 					'Nov',
 					'Dec'
 				];
-
-				historicalData = res.data.prices[0].prices.map((e, i) => {
-					let shortDate =
-						monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
+			
+		historicalData = tokenData.prices.map(e => {
+					let shortDate =	monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
 					return { ...e, shortDate };
 				});
 
-				growthInfo = calculateGrowth(historicalData);
+		console.log(historicalData)
 
-				lastPrice = [...historicalData]
-					.reverse()
-					[historicalData.length - 1].price.toFixed(2);
+		growthInfo = calculateGrowth(historicalData);
+		
+		const lastLog  = historicalData[0];
+		lastPrice = lastLog.price
+				
 
-				let tempPrices = [...historicalData].map((e) => e.price).reverse();
+		console.log(lastPrice)
+
+				const tempPrices = [...historicalData].map((e) => e.price).reverse();
+				console.log(tempPrices)
 				peak = Math.max(...tempPrices);
+
 				dataLine = {
 					labels: historicalData.map((e) => e.shortDate).reverse(),
 					datasets: [
@@ -189,7 +192,7 @@
 							borderJoinStyle: 'miter',
 							pointBorderColor: 'rgba(222, 125, 228, 1)',
 							pointBackgroundColor: 'rgb(75, 192, 192)',
-							pointBorderWidth: 10,
+							pointBorderWidth: 7,
 							pointHoverRadius: 0.5,
 							pointHoverBackgroundColor: 'rgba(222, 125, 228, 1)',
 							pointHoverBorderColor: 'rgba(222, 125, 228, 1)',
@@ -201,16 +204,19 @@
 					]
 				};
 
-				let config = {
+				console.log(dataLine);
+				
+
+				const config = {
 					type: 'line',
 					data: dataLine,
 					options: options,
 					plugins: [tooltipLine]
 				};
 
-				const node = document.getElementById('mushChart');
-				myChart = new Chart(node, config);
-			});
+				
+				myChart = new Chart(document.getElementById('mush-chart'), config);
+			
 	});
 </script>
 
