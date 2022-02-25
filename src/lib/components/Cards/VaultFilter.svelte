@@ -8,7 +8,6 @@
 		sushiswapOnlyFilter
 	} from '$lib/utils/filterFunctions';
 
-	let ordering = false;
 	export let filtersApplied: Array<VaultFilterFunction> = [];
 	export let platformSelected = 'All';
 	export let hideZeroBalances = false;

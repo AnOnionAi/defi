@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { height, width } from '@fortawesome/free-solid-svg-icons/faChevronUp';
-
 	interface StyleConfig {
 		width?: string;
 		height?: string;

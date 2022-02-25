@@ -2,11 +2,9 @@
 	import { _ } from 'svelte-i18n';
 	import { scale } from 'svelte/transition';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { setInit } from '$lib/i18n/init';
-	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
-	import { LANGUAGES, validLang } from '$lib/i18n/utils';
+	import { validLang } from '$lib/i18n/utils';
 
 	export let isShowing = false;
 

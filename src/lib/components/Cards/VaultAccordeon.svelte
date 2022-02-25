@@ -16,9 +16,7 @@
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { Token } from '$lib/ts/types';
-	import {
-		parseBigNumberToString
-	} from '$lib/utils/balanceParsers';
+	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import { BigNumber } from 'ethers';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
@@ -47,13 +45,8 @@
 	let isApproved: boolean;
 	let stakedTokens;
 	let userTokens: BigNumber;
-	let apy: string;
-	let tvl: string;
-	let daily: string;
-	let borderStyle = 'rounded-lg';
 	let tkn0Price: number;
 	let tkn1Price: number;
-	let userApproveAmount;
 	let userDepositAmount: string;
 	let userWithdrawAmount: string;
 	const loadingState = {
@@ -63,7 +56,8 @@
 		withdraw: false,
 		harvest: false
 	};
-	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
+
+	accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
 		}

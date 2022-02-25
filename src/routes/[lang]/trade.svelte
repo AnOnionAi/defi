@@ -3,14 +3,6 @@
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { MasterChef } from '$lib/utils/masterc';
-	import { ethers } from 'ethers';
-
-	onMount(async () => {
-		const bar = parseFloat(ethers.utils.formatEther('0'));
-		console.log(bar);
-	});
 </script>
 
 <section>
