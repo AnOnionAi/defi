@@ -36,11 +36,11 @@ export const getUsdcPerShare = async (): Promise<BigNumber> => {
 export const getPendingReward = async (address: string) => {
 	const promiseGetUserInfo = getUserInfo(address);
 	const usdcPerSharePromise = getUsdcPerShare();
-/* 	const sharesTotalPromise = getSharesTotal();
+	/* 	const sharesTotalPromise = getSharesTotal();
 	const lockedTotalPromise = wantLockedTotal(); */
 	const [userInfo, usdcPerShare] = await Promise.all([
 		promiseGetUserInfo,
-		usdcPerSharePromise,
+		usdcPerSharePromise
 		/* sharesTotalPromise,
 		lockedTotalPromise */
 	]);
