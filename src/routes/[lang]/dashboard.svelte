@@ -158,12 +158,13 @@
 					'Dec'
 				];
 			
-		historicalData = tokenData.prices.map(e => {
+		
+		
+				historicalData = tokenData.prices.map(e => {
 					let shortDate =	monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
 					return { ...e, shortDate };
 				});
 
-		console.log(historicalData)
 
 		growthInfo = calculateGrowth(historicalData);
 		
@@ -206,7 +207,6 @@
 					]
 				};
 
-				console.log(dataLine);
 				
 				const lineChartType:ChartType = "line"
 
