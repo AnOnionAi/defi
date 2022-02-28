@@ -20,7 +20,14 @@
 		faChevronDown
 	} from '@fortawesome/free-solid-svg-icons';
 	import {
-		MasterChef,
+		getStakedTokens,
+		getPendingMush,
+		getPoolLength,
+		getPoolInfo,
+		deposit,
+		withdraw,
+		harvestRewards,
+		getMushPerBlock,
 		getPoolMultiplier,
 		getPoolWeight
 	} from '$lib/utils/masterc';
@@ -110,9 +117,9 @@
 			if (tokenAllowance.isZero()) return;
 			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
 			if (userBalance.isZero()) return;
-			userStakedTokens = await MasterChef.getStakedTokens(info.pid, userAcc);
+			userStakedTokens = await getStakedTokens(info.pid, userAcc);
 			if (userStakedTokens.isZero()) return;
-			userEarnings = await MasterChef.getPendingMush(info.pid);
+			userEarnings = await getPendingMush(info.pid);
 		} catch (e) {
 			console.log('Failed to refresh pool Data');
 		}
@@ -120,7 +127,7 @@
 
 	onMount(async () => {
 		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
-		const poolInfo: PoolInfoResponse = await MasterChef.getPoolInfo(info.pid);
+		const poolInfo: PoolInfoResponse = await getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
@@ -136,7 +143,7 @@
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 
 		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
-		const tokenPerBlock = await MasterChef.getMushPerBlock();
+		const tokenPerBlock = await getMushPerBlock();
 		const mushPerBlock: number = parseFloat(
 			ethers.utils.formatEther(tokenPerBlock)
 		);
@@ -172,11 +179,7 @@
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await MasterChef.deposit(
-				info.pid,
-				amount,
-				stakingTokenDecimals
-			);
+			const tx = await deposit(info.pid, amount, stakingTokenDecimals);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
@@ -191,7 +194,7 @@
 		wantWithdrawAmount = amount;
 		addNotification(transactionSend);
 		try {
-			const tx = await MasterChef.withdraw(
+			const tx = await withdraw(
 				info.pid,
 				wantWithdrawAmount,
 				stakingTokenDecimals
@@ -209,7 +212,7 @@
 		loadingState.loadingHarvest = true;
 		try {
 			addNotification(transactionSend);
-			const tx = await MasterChef.deposit(info.pid, '0');
+			const tx = await deposit(info.pid, '0');
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {

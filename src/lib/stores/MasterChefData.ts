@@ -1,5 +1,10 @@
 import { BLOCK_TIMER } from '$lib/config';
-import { MasterChef } from '$lib/utils/masterc';
+import {
+	getTotalAllocPoints,
+	getMushMaxSupply,
+	getMushPerBlock,
+	getStartBlock
+} from '$lib/utils/masterc';
 import { BigNumber, ethers } from 'ethers';
 import type { Readable } from 'svelte/store';
 import { readable, derived } from 'svelte/store';
@@ -7,7 +12,7 @@ import { readable, derived } from 'svelte/store';
 export const mushPerBlock: Readable<number> = readable(
 	undefined,
 	function start(set) {
-		MasterChef.getMushPerBlock().then((bigNumberResponse) => {
+		getMushPerBlock().then((bigNumberResponse) => {
 			const mushPerBlock = parseInt(
 				ethers.utils.formatEther(bigNumberResponse)
 			);
@@ -27,7 +32,7 @@ export const mushPerYear = derived(mushPerBlock, ($mushPerBlock) => {
 export const mushMaxSupply: Readable<number> = readable(
 	undefined,
 	function start(set) {
-		MasterChef.getMushMaxSupply().then((maxSupplyBn) => {
+		getMushMaxSupply().then((maxSupplyBn) => {
 			const mushMaxSupplyNumber = parseFloat(
 				ethers.utils.formatEther(maxSupplyBn)
 			);
@@ -39,7 +44,7 @@ export const mushMaxSupply: Readable<number> = readable(
 export const totalAllocPoints: Readable<BigNumber> = readable(
 	undefined,
 	function start(set) {
-		MasterChef.getTotalAllocPoints().then((allocPoints) => {
+		getTotalAllocPoints().then((allocPoints) => {
 			set(allocPoints);
 		});
 	}
@@ -48,7 +53,7 @@ export const totalAllocPoints: Readable<BigNumber> = readable(
 export const startBlock: Readable<BigNumber> = readable(
 	undefined,
 	function start(set) {
-		MasterChef.getStartBlock().then((startBlock) => {
+		getStartBlock().then((startBlock) => {
 			set(startBlock);
 		});
 	}

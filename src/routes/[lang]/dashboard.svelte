@@ -35,8 +35,6 @@
 	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
 	import { Chart, ChartType, registerables } from 'chart.js';
 
-	Chart.register(...registerables);
-
 	let value = 0;
 	let lastPrice = 0;
 	let peak = 0;
@@ -137,90 +135,86 @@
 			.reverse();
 	}
 
-	onMount(async() => {
+	onMount(async () => {
+		Chart.register(...registerables);
 		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17`;
 		const response = await fetch(APIURL);
-		const {data} = await response.json();
+		const { data } = await response.json();
 		const tokenData = data[0];
-		
-		const monthsName = [
-					'Jan',
-					'Feb',
-					'Mar',
-					'Apr',
-					'May',
-					'Jun',
-					'Jul',
-					'Aug',
-					'Sep',
-					'Oct',
-					'Nov',
-					'Dec'
-				];
-			
-		
-		
-				historicalData = tokenData.prices.map(e => {
-					let shortDate =	monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
-					return { ...e, shortDate };
-				});
 
+		const monthsName = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Oct',
+			'Nov',
+			'Dec'
+		];
+
+		historicalData = tokenData.prices.map((e) => {
+			let shortDate =
+				monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
+			return { ...e, shortDate };
+		});
 
 		growthInfo = calculateGrowth(historicalData);
-		
-		const lastLog  = historicalData[0];
-		lastPrice = lastLog.price
-				
 
-		console.log(lastPrice)
+		const lastLog = historicalData[0];
+		lastPrice = lastLog.price;
 
-				const tempPrices = [...historicalData].map((e) => e.price).reverse();
-				console.log(tempPrices)
-				peak = Math.max(...tempPrices);
+		console.log(lastPrice);
 
-				dataLine = {
-					labels: historicalData.map((e) => e.shortDate).reverse(),
-					datasets: [
-						{
-							label: 'Mush Price',
-							scaleOverride: true,
-							scaleStartValue: 0.00001,
-							fill: true,
-							lineTension: 0,
-							backgroundColor: 'rgba(225, 204,230, .3)',
-							borderColor: 'rgb(75, 192, 192)',
-							borderCapStyle: 'butt',
-							borderDash: [],
-							borderDashOffset: 0.0,
-							borderJoinStyle: 'miter',
-							pointBorderColor: 'rgba(222, 125, 228, 1)',
-							pointBackgroundColor: 'rgb(75, 192, 192)',
-							pointBorderWidth: 7,
-							pointHoverRadius: 0.5,
-							pointHoverBackgroundColor: 'rgba(222, 125, 228, 1)',
-							pointHoverBorderColor: 'rgba(222, 125, 228, 1)',
-							pointHoverBorderWidth: 2,
-							pointRadius: 0.5,
-							pointHitRadius: 10,
-							data: historicalData.map((e) => e.price).reverse()
-						}
-					]
-				};
+		const tempPrices = [...historicalData].map((e) => e.price).reverse();
+		console.log(tempPrices);
+		peak = Math.max(...tempPrices);
 
-				
-				const lineChartType:ChartType = "line"
+		dataLine = {
+			labels: historicalData.map((e) => e.shortDate).reverse(),
+			datasets: [
+				{
+					label: 'Mush Price',
+					scaleOverride: true,
+					scaleStartValue: 0.00001,
+					fill: true,
+					lineTension: 0,
+					backgroundColor: 'rgba(225, 204,230, .3)',
+					borderColor: 'rgb(75, 192, 192)',
+					borderCapStyle: 'butt',
+					borderDash: [],
+					borderDashOffset: 0.0,
+					borderJoinStyle: 'miter',
+					pointBorderColor: 'rgba(222, 125, 228, 1)',
+					pointBackgroundColor: 'rgb(75, 192, 192)',
+					pointBorderWidth: 7,
+					pointHoverRadius: 0.5,
+					pointHoverBackgroundColor: 'rgba(222, 125, 228, 1)',
+					pointHoverBorderColor: 'rgba(222, 125, 228, 1)',
+					pointHoverBorderWidth: 2,
+					pointRadius: 0.5,
+					pointHitRadius: 10,
+					data: historicalData.map((e) => e.price).reverse()
+				}
+			]
+		};
 
-				const config = {
-					type: lineChartType,
-					data: dataLine,
-					options: options,
-					plugins: [tooltipLine]
-				};
+		const lineChartType: ChartType = 'line';
 
-				const ctx = document.getElementById("mush-chart") as HTMLCanvasElement;
+		const config = {
+			type: lineChartType,
+			data: dataLine,
+			options: options,
+			plugins: [tooltipLine]
+		};
 
-				myChart = new Chart(ctx,config)
-			
+		const ctx = document.getElementById('mush-chart') as HTMLCanvasElement;
+
+		myChart = new Chart(ctx, config);
 	});
 </script>
 
