@@ -34,6 +34,7 @@
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
 	import { Chart, ChartType, registerables } from 'chart.js';
+import { getMonthsEnshortedNames } from '$lib/i18n/utils';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -142,20 +143,7 @@
 		const { data } = await response.json();
 		const tokenData = data[0];
 
-		const monthsName = [
-			'Jan',
-			'Feb',
-			'Mar',
-			'Apr',
-			'May',
-			'Jun',
-			'Jul',
-			'Aug',
-			'Sep',
-			'Oct',
-			'Nov',
-			'Dec'
-		];
+		const monthsName = getMonthsEnshortedNames($page.params.lang)
 
 		historicalData = tokenData.prices.map((e) => {
 			let shortDate =
