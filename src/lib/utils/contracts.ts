@@ -1,20 +1,17 @@
 import MasterChefABI from '$lib/config/abi/MasterChef.json';
 import MushTokenABI from '$lib/config/abi/MushToken.json';
-import TESTLPABI from '$lib/config/abi/TEST-LP.json';
 import ERC20ABI from '$lib/config/abi/ERC20.json';
 import pairABI from '$lib/config/abi/IUniswapV2Pair.json';
 import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
 import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
 import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import DividendsABI from '$lib/config/abi/Dividends.json';
-import { farms } from '$lib/config/constants/farms';
-import addresses from '$lib/config/constants/addresses.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/ts/types';
 import { BigNumber, ethers } from 'ethers';
-import { getEthersProvider, getSigner } from './helpers';
+import { getSigner } from './helpers';
 
-export const getMasterChefContract = () => {
+export const getMasterChefContract = (): ethers.Contract => {
 	const masterChefContract = new ethers.Contract(
 		getContractAddress(Token.MASTERCHEF),
 		MasterChefABI,
@@ -23,7 +20,7 @@ export const getMasterChefContract = () => {
 	return masterChefContract;
 };
 
-export const getMushTokenContract = () => {
+export const getMushTokenContract = (): ethers.Contract => {
 	const mushTokenContract = new ethers.Contract(
 		getContractAddress(Token.MUSHTOKEN),
 		MushTokenABI,
@@ -32,17 +29,20 @@ export const getMushTokenContract = () => {
 	return mushTokenContract;
 };
 
-export const getContractObject = (address: string, abi: any) => {
+export const getContractObject = (
+	address: string,
+	abi: any
+): ethers.Contract => {
 	const contract = new ethers.Contract(address, abi, getSigner());
 	return contract;
 };
 
-export const getERC20Contract = (address: string) => {
+export const getERC20Contract = (address: string): ethers.Contract => {
 	const ercToken = new ethers.Contract(address, ERC20ABI, getSigner());
 	return ercToken;
 };
 
-export const getUniRouterContract = () => {
+export const getUniRouterContract = (): ethers.Contract => {
 	const router = new ethers.Contract(
 		getContractAddress(Token.UNIROUTER),
 		routerABI,
@@ -51,7 +51,7 @@ export const getUniRouterContract = () => {
 	return router;
 };
 
-export const getUniFactoryContract = () => {
+export const getUniFactoryContract = (): ethers.Contract => {
 	const factory = new ethers.Contract(
 		getContractAddress(Token.UNIFACTORY),
 		factoryABI,
@@ -60,7 +60,7 @@ export const getUniFactoryContract = () => {
 	return factory;
 };
 
-export const getLiquidityPairContract = (address: string) => {
+export const getLiquidityPairContract = (address: string): ethers.Contract => {
 	const provider = new ethers.providers.JsonRpcProvider(
 		'https://polygon-rpc.com/'
 	);
@@ -68,7 +68,9 @@ export const getLiquidityPairContract = (address: string) => {
 	return univ2Pair;
 };
 
-export const getMushAllowance = async (userAddr: string) => {
+export const getMushAllowance = async (
+	userAddr: string
+): Promise<BigNumber> => {
 	const mushContract = new ethers.Contract(
 		getContractAddress(Token.MUSHTOKEN),
 		ERC20ABI,
@@ -84,7 +86,7 @@ export const getTokenAllowance = async (
 	tknAddr: string,
 	spenderAddr: string,
 	userAddr: string
-) => {
+): Promise<BigNumber> => {
 	const tokenContract = new ethers.Contract(tknAddr, ERC20ABI, getSigner());
 	return await tokenContract.allowance(userAddr, spenderAddr);
 };
@@ -128,12 +130,12 @@ export const addLiquidityPool = async (
 export const getTokenPairAddress = async (
 	tkn0Addr: string,
 	tkn1Addr: string
-) => {
+): Promise<string> => {
 	const factory = getUniFactoryContract();
 	return await factory.getPair(tkn0Addr, tkn1Addr);
 };
 
-export const getVaultChefContract = () => {
+export const getVaultChefContract = (): ethers.Contract => {
 	const vaultChefContract = new ethers.Contract(
 		getContractAddress(Token.VAULTCHEF),
 		VaultChefABI,
@@ -142,7 +144,7 @@ export const getVaultChefContract = () => {
 	return vaultChefContract;
 };
 
-export const getMushStrategyContract = () => {
+export const getMushStrategyContract = (): ethers.Contract => {
 	const dividendsContract = new ethers.Contract(
 		getContractAddress(Token.DIVIDENDS),
 		DividendsABI,

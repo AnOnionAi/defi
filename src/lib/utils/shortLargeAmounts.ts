@@ -3,8 +3,7 @@ const oneBillion = 1000000000;
 const oneMillion = 1000000;
 const oneThousand = 1000;
 
-const shortLargeAmount = (amount: number) => {
-	let formattedAmount;
+const shortLargeAmount = (amount: number): string => {
 	if (amount / oneTrillion >= 1) {
 		const newAmount = (amount / oneTrillion).toFixed(2);
 		return `${newAmount}T`;

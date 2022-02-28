@@ -1,5 +1,4 @@
 import type { BigNumber } from 'ethers';
-import { getMasterChefContract } from './contracts';
 import { ethers } from 'ethers';
 import { ethersToBigNumber } from './bigNumber';
 import { getProviderSingleton } from './web3Helpers';
@@ -31,7 +30,8 @@ export const getMarketingAddress = async (): Promise<string> =>
 export const getMushAddress = async (): Promise<string> =>
 	masterChefContract.mush();
 
-export const getMushMaxSupply = async () => masterChefContract.mushMaxSupply();
+export const getMushMaxSupply = async (): Promise<BigNumber> =>
+	masterChefContract.mushMaxSupply();
 
 export const getMushPerBlock = async (): Promise<BigNumber> =>
 	masterChefContract.mushPerBlock();

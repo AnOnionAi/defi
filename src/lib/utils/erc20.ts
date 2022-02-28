@@ -67,6 +67,6 @@ export const depositToken = async (
 	return tokenContract.transfer(recipient, amount);
 };
 
-export const isNotZero = (allowance: BigNumber) => {
+export const isNotZero = (allowance: BigNumber): boolean => {
 	return allowance._hex !== ethers.constants.Zero._hex;
 };
