@@ -11,12 +11,11 @@
 
 	$: langPickerText = validLang($page.params.lang);
 
-	$:currentRoute = $page.url.pathname.replace(`/${$page.params.lang}`, '');
+	$: currentRoute = $page.url.pathname.replace(`/${$page.params.lang}`, '');
 
 	const toggleDropDownMenu = () => {
 		isShowing = !isShowing;
 	};
-
 
 	const handleNewLangSelect = (lang: string) => {
 		setInit(lang);
