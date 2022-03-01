@@ -8,24 +8,15 @@
 	export let isShowing = false;
 
 	let langPickerText = 'en';
-	let currentRoute = '/';
 
 	$: langPickerText = validLang($page.params.lang);
-	$: currentRoute = getCurrentRoute($page.url.pathname);
+
+	$:currentRoute = $page.url.pathname.replace(`/${$page.params.lang}`, '');
+
 	const toggleDropDownMenu = () => {
 		isShowing = !isShowing;
 	};
 
-	const getCurrentRoute = (pathname: string): string => {
-		const splittedPath = pathname.split('/');
-		const pageName = splittedPath[splittedPath.length - 1];
-
-		if (pageName.length == 2) {
-			return '';
-		}
-
-		return pageName;
-	};
 
 	const handleNewLangSelect = (lang: string) => {
 		setInit(lang);
@@ -49,19 +40,19 @@
 			<a
 				on:click={() => handleNewLangSelect('en')}
 				class=" flex items-center justify-center px-5 py-2 font-light hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/en/${currentRoute}`}>English</a>
+				href={`/en${currentRoute}`}>English</a>
 			<a
 				on:click={() => handleNewLangSelect('de')}
 				class=" flex items-center justify-center px-5 py-2 font-light hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/de/${currentRoute}`}>Deutsche</a>
+				href={`/de${currentRoute}`}>Deutsche</a>
 			<a
 				on:click={() => handleNewLangSelect('es')}
 				class=" flex items-center justify-center px-5 py-2 font-light hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/es/${currentRoute}`}>Español</a>
+				href={`/es${currentRoute}`}>Español</a>
 			<a
 				on:click={() => handleNewLangSelect('fr')}
 				class=" flex items-center justify-center px-5 py-2 font-light hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/fr/${currentRoute}`}>Français</a>
+				href={`/fr${currentRoute}`}>Français</a>
 		</div>
 	{/if}
 </div>
