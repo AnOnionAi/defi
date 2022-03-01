@@ -32,8 +32,8 @@
 	</button>
 	{#if isShowing}
 		<div
-			in:scale={{ duration: 150, start: 0.90 }}
-			out:scale={{ duration: 100, start: 0.90 }}
+			in:scale={{ duration: 150, start: 0.9 }}
+			out:scale={{ duration: 100, start: 0.9 }}
 			class=" {$isHomescreen &&
 				'z-20'} absolute  rounded-md bg-white text-black dark:bg-neutral-900 dark:text-white">
 			<a
