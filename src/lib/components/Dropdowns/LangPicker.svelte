@@ -17,7 +17,6 @@
 		isShowing = !isShowing;
 	};
 
-
 	const handleNewLangSelect = (lang: string) => {
 		setInit(lang);
 		isShowing = false;
