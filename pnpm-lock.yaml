@@ -11,6 +11,7 @@ specifiers:
   '@typescript-eslint/parser': ^4.33.0
   autoprefixer: ^10.4.2
   bignumber.js: ^9.0.1
+  chart.js: ^3.7.1
   eslint: ^7.32.0
   eslint-plugin-svelte3: ^3.2.0
   ethers: 5.5.1
@@ -19,6 +20,7 @@ specifiers:
   prettier: ^2.5.1
   prettier-plugin-tailwindcss: ^0.1.7
   svelte: ^3.44.3
+  svelte-check: ^2.4.5
   svelte-fa: ^2.3.3
   svelte-i18n: ^3.3.9
   svelte-loading-spinners: ^0.1.7
@@ -34,6 +36,7 @@ dependencies:
   '@fortawesome/free-brands-svg-icons': 5.15.4
   '@fortawesome/free-solid-svg-icons': 5.15.4
   bignumber.js: 9.0.2
+  chart.js: 3.7.1
   ethers: 5.5.1
   svelte-fa: 2.4.0
   svelte-i18n: 3.3.13_svelte@3.44.3
@@ -57,6 +60,7 @@ devDependencies:
   prettier: 2.5.1
   prettier-plugin-tailwindcss: 0.1.7_prettier@2.5.1
   svelte: 3.44.3
+  svelte-check: 2.4.5_postcss@8.4.6+svelte@3.44.3
   svelte-preprocess: 4.10.1_c198867e11ac409229a63626be09e383
   tailwindcss: 3.0.22_autoprefixer@10.4.2
   tslib: 2.3.1
@@ -2114,6 +2118,13 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /chart.js/3.7.1:
+    resolution:
+      {
+        integrity: sha512-8knRegQLFnPQAheZV8MjxIXc5gQEfDFD897BJgv/klO/vtIyFFmgMXrNfgrXpbTr/XbTturxRgxIXx/Y+ASJBA==
+      }
+    dev: false
 
   /chokidar/3.5.3:
     resolution:
@@ -4695,6 +4706,14 @@ packages:
     engines: { node: '>=0.10.0' }
     dev: true
 
+  /source-map/0.7.3:
+    resolution:
+      {
+        integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
+      }
+    engines: { node: '>= 8' }
+    dev: true
+
   /sourcemap-codec/1.4.8:
     resolution:
       {
@@ -4782,6 +4801,38 @@ packages:
         integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
       }
     engines: { node: '>= 0.4' }
+    dev: true
+
+  /svelte-check/2.4.5_postcss@8.4.6+svelte@3.44.3:
+    resolution:
+      {
+        integrity: sha512-nRft8BbG2wcxyCdHDZ7X43xLcvDzua3xLwq6wzHGcAF3ka3Jyhv2rvgq0+SF9NwHLMefp9C2XkM6etzsxK/cMQ==
+      }
+    hasBin: true
+    peerDependencies:
+      svelte: ^3.24.0
+    dependencies:
+      chokidar: 3.5.3
+      fast-glob: 3.2.11
+      import-fresh: 3.3.0
+      minimist: 1.2.5
+      picocolors: 1.0.0
+      sade: 1.7.4
+      source-map: 0.7.3
+      svelte: 3.44.3
+      svelte-preprocess: 4.10.1_c198867e11ac409229a63626be09e383
+      typescript: 4.5.4
+    transitivePeerDependencies:
+      - '@babel/core'
+      - coffeescript
+      - less
+      - node-sass
+      - postcss
+      - postcss-load-config
+      - pug
+      - sass
+      - stylus
+      - sugarss
     dev: true
 
   /svelte-fa/2.4.0:

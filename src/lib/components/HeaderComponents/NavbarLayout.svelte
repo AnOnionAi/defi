@@ -1,16 +1,10 @@
-<script lang="ts">
-	import { page } from '$app/stores';
-
+<script context="module" lang="ts">
 	export const prerender = false;
+</script>
+
+<script lang="ts">
 	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
-
-	let navbarStyles = '';
-
-	$: {
-		console.log('hs', $isHomescreen);
-		console.log($page.params.lang);
-	}
 </script>
 
 <nav

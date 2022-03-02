@@ -1,14 +1,12 @@
 <script context="module" lang="ts">
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
-	import { setInit } from '$lib/i18n/init';
 </script>
 
 <script lang="ts">
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import { pools } from '$lib/config/constants/pools';
 	import { darkMode } from '$lib/stores/dark';
-	import { isHomescreen } from '$lib/stores/homescreen';
 </script>
 
 <section class="background {$darkMode && 'background__dark'}">

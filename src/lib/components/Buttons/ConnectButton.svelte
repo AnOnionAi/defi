@@ -11,7 +11,6 @@
 	} from '$lib/utils/metamaskCalls';
 	import { POLYGON_CHAIN_ID } from '$lib/config';
 	import WrongNetwork from '../Modals/WrongNetwork.svelte';
-	import { fade, fly } from 'svelte/transition';
 
 	const { open } = getContext('simple-modal');
 

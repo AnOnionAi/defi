@@ -4,8 +4,6 @@
 
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { darkMode } from '$lib/stores/dark';
-	import { isHomescreen } from '$lib/stores/homescreen';
 	import { setInit } from '../i18n/init';
 	import { page } from '$app/stores';
 	import ConnectButton from '$lib/components/Buttons/ConnectButton.svelte';
@@ -18,7 +16,6 @@
 	import Logo from '$lib/components/HeaderComponents/Logo.svelte';
 	import NavbarLayout from '$lib/components/HeaderComponents/NavbarLayout.svelte';
 	import NavContainer from '$lib/components/HeaderComponents/NavContainer.svelte';
-	import { slide } from 'svelte/transition';
 	import MobileNavbar from '$lib/components/HeaderComponents/MobileNavbar.svelte';
 
 	let navbarMenuIsOpen = false;

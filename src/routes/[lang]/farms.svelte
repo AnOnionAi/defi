@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
-	import { setInit } from '$lib/i18n/init';
 	import { darkMode } from '$lib/stores/dark';
 </script>
 

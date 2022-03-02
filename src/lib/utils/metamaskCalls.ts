@@ -2,17 +2,17 @@ import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/ts/types';
 import { accounts } from '$lib/stores/MetaMaskAccount';
 
-export const isMetaMaskInstalled = () => {
+export const isMetaMaskInstalled = (): boolean => {
 	//Have to check the ethereum binding on the window object to see if it's installed
 	const { ethereum } = window;
 	return Boolean(ethereum && ethereum.isMetaMask);
 };
 
-export const goInstallMetamask = () => {
+export const goInstallMetamask = (): void => {
 	window.open('https://metamask.io/download');
 };
 
-export const metaMaskCon = async () => {
+export const metaMaskCon = async (): Promise<void> => {
 	try {
 		const user_accounts = await window.ethereum.request({
 			method: 'eth_requestAccounts'
@@ -24,7 +24,7 @@ export const metaMaskCon = async () => {
 	}
 };
 
-export const addTokenToMetamaskWallet = () => {
+export const addTokenToMetamaskWallet = (): Promise<void> => {
 	return window.ethereum
 		.request({
 			method: 'wallet_watchAsset',

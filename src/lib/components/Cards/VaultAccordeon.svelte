@@ -7,7 +7,6 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import type { LPair, VaultInfo } from '$lib/ts/types';
 	import {
 		getTokenBalance,
 		approveToken,
@@ -17,16 +16,13 @@
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { Token } from '$lib/ts/types';
-	import {
-		parseBigNumberToString,
-		parseBigNumberToDecimal
-	} from '$lib/utils/balanceParsers';
+	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import { BigNumber } from 'ethers';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
 	import { quickImages, sushiImages } from '$lib/config/constants/vaultsImages';
 	import { Chasing } from 'svelte-loading-spinners';
-	import { providers, ethers } from 'ethers';
+	import { ethers } from 'ethers';
 	import { getContext } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	const { open } = getContext('simple-modal');
@@ -45,17 +41,12 @@
 	export let vaultConfig;
 	let allImages = [...quickImages, ...sushiImages];
 	let userAcc: string;
-	let isHidden: boolean = true;
+	let isHidden = true;
 	let isApproved: boolean;
 	let stakedTokens;
 	let userTokens: BigNumber;
-	let apy: string;
-	let tvl: string;
-	let daily: string;
-	let borderStyle: string = 'rounded-lg';
 	let tkn0Price: number;
 	let tkn1Price: number;
-	let userApproveAmount;
 	let userDepositAmount: string;
 	let userWithdrawAmount: string;
 	const loadingState = {
@@ -65,7 +56,8 @@
 		withdraw: false,
 		harvest: false
 	};
-	const unsubscribe = accounts.subscribe(async (arrayAccs) => {
+
+	accounts.subscribe(async (arrayAccs) => {
 		if (arrayAccs) {
 			userAcc = arrayAccs[0];
 		}

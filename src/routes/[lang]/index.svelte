@@ -80,13 +80,14 @@
 
 			const star = new THREE.Mesh(geometry, material);
 			const [x, y, z] = Array(3)
-				.fill()
+				.fill(0)
 				.map(() => THREE.MathUtils.randFloatSpread(2500));
+
 			star.position.set(x, y, z);
 			scene.add(star);
 		}
 
-		Array(1000).fill().forEach(addStar);
+		Array(1000).fill(0).forEach(addStar);
 
 		const spaceTexture = new THREE.TextureLoader().load(spaceDay);
 		const spaceTextureLight = new THREE.TextureLoader().load(spaceNight);
@@ -372,6 +373,7 @@
 		display: inline;
 		background-color: white;
 		-webkit-box-decoration-break: clone;
+		box-decoration-break: clone;
 		padding: 0;
 		color: black;
 		font-size: 45px;

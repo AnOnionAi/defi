@@ -8,13 +8,11 @@
 	import Modal from 'svelte-simple-modal';
 	import '../app.css';
 	import {
-		chainID,
 		accounts,
 		metamaskConnect,
 		metamaskListeners
 	} from '$lib/stores/MetaMaskAccount';
 
-	let currentChain;
 	let currentPath;
 	let lastPath;
 

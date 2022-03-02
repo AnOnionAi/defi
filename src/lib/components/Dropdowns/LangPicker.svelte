@@ -1,22 +1,25 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n';
 	import { scale } from 'svelte/transition';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { setInit } from '$lib/i18n/init';
-	import { darkMode } from '$lib/stores/dark';
 	import { isHomescreen } from '$lib/stores/homescreen';
-	import { LANGUAGES, validLang } from '$lib/i18n/utils';
+	import { validLang } from '$lib/i18n/utils';
 
-	export let home = false;
 	export let isShowing = false;
 
 	let langPickerText = 'en';
 
 	$: langPickerText = validLang($page.params.lang);
 
+	$: currentRoute = $page.url.pathname.replace(`/${$page.params.lang}`, '');
+
 	const toggleDropDownMenu = () => {
 		isShowing = !isShowing;
+	};
+
+	const handleNewLangSelect = (lang: string) => {
+		setInit(lang);
+		isShowing = false;
 	};
 </script>
 
@@ -34,21 +37,21 @@
 			class=" {$isHomescreen &&
 				'z-20'} absolute  rounded-md bg-white text-black dark:bg-neutral-900 dark:text-white">
 			<a
-				on:click={() => setInit('en')}
+				on:click={() => handleNewLangSelect('en')}
 				class=" flex items-center justify-center px-5 py-2 font-light hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href="/en">English</a>
+				href={`/en${currentRoute}`}>English</a>
 			<a
-				on:click={() => setInit('de')}
+				on:click={() => handleNewLangSelect('de')}
 				class=" flex items-center justify-center px-5 py-2 font-light hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href="/de">Deutsche</a>
+				href={`/de${currentRoute}`}>Deutsche</a>
 			<a
-				on:click={() => setInit('es')}
+				on:click={() => handleNewLangSelect('es')}
 				class=" flex items-center justify-center px-5 py-2 font-light hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href="/es">Español</a>
+				href={`/es${currentRoute}`}>Español</a>
 			<a
-				on:click={() => setInit('fr')}
+				on:click={() => handleNewLangSelect('fr')}
 				class=" flex items-center justify-center px-5 py-2 font-light hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href="/fr">Français</a>
+				href={`/fr${currentRoute}`}>Français</a>
 		</div>
 	{/if}
 </div>

@@ -5,14 +5,6 @@
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	const { open } = getContext('simple-modal');
 
-	export async function load({ page }) {
-		const { lang } = page.params;
-
-		return {
-			props: { lang }
-		};
-	}
-
 	const openModal = () => {
 		open(MetamaskNotInstalled, {
 			closeButton: true,

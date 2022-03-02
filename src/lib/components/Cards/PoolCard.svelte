@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Provider } from '$lib/utils/web3Helpers';
-	import ERC20ABI from '$lib/config/abi/ERC20.json';
 	import { slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
@@ -10,9 +8,7 @@
 	import {
 		approveToken,
 		getTokenAllowance,
-		isNotZero,
 		getTokenBalance,
-		getTokenName,
 		getTokenDecimals
 	} from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
@@ -24,7 +20,14 @@
 		faChevronDown
 	} from '@fortawesome/free-solid-svg-icons';
 	import {
-		MasterChef,
+		getStakedTokens,
+		getPendingMush,
+		getPoolLength,
+		getPoolInfo,
+		deposit,
+		withdraw,
+		harvestRewards,
+		getMushPerBlock,
 		getPoolMultiplier,
 		getPoolWeight
 	} from '$lib/utils/masterc';
@@ -53,7 +56,7 @@
 	const { open } = getContext('simple-modal');
 
 	export let info: PoolInfo;
-	export let isFarm: boolean = false;
+	export let isFarm = false;
 
 	let poolFeePercentage: number = null;
 	let stakingTokenPrice: number;
@@ -73,7 +76,7 @@
 
 	let poolMultiplier: number;
 
-	let isHidden: boolean = true;
+	let isHidden = true;
 
 	let userAcc: string;
 	let tokenApproved: boolean;
@@ -81,7 +84,7 @@
 	let canWithdraw: boolean;
 	let canHarvest: boolean;
 
-	let wantWithdrawAmount: any;
+	let wantWithdrawAmount: string;
 	let idInterval;
 
 	let tokenAllowance: BigNumber = ethers.constants.Zero;
@@ -104,15 +107,6 @@
 		clearInterval(idInterval);
 	}
 
-	$: {
-		/* console.log({
-				tokenAllowance,
-				userBalance,
-				userStakedTokens,
-				userEarnings
-			}) */
-	}
-
 	const refreshData = async () => {
 		try {
 			tokenAllowance = await getTokenAllowance(
@@ -123,15 +117,17 @@
 			if (tokenAllowance.isZero()) return;
 			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
 			if (userBalance.isZero()) return;
-			userStakedTokens = await MasterChef.getStakedTokens(info.pid, userAcc);
+			userStakedTokens = await getStakedTokens(info.pid, userAcc);
 			if (userStakedTokens.isZero()) return;
-			userEarnings = await MasterChef.getPendingMush(info.pid);
-		} catch (e) {}
+			userEarnings = await getPendingMush(info.pid);
+		} catch (e) {
+			console.log('Failed to refresh pool Data');
+		}
 	};
 
 	onMount(async () => {
 		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
-		const poolInfo: PoolInfoResponse = await MasterChef.getPoolInfo(info.pid);
+		const poolInfo: PoolInfoResponse = await getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
@@ -147,7 +143,7 @@
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 
 		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
-		const tokenPerBlock = await MasterChef.getMushPerBlock();
+		const tokenPerBlock = await getMushPerBlock();
 		const mushPerBlock: number = parseFloat(
 			ethers.utils.formatEther(tokenPerBlock)
 		);
@@ -183,11 +179,7 @@
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await MasterChef.deposit(
-				info.pid,
-				amount,
-				stakingTokenDecimals
-			);
+			const tx = await deposit(info.pid, amount, stakingTokenDecimals);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
@@ -202,7 +194,7 @@
 		wantWithdrawAmount = amount;
 		addNotification(transactionSend);
 		try {
-			const tx = await MasterChef.withdraw(
+			const tx = await withdraw(
 				info.pid,
 				wantWithdrawAmount,
 				stakingTokenDecimals
@@ -220,7 +212,7 @@
 		loadingState.loadingHarvest = true;
 		try {
 			addNotification(transactionSend);
-			const tx = await MasterChef.deposit(info.pid, '0');
+			const tx = await deposit(info.pid, '0');
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {

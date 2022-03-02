@@ -1,4 +1,4 @@
-let env: {};
+let env;
 
 env = import.meta.env;
 

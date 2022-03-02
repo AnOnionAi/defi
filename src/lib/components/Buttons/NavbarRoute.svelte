@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { darkMode } from '$lib/stores/dark';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
-
 	export let pageTitle;
 	export let pageRoute;
 

@@ -2,9 +2,7 @@
 	import { _ } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
 	import type { PoolInfo } from '$lib/ts/types';
-	import { getERC20Contract } from '$lib/utils/contracts';
-	import { getContext, onMount } from 'svelte';
-	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import { getContext } from 'svelte';
 	import { ethers } from 'ethers';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 

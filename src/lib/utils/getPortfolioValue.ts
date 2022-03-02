@@ -39,15 +39,14 @@ export const getPortfolioValue = async (address: string): Promise<number> => {
 		const dataReponse: TokenBalancesResponse = data;
 		const { items } = dataReponse;
 		return items
-			.map((tokenData) =>
-				tokenData.quote_rate == 0
-					? 0
-					: parseFloat(
-							ethers.utils.formatUnits(
-								tokenData.balance,
-								tokenData.contract_decimals
-							)
-					  ) * tokenData.quote_rate
+			.map(
+				(tokenData) =>
+					parseFloat(
+						ethers.utils.formatUnits(
+							tokenData.balance,
+							tokenData.contract_decimals
+						)
+					) * tokenData.quote_rate
 			)
 			.reduce((prev, current) => prev + current);
 	} catch {

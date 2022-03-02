@@ -1,31 +1,24 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
-	import { getTokenBalance, isNotZero } from '$lib/utils/erc20';
+	import { getTokenBalance } from '$lib/utils/erc20';
 	import {
 		getPendingReward,
 		getSharesTotal,
-		getUserInfo,
 		harvest
 	} from '$lib/utils/dividends';
 	import { stakedWantTokens, deposit, withdraw } from '$lib/utils/vaultChef';
 	import { LoadingState, Token } from '$lib/ts/types';
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 
-	import { BigNumber, ethers, utils } from 'ethers';
-	import {
-		parseBigNumberToDecimal,
-		parseBigNumberToString
-	} from '$lib/utils/balanceParsers';
+	import { BigNumber, ethers } from 'ethers';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
-		transactionSend,
-		wrongInput
+		transactionSend
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
-	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import DividendsInfoItem from '../Dividends/DividendsInfoItem.svelte';
 	import InputWithButton from '../Dividends/InputWithButton.svelte';
@@ -42,12 +35,12 @@
 	let userStakedTokens: BigNumber = ethers.constants.Zero;
 	let userReward: BigNumber = ethers.constants.Zero;
 
-	let userCanWithdraw: boolean = false;
-	let userCanHarvest: boolean = false;
-	let userCanDeposit: boolean = false;
+	let userCanWithdraw = false;
+	let userCanHarvest = false;
+	let userCanDeposit = false;
 
-	let depositInput: string = '';
-	let withdrawInput: string = '';
+	let depositInput = '';
+	let withdrawInput = '';
 
 	let loadingState: LoadingState = {
 		loadingDeposit: false,

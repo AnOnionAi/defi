@@ -5,18 +5,14 @@
 		isMetaMaskInstalled
 	} from '$lib/utils/metamaskCalls';
 	import { getTokenBalance } from '$lib/utils/erc20';
-	import { onDestroy, onMount } from 'svelte';
 	import { Token } from '$lib/ts/types';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
-	import { BigNumber, ethers } from 'ethers';
+	import { ethers } from 'ethers';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
-	import { width } from '@fortawesome/free-solid-svg-icons/faChevronUp';
 	import { page } from '$app/stores';
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
-
 	import { getContext } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	const { open } = getContext('simple-modal');
