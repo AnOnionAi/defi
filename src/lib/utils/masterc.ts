@@ -4,7 +4,7 @@ import { ethersToBigNumber } from './bigNumber';
 import { getProviderSingleton } from './web3Helpers';
 import MasterChefAbi from '$lib/config/abi/MasterChef.json';
 import { getContractAddress } from './addressHelpers';
-import { PoolInfoResponse, Token } from '$lib/ts/types';
+import { Token } from '$lib/ts/types';
 import { getSigner } from './helpers';
 
 const masterChefContract = new ethers.Contract(
@@ -44,7 +44,7 @@ export const getPendingMush = async (pid: number): Promise<BigNumber> =>
 export const poolExistance = async (): Promise<boolean> =>
 	masterChefContract.poolExistance();
 
-export const getPoolInfo = async (pid: number): Promise<PoolInfoResponse> =>
+export const getPoolInfo = async (pid: number): Promise<any> =>
 	masterChefContract.poolInfo(pid);
 
 export const getPoolLength = async (): Promise<BigNumber> =>
