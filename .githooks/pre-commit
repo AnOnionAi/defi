@@ -2,4 +2,4 @@
 
 set -e
 
-#pnpm lint-staged
+pnpm lint-staged
