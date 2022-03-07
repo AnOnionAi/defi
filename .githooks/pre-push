@@ -3,5 +3,5 @@
 set -e
 
 pnpm install --frozen-lockfile
-pnpm check:svelte 
-pnpm check:eslint
+#pnpm check:svelte 
+#pnpm check:eslint
