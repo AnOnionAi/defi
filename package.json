@@ -14,7 +14,7 @@
 		"check:eslint": "eslint --fix --ignore-path .gitignore .",
 		"check:prettier": "prettier --check --plugin-search-dir=. .",
 		"check:svelte": "tsc && svelte-check --tsconfig tsconfig.json",
-		"prepare": "chmod ug+x .githooks/ && git config core.hooksPath .githooks",
+		"prepare": "chmod +x .githooks/* && git config core.hooksPath .githooks",
 		"lint": "pnpm check:prettier && pnpm check:svelte && pnpm check:eslint",
 		"test": "playwright test"
 	},
