@@ -49,9 +49,11 @@
 		{/if}
 		<main
 			class:dark={$darkMode}
-			class="main  background_pattern  {$darkMode &&
+			class="main background_pattern flex flex-1  {$darkMode &&
 				'bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-900'} ">
-			<slot />
+			<div class="flex-1">
+				<slot />
+			</div>
 		</main>
 		<Footer />
 	</Modal>
@@ -59,9 +61,6 @@
 
 <style>
 	.main {
-		min-height: 88vh;
 		width: 100%;
-		height: 100%;
-		margin: 0 auto;
 	}
 </style>

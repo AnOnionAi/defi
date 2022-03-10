@@ -69,34 +69,39 @@
 	};
 </script>
 
-<br />
-<h1 class="text-center text-5xl tracking-wide dark:text-white">
-	{$_('headers.dividends.text')}
-</h1>
-<div class="my-6">
-	<div
-		style="background-image:url({backgroundImage});"
-		class="dividends-wrapper">
+<section class="flex h-full flex-col">
+	<h1 class="mt-[2rem] text-center text-5xl tracking-wide dark:text-white">
+		{$_('headers.dividends.text')}
+	</h1>
+	<div class="flex-1">
 		<div
-			class="dividends h-full  w-full max-w-lg rounded-2xl  p-5 {!$darkMode &&
-				'shadow-xl'} bg-white dark:bg-neutral-900 ">
-			{#if approved}
-				<div in:fade={{ duration: 200 }} class="h-full">
-					<DividendCard />
-				</div>
-			{:else if $accounts && finishedApprovalFetch}
-				<ApproveMush onApproval={handleApproval} />
-			{:else if !$accounts}
-				<Connect />
-			{/if}
+			style="background-image:url({backgroundImage});"
+			class="dividends-wrapper">
+			<div
+				class="dividends h-full  w-full max-w-lg rounded-2xl  p-5 {!$darkMode &&
+					'shadow-xl'} bg-white dark:bg-neutral-900 ">
+				{#if approved}
+					<div in:fade={{ duration: 200 }} class="h-full">
+						<DividendCard />
+					</div>
+				{:else if $accounts && finishedApprovalFetch}
+					<ApproveMush onApproval={handleApproval} />
+				{:else if !$accounts}
+					<Connect />
+				{/if}
+			</div>
 		</div>
 	</div>
-</div>
+</section>
 
 <style>
+	section {
+		height: 100%;
+		width: 100%;
+	}
 	.dividends-wrapper {
 		width: 100%;
-		height: 82vh;
+		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;

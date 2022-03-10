@@ -17,14 +17,15 @@
 	});
 </script>
 
-<section class="farms" style="background:url({backgroundImage});">
-	<br />
-	<h1 class=" text-center text-5xl tracking-wide dark:text-white">
+<section
+	class="farms flex h-full flex-col"
+	style="background:url({backgroundImage});">
+	<h1 class="mt-[2rem] text-center text-5xl tracking-wide dark:text-white">
 		{$_('headers.farms.text')}
 	</h1>
-	<div class="w-23/24  mx-auto max-w-7xl rounded-xl ">
+	<div class="w-23/24 mx-auto flex max-w-7xl flex-1 items-center">
 		<div
-			class="flex flex-row flex-wrap justify-center gap-6 rounded-xl p-8   text-center">
+			class="flex flex-row  flex-wrap justify-center gap-6 rounded-xl  text-center">
 			<!--Start Farms-->
 			{#each farms as farm}
 				<PoolCard info={farm} isFarm={true} />
@@ -37,6 +38,5 @@
 <style>
 	.farms {
 		background-repeat: no-repeat;
-		min-height: 85vh;
 	}
 </style>
