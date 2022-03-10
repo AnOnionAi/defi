@@ -1,5 +1,7 @@
 <script context="module" lang="ts">
-	import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+	import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+	import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 	export async function getMush(): Promise<Array<GLTF>> {
 		try {
 			const mushLoader = new GLTFLoader();
