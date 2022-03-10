@@ -32,8 +32,10 @@
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
-	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
-	import { Chart, ChartType, registerables } from 'chart.js';
+	import { calculateGrowth } from '$lib/utils/growthPercentage';
+	import type { GrowthInfo } from '$lib/utils/growthPercentage';
+	import { Chart, registerables } from 'chart.js';
+	import type { ChartType } from 'chart.js';
 	import { getMonthsEnshortedNames } from '$lib/i18n/utils';
 
 	let value = 0;
