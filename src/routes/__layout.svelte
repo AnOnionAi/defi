@@ -50,7 +50,7 @@
 		<main
 			class:dark={$darkMode}
 			class="main background_pattern flex flex-1  {$darkMode &&
-				'bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-900'} ">
+				'bg-neutral-900'} ">
 			<div class="flex-1">
 				<slot />
 			</div>

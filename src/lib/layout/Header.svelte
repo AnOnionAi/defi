@@ -52,23 +52,19 @@
 		</div>
 		<div class="flex items-center" bind:this={menu}>
 			<Logo />
-			<div class="hidden md:flex">
-				<LangPicker bind:isShowing={showDropDownMenu} />
-			</div>
-			<NavRouteSection>
-				<NavbarRoute
-					pageTitle={$_('headers.dashboard.text')}
-					pageRoute="/dashboard" />
-				<NavbarRoute
-					pageTitle={$_('headers.dividends.text')}
-					pageRoute="/dividends" />
-				<NavbarRoute pageTitle={$_('headers.farms.text')} pageRoute="/farms" />
-				<NavbarRoute pageTitle={$_('headers.pools.text')} pageRoute="/pools" />
-				<NavbarRoute
-					pageTitle={$_('headers.vaults.text')}
-					pageRoute="/vaults" />
-			</NavRouteSection>
 		</div>
+
+		<NavRouteSection>
+			<NavbarRoute
+				pageTitle={$_('headers.dashboard.text')}
+				pageRoute="/dashboard" />
+			<NavbarRoute
+				pageTitle={$_('headers.dividends.text')}
+				pageRoute="/dividends" />
+			<NavbarRoute pageTitle={$_('headers.farms.text')} pageRoute="/farms" />
+			<NavbarRoute pageTitle={$_('headers.pools.text')} pageRoute="/pools" />
+			<NavbarRoute pageTitle={$_('headers.vaults.text')} pageRoute="/vaults" />
+		</NavRouteSection>
 
 		<div class="hidden lg:flex lg:gap-x-4 xl:gap-x-6">
 			<DarkModeButton />

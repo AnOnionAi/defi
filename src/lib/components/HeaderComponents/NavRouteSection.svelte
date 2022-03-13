@@ -1,3 +1,3 @@
-<div class="ml-6 hidden lg:flex lg:gap-x-1 xl:gap-x-2">
+<div class=" hidden lg:flex lg:gap-x-1 xl:gap-x-7">
 	<slot />
 </div>

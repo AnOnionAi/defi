@@ -12,7 +12,7 @@
 <a sveltekit:prefetch href={`/${$page.params.lang}${pageRoute}`}>
 	<span
 		class="hover:text-green-500 {$darkMode &&
-			'hover:text-green-300'}   rounded-md  px-2 py-3 {isCurrentRoute &&
+			'hover:text-green-300'}   rounded-md   {isCurrentRoute &&
 			!$darkMode &&
 			'font-medium text-green-500'} {isCurrentRoute &&
 			$darkMode &&

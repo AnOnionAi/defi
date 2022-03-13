@@ -4,15 +4,20 @@
 	import { isHomescreen } from '$lib/stores/homescreen';
 </script>
 
-<div class="flex flex-shrink-0 items-center">
-	<a href={`/${$page.params.lang}/`} class="flex cursor-pointer">
-		<img class="w-10 " src="/theme/fiji.svg" alt="Fung Finance Logo" />
+<div class="flex flex-shrink-0">
+	<a
+		href={`/${$page.params.lang}/`}
+		class="flex cursor-pointer items-center gap-1">
+		<img class="mr-1 w-10" src="/theme/fiji.svg" alt="Fung Finance Logo" />
 		{#if $isHomescreen}
-			<img class="mt-1 " src="/theme/fungfiDarkMode.svg" alt="Fung Finance" />
+			<p>Fung Fi</p>
 		{:else if $darkMode}
-			<img class="mt-1 " src="/theme/fungfiDarkMode.svg" alt="Fung Finance" />
+			<p class="text-[24px] font-[800] text-white">Fung Fi</p>
 		{:else}
-			<img class="mt-1 " src="/theme/fungfiLiteMode.svg" alt="Fung Finance" />
+			<p class="text-[24px] font-[800]">Fung Fi</p>
 		{/if}
 	</a>
 </div>
+
+<style>
+</style>
