@@ -1,6 +1,6 @@
 import BN from 'bignumber.js';
 import { getLiquidityPairContract } from '$lib/utils/contracts';
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 

@@ -22,11 +22,9 @@
 	import {
 		getStakedTokens,
 		getPendingMush,
-		getPoolLength,
 		getPoolInfo,
 		deposit,
 		withdraw,
-		harvestRewards,
 		getMushPerBlock,
 		getPoolMultiplier,
 		getPoolWeight
