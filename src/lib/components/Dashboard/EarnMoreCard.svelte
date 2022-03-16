@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="h-55 col-span-6 flex select-none flex-col  justify-between rounded-2xl bg-white p-5 shadow-md transition duration-300 dark:bg-neutral-900 md:col-span-3">
+	class="h-55 col-span-6 flex select-none flex-col  justify-between rounded-2xl bg-white p-5 opacity-80 shadow-md transition duration-300 dark:bg-neutral-800 md:col-span-3">
 	<div class="flex items-center">
 		<p
 			class="ml-2 text-xl font-light tracking-wider text-gray-600 dark:text-white">
@@ -31,7 +31,7 @@
 	<a
 		sveltekit:prefetch
 		href={route}
-		class="flex items-center self-center rounded-lg border  border-green-500 py-2 px-3 hover:bg-green-400 hover:text-white">
-		<p class="font-medium dark:text-white">{buttonText}</p>
+		class="flex  items-center self-center rounded-lg  bg-primary-500 py-2 px-3 hover:bg-primary-400 hover:text-white dark:bg-analogPurple-300  dark:hover:bg-analogPurple-400">
+		<p class="font-medium text-white">{buttonText}</p>
 	</a>
 </div>

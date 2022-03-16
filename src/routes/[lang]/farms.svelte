@@ -20,7 +20,8 @@
 <section
 	class="farms flex h-full flex-col"
 	style="background:url({backgroundImage});">
-	<h1 class="mt-[2rem] text-center text-5xl tracking-wide dark:text-white">
+	<h1
+		class="test mt-[2rem] text-center text-5xl font-[700] tracking-wide dark:text-white">
 		{$_('headers.farms.text')}
 	</h1>
 	<div class="w-23/24 mx-auto flex max-w-7xl flex-1 items-center">

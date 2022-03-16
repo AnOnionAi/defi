@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="flex h-32 w-full  flex-col justify-between overflow-hidden rounded-xl bg-white p-3  shadow-md dark:bg-neutral-900 dark:text-white dark:shadow-none">
+	class="flex h-32 w-full  flex-col justify-between overflow-hidden rounded-xl bg-white p-3  opacity-90 shadow-md dark:bg-neutral-800 dark:text-white dark:shadow-none">
 	<h3 class="text-center font-semibold ">{title}</h3>
 	{#if display && $page.params.lang}
 		{#if isPercentage && isPercentage != null}
@@ -19,9 +19,9 @@
 				in:fade={{ duration: 500 }}
 				class="flex items-center justify-center ">
 				{#if display < 0}
-					<Fa icon={faCaretDown} size={'2x'} color="#ef4444" />
+					<Fa icon={faCaretDown} size={'2x'} color="#ff2d50" />
 				{:else if display > 0}
-					<Fa icon={faCaretUp} size={'2x'} color="#22c55e" />
+					<Fa icon={faCaretUp} size={'2x'} color="#5efb4e" />
 				{/if}
 				<p class="ml-1 text-2xl">
 					{formatComma(Math.abs(display), $page.params.lang)}%

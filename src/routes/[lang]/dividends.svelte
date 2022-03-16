@@ -70,7 +70,8 @@
 </script>
 
 <section class="flex h-full flex-col">
-	<h1 class="mt-[2rem] text-center text-5xl tracking-wide dark:text-white">
+	<h1
+		class="mt-[2rem] select-none text-center text-5xl font-[700] tracking-wide dark:text-white ">
 		{$_('headers.dividends.text')}
 	</h1>
 	<div class="flex-1">
@@ -112,5 +113,11 @@
 
 	.dividends {
 		max-height: 600px;
+	}
+
+	.test {
+		background: -webkit-linear-gradient(#4158d0, #c850c0, #ffcc70);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 </style>
