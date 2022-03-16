@@ -11,7 +11,7 @@
 	class:dark={$darkMode}
 	class="{$isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
-		'bg-zinc-800 '} top-0 w-full backdrop-blur  {!$isHomescreen &&
-		'shadow-sm'} {$isHomescreen && 'text-white'} {$darkMode && 'text-white'}">
+		'bg-darkGrey-900 '}  w-full backdrop-blur   {$isHomescreen &&
+		'text-white'} {$darkMode && 'text-white'}">
 	<slot />
 </nav>

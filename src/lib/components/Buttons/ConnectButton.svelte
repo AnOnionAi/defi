@@ -49,29 +49,55 @@
 	};
 </script>
 
-<button
-	on:click={() => onClickDispatcher(isInstalled)}
-	class="rounded-md px-3  hover:bg-green-400 {$accounts &&
-		'bg-green-400'} {!$accounts && 'bg-green-600'} {!$darkMode && 'shadow-md'}">
-	<p class=" flex items-center font-light text-white ">
-		{#if isInstalled == 'checking'}
-			{$_('walletStatus.checking')}
-		{:else if $accounts}
-			<span class="flex items-center">{formatAddress($accounts)}</span>
-			<img
-				src="/assets/tinyRedMush.png"
-				alt="Mush for the family"
-				class="w-6 h-6 ml-2" />
-		{:else if isInstalled == 'isInstalled'}
-			{$_('dividendsPage.cyw')}
-		{:else if isInstalled == 'notInstalled'}
-			{$_('walletStatus.install')}
-		{/if}
-	</p>
-</button>
+{#if isInstalled == 'notInstalled'}
+	<button class="rounded-full bg-primary-400 px-4  text-sm font-bold text-white"
+		>Install Metamask</button>
+{/if}
+
+{#if isInstalled == 'checking'}
+	<button
+		class="flex items-center rounded-full bg-primary-400  px-4 text-sm font-bold text-white dark:bg-analogPurple-300">
+		<div class="flex items-center justify-center">
+			<div
+				class="h-4 w-4 animate-spin rounded-full
+		border-4 border-solid border-white border-t-transparent" />
+		</div>
+		<span class="px-2"> Checking... </span></button>
+{/if}
+
+{#if isInstalled == 'isInstalled' && !$accounts}
+	<button
+		class="pressed  rounded-full
+		 bg-primary-400 px-4 text-sm font-bold text-white hover:bg-primary-300 dark:bg-analogPurple-300 dark:hover:bg-analogPurple-400 {$darkMode &&
+			'pressed-dark'}"
+		on:click={() => onClickDispatcher(isInstalled)}>Connect Wallet</button>
+{/if}
+
+{#if $accounts}
+	<button
+		class="rounded-full bg-primary-400 px-6 text-sm font-bold text-white  hover:bg-primary-300 dark:bg-analogPurple-300 dark:hover:bg-analogPurple-400"
+		>{formatAddress($accounts)}</button>
+{/if}
 
 <style>
 	button {
-		height: 38px;
+		height: 34px;
+	}
+	.pressed {
+		box-shadow: 0 3px rgb(224, 210, 210);
+	}
+
+	.pressed:active {
+		transform: translateY(1px);
+		box-shadow: 0 1px rgb(126, 126, 126);
+	}
+
+	.pressed-dark {
+		box-shadow: 0 3px rgb(97, 96, 96);
+	}
+
+	.pressed-dark:active {
+		transform: translateY(1px);
+		box-shadow: 0 1px rgb(26, 26, 26);
 	}
 </style>

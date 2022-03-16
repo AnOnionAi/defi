@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { setInit } from '../i18n/init';
+	import { setInit } from '$lib/i18n/init';
 	import { page } from '$app/stores';
 	import ConnectButton from '$lib/components/Buttons/ConnectButton.svelte';
 	import LangPicker from '$lib/components/Dropdowns/LangPicker.svelte';
@@ -47,7 +47,7 @@
 
 <NavbarLayout>
 	<NavContainer>
-		<div class="flex md:hidden">
+		<div class="flex lg:hidden">
 			<LangPicker />
 		</div>
 		<div class="flex items-center" bind:this={menu}>
@@ -66,7 +66,10 @@
 			<NavbarRoute pageTitle={$_('headers.vaults.text')} pageRoute="/vaults" />
 		</NavRouteSection>
 
-		<div class="hidden lg:flex lg:gap-x-4 xl:gap-x-6">
+		<div class="hidden items-center lg:flex lg:gap-x-4 xl:gap-x-6">
+			<div>
+				<LangPicker />
+			</div>
 			<DarkModeButton />
 			<MushPrice />
 			<ConnectButton />
@@ -77,6 +80,6 @@
 	</NavContainer>
 
 	{#if navbarMenuIsOpen}
-		<MobileNavbar />
+		<MobileNavbar bind:navbarMenuIsOpen />
 	{/if}
 </NavbarLayout>

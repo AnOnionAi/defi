@@ -4,6 +4,6 @@
 
 <style>
 	div {
-		height: 72px;
+		height: 76px;
 	}
 </style>

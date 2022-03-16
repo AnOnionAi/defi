@@ -42,48 +42,51 @@
 			<a
 				href={`https://app.sushi.com/${$page.params.lang}/swap`}
 				target="_blank"
-				class="rounded-full bg-neutral-600 px-3 py-1 text-sm font-light text-white hover:bg-green-400"
-				>Buy MUSH</a>
+				class="rounded-full bg-complementary-600 px-3 py-1 text-sm font-[500]  text-white hover:bg-complementary-500 "
+				>Buy MUSH &rarr;</a>
 		</div>
 
 		<div class="flex items-center justify-center font-light">
-			<a href="https://google.com" class="mr-5 hover:text-green-400">Audits</a>
-			<a href="https://fung.wiki/" class="mr-5 hover:text-green-400">Wiki</a>
-			<a href={`/${$page.params.lang}/about`} class="mr-5 hover:text-green-400"
-				>About</a>
+			<a href="https://google.com" class="mr-5 hover:text-complementary-500"
+				>Audits</a>
+			<a href="https://fung.wiki/" class="mr-5 hover:text-complementary-500"
+				>Wiki</a>
+			<a
+				href={`/${$page.params.lang}/about`}
+				class="mr-5 hover:text-complementary-500">About</a>
 		</div>
 
 		<div
 			class="flex flex-row-reverse items-center justify-center lg:justify-start  ">
 			<a href="https://github.com/fungfi" class="mr-3 lg:mr-5">
-				<Fa icon={faGithub} size="lg" class="hover:text-green-400" />
+				<Fa icon={faGithub} size="lg" class="hover:text-complementary-500" />
 			</a>
 			<a
 				href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh"
 				aria-label="Tiktok"
 				class="mr-3 lg:mr-5">
-				<Fa icon={faTiktok} size="lg" class="hover:text-green-400" />
+				<Fa icon={faTiktok} size="lg" class="hover:text-complementary-500" />
 			</a>
 			<a href="https://facebook.com" aria-label="Facebook" class="mr-5">
-				<Fa icon={faFacebook} size="lg" class="hover:text-green-400" />
+				<Fa icon={faFacebook} size="lg" class="hover:text-complementary-500" />
 			</a>
 			<a href="https://youtube.com" class="mr-3 lg:mr-5">
-				<Fa icon={faYoutube} size="lg" class=" hover:text-green-400" />
+				<Fa icon={faYoutube} size="lg" class=" hover:text-complementary-500" />
 			</a>
 			<a
 				href="https://twitter.com/fung_fi"
 				aria-label="Twitter"
 				class="mr-3 lg:mr-5">
-				<Fa icon={faTwitter} size="lg" class="hover:text-green-400" />
+				<Fa icon={faTwitter} size="lg" class="hover:text-complementary-500" />
 			</a>
 			<a
 				href="https://telegram.com/fungfi"
 				aria-label="Telegram"
 				class="mr-3 lg:mr-5">
-				<Fa icon={faTelegram} size="lg" class="hover:text-green-400" />
+				<Fa icon={faTelegram} size="lg" class="hover:text-complementary-500" />
 			</a>
 			<a href="https://discord.gg/b5H9BVCt" class="mr-3 lg:mr-5">
-				<Fa icon={faDiscord} size="lg" class="hover:text-green-400" />
+				<Fa icon={faDiscord} size="lg" class="hover:text-complementary-500" />
 			</a>
 		</div>
 	</div>

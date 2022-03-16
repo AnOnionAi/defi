@@ -12,8 +12,11 @@
 		<img
 			src="/assets/mushRound.png"
 			alt=""
-			class="w-6  transform transition duration-300 group-hover:scale-125" />
-		<p class="pl-2 font-medium  ">${$tokenPrice.toPrecision(6)}</p>
+			class="w-7  transform tracking-tighter transition duration-300 group-hover:scale-125" />
+		<p
+			class="pl-1 font-bold opacity-80 hover:text-primary-300 hover:opacity-100 dark:hover:text-analogPurple-300">
+			${$tokenPrice.toPrecision(4)}
+		</p>
 	{:else}
 		<div
 			class="h-8 w-24 rounded-lg bg-neutral-200 dark:bg-neutral-400 animate-pulse" />

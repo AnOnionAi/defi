@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Header from '$lib/layout/Header.svelte';
-	import Footer from '$lib/layout/Footer.svelte';
+	import Header from '$lib/components/layout/Header.svelte';
+	import Footer from '$lib/components/layout/Footer.svelte';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
 	import { navigating, page } from '$app/stores';
-	import LinearBar from '$lib/layout/LinearBar.svelte';
+	import LinearBar from '$lib/components/layout/LinearBar.svelte';
 	import Modal from 'svelte-simple-modal';
 	import '../app.css';
 	import {
@@ -50,7 +50,7 @@
 		<main
 			class:dark={$darkMode}
 			class="main background_pattern flex flex-1  {$darkMode &&
-				'bg-neutral-900'} ">
+				'bg-darkGrey-900'} ">
 			<div class="flex-1">
 				<slot />
 			</div>
