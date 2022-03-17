@@ -15,5 +15,13 @@
 		"browser": true,
 		"es2020": true,
 		"node": true
-	}
+	},
+	"ignorePatterns": [
+		"*.cjs",
+		"pnpm-lock.yaml",
+		"README.md",
+		"src/app.html",
+		"static/",
+		"netlify.toml"
+	]
 }
