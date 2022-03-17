@@ -50,8 +50,9 @@
 </script>
 
 {#if isInstalled == 'notInstalled'}
-	<button class="rounded-full bg-primary-400 px-4  text-sm font-bold text-white"
-		>Install Metamask</button>
+	<button
+		class="rounded-full bg-primary-400 px-4 text-sm font-bold  text-white dark:bg-analogPurple-300 dark:hover:bg-analogPurple-400"
+		>{$_('walletStatus.install')}</button>
 {/if}
 
 {#if isInstalled == 'checking'}

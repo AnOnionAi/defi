@@ -143,7 +143,7 @@
 <div class="flex h-full w-full flex-col p-2">
 	<div class="mb-10 flex w-full justify-between">
 		<div class="flex select-none items-center">
-			<img src="/assets/mushRound.png" alt="Mush Token Icon" class="w-8" />
+			<img src="/assets/mushCoin.webp" alt="Mush Token Icon" class="w-8" />
 			<h2 class="pl-2 text-2xl font-semibold  dark:text-white">MUSH</h2>
 		</div>
 

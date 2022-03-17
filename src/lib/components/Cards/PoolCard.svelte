@@ -51,6 +51,7 @@
 	import { totalAllocPoints } from '$lib/stores/MasterChefData';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
+	import CustomSpinner from '../LoadingUI/CustomSpinner.svelte';
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
@@ -337,7 +338,7 @@
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="rounded-lg bg-green-500 py-2 px-4 text-sm font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:bg-neutral-400"
+					class="rounded-lg bg-green-500 py-2 px-4 text-sm font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:bg-neutral-300 dark:disabled:bg-neutral-600"
 					>{$_('actions.harvest')}</button>
 			</div>
 		</div>
@@ -359,12 +360,12 @@
 			{:else if !tokenApproved}
 				<button
 					on:click={onApprove}
-					class="flex justify-center items-center bg-green-500 hover:bg-green-600 text-white tracking-wide font-semibold w-full h-full rounded-xl">
+					class="flex justify-center items-center bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-triadicGreen-600 dark:hover:bg-triadicGreen-700 active:scale-90  ease-in-out  duration-300 text-white tracking-wide font-semibold w-full h-full rounded-xl">
 					{$_('actions.approve')}
 					{isFarm ? 'Farm' : 'Pool'}
 					{#if loadingState.loadingApproval}
-						<div class="ml-1">
-							<Circle color="#fff" size={16} duration="2s" />
+						<div class="ml-2">
+							<CustomSpinner />
 						</div>
 					{/if}
 				</button>
@@ -401,8 +402,8 @@
 			on:click={showPoolInfo}
 			class="group flex cursor-pointer items-center justify-center dark:text-white">
 			<p
-				class="mr-2 font-medium  group-hover:text-green-500 {!isHidden &&
-					'text-green-500'} ">
+				class="mr-2 font-medium  group-hover:text-triadicGreen-500 {!isHidden &&
+					'text-triadicGreen-500'} ">
 				{$_('poolCard.details')}
 			</p>
 			{#if isHidden}

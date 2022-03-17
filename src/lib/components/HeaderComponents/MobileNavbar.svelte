@@ -17,9 +17,9 @@
 <div
 	in:slide={{ duration: 400 }}
 	out:slide={{ duration: 400 }}
-	class=" bg-paper lg:hidden {$darkMode &&
+	class="  lg:hidden {$darkMode &&
 		!$isHomescreen &&
-		'divide-zinc-600 bg-darkGrey-900'} {$isHomescreen &&
+		'divide-zinc-600 '} {$isHomescreen &&
 		'z-10 bg-transparent text-white backdrop-blur backdrop-filter'} py-1s flex  flex-col items-center divide-y   {$darkMode &&
 		'text-white'}">
 	<button

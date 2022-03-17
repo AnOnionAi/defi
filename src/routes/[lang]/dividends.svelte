@@ -79,7 +79,7 @@
 			style="background-image:url({backgroundImage});"
 			class="dividends-wrapper">
 			<div
-				class="dividends h-full  w-full max-w-lg rounded-2xl  p-5 {!$darkMode &&
+				class="dividends my-7 mx-2 h-[680px]  w-full max-w-lg rounded-2xl  p-5 {!$darkMode &&
 					'shadow-xl'} bg-white dark:bg-neutral-800 ">
 				{#if approved}
 					<div in:fade={{ duration: 200 }} class="h-full">

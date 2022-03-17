@@ -7,10 +7,10 @@
 	$: isCurrentRoute = $page?.url.pathname.includes(pageRoute);
 </script>
 
-<a sveltekit:prefetch href={`/${$page.params.lang}${pageRoute}`}>
+<a class="w-full" sveltekit:prefetch href={`/${$page.params.lang}${pageRoute}`}>
 	<span
-		class="link link-underline link-underline-black {$darkMode &&
-			'link-underline-dark link-underline-black-dark'} text-[18px] font-[500] {isCurrentRoute &&
+		class=" link link-underline link-underline-black {$darkMode &&
+			'link-underline-dark link-underline-black-dark'} text-[16px] font-[500] {isCurrentRoute &&
 			'text-primary-400'}
 	{isCurrentRoute && $darkMode && 'text-analogPurple-200'}">{pageTitle}</span>
 </a>

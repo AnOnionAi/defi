@@ -20,7 +20,6 @@
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import { BigNumber } from 'ethers';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
-	import { quickImages, sushiImages } from '$lib/config/constants/vaultsImages';
 	import { Chasing } from 'svelte-loading-spinners';
 	import { ethers } from 'ethers';
 	import { getContext } from 'svelte';
@@ -35,11 +34,12 @@
 	import { darkMode } from '$lib/stores/dark';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
+	import AssetPair from './AssetPair.svelte';
+	import VaultHeading from './VaultHeading.svelte';
 
 	const { addNotification } = getNotificationsContext();
 
 	export let vaultConfig;
-	let allImages = [...quickImages, ...sushiImages];
 	let userAcc: string;
 	let isHidden = true;
 	let isApproved: boolean;
@@ -158,90 +158,33 @@
 
 <div
 	in:fly={{ y: 200, duration: 100 }}
-	class="mx-auto mb-5 max-w-6xl sm:px-4 md:px-2 lg:px-0">
+	class="mx-auto mb-5 max-w-6xl opacity-95 sm:px-4 md:px-2 lg:px-0">
 	<div
 		on:click={openAccordeon}
 		class="{!$darkMode &&
 			'sideShadow'} mx-auto rounded-lg bg-white py-6  	{!isHidden &&
-			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-100  dark:border-green-500  dark:bg-neutral-900 dark:hover:bg-neutral-700">
-		<div class="sm:mx-20 sm:flex sm:items-center sm:justify-between">
-			<div class="flex items-center justify-center">
-				<div class="relative flex h-11 w-12">
-					<img
-						src={[
-							...allImages.filter(
-								({ pair }) => pair.token0Name === vaultConfig.pair.token0Name
-							)
-						][0].pair.token0ImagePath}
-						alt={'Token 1: ' + vaultConfig.pair.token0Name}
-						class="h-7 w-7" />
-					<img
-						src={[
-							...allImages.filter(
-								({ pair }) => pair.token1Name === vaultConfig.pair.token1Name
-							)
-						][0].pair.token1ImagePath}
-						alt={'Token 2: ' + vaultConfig.pair.token1Name}
-						class="absolute bottom-0 right-1 h-7 w-7" />
-				</div>
-				<div class="ml-2">
-					<p
-						class="smaller-font font-medium uppercase text-gray-600 dark:text-gray-400">
-						{$_('actions.earn')}
-						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP
-					</p>
-					<p class="text-lg font-semibold dark:text-white ">
-						{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
-					</p>
-					<div class="hidden">
-						<p
-							class="border-blue-500 bg-blue-500 text-blue-500 hover:bg-blue-500 active:bg-blue-500">
-							.
-						</p>
-						<p
-							class="border-pink-500 bg-pink-500 text-pink-500 hover:bg-pink-500 active:bg-pink-500">
-							.
-						</p>
-					</div>
-
-					<div
-						class="flex items-center  justify-center rounded-full  border-2 font-medium tracking-wide border-{vaultConfig
-							.platform.brandColor}-500 text-{vaultConfig.platform
-							.brandColor}-500  h-6 w-20 text-xs">
-						{vaultConfig.platform.name}
-					</div>
-				</div>
-			</div>
+			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-100   dark:bg-neutral-800 dark:hover:bg-neutral-700">
+		<div
+			class="mx-3 block items-center justify-between md:mx-8 md:flex lg:mx-14 xl:mx-20 ">
+			<AssetPair
+				token0Name={vaultConfig.pair.token0Name}
+				token1Name={vaultConfig.pair.token1Name}
+				platformName={vaultConfig.platform.name.toLowerCase()} />
 			<div
-				class="mx-auto flex h-20 w-8/12 items-center justify-between lg:mx-0">
-				<div class="flex w-10/12 justify-around ">
-					<div>
-						<p class="text-sm font-light text-gray-600 dark:text-gray-300">
-							APY
-						</p>
-						<p class="dark:text-white">{vaultConfig.apy.toFixed(2)}%</p>
-					</div>
-					<div>
-						<p class="text-sm font-light text-gray-600 dark:text-gray-300">
-							Staked
-						</p>
-						<p class="dark:text-white">{vaultConfig.stakedAmount.toFixed(2)}</p>
-						<p />
-					</div>
-					<div>
-						<p class="text-sm font-light text-gray-600 dark:text-gray-300">
-							Wallet
-						</p>
-						<p class="dark:text-white">
-							{vaultConfig.userWalletBalance.toFixed(2)}
-						</p>
-					</div>
-					<div>
-						<p class="text-sm font-light text-gray-600 dark:text-gray-300">
-							TVL
-						</p>
-						<p class="dark:text-white">${vaultConfig.tvl.toFixed(2)}</p>
-					</div>
+				class="flex h-20 items-center  justify-between p-2 md:flex-1 lg:mx-0">
+				<div class="flex w-11/12 justify-around ">
+					<VaultHeading
+						headingText={'APY'}
+						subHeading={vaultConfig.apy.toFixed(2)}>%</VaultHeading>
+					<VaultHeading
+						headingText={'Staked'}
+						subHeading={vaultConfig.stakedAmount.toFixed(2)} />
+					<VaultHeading
+						headingText={'Wallet'}
+						subHeading={vaultConfig.userWalletBalance.toFixed(2)} />
+					<VaultHeading
+						headingText={'TVL'}
+						subHeading={vaultConfig.tvl.toFixed(2)} />
 				</div>
 				<div class="dark:text-white">
 					{#if isHidden}
@@ -451,12 +394,7 @@
 
 <style>
 	.sideShadow {
-		box-shadow: 6px 6px 4px -4px rgb(197, 199, 197),
-			-6px 0 4px -4px rgb(197, 199, 197);
-		-moz-box-shadow: 6px 6px 4px -4px rgb(197, 199, 197),
-			-6px 0 4px -4px rgb(197, 199, 197);
-		-webkit-box-shadow: 6px 6px 4px -4px rgb(197, 199, 197),
-			-6px 0 4px -4px rgb(197, 199, 197);
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	}
 	input {
 		font-size: 18px;
@@ -467,15 +405,5 @@
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
-	}
-	.secondary-font {
-		color: rgb(151, 157, 198);
-	}
-	.smaller-font {
-		font-size: 0.62rem;
-	}
-	.side-shadows {
-		box-shadow: 12px 0 15px -4px rgba(0, 55, 162, 0.97),
-			-12px 0 8px -4px rgba(0, 55, 162, 0.97);
 	}
 </style>

@@ -4,7 +4,6 @@
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
 	import { navigating, page } from '$app/stores';
-	import LinearBar from '$lib/components/layout/LinearBar.svelte';
 	import Modal from 'svelte-simple-modal';
 	import '../app.css';
 	import {
@@ -12,6 +11,7 @@
 		metamaskConnect,
 		metamaskListeners
 	} from '$lib/stores/MetaMaskAccount';
+	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
 
 	let currentPath;
 	let lastPath;
@@ -44,7 +44,7 @@
 		<Header />
 		{#if $navigating}
 			<div class="absolute left-0 top-0 z-10 w-screen">
-				<LinearBar />
+				<GradientLinearBar />
 			</div>
 		{/if}
 		<main

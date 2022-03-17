@@ -10,7 +10,7 @@
 <a href={swapperURL} target="_blank" class="group flex items-center">
 	{#if $tokenPrice}
 		<img
-			src="/assets/mushRound.png"
+			src="/assets/mushCoin.webp"
 			alt=""
 			class="w-7  transform tracking-tighter transition duration-300 group-hover:scale-125" />
 		<p
@@ -25,7 +25,7 @@
 
 <style>
 	div {
-		height: 38px;
+		height: 36px;
 	}
 
 	img {
