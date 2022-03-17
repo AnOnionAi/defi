@@ -80,7 +80,7 @@
 			class="dividends-wrapper">
 			<div
 				class="dividends h-full  w-full max-w-lg rounded-2xl  p-5 {!$darkMode &&
-					'shadow-xl'} bg-white dark:bg-neutral-900 ">
+					'shadow-xl'} bg-white dark:bg-neutral-800 ">
 				{#if approved}
 					<div in:fade={{ duration: 200 }} class="h-full">
 						<DividendCard />

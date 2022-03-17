@@ -273,7 +273,7 @@
 </script>
 
 <div
-	class="self-start   bg-white dark:bg-neutral-900 {!$darkMode &&
+	class="self-start   bg-white dark:bg-neutral-800 {!$darkMode &&
 		'shadow-xl'}  relative transform select-none rounded-3xl transition duration-300 hover:scale-105">
 	<div class="absolute flex w-full flex-row-reverse p-4">
 		<div>
@@ -353,7 +353,7 @@
 					on:click={isMetaMaskInstalled()
 						? metaMaskCon
 						: openMetamaskAlertModal}
-					class="h-full w-full rounded-xl bg-green-500 font-semibold tracking-wide text-white hover:bg-green-600">
+					class="h-full w-full rounded-xl bg-triadicGreen-600 font-semibold tracking-wide text-white hover:bg-green-600">
 					{$_('actions.unlock')}
 				</button>
 			{:else if !tokenApproved}

@@ -12,6 +12,6 @@
 	class="{$isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
 		!$isHomescreen &&
 		'bg-darkGrey-900 '}  w-full backdrop-blur   {$isHomescreen &&
-		'text-white'} {$darkMode && 'text-white'}">
+		'text-white'} {$darkMode && 'text-white'} select-none">
 	<slot />
 </nav>
