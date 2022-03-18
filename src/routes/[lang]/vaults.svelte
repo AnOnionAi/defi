@@ -87,8 +87,8 @@
 </script>
 
 <section class="pb-3 ">
-	<br />
-	<h1 class="text-center text-5xl tracking-wide dark:text-white">
+	<h1
+		class="select-none py-[2rem] text-center text-3xl font-[700] tracking-wide  dark:text-white md:text-4xl lg:text-5xl ">
 		{$_('headers.vaults.text')}
 	</h1>
 

@@ -276,7 +276,7 @@
 <div
 	class="self-start   bg-white dark:bg-neutral-800 {!$darkMode &&
 		'shadow-xl'}  relative transform select-none rounded-3xl transition duration-300 hover:scale-105">
-	<div class="absolute flex w-full flex-row-reverse p-4">
+	<div class="absolute flex w-full flex-row-reverse p-4 ">
 		<div>
 			{#if isFarm}
 				<SushiswapBadge />

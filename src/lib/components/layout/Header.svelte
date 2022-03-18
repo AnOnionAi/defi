@@ -32,19 +32,6 @@
 	}
 </script>
 
-<svelte:window
-	on:click={(e) => {
-		if (showDropDownMenu && !menu.contains(e.target)) {
-			console.log('click');
-			showDropDownMenu = false;
-		}
-	}}
-	on:keydown={(e) => {
-		if (e.code === 'Escape') {
-			showDropDownMenu = false;
-		}
-	}} />
-
 <NavbarLayout>
 	<NavContainer>
 		<div class="flex lg:hidden">

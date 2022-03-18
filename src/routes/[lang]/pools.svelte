@@ -10,8 +10,8 @@
 </script>
 
 <section class="background {$darkMode && 'background__dark'}">
-	<br />
-	<h1 class="text-center text-5xl font-[700] tracking-wide dark:text-white">
+	<h1
+		class="py-[2rem] text-center text-5xl font-[700] tracking-wide dark:text-white">
 		{$_('headers.pools.text')}
 	</h1>
 	<div class="pools mt-5 space-y-4 ">

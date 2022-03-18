@@ -71,7 +71,7 @@
 
 <section class="flex h-full flex-col">
 	<h1
-		class="mt-[2rem] select-none text-center text-5xl font-[700] tracking-wide dark:text-white ">
+		class="mt-[2rem] select-none text-center text-3xl font-[700] tracking-wide  dark:text-white md:text-4xl lg:text-5xl ">
 		{$_('headers.dividends.text')}
 	</h1>
 	<div class="flex-1">
