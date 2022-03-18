@@ -8,15 +8,20 @@
 	import '../app.css';
 	import {
 		accounts,
+		logUser,
 		metamaskConnect,
-		metamaskListeners
+		metamaskListeners,
+		retrieveUserAddress
 	} from '$lib/stores/MetaMaskAccount';
 	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
+	import { onMount } from 'svelte';
 
-	let currentPath;
-	let lastPath;
+	onMount(async () => {
+		await metamaskListeners();
+		await logUser();
+	});
 
-	$: {
+	/* 	$: {
 		currentPath = $page.url.pathname;
 		currentPath = currentPath.split('/');
 
@@ -36,7 +41,7 @@
 		}
 
 		lastPath = currentPath;
-	}
+	} */
 </script>
 
 <Notifications>

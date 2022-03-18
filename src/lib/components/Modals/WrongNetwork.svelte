@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { requestChainChange } from '$lib/stores/MetaMaskAccount';
+	import {
+		requestChainAdd,
+		requestChainChange
+	} from '$lib/stores/MetaMaskAccount';
 
 	const handleChainChange = async () => {
 		try {
 			await requestChainChange();
 			location.reload();
 		} catch (e) {
-			console.log(e);
+			await requestChainAdd();
+			await requestChainChange();
 		}
 	};
 </script>
