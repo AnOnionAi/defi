@@ -18,6 +18,8 @@
 
 	let isInstalled: MetamaskExtensionStatus = 'checking';
 
+	$: modalBackgroundColor = $darkMode ? '#121212' : '#fff';
+
 	onMount(() => {
 		isInstalled = isMetaMaskInstalled() ? 'isInstalled' : 'notInstalled';
 		chainID.subscribe((id) => {
@@ -26,10 +28,13 @@
 					WrongNetwork,
 					{},
 					{
-						closeButton: true,
+						closeButton: false,
 						closeOnEsc: false,
-						closeOnOuterClick: false,
-						styleWindow: { width: '400px' }
+						closeOnOuterClick: true,
+						styleWindow: {
+							backgroundColor: modalBackgroundColor,
+							width: '400px'
+						}
 					}
 				);
 			}
