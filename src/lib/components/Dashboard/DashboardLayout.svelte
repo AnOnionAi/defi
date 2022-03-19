@@ -10,12 +10,12 @@
 
 <style>
 	.background {
-		background-image: url('/theme/dashboard/dashboardMushrooms.png');
+		background-image: url('/theme/dashboard/dashboardMushrooms.webp');
 		background-size: cover;
 	}
 
 	.background__dark {
-		background-image: url('/theme/dashboard/purpleMush.png');
+		background-image: url('/theme/dashboard/purpleMush.webp');
 		background-size: cover;
 	}
 </style>
