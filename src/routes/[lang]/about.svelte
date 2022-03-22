@@ -45,7 +45,7 @@
 		</div>
 	</article>
 
-	<div class="farms-section-background {$darkMode && 'purple-gradient'}">
+	<div class="farms-section-background {$darkMode && 'purple-gradient'} pb-8">
 		<div class="relative">
 			<div class="curve-first">
 				<svg
@@ -62,7 +62,7 @@
 				class="flex  w-full flex-col-reverse  justify-center  px-4 pt-[25%] md:flex-row md:px-8 md:pt-[10%] lg:px-10 xl:px-12">
 				<div class="flex w-full justify-center md:w-5/12 lg:w-5/12  xl:p-12">
 					<img
-						src="/assets/pickaxes.svg"
+						src="/assets/cryptoVault.svg"
 						alt="Cryto Investments portfolio"
 						class="animation-glide" />
 				</div>
@@ -70,16 +70,16 @@
 					class="flex w-full flex-col items-center justify-center md:flex-1  md:items-start">
 					<h2
 						class="select-none text-center text-4xl font-bold capitalize text-gray-100  md:text-left   md:text-4xl lg:text-4xl xl:text-6xl">
-						{$_('headers.farms.text')}
+						{$_('headers.vaults.text')}
 					</h2>
 					<p
 						class="mt-2 text-justify text-sm leading-relaxed text-white dark:text-gray-200 xl:text-lg">
-						{$_('about.farms-description')}
+						{$_('about.vaults-description')}
 					</p>
 					<a
-						href={`${$page.params.lang}/farms`}
+						href={`${$page.params.lang}/vaults`}
 						class="mt-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
-						>Go to Farms</a>
+						>{$_('dashboard.goDeposit')}</a>
 				</div>
 			</article>
 		</div>
@@ -88,17 +88,17 @@
 			<div class="grid grid-cols-1 gap-x-8 gap-y-6 py-12 md:grid-cols-2">
 				<div class="flex flex-col items-center">
 					<h2 class="text-center text-5xl font-bold text-white">
-						{$_('headers.vaults.text')}
+						{$_('headers.farms.text')}
 					</h2>
-					<p class="min-h-[160px] p-3 text-justify font-medium text-gray-100">
-						{$_('about.vaults-description')}
+					<p class="min-h-[140px] p-3 text-justify font-medium text-gray-100">
+						{$_('about.farms-description')}
 					</p>
 					<a
 						href={`${$page.params.lang}/farms`}
 						class=" mb-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
-						>Go to Vaults</a>
+						>{$_('dashboard.startFarming')}</a>
 					<img
-						src="/assets/cryptoVault.svg"
+						src="/assets/pickaxes.svg"
 						alt="Crypto currencies"
 						class="animation-glide w-[350px]" />
 				</div>
@@ -107,13 +107,13 @@
 					<h2 class="text-center text-5xl font-bold text-white">
 						{$_('headers.pools.text')}
 					</h2>
-					<p class="min-h-[160px] p-3 text-justify font-medium text-gray-100">
+					<p class="min-h-[140px] p-3 text-justify font-medium text-gray-100">
 						{$_('about.pools-description')}
 					</p>
 					<a
 						href={`${$page.params.lang}/farms`}
 						class=" mb-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
-						>Go to Pools</a>
+						>{$_('dashboard.addLiquidity')}</a>
 					<img
 						src="/assets/poolsAssets.svg"
 						alt="Crypto currencies"
@@ -122,75 +122,33 @@
 			</div>
 		</div>
 	</div>
-</section>
 
-<!-- <section class="green {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">
-		{$_('headers.automated-crypto.text')}
-	</h1>
-	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-		{$_('about.automated-description')}
-	</p>
-	<div class="curve {$darkMode && 'dark-curve'}" />
-	<img
-		class="{$darkMode && 'img-darkmode'} z-0 h-32 w-32 lg:h-auto lg:w-auto"
-		src="/assets/crypto-market.png"
-		alt="crypto-market" />
-</section>
-
-<section class="farms {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.farms.text')}</h1>
-	<div class="columns">
-		<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-			{$_('about.farms-description')}
-		</p>
-		<img
-			class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
-			src="/assets/farms.png"
-			alt="farms" />
+	<div
+		class="flex min-h-[700px] w-full content-center items-center p-5 md:p-5 lg:p-12">
+		<div class="grid grid-cols-1 md:grid-cols-2">
+			<div
+				class="flex w-full flex-col items-center justify-center gap-3 md:items-start">
+				<h2
+					class="text-3xl font-medium tracking-wide text-gray-800 dark:text-white lg:text-4xl  xl:text-5xl">
+					{$_('headers.crypto-responsibility.text')}
+				</h2>
+				<p
+					class="text-justify leading-relaxed text-gray-600 dark:text-gray-200">
+					{$_('about.responsibility-description')}
+				</p>
+				<a
+					target="_blank"
+					href={`https://academy.binance.com/${$page.params.lang}`}
+					class="mt-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
+					>{'Learn More ...'}</a>
+			</div>
+			<img
+				src="/assets/cryptoResponsability.svg"
+				alt=""
+				class=" animation-glide w-[220px] justify-self-center md:w-[300px] lg:w-[360px]" />
+		</div>
 	</div>
 </section>
-
-<section class="pools bubble {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.pools.text')}</h1>
-	<div class="columns">
-		<img
-			class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
-			src="/pools.png"
-			alt="pools" />
-		<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-			{$_('about.pools-description')}
-		</p>
-	</div>
-</section>
-
-<section class="orange {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.vaults.text')}</h1>
-	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-		{$_('about.vaults-description')}
-	</p>
-	<img
-		class="{$darkMode && 'img-darkmode'} my-4 h-32 w-32 lg:h-auto lg:w-auto"
-		src="/assets/vaults.png"
-		alt="vaults" />
-</section>
-
-<div class="spacer layer1 flip" />
-
-<section
-	class="crypto-responsibility blue {$darkMode &&
-		'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">
-		{$_('headers.crypto-responsibility.text')}
-	</h1>
-	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-		{$_('about.responsibility-description')}
-	</p>
-	<img
-		class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
-		src="/assets/crypto-responsibility.png"
-		alt="crypto-responsibility" />
-</section> -->
 
 <style>
 	article {
@@ -216,11 +174,13 @@
 	}
 
 	.farms-section-background {
-		background: rgb(255, 158, 170);
-		background: linear-gradient(
-			167deg,
-			rgba(255, 158, 170, 1) 23%,
-			rgba(253, 176, 225, 1) 91%
+		background-image: linear-gradient(
+			to left bottom,
+			#ff4f69,
+			#ff5d5c,
+			#ff6b51,
+			#fe7a47,
+			#f9883e
 		);
 	}
 
