@@ -45,7 +45,9 @@
 		</div>
 	</article>
 
-	<div class="farms-section-background {$darkMode && 'purple-gradient'} pb-8">
+	<div
+		class="farms-section-background {$darkMode &&
+			'purple-gradient'} relative pb-8">
 		<div class="relative">
 			<div class="curve-first">
 				<svg
@@ -77,7 +79,7 @@
 						{$_('about.vaults-description')}
 					</p>
 					<a
-						href={`${$page.params.lang}/vaults`}
+						href={`/${$page.params.lang}/vaults`}
 						class="mt-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
 						>{$_('dashboard.goDeposit')}</a>
 				</div>
@@ -94,7 +96,7 @@
 						{$_('about.farms-description')}
 					</p>
 					<a
-						href={`${$page.params.lang}/farms`}
+						href={`/${$page.params.lang}/farms`}
 						class=" mb-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
 						>{$_('dashboard.startFarming')}</a>
 					<img
@@ -111,7 +113,7 @@
 						{$_('about.pools-description')}
 					</p>
 					<a
-						href={`${$page.params.lang}/farms`}
+						href={`/${$page.params.lang}/farms`}
 						class=" mb-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
 						>{$_('dashboard.addLiquidity')}</a>
 					<img
@@ -120,6 +122,17 @@
 						class="animation-glide w-[192px]" />
 				</div>
 			</div>
+		</div>
+		<div class="bottom-curve">
+			<svg
+				data-name="Layer 1"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 1200 120"
+				preserveAspectRatio="none">
+				<path
+					d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+					class={$darkMode ? 'shape-fill-dark' : 'shape-fill'} />
+			</svg>
 		</div>
 	</div>
 
@@ -151,6 +164,31 @@
 </section>
 
 <style>
+	.bottom-curve {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		overflow: hidden;
+		line-height: 0;
+		transform: rotate(180deg);
+	}
+
+	.bottom-curve svg {
+		position: relative;
+		display: block;
+		width: calc(100% + 1.3px);
+		height: 40px;
+	}
+
+	.bottom-curve .shape-fill-dark {
+		fill: #121212;
+	}
+
+	.bottom-curve .shape-fill {
+		fill: #fff;
+	}
+
 	article {
 		min-height: 102vh;
 	}

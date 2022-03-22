@@ -68,7 +68,7 @@ export async function metamaskListeners(): Promise<void> {
 export const requestChainChange = async (): Promise<void> => {
 	return window.ethereum.request({
 		method: 'wallet_switchEthereumChain',
-		params: [{ chainId: POLYGON_CHAIN_ID }] // chainId must be in hexadecimal numbers
+		params: [{ chainId: POLYGON_CHAIN_ID }]
 	});
 };
 
@@ -81,6 +81,6 @@ export const requestChainAdd = async (): Promise<void> => {
 				chainName: 'Matic Mainnet',
 				rpcUrls: ['https://polygon-rpc.com/']
 			}
-		] // chainId must be in hexadecimal numbers
+		]
 	});
 };

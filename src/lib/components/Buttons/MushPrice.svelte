@@ -14,7 +14,7 @@
 			alt=""
 			class="w-7  transform tracking-tighter transition duration-300 group-hover:scale-125" />
 		<p
-			class="pl-1 font-bold opacity-80 hover:text-primary-300 hover:opacity-100 dark:hover:text-analogPurple-300">
+			class="pl-1 font-bold opacity-80 hover:text-primary-300 hover:opacity-100 dark:text-gray-100 dark:hover:text-analogPurple-300">
 			${$tokenPrice.toPrecision(4)}
 		</p>
 	{:else}

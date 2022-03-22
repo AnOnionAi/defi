@@ -43,7 +43,7 @@
 <div bind:this={menu} class="relative  ml-1 lg:inline-block">
 	<button
 		on:click={toggleDropDownMenu}
-		class="h-11 w-10 cursor-pointer select-none rounded-md  text-lg font-medium tracking-wide hover:text-primary-300 dark:hover:text-analogPurple-200 {isShowing &&
+		class="h-11 w-10 cursor-pointer select-none rounded-md text-lg  font-medium tracking-wide hover:text-primary-300 dark:text-gray-200 dark:hover:text-analogPurple-200 {isShowing &&
 			!$darkMode &&
 			'text-primary-300'} {isShowing && $darkMode && 'text-analogPurple-200'}">
 		<Fa icon={faLanguage} size="lg" />
