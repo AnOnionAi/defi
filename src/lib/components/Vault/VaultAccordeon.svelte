@@ -200,12 +200,14 @@
 		<div
 			in:slide={{ duration: 400 }}
 			out:slide={{ duration: 400 }}
-			class="max-w-8xl mx-auto rounded-b-lg bg-neutral-200 px-5 py-5 dark:bg-neutral-800">
+			class="max-w-8xl mx-auto rounded-b-lg bg-neutral-200 px-5 py-5 opacity-100 dark:bg-neutral-800">
 			{#if !$accounts}
 				<button
 					on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
-					class=" mx-auto block w-10/12  bg-{vaultConfig.platform
-						.brandColor}-500 transform rounded-xl py-2 text-xl font-semibold tracking-wide  text-white transition duration-300 hover:scale-105 "
+					class=" mx-auto block w-10/12 {vaultConfig.platform.name.toLowerCase() ==
+					'quickswap'
+						? 'gradientQuickswap'
+						: 'gradientSushiswap'} transform rounded-xl py-2 text-xl font-semibold tracking-wide  text-white transition duration-300 hover:bg-blue-400 "
 					>{$_('actions.unlock')}
 				</button>
 			{:else}
@@ -405,5 +407,31 @@
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
+	}
+
+	.gradientQuickswap {
+		background: rgb(33, 114, 229);
+		background: linear-gradient(
+			198deg,
+			rgba(33, 114, 229, 1) 5%,
+			rgba(181, 0, 114, 1) 95%
+		);
+	}
+
+	.gradientQuickswap:hover {
+		background: rgb(33, 114, 229);
+	}
+
+	.gradientSushiswap {
+		background: rgb(222, 92, 168);
+		background: linear-gradient(
+			18deg,
+			rgba(222, 92, 168, 1) 33%,
+			rgba(254, 118, 136, 1) 75%
+		);
+	}
+
+	.gradientSushiswap:hover {
+		background: rgb(222, 92, 168);
 	}
 </style>
