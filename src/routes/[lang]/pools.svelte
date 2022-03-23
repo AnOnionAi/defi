@@ -5,15 +5,13 @@
 
 <script lang="ts">
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
+	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import { pools } from '$lib/config/constants/pools';
 	import { darkMode } from '$lib/stores/dark';
 </script>
 
 <section class="background {$darkMode && 'background__dark'}">
-	<h1
-		class="py-[2rem] text-center text-5xl font-[700] tracking-wide dark:text-white">
-		{$_('headers.pools.text')}
-	</h1>
+	<PageHeader text={$_('headers.pools.text')} />
 	<div class="pools mt-5 space-y-4 ">
 		<div
 			class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-8 text-center ">

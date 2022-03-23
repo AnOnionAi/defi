@@ -34,7 +34,7 @@
 		'z-20 border-none backdrop-blur backdrop-filter '}  {$darkMode &&
 		'border-dark-200'} {$darkMode &&
 		!$isHomescreen &&
-		'bg-zinc-900'} footer-height {textColor} ">
+		'bg-zinc-900'} footer-height {textColor}  transition duration-500">
 	<div
 		class="footer-height grid grid-cols-1 gap-4 px-6 py-6 md:grid-cols-3 lg:py-1">
 		<div

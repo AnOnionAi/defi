@@ -338,7 +338,10 @@
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="rounded-lg bg-triadicGreen-500 py-2 px-4 text-sm font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:bg-neutral-300 dark:disabled:bg-neutral-600"
+					class="rounded-lg py-2 
+					{canHarvest &&
+						'bg-gradient-to-r from-complementary-600 to-triadicGreen-600 dark:bg-gradient-to-r dark:from-complementary-500 dark:to-triadicGreen-500'} px-4 text-sm font-semibold tracking-wide 
+					text-white disabled:cursor-not-allowed disabled:bg-neutral-300 dark:disabled:bg-neutral-600"
 					>{$_('actions.harvest')}</button>
 			</div>
 		</div>

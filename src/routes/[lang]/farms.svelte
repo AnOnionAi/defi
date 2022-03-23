@@ -7,6 +7,7 @@
 <script lang="ts">
 	import { farms } from '$lib/config/constants/farms';
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
+	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 
 	let backgroundImage;
 
@@ -20,10 +21,7 @@
 <section
 	class="farms flex h-full flex-col pb-12"
 	style="background:url({backgroundImage});">
-	<h1
-		class="test  py-[2rem]  text-center text-5xl font-[700] tracking-wide dark:text-white">
-		{$_('headers.farms.text')}
-	</h1>
+	<PageHeader text={$_('headers.farms.text')} />
 	<div class="w-23/24 mx-auto flex max-w-7xl flex-1 items-center">
 		<div
 			class="flex flex-row  flex-wrap justify-center gap-6 rounded-xl  text-center">

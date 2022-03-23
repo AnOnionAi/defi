@@ -19,6 +19,7 @@
 		reduceFilters
 	} from '$lib/utils/filterFunctions';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
+	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
@@ -87,10 +88,7 @@
 </script>
 
 <section class="pb-3 ">
-	<h1
-		class="select-none py-[2rem] text-center text-3xl font-[700] tracking-wide  dark:text-white md:text-4xl lg:text-5xl ">
-		{$_('headers.vaults.text')}
-	</h1>
+	<PageHeader text={$_('headers.vaults.text')} />
 
 	<div class="mainContainer 	sideShadow background__lite pt-10">
 		<div in:fade={{ duration: 200 }}>

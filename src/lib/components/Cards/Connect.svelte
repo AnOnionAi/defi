@@ -46,7 +46,6 @@
 
 	.btn-grad {
 		margin: 10px;
-
 		text-align: center;
 		transition: 0.5s;
 		background-size: 200% auto;

@@ -68,15 +68,16 @@
 				class="h-4 w-4 animate-spin rounded-full
 		border-4 border-solid border-white border-t-transparent" />
 		</div>
-		<span class="px-2"> Checking... </span></button>
+		<span class="px-2">{$_('walletStatus.checking')}</span></button>
 {/if}
 
 {#if isInstalled == 'isInstalled' && !$accounts}
 	<button
-		class="pressed  rounded-full
-		 bg-primary-400 px-4 text-sm font-bold text-white hover:bg-primary-300 dark:bg-analogPurple-300 dark:hover:bg-analogPurple-400 {$darkMode &&
+		class="pressed  rounded-full bg-primary-400 px-4
+		 text-sm font-bold text-white transition duration-500 hover:bg-primary-300 dark:bg-analogPurple-300 dark:hover:bg-analogPurple-400 {$darkMode &&
 			'pressed-dark'}"
-		on:click={() => onClickDispatcher(isInstalled)}>Connect Wallet</button>
+		on:click={() => onClickDispatcher(isInstalled)}
+		>{$_('dividendsPage.cyw')}</button>
 {/if}
 
 {#if $accounts}

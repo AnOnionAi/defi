@@ -55,7 +55,7 @@
 		<main
 			class:dark={$darkMode}
 			class="main background_pattern flex flex-1  {$darkMode &&
-				'bg-darkGrey-900'} ">
+				'bg-darkGrey-900 '} transition duration-500 ">
 			<div class="flex-1">
 				<slot />
 			</div>

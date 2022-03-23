@@ -46,8 +46,9 @@
 	</article>
 
 	<div
-		class="farms-section-background {$darkMode &&
-			'purple-gradient'} relative pb-8">
+		class="relative bg-gradient-to-bl from-primary-300 via-primary-200
+		to-analogMelon-300 pb-8 dark:bg-gradient-to-t dark:from-black
+		  dark:via-purple-900 dark:to-analogPurple-800">
 		<div class="relative">
 			<div class="curve-first">
 				<svg
@@ -211,28 +212,12 @@
 		transform: rotateY(180deg);
 	}
 
-	.farms-section-background {
-		background-image: linear-gradient(
-			to left bottom,
-			#ff4f69,
-			#ff5d5c,
-			#ff6b51,
-			#fe7a47,
-			#f9883e
-		);
-	}
-
 	.curve-first .shape-fill {
 		fill: #ffffff;
 	}
 
 	.curve-first .shape-fill-dark {
 		fill: #121212;
-	}
-
-	.purple-gradient {
-		background-color: #923cb5;
-		background-image: linear-gradient(147deg, #923cb5 0%, #000000 74%);
 	}
 
 	.animation-glide {
@@ -259,20 +244,5 @@
 		width: 100%;
 		overflow: hidden;
 		line-height: 0;
-	}
-
-	.second-section svg {
-		position: relative;
-		display: block;
-		width: calc(100% + 1.3px);
-		height: 44px;
-	}
-
-	.second-section .shape-fill {
-		fill: #fdb0e1;
-	}
-
-	.second-section .shape-fill-dark {
-		fill: #000000;
 	}
 </style>

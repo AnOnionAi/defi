@@ -21,6 +21,7 @@
 		transactionSend
 	} from '$lib/config/constants/notifications';
 	import { darkMode } from '$lib/stores/dark';
+	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	const { addNotification } = getNotificationsContext();
 
 	let userAccount: string;
@@ -70,17 +71,14 @@
 </script>
 
 <section class="flex h-full flex-col">
-	<h1
-		class="mt-[2rem] select-none text-center text-3xl font-[700] tracking-wide  dark:text-white md:text-4xl lg:text-5xl ">
-		{$_('headers.dividends.text')}
-	</h1>
+	<PageHeader text={$_('headers.dividends.text')} />
 	<div class="flex-1">
 		<div
 			style="background-image:url({backgroundImage});"
 			class="dividends-wrapper">
 			<div
 				class="dividends my-7 mx-2 h-[680px]  w-full max-w-lg rounded-2xl  p-5 {!$darkMode &&
-					'shadow-xl'} bg-white dark:bg-neutral-800 ">
+					'shadow-xl'} bg-white transition  duration-500 dark:bg-neutral-800">
 				{#if approved}
 					<div in:fade={{ duration: 200 }} class="h-full">
 						<DividendCard />
