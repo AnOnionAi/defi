@@ -338,7 +338,7 @@
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="rounded-lg bg-green-500 py-2 px-4 text-sm font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:bg-neutral-300 dark:disabled:bg-neutral-600"
+					class="rounded-lg bg-triadicGreen-500 py-2 px-4 text-sm font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:bg-neutral-300 dark:disabled:bg-neutral-600"
 					>{$_('actions.harvest')}</button>
 			</div>
 		</div>
@@ -354,7 +354,7 @@
 					on:click={isMetaMaskInstalled()
 						? metaMaskCon
 						: openMetamaskAlertModal}
-					class="h-full w-full rounded-xl bg-triadicGreen-600 font-semibold tracking-wide text-white hover:bg-green-600">
+					class="h-full w-full rounded-xl bg-triadicGreen-600 font-semibold tracking-wide text-white hover:bg-triadicGreen-600">
 					{$_('actions.unlock')}
 				</button>
 			{:else if !tokenApproved}

@@ -229,12 +229,12 @@
 							{/if}
 						</div>
 						<div
-							class="flex my-2 py-2 px-3 bg-neutral-300 dark:bg-neutral-500 rounded-lg  lg:w-11/12 justify-between">
+							class="flex my-2 py-2 px-3 bg-neutral-300 dark:bg-neutral-700 rounded-lg  lg:w-11/12 justify-between">
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userDepositAmount}
 								placeholder="Enter Value"
-								class="bg-neutral-300  text-gray-900 font-bold w-8/12 dark:bg-neutral-500	dark:text-white"
+								class="bg-transparent  text-gray-900 font-bold w-8/12 	dark:text-white"
 								type="text" />
 							{#if isApproved}
 								<button
@@ -308,12 +308,12 @@
 							{/if}
 						</div>
 						<div
-							class="flex justify-between my-2 py-2 px-3 bg-neutral-300 rounded-lg  dark:bg-neutral-500 lg:w-11/12 ">
+							class="flex justify-between my-2 py-2 px-3 bg-neutral-300 rounded-lg  dark:bg-neutral-700 lg:w-11/12 ">
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userWithdrawAmount}
 								placeholder="Enter Value"
-								class="bg-neutral-300 text-gray-900 font-bold w-8/12 dark:bg-neutral-500 dark:text-white"
+								class="text-gray-900 font-bold w-8/12 bg-transparent dark:text-white"
 								type="text" />
 							<button
 								disabled={loadingState.something}

@@ -5,8 +5,10 @@
 	export let platformName: string;
 
 	const platformStyles = {
-		quickswap: 'blue',
-		sushiswap: 'pink'
+		quickswap:
+			'border-blue-500 text-blue-500 dark:border-blue-400 dark:text-blue-400',
+		sushiswap:
+			'border-pink-500 text-pink-500 dark:border-pink-400 dark:text-pink-400'
 	};
 </script>
 
@@ -33,11 +35,8 @@
 			</p>
 
 			<div
-				class="flex items-center  justify-center rounded-full  border-2 font-medium tracking-wide border-{platformStyles[
-					platformName
-				]}-500 text-{platformStyles[
-					platformName
-				]}-500 h-6 w-20 text-xs capitalize">
+				class="flex h-6  w-20 items-center  justify-center rounded-full border-2 
+				 text-xs font-medium capitalize tracking-wide {platformStyles[platformName]}">
 				{platformName}
 			</div>
 		</div>
