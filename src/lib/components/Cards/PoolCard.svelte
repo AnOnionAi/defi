@@ -386,12 +386,12 @@
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-400 disabled:cursor-not-allowed"
+							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
 							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-400 disabled:cursor-not-allowed"
+							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600  disabled:cursor-not-allowed"
 							>-</button>
 					</div>
 				</div>
@@ -407,11 +407,15 @@
 				{$_('poolCard.details')}
 			</p>
 			{#if isHidden}
-				<div class="group-hover:text-green-500 {!isHidden && 'text-green-500'}">
+				<div
+					class="group-hover:text-triadicGreen-500 {!isHidden &&
+						'text-triadicGreen-500'}">
 					<Fa icon={faChevronDown} size="xs" translateY={0.15} />
 				</div>
 			{:else}
-				<div class="group-hover:text-green-500 {!isHidden && 'text-green-500'}">
+				<div
+					class="group-hover:text-triadicGreen-500 {!isHidden &&
+						'text-triadicGreen-500'}">
 					<Fa icon={faChevronUp} size="xs" translateY={0.15} />
 				</div>
 			{/if}
