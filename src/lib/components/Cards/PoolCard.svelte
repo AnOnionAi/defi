@@ -184,7 +184,6 @@
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
-			console.log('Internal Error on DepositHandler', error);
 			addNotification(transactionDeniedByTheUser);
 		}
 		loadingState.loadingDeposit = false;
@@ -203,7 +202,6 @@
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
-			console.log('Internal Error on WithdrawHandler', error);
 			addNotification(transactionDeniedByTheUser);
 		}
 		loadingState.loadingWithdraw = false;
@@ -235,7 +233,6 @@
 			addNotification(transactionCompleted);
 		} catch {
 			addNotification(transactionDeniedByTheUser);
-			console.log('Oops');
 		}
 		loadingState.loadingApproval = false;
 	};

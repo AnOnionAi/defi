@@ -45,11 +45,7 @@
 		if (status == 'notInstalled') {
 			return goInstallMetamask();
 		} else if (status == 'isInstalled' && !$accounts) {
-			console.log('hey');
-
 			return metaMaskCon();
-		} else if (status == 'isInstalled' && $accounts) {
-			console.log('TODO: Make a modal for unlogging the user');
 		}
 	};
 </script>

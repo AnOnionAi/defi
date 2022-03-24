@@ -142,7 +142,7 @@
 				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log('Error loading 3D models');
 			});
 
 		function animate() {

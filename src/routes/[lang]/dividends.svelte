@@ -30,7 +30,6 @@
 	let finishedApprovalFetch = false;
 
 	let backgroundImage: string;
-
 	$: userAccount = $accounts?.[0];
 	$: approved = !userMushAllowance.isZero();
 
@@ -53,7 +52,6 @@
 
 	const handleApproval = async () => {
 		try {
-			console.log('whats happening');
 			addNotification(transactionSend);
 
 			const tx = await approveToken(
@@ -64,7 +62,6 @@
 			approved = true;
 			addNotification(transactionCompleted);
 		} catch (e) {
-			console.log(e);
 			addNotification(transactionDeniedByTheUser);
 		}
 	};
@@ -77,7 +74,7 @@
 			style="background-image:url({backgroundImage});"
 			class="dividends-wrapper">
 			<div
-				class="dividends my-7 mx-2 h-[680px]  w-full max-w-lg rounded-2xl  p-5 {!$darkMode &&
+				class="dividends my-7 mx-2 h-[680px]  w-[380px] rounded-2xl p-5 md:w-[432px]  lg:w-[460px] {!$darkMode &&
 					'shadow-xl'} bg-white transition  duration-500 dark:bg-neutral-800">
 				{#if approved}
 					<div in:fade={{ duration: 200 }} class="h-full">
@@ -104,18 +101,32 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-size: 350px;
-		background-position: 85% 75%;
+		background-size: 240px;
+		background-position: 90% 85%;
 		background-repeat: no-repeat;
+	}
+
+	@media only screen and (max-width: 1160px) {
+		.dividends-wrapper {
+			background-position: 95% 90%;
+			background-size: 220px;
+		}
+	}
+
+	@media only screen and (max-width: 1010px) {
+		.dividends-wrapper {
+			background-position: 100% 90%;
+			background-size: 220px;
+		}
+	}
+
+	@media only screen and (max-width: 1010px) {
+		.dividends-wrapper {
+			background-size: 0px;
+		}
 	}
 
 	.dividends {
 		max-height: 600px;
-	}
-
-	.test {
-		background: -webkit-linear-gradient(#4158d0, #c850c0, #ffcc70);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
 	}
 </style>

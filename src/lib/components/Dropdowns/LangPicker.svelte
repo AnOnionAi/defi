@@ -30,7 +30,6 @@
 <svelte:window
 	on:click={(e) => {
 		if (isShowing && !menu.contains(e.target)) {
-			console.log('click');
 			isShowing = false;
 		}
 	}}

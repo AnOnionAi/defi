@@ -14,13 +14,12 @@ export async function metamaskConnect(): Promise<void> {
 		const userCurrentBlockchain = await window.ethereum.request({
 			method: 'eth_chainId'
 		});
-		console.log(userCurrentBlockchain);
 		chainID.set(userCurrentBlockchain);
 
 		const chain = await window.ethereum.request({ method: 'eth_chainId' });
 		chainID.set(chain);
 	} catch {
-		console.log('Error: Unable to log the user in Metamask');
+		console.log('The user rejected the connection');
 	}
 }
 
@@ -45,7 +44,6 @@ export async function logUser(): Promise<void> {
 export async function metamaskListeners(): Promise<void> {
 	try {
 		window.ethereum.on('chainChanged', (_chainID) => {
-			console.log('Chain ID is', _chainID);
 			chainID.set(_chainID);
 		});
 
@@ -55,7 +53,6 @@ export async function metamaskListeners(): Promise<void> {
 				if (addresses.length > 0) {
 					accounts.set(addresses);
 				} else {
-					console.log('LOGGED OUT');
 					accounts.set(undefined);
 				}
 			}
