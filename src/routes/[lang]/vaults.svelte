@@ -114,6 +114,6 @@
 	}
 
 	.background__lite {
-		background-image: url('/theme/vaults/vaultsBackground2.png');
+		background-image: url('/theme/vaults/vaultsBackground.webp');
 	}
 </style>

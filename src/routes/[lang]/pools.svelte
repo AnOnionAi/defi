@@ -12,7 +12,7 @@
 
 <section class="background {$darkMode && 'background__dark'}">
 	<PageHeader text={$_('headers.pools.text')} />
-	<div class="pools mt-5 space-y-4 ">
+	<div class=" mt-5 space-y-4 ">
 		<div
 			class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-8 text-center ">
 			{#each pools as pool}
@@ -28,14 +28,11 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
-		background-image: url('/theme/pools/fantasyMushCity.jpg');
+		background-image: url('/theme/pools/fantasyMushCity.webp');
 	}
 	.background__dark {
-		background-image: url('/theme/pools/mushVillageDark.jpeg');
+		background-image: url('/theme/pools/mushVillageDark.webp');
 		background-size: cover;
 		background-position: center center;
-	}
-	.pools {
-		min-height: 86vh;
 	}
 </style>
