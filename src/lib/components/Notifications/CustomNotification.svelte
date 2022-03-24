@@ -35,8 +35,6 @@
 		);
 	});
 
-	type NotificationType = 'error' | 'danger' | 'success' | 'warning';
-
 	const tailwindNotificationStyles = {
 		success: 'bg-triadicGreen-700',
 		error: 'bg-primary-900',
@@ -51,8 +49,9 @@
 	out:fly={{ duration: 300, x: 50 }}
 	class="{queuePosition == 0
 		? 'mt-[80px]'
-		: ''} mx-1 mb-2  rounded-lg  py-5 text-white {$darkMode &&
-		'bg-blue-300'} relative {tailwindNotificationStyles[notification.type]}">
+		: ''} relative mx-1  mb-2  rounded-lg py-5 text-white {tailwindNotificationStyles[
+		notification.type
+	]}">
 	<h4 class="cursor-pointer select-none text-center text-xl">
 		{notification.text}
 	</h4>
