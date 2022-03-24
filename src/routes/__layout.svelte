@@ -15,6 +15,8 @@
 	} from '$lib/stores/MetaMaskAccount';
 	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
 	import { onMount } from 'svelte';
+	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
+	import { SvelteComponent, SvelteComponentDev } from 'svelte/internal';
 
 	onMount(async () => {
 		await metamaskListeners();
@@ -44,7 +46,7 @@
 	} */
 </script>
 
-<Notifications>
+<Notifications item={CustomNotification}>
 	<Modal>
 		<Header />
 		{#if $navigating}

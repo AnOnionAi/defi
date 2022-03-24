@@ -158,7 +158,7 @@
 
 <div
 	in:fly={{ y: 200, duration: 100 }}
-	class="mx-auto mb-5 max-w-6xl opacity-95 sm:px-4 md:px-2 lg:px-0">
+	class="mx-auto mb-4 max-w-6xl opacity-95 sm:px-4 md:px-2 lg:px-0">
 	<div
 		on:click={openAccordeon}
 		class="{!$darkMode &&

@@ -3,7 +3,7 @@
 </script>
 
 <h1
-	class=" to: select-none bg-analogMelon-200 bg-gradient-to-t from-primary-400 bg-clip-text pt-[2rem] text-center text-3xl font-[700] 
+	class=" to: mb-[1rem] select-none bg-analogMelon-200 bg-gradient-to-t from-primary-400 bg-clip-text pt-[2rem] text-center text-3xl font-[700] 
 	tracking-wide text-transparent  transition 
 	duration-500 dark:bg-gradient-to-b dark:from-triadicYellow-400 dark:to-analogPurple-400
 	
