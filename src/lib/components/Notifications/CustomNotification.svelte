@@ -19,7 +19,7 @@
 
 	export let onRemove = null;
 
-	const handleButtonClick = () => {
+	const handleClick = () => {
 		onRemove();
 	};
 
@@ -46,13 +46,14 @@
 </script>
 
 <div
+	on:click={handleClick}
 	in:fly={{ duration: 300, x: 50 }}
 	out:fly={{ duration: 300, x: 50 }}
 	class="{queuePosition == 0
 		? 'mt-[80px]'
 		: ''} mx-1 mb-2  rounded-lg  py-5 text-white {$darkMode &&
 		'bg-blue-300'} relative {tailwindNotificationStyles[notification.type]}">
-	<h4 class="text-center text-xl">
+	<h4 class="cursor-pointer select-none text-center text-xl">
 		{notification.text}
 	</h4>
 	{#if notification.description}
