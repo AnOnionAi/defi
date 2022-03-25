@@ -9,18 +9,16 @@
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 
-	let backgroundImage;
+	/* 	let backgroundImage;
 
 	darkMode.subscribe((darkEnabled) => {
 		darkEnabled
-			? (backgroundImage = '/theme/farms/niceDarkMush.svg')
-			: (backgroundImage = '/theme/farms/niceMush.svg');
-	});
+			? (backgroundImage = '/theme/farms/gradientMushroom.png')
+			: (backgroundImage = '/theme/farms/gradientMushroom.');
+	}); */
 </script>
 
-<section
-	class="farms flex h-full flex-col pb-12"
-	style="background:url({backgroundImage});">
+<section class=" farms flex h-full flex-col pb-5">
 	<PageHeader text={$_('headers.farms.text')} />
 	<div class="w-23/24 mx-auto flex max-w-7xl flex-1 items-center">
 		<div
@@ -36,6 +34,26 @@
 
 <style>
 	.farms {
+		background-image: url('/theme/farms/gradientMushroom.png');
 		background-repeat: no-repeat;
+		background-position: right bottom;
+	}
+
+	@media only screen and (max-width: 1010px) {
+		.farms {
+			background-size: 200px;
+		}
+	}
+
+	@media only screen and (max-width: 1010px) {
+		.farms {
+			background-size: 200px;
+		}
+	}
+
+	@media only screen and (max-width: 715px) {
+		.farms {
+			background-size: 0px;
+		}
 	}
 </style>

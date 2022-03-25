@@ -9,9 +9,9 @@
 
 <a class="w-full" sveltekit:prefetch href={`/${$page.params.lang}${pageRoute}`}>
 	<span
-		class=" link link-underline link-underline-black dark:text-gray-200 {$darkMode &&
+		class=" link link-underline link-underline-black {$darkMode &&
 			'link-underline-dark link-underline-black-dark'} text-[16px] font-[500] {isCurrentRoute &&
-			'text-primary-400'}
+			'text-primary-400'} 
 	{isCurrentRoute && $darkMode && 'text-analogPurple-200'}">{pageTitle}</span>
 </a>
 
