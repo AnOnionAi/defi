@@ -59,41 +59,41 @@
 		<div
 			class="flex flex-row-reverse items-center justify-center lg:justify-start  ">
 			<a href="https://github.com/fungfi" class="mr-3 lg:mr-5" target="_blank">
-				<Fa icon={faGithub} size="lg" class="hover:text-complementary-500" />
+				<Fa icon={faGithub} size="lg" class="hover:text-[#999999]" />
 			</a>
 			<a
 				href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh"
 				target="_blank"
 				aria-label="Tiktok"
 				class="mr-3 lg:mr-5">
-				<Fa icon={faTiktok} size="lg" class="hover:text-complementary-500" />
+				<Fa icon={faTiktok} size="lg" class="hover:text-black" />
 			</a>
 			<a
 				href="https://facebook.com"
 				aria-label="Facebook"
 				class="mr-5"
 				target="_blank">
-				<Fa icon={faFacebook} size="lg" class="hover:text-complementary-500" />
+				<Fa icon={faFacebook} size="lg" class="hover:text-[#4267B2]" />
 			</a>
 			<a href="https://youtube.com" class="mr-3 lg:mr-5" target="_blank">
-				<Fa icon={faYoutube} size="lg" class=" hover:text-complementary-500" />
+				<Fa icon={faYoutube} size="lg" class=" hover:text-[#FF0000]" />
 			</a>
 			<a
 				href="https://twitter.com/fung_fi"
 				target="_blank"
 				aria-label="Twitter"
 				class="mr-3 lg:mr-5">
-				<Fa icon={faTwitter} size="lg" class="hover:text-complementary-500" />
+				<Fa icon={faTwitter} size="lg" class="hover:text-[#1DA1F2]" />
 			</a>
 			<a
 				href="https://telegram.com/fungfi"
 				target="_blank"
 				aria-label="Telegram"
 				class="mr-3 lg:mr-5">
-				<Fa icon={faTelegram} size="lg" class="hover:text-complementary-500" />
+				<Fa icon={faTelegram} size="lg" class="hover:text-[#229ED9]" />
 			</a>
 			<a href="https://discord.gg/b5H9BVC" class="mr-3 lg:mr-5" target="_blank">
-				<Fa icon={faDiscord} size="lg" class="hover:text-complementary-500" />
+				<Fa icon={faDiscord} size="lg" class="hover:text-[#7289DA]" />
 			</a>
 		</div>
 	</div>
