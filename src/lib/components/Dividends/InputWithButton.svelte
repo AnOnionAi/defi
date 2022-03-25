@@ -14,7 +14,7 @@
 	export let inputValue;
 </script>
 
-<div>
+<div class="">
 	<p class="ml-1 mb-1 text-sm text-gray-500 dark:text-gray-200">
 		{placeholderText}:
 		<span class="text-black dark:text-white">
@@ -26,7 +26,7 @@
 		</span>
 	</p>
 	<div
-		class="flex h-16 justify-between rounded-xl bg-gray-300 px-2 py-2 dark:bg-gray-800">
+		class="flex h-16 justify-between rounded-xl bg-gray-300 px-2 py-2 transition duration-500 dark:bg-neutral-700">
 		<input
 			disabled={disableInput}
 			bind:value={inputValue}
@@ -36,9 +36,9 @@
 		<button
 			on:click={handleButton}
 			disabled={buttonDisabled}
-			class="h-auto  bg-black {!buttonDisabled &&
-				'hover:bg-green-500 dark:hover:bg-emerald-400'} {isLoading &&
-				'bg-green-500 dark:bg-emerald-400'} flex items-center justify-center gap-x-2  rounded-lg px-3 text-white disabled:cursor-not-allowed disabled:opacity-70"
+			class="h-auto bg-primary-400 transition duration-500  disabled:bg-neutral-400 dark:bg-analogPurple-900 dark:disabled:bg-neutral-500 {!buttonDisabled &&
+				'hover:bg-triadicGreen-700 dark:hover:bg-triadicGreen-600'} {isLoading &&
+				'bg-triadicGreen-700 dark:bg-triadicGreen-600'} flex items-center justify-center gap-x-2 rounded-lg  px-3 font-medium text-white disabled:cursor-not-allowed disabled:opacity-50"
 			>{buttonText}
 			{#if isLoading}
 				<Chasing size={16} color={'#fff'} />

@@ -9,9 +9,10 @@
 
 <nav
 	class:dark={$darkMode}
-	class="{$isHomescreen && 'z-10'} backdrop-filter {$darkMode &&
+	class=" {!$isHomescreen && !$darkMode && 'text-gray-800'} {$isHomescreen &&
+		'z-10 text-white'}  backdrop-filter {$darkMode &&
 		!$isHomescreen &&
-		'bg-zinc-800 '} top-0 w-full backdrop-blur  {!$isHomescreen &&
-		'shadow-sm'} {$isHomescreen && 'text-white'} {$darkMode && 'text-white'}">
+		'bg-darkGrey-900 '} w-full backdrop-blur  transition duration-500  {$darkMode &&
+		'text-white'} select-none ">
 	<slot />
 </nav>

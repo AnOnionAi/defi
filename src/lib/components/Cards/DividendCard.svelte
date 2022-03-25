@@ -71,12 +71,11 @@
 				getContractAddress(Token.MUSHTOKEN),
 				userAddress
 			);
-			console.log(userBalance);
 			userStakedTokens = await stakedWantTokens(2, userAddress);
 			TVL = await getSharesTotal();
 			userReward = await getPendingReward(userAddress);
 		} catch {
-			console.log('Failed on fetching data');
+			console.log('Failed on updating data');
 		}
 	};
 
@@ -132,7 +131,6 @@
 			userCanHarvest = false;
 			userReward = ethers.constants.Zero;
 		} catch {
-			console.log('Failed on Harvest');
 			addNotification(transactionDeniedByTheUser);
 			loadingState.loadingHarvest = false;
 		}
@@ -143,7 +141,7 @@
 <div class="flex h-full w-full flex-col p-2">
 	<div class="mb-10 flex w-full justify-between">
 		<div class="flex select-none items-center">
-			<img src="/assets/mushRound.png" alt="Mush Token Icon" class="w-8" />
+			<img src="/assets/mushCoin.webp" alt="Mush Token Icon" class="w-8" />
 			<h2 class="pl-2 text-2xl font-semibold  dark:text-white">MUSH</h2>
 		</div>
 

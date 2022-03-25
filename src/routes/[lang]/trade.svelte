@@ -3,10 +3,47 @@
 </script>
 
 <script lang="ts">
+	import { getNotificationsContext } from 'svelte-notifications';
+
+	const { addNotification } = getNotificationsContext();
+
+	const addErrorNotification = () => {
+		addNotification({
+			position: 'top-right',
+			text: 'Error Notification',
+			type: 'error'
+		});
+	};
+
+	const addSuccessNotification = () => {
+		addNotification({
+			position: 'top-right',
+			text: 'Error Notification',
+			type: 'success'
+		});
+	};
+
+	const addWarningNotification = () => {
+		addNotification({
+			position: 'top-right',
+			text: 'Warning Notification',
+			type: 'warning'
+		});
+	};
 </script>
 
 <section>
 	<br />
-	<h1 class="text-dark-200 text-4xl dark:text-white">T R A D E</h1>
-	<div class="h-full" />
+	<h1 class="text-dark-200 text-center text-4xl dark:text-white">Test Page</h1>
+	<button
+		on:click={addErrorNotification}
+		class="rounded-lg bg-black px-4 py-2 text-white">Error Notification</button>
+	<button
+		on:click={addSuccessNotification}
+		class="rounded-lg bg-black px-4 py-2 text-white"
+		>Success Notification</button>
+	<button
+		on:click={addWarningNotification}
+		class="rounded-lg bg-black px-4 py-2 text-white"
+		>Success Notification</button>
 </section>

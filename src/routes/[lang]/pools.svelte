@@ -5,16 +5,14 @@
 
 <script lang="ts">
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
+	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import { pools } from '$lib/config/constants/pools';
 	import { darkMode } from '$lib/stores/dark';
 </script>
 
 <section class="background {$darkMode && 'background__dark'}">
-	<br />
-	<h1 class="text-center text-5xl tracking-wide dark:text-white">
-		{$_('headers.pools.text')}
-	</h1>
-	<div class="pools mt-5 space-y-4 ">
+	<PageHeader text={$_('headers.pools.text')} />
+	<div class=" mt-5 space-y-4 ">
 		<div
 			class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-8 text-center ">
 			{#each pools as pool}
@@ -30,14 +28,11 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
-		background-image: url('/theme/pools/fantasyMushCity.jpg');
+		background-image: url('/theme/pools/fantasyMushCity.webp');
 	}
 	.background__dark {
-		background-image: url('/theme/pools/mushVillageDark.jpeg');
+		background-image: url('/theme/pools/mushVillageDark.webp');
 		background-size: cover;
 		background-position: center center;
-	}
-	.pools {
-		min-height: 86vh;
 	}
 </style>

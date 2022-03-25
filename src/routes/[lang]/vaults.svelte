@@ -11,7 +11,7 @@
 		VaultInfo,
 		VaultState
 	} from '$lib/ts/types';
-	import VaultAccordeon from '$lib/components/Cards/VaultAccordeon.svelte';
+	import VaultAccordeon from '$lib/components/Vault/VaultAccordeon.svelte';
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import { onMount } from 'svelte';
 	import {
@@ -19,6 +19,7 @@
 		reduceFilters
 	} from '$lib/utils/filterFunctions';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
+	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
@@ -87,10 +88,7 @@
 </script>
 
 <section class="pb-3 ">
-	<br />
-	<h1 class="text-center text-5xl tracking-wide dark:text-white">
-		{$_('headers.vaults.text')}
-	</h1>
+	<PageHeader text={$_('headers.vaults.text')} />
 
 	<div class="mainContainer 	sideShadow background__lite pt-10">
 		<div in:fade={{ duration: 200 }}>
@@ -116,6 +114,6 @@
 	}
 
 	.background__lite {
-		background-image: url('/theme/vaults/vaultsBackground2.png');
+		background-image: url('/theme/vaults/vaultsBackground.webp');
 	}
 </style>

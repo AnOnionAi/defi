@@ -1,22 +1,29 @@
 <script lang="ts">
-	import Header from '$lib/layout/Header.svelte';
-	import Footer from '$lib/layout/Footer.svelte';
+	import Header from '$lib/components/layout/Header.svelte';
+	import Footer from '$lib/components/layout/Footer.svelte';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
 	import { navigating, page } from '$app/stores';
-	import LinearBar from '$lib/layout/LinearBar.svelte';
 	import Modal from 'svelte-simple-modal';
 	import '../app.css';
 	import {
 		accounts,
+		logUser,
 		metamaskConnect,
-		metamaskListeners
+		metamaskListeners,
+		retrieveUserAddress
 	} from '$lib/stores/MetaMaskAccount';
+	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
+	import { onMount } from 'svelte';
+	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
+	import { SvelteComponent, SvelteComponentDev } from 'svelte/internal';
 
-	let currentPath;
-	let lastPath;
+	onMount(async () => {
+		await metamaskListeners();
+		await logUser();
+	});
 
-	$: {
+	/* 	$: {
 		currentPath = $page.url.pathname;
 		currentPath = currentPath.split('/');
 
@@ -36,21 +43,21 @@
 		}
 
 		lastPath = currentPath;
-	}
+	} */
 </script>
 
-<Notifications>
+<Notifications item={CustomNotification}>
 	<Modal>
 		<Header />
 		{#if $navigating}
 			<div class="absolute left-0 top-0 z-10 w-screen">
-				<LinearBar />
+				<GradientLinearBar />
 			</div>
 		{/if}
 		<main
 			class:dark={$darkMode}
 			class="main background_pattern flex flex-1  {$darkMode &&
-				'bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-900'} ">
+				'bg-darkGrey-900 '} transition duration-500 ">
 			<div class="flex-1">
 				<slot />
 			</div>

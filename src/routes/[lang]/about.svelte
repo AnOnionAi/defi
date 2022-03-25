@@ -5,6 +5,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import { darkMode } from '$lib/stores/dark';
+	import { page } from '$app/stores';
 </script>
 
 <svelte:head>
@@ -17,237 +18,231 @@
 		src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
 </svelte:head>
 
-<section class="green {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">
-		{$_('headers.automated-crypto.text')}
-	</h1>
-	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-		{$_('about.automated-description')}
-	</p>
-	<div class="curve {$darkMode && 'dark-curve'}" />
-	<img
-		class="{$darkMode && 'img-darkmode'} z-0 h-32 w-32 lg:h-auto lg:w-auto"
-		src="/assets/crypto-market.png"
-		alt="crypto-market" />
-</section>
+<section class=" h-full">
+	<article class="flex  w-full px-4 pt-[10%] md:px-8 lg:px-10 xl:px-12">
+		<div class="w-full flex-1">
+			<h2
+				class="select-none p-2 text-center text-4xl font-medium capitalize text-primary-400 dark:text-analogPurple-200 md:text-left md:text-4xl lg:text-4xl xl:text-5xl">
+				{$_('headers.automated-crypto.text')}
+			</h2>
+			<p
+				class="px-4 text-justify text-sm text-gray-700  dark:text-gray-300 lg:leading-relaxed xl:text-lg">
+				{$_('about.automated-description')}
+			</p>
+		</div>
+		<div class="flex w-0 md:w-5/12 lg:w-5/12  xl:p-12">
+			{#if $darkMode}
+				<img
+					src="/assets/cryptoportfolio_dark.svg"
+					alt="Cryto Investments portfolio"
+					class="" />
+			{:else}
+				<img
+					src="/assets/cryptoportfolio_primary.svg"
+					alt="Cryto Investments portfolio"
+					class="" />
+			{/if}
+		</div>
+	</article>
 
-<section class="farms {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.farms.text')}</h1>
-	<div class="columns">
-		<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-			{$_('about.farms-description')}
-		</p>
-		<img
-			class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
-			src="/assets/farms.png"
-			alt="farms" />
+	<div
+		class="relative bg-gradient-to-bl from-primary-300 via-primary-200
+		to-analogMelon-300 pb-8 dark:bg-gradient-to-t dark:from-black
+		  dark:via-purple-900 dark:to-analogPurple-800">
+		<div class="relative">
+			<div class="curve-first">
+				<svg
+					data-name="Layer 1"
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 1200 120"
+					preserveAspectRatio="none">
+					<path
+						d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+						class="shape-fill {$darkMode && 'shape-fill-dark'}" />
+				</svg>
+			</div>
+			<article
+				class="flex  w-full flex-col-reverse  justify-center  px-4 pt-[25%] md:flex-row md:px-8 md:pt-[10%] lg:px-10 xl:px-12">
+				<div class="flex w-full justify-center md:w-5/12 lg:w-5/12  xl:p-12">
+					<img
+						src="/assets/cryptoVault.svg"
+						alt="Cryto Investments portfolio"
+						class="animation-glide" />
+				</div>
+				<div
+					class="flex w-full flex-col items-center justify-center md:flex-1  md:items-start">
+					<h2
+						class="select-none text-center text-4xl font-bold capitalize text-gray-100  md:text-left   md:text-4xl lg:text-4xl xl:text-6xl">
+						{$_('headers.vaults.text')}
+					</h2>
+					<p
+						class="mt-2 text-justify text-sm leading-relaxed text-white dark:text-gray-200 xl:text-lg">
+						{$_('about.vaults-description')}
+					</p>
+					<a
+						href={`/${$page.params.lang}/vaults`}
+						class="mt-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
+						>{$_('dashboard.goDeposit')}</a>
+				</div>
+			</article>
+		</div>
+
+		<div class="min-h-[600px] px-8">
+			<div class="grid grid-cols-1 gap-x-8 gap-y-6 py-12 md:grid-cols-2">
+				<div class="flex flex-col items-center">
+					<h2 class="text-center text-5xl font-bold text-white">
+						{$_('headers.farms.text')}
+					</h2>
+					<p class="min-h-[140px] p-3 text-justify font-medium text-gray-100">
+						{$_('about.farms-description')}
+					</p>
+					<a
+						href={`/${$page.params.lang}/farms`}
+						class=" mb-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
+						>{$_('dashboard.startFarming')}</a>
+					<img
+						src="/assets/pickaxes.svg"
+						alt="Crypto currencies"
+						class="animation-glide w-[350px]" />
+				</div>
+
+				<div class="flex flex-col items-center">
+					<h2 class="text-center text-5xl font-bold text-white">
+						{$_('headers.pools.text')}
+					</h2>
+					<p class="min-h-[140px] p-3 text-justify font-medium text-gray-100">
+						{$_('about.pools-description')}
+					</p>
+					<a
+						href={`/${$page.params.lang}/farms`}
+						class=" mb-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
+						>{$_('dashboard.addLiquidity')}</a>
+					<img
+						src="/assets/poolsAssets.svg"
+						alt="Crypto currencies"
+						class="animation-glide w-[192px]" />
+				</div>
+			</div>
+		</div>
+		<div class="bottom-curve">
+			<svg
+				data-name="Layer 1"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 1200 120"
+				preserveAspectRatio="none">
+				<path
+					d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+					class={$darkMode ? 'shape-fill-dark' : 'shape-fill'} />
+			</svg>
+		</div>
 	</div>
-</section>
 
-<section class="pools bubble {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.pools.text')}</h1>
-	<div class="columns">
-		<img
-			class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
-			src="/pools.png"
-			alt="pools" />
-		<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-			{$_('about.pools-description')}
-		</p>
+	<div
+		class="flex min-h-[700px] w-full content-center items-center p-5 md:p-5 lg:p-12">
+		<div class="grid grid-cols-1 md:grid-cols-2">
+			<div
+				class="flex w-full flex-col items-center justify-center gap-3 md:items-start">
+				<h2
+					class="text-3xl font-medium tracking-wide text-gray-800 dark:text-white lg:text-4xl  xl:text-5xl">
+					{$_('headers.crypto-responsibility.text')}
+				</h2>
+				<p
+					class="text-justify leading-relaxed text-gray-600 dark:text-gray-200">
+					{$_('about.responsibility-description')}
+				</p>
+				<a
+					target="_blank"
+					href={`https://academy.binance.com/${$page.params.lang}`}
+					class="mt-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
+					>{'Learn More ...'}</a>
+			</div>
+			<img
+				src="/assets/cryptoResponsability.svg"
+				alt=""
+				class=" animation-glide w-[220px] justify-self-center md:w-[300px] lg:w-[360px]" />
+		</div>
 	</div>
-</section>
-
-<section class="orange {$darkMode && 'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">{$_('headers.vaults.text')}</h1>
-	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-		{$_('about.vaults-description')}
-	</p>
-	<img
-		class="{$darkMode && 'img-darkmode'} my-4 h-32 w-32 lg:h-auto lg:w-auto"
-		src="/assets/vaults.png"
-		alt="vaults" />
-</section>
-
-<div class="spacer layer1 flip" />
-
-<section
-	class="crypto-responsibility blue {$darkMode &&
-		'font-darkmode'} h-100 sm:h-auto">
-	<h1 class="my-6 text-4xl lg:text-6xl">
-		{$_('headers.crypto-responsibility.text')}
-	</h1>
-	<p class="p-4 text-sm lg:p-48 lg:text-2xl">
-		{$_('about.responsibility-description')}
-	</p>
-	<img
-		class="{$darkMode && 'img-darkmode'} h-32 w-32 lg:h-auto lg:w-auto"
-		src="/assets/crypto-responsibility.png"
-		alt="crypto-responsibility" />
 </section>
 
 <style>
-	p {
-		padding-top: 0;
-		padding-bottom: 0;
-		text-align: justify;
-	}
-
-	.img-darkmode {
-		filter: invert(1);
-	}
-
-	:global(body) {
-		overflow-x: hidden;
-	}
-
-	section {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		min-height: 500px;
-		padding-top: 150px;
-		padding-bottom: 100px;
-	}
-
-	.font-darkmode {
-		color: #fff;
-	}
-
-	.farms .columns {
-		display: -ms-flex;
-		display: -webkit-flex;
-		display: flex;
-		width: 80%;
-		justify-content: center;
-	}
-
-	.farms .columns p {
-		margin: 5px;
-		padding: 0;
-		padding-top: 10px;
-		width: 60%;
-	}
-
-	.farms .columns img {
-		margin-left: 30px;
-	}
-
-	.pools .columns {
-		display: -ms-flex;
-		display: -webkit-flex;
-		display: flex;
-		width: 80%;
-		justify-content: center;
-	}
-
-	.pools .columns p {
-		margin: 5px;
-		padding: 0;
-		padding-top: 10px;
-		width: 60%;
-	}
-
-	.pools .columns img {
-		margin-right: 10px;
-	}
-
-	.crypto-responsibility {
-		transform: translateY(-2px);
-	}
-
-	.green {
-		background: #4ade80;
-	}
-
-	.orange {
-		background: #fb923c;
-	}
-
-	.blue {
-		background: #60a5fa;
-	}
-
-	/* Curved bg with plain CSS */
-
-	.curve {
-		position: absolute;
-		height: 150px;
-		width: 100%;
-		bottom: 0;
-		text-align: center;
-	}
-
-	.curve::before {
-		content: '';
-		display: block;
-		position: absolute;
-		border-radius: 100% 50%;
-		width: 55%;
-		height: 100%;
-		transform: translate(85%, 60%);
-		background-color: #f9f8f9;
-		z-index: 0;
-	}
-
-	.dark-curve::before {
-		content: '';
-		display: block;
-		position: absolute;
-		border-radius: 100% 50%;
-		width: 55%;
-		height: 100%;
-		transform: translate(85%, 60%);
-		background-color: #0b1216;
-		z-index: 0;
-	}
-
-	.curve::after {
-		content: '';
-		display: block;
-		position: absolute;
-		border-radius: 100% 50%;
-		width: 55%;
-		height: 100%;
-		background-color: #4ade80;
-		transform: translate(-4%, 40%);
-		z-index: 0;
-	}
-
-	/* Bubble bg with plain CSS */
-
-	.bubble {
-		z-index: 1;
-	}
-
-	.bubble::after {
-		background-color: #fb923c;
-		content: '';
-		border-top-left-radius: 50% 100%;
-		border-top-right-radius: 50% 100%;
+	.bottom-curve {
 		position: absolute;
 		bottom: 0;
-		z-index: -1;
+		left: 0;
 		width: 100%;
-		height: 85%;
-	}
-
-	/* SVG background image via https://haikei.app/ */
-
-	.spacer {
-		aspect-ratio: 960/300;
-		width: 100%;
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: cover;
-	}
-
-	.layer1 {
-		background-image: url('/static/assets/layer1.svg');
-	}
-
-	.flip {
+		overflow: hidden;
+		line-height: 0;
 		transform: rotate(180deg);
+	}
+
+	.bottom-curve svg {
+		position: relative;
+		display: block;
+		width: calc(100% + 1.3px);
+		height: 40px;
+	}
+
+	.bottom-curve .shape-fill-dark {
+		fill: #121212;
+	}
+
+	.bottom-curve .shape-fill {
+		fill: #fff;
+	}
+
+	article {
+		min-height: 102vh;
+	}
+
+	.curve-first {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		overflow: hidden;
+		line-height: 0;
+		transform: rotate(180deg);
+	}
+
+	.curve-first svg {
+		position: relative;
+		display: block;
+		width: calc(127% + 1.3px);
+		height: 73px;
+		transform: rotateY(180deg);
+	}
+
+	.curve-first .shape-fill {
+		fill: #ffffff;
+	}
+
+	.curve-first .shape-fill-dark {
+		fill: #121212;
+	}
+
+	.animation-glide {
+		position: relative;
+		animation: glide 1.5s ease-in-out alternate infinite;
+	}
+
+	@keyframes glide {
+		from {
+			left: 0px;
+			top: 0px;
+		}
+
+		to {
+			left: 0px;
+			top: 25px;
+		}
+	}
+
+	.second-section {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		overflow: hidden;
+		line-height: 0;
 	}
 </style>

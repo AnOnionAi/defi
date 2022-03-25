@@ -3,6 +3,14 @@
 	"parser": "@typescript-eslint/parser",
 	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
 	"plugins": ["svelte3", "@typescript-eslint"],
+	"ignorePatterns": [
+		".cjs",
+		"pnpm-lock.yaml",
+		"README.md",
+		"src/app.html",
+		"static/",
+		"netlify.toml"
+	],
 	"overrides": [{ "files": ["*.svelte"], "processor": "svelte3/svelte3" }],
 	"settings": {
 		"svelte3/typescript": true
@@ -15,13 +23,5 @@
 		"browser": true,
 		"es2020": true,
 		"node": true
-	},
-	"ignorePatterns": [
-		"*.cjs",
-		"pnpm-lock.yaml",
-		"README.md",
-		"src/app.html",
-		"static/",
-		"netlify.toml"
-	]
+	}
 }

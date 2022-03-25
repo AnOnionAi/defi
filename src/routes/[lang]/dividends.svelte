@@ -21,6 +21,7 @@
 		transactionSend
 	} from '$lib/config/constants/notifications';
 	import { darkMode } from '$lib/stores/dark';
+	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	const { addNotification } = getNotificationsContext();
 
 	let userAccount: string;
@@ -29,7 +30,6 @@
 	let finishedApprovalFetch = false;
 
 	let backgroundImage: string;
-
 	$: userAccount = $accounts?.[0];
 	$: approved = !userMushAllowance.isZero();
 
@@ -46,13 +46,12 @@
 
 	darkMode.subscribe((darkEnabled) => {
 		darkEnabled
-			? (backgroundImage = '/theme/dividends/mushHouse.svg')
+			? (backgroundImage = '/theme/dividends/mushHouse.webp')
 			: (backgroundImage = '/theme/dividends/cuteMush.svg');
 	});
 
 	const handleApproval = async () => {
 		try {
-			console.log('whats happening');
 			addNotification(transactionSend);
 
 			const tx = await approveToken(
@@ -63,23 +62,20 @@
 			approved = true;
 			addNotification(transactionCompleted);
 		} catch (e) {
-			console.log(e);
 			addNotification(transactionDeniedByTheUser);
 		}
 	};
 </script>
 
 <section class="flex h-full flex-col">
-	<h1 class="mt-[2rem] text-center text-5xl tracking-wide dark:text-white">
-		{$_('headers.dividends.text')}
-	</h1>
+	<PageHeader text={$_('headers.dividends.text')} />
 	<div class="flex-1">
 		<div
 			style="background-image:url({backgroundImage});"
 			class="dividends-wrapper">
 			<div
-				class="dividends h-full  w-full max-w-lg rounded-2xl  p-5 {!$darkMode &&
-					'shadow-xl'} bg-white dark:bg-neutral-900 ">
+				class="dividends my-7 mx-2 h-[680px]  w-[380px] rounded-2xl p-5 md:w-[432px]  lg:w-[460px] {!$darkMode &&
+					'shadow-xl'} bg-white transition  duration-500 dark:bg-neutral-800">
 				{#if approved}
 					<div in:fade={{ duration: 200 }} class="h-full">
 						<DividendCard />
@@ -105,9 +101,29 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-size: 350px;
-		background-position: 85% 75%;
+		background-size: 240px;
+		background-position: 90% 85%;
 		background-repeat: no-repeat;
+	}
+
+	@media only screen and (max-width: 1160px) {
+		.dividends-wrapper {
+			background-position: 95% 90%;
+			background-size: 220px;
+		}
+	}
+
+	@media only screen and (max-width: 1010px) {
+		.dividends-wrapper {
+			background-position: 100% 90%;
+			background-size: 220px;
+		}
+	}
+
+	@media only screen and (max-width: 1010px) {
+		.dividends-wrapper {
+			background-size: 0px;
+		}
 	}
 
 	.dividends {

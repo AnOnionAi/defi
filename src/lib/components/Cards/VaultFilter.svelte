@@ -157,7 +157,7 @@
 					</span>
 				</span>
 				<span class="radio__label text-base text-pink-700">
-					<img src="/icons/sushi.png" alt="SushiSwap" />
+					<img src="/icons/sushi.webp" alt="SushiSwap" />
 				</span>
 			</label>
 

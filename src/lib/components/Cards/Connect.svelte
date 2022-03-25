@@ -28,8 +28,35 @@
 			alt="Metamask Fox"
 			class="mb-5 w-40 transform self-center transition duration-300 hover:scale-125" />
 		<p
-			class="rounded-full bg-black p-3 text-center text-xl font-medium text-white hover:bg-gray-600 dark:bg-emerald-500 dark:hover:bg-emerald-300 ">
+			class="btn-grad rounded-full p-3 text-center text-xl font-medium text-white hover:bg-primary-300 dark:bg-analogPurple-300 dark:hover:bg-emerald-300 ">
 			{$_('dividendsPage.cyw')}
 		</p>
 	</div>
 </div>
+
+<style>
+	.btn-grad {
+		background-image: linear-gradient(
+			to right,
+			#f37102 0%,
+			#ff3550 51%,
+			#fc28b2 100%
+		);
+	}
+
+	.btn-grad {
+		margin: 10px;
+		text-align: center;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: white;
+		box-shadow: 0 0 2px #eee;
+		display: block;
+	}
+
+	.btn-grad:hover {
+		background-position: right center; /* change the direction of the change here */
+		color: #fff;
+		text-decoration: none;
+	}
+</style>
