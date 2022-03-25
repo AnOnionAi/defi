@@ -1,4 +1,3 @@
-import type { BigNumber } from 'ethers';
 import { getVaultChefContract } from './contracts';
 import { ethers } from 'ethers';
 
@@ -48,7 +47,11 @@ export const withdrawTo = (
 ): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
-		return vaultChef.withdraw(pid, ethers.utils.parseUnits(amount.trim(), 18));
+		return vaultChef.withdraw(
+			pid,
+			ethers.utils.parseUnits(amount.trim(), 18),
+			to
+		);
 	} catch (error) {
 		console.log(error, 'Unable to withdraw');
 	}

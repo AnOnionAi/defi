@@ -1,9 +1,9 @@
-name: Lint
+name: Continuous Integration
 
 on: [pull_request]
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,23 +18,29 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install pnpm
-        run: sudo npm install -g pnpm
-
       - name: Install dependencies
         run: |
-          pnpm add svelte typescript
-          pnpm add -D prettier prettier-plugin-tailwindcss eslint
-          pnpm add -D @typescript-eslint/parser @typescript-eslint/eslint-plugin
+          sudo npm install -g pnpm
+          pnpm install --frozen-lockfile
+
+      - name: Install Playwright
+        run: npx playwright install-deps
+
+      - name: Build project
+        run: pnpm build
+
+      # - name: Playwright tests
+      #  run: pnpm test
 
       - name: Format
         run: pnpm format
+
+      - name: Lint
+        run: pnpm lint
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply formatting changes
           branch: ${{ github.head_ref }}
-
-      - name: Lint
-        run: pnpm lint
+          commit_options: '--no-verify'

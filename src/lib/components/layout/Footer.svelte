@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { darkMode } from '$lib/stores/dark';
-	import { _ } from 'svelte-i18n';
 	import { page } from '$app/stores';
 	import Fa from 'svelte-fa';
 	import { isHomescreen } from '$lib/stores/homescreen';

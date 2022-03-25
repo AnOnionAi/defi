@@ -262,12 +262,12 @@
 			{#if visible}
 				<h4
 					in:fade={{ duration: 1000 }}
-					class="relative pt-36 text-4xl xl:pt-72">
+					class="relative pt-36 text-4xl italic xl:pt-72">
 					{$_('home.tagline1')}
 				</h4>
 				<h4
 					in:fade={{ delay: 1500, duration: 3000 }}
-					class="relative pt-2 text-4xl italic">
+					class="relative pt-2 text-4xl">
 					{$_('home.tagline2')} 🍄
 				</h4>
 				<h3
