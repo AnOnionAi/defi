@@ -46,7 +46,7 @@
 
 	darkMode.subscribe((darkEnabled) => {
 		darkEnabled
-			? (backgroundImage = '/theme/dividends/mushHouse.svg')
+			? (backgroundImage = '/theme/dividends/mushHouse.webp')
 			: (backgroundImage = '/theme/dividends/cuteMush.svg');
 	});
 
