@@ -101,7 +101,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-size: 240px;
+		background-size: 160px;
 		background-position: 90% 85%;
 		background-repeat: no-repeat;
 	}
@@ -109,18 +109,18 @@
 	@media only screen and (max-width: 1160px) {
 		.dividends-wrapper {
 			background-position: 95% 90%;
-			background-size: 220px;
+			background-size: 140px;
 		}
 	}
 
 	@media only screen and (max-width: 1010px) {
 		.dividends-wrapper {
 			background-position: 100% 90%;
-			background-size: 220px;
+			background-size: 100 px;
 		}
 	}
 
-	@media only screen and (max-width: 1010px) {
+	@media only screen and (max-width: 800px) {
 		.dividends-wrapper {
 			background-size: 0px;
 		}

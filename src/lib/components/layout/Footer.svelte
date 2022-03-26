@@ -65,7 +65,10 @@
 				target="_blank"
 				aria-label="Tiktok"
 				class="mr-3 lg:mr-5">
-				<Fa icon={faTiktok} size="lg" class="hover:text-black" />
+				<Fa
+					icon={faTiktok}
+					size="lg"
+					class="hover:text-black {$darkMode && 'hover:text-[#25F4EE]'}" />
 			</a>
 			<a
 				href="https://facebook.com"

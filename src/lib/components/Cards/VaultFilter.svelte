@@ -101,7 +101,7 @@
 	};
 </script>
 
-<div
+<!-- <div
 	class="overflow-right-hidden m-auto my-4 w-full max-w-7xl rounded-2xl border border-white bg-white px-4 pb-4 pt-6 shadow dark:bg-neutral-900 dark:text-white">
 	<div class="relative flex w-auto flex-row flex-wrap justify-around">
 		<div
@@ -272,224 +272,22 @@
 			</div>
 		</div>
 	</div>
+</div> -->
+
+<div
+	class="sideShadow mx-auto mb-8 h-[200px] max-w-6xl rounded-lg bg-white py-4 px-9 dark:bg-neutral-800">
+	<div class=" grid h-full w-full grid-cols-4 ">
+		<div>
+			<input
+				type="checkbox"
+				checked={true}
+				class="  h-[20px] w-[20px] accent-primary-400 dark:accent-analogPurple-400" />
+		</div>
+	</div>
 </div>
 
 <style>
-	#switch[type='checkbox'] {
-		height: 0;
-		width: 0;
-		visibility: hidden;
-	}
-
-	#switch-label {
-		cursor: pointer;
-		text-indent: -9999px;
-		width: 70px;
-		height: 35px;
-		background: grey;
-		display: block;
-		border-radius: 100px;
-		position: relative;
-	}
-
-	#switch-label:after {
-		content: '';
-		position: absolute;
-		top: 5px;
-		left: 5px;
-		width: 25px;
-		height: 25px;
-		background: #fff;
-		border-radius: 45px;
-		transition: 0.3s;
-	}
-
-	#switch:checked + label {
-		background: rgba(16, 185, 129, var(--tw-bg-opacity));
-	}
-
-	#switch:checked + label:after {
-		left: calc(100% - 5px);
-		transform: translateX(-90%);
-	}
-
-	#switch-label:active:after {
-		width: 20px;
-	}
-
-	img {
-		width: 32px;
-		height: 32px;
-	}
-
-	.content-input input {
-		display: inline-block;
-		width: 100%;
-		padding: 7px 10px;
-		height: 42px;
-		outline: 0;
-		border: 0;
-		border-radius: 0;
-		background: #f0f0f0;
-		color: #7b7b7b;
-		font-size: 1.1em;
-		font-weight: 400;
-		color: #999;
-
-		border: 2px solid rgba(0, 0, 0, 0.2);
-		border-radius: 12px;
-		position: relative;
-		transition: all 0.25s ease;
-		opacity: 1;
-	}
-
-	.title {
-		font-size: 15px;
-		font-weight: 400;
-	}
-
-	/* ----------- DROP DOWN STYLES ---------------- */
-
-	.content-select select {
-		appearance: none;
-		-webkit-appearance: none;
-		-moz-appearance: none;
-	}
-
-	/* Eliminamos la fecha que por defecto aparece en el desplegable */
-	.content-select select::-ms-expand {
-		display: none;
-	}
-
-	.content-select {
-		position: relative;
-	}
-
-	.content-select select {
-		display: inline-block;
-		width: 100%;
-		max-width: 200px;
-		min-width: 200px;
-		cursor: pointer;
-		padding: 7px 10px;
-		height: 42px;
-		outline: 0;
-		border: 0;
-		border-radius: 0;
-		background: #f0f0f0;
-		font-size: 1.1em;
-		font-weight: 400;
-		color: #999;
-		border: 2px solid rgba(0, 0, 0, 0.2);
-		border-radius: 12px;
-		position: relative;
-		transition: all 0.25s ease;
-	}
-
-	.content-select select:hover {
-		background: #b1e8cd;
-	}
-
-	select option {
-		min-width: 200px;
-		min-height: 200px;
-		cursor: pointer;
-		height: 500px;
-	}
-
-	/* 
-    Creamos la fecha que aparece a la izquierda del select.
-    Realmente este elemento es un cuadrado que sólo tienen
-    dos bordes con color y que giramos con transform: rotate(-45deg);
-    */
-	.content-select i {
-		position: absolute;
-		right: 20px;
-		top: calc(50% - 13px);
-		width: 16px;
-		height: 16px;
-		display: block;
-		border-left: 4px solid #2ac176;
-		border-bottom: 4px solid #2ac176;
-		transform: rotate(-45deg); /* Giramos el cuadrado */
-		transition: all 0.25s ease;
-	}
-
-	.content-select:hover i {
-		margin-top: 3px;
-	}
-
-	/* ------------ CHECKBOX STYLES --------------- */
-	input[type='radio'] {
-		cursor: pointer;
-	}
-
-	input[type='checkbox'] {
-		cursor: pointer;
-	}
-
-	.checkbox {
-		display: grid;
-		grid-template-columns: min-content auto;
-		font-size: 2rem;
-		color: var(--color);
-		max-width: 200px;
-		min-width: 200px;
-	}
-
-	.checkbox .radio__label {
-		font-size: 16px;
-	}
-
-	.radio__label#all {
-		color: #059669;
-	}
-
-	.radio__label#zero {
-		color: #dc2626;
-	}
-
-	input {
-		opacity: 0;
-		width: 1em;
-		height: 1em;
-		z-index: 2;
-	}
-
-	.checkbox__control {
-		width: 0.8em;
-		height: 0.8em;
-		border-radius: 0.2em;
-		border: 0.1em solid currentColor;
-	}
-
-	.checkbox__input {
-		display: grid;
-		grid-template-areas: 'checkbox';
-	}
-	.checkbox__input > * {
-		grid-area: checkbox;
-	}
-
-	.checkbox__control svg {
-		transition: transform 0.1s ease-in 25ms;
-		transform: scale(0);
-		transform-origin: bottom left;
-	}
-
-	.checkbox__input input:checked + .checkbox__control svg {
-		transform: scale(1);
-	}
-
-	.checkbox__input input:focus + .checkbox__control {
-		box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
-	}
-
-	.checkbox__input input:hover + .checkbox__control {
-		box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
-	}
-
-	.checkbox__input input:checkbox:disabled + .checkbox__control {
-		color: red;
+	.sideShadow {
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	}
 </style>

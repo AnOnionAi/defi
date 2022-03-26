@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Header from '$lib/components/layout/Header.svelte';
-	import Footer from '$lib/components/layout/Footer.svelte';
+	import Header from '$lib/components/Layout/Header.svelte';
+	import Footer from '$lib/components/Layout/Footer.svelte';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
 	import { navigating, page } from '$app/stores';
@@ -14,9 +14,8 @@
 		retrieveUserAddress
 	} from '$lib/stores/MetaMaskAccount';
 	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, SvelteComponent } from 'svelte';
 	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
-	import { SvelteComponent, SvelteComponentDev } from 'svelte/internal';
 
 	onMount(async () => {
 		await metamaskListeners();
