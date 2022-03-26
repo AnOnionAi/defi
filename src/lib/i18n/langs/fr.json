@@ -2,7 +2,7 @@
 	"home": {
 		"tagline1": "Fais-le",
 		"tagline2": "MushCoin",
-		"marketCap": "Capitalisation boursière Mush",
+		"marketCap": "Capitalisation boursière",
 		"introTitle": "Présentation de MushCoin",
 		"intro": "Les principes que nous suivons dans Defi (finance décentralisée) sont basés sur la philosophie des Fungi. Les Champignons sont un organisme vital qui recycle les morts. Ils ramènent les morts à la terre. Ils continuent le Cercle de la Vie. MushCoin est votre clé pour cette nouvelle Emerald Cyber City. Nous décomposons la pourriture.",
 		"velocityIdeas": "Ne manquez pas le DeFi💡",
@@ -39,7 +39,7 @@
 			"text": "Dividendes"
 		},
 		"dashboard": {
-			"text": "Tableau de bord"
+			"text": "Tableau"
 		},
 		"farms": {
 			"text": "Fermes"
