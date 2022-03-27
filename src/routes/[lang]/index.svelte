@@ -4,23 +4,16 @@
 
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-
 	import { page } from '$app/stores';
-
 	import spaceDay from '/static/animation/space.webp';
 	import spaceNight from '/static/animation/space35.webp';
 	import moon from '/static/animation/moon.webp';
-	import earth from '/static/animation/earth.webp';
-	import earthNite from '/static/animation/earthNite.jpg';
-
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
 	import { _ } from 'svelte-i18n';
 	import * as THREE from 'three';
 	import { isHomescreen } from '$lib/stores/homescreen';
-
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
-
 	import { fade } from 'svelte/transition';
 
 	let canvas;
@@ -32,6 +25,7 @@
 	});
 
 	onMount(() => {
+		$darkMode = true;
 		isHomescreen.set(true);
 		scene = new THREE.Scene();
 		visible = true;
@@ -51,12 +45,7 @@
 		camera.position.setZ(30);
 
 		//Start Torus
-		const geometryTorusOne = new THREE.TorusGeometry(
-			7,
-			1,
-			8,
-			25
-		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
+		const geometryTorusOne = new THREE.TorusGeometry(7, 1, 8, 25);
 		const materialTorusOne = new THREE.MeshStandardMaterial({
 			color: 0xff6347,
 			wireframe: true
@@ -69,7 +58,7 @@
 
 		const lightPoint = new THREE.PointLight(0xffffff);
 
-		lightPoint.position.set(20, 20, 20);
+		lightPoint.position.set(0, 0, 0);
 
 		const ambientLight = new THREE.AmbientLight(0xffffff);
 		scene.add(lightPoint, ambientLight);
@@ -100,26 +89,13 @@
 		const moonTexture = new THREE.TextureLoader().load(
 			'/static/animation/textureMoon.webp'
 		);
-		const earthTexture = new THREE.TextureLoader().load(
-			'/static/animation/textureEarth.webp'
-		);
-		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
-		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
-		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);
 
+		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
 		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(64, 256, 256),
+			new THREE.SphereGeometry(256, 256, 256), // new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureMoon,
 				normalMap: moonTexture
-			})
-		);
-
-		const floppaEarth = new THREE.Mesh(
-			new THREE.SphereGeometry(260, 512, 512), // new THREE.SphereGeometry(128, 508, 508),
-			new THREE.MeshStandardMaterial({
-				map: floppaTextureEarth,
-				normalMap: earthTexture
 			})
 		);
 
@@ -132,14 +108,10 @@
 			.then((mush) => {
 				const [dollar, mushCrypto] = mush;
 				dollarSign = dollar.scene;
-				// mushMeshLA = lactarius.scene;
-				// mushMeshLA.position.set(-1.5, 0, -47);
 				mushMeshCryp = mushCrypto.scene;
-				mushMeshCryp.scale.set(100, 100, 100);
-				mushMeshCryp.position.set(0, 50, 0);
-				floppaMoon.position.set(440, 0, -500);
-				floppaEarth.position.set(240, 0, -260);
-				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
+				mushMeshCryp.scale.set(200, 200, 200);
+				floppaMoon.position.set(0, 0, 0);
+				scene.add(dollarSign, floppaMoon, mushMeshCryp);
 			})
 			.catch((err) => {
 				console.log('Error loading 3D models');
@@ -152,12 +124,8 @@
 
 			torusOne.rotation.y += 0.0015;
 
-			// if (mushMeshLA) {
-			// 	mushMeshLA.rotateY((Math.PI / 60) * 0.6);
-			// 	mushMeshLA.rotateX((Math.PI / 120) * 0.6);
-			// }
 			if (mushMeshCryp) {
-				mushMeshCryp.rotation.y -= 0.005;
+				mushMeshCryp.rotation.y -= 0.0015;
 
 				mushMeshCryp.position.x = -100;
 				mushMeshCryp.position.y = -100;
@@ -165,10 +133,7 @@
 			}
 
 			if (floppaMoon) {
-				floppaMoon.rotation.y += 0.002;
-			}
-			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.0005;
+				floppaMoon.rotation.y += 0.0005;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
@@ -191,21 +156,9 @@
 			}
 
 			if ($darkMode) {
-				scene.background = spaceTextureLight; //new THREE.Color(0x000000);
-				floppaEarth.material.setValues(
-					new THREE.MeshStandardMaterial({
-						map: floppaTextureEarthNite,
-						normalMap: earthTexture
-					})
-				);
+				scene.background = spaceTextureLight;
 			} else {
 				scene.background = spaceTexture;
-				floppaEarth.material.setValues(
-					new THREE.MeshStandardMaterial({
-						map: floppaTextureEarth,
-						normalMap: earthTexture
-					})
-				);
 			}
 
 			renderer.render(scene, camera);
@@ -239,30 +192,15 @@
 	</div>
 </noscript>
 
-<!-- <svelte:head>
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
-		rel="stylesheet"
-	/>
-</svelte:head> -->
-
 <section class="relative">
 	<canvas bind:this={canvas} id="bg" />
 
 	<section class="mr-auto ml-auto w-5/6 text-white">
 		<section
-			style="margin-top: 25px;"
 			class="MUSH_about title group min-h-screen bg-transparent text-center">
-			<h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2>
-			<!-- <div class="relative">
-				<img class="m-auto" src="title.webp" alt="title">
-			</div> -->
+			<h2 class="relative text-9xl">FUNGFI DEFI</h2>
 			{#if visible}
-				<h4
-					in:fade={{ duration: 1000 }}
-					class="relative pt-36 text-4xl italic xl:pt-72">
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-48 text-4xl italic">
 					{$_('home.tagline1')}
 				</h4>
 				<h4
@@ -291,46 +229,10 @@
 			<div class="MUSH_main_section text-md lg:text-xl">{$_('home.intro')}</div>
 		</section>
 
-		<section
-			class="MUSH_about subtitle m-auto flex max-w-3xl text-sm backdrop-filter">
-			<div class="MUSH_main_section">
-				<blockquote>{$_('home.wallStreetTitle')}</blockquote>
-			</div>
-		</section>
-
-		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
-			<div class="MUSH_main_section text-md lg:text-xl">
-				{$_('home.wallStreetSpeech')}
-			</div>
-		</section>
-
 		<section class="MUSH_about subtitle m-auto flex max-w-3xl backdrop-filter">
 			<div class="MUSH_main_section">
-				<blockquote>{$_('home.cryptoAdventureTitle')}</blockquote>
-			</div>
-		</section>
-
-		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
-			<div class="MUSH_main_section text-md lg:text-xl">
-				{$_('home.cryptoAdventureText')}
-			</div>
-		</section>
-
-		<section class="MUSH_about subtitle m-auto flex max-w-3xl backdrop-filter">
-			<div class="MUSH_main_section">
-				<blockquote>{$_('home.kariosTitle')} ⏰</blockquote>
-			</div>
-		</section>
-
-		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
-			<div class="MUSH_main_section text-md lg:text-xl">
-				{$_('home.kariosText')}
-			</div>
-		</section>
-
-		<section class="MUSH_about subtitle m-auto flex max-w-3xl backdrop-filter">
-			<div class="MUSH_main_section">
-				<blockquote>{$_('home.velocityIdeas')} 💡</blockquote>
+				<blockquote>{$_('home.velocityIdeas')}</blockquote>
+				<blockquote>{$_('home.revolution')}</blockquote>
 			</div>
 		</section>
 

@@ -152,7 +152,7 @@
 				</p>
 				<a
 					target="_blank"
-					href={`https://academy.binance.com/${$page.params.lang}`}
+					href={`https://fung.wiki/index.php/Main_Page`}
 					class="mt-3  rounded-full bg-complementary-600 py-2 px-5 font-[500] capitalize text-white transition duration-500 hover:bg-complementary-500 dark:bg-analogPurple-400 dark:hover:bg-analogPurple-300"
 					>{'Learn More ...'}</a>
 			</div>

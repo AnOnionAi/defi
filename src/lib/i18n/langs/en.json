@@ -4,19 +4,14 @@
 		"tagline2": "MushCoin",
 		"marketCap": "Mush Market Cap",
 		"introTitle": "Presenting MushCoin",
-		"intro": "The principles we follow in Defi (Decentralized Finance) is based on the philosophy of the Fungi. The Mushrooms are a critical and perhaps most vital organism to the world. They recycle the dead. They take the dead and rotting material and revitalize it. The mushrooms ensure that dead plants and animals are broken down into smaller molecules that can be used by other members of the ecosystem. In the same way, FungFi follows this same principle with financial system. Introducing mushCoin, your key to Defi, to decompose the rot of the financial system and return the vital nutrients. Creating a sustainable cycle.",
-		"wallStreetTitle": "The Crypto of Wall Street",
-		"wallStreetSpeech": "Wall Street is a place between Liberty and Nassau Street in Downtown Manhattan. It is mostly a tourist destination today. However, Wall Street is not known around the world because of the physical street. It is an idea. A concept. Wall Street is the representation of real money. The whales, who finance everything and have their hands in every cookie jar. The name of the game is debt. The banks loan out money and make interest on it. They take your savings accounts and loan it out. They finance homes, cars & corporate bonds. In every transaction that exist, they play the role of the middle man and are there every step of the way. However, there exist one particular privilege position within Wall Street, the position of the market makers. They have almost no risk in the market but continue to rake in practically risk free money, providing liquidity. But you or I can not play this game. We are not allowed. There are high capital requirements and many legal barriers to entry. It is a big club and we aren’t in it.",
-		"cryptoAdventureTitle": "Your Crypto Adventure",
-		"cryptoAdventureText": "Until very recently, these ideas and concepts did not even exist. The technology is growing exponentially, faster than any government, corporation or literally anyone can keep up. In Defi, everything is ran by smart contracts, which are algorithms on the decentralized blockchain. Via these algorithms, you can provide liquidity. You now have the tools to play the game only available previously to the elite. You can 'stake' a position in these liquidity pools and get rewarded just for providing liquidity. No more do you settle for measly returns in your checking account, you can now participate in this new digital algorithmic economy. Governments & banks are scared of this technology, nor are many capable of understanding it. No longer is a middle man required, and with the tools & smart contracts found here on this site, you can embark on your Defi journey to relish the potential of a market maker.",
-		"kariosTitle": "Karios",
-		"kariosText": "Kairos is an ancient Greek word meaning 'the right, critical, or opportune moment'. The genius of crypto has created that kairos, and it is now. That genius is the ability for all transactions to be peer to peer, person to person. Allowing money to be sent anywhere in the world, and no central bank or banking intermediary required. For there's no need to fear or hope, but only to look for new technologies. It is only now the true potential of the blockchain has been cracked open. Crypto will continue to exist in this global Internet but the men behind the curtain will want to take this away from you. Emerald City might not last forever.",
-		"velocityIdeas": "Our Velocity of Ideas",
-		"velocityIdeasText": "The velocity of ideas is accelerating. Fast. We plan to be always pushing technology to its limit. Let us work to create more value and wealth, for more people in this global digital community. Together. For the losers now, will be later to win, for the times, they are a changing.",
-		"gainzText": "Come Join Us at Fungi Fantasy! Where the gainz so good, ya think ya dreamin'",
+		"intro": "The principles we follow in Defi (Decentralized Finance) is based on the philosophy of the Fungi. The Mushrooms are a vital organism that recycle the dead. They ruturn the dead back to the earth. They continue the Circle of Life. MushCoin is your key to this new Emerald Cyber City. We decompose the rot.",
+		"velocityIdeas": "Don't Miss The DeFi💡",
+		"velocityIdeasText": "In Defi, everything is ran by smart contracts, which are algorithms on the decentralized blockchain. Putting your crypto to work. No longer sitting in a wallet. Kairos is an ancient Greek word meaning 'the right, critical, or opportune moment'. The velocity of ideas is accelerating. Expotientially. If you are not keeping up with technology, you will fall behind fast. But there's no need to fear or hope, only to seek new technologies. For the losers now, will be later to win, for the times, they are a changing.",
+		"revolution": "Revolution",
+		"gainzText": "Come Join Us in our Fungi Fantasy! Don't be the last one to learn about DeFi",
 		"fijiSignature": " - Fiji The Fungi",
-		"psText": "P.S. Don't forget, money is only an idea. There are many ideas left to be unlocked in the universe.",
-		"powerText": "The power is yours. ",
+		"psText": "P.S. There are many ideas left to be unlocked in the universe.",
+		"powerText": "The power is yours. MushCoin is the key to the future. We are the future. Together we will make it.",
 		"ps2Text": "P.S.S. MushCoin to the Moon and Beyond!"
 	},
 
@@ -36,7 +31,7 @@
 	},
 	"headers": {
 		"automated-crypto": {
-			"text": "Automated Crypto Market Making"
+			"text": "Auto Crypto Market Making"
 		},
 		"dividends": {
 			"text": "Dividends"
