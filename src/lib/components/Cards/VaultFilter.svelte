@@ -16,6 +16,11 @@
 	export let filterBy = 'TVL';
 	export let sortBy = 'Descending';
 	import { _ } from 'svelte-i18n';
+	import StyledRadioButton from '../FormElements/StyledRadioButton.svelte';
+	import StyledCheckbox from '../FormElements/StyledCheckbox.svelte';
+	import StyledSelect from '../FormElements/StyledSelect.svelte';
+	import StyledSearchbar from '../FormElements/StyledSearchbar.svelte';
+	import StyledSwitch from '../FormElements/StyledSwitch.svelte';
 
 	const handleHideZeroBalancesFilter = () => {
 		hideZeroBalances = !hideZeroBalances; //Toggles the state
@@ -101,187 +106,77 @@
 	};
 </script>
 
-<!-- <div
-	class="overflow-right-hidden m-auto my-4 w-full max-w-7xl rounded-2xl border border-white bg-white px-4 pb-4 pt-6 shadow dark:bg-neutral-900 dark:text-white">
-	<div class="relative flex w-auto flex-row flex-wrap justify-around">
-		<div
-			class="m-auto flex w-full max-w-6xl flex-col sm:justify-between lg:flex-row ">
-			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
-				<span class="checkbox__input">
-					<input
-						name="checkbox_p"
-						type="radio"
-						value="All"
-						bind:group={platformSelected}
-						on:change={handlePlatformFilter} />
-					<span class="checkbox__control">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-							focusable="false">
-							<path
-								fill="none"
-								stroke="currentColor"
-								stroke-width="3"
-								d="M1.73 12.91l6.37 6.37L22.79 4.59" />
-						</svg>
-					</span>
-				</span>
-				<span
-					id="all"
-					class="radio__label text-base dark:font-normal dark:tracking-wider"
-					>All</span>
-			</label>
-
-			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
-				<span class="checkbox__input">
-					<input
-						name="checkbox_p"
-						type="radio"
-						value="SushiSwap"
-						bind:group={platformSelected}
-						on:change={handlePlatformFilter} />
-					<span class="checkbox__control">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-							focusable="false">
-							<path
-								fill="none"
-								stroke="currentColor"
-								stroke-width="3"
-								d="M1.73 12.91l6.37 6.37L22.79 4.59" />
-						</svg>
-					</span>
-				</span>
-				<span class="radio__label text-base text-pink-700">
-					<img src="/icons/sushi.webp" alt="SushiSwap" />
-				</span>
-			</label>
-
-			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
-				<span class="checkbox__input">
-					<input
-						name="checkbox_p"
-						type="radio"
-						value="QuickSwap"
-						bind:group={platformSelected}
-						on:change={handlePlatformFilter} />
-					<span class="checkbox__control">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-							focusable="false">
-							<path
-								fill="none"
-								stroke="currentColor"
-								stroke-width="3"
-								d="M1.73 12.91l6.37 6.37L22.79 4.59" />
-						</svg>
-					</span>
-				</span>
-				<span class="radio__label text-base text-blue-700">
-					<img src="/icons/quick.svg" alt="QuickSwap" />
-				</span>
-			</label>
-
-			<label for="my-control" class="checkbox gap-1 pl-4 sm:pl-0">
-				<span class="checkbox__input">
-					<input
-						name="checkbox"
-						type="checkbox"
-						on:change={handleHideZeroBalancesFilter} />
-					<span class="checkbox__control">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							aria-hidden="true"
-							focusable="false">
-							<path
-								fill="none"
-								stroke="currentColor"
-								stroke-width="3"
-								d="M1.73 12.91l6.37 6.37L22.79 4.59" />
-						</svg>
-					</span>
-				</span>
-				<span id="zero" class="radio__label text-base dark:font-normal "
-					>{$_('vaultFilter.hidezero')}</span>
-			</label>
-		</div>
-
-		<div
-			class=" m-auto mt-2 inline-block max-w-7xl pt-4 pb-4 sm:ml-0 sm:mb-0 sm:mr-0 sm:mt-2	">
-			<div class="title pl-2 pb-2 text-sm uppercase">
-				{$_('vaultFilter.filterby')}
-			</div>
-			<div class="content-select">
-				<select class="dark:bg-neutral-500" bind:value={filterBy}>
-					<option value="TVL">TVL</option>
-					<option value="APY">APY</option>
-				</select>
-				<i />
-			</div>
-		</div>
-
-		<div
-			class=" m-auto mt-2 inline-block pt-4 pb-4 sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2	">
-			<div class="title pl-2 pb-2 text-sm uppercase">
-				{$_('vaultFilter.sortby')}
-			</div>
-			<div class="content-select">
-				<select bind:value={sortBy}>
-					<option class="min-w-7xl" value="Descending"
-						>{$_('vaultFilter.desceding')}</option>
-					<option value="Ascending">{$_('vaultFilter.ascending')}</option>
-				</select>
-				<i />
-			</div>
-		</div>
-
-		<div
-			class=" m-auto mt-2 inline-block pt-4 pb-4 sm:ml-2 sm:mb-0 sm:mr-2 sm:mt-2	">
-			<div class="title pl-2 pb-2 text-sm uppercase">
-				{$_('vaultFilter.search')}
-			</div>
-			<div class="content-input">
-				<input
-					type="text"
-					placeholder={$_('vaultFilter.searchvaults')}
-					bind:value={statement}
-					on:input={handleSearchByName} />
-			</div>
-		</div>
-
-		<div
-			class="m-auto mt-4 inline-block pt-8 pb-4 sm:ml-2 sm:mb-0 sm:mr-0 sm:mt-2 sm:pt-10	">
-			<div class="flex flex-row">
-				<div class="pt-1">
-					<input
-						checked={stakedOnly}
-						type="checkbox"
-						id="switch"
-						on:click={handleStakedOnlyFilter} /><label
-						id="switch-label"
-						for="switch">A</label>
-				</div>
-				<p class="pt-2 pl-2">{$_('vaultFilter.stakedonly')}</p>
-			</div>
-		</div>
-	</div>
-</div> -->
-
 <div
-	class="sideShadow mx-auto mb-8 h-[200px] max-w-6xl rounded-lg bg-white py-4 px-9 dark:bg-neutral-800">
-	<div class=" grid h-full w-full grid-cols-4 ">
-		<div>
-			<input
-				type="checkbox"
-				checked={true}
-				class="  h-[20px] w-[20px] accent-primary-400 dark:accent-analogPurple-400" />
+	class="sideShadow mx-2 mb-8 min-h-[180px] max-w-6xl rounded-2xl bg-white py-6 px-9 dark:bg-neutral-800 lg:mx-auto">
+	<div
+		class=" grid h-full w-full grid-cols-2 grid-rows-4 gap-x-2 gap-y-2 md:place-items-center lg:grid-cols-4  lg:grid-rows-2 lg:place-items-start ">
+		<div class="flex gap-2 place-self-start md:place-self-center">
+			<StyledRadioButton
+				name="checkbox_p"
+				onChange={handlePlatformFilter}
+				value={'All'}
+				bind:optionsGroup={platformSelected} />
+			<p class="text-gray-700 dark:text-gray-100">All</p>
+		</div>
+
+		<div class="flex gap-2 place-self-start md:place-self-center">
+			<StyledRadioButton
+				name="checkbox_p"
+				onChange={handlePlatformFilter}
+				value={'SushiSwap'}
+				bind:optionsGroup={platformSelected} />
+			<img src="/icons/sushi.webp" alt="SushiSwap" class="h-6 w-6" />
+		</div>
+
+		<div class="flex gap-2 place-self-start md:place-self-center">
+			<StyledRadioButton
+				name="checkbox_p"
+				onChange={handlePlatformFilter}
+				value={'QuickSwap'}
+				bind:optionsGroup={platformSelected} />
+			<img src="/icons/quick.svg" alt="Quickswap" class="h-6 w-6" />
+		</div>
+
+		<div class="place-self-start md:place-self-center">
+			<div class="flex items-center gap-2">
+				<StyledCheckbox onChange={handleHideZeroBalancesFilter} />
+				<p class="flex text-sm text-gray-700 dark:text-gray-100 md:text-base">
+					Hide Zero Balances
+				</p>
+			</div>
+		</div>
+		<div class="flex  flex-col ">
+			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">Filter By</p>
+			<StyledSelect value={filterBy}>
+				<option value="TVL">TVL</option>
+				<option value="APY">APY</option>
+			</StyledSelect>
+		</div>
+		<div class="flex  flex-col ">
+			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">Sort By</p>
+			<StyledSelect value={sortBy}>
+				<option class="min-w-7xl" value="Descending"
+					>{$_('vaultFilter.desceding')}</option>
+				<option value="Ascending">{$_('vaultFilter.ascending')}</option>
+			</StyledSelect>
+		</div>
+		<div class="flex  flex-col ">
+			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">Search</p>
+			<StyledSearchbar
+				placeholder="Vaults"
+				handleInput={handleSearchByName}
+				bind:inputValue={statement} />
+		</div>
+
+		<div class="flex flex-col-reverse place-self-center pt-3">
+			<div class="flex items-center ">
+				<StyledSwitch
+					checked={stakedOnly}
+					handleClick={handleStakedOnlyFilter} />
+				<p class="pl-2 text-sm text-gray-700 dark:text-gray-100 md:text-base">
+					Staked Only
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
