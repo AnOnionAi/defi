@@ -16,138 +16,141 @@
 	},
 	"pages": {
 		"about": {
-			"title": "Sur"
+			"title": "A cerca de"
 		},
 		"contact": {
-			"title": "Contact"
+			"title": "Contacto"
 		},
 		"audits": {
-			"title": "Audits"
+			"title": "Auditorías"
 		},
 		"trade": {
-			"title": "Échange"
-		},
-		"trdae": {
-			"trade": "Commerce"
+			"title": "Comercio"
 		}
 	},
 	"headers": {
 		"automated-crypto": {
-			"text": "Création de marché de la cryptographie automatique"
+			"text": "Creación Automatizada de Criptomercados"
 		},
 		"dividends": {
-			"text": "Dividendes"
+			"text": "Dividendos"
 		},
 		"dashboard": {
-			"text": "Tableau"
+			"text": "Tablero"
 		},
 		"farms": {
-			"text": "Fermes"
+			"text": "Granjas"
 		},
 		"pools": {
-			"text": "Piscines"
+			"text": "Fondos"
 		},
 		"vaults": {
-			"text": "coffres"
+			"text": "Bóvedas"
 		},
 		"crypto-responsibility": {
-			"text": "Responsabilité cryptographique"
+			"text": "Responsibilidad Criptográfica"
 		}
 	},
 	"about": {
-		"automated-description": "La création automatisée de marchés cryptographiques (ACMM) permet d'échanger des actifs numériques de manière automatique et sans autorisation en utilisant des pools de liquidités plutôt qu'un marché traditionnel d'acheteurs et de vendeurs. Les utilisateurs alimentent des pools de liquidités avec des jetons cryptographiques, dont les prix sont déterminés par une formule mathématique constante. Au lieu d'échanger entre acheteurs et vendeurs, les utilisateurs négocient contre un pool de jetons - un pool de liquidités. Les fournisseurs de liquidité perçoivent normalement des frais pour fournir des jetons au pool. Cette commission est payée par les traders qui interagissent avec le pool de liquidités. Cela permet aux fournisseurs de liquidités de gagner du rendement. Dividendes.",
-		"farms-description": "Les fermes sont utilisées pour l'agriculture de rendement. Il s'agit de la pratique consistant à jalonner ou à verrouiller des crypto-monnaies dans notre protocole blockchain pour générer des récompenses tokenisées. Fungfi s'appuie sur l'agriculture de rendement pour vous inciter à contribuer à la liquidité de notre réseau. Fungfi ne s'appuie pas sur un facilitateur de marché centralisé.",
-		"pools-description": "Un pool de liquidités est un pool participatif de crypto-monnaies ou de jetons enfermés dans un contrat intelligent qui est utilisé pour faciliter les transactions entre les actifs sur un échange décentralisé (DEX). Cela permet aux actifs numériques d'être échangés de manière automatique et sans autorisation grâce à l'utilisation de pools de liquidités.",
-		"vaults-description": "Un coffre-fort est un élément de l'architecture blockchain utilisé pour le stockage, le dépôt et le retrait de différents types d'actifs de crypto-monnaie. Par exemple, lorsqu'un utilisateur mise, prête, emprunte ou frappe différents actifs cryptographiques, Fungfi échangera automatiquement le nombre correct d'actifs entre différentes parties via des contrats intelligents.",
-		"responsibility-description": "Investissez de manière responsable. Il y a un potentiel incroyable pour des gains énormes dans Fungfi Defi, mais tout dans la vie comporte des risques. Alors que toutes les précautions sont prises pour s'en protéger. Tout ce qui concerne Internet ou les ordinateurs comporte le risque de pirates. Vous devez également être conscient de la volatilité. Les marchés de la cryptographie, tout en étant très rémunérateurs, comportent une grande volatilité. Parfois, cette volatilité peut entraîner des ventes de panique, des paniques bancaires ou des pertes impermanentes. Enfin, si vous perdez votre clé privée ou votre déclaration secrète dans votre portefeuille, cette crypto est brûlée. C'est parti pour toujours. Donc sois prudent."
+		"automated-description": "La creación automatizada de criptomercados (ACMM) permite que los activos digitales se negocien de forma automática y sin permiso mediante el uso de fondos de liquidez en lugar de un mercado tradicional de compradores y vendedores. Los usuarios suministran fondos de liquidez con tokens criptográficos, cuyos precios están determinados por una fórmula matemática constante. En lugar de negociar entre compradores y vendedores, los usuarios intercambian contra un grupo de tokens, un grupo de liquidez. Los proveedores de liquidez normalmente ganan una tarifa por proporcionar tokens al grupo. Esta tarifa la pagan los comerciantes que interactúan con el grupo de liquidez. Esto permite que los proveedores de liquidez puedan obtener rendimiento. Dividendos.",
+		"farms-description": "Las granjas se utilizan para la agricultura de rendimiento. Esta es la práctica de apostar o bloquear criptomonedas dentro de nuestro protocolo de cadena de bloques para generar recompensas tokenizadas. Fungfi se basa en la agricultura de rendimiento para incentivarlo a contribuir a la liquidez de nuestra red. Fungfi no depende de un facilitador de mercado centralizado.",
+		"pools-description": "Un grupo de liquidez es un grupo de criptomonedas o tokens de colaboración colectiva bloqueados en un contrato inteligente que se utiliza para facilitar las transacciones entre los activos en un intercambio descentralizado (DEX). Esto permite que los activos digitales se negocien de manera automática y sin permiso mediante el uso de fondos de liquidez.",
+		"vaults-description": "Una bóveda es una pieza de arquitectura de cadena de bloques utilizada para el almacenamiento, depósito y retiro de diferentes tipos de activos de criptomonedas. Por ejemplo, cuando un usuario apuesta, presta, toma prestado o acuña diferentes criptoactivos, Fungfi intercambiará automáticamente la cantidad correcta de activos entre diferentes partes a través de contratos inteligentes.",
+		"responsibility-description": "Invierta responsablemente. Hay un potencial increíble para obtener grandes ganancias en Fungfi Defi, pero todo en la vida conlleva riesgos. Si bien se toman todas las precauciones para protegerse contra ella. Todo lo relacionado con Internet o las computadoras conlleva el riesgo de los piratas informáticos. También debe ser consciente de la volatilidad. Los criptomercados, si bien son muy gratificantes, conllevan una gran volatilidad. A veces, esta volatilidad puede provocar ventas de pánico, corridas bancarias o pérdidas temporales. Finalmente, si pierde su clave privada o declaración secreta en su billetera, esa criptografía se quema. Se ha ido para siempre. Así que ten cuidado."
 	},
 	"dashboard": {
-		"wallet": "Dans votre portefeuille",
-		"tvl": "Valeur totale verrouillée",
-		"across": "Dans tous les Fung Financial",
-		"earn": "Gagne plus",
-		"index": "Indice",
-		"mushpb": "MUSH par bloc",
-		"marketcap": "Capitalisation boursière",
-		"totalvol": "Volume total",
-		"maxsupply": "Approvisionnement maximum",
-		"price": "Prix de la bouillie :",
-		"today": "Aujourd'hui",
-		"peak": "Culminer",
-		"profit": "Profit",
-		"lockedInFarms": "Enfermé dans les fermes Mush",
-		"lockedInPools": "Enfermé dans des piscines poly",
-		"lockedInVaults": "Enfermé dans des coffres-forts virtuels",
-		"startFarming": "Plantez une graine",
-		"addLiquidity": "Créer de la liquidité",
-		"goDeposit": "Verser"
+		"wallet": "Tu cartera",
+		"tvl": "Valor Total Guardado",
+		"across": "En todo Fung Financial",
+		"earn": "Gana más",
+		"index": "Index",
+		"mushpb": "MUSH por bloque",
+		"marketcap": "Capitalización",
+		"totalvol": "Volumen Total",
+		"maxsupply": "Suministro Máximo",
+		"price": "Precio del MUSH",
+		"today": "Hoy",
+		"peak": "Máximo",
+		"profit": "Ganancia",
+		"lockedInFarms": "En las granjas de MUSH",
+		"lockedInPools": "En los fondos de Poly",
+		"lockedInVaults": "En las Bóvedas de FungFi ",
+		"startFarming": "Plantar una semilla",
+		"addLiquidity": "Crear liquidez",
+		"goDeposit": "Deposita"
 	},
 	"dividendsPage": {
-		"cyw": "Connecter le portefeuille",
-		"approval": "Approbation exigée",
-		"approvalDescription": "Vous devez d'abord approuver vos dépenses MUSH."
+		"cyw": "Conecta tu Cartera",
+		"approval": "Se requiere aprobación",
+		"approvalDescription": "Necesitas aprobar el gasto de MUSH primero"
 	},
 	"your": {
-		"wallet": "Ton portefeuille"
+		"wallet": "Your Wallet"
 	},
 	"actions": {
-		"earn": "Gagner",
-		"get": "Avoir",
-		"add": "Ajouter",
-		"depositFee": "Frais de dépôt",
-		"wallet": "Portefeuille",
-		"approve": "Approuver",
-		"unlock": "Ouvrir",
-		"deposit": "Verser",
-		"withdraw": "Retirer",
-		"harvest": "Récolte",
-		"stake": "Miser",
-		"details": "Des détails",
-		"depositfee": "Frais de dépôt",
-		"withdrawalfee": "frais de retrait",
-		"notAvaliable": "Pas disponible"
+		"earn": "Gana",
+		"get": "Obten",
+		"add": "Agregar",
+		"depositFee": "Tarifa por Depósito",
+		"wallet": "Cartera",
+		"approve": "Aprobar",
+		"unlock": "Desbloquear",
+		"deposit": "Depositar",
+		"withdraw": "Retirar",
+		"harvest": "Cosechar",
+		"stake": "Poner",
+		"details": "Detalles",
+		"depositfee": "Tarifa por Depósito",
+		"withdrawalfee": "Tarifa de Retiro",
+		"notAvaliable": "No disponible"
 	},
+
 	"pastActions": {
-		"earned": "Gagné",
-		"deposited": "Déposé",
-		"withdrawed": "Retiré",
-		"staked": "Jalonné"
+		"earned": "Ganado",
+		"deposited": "Depositado",
+		"withdrawed": "Retirado",
+		"staked": "Puesto"
 	},
+
 	"poolCard": {
-		"details": "Des détails",
-		"hide": "Cacher",
-		"totalLiquidity": "Liquidité totale",
-		"myLiquidity": "Ma liquidité",
-		"viewonMatic": "Vérifier sur PolyScan"
+		"details": "Detalles",
+		"hide": "Esconder",
+		"totalLiquidity": "Liquidez Total",
+		"myLiquidity": "Mi Liquidez",
+		"viewonMatic": "Ver en el explorador"
 	},
+
 	"vaultAccordeon": {
-		"currentPrices": "Prix actuels",
-		"notListedIn": "Non répertorié dans",
-		"viewInfo": "Afficher les informations",
-		"loading": "Chargement"
+		"currentPrices": "Precios Actuales",
+		"notListedIn": "Sin listar en",
+		"viewInfo": "Ver Información",
+		"loading": "Cargando"
 	},
+
 	"vaultFilter": {
-		"all": "Tous",
-		"hidezero": "Masquer les soldes nuls",
-		"filterby": "Filtrer par",
-		"sortby": "Trier par",
-		"search": "Rechercher",
-		"stakedonly": "Implanté uniquement",
-		"desceding": "Descendant",
-		"ascending": "Ascendant",
-		"searchvaults": "Rechercher des coffres-forts"
+		"all": "Todos",
+		"hidezero": "Esconder Balances Cero",
+		"filterby": "Filtrar por",
+		"sortby": "Ordenar por",
+		"search": "Buscar",
+		"stakedonly": "Solo Staked",
+		"desceding": "Descendiente",
+		"ascending": "Ascendiente",
+		"searchvaults": "Buscar Bóvedas"
 	},
+
 	"modals": {
-		"input": "Contribution",
-		"balance": "Équilibre",
-		"otherOptions": "Autres options",
-		"depositYour": "DÉPOSEZ VOTRE",
-		"withdrawYour": "RETIREZ VOTRE"
+		"input": "Aporte",
+		"balance": "Balance",
+		"otherOptions": "Otras Opciones",
+		"depositYour": "DEPOSITA TU",
+		"withdrawYour": "RETIRA TU"
 	},
+
 	"walletStatus": {
-		"wallet": "Portefeuille",
-		"install": "Installer Metamask",
-		"connected": "Lié",
-		"checking": "Vérification du métamasque..."
+		"wallet": "Cartera",
+		"install": "Instalar Metamask",
+		"connected": "Conectado",
+		"checking": "Verificando Metamask..."
 	}
 }
