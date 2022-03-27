@@ -16,13 +16,13 @@
 	},
 	"pages": {
 		"about": {
-			"title": "Sobre"
+			"title": "A cerca de"
 		},
 		"contact": {
 			"title": "Contacto"
 		},
 		"audits": {
-			"title": "Auditorias"
+			"title": "Auditorías"
 		},
 		"trade": {
 			"title": "Comercio"
@@ -30,7 +30,7 @@
 	},
 	"headers": {
 		"automated-crypto": {
-			"text": "Creación automática de mercado criptográfico"
+			"text": "Creación Automatizada de Criptomercados"
 		},
 		"dividends": {
 			"text": "Dividendos"
@@ -42,13 +42,13 @@
 			"text": "Granjas"
 		},
 		"pools": {
-			"text": "Quinielas"
+			"text": "Fondos"
 		},
 		"vaults": {
 			"text": "Bóvedas"
 		},
 		"crypto-responsibility": {
-			"text": "Responsabilidad criptográfica"
+			"text": "Responsibilidad Criptográfica"
 		}
 	},
 	"about": {
@@ -59,92 +59,98 @@
 		"responsibility-description": "Invierta responsablemente. Hay un potencial increíble para obtener grandes ganancias en Fungfi Defi, pero todo en la vida conlleva riesgos. Si bien se toman todas las precauciones para protegerse contra ella. Todo lo relacionado con Internet o las computadoras conlleva el riesgo de los piratas informáticos. También debe ser consciente de la volatilidad. Los criptomercados, si bien son muy gratificantes, conllevan una gran volatilidad. A veces, esta volatilidad puede provocar ventas de pánico, corridas bancarias o pérdidas temporales. Finalmente, si pierde su clave privada o declaración secreta en su billetera, esa criptografía se quema. Se ha ido para siempre. Así que ten cuidado."
 	},
 	"dashboard": {
-		"wallet": "En tu billetera",
-		"tvl": "Valor total bloqueado",
+		"wallet": "Tu cartera",
+		"tvl": "Valor Total Guardado",
 		"across": "En todo Fung Financial",
-		"earn": "Ganar mas",
-		"index": "Índice",
+		"earn": "Gana más",
+		"index": "Index",
 		"mushpb": "MUSH por bloque",
-		"marketcap": "Tapa del mercado",
-		"totalvol": "Volumen total",
-		"maxsupply": "Suministro máximo",
-		"price": "Precio de la papilla:",
-		"today": "Hoy dia",
-		"peak": "Cima",
+		"marketcap": "Capitalización",
+		"totalvol": "Volumen Total",
+		"maxsupply": "Suministro Máximo",
+		"price": "Precio del MUSH",
+		"today": "Hoy",
+		"peak": "Máximo",
 		"profit": "Ganancia",
-		"lockedInFarms": "Encerrado en Mush Farms",
-		"lockedInPools": "Bloqueado en piscinas polivinílicas",
-		"lockedInVaults": "Encerrado en bóvedas cibernéticas",
-		"startFarming": "plantar una semilla",
-		"addLiquidity": "Crear Liquidez",
-		"goDeposit": "Depositar"
+		"lockedInFarms": "En las granjas de MUSH",
+		"lockedInPools": "En los fondos de Poly",
+		"lockedInVaults": "En las Bóvedas de FungFi ",
+		"startFarming": "Plantar una semilla",
+		"addLiquidity": "Crear liquidez",
+		"goDeposit": "Deposita"
 	},
 	"dividendsPage": {
-		"cyw": "Conectar billetera",
-		"approval": "Aprobación requerida",
-		"approvalDescription": "Primero debe aprobar su gasto MUSH."
+		"cyw": "Conecta tu Cartera",
+		"approval": "Se requiere aprobación",
+		"approvalDescription": "Necesitas aprobar el gasto de MUSH primero"
 	},
 	"your": {
-		"wallet": "tu billetera"
+		"wallet": "Your Wallet"
 	},
 	"actions": {
-		"earn": "Ganar",
-		"get": "Obtener",
+		"earn": "Gana",
+		"get": "Obten",
 		"add": "Agregar",
-		"depositFee": "Tarifa de depósito",
-		"wallet": "Billetera",
+		"depositFee": "Tarifa por Depósito",
+		"wallet": "Cartera",
 		"approve": "Aprobar",
-		"unlock": "desbloquear",
+		"unlock": "Desbloquear",
 		"deposit": "Depositar",
 		"withdraw": "Retirar",
-		"harvest": "Cosecha",
-		"stake": "Apostar",
+		"harvest": "Cosechar",
+		"stake": "Poner",
 		"details": "Detalles",
-		"depositfee": "Tarifa de depósito",
-		"withdrawalfee": "Cargo por retiro",
+		"depositfee": "Tarifa por Depósito",
+		"withdrawalfee": "Tarifa de Retiro",
 		"notAvaliable": "No disponible"
 	},
+
 	"pastActions": {
-		"earned": "ganado",
+		"earned": "Ganado",
 		"deposited": "Depositado",
-		"withdrawed": "retirado",
-		"staked": "apostado"
+		"withdrawed": "Retirado",
+		"staked": "Puesto"
 	},
+
 	"poolCard": {
 		"details": "Detalles",
 		"hide": "Esconder",
 		"totalLiquidity": "Liquidez Total",
 		"myLiquidity": "Mi Liquidez",
-		"viewonMatic": "Comprobar en PolyScan"
+		"viewonMatic": "Ver en el explorador"
 	},
+
 	"vaultAccordeon": {
-		"currentPrices": "Precios actuales",
-		"notListedIn": "No listado en",
-		"viewInfo": "Ver información",
+		"currentPrices": "Precios Actuales",
+		"notListedIn": "Sin listar en",
+		"viewInfo": "Ver Información",
 		"loading": "Cargando"
 	},
+
 	"vaultFilter": {
 		"all": "Todos",
-		"hidezero": "Ocultar saldos cero",
-		"filterby": "Filtrado por",
+		"hidezero": "Esconder Balances Cero",
+		"filterby": "Filtrar por",
 		"sortby": "Ordenar por",
-		"search": "Búsqueda",
-		"stakedonly": "Solo apostado",
-		"desceding": "Descendente",
-		"ascending": "ascendente",
-		"searchvaults": "Bóvedas de búsqueda"
+		"search": "Buscar",
+		"stakedonly": "Solo Staked",
+		"desceding": "Descendiente",
+		"ascending": "Ascendiente",
+		"searchvaults": "Buscar Bóvedas"
 	},
+
 	"modals": {
 		"input": "Aporte",
-		"balance": "Equilibrio",
-		"otherOptions": "Otras opciones",
+		"balance": "Balance",
+		"otherOptions": "Otras Opciones",
 		"depositYour": "DEPOSITA TU",
-		"withdrawYour": "RETIRAR SU"
+		"withdrawYour": "RETIRA TU"
 	},
+
 	"walletStatus": {
-		"wallet": "Billetera",
+		"wallet": "Cartera",
 		"install": "Instalar Metamask",
 		"connected": "Conectado",
-		"checking": "Comprobando metamáscara..."
+		"checking": "Verificando Metamask..."
 	}
 }
