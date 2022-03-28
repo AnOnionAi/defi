@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="flex h-[36px] w-[120px]  items-center justify-center rounded-lg border-primary-400 bg-gray-100 px-2 text-gray-500 	
+	class="w-[132 px] flex	h-[36px]  items-center justify-center rounded-lg border-primary-400 bg-gray-100 px-2 text-gray-500 	
 	 dark:border-analogPurple-300 dark:bg-neutral-700   dark:text-gray-400 	md:w-[200px]">
 	<input
 		bind:value={inputValue}

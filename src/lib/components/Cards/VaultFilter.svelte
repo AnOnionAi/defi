@@ -168,7 +168,7 @@
 				bind:inputValue={statement} />
 		</div>
 
-		<div class="flex flex-col-reverse place-self-center pt-3">
+		<div class="flex flex-col-reverse place-self-center	 self-end	 ">
 			<div class="flex items-center ">
 				<StyledSwitch
 					checked={stakedOnly}
