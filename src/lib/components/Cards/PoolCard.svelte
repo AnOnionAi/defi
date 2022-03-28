@@ -269,7 +269,7 @@
 
 <div
 	class="self-start   bg-white dark:bg-neutral-800 {!$darkMode &&
-		'customShadow'}  relative transform select-none rounded-3xl transition duration-300 hover:bg-pink-50">
+		'customShadow'}  relative transform select-none rounded-3xl transition duration-300 ">
 	<div class="absolute flex w-full flex-row-reverse p-4 ">
 		<div>
 			{#if isFarm}
