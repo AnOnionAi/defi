@@ -4,9 +4,9 @@
 	"id": "/?homescreen=1",
 	"start_url": "/",
 	"display": "standalone",
-	"background_color": "#ffffff",
+	"background_color": "#fe7688",
 	"scope": "/",
-	"theme_color": "#ffffff",
+	"theme_color": "#fe7688",
 	"icons": [
 		{
 			"src": "/pwa/android-chrome-192x192.webp",
