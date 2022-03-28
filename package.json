@@ -48,7 +48,6 @@
 		"typescript": "^4.5.4"
 	},
 	"dependencies": {
-		"@fontsource/poppins": "^4.5.5",
 		"@fortawesome/free-brands-svg-icons": "^5.15.3",
 		"@fortawesome/free-solid-svg-icons": "^5.15.3",
 		"bignumber.js": "^9.0.1",
