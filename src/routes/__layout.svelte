@@ -3,16 +3,10 @@
 	import Footer from '$lib/components/Layout/Footer.svelte';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
-	import { navigating, page } from '$app/stores';
+	import { navigating } from '$app/stores';
 	import Modal from 'svelte-simple-modal';
 	import '../app.css';
-	import {
-		accounts,
-		logUser,
-		metamaskConnect,
-		metamaskListeners,
-		retrieveUserAddress
-	} from '$lib/stores/MetaMaskAccount';
+	import { logUser, metamaskListeners } from '$lib/stores/MetaMaskAccount';
 	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
 	import { onMount, SvelteComponent } from 'svelte';
 	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';

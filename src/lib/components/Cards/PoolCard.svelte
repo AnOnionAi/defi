@@ -31,7 +31,6 @@
 	} from '$lib/utils/masterc';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
-	import { Circle } from 'svelte-loading-spinners';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,

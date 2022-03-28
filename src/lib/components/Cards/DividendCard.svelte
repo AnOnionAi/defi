@@ -26,8 +26,6 @@
 
 	const { addNotification } = getNotificationsContext();
 
-	$: mushUsdPrice = $tokenPrice;
-
 	let pollingInterval;
 
 	let TVL: BigNumber = ethers.constants.Zero;
