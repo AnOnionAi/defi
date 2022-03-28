@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@fontsource/poppins': ^4.5.5
   '@fortawesome/free-brands-svg-icons': ^5.15.3
   '@fortawesome/free-solid-svg-icons': ^5.15.3
   '@playwright/test': ^1.19.0
@@ -35,6 +36,7 @@ specifiers:
   typescript: ^4.5.4
 
 dependencies:
+  '@fontsource/poppins': 4.5.5
   '@fortawesome/free-brands-svg-icons': 5.15.4
   '@fortawesome/free-solid-svg-icons': 5.15.4
   bignumber.js: 9.0.2
@@ -976,6 +978,10 @@ packages:
       '@ethersproject/logger': 5.5.0
       '@ethersproject/properties': 5.5.0
       '@ethersproject/strings': 5.5.0
+    dev: false
+
+  /@fontsource/poppins/4.5.5:
+    resolution: {integrity: sha512-fqRWOQDhfoJoxP98qwMQLvLcgOu13yib6rZjL5UqpurobIaWTweqzo95uOLOGBjEE0bMMAbfDMoFUTL8Byrdeg==}
     dev: false
 
   /@formatjs/ecma402-abstract/1.11.0:
