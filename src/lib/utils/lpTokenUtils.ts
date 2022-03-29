@@ -3,7 +3,7 @@ import UNIV2ABI from '$lib/config/abi/IUniswapV2Pair.json';
 import ERC20ABI from '$lib/config/abi/ERC20.json';
 import { getProviderSingleton } from './web3Helpers';
 import { getContractAddress } from './addressHelpers';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 
 let mushTokenPriceUSD = 0;

@@ -4,7 +4,7 @@ import { ethersToBigNumber } from './bigNumber';
 import { getProviderSingleton } from './web3Helpers';
 import MasterChefAbi from '$lib/config/abi/MasterChef.json';
 import { getContractAddress } from './addressHelpers';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 import { getSigner } from './helpers';
 
 const masterChefContract = new ethers.Contract(

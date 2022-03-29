@@ -7,7 +7,7 @@ import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
 import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import DividendsABI from '$lib/config/abi/Dividends.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
 

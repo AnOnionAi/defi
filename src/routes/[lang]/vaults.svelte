@@ -10,7 +10,7 @@
 		VaultFilterFunction,
 		VaultInfo,
 		VaultState
-	} from '$lib/ts/types';
+	} from '$lib/types/types';
 	import VaultAccordeon from '$lib/components/Vault/VaultAccordeon.svelte';
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import { onMount } from 'svelte';

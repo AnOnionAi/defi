@@ -1,5 +1,5 @@
 import { APIKEY } from '$lib/env';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 import { ethers } from 'ethers';
 import { getContractAddress, getMasterChefAddress } from './addressHelpers';
 import { getTokenBalance } from './erc20';

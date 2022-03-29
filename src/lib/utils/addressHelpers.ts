@@ -1,6 +1,6 @@
 import addresses from '$lib/config/constants/addresses.json';
 import env from '$lib/env';
-import type { Token } from '$lib/ts/types';
+import type { Token } from '$lib/types/types';
 
 export const getMushAddress = () => {
 	return addresses.MUSHTOKEN[env['CHAIN']];

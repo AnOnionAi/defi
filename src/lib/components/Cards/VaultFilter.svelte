@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Criteria } from '$lib/ts/types';
-	import type { VaultFilterFunction } from '$lib/ts/types';
+	import { Criteria } from '$lib/types/types';
+	import type { VaultFilterFunction } from '$lib/types/types';
 	import {
 		hideZeroBalancesFilter,
 		stakedOnlyFilter,

@@ -15,7 +15,7 @@
 	} from '$lib/utils/erc20';
 	import { metaMaskCon } from '$lib/utils/helpers';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
-	import { Token } from '$lib/ts/types';
+	import { Token } from '$lib/types/types';
 	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import { BigNumber } from 'ethers';

@@ -1,7 +1,7 @@
-import type { VaultInfo } from '$lib/ts/types';
+import type { VaultInfo } from '$lib/types/types';
 import platforms from './platforms.json';
-import { TokenQuotes } from '$lib/ts/types';
-import { Token } from '$lib/ts/types';
+import { TokenQuotes } from '$lib/types/types';
+import { Token } from '$lib/types/types';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 export const quickVaults: VaultInfo[] = [
 	{

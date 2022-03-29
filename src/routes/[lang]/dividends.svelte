@@ -8,7 +8,7 @@
 	import { getTokenAllowance } from '$lib/utils/erc20';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import ApproveMush from '$lib/components/Cards/ApproveMush.svelte';
-	import { Token } from '$lib/ts/types';
+	import { Token } from '$lib/types/types';
 	import DividendCard from '$lib/components/Cards/DividendCard.svelte';
 	import Connect from '$lib/components/Cards/Connect.svelte';
 	import { fade } from 'svelte/transition';

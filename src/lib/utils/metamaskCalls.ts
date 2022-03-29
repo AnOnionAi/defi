@@ -1,5 +1,5 @@
 import { getContractAddress } from './addressHelpers';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 import { accounts } from '$lib/stores/MetaMaskAccount';
 
 export const isMetaMaskInstalled = (): boolean => {
