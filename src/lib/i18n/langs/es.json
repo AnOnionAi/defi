@@ -2,13 +2,13 @@
 	"home": {
 		"tagline1": "Hazlo",
 		"tagline2": "MushCoin",
-		"marketCap": "Capital de Mercado ",
-		"introTitle": "Presentando MushCoin",
-		"intro": "Los principios que seguimos en Defi (Finanzas Descentralizadas) se basan en la filosofía de los Fungi. Los Hongos son un organismo vital que reciclan a los muertos. Devuelven a los muertos a la tierra. Continúan el Círculo de la Vida. MushCoin es su llave para esta nueva Ciudad Cibernética Esmeralda. Descomponemos la podredumbre.",
-		"velocityIdeas": "No te pierdas el DeFi💡",
-		"velocityIdeasText": "En Defi, todo se ejecuta mediante contratos inteligentes, que son algoritmos en la cadena de bloques descentralizada. Ponga su criptografía a trabajar. Ya no está sentado en una billetera. Kairos es una palabra griega antigua que significa \"el momento adecuado, crítico u oportuno\". La velocidad de las ideas se está acelerando. exponencialmente. Si no está al día con la tecnología, se atrasará rápidamente. Pero no hay que temer ni esperar, solo buscar nuevas tecnologías. Para los perdedores ahora, será más tarde para ganar, para los tiempos, están cambiando.",
+		"marketCap": "Capitalización de Mercado ",
+		"introTitle": "Presentamos MushCoin",
+		"intro": "Los principios que seguimos en Defi (Finanzas Descentralizadas) se basan en la filosofía de los Fungi. Los Hongos son un organismo vital que reciclan a los muertos. Devuelven a los muertos a la tierra. Continúan el Ciclo de la Vida. MushCoin es su llave para esta nueva Ciudad Cibernética Esmeralda. Descomponemos la podredumbre.",
+		"velocityIdeas": "No te pierdas DeFi💡",
+		"velocityIdeasText": "En DeFi, todo se ejecuta mediante contratos inteligentes, que son algoritmos en la cadena de bloques descentralizada. Ponga sus criptoactivos a trabajar. Ya no mas holding. Kairos es una palabra griega antigua que significa \"el momento adecuado, crítico u oportuno\". La velocidad de las ideas se está acelerando. exponencialmente. Si no está al día con la tecnología, se atrasará rápidamente. Pero no hay que temer ni esperar, solo buscar nuevas tecnologías. Para los perdedores ahora, será más tarde para ganar, para los tiempos, están cambiando.",
 		"revolution": "Revolución",
-		"gainzText": "¡Únase a nosotros en nuestra fantasía de hongos! No seas el último en aprender sobre DeFi",
+		"gainzText": "¡Únase a nosotros en nuestra Fungi Aventura! No seas el último en aprender sobre DeFi",
 		"fijiSignature": " - Fiji El Hongo",
 		"psText": "PD Quedan muchas ideas por desbloquear en el universo.",
 		"powerText": "El poder es tuyo. MushCoin es la clave del futuro. Somos el futuro. Juntos lo lograremos.",
@@ -16,7 +16,7 @@
 	},
 	"pages": {
 		"about": {
-			"title": "A cerca de"
+			"title": "Acerca de "
 		},
 		"contact": {
 			"title": "Contacto"
