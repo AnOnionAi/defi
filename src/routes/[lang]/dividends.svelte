@@ -44,12 +44,6 @@
 		});
 	}
 
-	darkMode.subscribe((darkEnabled) => {
-		darkEnabled
-			? (backgroundImage = '/theme/dividends/mushHouse.webp')
-			: (backgroundImage = '/theme/dividends/cuteMush.svg');
-	});
-
 	const handleApproval = async () => {
 		try {
 			addNotification(transactionSend);
@@ -71,8 +65,9 @@
 	<PageHeader text={$_('headers.dividends.text')} />
 	<div class="flex-1">
 		<div
-			style="background-image:url({backgroundImage});"
-			class="dividends-wrapper">
+			class="dividends-wrapper {$darkMode
+				? 'mushHouseBackground'
+				: 'smallMushBackground'}">
 			<div
 				class="dividends my-7 mx-2 h-[680px]  w-[380px] rounded-2xl p-5 md:w-[432px]  lg:w-[460px] {!$darkMode &&
 					'shadow-xl'} bg-white transition  duration-500 dark:bg-neutral-800">
@@ -101,9 +96,18 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-size: 160px;
 		background-position: 90% 85%;
 		background-repeat: no-repeat;
+	}
+
+	.smallMushBackground {
+		background-size: 160px;
+		background-image: url('/theme/dividends/cuteMush.svg');
+	}
+
+	.mushHouseBackground {
+		background-size: 250px;
+		background-image: url('/theme/dividends/mushHouse.webp');
 	}
 
 	@media only screen and (max-width: 1160px) {
