@@ -22,6 +22,10 @@
 	import StyledSearchbar from '../FormElements/StyledSearchbar.svelte';
 	import StyledSwitch from '../FormElements/StyledSwitch.svelte';
 
+	$: {
+		console.log('Sort by: ' + sortBy);
+		console.log('Filter by: ' + filterBy);
+	}
 	const handleHideZeroBalancesFilter = () => {
 		hideZeroBalances = !hideZeroBalances; //Toggles the state
 		if (hideZeroBalances) {
@@ -147,14 +151,14 @@
 		</div>
 		<div class="flex  flex-col ">
 			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">Filter By</p>
-			<StyledSelect value={filterBy}>
+			<StyledSelect bind:value={filterBy}>
 				<option value="TVL">TVL</option>
 				<option value="APY">APY</option>
 			</StyledSelect>
 		</div>
 		<div class="flex  flex-col ">
 			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">Sort By</p>
-			<StyledSelect value={sortBy}>
+			<StyledSelect bind:value={sortBy}>
 				<option class="min-w-7xl" value="Descending"
 					>{$_('vaultFilter.desceding')}</option>
 				<option value="Ascending">{$_('vaultFilter.ascending')}</option>
