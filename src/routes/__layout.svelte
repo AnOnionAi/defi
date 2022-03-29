@@ -15,28 +15,6 @@
 		await metamaskListeners();
 		await logUser();
 	});
-
-	/* 	$: {
-		currentPath = $page.url.pathname;
-		currentPath = currentPath.split('/');
-
-		if (typeof Storage !== 'undefined') {
-			if (
-				(currentPath.length != 2 && currentPath[2] != 'dashboard') ||
-				sessionStorage.getItem('METAMASK_ACCOUNT')
-			) {
-				if (
-					!$accounts &&
-					JSON.stringify(currentPath) != JSON.stringify(lastPath)
-				) {
-					metamaskConnect();
-					metamaskListeners();
-				}
-			}
-		}
-
-		lastPath = currentPath;
-	} */
 </script>
 
 <Notifications item={CustomNotification}>
