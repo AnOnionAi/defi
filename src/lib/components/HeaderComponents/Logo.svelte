@@ -9,9 +9,9 @@
 		href={`/${$page.params.lang}/`}
 		class="flex cursor-pointer items-center gap-1">
 		<img class="mr-1 w-10" src="/theme/fiji.svg" alt="Fung Finance Logo" />
-		{#if $darkMode || $isHomescreen}
+		{#if $darkMode}
 			<img src="/theme/darkFungFi.webp" alt="Fung Fi" />
-		{:else if !$isHomescreen || !$darkMode}
+		{:else}
 			<img src="/theme/liteFungFi.webp" alt="Fung Fi" />
 		{/if}
 	</a>
