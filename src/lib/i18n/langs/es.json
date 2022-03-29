@@ -2,13 +2,13 @@
 	"home": {
 		"tagline1": "Hazlo",
 		"tagline2": "MushCoin",
-		"marketCap": "Capital de Mercado ",
-		"introTitle": "Presentando MushCoin",
-		"intro": "Los principios que seguimos en Defi (Finanzas Descentralizadas) se basan en la filosofía de los Fungi. Los Hongos son un organismo vital que reciclan a los muertos. Devuelven a los muertos a la tierra. Continúan el Círculo de la Vida. MushCoin es su llave para esta nueva Ciudad Cibernética Esmeralda. Descomponemos la podredumbre.",
-		"velocityIdeas": "No te pierdas el DeFi💡",
-		"velocityIdeasText": "En Defi, todo se ejecuta mediante contratos inteligentes, que son algoritmos en la cadena de bloques descentralizada. Ponga su criptografía a trabajar. Ya no está sentado en una billetera. Kairos es una palabra griega antigua que significa \"el momento adecuado, crítico u oportuno\". La velocidad de las ideas se está acelerando. exponencialmente. Si no está al día con la tecnología, se atrasará rápidamente. Pero no hay que temer ni esperar, solo buscar nuevas tecnologías. Para los perdedores ahora, será más tarde para ganar, para los tiempos, están cambiando.",
+		"marketCap": "Capitalización de Mercado ",
+		"introTitle": "Presentamos MushCoin",
+		"intro": "Los principios que seguimos en Defi (Finanzas Descentralizadas) se basan en la filosofía de los Fungi. Los Hongos son un organismo vital que reciclan a los muertos. Devuelven a los muertos a la tierra. Continúan el Ciclo de la Vida. MushCoin es su llave para esta nueva Ciudad Cibernética Esmeralda. Descomponemos la podredumbre.",
+		"velocityIdeas": "No te pierdas DeFi💡",
+		"velocityIdeasText": "En DeFi, todo se ejecuta mediante contratos inteligentes, que son algoritmos en la cadena de bloques descentralizada. Ponga sus criptoactivos a trabajar. Ya no mas holding. Kairos es una palabra griega antigua que significa \"el momento adecuado, crítico u oportuno\". La velocidad de las ideas se está acelerando. exponencialmente. Si no está al día con la tecnología, se atrasará rápidamente. Pero no hay que temer ni esperar, solo buscar nuevas tecnologías. Para los perdedores ahora, será más tarde para ganar, para los tiempos, están cambiando.",
 		"revolution": "Revolución",
-		"gainzText": "¡Únase a nosotros en nuestra fantasía de hongos! No seas el último en aprender sobre DeFi",
+		"gainzText": "¡Únase a nosotros en nuestra Fungi Aventura! No seas el último en aprender sobre DeFi",
 		"fijiSignature": " - Fiji El Hongo",
 		"psText": "PD Quedan muchas ideas por desbloquear en el universo.",
 		"powerText": "El poder es tuyo. MushCoin es la clave del futuro. Somos el futuro. Juntos lo lograremos.",
@@ -16,7 +16,7 @@
 	},
 	"pages": {
 		"about": {
-			"title": "A cerca de"
+			"title": "Acerca de "
 		},
 		"contact": {
 			"title": "Contacto"
@@ -53,14 +53,14 @@
 	},
 	"about": {
 		"automated-description": "La creación automatizada de criptomercados (ACMM) permite que los activos digitales se negocien de forma automática y sin permiso mediante el uso de fondos de liquidez en lugar de un mercado tradicional de compradores y vendedores. Los usuarios suministran fondos de liquidez con tokens criptográficos, cuyos precios están determinados por una fórmula matemática constante. En lugar de negociar entre compradores y vendedores, los usuarios intercambian contra un grupo de tokens, un grupo de liquidez. Los proveedores de liquidez normalmente ganan una tarifa por proporcionar tokens al grupo. Esta tarifa la pagan los comerciantes que interactúan con el grupo de liquidez. Esto permite que los proveedores de liquidez puedan obtener rendimiento. Dividendos.",
-		"farms-description": "Las granjas se utilizan para la agricultura de rendimiento. Esta es la práctica de apostar o bloquear criptomonedas dentro de nuestro protocolo de cadena de bloques para generar recompensas tokenizadas. Fungfi se basa en la agricultura de rendimiento para incentivarlo a contribuir a la liquidez de nuestra red. Fungfi no depende de un facilitador de mercado centralizado.",
+		"farms-description": "Las granjas se utilizan para la cosecha de rendimiento. Esta es la práctica de apostar o bloquear criptomonedas dentro de nuestro protocolo de cadena de bloques para generar recompensas tokenizadas. Fungfi se basa en la agricultura de rendimiento para incentivarlo a contribuir a la liquidez de nuestra red. Fungfi no depende de un facilitador de mercado centralizado.",
 		"pools-description": "Un grupo de liquidez es un grupo de criptomonedas o tokens de colaboración colectiva bloqueados en un contrato inteligente que se utiliza para facilitar las transacciones entre los activos en un intercambio descentralizado (DEX). Esto permite que los activos digitales se negocien de manera automática y sin permiso mediante el uso de fondos de liquidez.",
 		"vaults-description": "Una bóveda es una pieza de arquitectura de cadena de bloques utilizada para el almacenamiento, depósito y retiro de diferentes tipos de activos de criptomonedas. Por ejemplo, cuando un usuario apuesta, presta, toma prestado o acuña diferentes criptoactivos, Fungfi intercambiará automáticamente la cantidad correcta de activos entre diferentes partes a través de contratos inteligentes.",
 		"responsibility-description": "Invierta responsablemente. Hay un potencial increíble para obtener grandes ganancias en Fungfi Defi, pero todo en la vida conlleva riesgos. Si bien se toman todas las precauciones para protegerse contra ella. Todo lo relacionado con Internet o las computadoras conlleva el riesgo de los piratas informáticos. También debe ser consciente de la volatilidad. Los criptomercados, si bien son muy gratificantes, conllevan una gran volatilidad. A veces, esta volatilidad puede provocar ventas de pánico, corridas bancarias o pérdidas temporales. Finalmente, si pierde su clave privada o declaración secreta en su billetera, esa criptografía se quema. Se ha ido para siempre. Así que ten cuidado."
 	},
 	"dashboard": {
 		"wallet": "Tu cartera",
-		"tvl": "Valor Total Guardado",
+		"tvl": "Valor Total Almacenado",
 		"across": "En todo Fung Financial",
 		"earn": "Gana más",
 		"index": "Index",
@@ -80,7 +80,7 @@
 		"goDeposit": "Deposita"
 	},
 	"dividendsPage": {
-		"cyw": "Conecta tu Cartera",
+		"cyw": "Conectar Cartera",
 		"approval": "Se requiere aprobación",
 		"approvalDescription": "Necesitas aprobar el gasto de MUSH primero"
 	},
