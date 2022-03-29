@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { darkMode } from '$lib/stores/dark';
 	import { page } from '$app/stores';
-	export let pageTitle;
-	export let pageRoute;
+	export let pageTitle: string;
+	export let pageRoute: string;
 
 	$: isCurrentRoute = $page?.url.pathname.includes(pageRoute);
 </script>

@@ -20,7 +20,6 @@
 
 	let navbarMenuIsOpen = false;
 	let showDropDownMenu = false;
-
 	let menu;
 
 	if (!$page.params.lang) {

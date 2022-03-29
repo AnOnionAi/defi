@@ -1,15 +1,13 @@
 <script lang="ts">
-	import { darkMode } from '$lib/stores/dark';
 	import { notificationsOnScreen } from '$lib/stores/notificationStack';
 	import { onDestroy, onMount } from 'svelte';
-	import { fly, slide } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	export let notification = {
 		text: '',
 		description: '',
 		type: ''
 	};
-
-	let notificationID;
+	let notificationID: string;
 	$: queuePosition = $notificationsOnScreen.indexOf(notificationID);
 
 	const generateRandomID = () => {

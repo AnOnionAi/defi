@@ -31,7 +31,6 @@
 	} from '$lib/utils/masterc';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
-	import { Circle } from 'svelte-loading-spinners';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
@@ -270,7 +269,7 @@
 
 <div
 	class="self-start   bg-white dark:bg-neutral-800 {!$darkMode &&
-		'shadow-xl'}  relative transform select-none rounded-3xl transition duration-300 hover:scale-105">
+		'customShadow'}  relative transform select-none rounded-3xl transition duration-300 ">
 	<div class="absolute flex w-full flex-row-reverse p-4 ">
 		<div>
 			{#if isFarm}
@@ -453,5 +452,9 @@
 	img {
 		width: 120px;
 		height: 120px;
+	}
+
+	.customShadow {
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	}
 </style>

@@ -43,6 +43,6 @@ export const pools: PoolInfo[] = [
 		pid: 7,
 		tokenName: 'CRYSTL',
 		tokenAddr: getContractAddress(Token.CRYSTL),
-		tokenImagePath: '/icons/	crystl.webp'
+		tokenImagePath: '/icons/crystl.webp'
 	}
 ];

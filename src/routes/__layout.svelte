@@ -1,49 +1,20 @@
 <script lang="ts">
-	import Header from '$lib/components/layout/Header.svelte';
-	import Footer from '$lib/components/layout/Footer.svelte';
+	import Header from '$lib/components/Layout/Header.svelte';
+	import Footer from '$lib/components/Layout/Footer.svelte';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
-	import { navigating, page } from '$app/stores';
+	import { navigating } from '$app/stores';
 	import Modal from 'svelte-simple-modal';
 	import '../app.css';
-	import {
-		accounts,
-		logUser,
-		metamaskConnect,
-		metamaskListeners,
-		retrieveUserAddress
-	} from '$lib/stores/MetaMaskAccount';
+	import { logUser, metamaskListeners } from '$lib/stores/MetaMaskAccount';
 	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, SvelteComponent } from 'svelte';
 	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
-	import { SvelteComponent, SvelteComponentDev } from 'svelte/internal';
 
 	onMount(async () => {
 		await metamaskListeners();
 		await logUser();
 	});
-
-	/* 	$: {
-		currentPath = $page.url.pathname;
-		currentPath = currentPath.split('/');
-
-		if (typeof Storage !== 'undefined') {
-			if (
-				(currentPath.length != 2 && currentPath[2] != 'dashboard') ||
-				sessionStorage.getItem('METAMASK_ACCOUNT')
-			) {
-				if (
-					!$accounts &&
-					JSON.stringify(currentPath) != JSON.stringify(lastPath)
-				) {
-					metamaskConnect();
-					metamaskListeners();
-				}
-			}
-		}
-
-		lastPath = currentPath;
-	} */
 </script>
 
 <Notifications item={CustomNotification}>
