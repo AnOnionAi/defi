@@ -6,20 +6,26 @@
 
 ### fungfi.com [![Netlify Status](https://api.netlify.com/api/v1/badges/20fe0398-65b4-4880-a63b-b328a9364b6b/deploy-status)](https://app.netlify.com/sites/fungfi/deploys)
 
-## Starting the project
+## Starting the defi project
+
 
 ```
 git clone https://github.com/ZetiAi/defi.git
 pnpm install
-pnpm run dev
+pnpm dev
 ```
 
 ## Building
 
-`pnpm run build`
+`pnpm build`
+
 
 ## Preview
 
 You can preview the built app to see how production will perform.
 
-`npm run preview`
+`pnpm preview`
+
+
+
+
