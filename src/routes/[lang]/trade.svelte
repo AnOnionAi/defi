@@ -1,21 +1,49 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-
-	import { _ } from 'svelte-i18n';
-	import { setInit } from '$lib/i18n/init';
-	import { onMount } from 'svelte';
-	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
-	onMount(async () => {
-		console.log(await getTokenPriceUSD('0x76bF0C28e604CC3fE9967c83b3C3F31c213cfE64'));
-	});
 </script>
 
 <script lang="ts">
-	export let lang;
+	import { getNotificationsContext } from 'svelte-notifications';
+
+	const { addNotification } = getNotificationsContext();
+
+	const addErrorNotification = () => {
+		addNotification({
+			position: 'top-right',
+			text: 'Error Notification',
+			type: 'error'
+		});
+	};
+
+	const addSuccessNotification = () => {
+		addNotification({
+			position: 'top-right',
+			text: 'Error Notification',
+			type: 'success'
+		});
+	};
+
+	const addWarningNotification = () => {
+		addNotification({
+			position: 'top-right',
+			text: 'Warning Notification',
+			type: 'warning'
+		});
+	};
 </script>
 
 <section>
 	<br />
-	<h1 class="text-dark-200 dark:text-white text-4xl">T R A D E</h1>
-	<div class="h-full" />
+	<h1 class="text-dark-200 text-center text-4xl dark:text-white">Test Page</h1>
+	<button
+		on:click={addErrorNotification}
+		class="rounded-lg bg-black px-4 py-2 text-white">Error Notification</button>
+	<button
+		on:click={addSuccessNotification}
+		class="rounded-lg bg-black px-4 py-2 text-white"
+		>Success Notification</button>
+	<button
+		on:click={addWarningNotification}
+		class="rounded-lg bg-black px-4 py-2 text-white"
+		>Success Notification</button>
 </section>

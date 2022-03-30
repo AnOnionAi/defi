@@ -1,4 +1,4 @@
-let env: {};
+let env;
 
 env = import.meta.env;
 
@@ -16,7 +16,7 @@ const getEnvFiltered = (regex: RegExp, env) => {
 const getEnv = () => {
 	const NODE_ENV = env['VITE_NODE_ENV'];
 
-	console.log('VITE NODE ENV:!!!', NODE_ENV);
+	/* 	console.log('VITE NODE ENV:!!!', NODE_ENV); */
 
 	switch (NODE_ENV) {
 		case 'qa':
@@ -31,7 +31,7 @@ const getEnv = () => {
 			env = getEnvFiltered(/VITE_(?!PROD|QA)/, env);
 	}
 
-	console.log('APP RUNNING ON: ', env['CHAIN'], ' BLOCKCHAIN');
+	/* console.log('APP RUNNING ON: ', env['CHAIN'], ' BLOCKCHAIN'); */
 
 	return env;
 };

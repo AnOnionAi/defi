@@ -6,30 +6,35 @@
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { _ } from 'svelte-i18n';
 	export let title: string;
-	export let display: number = 0;
+	export let display = 0;
 	export let isPercentage = false;
 </script>
 
 <div
-	class="bg-white p-3 dark:bg-dark-900  rounded-xl w-full  flex flex-col justify-between  dark:text-white shadow-md dark:shadow-none overflow-hidden"
->
-	<h3 class="font-semibold text-center ">{title}</h3>
+	class="flex h-32 w-full  flex-col justify-between overflow-hidden rounded-xl bg-white p-3  opacity-90 shadow-md dark:bg-neutral-800 dark:text-white dark:shadow-none">
+	<h3 class="text-center font-semibold ">{title}</h3>
 	{#if display && $page.params.lang}
 		{#if isPercentage && isPercentage != null}
-			<div in:fade={{ duration: 500 }} class="flex items-center justify-center ">
+			<div
+				in:fade={{ duration: 500 }}
+				class="flex items-center justify-center ">
 				{#if display < 0}
-					<Fa icon={faCaretDown} size={'2x'} color="#ef4444" />
+					<Fa icon={faCaretDown} size={'2x'} color="#ff2d50" />
 				{:else if display > 0}
-					<Fa icon={faCaretUp} size={'2x'} color="#22c55e" />
+					<Fa icon={faCaretUp} size={'2x'} color="#5efb4e" />
 				{/if}
-				<p class="ml-1 text-2xl">{formatComma(Math.abs(display), $page.params.lang)}%</p>
+				<p class="ml-1 text-2xl">
+					{formatComma(Math.abs(display), $page.params.lang)}%
+				</p>
 			</div>
 		{:else}
-			<p class="text-center text-2xl">${formatComma(display, $page.params.lang)}</p>
+			<p class="text-center text-2xl">
+				${formatComma(display, $page.params.lang)}
+			</p>
 		{/if}
 	{/if}
 	{#if display === null}
-		<p class="text-lg text-center">{$_('actions.notAvaliable')}</p>
+		<p class="text-center text-lg">{$_('actions.notAvaliable')}</p>
 	{/if}
 	<p />
 </div>

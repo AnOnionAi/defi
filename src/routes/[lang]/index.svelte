@@ -4,26 +4,18 @@
 
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-
 	import { page } from '$app/stores';
-
-	import spaceDay from '/static/space.webp';
-	import spaceNight from '/static/space35.webp';
-	import moon from '/static/moon.webp';
-	import earth from '/static/earth.webp';
-	import earthNite from '/static/earthNite.jpg';
-
+	import spaceDay from '/static/animation/space.webp';
+	import spaceNight from '/static/animation/space35.webp';
+	import moon from '/static/animation/moon.webp';
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
 	import { _ } from 'svelte-i18n';
 	import * as THREE from 'three';
 	import { isHomescreen } from '$lib/stores/homescreen';
-
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
-
 	import { fade } from 'svelte/transition';
 
-	isHomescreen.set(true);
 	let canvas;
 	let scene;
 	let visible = false;
@@ -33,6 +25,8 @@
 	});
 
 	onMount(() => {
+		$darkMode = true;
+		isHomescreen.set(true);
 		scene = new THREE.Scene();
 		visible = true;
 		const camera = new THREE.PerspectiveCamera(
@@ -51,13 +45,11 @@
 		camera.position.setZ(30);
 
 		//Start Torus
-		const geometryTorusOne = new THREE.TorusGeometry(
-			7,
-			1,
-			8,
-			25
-		); /*new THREE.ParametricGeometry( sineWave, 25, 25 );*/
-		const materialTorusOne = new THREE.MeshStandardMaterial({ color: 0xff6347, wireframe: true });
+		const geometryTorusOne = new THREE.TorusGeometry(7, 1, 8, 25);
+		const materialTorusOne = new THREE.MeshStandardMaterial({
+			color: 0xff6347,
+			wireframe: true
+		});
 		const torusOne = new THREE.Mesh(geometryTorusOne, materialTorusOne);
 		scene.add(torusOne);
 
@@ -66,7 +58,7 @@
 
 		const lightPoint = new THREE.PointLight(0xffffff);
 
-		lightPoint.position.set(20, 20, 20);
+		lightPoint.position.set(0, 0, 0);
 
 		const ambientLight = new THREE.AmbientLight(0xffffff);
 		scene.add(lightPoint, ambientLight);
@@ -77,13 +69,14 @@
 
 			const star = new THREE.Mesh(geometry, material);
 			const [x, y, z] = Array(3)
-				.fill()
+				.fill(0)
 				.map(() => THREE.MathUtils.randFloatSpread(2500));
+
 			star.position.set(x, y, z);
 			scene.add(star);
 		}
 
-		Array(1000).fill().forEach(addStar);
+		Array(1000).fill(0).forEach(addStar);
 
 		const spaceTexture = new THREE.TextureLoader().load(spaceDay);
 		const spaceTextureLight = new THREE.TextureLoader().load(spaceNight);
@@ -93,25 +86,16 @@
 			scene.background = spaceTexture;
 		}
 
-		const moonTexture = new THREE.TextureLoader().load('textureMoon.webp');
-		const earthTexture = new THREE.TextureLoader().load('textureEarth.webp');
-		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
-		const floppaTextureEarth = new THREE.TextureLoader().load(earth);
-		const floppaTextureEarthNite = new THREE.TextureLoader().load(earthNite);
+		const moonTexture = new THREE.TextureLoader().load(
+			'/static/animation/textureMoon.webp'
+		);
 
+		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
 		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(64, 256, 256),
+			new THREE.SphereGeometry(256, 256, 256), // new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
 				map: floppaTextureMoon,
 				normalMap: moonTexture
-			})
-		);
-
-		const floppaEarth = new THREE.Mesh(
-			new THREE.SphereGeometry(260, 512, 512), // new THREE.SphereGeometry(128, 508, 508),
-			new THREE.MeshStandardMaterial({
-				map: floppaTextureEarth,
-				normalMap: earthTexture
 			})
 		);
 
@@ -124,17 +108,13 @@
 			.then((mush) => {
 				const [dollar, mushCrypto] = mush;
 				dollarSign = dollar.scene;
-				// mushMeshLA = lactarius.scene;
-				// mushMeshLA.position.set(-1.5, 0, -47);
 				mushMeshCryp = mushCrypto.scene;
-				mushMeshCryp.scale.set(100, 100, 100);
-				mushMeshCryp.position.set(0, 0, 0);
-				floppaMoon.position.set(-10, 0, 500);
-				floppaEarth.position.set(240, 0, -260);
-				scene.add(dollarSign, floppaMoon, floppaEarth, mushMeshCryp);
+				mushMeshCryp.scale.set(200, 200, 200);
+				floppaMoon.position.set(0, 0, 0);
+				scene.add(dollarSign, floppaMoon, mushMeshCryp);
 			})
 			.catch((err) => {
-				console.log(err);
+				console.log('Error loading 3D models');
 			});
 
 		function animate() {
@@ -144,12 +124,8 @@
 
 			torusOne.rotation.y += 0.0015;
 
-			// if (mushMeshLA) {
-			// 	mushMeshLA.rotateY((Math.PI / 60) * 0.6);
-			// 	mushMeshLA.rotateX((Math.PI / 120) * 0.6);
-			// }
 			if (mushMeshCryp) {
-				mushMeshCryp.rotation.y -= 0.005;
+				mushMeshCryp.rotation.y -= 0.0015;
 
 				mushMeshCryp.position.x = -100;
 				mushMeshCryp.position.y = -100;
@@ -157,10 +133,7 @@
 			}
 
 			if (floppaMoon) {
-				floppaMoon.rotation.y += 0.01;
-			}
-			if (floppaEarth) {
-				floppaEarth.rotation.y += 0.0015;
+				floppaMoon.rotation.y += 0.0005;
 			}
 			if (dollarSign) {
 				const t = document.body.getBoundingClientRect().top;
@@ -183,21 +156,9 @@
 			}
 
 			if ($darkMode) {
-				scene.background = spaceTextureLight; //new THREE.Color(0x000000);
-				floppaEarth.material.setValues(
-					new THREE.MeshStandardMaterial({
-						map: floppaTextureEarthNite,
-						normalMap: earthTexture
-					})
-				);
+				scene.background = spaceTextureLight;
 			} else {
 				scene.background = spaceTexture;
-				floppaEarth.material.setValues(
-					new THREE.MeshStandardMaterial({
-						map: floppaTextureEarth,
-						normalMap: earthTexture
-					})
-				);
 			}
 
 			renderer.render(scene, camera);
@@ -231,38 +192,25 @@
 	</div>
 </noscript>
 
-<svelte:head>
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
-		rel="stylesheet"
-	/>
-</svelte:head>
-
 <section class="relative">
 	<canvas bind:this={canvas} id="bg" />
 
-	<section class="text-white mr-auto ml-auto w-5/6">
+	<section class="mr-auto ml-auto w-5/6 text-white">
 		<section
-			style="margin-top: 25px;"
-			class="MUSH_about title text-center bg-transparent min-h-screen group"
-		>
-			<h2 class="relative text-5xl lg:text-9xl">FUNGFI DEFI</h2>
-			<!-- <div class="relative">
-				<img class="m-auto" src="title.webp" alt="title">
-			</div> -->
+			class="MUSH_about title group min-h-screen bg-transparent text-center">
+			<h2 class="relative text-9xl">FUNGFI DEFI</h2>
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-33 xl:pt-75 text-4xl">
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-48 text-4xl italic">
 					{$_('home.tagline1')}
 				</h4>
-				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative pt-2 italic text-4xl">
+				<h4
+					in:fade={{ delay: 1500, duration: 3000 }}
+					class="relative pt-2 text-4xl">
 					{$_('home.tagline2')} 🍄
 				</h4>
 				<h3
 					in:fade={{ delay: 3500, duration: 1000 }}
-					class="market-cap relative text-green-500 font-bold text-3xl lg:text-6xl mt-2 lg:mt-6 pt-2 max-w-screen lg:ml-auto lg:mr-auto lg:max-w-screen-md m-auto"
-				>
+					class="market-cap max-w-screen relative m-auto mt-2 pt-2 text-3xl font-bold text-green-500 lg:mt-6 lg:ml-auto lg:mr-auto lg:max-w-screen-md lg:text-6xl">
 					{$_('home.marketCap')}
 					{#if $mushMarketCap}
 						<p in:fade={{ delay: 4250, duration: 2000 }}>
@@ -275,52 +223,20 @@
 			{/if}
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto rounded">
+		<section
+			class="MUSH_about m-auto max-w-3xl rounded shadow-md backdrop-filter">
 			<h2 class="text-center text-5xl">{$_('home.introTitle')} 📜</h2>
 			<div class="MUSH_main_section text-md lg:text-xl">{$_('home.intro')}</div>
 		</section>
 
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex text-sm">
+		<section class="MUSH_about subtitle m-auto flex max-w-3xl backdrop-filter">
 			<div class="MUSH_main_section">
-				<blockquote>{$_('home.wallStreetTitle')}</blockquote>
+				<blockquote>{$_('home.velocityIdeas')}</blockquote>
+				<blockquote>{$_('home.revolution')}</blockquote>
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
-			<div class="MUSH_main_section text-md lg:text-xl">{$_('home.wallStreetSpeech')}</div>
-		</section>
-
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
-			<div class="MUSH_main_section">
-				<blockquote>{$_('home.cryptoAdventureTitle')}</blockquote>
-			</div>
-		</section>
-
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
-			<div class="MUSH_main_section text-md lg:text-xl">
-				{$_('home.cryptoAdventureText')}
-			</div>
-		</section>
-
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
-			<div class="MUSH_main_section">
-				<blockquote>{$_('home.kariosTitle')} ⏰</blockquote>
-			</div>
-		</section>
-
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
-			<div class="MUSH_main_section text-md lg:text-xl">
-				{$_('home.kariosText')}
-			</div>
-		</section>
-
-		<section class="MUSH_about subtitle backdrop-filter max-w-3xl m-auto flex">
-			<div class="MUSH_main_section">
-				<blockquote>{$_('home.velocityIdeas')} 💡</blockquote>
-			</div>
-		</section>
-
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.velocityIdeasText')}
 				<br />
@@ -332,7 +248,7 @@
 			</div>
 		</section>
 
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.psText')}
 				<br />
@@ -340,7 +256,7 @@
 				{$_('home.powerText')}
 			</div>
 		</section>
-		<section class="MUSH_about shadow-md backdrop-filter max-w-3xl m-auto">
+		<section class="MUSH_about m-auto max-w-3xl shadow-md backdrop-filter">
 			<div class="MUSH_main_section text-md lg:text-xl">
 				{$_('home.ps2Text')} 🚀
 			</div>
@@ -359,6 +275,7 @@
 		display: inline;
 		background-color: white;
 		-webkit-box-decoration-break: clone;
+		box-decoration-break: clone;
 		padding: 0;
 		color: black;
 		font-size: 45px;

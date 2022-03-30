@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Provider } from '$lib/utils/web3Helpers';
-	import ERC20ABI from '$lib/config/abi/ERC20.json';
 	import { slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
@@ -10,20 +8,29 @@
 	import {
 		approveToken,
 		getTokenAllowance,
-		isNotZero,
 		getTokenBalance,
-		getTokenName,
 		getTokenDecimals
 	} from '$lib/utils/erc20';
 	import { onDestroy, onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import { BigNumber, ethers } from 'ethers';
 	import Fa from 'svelte-fa';
-	import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-	import { MasterChef, getPoolMultiplier, getPoolWeight } from '$lib/utils/masterc';
+	import {
+		faChevronUp,
+		faChevronDown
+	} from '@fortawesome/free-solid-svg-icons';
+	import {
+		getStakedTokens,
+		getPendingMush,
+		getPoolInfo,
+		deposit,
+		withdraw,
+		getMushPerBlock,
+		getPoolMultiplier,
+		getPoolWeight
+	} from '$lib/utils/masterc';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
-	import { Circle } from 'svelte-loading-spinners';
 	import {
 		transactionCompleted,
 		transactionDeniedByTheUser,
@@ -31,7 +38,6 @@
 	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { getPoolApr } from '$lib/utils/yieldCalculator';
-	import BN from 'bignumber.js';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
 	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
@@ -42,12 +48,13 @@
 	import { totalAllocPoints } from '$lib/stores/MasterChefData';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
+	import CustomSpinner from '../LoadingUI/CustomSpinner.svelte';
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
 
 	export let info: PoolInfo;
-	export let isFarm: boolean = false;
+	export let isFarm = false;
 
 	let poolFeePercentage: number = null;
 	let stakingTokenPrice: number;
@@ -67,7 +74,7 @@
 
 	let poolMultiplier: number;
 
-	let isHidden: boolean = true;
+	let isHidden = true;
 
 	let userAcc: string;
 	let tokenApproved: boolean;
@@ -75,7 +82,7 @@
 	let canWithdraw: boolean;
 	let canHarvest: boolean;
 
-	let wantWithdrawAmount: any;
+	let wantWithdrawAmount: string;
 	let idInterval;
 
 	let tokenAllowance: BigNumber = ethers.constants.Zero;
@@ -98,15 +105,6 @@
 		clearInterval(idInterval);
 	}
 
-	$: {
-		/* console.log({
-				tokenAllowance,
-				userBalance,
-				userStakedTokens,
-				userEarnings
-			}) */
-	}
-
 	const refreshData = async () => {
 		try {
 			tokenAllowance = await getTokenAllowance(
@@ -117,15 +115,17 @@
 			if (tokenAllowance.isZero()) return;
 			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
 			if (userBalance.isZero()) return;
-			userStakedTokens = await MasterChef.getStakedTokens(info.pid, userAcc);
+			userStakedTokens = await getStakedTokens(info.pid, userAcc);
 			if (userStakedTokens.isZero()) return;
-			userEarnings = await MasterChef.getPendingMush(info.pid);
-		} catch (e) {}
+			userEarnings = await getPendingMush(info.pid);
+		} catch (e) {
+			console.log('Failed to refresh pool Data');
+		}
 	};
 
 	onMount(async () => {
 		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
-		const poolInfo: PoolInfoResponse = await MasterChef.getPoolInfo(info.pid);
+		const poolInfo: PoolInfoResponse = await getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
@@ -135,12 +135,16 @@
 			info.tokenAddr,
 			getContractAddress(Token.MASTERCHEF)
 		);
-		stakingTokenAmount = parseFloat(ethers.utils.formatUnits(sta, stakingTokenDecimals));
+		stakingTokenAmount = parseFloat(
+			ethers.utils.formatUnits(sta, stakingTokenDecimals)
+		);
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 
 		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
-		const tokenPerBlock = await MasterChef.getMushPerBlock();
-		const mushPerBlock: number = parseFloat(ethers.utils.formatEther(tokenPerBlock));
+		const tokenPerBlock = await getMushPerBlock();
+		const mushPerBlock: number = parseFloat(
+			ethers.utils.formatEther(tokenPerBlock)
+		);
 		tokenAllocatedPerBlock = mushPerBlock * poolWeightbn.toNumber();
 
 		poolApr = getPoolApr(
@@ -173,11 +177,10 @@
 		loadingState.loadingDeposit = true;
 		addNotification(transactionSend);
 		try {
-			const tx = await MasterChef.deposit(info.pid, amount, stakingTokenDecimals);
+			const tx = await deposit(info.pid, amount, stakingTokenDecimals);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
-			console.log('Internal Error on DepositHandler', error);
 			addNotification(transactionDeniedByTheUser);
 		}
 		loadingState.loadingDeposit = false;
@@ -188,11 +191,14 @@
 		wantWithdrawAmount = amount;
 		addNotification(transactionSend);
 		try {
-			const tx = await MasterChef.withdraw(info.pid, wantWithdrawAmount, stakingTokenDecimals);
+			const tx = await withdraw(
+				info.pid,
+				wantWithdrawAmount,
+				stakingTokenDecimals
+			);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
-			console.log('Internal Error on WithdrawHandler', error);
 			addNotification(transactionDeniedByTheUser);
 		}
 		loadingState.loadingWithdraw = false;
@@ -202,7 +208,7 @@
 		loadingState.loadingHarvest = true;
 		try {
 			addNotification(transactionSend);
-			const tx = await MasterChef.deposit(info.pid, '0');
+			const tx = await deposit(info.pid, '0');
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
@@ -216,12 +222,14 @@
 		loadingState.loadingApproval = true;
 		try {
 			addNotification(transactionSend);
-			const tx = await approveToken(info.tokenAddr, getContractAddress(Token.MASTERCHEF));
+			const tx = await approveToken(
+				info.tokenAddr,
+				getContractAddress(Token.MASTERCHEF)
+			);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch {
 			addNotification(transactionDeniedByTheUser);
-			console.log('Oops');
 		}
 		loadingState.loadingApproval = false;
 	};
@@ -260,10 +268,9 @@
 </script>
 
 <div
-	class="self-start min-w-84 max-w-84  bg-white dark:bg-dark-900 {!$darkMode &&
-		'shadow-xl'}  rounded-3xl relative transform transition duration-300 hover:scale-101 select-none"
->
-	<div class="absolute flex flex-row-reverse p-4 w-full">
+	class="self-start   bg-white dark:bg-neutral-800 {!$darkMode &&
+		'customShadow'}  relative transform select-none rounded-3xl transition duration-300 ">
+	<div class="absolute flex w-full flex-row-reverse p-4 ">
 		<div>
 			{#if isFarm}
 				<SushiswapBadge />
@@ -271,43 +278,52 @@
 			<MultiplierBadge multiplier={poolMultiplier} />
 		</div>
 	</div>
-	<div class="py-4 px-8 flex flex-col h-124">
-		<img src={info.tokenImagePath} alt={info.tokenName} class="w-30 h-30 self-center my-2" />
+	<div class="cardContainer flex h-full flex-col py-4 px-8">
+		<img
+			src={info.tokenImagePath}
+			alt={info.tokenName}
+			class="my-2 self-center" />
 		<div>
-			<p class="font-bold dark:text-white text-lg mb-3">{info.tokenName}</p>
+			<p class="mb-3 text-lg font-bold dark:text-white">{info.tokenName}</p>
 		</div>
-		<div class="flex justify-between mb-2">
-			<p class="dark:text-gray-200  text-gray-800">APR:</p>
+		<div class="mb-2 flex justify-between">
+			<p class="text-gray-800  dark:text-gray-200">APR:</p>
 			{#if poolApr == 'Infinity'}
 				<p class="font-medium dark:text-white">∞</p>
 			{:else if poolApr}
 				<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
 			{:else}
-				<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+				<p
+					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
-		<div class="flex justify-between mb-2">
-			<p class="dark:text-gray-200  text-gray-800 capitalize">{$_('actions.earn')}:</p>
+		<div class="mb-2 flex justify-between">
+			<p class="capitalize  text-gray-800 dark:text-gray-200">
+				{$_('actions.earn')}:
+			</p>
 			<p class="font-medium dark:text-white">MUSH</p>
 		</div>
 
-		<div class="flex justify-between text-lg mb-6">
-			<p class="dark:text-gray-200  text-gray-800 capitalize">{$_('actions.depositFee')}:</p>
+		<div class="mb-6 flex justify-between text-lg">
+			<p class="capitalize  text-gray-800 dark:text-gray-200">
+				{$_('actions.depositFee')}:
+			</p>
 			{#if poolFeePercentage != null}
 				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
 			{:else}
-				<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+				<p
+					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
-		<div class="flex flex-col w-full mb-2">
-			<p class="text-xs text-left font-medium dark:text-white uppercase">
+		<div class="mb-2 flex w-full flex-col">
+			<p class="text-left text-xs font-medium uppercase dark:text-white">
 				<span class="text-pink-400">MUSH </span>{$_('pastActions.earned')}
 			</p>
 			<div class="flex w-full justify-between">
 				{#if userEarnings}
-					<p class="text-xl flex items-center dark:text-white">
+					<p class="flex items-center text-xl dark:text-white">
 						{parseFloat(ethers.utils.formatEther(userEarnings)).toFixed(2)}
 					</p>
 				{:else}
@@ -316,33 +332,37 @@
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
 					on:click={onHarvest}
-					class="text-sm py-2 px-4 rounded-lg bg-green-500 text-white font-semibold tracking-wide disabled:bg-gray-400 disabled:cursor-not-allowed"
-					>{$_('actions.harvest')}</button
-				>
+					class="rounded-lg py-2 
+					{canHarvest &&
+						'bg-gradient-to-r from-complementary-600 to-triadicGreen-600 dark:bg-gradient-to-r dark:from-complementary-500 dark:to-triadicGreen-500'} px-4 text-sm font-semibold tracking-wide 
+					text-white disabled:cursor-not-allowed disabled:bg-neutral-300 dark:disabled:bg-neutral-600"
+					>{$_('actions.harvest')}</button>
 			</div>
 		</div>
 
-		<p class="text-xs text-left font-medium dark:text-white uppercase">
-			<span class="text-pink-400">{info.tokenName} </span>{$_('pastActions.staked')}
+		<p class="text-left text-xs font-medium uppercase dark:text-white">
+			<span class="text-pink-400">{info.tokenName} </span>{$_(
+				'pastActions.staked'
+			)}
 		</p>
-		<div class="flex h-10  w-full mb-6 mt-2">
+		<div class="mb-6 mt-2  flex h-10 w-full">
 			{#if !$accounts}
 				<button
-					on:click={isMetaMaskInstalled() ? metaMaskCon : openMetamaskAlertModal}
-					class="bg-green-500 hover:bg-green-600 text-white tracking-wide font-semibold w-full h-full rounded-xl"
-				>
+					on:click={isMetaMaskInstalled()
+						? metaMaskCon
+						: openMetamaskAlertModal}
+					class="h-full w-full rounded-xl bg-triadicGreen-600 font-semibold tracking-wide text-white hover:bg-triadicGreen-600">
 					{$_('actions.unlock')}
 				</button>
 			{:else if !tokenApproved}
 				<button
 					on:click={onApprove}
-					class="flex justify-center items-center bg-green-500 hover:bg-green-600 text-white tracking-wide font-semibold w-full h-full rounded-xl"
-				>
+					class="flex justify-center items-center bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-triadicGreen-600 dark:hover:bg-triadicGreen-700 active:scale-90  ease-in-out  duration-300 text-white tracking-wide font-semibold w-full h-full rounded-xl">
 					{$_('actions.approve')}
 					{isFarm ? 'Farm' : 'Pool'}
 					{#if loadingState.loadingApproval}
-						<div class="ml-1">
-							<Circle color="#fff" size={16} duration="2s" />
+						<div class="ml-2">
+							<CustomSpinner />
 						</div>
 					{/if}
 				</button>
@@ -355,22 +375,21 @@
 							).toPrecision(4)}
 						</p>
 					{:else}
-						<p class="w-12 h-full bg-gray-200 dark:bg-dark-300 rounded-lg animate-pulse" />
+						<p
+							class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
 					{/if}
 
 					<div class="flex space-x-2">
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
-							>+</button
-						>
+							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
+							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
-							class="bg-green-500 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
-							>-</button
-						>
+							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600  disabled:cursor-not-allowed"
+							>-</button>
 					</div>
 				</div>
 			{/if}
@@ -378,13 +397,24 @@
 
 		<div
 			on:click={showPoolInfo}
-			class="flex items-center justify-center dark:text-white cursor-pointer hover:text-green-500"
-		>
-			<p class="font-medium mr-2">{$_('poolCard.details')}</p>
+			class="group flex cursor-pointer items-center justify-center dark:text-white">
+			<p
+				class="mr-2 font-medium  group-hover:text-triadicGreen-500 {!isHidden &&
+					'text-triadicGreen-500'} ">
+				{$_('poolCard.details')}
+			</p>
 			{#if isHidden}
-				<Fa icon={faChevronDown} size="xs" translateY={0.15} />
+				<div
+					class="group-hover:text-triadicGreen-500 {!isHidden &&
+						'text-triadicGreen-500'}">
+					<Fa icon={faChevronDown} size="xs" translateY={0.15} />
+				</div>
 			{:else}
-				<Fa icon={faChevronUp} size="xs" translateY={0.15} />
+				<div
+					class="group-hover:text-triadicGreen-500 {!isHidden &&
+						'text-triadicGreen-500'}">
+					<Fa icon={faChevronUp} size="xs" translateY={0.15} />
+				</div>
 			{/if}
 		</div>
 	</div>
@@ -392,13 +422,12 @@
 		<div
 			in:slide={{ duration: 350 }}
 			out:slide={{ duration: 350 }}
-			class="px-8 pb-4 dark:text-white"
-		>
-			<div class="flex justify-between mb-1">
+			class="px-8 pb-4 dark:text-white">
+			<div class="mb-1 flex justify-between">
 				<p>{$_('actions.stake')}</p>
 				<p class="font-medium">{info.tokenName}</p>
 			</div>
-			<div class="flex justify-between mb-1">
+			<div class="mb-1 flex justify-between">
 				<p>{$_('poolCard.totalLiquidity')}:</p>
 				{#if poolLiquidityUSD}
 					${shortLargeAmount(poolLiquidityUSD)}
@@ -409,8 +438,23 @@
 			<a
 				class="font-medium hover:text-green-500"
 				href={`https://polygonscan.com/address/${info.tokenAddr}`}
-				target="_blank">{$_('poolCard.viewonMatic')}</a
-			>
+				target="_blank">{$_('poolCard.viewonMatic')}</a>
 		</div>
 	{/if}
 </div>
+
+<style>
+	.cardContainer {
+		width: 336px;
+		height: 496px;
+	}
+
+	img {
+		width: 120px;
+		height: 120px;
+	}
+
+	.customShadow {
+		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	}
+</style>

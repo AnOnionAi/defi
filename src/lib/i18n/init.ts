@@ -15,6 +15,7 @@ export const setInit = (lang: string) => {
 			break;
 		case 'fr':
 			addMessages('fr', fr);
+			break;
 		default:
 			addMessages('es', es);
 			break;

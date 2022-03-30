@@ -1,58 +1,37 @@
 <script lang="ts">
-	import Header from '$lib/layout/Header.svelte';
-	import Footer from '$lib/layout/Footer.svelte';
+	import Header from '$lib/components/Layout/Header.svelte';
+	import Footer from '$lib/components/Layout/Footer.svelte';
 	import { darkMode } from '$lib/stores/dark';
 	import Notifications from 'svelte-notifications';
-	import { navigating, page } from '$app/stores';
-	import LinearBar from '$lib/layout/LinearBar.svelte';
+	import { navigating } from '$app/stores';
 	import Modal from 'svelte-simple-modal';
-	import 'virtual:windi.css';
 	import '../app.css';
-	import { onMount } from 'svelte';
-	import {
-		chainID,
-		accounts,
-		metamaskConnect,
-		metamaskListeners,
-		metaMaskDisconnect
-	} from '$lib/stores/MetaMaskAccount';
-	import WrongNetwork from '$lib/components/Modals/WrongNetwork.svelte';
-	import { POLYGON_CHAIN_ID } from '$lib/config';
+	import { logUser, metamaskListeners } from '$lib/stores/MetaMaskAccount';
+	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
+	import { onMount, SvelteComponent } from 'svelte';
+	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
 
-	let currentChain;
-	let currentPath;
-	let lastPath;
-
-	$: {
-		currentPath = $page.url.pathname;
-		currentPath = currentPath.split('/');
-
-		if (typeof Storage !== 'undefined') {
-			if (
-				(currentPath.length != 2 && currentPath[2] != 'dashboard') ||
-				sessionStorage.getItem('METAMASK_ACCOUNT')
-			) {
-				if (!$accounts && JSON.stringify(currentPath) != JSON.stringify(lastPath)) {
-					metamaskConnect();
-					metamaskListeners();
-				}
-			}
-		}
-
-		lastPath = currentPath;
-	}
+	onMount(async () => {
+		await metamaskListeners();
+		await logUser();
+	});
 </script>
 
-<Notifications>
+<Notifications item={CustomNotification}>
 	<Modal>
 		<Header />
 		{#if $navigating}
-			<div class="absolute left-0 top-0 w-screen z-10">
-				<LinearBar />
+			<div class="absolute left-0 top-0 z-10 w-screen">
+				<GradientLinearBar />
 			</div>
 		{/if}
-		<main class:dark={$darkMode} class="main  background_pattern  {$darkMode && 'bg-dark-500'} ">
-			<slot />
+		<main
+			class:dark={$darkMode}
+			class="main background_pattern flex flex-1  {$darkMode &&
+				'bg-darkGrey-900 '} transition duration-500 ">
+			<div class="flex-1">
+				<slot />
+			</div>
 		</main>
 		<Footer />
 	</Modal>
@@ -60,12 +39,6 @@
 
 <style>
 	.main {
-		min-height: 88vh;
 		width: 100%;
-		height: 100%;
-		margin: 0 auto;
-	}
-	.dark-active {
-		background: linear-gradient(to bottom, rgb(45, 55, 63) 0, #0b1216 500px);
 	}
 </style>

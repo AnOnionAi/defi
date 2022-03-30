@@ -1,28 +1,28 @@
 import type { Notification } from '$lib/ts/types';
 export const transactionSend: Notification = {
-	text: 'Transaction Sent 👍',
-	position: 'bottom-center',
+	text: 'Transaction Sent',
+	position: 'top-right',
 	type: 'success',
-	removeAfter: 4000
+	removeAfter: 5000
 };
 
 export const transactionDeniedByTheUser: Notification = {
-	text: 'Transaction Denied 📛',
-	position: 'bottom-center',
+	text: 'Transaction Denied',
+	position: 'top-right',
 	type: 'danger',
-	removeAfter: 4000
+	removeAfter: 5000
 };
 
 export const transactionCompleted: Notification = {
-	text: 'Transaction Completed 💸',
-	position: 'bottom-center',
+	text: 'Transaction Completed',
+	position: 'top-right',
 	type: 'success',
-	removeAfter: 4000
+	removeAfter: 5000
 };
 
 export const wrongInput: Notification = {
 	text: 'Be sure to input a number',
-	position: 'bottom-center',
+	position: 'top-right',
 	type: 'warning',
-	removeAfter: 2000
+	removeAfter: 5000
 };

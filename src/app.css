@@ -1,46 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
-
-:root {
-	--text-color: #444444;
-	--logo-color: rgba(27, 160, 133, 1);
-	--light-background: #f9f8f9;
-	--light-secondary: #fff;
-	--dark-background: #172029;
-	--dark-secondary: #1c1f28;
-	--dark-thirty: rgba(25, 25, 25, 1);
-}
-
-body {
-	font-family: 'Poppins', sans-serif;
-	min-height: 100vh;
-	margin: 0;
-	background-color: var(--light-background);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 #svelte {
 	min-height: 100vh;
+	font-family: 'Poppins', sans-serif;
 	display: flex;
 	flex-direction: column;
-}
-
-p {
-	line-height: 1.5;
-}
-
-h1 {
-	font-size: 2rem;
-	margin-bottom: 0 0 1em 0;
-	text-align: center;
-}
-
-h2 {
-	font-size: 1rem;
-}
-
-input,
-button {
-	font-size: inherit;
-	font-family: inherit;
 }
 
 input:focus,

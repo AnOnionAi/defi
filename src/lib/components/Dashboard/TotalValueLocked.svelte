@@ -7,9 +7,8 @@
 </script>
 
 <div
-	class="bg-white dark:bg-dark-900 rounded-2xl p-5 h-55 shadow-xl flex flex-col justify-between select-none transition duration-300"
->
-	<p class="text-sm md:text-base lg:text-xl text-gray-600  dark:text-white">
+	class="flex h-56 select-none flex-col justify-between rounded-2xl bg-white p-5 opacity-80 shadow-xl transition duration-300 dark:bg-neutral-800">
+	<p class="text-sm text-gray-600 dark:text-white md:text-base  lg:text-xl">
 		{$_('dashboard.tvl')} (TVL)
 	</p>
 
@@ -17,8 +16,7 @@
 		{#if $totalValueLocked}
 			<p
 				in:fade={{ duration: 500 }}
-				class="font-medium text-dark-800 dark:text-gray-200 text-lg md:text-xl xl:text-2xl"
-			>
+				class="text-dark-800 text-lg font-medium dark:text-gray-200 md:text-xl xl:text-2xl">
 				${formatComma($totalValueLocked, $page.params.lang)}
 			</p>
 		{/if}

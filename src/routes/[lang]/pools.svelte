@@ -1,25 +1,20 @@
 <script context="module" lang="ts">
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
-	import { setInit } from '$lib/i18n/init';
 </script>
 
 <script lang="ts">
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
+	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import { pools } from '$lib/config/constants/pools';
 	import { darkMode } from '$lib/stores/dark';
-	import { isHomescreen } from '$lib/stores/homescreen';
 </script>
 
 <section class="background {$darkMode && 'background__dark'}">
-	<br />
-	<h1 class="dark:text-white text-5xl tracking-widest font-medium">
-		{$_('headers.pools.text')}
-	</h1>
-	<div class="mt-5 space-y-4 pools ">
+	<PageHeader text={$_('headers.pools.text')} />
+	<div class=" mt-5 space-y-4 ">
 		<div
-			class="flex flex-row justify-center gap-y-9 gap-x-6 p-8 text-center flex-wrap max-w-7xl mx-auto "
-		>
+			class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-8 text-center ">
 			{#each pools as pool}
 				<PoolCard info={pool} />
 			{/each}
@@ -33,14 +28,11 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
-		background-image: url('/backgrounds/fantasyMushCity.jpg');
+		background-image: url('/theme/pools/fantasyMushCity.webp');
 	}
 	.background__dark {
-		background-image: url('/backgrounds/mushVillageDark.jpeg');
+		background-image: url('/theme/pools/mushVillageDark.webp');
 		background-size: cover;
 		background-position: center center;
-	}
-	.pools {
-		min-height: 86vh;
 	}
 </style>

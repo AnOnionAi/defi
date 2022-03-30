@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
 	export const prerender = false;
 	import { _ } from 'svelte-i18n';
-	import { darkMode } from '$lib/stores/dark';
 </script>
 
 <script lang="ts">
@@ -31,17 +30,17 @@
 	import MushPriceCard from '$lib/components/Dashboard/MushPriceCard.svelte';
 	import MushPriceSide from '$lib/components/Dashboard/MushPriceSide.svelte';
 	import MushPriceSection from '$lib/components/Dashboard/MushPriceSection.svelte';
-	import { getFarmsTVL, getPoolsTVL, getPortfolioValue } from '$lib/utils/getPortfolioValue';
-	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	import { formatComma } from '$lib/utils/formatNumbersByLang';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
-	import { calculateGrowth, GrowthInfo } from '$lib/utils/growthPercentage';
-	import { parse } from 'path/posix';
-	import { APIKEY, getCovalentApiKey } from '$lib/env';
+	import { calculateGrowth } from '$lib/utils/growthPercentage';
+	import type { GrowthInfo } from '$lib/utils/growthPercentage';
+	import { Chart, registerables } from 'chart.js';
+	import type { ChartType } from 'chart.js';
+	import { getMonthsEnshortedNames } from '$lib/i18n/utils';
 
 	let value = 0;
 	let lastPrice = 0;
-	let peak: string | number = 0;
+	let peak = 0;
 	let dataLine;
 	let myChart;
 	let historicalData;
@@ -139,76 +138,71 @@
 			.reverse();
 	}
 
-	onMount(() => {
-		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_${APIKEY}`;
+	onMount(async () => {
+		Chart.register(...registerables);
+		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17`;
+		const response = await fetch(APIURL);
+		const { data } = await response.json();
+		const tokenData = data[0];
 
-		fetch(APIURL)
-			.then((res) => res.json())
-			.then((res) => {
-				const monthsName = [
-					'Jan',
-					'Feb',
-					'Mar',
-					'Apr',
-					'May',
-					'Jun',
-					'Jul',
-					'Aug',
-					'Sep',
-					'Oct',
-					'Nov',
-					'Dec'
-				];
+		const monthsName = getMonthsEnshortedNames($page.params.lang);
 
-				historicalData = res.data.prices[0].prices.map((e, i) => {
-					let shortDate = monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
-					return { ...e, shortDate };
-				});
+		historicalData = tokenData.prices.map((e) => {
+			let shortDate =
+				monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
+			return { ...e, shortDate };
+		});
 
-				growthInfo = calculateGrowth(historicalData);
+		growthInfo = calculateGrowth(historicalData);
 
-				lastPrice = [...historicalData].reverse()[historicalData.length - 1].price.toFixed(2);
+		const lastLog = historicalData[0];
+		lastPrice = lastLog.price;
 
-				let tempPrices = [...historicalData].map((e) => e.price).reverse();
-				peak = Math.max(...tempPrices).toFixed(5);
-				dataLine = {
-					labels: historicalData.map((e) => e.shortDate).reverse(),
-					datasets: [
-						{
-							label: 'Mush Price',
-							scaleOverride: true,
-							scaleStartValue: 0.00001,
-							fill: true,
-							lineTension: 0,
-							backgroundColor: 'rgba(225, 204,230, .3)',
-							borderColor: 'rgb(75, 192, 192)',
-							borderCapStyle: 'butt',
-							borderDash: [],
-							borderDashOffset: 0.0,
-							borderJoinStyle: 'miter',
-							pointBorderColor: 'rgba(222, 125, 228, 1)',
-							pointBackgroundColor: 'rgb(75, 192, 192)',
-							pointBorderWidth: 10,
-							pointHoverRadius: 0.5,
-							pointHoverBackgroundColor: 'rgba(222, 125, 228, 1)',
-							pointHoverBorderColor: 'rgba(222, 125, 228, 1)',
-							pointHoverBorderWidth: 2,
-							pointRadius: 0.5,
-							pointHitRadius: 10,
-							data: historicalData.map((e) => e.price).reverse()
-						}
-					]
-				};
+		const tempPrices = [...historicalData].map((e) => e.price).reverse();
+		console.log(tempPrices);
+		peak = Math.max(...tempPrices);
 
-				let config = {
-					type: 'line',
-					data: dataLine,
-					options: options,
-					plugins: [tooltipLine]
-				};
+		dataLine = {
+			labels: historicalData.map((e) => e.shortDate).reverse(),
+			datasets: [
+				{
+					label: 'Mush Price',
+					scaleOverride: true,
+					scaleStartValue: 0.00001,
+					fill: true,
+					lineTension: 0,
+					backgroundColor: 'rgba(225, 204,230, .3)',
+					borderColor: 'rgb(75, 192, 192)',
+					borderCapStyle: 'butt',
+					borderDash: [],
+					borderDashOffset: 0.0,
+					borderJoinStyle: 'miter',
+					pointBorderColor: 'rgba(222, 125, 228, 1)',
+					pointBackgroundColor: 'rgb(75, 192, 192)',
+					pointBorderWidth: 7,
+					pointHoverRadius: 0.5,
+					pointHoverBackgroundColor: 'rgba(222, 125, 228, 1)',
+					pointHoverBorderColor: 'rgba(222, 125, 228, 1)',
+					pointHoverBorderWidth: 2,
+					pointRadius: 0.5,
+					pointHitRadius: 10,
+					data: historicalData.map((e) => e.price).reverse()
+				}
+			]
+		};
 
-				myChart = new Chart(document.getElementById('mush-chart'), config);
-			});
+		const lineChartType: ChartType = 'line';
+
+		const config = {
+			type: lineChartType,
+			data: dataLine,
+			options: options,
+			plugins: [tooltipLine]
+		};
+
+		const ctx = document.getElementById('mush-chart') as HTMLCanvasElement;
+
+		myChart = new Chart(ctx, config);
 	});
 </script>
 
@@ -229,49 +223,42 @@
 			primaryText={formatComma($farmsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInFarms')}
 			buttonText={$_('dashboard.startFarming')}
-			route={`/${$page.params.lang}/farms`}
-		/>
+			route={`/${$page.params.lang}/farms`} />
 
 		<EarnMoreCard
 			title={$_('headers.pools.text')}
 			primaryText={formatComma($poolsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInPools')}
 			buttonText={$_('dashboard.addLiquidity')}
-			route={`/${$page.params.lang}/pools`}
-		/>
+			route={`/${$page.params.lang}/pools`} />
 
 		<EarnMoreCard
 			title={$_('headers.vaults.text')}
 			primaryText={formatComma($vaultsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
-			route={`/${$page.params.lang}/vaults`}
-		/>
+			route={`/${$page.params.lang}/vaults`} />
 	</EarnMoreSection>
 
 	<SectionTitle title={$_('dashboard.index')} />
 	<IndexSection>
 		<IndexCard
 			title={$_('dashboard.mushpb')}
-			description="{formatComma($mushPerBlock, $page.params.lang)} MUSH"
-		/>
+			description="{formatComma($mushPerBlock, $page.params.lang)} MUSH" />
 		<IndexCard
 			title={$_('dashboard.marketcap')}
-			description="${formatComma($mushMarketCap, $page.params.lang)}"
-		/>
+			description="${formatComma($mushMarketCap, $page.params.lang)}" />
 		<IndexCard
 			title={$_('dashboard.totalvol')}
-			description="{formatComma($totalMushSupply, $page.params.lang)} MUSH"
-		/>
+			description="{formatComma($totalMushSupply, $page.params.lang)} MUSH" />
 		<IndexCard
 			title={$_('dashboard.maxsupply')}
-			description="{formatComma($maxMushSupply, $page.params.lang)} MUSH"
-		/>
+			description="{formatComma($maxMushSupply, $page.params.lang)} MUSH" />
 	</IndexSection>
 
 	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
 	<MushPriceSection>
-		<div class="h-92 col-span-9  lg:col-span-6	">
+		<div class="col-span-9 h-80  lg:col-span-6	">
 			<ButtonGroup
 				options={[
 					{ id: 0, name: 'Day' },
@@ -279,16 +266,24 @@
 					{ id: 2, name: 'Month' }
 				]}
 				selected={value}
-				on:change={handleOption}
-			/>
+				on:change={handleOption} />
 			<MushPriceGraph />
 		</div>
 
 		<MushPriceSide>
-			<MushPriceCard title="Today" display={growthInfo.todayGrowth} isPercentage={true} />
-			<MushPriceCard title="Weekly" display={growthInfo.weeklyGrowth} isPercentage={true} />
-			<MushPriceCard title="Monthly" display={growthInfo.monthlyGrowth} isPercentage={true} />
-			<MushPriceCard title="Peak" display={parseFloat(peak)} />
+			<MushPriceCard
+				title="Today"
+				display={growthInfo.todayGrowth}
+				isPercentage={true} />
+			<MushPriceCard
+				title="Weekly"
+				display={growthInfo.weeklyGrowth}
+				isPercentage={true} />
+			<MushPriceCard
+				title="Monthly"
+				display={growthInfo.monthlyGrowth}
+				isPercentage={true} />
+			<MushPriceCard title="Peak" display={peak} />
 		</MushPriceSide>
 	</MushPriceSection>
 </DashboardLayout>

@@ -1,5 +1,4 @@
 <div
-	class="w-full h-auto px-12 md:px-4 mb-5 grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12  md:gap-x-3 gap-y-6 gap-x-8"
->
+	class="mb-5 grid h-auto w-full grid-cols-3 gap-y-6 gap-x-8 px-12 md:grid-cols-6  md:gap-x-3 md:px-4 lg:grid-cols-12">
 	<slot />
 </div>

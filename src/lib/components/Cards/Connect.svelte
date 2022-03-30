@@ -5,14 +5,6 @@
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	const { open } = getContext('simple-modal');
 
-	export async function load({ page }) {
-		const { lang } = page.params;
-
-		return {
-			props: { lang }
-		};
-	}
-
 	const openModal = () => {
 		open(MetamaskNotInstalled, {
 			closeButton: true,
@@ -20,18 +12,51 @@
 			closeOnOuterClick: true
 		});
 	};
+
+	const dispatchClick = () => {
+		if (isMetaMaskInstalled()) return metaMaskCon();
+		return openModal();
+	};
 </script>
 
 <div
-	class="h-12/12 w-full flex justify-center items-center cursor-pointer"
-	on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
->
-	<div class="w-6/12 h-12/12 flex flex-col justify-center ">
-		<img src="/metamask.svg" alt="Metamask Fox" class="w-40 self-center mb-5" />
+	class="flex h-full w-full cursor-pointer items-center justify-center"
+	on:click={dispatchClick}>
+	<div class="h-12/12 flex w-6/12 flex-col justify-center ">
+		<img
+			src="/assets/metamask.svg"
+			alt="Metamask Fox"
+			class="mb-5 w-40 transform self-center transition duration-300 hover:scale-125" />
 		<p
-			class="text-xl text-center bg-black text-white font-medium rounded-full p-1  dark:border-green-500 dark:border-3"
-		>
+			class="btn-grad rounded-full p-3 text-center text-xl font-medium text-white hover:bg-primary-300 dark:bg-analogPurple-300 dark:hover:bg-emerald-300 ">
 			{$_('dividendsPage.cyw')}
 		</p>
 	</div>
 </div>
+
+<style>
+	.btn-grad {
+		background-image: linear-gradient(
+			to right,
+			#f37102 0%,
+			#ff3550 51%,
+			#fc28b2 100%
+		);
+	}
+
+	.btn-grad {
+		margin: 10px;
+		text-align: center;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: white;
+		box-shadow: 0 0 2px #eee;
+		display: block;
+	}
+
+	.btn-grad:hover {
+		background-position: right center; /* change the direction of the change here */
+		color: #fff;
+		text-decoration: none;
+	}
+</style>

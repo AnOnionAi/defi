@@ -3,23 +3,45 @@
 	import { _ } from 'svelte-i18n';
 </script>
 
-<div class="h-12/12 w-full flex items-center justify-center">
-	<div class="w-9/12 h-8/12 flex flex-col  justify-around items-center">
-		<img src="/mushRound.png" alt="The mush token icon" class="w-36  " />
-		<div>
-			<p class="text-xl text-center font-medium dark:text-white mb-2">
-				{$_('dividendsPage.approval')}
-			</p>
-			<p class="text-center dark:text-white text-xs">
-				{$_('dividendsPage.approvalDescription')}
-			</p>
-		</div>
-		<div>
-			<button
-				on:click={onApproval}
-				class="self-center font-semibold py-2 px-4 bg-black text-white hover:bg-green-500 dark:border dark:border-green-500 dark:rounded-full  rounded-xl"
-				>{$_('actions.approve')}</button
-			>
-		</div>
+-->
+
+<div class="flex h-full items-center justify-center">
+	<div class="flex flex-col items-center gap-6">
+		<img src="/assets/mushCoin.webp" alt="The mush token icon" class="w-28" />
+		<p class="font-medium dark:text-white">
+			{$_('dividendsPage.approvalDescription')}
+		</p>
+		<button
+			on:click={onApproval}
+			class="btn-grad rounded-full px-8 py-2 font-medium tracking-wide text-white"
+			>{$_('actions.approve')}</button>
 	</div>
 </div>
+
+<style>
+	.btn-grad {
+		background-image: linear-gradient(
+			to right,
+			#fe7688 0%,
+			#f52149 51%,
+			#fc28b2 100%
+		);
+	}
+
+	.btn-grad {
+		margin: 10px;
+
+		text-align: center;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: white;
+		box-shadow: 0 0 2px #eee;
+		display: block;
+	}
+
+	.btn-grad:hover {
+		background-position: right center;
+		color: #fff;
+		text-decoration: none;
+	}
+</style>

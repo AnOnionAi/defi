@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { height, width } from '@fortawesome/free-solid-svg-icons/faChevronUp';
-
 	interface StyleConfig {
 		width?: string;
 		height?: string;
@@ -12,8 +10,7 @@
 
 <div
 	style="width:{styles.width}; height:{styles.height}; "
-	class="pulse bg-gray-200 dark:bg-dark-400 rounded-lg"
-/>
+	class="pulse rounded-lg bg-neutral-400 dark:bg-neutral-700" />
 
 <style>
 	.pulse {

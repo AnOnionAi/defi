@@ -1,4 +1,3 @@
-import type { BigNumber } from 'ethers';
 import { getVaultChefContract } from './contracts';
 import { ethers } from 'ethers';
 
@@ -14,10 +13,18 @@ export const deposit = async (pid: number, amount: string): Promise<any> => {
 	}
 };
 
-export const depositTo = async (pid: number, amount: string, to: string): Promise<any> => {
+export const depositTo = async (
+	pid: number,
+	amount: string,
+	to: string
+): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
-		return await vaultChef.deposit(pid, ethers.utils.parseUnits(amount.trim(), 18), to);
+		return await vaultChef.deposit(
+			pid,
+			ethers.utils.parseUnits(amount.trim(), 18),
+			to
+		);
 	} catch (error) {
 		console.log(error, 'Unable to deposit');
 	}
@@ -33,16 +40,27 @@ export const withdraw = async (pid: number, amount: string): Promise<any> => {
 	}
 };
 
-export const withdrawTo = (pid: number, amount: string, to: string): Promise<any> => {
+export const withdrawTo = (
+	pid: number,
+	amount: string,
+	to: string
+): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
-		return vaultChef.withdraw(pid, ethers.utils.parseUnits(amount.trim(), 18));
+		return vaultChef.withdraw(
+			pid,
+			ethers.utils.parseUnits(amount.trim(), 18),
+			to
+		);
 	} catch (error) {
 		console.log(error, 'Unable to withdraw');
 	}
 };
 
-export const stakedWantTokens = async (pid: number, userAccount: string): Promise<any> => {
+export const stakedWantTokens = async (
+	pid: number,
+	userAccount: string
+): Promise<any> => {
 	try {
 		const vaultChef = getVaultChefContract();
 		return await vaultChef.stakedWantTokens(pid, userAccount);

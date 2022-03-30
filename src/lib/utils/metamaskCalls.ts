@@ -2,19 +2,21 @@ import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/ts/types';
 import { accounts } from '$lib/stores/MetaMaskAccount';
 
-export const isMetaMaskInstalled = () => {
+export const isMetaMaskInstalled = (): boolean => {
 	//Have to check the ethereum binding on the window object to see if it's installed
 	const { ethereum } = window;
 	return Boolean(ethereum && ethereum.isMetaMask);
 };
 
-export const goInstallMetamask = () => {
+export const goInstallMetamask = (): void => {
 	window.open('https://metamask.io/download');
 };
 
-export const metaMaskCon = async () => {
+export const metaMaskCon = async (): Promise<void> => {
 	try {
-		const user_accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+		const user_accounts = await window.ethereum.request({
+			method: 'eth_requestAccounts'
+		});
 		accounts.set(user_accounts);
 		sessionStorage.setItem('METAMASK_ACCOUNT', user_accounts);
 	} catch {
@@ -22,8 +24,8 @@ export const metaMaskCon = async () => {
 	}
 };
 
-export const addTokenToMetamaskWallet = () => {
-	return ethereum
+export const addTokenToMetamaskWallet = (): Promise<void> => {
+	return window.ethereum
 		.request({
 			method: 'wallet_watchAsset',
 			params: {
@@ -32,7 +34,7 @@ export const addTokenToMetamaskWallet = () => {
 					address: getContractAddress(Token.MUSHTOKEN),
 					symbol: 'MUSH',
 					decimals: 18,
-					image: 'https://zyber-dev.netlify.app/mushRound.png'
+					image: 'https://zyber-dev.netlify.app/assets/mushRound.png'
 				}
 			}
 		})

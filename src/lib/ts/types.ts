@@ -1,5 +1,11 @@
 import type { BigNumber } from 'ethers';
 
+declare global {
+	interface Window {
+		ethereum: any;
+	}
+}
+
 export interface FarmConfig {
 	pid: number;
 	lpSymbol: string;
@@ -123,9 +129,9 @@ export enum TokenQuotes {
 }
 
 export type Notification = {
-	text: String;
-	position: String;
-	type: String;
+	text: string;
+	position: string;
+	type: string;
 	removeAfter: number;
 };
 

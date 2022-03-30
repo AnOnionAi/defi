@@ -1,0 +1,46 @@
+name: Continuous Integration
+
+on: [pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Node 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          sudo npm install -g pnpm
+          pnpm install --frozen-lockfile
+
+      - name: Install Playwright
+        run: npx playwright install-deps
+
+      - name: Build project
+        run: pnpm build
+
+      # - name: Playwright tests
+      #  run: pnpm test
+
+      - name: Format
+        run: pnpm format
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply formatting changes
+          branch: ${{ github.head_ref }}
+          commit_options: '--no-verify'
