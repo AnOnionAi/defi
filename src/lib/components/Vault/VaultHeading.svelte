@@ -6,11 +6,14 @@
 </script>
 
 <div>
-	<p class="text-sm font-light text-gray-600 dark:text-gray-300">
+	<p class="text-sm text-gray-600 dark:text-gray-300">
 		{headingText}
 	</p>
 	{#if subHeading}
-		<p class="tracking-tighter dark:text-white">{subHeading} <slot /></p>
+		<p class="text-lg tracking-tighter dark:text-white">
+			{subHeading}
+			<slot />
+		</p>
 	{:else}
 		<LoadingSkeleton styles={{ width: '52px', height: '20px' }} />
 	{/if}

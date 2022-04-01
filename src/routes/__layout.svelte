@@ -15,9 +15,11 @@
 		await metamaskListeners();
 		await logUser();
 	});
+
+	let bannerNotifications: any = CustomNotification;
 </script>
 
-<Notifications item={CustomNotification}>
+<Notifications item={bannerNotifications}>
 	<Modal>
 		<Header />
 		{#if $navigating}

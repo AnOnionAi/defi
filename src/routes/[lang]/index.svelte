@@ -1,13 +1,6 @@
-<script context="module" lang="ts">
-	export const prerender = false;
-</script>
-
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import spaceDay from '/static/animation/space.webp';
-	import spaceNight from '/static/animation/space35.webp';
-	import moon from '/static/animation/moon.webp';
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
 	import { _ } from 'svelte-i18n';
@@ -78,8 +71,12 @@
 
 		Array(1000).fill(0).forEach(addStar);
 
-		const spaceTexture = new THREE.TextureLoader().load(spaceDay);
-		const spaceTextureLight = new THREE.TextureLoader().load(spaceNight);
+		const spaceTexture = new THREE.TextureLoader().load(
+			'/animation/space.webp'
+		);
+		const spaceTextureLight = new THREE.TextureLoader().load(
+			'/animation/space3.webp'
+		);
 		if ($darkMode) {
 			scene.background = spaceTextureLight; //new THREE.Color(0x000000);
 		} else {
@@ -87,10 +84,12 @@
 		}
 
 		const moonTexture = new THREE.TextureLoader().load(
-			'/static/animation/textureMoon.webp'
+			'/animation/textureMoon.webp'
 		);
 
-		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
+		const floppaTextureMoon = new THREE.TextureLoader().load(
+			'/animation/moon.webp'
+		);
 		const floppaMoon = new THREE.Mesh(
 			new THREE.SphereGeometry(256, 256, 256), // new THREE.SphereGeometry(128, 508, 508),
 			new THREE.MeshStandardMaterial({
@@ -200,7 +199,7 @@
 			class="MUSH_about title group min-h-screen bg-transparent text-center">
 			<h2 class="relative text-9xl">FUNGFI DEFI</h2>
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-48 text-4xl italic">
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-48 text-5xl italic">
 					{$_('home.tagline1')}
 				</h4>
 				<h4
@@ -298,7 +297,7 @@
 		background-color: rgba(15, 15, 15, 0.7);
 		padding: 25px;
 		--tw-backdrop-blur: blur(1px);
-		margin-bottom: 70vh;
+		margin-bottom: 50vh;
 	}
 
 	.MUSH_about:last-child {
@@ -307,7 +306,7 @@
 
 	.MUSH_about.title {
 		background-color: transparent;
-		margin-bottom: 50vh !important;
+		margin-bottom: 10vh !important;
 	}
 
 	.MUSH_about.subtitle {

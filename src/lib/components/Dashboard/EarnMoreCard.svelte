@@ -31,7 +31,7 @@
 	<a
 		sveltekit:prefetch
 		href={route}
-		class="flex  items-center self-center rounded-lg  bg-primary-500 py-2 px-3 hover:bg-primary-400 hover:text-white dark:bg-analogPurple-300  dark:hover:bg-analogPurple-400">
+		class="flex items-center self-center rounded-lg  bg-primary-500 py-2 px-3 hover:bg-primary-300 hover:text-white dark:bg-analogPurple-300  dark:hover:bg-analogPurple-500">
 		<p class="font-medium text-white">{buttonText}</p>
 	</a>
 </div>

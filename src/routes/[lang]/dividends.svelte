@@ -106,7 +106,7 @@
 	}
 
 	.mushHouseBackground {
-		background-size: 360px;
+		background-size: 375px;
 		background-image: url('/theme/dividends/mushHouse.webp');
 	}
 
