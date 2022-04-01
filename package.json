@@ -1,6 +1,6 @@
 {
 	"name": "defi",
-	"version": "0.13.0",
+	"version": "0.15.0",
 	"description": "Decentralized Finance",
 	"private": true,
 	"scripts": {
@@ -8,9 +8,6 @@
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
 		"format": "prettier --write --plugin-search-dir=. .",
-		"testnet": "export VITE_NODE_ENV=dev && svelte-kit dev",
-		"polyqa": "export VITE_NODE_ENV=qa && svelte-kit dev",
-		"mainnet": "export VITE_NODE_ENV=production && svelte-kit dev",
 		"check:eslint": "eslint --fix --ignore-path .gitignore .",
 		"check:prettier": "prettier --check --plugin-search-dir=. .",
 		"check:svelte": "tsc && svelte-check --tsconfig tsconfig.json",
