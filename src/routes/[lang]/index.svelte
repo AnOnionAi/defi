@@ -185,10 +185,14 @@
 			class="MUSH_about title group min-h-screen bg-transparent text-center">
 			<h2 class="relative text-9xl">FUNGFI DEFI</h2>
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-24 text-7xl italic">
+				<h4
+					in:fade={{ duration: 1000 }}
+					class="makeIt relative pt-24 text-7xl italic">
 					{$_('home.tagline1')}
 				</h4>
-				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative text-5xl">
+				<h4
+					in:fade={{ delay: 1500, duration: 3000 }}
+					class="mushCoin relative text-5xl">
 					{$_('home.tagline2')} 🍄
 				</h4>
 				<h3
@@ -315,8 +319,16 @@
 		top: 0;
 	}
 
+	.makeIt {
+		text-shadow: 2px 2px 2px #76feec;
+	}
+
+	.mushCoin {
+		text-shadow: 1px 1px 1px #fe7688;
+	}
+
 	.market-cap {
-		text-shadow: 10px 10px 10px #88fe76;
+		text-shadow: 3px 3px 3px #88fe76;
 	}
 
 	canvas {
