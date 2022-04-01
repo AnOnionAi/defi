@@ -8,7 +8,6 @@
 
 ## Starting the defi project
 
-
 ```
 git clone https://github.com/ZetiAi/defi.git
 pnpm install
@@ -19,13 +18,8 @@ pnpm dev
 
 `pnpm build`
 
-
 ## Preview
 
 You can preview the built app to see how production will perform.
 
 `pnpm preview`
-
-
-
-

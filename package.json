@@ -1,6 +1,6 @@
 {
 	"name": "defi",
-	"version": "0.13.0",
+	"version": "0.15.0",
 	"description": "Decentralized Finance",
 	"private": true,
 	"scripts": {
@@ -8,9 +8,6 @@
 		"build": "svelte-kit build",
 		"preview": "svelte-kit preview",
 		"format": "prettier --write --plugin-search-dir=. .",
-		"testnet": "export VITE_NODE_ENV=dev && svelte-kit dev",
-		"polyqa": "export VITE_NODE_ENV=qa && svelte-kit dev",
-		"mainnet": "export VITE_NODE_ENV=production && svelte-kit dev",
 		"check:eslint": "eslint --fix --ignore-path .gitignore .",
 		"check:prettier": "prettier --check --plugin-search-dir=. .",
 		"check:svelte": "tsc && svelte-check --tsconfig tsconfig.json",
@@ -27,8 +24,8 @@
 	"devDependencies": {
 		"@playwright/test": "^1.19.0",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.50",
-		"@sveltejs/kit": "1.0.0-next.294",
-		"@types/three": "^0.138.0",
+		"@sveltejs/kit": "1.0.0-next.304",
+		"@types/three": "^0.139.0",
 		"@typescript-eslint/eslint-plugin": "^4.33.0",
 		"@typescript-eslint/parser": "^4.33.0",
 		"autoprefixer": "^10.4.2",
@@ -58,7 +55,7 @@
 		"svelte-loading-spinners": "^0.1.7",
 		"svelte-notifications": "^0.9.91",
 		"svelte-simple-modal": "^1.0.2",
-		"three": "^0.138.3"
+		"three": "^0.139.2"
 	},
 	"type": "module"
 }

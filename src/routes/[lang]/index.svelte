@@ -1,17 +1,21 @@
-<script context="module" lang="ts">
-	export const prerender = false;
-</script>
-
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import spaceDay from '/static/animation/space.webp';
-	import spaceNight from '/static/animation/space35.webp';
-	import moon from '/static/animation/moon.webp';
 	import { darkMode } from '$lib/stores/dark';
 	import { getMush } from '$lib/components/ThreeD/mushModle.svelte';
 	import { _ } from 'svelte-i18n';
-	import * as THREE from 'three';
+	import {
+		Scene,
+		PerspectiveCamera,
+		WebGLRenderer,
+		TorusGeometry,
+		MeshStandardMaterial,
+		Mesh,
+		PointLight,
+		AmbientLight,
+		TextureLoader,
+		SphereGeometry
+	} from 'three';
 	import { isHomescreen } from '$lib/stores/homescreen';
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
 	import { fade } from 'svelte/transition';
@@ -25,18 +29,17 @@
 	});
 
 	onMount(() => {
-		$darkMode = true;
 		isHomescreen.set(true);
-		scene = new THREE.Scene();
+		scene = new Scene();
 		visible = true;
-		const camera = new THREE.PerspectiveCamera(
+		const camera = new PerspectiveCamera(
 			75,
 			window.innerWidth / window.innerHeight,
 			0.1,
 			1000
 		);
 
-		const renderer = new THREE.WebGLRenderer({
+		const renderer = new WebGLRenderer({
 			canvas
 		});
 		renderer.setPixelRatio(window.devicePixelRatio);
@@ -44,60 +47,31 @@
 
 		camera.position.setZ(30);
 
+		const spaceTexture = new TextureLoader().load(
+			'/animation/green-space-texture.webp'
+		);
+		const spaceTextureLight = new TextureLoader().load(
+			'/animation/elegant-space-texture.webp'
+		);
+
 		//Start Torus
-		const geometryTorusOne = new THREE.TorusGeometry(7, 1, 8, 25);
-		const materialTorusOne = new THREE.MeshStandardMaterial({
-			color: 0xff6347,
+		const geometryTorusOne = new TorusGeometry(7, 1, 8, 25);
+		const materialTorusOne = new MeshStandardMaterial({
+			color: 0xfe7688,
 			wireframe: true
 		});
-		const torusOne = new THREE.Mesh(geometryTorusOne, materialTorusOne);
+		const torusOne = new Mesh(geometryTorusOne, materialTorusOne);
 		scene.add(torusOne);
 
 		torusOne.position.set(0, 0, 0);
 		// End Torus
 
-		const lightPoint = new THREE.PointLight(0xffffff);
+		const lightPoint = new PointLight(0xfe7688);
 
 		lightPoint.position.set(0, 0, 0);
 
-		const ambientLight = new THREE.AmbientLight(0xffffff);
+		const ambientLight = new AmbientLight(0xfe7688);
 		scene.add(lightPoint, ambientLight);
-
-		function addStar() {
-			const geometry = new THREE.SphereGeometry(1, 24, 24);
-			const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-
-			const star = new THREE.Mesh(geometry, material);
-			const [x, y, z] = Array(3)
-				.fill(0)
-				.map(() => THREE.MathUtils.randFloatSpread(2500));
-
-			star.position.set(x, y, z);
-			scene.add(star);
-		}
-
-		Array(1000).fill(0).forEach(addStar);
-
-		const spaceTexture = new THREE.TextureLoader().load(spaceDay);
-		const spaceTextureLight = new THREE.TextureLoader().load(spaceNight);
-		if ($darkMode) {
-			scene.background = spaceTextureLight; //new THREE.Color(0x000000);
-		} else {
-			scene.background = spaceTexture;
-		}
-
-		const moonTexture = new THREE.TextureLoader().load(
-			'/static/animation/textureMoon.webp'
-		);
-
-		const floppaTextureMoon = new THREE.TextureLoader().load(moon);
-		const floppaMoon = new THREE.Mesh(
-			new THREE.SphereGeometry(256, 256, 256), // new THREE.SphereGeometry(128, 508, 508),
-			new THREE.MeshStandardMaterial({
-				map: floppaTextureMoon,
-				normalMap: moonTexture
-			})
-		);
 
 		/**
             Getting gltf models
@@ -117,6 +91,17 @@
 				console.log('Error loading 3D models');
 			});
 
+		// Start Moon
+		const floppaTextureMoon = new TextureLoader().load('/animation/moon.webp');
+
+		const floppaMoon = new Mesh(
+			new SphereGeometry(250, 250, 250),
+			new MeshStandardMaterial({
+				map: floppaTextureMoon,
+				metalness: 0.25
+			})
+		);
+
 		function animate() {
 			requestAnimationFrame(animate);
 
@@ -127,9 +112,9 @@
 			if (mushMeshCryp) {
 				mushMeshCryp.rotation.y -= 0.0015;
 
-				mushMeshCryp.position.x = -100;
-				mushMeshCryp.position.y = -100;
-				mushMeshCryp.position.z = -1100;
+				mushMeshCryp.position.x = 0;
+				mushMeshCryp.position.y = 0;
+				mushMeshCryp.position.z = -100;
 			}
 
 			if (floppaMoon) {
@@ -200,22 +185,20 @@
 			class="MUSH_about title group min-h-screen bg-transparent text-center">
 			<h2 class="relative text-9xl">FUNGFI DEFI</h2>
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-48 text-4xl italic">
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-24 text-7xl italic">
 					{$_('home.tagline1')}
 				</h4>
-				<h4
-					in:fade={{ delay: 1500, duration: 3000 }}
-					class="relative pt-2 text-4xl">
+				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative text-5xl">
 					{$_('home.tagline2')} 🍄
 				</h4>
 				<h3
 					in:fade={{ delay: 3500, duration: 1000 }}
-					class="market-cap max-w-screen relative m-auto mt-2 pt-2 text-3xl font-bold text-green-500 lg:mt-6 lg:ml-auto lg:mr-auto lg:max-w-screen-md lg:text-6xl">
+					class="market-cap max-w-screen relative m-auto mt-2 pt-4 font-bold sm:text-4xl md:text-5xl lg:mt-6 lg:ml-auto lg:mr-auto lg:text-6xl xl:text-7xl 2xl:text-8xl">
 					{$_('home.marketCap')}
 					{#if $mushMarketCap}
 						<p in:fade={{ delay: 4250, duration: 2000 }}>
 							${$page.params.lang == 'es'
-								? $mushMarketCap.toLocaleString('es-ES')
+								? $mushMarketCap.toLocaleString('es-ES') // Why this code?
 								: $mushMarketCap.toLocaleString('en-US')}
 						</p>
 					{/if}
@@ -298,7 +281,7 @@
 		background-color: rgba(15, 15, 15, 0.7);
 		padding: 25px;
 		--tw-backdrop-blur: blur(1px);
-		margin-bottom: 70vh;
+		margin-bottom: 50vh;
 	}
 
 	.MUSH_about:last-child {
@@ -307,7 +290,7 @@
 
 	.MUSH_about.title {
 		background-color: transparent;
-		margin-bottom: 50vh !important;
+		margin-bottom: 10vh !important;
 	}
 
 	.MUSH_about.subtitle {
@@ -333,7 +316,7 @@
 	}
 
 	.market-cap {
-		text-shadow: 4px 4px 4px seagreen;
+		text-shadow: 10px 10px 10px #88fe76;
 	}
 
 	canvas {
@@ -351,7 +334,7 @@
 		text-align: center;
 		font-weight: bold;
 		color: #fff;
-		background-color: orangered;
+		background-color: #76feec;
 		padding: 5px 0 5px 0;
 		z-index: 100;
 	}

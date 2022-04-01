@@ -1,17 +1,16 @@
 import addresses from '$lib/config/constants/addresses.json';
-import env from '$lib/env';
 import type { Token } from '$lib/ts/types';
 
 export const getMushAddress = () => {
-	return addresses.MUSHTOKEN[env['CHAIN']];
+	return addresses.MUSHTOKEN[String(import.meta.env.VITE_CHAIN)];
 };
 
 export const getMasterChefAddress = () => {
-	return addresses.MASTERCHEF[env['CHAIN']];
+	return addresses.MASTERCHEF[String(import.meta.env.VITE_CHAIN)];
 };
 
 export const getContractAddress = (contractName: Token): string => {
-	return addresses[contractName][env['CHAIN']];
+	return addresses[contractName][import.meta.env.VITE_CHAIN];
 };
 
 export const formatAddress = (walletAddress: Array<string>): string => {
