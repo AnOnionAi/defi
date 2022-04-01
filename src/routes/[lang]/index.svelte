@@ -185,22 +185,20 @@
 			class="MUSH_about title group min-h-screen bg-transparent text-center">
 			<h2 class="relative text-9xl">FUNGFI DEFI</h2>
 			{#if visible}
-				<h4 in:fade={{ duration: 1000 }} class="relative pt-48 text-7xl italic">
+				<h4 in:fade={{ duration: 1000 }} class="relative pt-24 text-7xl italic">
 					{$_('home.tagline1')}
 				</h4>
-				<h4
-					in:fade={{ delay: 1500, duration: 3000 }}
-					class="relative pt-2 text-5xl">
+				<h4 in:fade={{ delay: 1500, duration: 3000 }} class="relative text-5xl">
 					{$_('home.tagline2')} 🍄
 				</h4>
 				<h3
 					in:fade={{ delay: 3500, duration: 1000 }}
-					class="market-cap max-w-screen text-triadicGreenn-500 relative m-auto mt-2 pt-2 text-3xl font-bold lg:mt-6 lg:ml-auto lg:mr-auto lg:max-w-screen-md lg:text-6xl">
+					class="market-cap max-w-screen relative m-auto mt-2 pt-4 font-bold sm:text-4xl md:text-5xl lg:mt-6 lg:ml-auto lg:mr-auto lg:text-6xl xl:text-7xl 2xl:text-8xl">
 					{$_('home.marketCap')}
 					{#if $mushMarketCap}
 						<p in:fade={{ delay: 4250, duration: 2000 }}>
 							${$page.params.lang == 'es'
-								? $mushMarketCap.toLocaleString('es-ES')
+								? $mushMarketCap.toLocaleString('es-ES') // Why this code?
 								: $mushMarketCap.toLocaleString('en-US')}
 						</p>
 					{/if}
