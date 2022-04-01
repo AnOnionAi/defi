@@ -316,7 +316,7 @@
 	}
 
 	.market-cap {
-		text-shadow: 4px 4px 4px seagreen;
+		text-shadow: 10px 10px 10px #88fe76;
 	}
 
 	canvas {
@@ -334,7 +334,7 @@
 		text-align: center;
 		font-weight: bold;
 		color: #fff;
-		background-color: orangered;
+		background-color: #76feec;
 		padding: 5px 0 5px 0;
 		z-index: 100;
 	}
