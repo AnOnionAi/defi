@@ -11,13 +11,15 @@
 	import { onMount, SvelteComponent } from 'svelte';
 	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
 
+	const customNotificationComponent = CustomNotification as any;
+
 	onMount(async () => {
 		await metamaskListeners();
 		await logUser();
 	});
 </script>
 
-<Notifications item={CustomNotification}>
+<Notifications item={customNotificationComponent}>
 	<Modal>
 		<Header />
 		{#if $navigating}

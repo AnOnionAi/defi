@@ -20,6 +20,11 @@
 	} from '$lib/utils/filterFunctions';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
+	import { getVaultAPYandAPR } from '$lib/utils/getVaultAPY';
+	import { getTokenBalance } from '$lib/utils/erc20';
+	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import { BigNumber, ethers } from 'ethers';
+	import { vaultChef } from '$lib/utils/contracts';
 
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
@@ -31,9 +36,35 @@
 	let filterBy: string;
 	let filtersApplied: Array<VaultFilterFunction> = [];
 
-	onMount(() => {
+	onMount(async () => {
 		const vaultsData: Array<VaultInfo> = [...quickVaults, ...sushiVaults];
-		allVaults = vaultsData.map((vault) => {
+
+		allVaults = await Promise.all(
+			vaultsData.map(async (vault) => {
+				const { apy, tvl } = await getVaultAPYandAPR(vault);
+				const userTokenBalance = $accounts
+					? await getTokenBalance(vault.pair.pairContract, $accounts[0])
+					: ethers.constants.Zero;
+				const userWalletBalance = parseFloat(
+					ethers.utils.formatEther(userTokenBalance)
+				);
+				const stakedAmount: BigNumber = $accounts
+					? await vaultChef.stakedWantTokens(vault.pid, $accounts[0])
+					: ethers.constants.Zero;
+				const parsedStakedAmount = parseFloat(
+					ethers.utils.formatEther(stakedAmount)
+				);
+				return {
+					...vault,
+					apy,
+					tvl,
+					userWalletBalance,
+					stakedAmount: parsedStakedAmount
+				};
+			})
+		);
+
+		/* allVaults = vaultsData.map((vault) => {
 			return {
 				...vault,
 				apy: Math.random() * $tokenPrice * 100,
@@ -41,7 +72,7 @@
 				userWalletBalance: generateRandomBalance(), //TODO: remove this random to the actual api calls.
 				stakedAmount: generateRandomBalance()
 			};
-		});
+		}); */
 	});
 
 	$: {
@@ -101,10 +132,20 @@
 				bind:hideZeroBalances
 				bind:statement />
 		</div>
-
-		{#each filteredVaults as vault}
-			<VaultAccordeon vaultConfig={vault} />
-		{/each}
+		{#if allVaults.length >= 1}
+			{#each filteredVaults as vault}
+				<VaultAccordeon vaultConfig={vault} />
+			{/each}
+		{:else}
+			<div
+				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+			<div
+				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+			<div
+				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+			<div
+				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+		{/if}
 	</div>
 </section>
 

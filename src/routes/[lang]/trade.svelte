@@ -3,6 +3,18 @@
 </script>
 
 <script lang="ts">
+	import { sushiVaults } from '$lib/config/constants/vaults';
+
+	import { getVaultAPYandAPR } from '$lib/utils/getVaultAPY';
+
+	import {
+		getLPTokenPrice,
+		getParsedLPTokenReserves
+	} from '$lib/utils/lpTokenUtils';
+	import { getSushiPerBlock } from '$lib/utils/sushiSwapUtils';
+
+	import { onMount } from 'svelte';
+
 	import { getNotificationsContext } from 'svelte-notifications';
 
 	const { addNotification } = getNotificationsContext();
@@ -30,6 +42,10 @@
 			type: 'warning'
 		});
 	};
+
+	onMount(async () => {
+		console.log(await getVaultAPYandAPR(sushiVaults[0]));
+	});
 </script>
 
 <section>
