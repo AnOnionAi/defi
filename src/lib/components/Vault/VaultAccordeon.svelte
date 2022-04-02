@@ -158,12 +158,12 @@
 
 <div
 	in:fly={{ y: 200, duration: 100 }}
-	class="mx-auto mb-4 max-w-6xl opacity-95 sm:px-4 md:px-2 lg:px-0">
+	class="mx-auto mb-3 max-w-6xl opacity-95 sm:px-4 md:px-2 lg:px-0">
 	<div
 		on:click={openAccordeon}
 		class="{!$darkMode &&
 			'sideShadow'} mx-auto rounded-lg bg-white py-6  	{!isHidden &&
-			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-100   dark:bg-neutral-800 dark:hover:bg-neutral-700">
+			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-200   dark:bg-neutral-800 dark:hover:bg-neutral-600">
 		<div
 			class="mx-3 block items-center justify-between md:mx-8 md:flex lg:mx-14 xl:mx-20 ">
 			<AssetPair

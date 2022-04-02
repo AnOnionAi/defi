@@ -355,13 +355,13 @@
 					on:click={isMetaMaskInstalled()
 						? metaMaskCon
 						: openMetamaskAlertModal}
-					class="h-full w-full rounded-xl bg-triadicGreen-600 font-semibold tracking-wide text-white hover:bg-triadicGreen-600">
+					class="h-full w-full rounded-xl bg-triadicGreen-600 font-semibold tracking-wide text-white hover:bg-triadicGreen-800">
 					{$_('actions.unlock')}
 				</button>
 			{:else if !tokenApproved}
 				<button
 					on:click={onApprove}
-					class="flex justify-center items-center bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-triadicGreen-600 dark:hover:bg-triadicGreen-700 active:scale-90  ease-in-out  duration-300 text-white tracking-wide font-semibold w-full h-full rounded-xl">
+					class="flex justify-center items-center bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-triadicGreen-600 dark:hover:bg-triadicGreen-800 active:scale-90  ease-in-out  duration-300 text-white tracking-wide font-semibold w-full h-full rounded-xl">
 					{$_('actions.approve')}
 					{isFarm ? 'Farm' : 'Pool'}
 					{#if loadingState.loadingApproval}
@@ -387,7 +387,7 @@
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
+							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-500 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
 							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}

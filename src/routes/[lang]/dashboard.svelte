@@ -140,7 +140,9 @@
 
 	onMount(async () => {
 		Chart.register(...registerables);
-		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=ckey_dd9ac67c651d4e54bd3483e3c17`;
+		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=${
+			import.meta.env.VITE_COVALENT_API_KEY
+		}`;
 		const response = await fetch(APIURL);
 		const { data } = await response.json();
 

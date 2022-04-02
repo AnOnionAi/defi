@@ -1,5 +1,4 @@
-import { APIKEY } from '$lib/env';
-import { Token } from '$lib/types/types';
+import { Token } from '$lib/ts/types';
 import { ethers } from 'ethers';
 import { getContractAddress, getMasterChefAddress } from './addressHelpers';
 import { getTokenBalance } from './erc20';
@@ -32,7 +31,9 @@ interface ERC20MetaData {
 }
 
 export const getPortfolioValue = async (address: string): Promise<number> => {
-	const APIURL = `https://api.covalenthq.com/v1/137/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=ckey_${APIKEY}`;
+	const APIURL = `https://api.covalenthq.com/v1/137/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=${
+		import.meta.env.VITE_COVALENT_API_KEY
+	}`;
 	try {
 		const response = await fetch(APIURL);
 		const { data } = await response.json();

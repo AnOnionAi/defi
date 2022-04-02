@@ -96,17 +96,17 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-position: 90% 85%;
+		background-position: 90% 70%;
 		background-repeat: no-repeat;
 	}
 
 	.smallMushBackground {
-		background-size: 160px;
-		background-image: url('/theme/dividends/cuteMush.svg');
+		background-size: 100px;
+		background-image: url('/theme/dividends/cuteMush.webp');
 	}
 
 	.mushHouseBackground {
-		background-size: 360px;
+		background-size: 400px;
 		background-image: url('/theme/dividends/mushHouse.webp');
 	}
 
