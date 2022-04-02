@@ -17,39 +17,9 @@ const errorHistoryNotFound: GrowthInfo = {
 };
 
 export const calculateGrowth = (historicalData: Array<any>): GrowthInfo => {
-	const [lastDayLog] = historicalData;
-	const lastDate = new Date(lastDayLog.date);
-	const oneDayBeforeLastDate = new Date(lastDate);
-	const oneWeekBeforeLastDate = new Date(lastDate);
-	const oneMonthBeforeLastDate = new Date(lastDate);
-	oneDayBeforeLastDate.setDate(oneDayBeforeLastDate.getDate() - 1);
-	oneWeekBeforeLastDate.setDate(oneDayBeforeLastDate.getDate() - 7);
-	oneMonthBeforeLastDate.setDate(oneDayBeforeLastDate.getDate() - 30);
-
-	const punctualDateStamps = [
-		oneDayBeforeLastDate.getTime(),
-		oneWeekBeforeLastDate.getTime(),
-		oneMonthBeforeLastDate.getTime()
-	];
-
-	const wantedLogs = historicalData.filter((datePriceLog) =>
-		punctualDateStamps.includes(new Date(datePriceLog.date).getTime())
-	);
-
-	if (wantedLogs.length == 0) return errorHistoryNotFound;
-
-	const yesterdayLog =
-		wantedLogs.find(
-			(log) => new Date(log.date).getTime() == oneDayBeforeLastDate.getTime()
-		) || null;
-	const lastWeekLog =
-		wantedLogs.find(
-			(log) => new Date(log.date).getTime() == oneWeekBeforeLastDate.getTime()
-		) || null;
-	const lastMonthLog =
-		wantedLogs.find(
-			(log) => new Date(log.date).getTime() == oneMonthBeforeLastDate.getTime()
-		) || null;
+	const [lastDayLog, yesterdayLog] = historicalData;
+	const lastWeekLog = historicalData[7];
+	const lastMonthLog = historicalData[31];
 
 	const todayGrowth =
 		((lastDayLog.price - yesterdayLog.price) / yesterdayLog.price) * 100;

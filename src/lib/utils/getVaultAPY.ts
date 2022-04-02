@@ -63,7 +63,6 @@ export const getVaultAPYandAPR = async (
 		MATIC_PER_BLOCK,
 		parsedTotalStaked
 	);
-	console.log('APR ', apr);
 	const apyCalc = (1 + apr / 365) ** 365 - 1;
 	const apy = isFinite(apyCalc) && !isNaN(apyCalc) ? apyCalc : null;
 	const tvl =
