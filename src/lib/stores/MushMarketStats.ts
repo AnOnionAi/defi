@@ -3,7 +3,7 @@ import { readable, derived } from 'svelte/store';
 import { tokenPrice } from './NativeTokenPrice';
 import CappedERC20 from '$lib/config/abi/CappedERC20.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 import { getProviderSingleton } from '$lib/utils/web3Helpers';
 import { BURN_ADDRESS } from '$lib/config';
 import type { Readable } from 'svelte/store';

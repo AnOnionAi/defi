@@ -1,4 +1,4 @@
-import type { Notification } from '$lib/ts/types';
+import type { Notification } from '$lib/types/types';
 export const transactionSend: Notification = {
 	text: 'Transaction Sent',
 	position: 'top-right',

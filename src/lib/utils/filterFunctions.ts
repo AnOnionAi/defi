@@ -1,4 +1,4 @@
-import type { VaultFilterFunction, VaultState } from '$lib/ts/types';
+import type { VaultFilterFunction, VaultState } from '$lib/types/types';
 
 export const hideZeroBalancesFilter = (vault: VaultState): boolean => {
 	return vault.userWalletBalance != 0;

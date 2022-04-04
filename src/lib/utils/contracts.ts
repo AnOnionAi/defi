@@ -1,5 +1,7 @@
 import MasterChefABI from '$lib/config/abi/MasterChef.json';
+import MiniChefV2 from '$lib/config/abi/MiniChefV2.json';
 import MushTokenABI from '$lib/config/abi/MushToken.json';
+import StrategySushiswap from '$lib/config/abi/StrategySushiswap.json';
 import ERC20ABI from '$lib/config/abi/ERC20.json';
 import pairABI from '$lib/config/abi/IUniswapV2Pair.json';
 import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
@@ -7,9 +9,11 @@ import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
 import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import DividendsABI from '$lib/config/abi/Dividends.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './helpers';
+import { MINICHEF_ADDRESS } from '$lib/config';
+import { getProvider } from './web3Helpers';
 
 export const getMasterChefContract = (): ethers.Contract => {
 	const masterChefContract = new ethers.Contract(
@@ -144,6 +148,12 @@ export const getVaultChefContract = (): ethers.Contract => {
 	return vaultChefContract;
 };
 
+export const vaultChef = new ethers.Contract(
+	getContractAddress(Token.VAULTCHEF),
+	VaultChefABI,
+	getProvider()
+);
+
 export const getMushStrategyContract = (): ethers.Contract => {
 	const dividendsContract = new ethers.Contract(
 		getContractAddress(Token.DIVIDENDS),
@@ -152,4 +162,14 @@ export const getMushStrategyContract = (): ethers.Contract => {
 	);
 
 	return dividendsContract;
+};
+
+export const miniChefV2 = new ethers.Contract(
+	MINICHEF_ADDRESS,
+	MiniChefV2,
+	getProvider()
+);
+
+export const getSushiswapStrategyContract = (strategyAddress: string) => {
+	return new ethers.Contract(strategyAddress, StrategySushiswap, getProvider());
 };

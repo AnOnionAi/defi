@@ -1,6 +1,6 @@
-import type { PoolInfo } from '$lib/ts/types';
+import type { PoolInfo } from '$lib/types/types';
 import { getContractAddress } from '$lib/utils/addressHelpers';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 
 export const pools: PoolInfo[] = [
 	{

@@ -5,7 +5,7 @@
 		isMetaMaskInstalled
 	} from '$lib/utils/metamaskCalls';
 	import { getTokenBalance } from '$lib/utils/erc20';
-	import { Token } from '$lib/ts/types';
+	import { Token } from '$lib/types/types';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { ethers } from 'ethers';
