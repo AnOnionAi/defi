@@ -1,9 +1,30 @@
 <script context="module" lang="ts">
-	export const prerender = false;
-	import { _ } from 'svelte-i18n';
+	const allTheVaults: Array<VaultInfo> = [...quickVaults, ...sushiVaults];
+
+	export async function load() {
+		const vaultsTvlsAndApys = await Promise.all(
+			allTheVaults.map(async (vault) => {
+				const { apy, tvl } = await getVaultAPYandAPR(vault);
+				return {
+					apy,
+					tvl
+				};
+			})
+		);
+
+		console.log(vaultsTvlsAndApys);
+
+		return {
+			status: 200,
+			props: {
+				test: vaultsTvlsAndApys
+			}
+		};
+	}
 </script>
 
 <script lang="ts">
+	import { _ } from 'svelte-i18n';
 	import { fade } from 'svelte/transition';
 	import { quickVaults, sushiVaults } from '$lib/config/constants/vaults';
 	import type {
@@ -25,7 +46,7 @@
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { BigNumber, ethers } from 'ethers';
 	import { vaultChef } from '$lib/utils/contracts';
-
+	export let test;
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
 	let platformSelected: string;
@@ -36,6 +57,7 @@
 	let filterBy: string;
 	let filtersApplied: Array<VaultFilterFunction> = [];
 
+	console.log('Load function props: ' + [...test]);
 	onMount(async () => {
 		const vaultsData: Array<VaultInfo> = [...quickVaults, ...sushiVaults];
 
