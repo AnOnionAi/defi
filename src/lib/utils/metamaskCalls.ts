@@ -34,7 +34,7 @@ export const addTokenToMetamaskWallet = (): Promise<void> => {
 					address: getContractAddress(Token.MUSHTOKEN),
 					symbol: 'MUSH',
 					decimals: 18,
-					image: 'https://zyber-dev.netlify.app/assets/mushRound.png'
+					image: 'https://fungfi.dev/assets/mushCoin.webp'
 				}
 			}
 		})
