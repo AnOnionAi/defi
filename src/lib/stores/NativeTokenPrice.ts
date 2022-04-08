@@ -4,6 +4,9 @@ import { ethers } from 'ethers';
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 
+import { Token } from '$lib/types/types';
+import { getContractAddress } from '$lib/utils/addressHelpers';
+
 export const loading = writable(false);
 export const error = writable(undefined);
 export const tokenPrice: Writable<number> = writable(undefined);
@@ -11,7 +14,7 @@ export const tokenPrice: Writable<number> = writable(undefined);
 export const fetchNativeTokenPrice = async () => {
 	loading.set(true);
 	const liquidityPair = getLiquidityPairContract(
-		'0x847c35997a08921b13301532EAB0cd98093BE8CC'
+		getContractAddress(Token.SUSHILP)
 	);
 	try {
 		const [usdcReserve, mushReserve] = await liquidityPair.getReserves();
