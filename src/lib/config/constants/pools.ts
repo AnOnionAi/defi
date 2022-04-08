@@ -44,5 +44,11 @@ export const pools: PoolInfo[] = [
 		tokenName: 'CRYSTL',
 		tokenAddr: getContractAddress(Token.CRYSTL),
 		tokenImagePath: '/icons/crystl.webp'
+	},
+	{
+		pid: 8,
+		tokenName: 'POLYDOGE',
+		tokenAddr: '0x8A953CfE442c5E8855cc6c61b1293FA648BAE472',
+		tokenImagePath: '/icons/polydoge.webp'
 	}
 ];

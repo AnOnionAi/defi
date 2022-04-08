@@ -31,7 +31,8 @@
 		withdraw,
 		getMushPerBlock,
 		getPoolMultiplier,
-		getPoolWeight
+		getPoolWeight,
+		masterChefContract
 	} from '$lib/utils/masterc';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
@@ -121,7 +122,7 @@
 			if (userBalance.isZero()) return;
 			userStakedTokens = await getStakedTokens(info.pid, userAcc);
 			if (userStakedTokens.isZero()) return;
-			userEarnings = await getPendingMush(info.pid);
+			userEarnings = await getPendingMush(info.pid, userAcc);
 		} catch (e) {
 			console.log('Failed to refresh pool Data');
 		}
@@ -129,7 +130,7 @@
 
 	onMount(async () => {
 		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
-		const poolInfo: PoolInfoResponse = await getPoolInfo(info.pid);
+		const poolInfo = await getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);

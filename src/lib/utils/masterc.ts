@@ -2,19 +2,19 @@ import type { BigNumber } from 'ethers';
 import { ethers } from 'ethers';
 import { ethersToBigNumber } from './bigNumber';
 import { getProviderSingleton } from './web3Helpers';
-import MasterChefAbi from '$lib/config/abi/MasterChef.json';
+import MasterChefABI from '$lib/config/abi/MasterChef.json';
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/types/types';
 import { getSigner } from './helpers';
 
-const masterChefContract = new ethers.Contract(
+export const masterChefContract = new ethers.Contract(
 	getContractAddress(Token.MASTERCHEF),
-	MasterChefAbi,
+	MasterChefABI,
 	getProviderSingleton()
 );
 
 export const getDevAddress = async (): Promise<string> =>
-	masterChefContract.devAddress();
+	masterChefContract.devaddr();
 
 export const getFeeAddress = async (): Promise<string> =>
 	masterChefContract.feeAddress();
@@ -33,19 +33,23 @@ export const getMushAddress = async (): Promise<string> =>
 export const getMushMaxSupply = async (): Promise<BigNumber> =>
 	masterChefContract.mushMaxSupply();
 
-export const getMushPerBlock = async (): Promise<BigNumber> =>
-	masterChefContract.mushPerBlock();
+export const getMushPerBlock = async (): Promise<BigNumber> => {
+	const mushPerSecond: BigNumber = await masterChefContract.nativePerSecond();
+	return mushPerSecond.mul(3);
+};
 
 export const owner = async (): Promise<string> => masterChefContract.owner();
 
-export const getPendingMush = async (pid: number): Promise<BigNumber> =>
-	masterChefContract.pendingMush(pid);
+export const getPendingMush = async (
+	pid: number,
+	userAddress: string
+): Promise<BigNumber> => masterChefContract.pendingNative(pid, userAddress);
 
 export const poolExistance = async (): Promise<boolean> =>
 	masterChefContract.poolExistance();
 
 export const getPoolInfo = async (pid: number): Promise<any> =>
-	masterChefContract.poolInfo(pid);
+	masterChefContract.poolInfo(0);
 
 export const getPoolLength = async (): Promise<BigNumber> =>
 	masterChefContract.poolLength();
