@@ -76,7 +76,9 @@
 				class="bg-analogMelon-200 bg-gradient-to-t from-primary-400 bg-clip-text p-3 text-5xl font-bold text-transparent dark:bg-gradient-to-b dark:from-triadicYellow-400 dark:to-analogPurple-300 md:text-6xl lg:text-7xl  xl:text-8xl">
 				Fung Finance
 			</h1>
-			<h2 class="text-xl font-semibold md:text-2xl lg:text-3xl">Make it</h2>
+			<h2 class="text-xl font-semibold md:text-2xl lg:text-3xl">
+				Make it Mushcoin
+			</h2>
 		</div>
 		<div class="">
 			<h3 class="text-center text-2xl font-bold md:text-3xl lg:text-4xl">
@@ -85,7 +87,7 @@
 			<div class="mt-8 flex flex-col gap-3 py-2 md:flex-row md:gap-6">
 				<div class="group">
 					<div
-						class="flex max-w-[260px] cursor-pointer items-center gap-4 rounded-xl border-2 bg-white px-4 py-5  group-hover:border-primary-300 dark:border-neutral-600 dark:bg-neutral-800 dark:group-hover:border-analogPurple-300">
+						class="flex min-h-[232px] max-w-[260px] cursor-pointer flex-col items-center gap-4 rounded-xl border-2 bg-white px-4 py-5  group-hover:border-primary-300 dark:border-neutral-600 dark:bg-neutral-800 dark:group-hover:border-analogPurple-300">
 						<img
 							src="/assets/mushCoin.webp"
 							alt="The Mushcoin"
@@ -93,12 +95,15 @@
 
 						<div>
 							<h4
-								class="mb-1 text-sm font-medium group-hover:text-primary-400 dark:group-hover:text-analogPurple-300">
-								Mush Token
+								class="mb-1 text-center text-sm font-medium group-hover:text-primary-400 dark:group-hover:text-analogPurple-300">
+								Mush Coin
 							</h4>
 							<p
-								class="text-xs group-hover:text-primary-300 dark:group-hover:text-analogPurple-300 ">
-								Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+								class="text-xs  group-hover:text-primary-300 dark:group-hover:text-analogPurple-300 ">
+								MushCoin is how people express their stake in FungFi’s future.
+								FungFi is owned by MUSH holders and all fees collected by our
+								yield automation products will be distributed through our
+								dividend pool from day one.
 							</p>
 						</div>
 					</div>
@@ -106,7 +111,7 @@
 
 				<div class="group">
 					<div
-						class="flex max-w-[260px] cursor-pointer items-center gap-4 rounded-xl border-2 bg-white px-4 py-5  group-hover:border-primary-300 dark:border-neutral-600 dark:bg-neutral-800 dark:group-hover:border-analogPurple-300">
+						class="flex min-h-[232px] max-w-[260px] cursor-pointer flex-col items-center gap-4 rounded-xl border-2 bg-white px-4 py-5  group-hover:border-primary-300 dark:border-neutral-600 dark:bg-neutral-800 dark:group-hover:border-analogPurple-300">
 						<img
 							src="/assets/mushroomFarms.svg"
 							alt="The Mushcoin"
@@ -114,12 +119,15 @@
 
 						<div>
 							<h4
-								class="mb-1 text-sm font-medium group-hover:text-primary-400 dark:group-hover:text-analogPurple-300">
+								class="mb-1 text-center text-sm font-medium group-hover:text-primary-400 dark:group-hover:text-analogPurple-300">
 								Mushroom Farms
 							</h4>
 							<p
 								class="text-xs group-hover:text-primary-300 dark:group-hover:text-analogPurple-300 ">
-								Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+								Customers who stake MUSH/USDC LP tokens in FungFi farms will be
+								rewarded with MushCoin during the token distribution period.
+								there are no deposit or withdrawal fees for staking MUSH/USDC LP
+								tokens. We incentivize liquidity on Sushiswap.
 							</p>
 						</div>
 					</div>
@@ -127,7 +135,7 @@
 
 				<div class="group">
 					<div
-						class="flex max-w-[260px] cursor-pointer items-center gap-4 rounded-xl border-2 bg-white px-4 py-5  group-hover:border-primary-300 dark:border-neutral-600 dark:bg-neutral-800 dark:group-hover:border-analogPurple-300">
+						class="flex min-h-[232px]  max-w-[260px] cursor-pointer flex-col items-center gap-4 rounded-xl border-2 bg-white px-4 py-5  group-hover:border-primary-300 dark:border-neutral-600 dark:bg-neutral-800 dark:group-hover:border-analogPurple-300">
 						<img
 							src="/assets/cryptoVault.svg"
 							alt="The Mushcoin"
@@ -135,12 +143,15 @@
 
 						<div>
 							<h4
-								class="mb-1 text-sm font-medium group-hover:text-primary-400 dark:group-hover:text-analogPurple-300">
-								Fung Vaults
+								class="mb-1 text-center text-sm font-medium group-hover:text-primary-400 dark:group-hover:text-analogPurple-300">
+								FungFi Vaults
 							</h4>
 							<p
-								class="text-xs group-hover:text-primary-300 dark:group-hover:text-analogPurple-300 ">
-								Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+								class="text-xs  group-hover:text-primary-300 dark:group-hover:text-analogPurple-300 ">
+								Allow users to automatically compound farming tokens back into
+								the assets they originally staked. We’ll be launching vaults for
+								a a number of different platforms, including Sushiswap. &
+								Quickswap.
 							</p>
 						</div>
 					</div>
