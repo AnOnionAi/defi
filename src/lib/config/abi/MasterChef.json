@@ -3,34 +3,22 @@
 		"inputs": [
 			{
 				"internalType": "contract MushToken",
-				"name": "_mush",
+				"name": "_native",
 				"type": "address"
 			},
+			{ "internalType": "address", "name": "_devaddr", "type": "address" },
+			{
+				"internalType": "address",
+				"name": "_marketingAddr",
+				"type": "address"
+			},
+			{ "internalType": "address", "name": "_feeAddress", "type": "address" },
 			{
 				"internalType": "uint256",
-				"name": "_startBlock",
+				"name": "_NativePerSecond",
 				"type": "uint256"
 			},
-			{
-				"internalType": "address",
-				"name": "_devAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_marketingAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_feeAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_vaultAddress",
-				"type": "address"
-			}
+			{ "internalType": "uint256", "name": "_startTime", "type": "uint256" }
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -116,31 +104,6 @@
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "referrer",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "commissionAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "ReferralCommissionPaid",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
 				"name": "newAddress",
 				"type": "address"
 			}
@@ -177,51 +140,26 @@
 				"type": "address"
 			},
 			{
-				"indexed": true,
-				"internalType": "contract IReferral",
-				"name": "newAddress",
-				"type": "address"
-			}
-		],
-		"name": "SetReferralAddress",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "newAddress",
-				"type": "address"
-			}
-		],
-		"name": "SetVaultAddress",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "mushPerBlock",
+				"name": "nativePerSecond",
 				"type": "uint256"
 			}
 		],
 		"name": "UpdateEmissionRate",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "newStartTime",
+				"type": "uint256"
+			}
+		],
+		"name": "UpdateStartTime",
 		"type": "event"
 	},
 	{
@@ -250,35 +188,85 @@
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "MAXIMUM_REFERRAL_COMMISSION_RATE",
-		"outputs": [
+		"anonymous": false,
+		"inputs": [
 			{
-				"internalType": "uint16",
-				"name": "",
-				"type": "uint16"
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "pid",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "lpToken",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "allocPoint",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "depositFeeBP",
+				"type": "uint256"
 			}
 		],
+		"name": "addPool",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "pid",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "lpToken",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "allocPoint",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "depositFeeBP",
+				"type": "uint256"
+			}
+		],
+		"name": "setPool",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_EMISSION_RATE",
+		"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_allocPoint",
-				"type": "uint256"
-			},
+			{ "internalType": "uint256", "name": "_allocPoint", "type": "uint256" },
 			{
 				"internalType": "contract IERC20",
 				"name": "_lpToken",
 				"type": "address"
 			},
-			{
-				"internalType": "uint16",
-				"name": "_depositFeeBP",
-				"type": "uint16"
-			}
+			{ "internalType": "uint16", "name": "_depositFeeBP", "type": "uint16" },
+			{ "internalType": "bool", "name": "_isNative", "type": "bool" },
+			{ "internalType": "bool", "name": "_withUpdate", "type": "bool" }
 		],
 		"name": "add",
 		"outputs": [],
@@ -287,21 +275,8 @@
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_referrer",
-				"type": "address"
-			}
+			{ "internalType": "uint256", "name": "_pid", "type": "uint256" },
+			{ "internalType": "uint256", "name": "_amount", "type": "uint256" }
 		],
 		"name": "deposit",
 		"outputs": [],
@@ -310,24 +285,14 @@
 	},
 	{
 		"inputs": [],
-		"name": "devAddress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"name": "devaddr",
+		"outputs": [{ "internalType": "address", "name": "", "type": "address" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pid",
-				"type": "uint256"
-			}
+			{ "internalType": "uint256", "name": "_pid", "type": "uint256" }
 		],
 		"name": "emergencyWithdraw",
 		"outputs": [],
@@ -337,50 +302,24 @@
 	{
 		"inputs": [],
 		"name": "feeAddress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{ "internalType": "address", "name": "", "type": "address" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_from",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_to",
-				"type": "uint256"
-			}
+			{ "internalType": "uint256", "name": "_from", "type": "uint256" },
+			{ "internalType": "uint256", "name": "_to", "type": "uint256" }
 		],
 		"name": "getMultiplier",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
 		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "marketingAddress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"name": "marketingAddr",
+		"outputs": [{ "internalType": "address", "name": "", "type": "address" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
@@ -393,107 +332,48 @@
 	},
 	{
 		"inputs": [],
-		"name": "mush",
+		"name": "native",
 		"outputs": [
-			{
-				"internalType": "contract MushToken",
-				"name": "",
-				"type": "address"
-			}
+			{ "internalType": "contract MushToken", "name": "", "type": "address" }
 		],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "mushMaxSupply",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "mushPerBlock",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"name": "nativePerSecond",
+		"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
 		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
+		"outputs": [{ "internalType": "address", "name": "", "type": "address" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_user",
-				"type": "address"
-			}
+			{ "internalType": "uint256", "name": "_pid", "type": "uint256" },
+			{ "internalType": "address", "name": "_user", "type": "address" }
 		],
-		"name": "pendingMush",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"name": "pendingNative",
+		"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "contract IERC20",
-				"name": "",
-				"type": "address"
-			}
+			{ "internalType": "contract IERC20", "name": "", "type": "address" }
 		],
 		"name": "poolExistence",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
+		"outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
 		"name": "poolInfo",
 		"outputs": [
 			{
@@ -501,26 +381,20 @@
 				"name": "lpToken",
 				"type": "address"
 			},
+			{ "internalType": "uint256", "name": "allocPoint", "type": "uint256" },
 			{
 				"internalType": "uint256",
-				"name": "allocPoint",
+				"name": "lastRewardSecond",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "lastRewardBlock",
+				"name": "accNativePerShare",
 				"type": "uint256"
 			},
-			{
-				"internalType": "uint256",
-				"name": "accmushPerShare",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint16",
-				"name": "depositFeeBP",
-				"type": "uint16"
-			}
+			{ "internalType": "uint16", "name": "depositFeeBP", "type": "uint16" },
+			{ "internalType": "uint256", "name": "lpSupply", "type": "uint256" },
+			{ "internalType": "bool", "name": "isNative", "type": "bool" }
 		],
 		"stateMutability": "view",
 		"type": "function"
@@ -528,39 +402,7 @@
 	{
 		"inputs": [],
 		"name": "poolLength",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "referral",
-		"outputs": [
-			{
-				"internalType": "contract IReferral",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "referralCommissionRate",
-		"outputs": [
-			{
-				"internalType": "uint16",
-				"name": "",
-				"type": "uint16"
-			}
-		],
+		"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
@@ -573,21 +415,10 @@
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_allocPoint",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint16",
-				"name": "_depositFeeBP",
-				"type": "uint16"
-			}
+			{ "internalType": "uint256", "name": "_pid", "type": "uint256" },
+			{ "internalType": "uint256", "name": "_allocPoint", "type": "uint256" },
+			{ "internalType": "uint16", "name": "_depositFeeBP", "type": "uint16" },
+			{ "internalType": "bool", "name": "_withUpdate", "type": "bool" }
 		],
 		"name": "set",
 		"outputs": [],
@@ -596,11 +427,7 @@
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_devAddress",
-				"type": "address"
-			}
+			{ "internalType": "address", "name": "_devaddr", "type": "address" }
 		],
 		"name": "setDevAddress",
 		"outputs": [],
@@ -609,11 +436,7 @@
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_feeAddress",
-				"type": "address"
-			}
+			{ "internalType": "address", "name": "_feeAddress", "type": "address" }
 		],
 		"name": "setFeeAddress",
 		"outputs": [],
@@ -623,75 +446,33 @@
 	{
 		"inputs": [
 			{
-				"internalType": "contract IReferral",
-				"name": "_referral",
-				"type": "address"
-			}
-		],
-		"name": "setReferralAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint16",
-				"name": "_referralCommissionRate",
+				"name": "_globalDepositFeeBP",
 				"type": "uint16"
 			}
 		],
-		"name": "setReferralCommissionRate",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_vaultAddress",
-				"type": "address"
-			}
-		],
-		"name": "setVaultAddress",
+		"name": "setGlobalDepositFee",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "startBlock",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"name": "startTime",
+		"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
 		"name": "totalAllocPoint",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
+		"outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
+			{ "internalType": "address", "name": "newOwner", "type": "address" }
 		],
 		"name": "transferOwnership",
 		"outputs": [],
@@ -702,7 +483,7 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_mushPerBlock",
+				"name": "_NativePerSecond",
 				"type": "uint256"
 			}
 		],
@@ -713,11 +494,7 @@
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pid",
-				"type": "uint256"
-			}
+			{ "internalType": "uint256", "name": "_pid", "type": "uint256" }
 		],
 		"name": "updatePool",
 		"outputs": [],
@@ -726,71 +503,30 @@
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_startBlock",
-				"type": "uint256"
-			}
+			{ "internalType": "uint256", "name": "_newStartTime", "type": "uint256" }
 		],
-		"name": "updateStartBlock",
+		"name": "updateStartTime",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
+			{ "internalType": "uint256", "name": "", "type": "uint256" },
+			{ "internalType": "address", "name": "", "type": "address" }
 		],
 		"name": "userInfo",
 		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "rewardDebt",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "vaultAddress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
+			{ "internalType": "uint256", "name": "amount", "type": "uint256" },
+			{ "internalType": "uint256", "name": "rewardDebt", "type": "uint256" }
 		],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
+			{ "internalType": "uint256", "name": "_pid", "type": "uint256" },
+			{ "internalType": "uint256", "name": "_amount", "type": "uint256" }
 		],
 		"name": "withdraw",
 		"outputs": [],

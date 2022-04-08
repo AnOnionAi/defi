@@ -1,6 +1,6 @@
-import type { PoolInfo } from '$lib/ts/types';
+import type { PoolInfo } from '$lib/types/types';
 import { getContractAddress } from '$lib/utils/addressHelpers';
-import { Token } from '$lib/ts/types';
+import { Token } from '$lib/types/types';
 
 export const pools: PoolInfo[] = [
 	{
@@ -44,5 +44,11 @@ export const pools: PoolInfo[] = [
 		tokenName: 'CRYSTL',
 		tokenAddr: getContractAddress(Token.CRYSTL),
 		tokenImagePath: '/icons/crystl.webp'
+	},
+	{
+		pid: 8,
+		tokenName: 'POLYDOGE',
+		tokenAddr: '0x8A953CfE442c5E8855cc6c61b1293FA648BAE472',
+		tokenImagePath: '/icons/polydoge.webp'
 	}
 ];

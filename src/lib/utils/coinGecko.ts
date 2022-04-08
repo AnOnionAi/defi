@@ -18,7 +18,9 @@ export const getTokenPriceUSD = async (
 	}
 };
 
-export const getPoolTokenPriceUSD = async (addr: ContractAddress) => {
+export const getPoolTokenPriceUSD = async (
+	addr: ContractAddress
+): Promise<number> => {
 	try {
 		const response = await fetch(
 			`https://api.coingecko.com/api/v3/simple/token_price/polygon-pos?contract_addresses=${addr}&vs_currencies=usd`

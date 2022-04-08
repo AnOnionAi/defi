@@ -8,8 +8,8 @@
 		harvest
 	} from '$lib/utils/dividends';
 	import { stakedWantTokens, deposit, withdraw } from '$lib/utils/vaultChef';
-	import { Token } from '$lib/ts/types';
-	import type { LoadingState } from '$lib/ts/types';
+	import { Token } from '$lib/types/types';
+	import type { LoadingState } from '$lib/types/types';
 	import { onDestroy } from 'svelte';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 

@@ -145,8 +145,8 @@
 		}`;
 		const response = await fetch(APIURL);
 		const { data } = await response.json();
-		const tokenData = data[0];
 
+		const tokenData = data[0];
 		const monthsName = getMonthsEnshortedNames($page.params.lang);
 
 		historicalData = tokenData.prices.map((e) => {
@@ -154,7 +154,7 @@
 				monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
 			return { ...e, shortDate };
 		});
-
+		console.log(historicalData);
 		growthInfo = calculateGrowth(historicalData);
 
 		const lastLog = historicalData[0];
