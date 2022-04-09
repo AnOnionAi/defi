@@ -54,11 +54,11 @@
 		</h2>
 
 		<h2
-			class="block text-center text-xl font-semibold text-white md:hidden md:text-2xl">
-			TIME LEFT FOR OFFICIAL LAUNCH:
+			class="block text-center text-lg font-semibold text-white md:hidden md:text-2xl">
+			TIME LEFT FOR OFFICIAL LAUNCH: <br />
 			{#if daysLeft}
 				{daysLeft}D {hoursLeft}H
-				{minutesLeft}M {secondsLeft}S
+				{minutesLeft}M {secondsLeft}S 🚀
 			{/if}
 		</h2>
 	</div>
