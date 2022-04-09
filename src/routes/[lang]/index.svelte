@@ -4,15 +4,15 @@
 	import { darkMode } from '$lib/stores/dark';
 	import { time, _ } from 'svelte-i18n';
 	import { isHomescreen } from '$lib/stores/homescreen';
+	import { CurvePath } from 'three';
+	import { mushMarketCap } from '$lib/stores/MushMarketStats';
 
 	const launchDate = new Date('14 April 2022 19:00:00');
 
-	let timeleft: {
-		days: number;
-		hours: number;
-		minutes: number;
-		seconds: number;
-	};
+	$: daysLeft = 0;
+	$: hoursLeft = 0;
+	$: minutesLeft = 0;
+	$: secondsLeft = 0;
 
 	const updateTimeLeft = () => {
 		let dateNow = new Date();
@@ -26,12 +26,10 @@
 		minutes = minutes - days * 24 * 60 - hours * 60;
 		seconds = seconds - days * 24 * 60 * 60 - hours * 60 * 60 - minutes * 60;
 
-		timeleft = {
-			days,
-			minutes,
-			hours,
-			seconds
-		};
+		daysLeft = days;
+		hoursLeft = hours;
+		minutesLeft = minutes;
+		secondsLeft = seconds;
 	};
 
 	const intervalID = setInterval(() => {
@@ -49,18 +47,18 @@
 		<h2
 			class=" hidden text-center text-xl font-semibold text-white md:block md:text-2xl">
 			TIME LEFT FOR OFFICIAL LAUNCH:
-			{#if timeleft?.days}
-				{timeleft.days} DAYS {timeleft.hours} HOURS
-				{timeleft.minutes} MINUTES {timeleft.seconds} SECONDS 🚀
+			{#if daysLeft}
+				{daysLeft} DAYS {hoursLeft} HOURS
+				{minutesLeft} MINUTES {secondsLeft} SECONDS 🚀
 			{/if}
 		</h2>
 
 		<h2
 			class="block text-center text-xl font-semibold text-white md:hidden md:text-2xl">
 			TIME LEFT FOR OFFICIAL LAUNCH:
-			{#if timeleft?.days}
-				{timeleft.days}D {timeleft.hours}H
-				{timeleft.minutes}M {timeleft.seconds}S
+			{#if daysLeft}
+				{daysLeft}D {hoursLeft}H
+				{minutesLeft}M {secondsLeft}S
 			{/if}
 		</h2>
 	</div>
@@ -78,6 +76,18 @@
 			<h2 class="text-xl font-semibold md:text-2xl lg:text-3xl">
 				Make It Mushcoin!
 			</h2>
+			<h3 class=" mt-4 text-xl font-semibold md:text-xl lg:text-2xl">
+				Market Cap :
+				{#if $mushMarketCap}
+					{$mushMarketCap.toLocaleString(
+						`${$page.params.lang}-${$page.params.lang}`,
+						{
+							style: 'currency',
+							currency: 'USD'
+						}
+					)}
+				{/if}
+			</h3>
 		</div>
 		<div class="px-6">
 			<p

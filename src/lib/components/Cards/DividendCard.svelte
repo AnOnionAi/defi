@@ -171,23 +171,29 @@
 	<div class="flex flex-1 flex-col justify-around">
 		<InputWithButton
 			bind:inputValue={depositInput}
-			buttonDisabled={!userCanDeposit}
-			isLoading={loadingState.loadingDeposit}
+			bind:buttonDisabled={userCanDeposit}
+			bind:isLoading={loadingState.loadingDeposit}
 			handleButton={handleDeposit}
-			placeholderText={$_('actions.wallet')}
-			displayNumber={parseFloat(ethers.utils.formatEther(userBalance))}
-			afterText=" MUSH"
-			buttonText={$_('actions.deposit')} />
+			buttonText={$_('actions.deposit')}>
+			<p class="pl-1">
+				{$_('actions.wallet')}:
+				{parseFloat(ethers.utils.formatEther(userBalance)) ?? 'Loading... '}
+				MUSH
+			</p>
+		</InputWithButton>
 
 		<InputWithButton
 			bind:inputValue={withdrawInput}
 			buttonDisabled={!userCanWithdraw}
 			isLoading={loadingState.loadingWithdraw}
 			handleButton={handleWithdraw}
-			placeholderText={$_('pastActions.deposited')}
-			displayNumber={parseFloat(ethers.utils.formatEther(userStakedTokens))}
-			afterText=" MUSH"
-			buttonText={$_('actions.withdraw')} />
+			buttonText={$_('actions.withdraw')}>
+			<p>
+				{$_('pastActions.deposited')}:
+				{parseFloat(ethers.utils.formatEther(userStakedTokens)) ?? 'Loading...'}
+				MUSH
+			</p>
+		</InputWithButton>
 
 		<InputWithButton
 			bind:inputValue={userReward}
@@ -195,9 +201,12 @@
 			disableInput={true}
 			isLoading={loadingState.loadingHarvest}
 			handleButton={handleHarvest}
-			placeholderText={$_('pastActions.earned')}
-			displayNumber={parseFloat(ethers.utils.formatUnits(userReward, 6))}
-			afterText=" USDC"
-			buttonText={$_('actions.earn')} />
+			buttonText={$_('actions.earn')}>
+			<p>
+				{$_('pastActions.earned')}:
+				{parseFloat(ethers.utils.formatUnits(userReward, 6))}
+				USDC
+			</p>
+		</InputWithButton>
 	</div>
 </div>
