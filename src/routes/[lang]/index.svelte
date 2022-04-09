@@ -7,7 +7,7 @@
 	import { CurvePath } from 'three';
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
 
-	const launchDate = new Date('14 April 2022 19:00:00');
+	const launchDate = new Date('9 April 2022 19:00:00');
 
 	$: daysLeft = 0;
 	$: hoursLeft = 0;
@@ -47,7 +47,7 @@
 		<h2
 			class=" hidden text-center text-xl font-semibold text-white md:block md:text-2xl">
 			TIME LEFT FOR OFFICIAL LAUNCH:
-			{#if daysLeft}
+			{#if daysLeft >= 0}
 				{daysLeft} DAYS {hoursLeft} HOURS
 				{minutesLeft} MINUTES {secondsLeft} SECONDS 🚀
 			{/if}
@@ -56,7 +56,7 @@
 		<h2
 			class="block text-center text-lg font-semibold text-white md:hidden md:text-2xl">
 			TIME LEFT FOR OFFICIAL LAUNCH: <br />
-			{#if daysLeft}
+			{#if daysLeft >= 0}
 				{daysLeft}D {hoursLeft}H
 				{minutesLeft}M {secondsLeft}S 🚀
 			{/if}
