@@ -70,7 +70,7 @@
 				: 'smallMushBackground'}">
 			<div
 				class="dividends my-7 mx-2 h-[680px]  w-[380px] rounded-2xl p-5 md:w-[432px]  lg:w-[460px] {!$darkMode &&
-					'shadow-xl'} bg-white transition  duration-500 dark:bg-neutral-800">
+					'drop-shadow-2xl'} bg-white transition  duration-500 dark:bg-neutral-800">
 				{#if approved}
 					<div in:fade={{ duration: 200 }} class="h-full">
 						<DividendCard />
