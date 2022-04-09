@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="flex h-32 w-full  flex-col justify-between overflow-hidden rounded-xl bg-white p-3  opacity-90 shadow-md dark:bg-neutral-800 dark:text-white dark:shadow-none">
+	class="flex h-32 w-full  flex-col justify-between overflow-hidden rounded-xl bg-white p-3  opacity-95 shadow-md dark:bg-neutral-800 dark:text-white dark:shadow-none">
 	<h3 class="text-center font-semibold ">{title}</h3>
 	{#if display && $page.params.lang}
 		{#if isPercentage && isPercentage != null}
