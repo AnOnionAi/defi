@@ -19,8 +19,7 @@
 	import MobileNavbar from '$lib/components/HeaderComponents/MobileNavbar.svelte';
 
 	let navbarMenuIsOpen = false;
-	let showDropDownMenu = false;
-	let menu;
+	let menu: HTMLDivElement;
 
 	if (!$page.params.lang) {
 		setInit('en');
