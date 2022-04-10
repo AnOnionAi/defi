@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/stores/dark';
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
+	import { _ } from 'svelte-i18n';
 
 	const launchDate = new Date('14 April 2022 19:00:00');
 
@@ -204,12 +205,12 @@
 				</div>
 			</div>
 		</div>
-		<br />
-		<h2 class="text-xl font-semibold italic md:text-2xl lg:text-3xl">
+		<h2
+			class="makeIt mt-4 font-semibold italic outline-2 md:text-3xl lg:text-4xl">
 			Make It MushCoin !
 		</h2>
-		<h3 class=" mt-4 text-xl font-semibold md:text-xl lg:text-2xl">
-			Market Cap :
+		<h3 class="mt-4 text-xl font-bold md:text-xl lg:text-2xl">
+			{$_('home.marketCap')}
 			{#if $mushMarketCap}
 				{$mushMarketCap.toLocaleString(getLocale(`${$page.params.lang}`), {
 					style: 'currency',
@@ -219,3 +220,9 @@
 		</h3>
 	</div>
 </section>
+
+<style>
+	.makeIt {
+		text-shadow: 1px 1px 1px #76feec;
+	}
+</style>
