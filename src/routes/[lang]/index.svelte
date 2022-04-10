@@ -205,8 +205,7 @@
 				</div>
 			</div>
 		</div>
-		<h2
-			class="makeIt mt-4 font-semibold italic outline-2 md:text-3xl lg:text-4xl">
+		<h2 class="makeIt mt-4 font-semibold italic md:text-3xl lg:text-4xl">
 			Make It MushCoin !
 		</h2>
 		<h3 class="mt-4 text-xl font-bold md:text-xl lg:text-2xl">
