@@ -29,7 +29,6 @@
 	let approved = false;
 	let finishedApprovalFetch = false;
 
-	let backgroundImage: string;
 	$: userAccount = $accounts?.[0];
 	$: approved = !userMushAllowance.isZero();
 
@@ -46,12 +45,11 @@
 
 	const handleApproval = async () => {
 		try {
-			addNotification(transactionSend);
-
 			const tx = await approveToken(
 				getContractAddress(Token.MUSHTOKEN),
 				getContractAddress(Token.VAULTCHEF)
 			);
+			addNotification(transactionSend);
 			await tx.wait();
 			approved = true;
 			addNotification(transactionCompleted);

@@ -180,12 +180,13 @@
 
 	const onDeposit = async (amount) => {
 		loadingState.loadingDeposit = true;
-		addNotification(transactionSend);
 		try {
 			const tx = await deposit(info.pid, amount, stakingTokenDecimals);
+			addNotification(transactionSend);
 			await tx.wait();
 			addNotification(transactionCompleted);
 		} catch (error) {
+			console.log(error);
 			addNotification(transactionDeniedByTheUser);
 		}
 		loadingState.loadingDeposit = false;
@@ -377,7 +378,13 @@
 						<p class="flex text-xl dark:text-white">
 							{parseFloat(
 								ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)
-							).toPrecision(4)}
+							).toFixed(1)}
+							{#if parseFloat(ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)) < 0.0001 && !userStakedTokens.isZero()}
+								<span
+									>.... {ethers.utils
+										.formatUnits(userStakedTokens, stakingTokenDecimals)
+										.slice(-2)}</span>
+							{/if}
 						</p>
 					{:else}
 						<p

@@ -4,9 +4,6 @@
 	export let buttonDisabled = false;
 	export let isLoading = false;
 	export let buttonText: string;
-	export let placeholderText: string;
-	export let displayNumber: number;
-	export let afterText = '';
 	import { Chasing } from 'svelte-loading-spinners';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
 	import { _ } from 'svelte-i18n';
@@ -15,16 +12,7 @@
 </script>
 
 <div class="">
-	<p class="ml-1 mb-1 text-sm text-gray-500 dark:text-gray-200">
-		{placeholderText}:
-		<span class="text-black dark:text-white">
-			{#if displayNumber != null}
-				{displayNumber}{afterText}
-			{:else}
-				{$_('actions.notAvaliable')}
-			{/if}
-		</span>
-	</p>
+	<slot />
 	<div
 		class="flex h-16 justify-between rounded-xl bg-gray-300 px-2 py-2 transition duration-500 dark:bg-neutral-700">
 		<input

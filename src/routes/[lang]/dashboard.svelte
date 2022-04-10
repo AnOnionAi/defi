@@ -15,7 +15,7 @@
 		maxMushSupply
 	} from '$lib/stores/MushMarketStats';
 	import { page } from '$app/stores';
-	import { mushPerBlock } from '$lib/stores/MasterChefData';
+	import { mushPerBlock, mushPerSecond } from '$lib/stores/MasterChefData';
 	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
 	import TotalValueLocked from '$lib/components/Dashboard/TotalValueLocked.svelte';
 	import HighestApy from '$lib/components/Dashboard/HighestApy.svelte';
@@ -154,7 +154,6 @@
 				monthsName[e.date.split('-')[1] - 1] + '-' + e.date.split('-')[2];
 			return { ...e, shortDate };
 		});
-		console.log(historicalData);
 		growthInfo = calculateGrowth(historicalData);
 
 		const lastLog = historicalData[0];
@@ -245,8 +244,8 @@
 	<SectionTitle title={$_('dashboard.index')} />
 	<IndexSection>
 		<IndexCard
-			title={$_('dashboard.mushpb')}
-			description="{formatComma($mushPerBlock, $page.params.lang)} MUSH" />
+			title={$_('dashboard.mushps')}
+			description="{formatComma($mushPerSecond, $page.params.lang)} MUSH" />
 		<IndexCard
 			title={$_('dashboard.marketcap')}
 			description="${formatComma($mushMarketCap, $page.params.lang)}" />
