@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/stores/dark';
-	import { time, _ } from 'svelte-i18n';
-	import { isHomescreen } from '$lib/stores/homescreen';
-	import { CurvePath } from 'three';
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
-	import Logo from '$lib/components/HeaderComponents/Logo.svelte';
 
 	const launchDate = new Date('14 April 2022 19:00:00');
 
