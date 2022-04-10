@@ -24,12 +24,6 @@
 	if (action === 'DEPOSIT') secondaryColor = '#86efac';
 	if (action === 'WITHDRAW') secondaryColor = '#ef4444';
 
-	darkMode.subscribe((darkEnabled) => {
-		darkEnabled
-			? (primaryTextColor = '#e5e7eb')
-			: (primaryTextColor = '#9ca3af');
-	});
-
 	const startDeposit = () => {
 		onDeposit(wantAmount);
 		close();
@@ -42,14 +36,13 @@
 </script>
 
 <div
-	style="border-color: {secondaryColor};"
+	class:dark={$darkMode}
 	class="flex rounded-lg bg-white {$darkMode &&
-		'bg-neutral-900'} -m-4 border-2 ">
+		'bg-neutral-900'} -m-5 border-2 ">
 	<div class="flex w-full flex-col py-8">
 		<div>
 			<h1
-				style="color: {primaryTextColor};"
-				class="mb-3 font-medium tracking-wider">
+				class="mb-3 text-center text-2xl font-semibold text-gray-800 dark:text-gray-100">
 				{#if action === 'DEPOSIT'}
 					{$_('actions.deposit')}
 				{:else if action === 'WITHDRAW'}
@@ -59,11 +52,10 @@
 		</div>
 		<div class="px-10">
 			<div
-				style="border-color: {secondaryColor};"
-				class="md:text-md rounded-3xl  border-2 py-3  text-sm ">
+				class="md:text-md rounded-3xl  border-2 border-gray-300 py-3 text-sm text-gray-500 dark:border-neutral-700  dark:text-gray-100 ">
 				<div
 					class="flex flex-col items-center px-4 py-3 md:flex-row md:justify-between">
-					<p style="color: {primaryTextColor};">{$_('modals.input')}:</p>
+					<p class="font-semibold">{$_('modals.input')}:</p>
 					<div class="flex">
 						{#if action == 'DEPOSIT'}
 							<button
@@ -109,9 +101,8 @@
 						<input
 							on:keypress={onyAllowFloatNumbers}
 							bind:value={wantAmount}
-							style="color: {primaryTextColor};"
 							type="text"
-							class="w-full bg-transparent text-center text-lg font-semibold md:text-left"
+							class="w-full bg-transparent text-center text-lg font-semibold text-gray-700 dark:text-white md:text-left"
 							placeholder="0.00" />
 					</div>
 					<div class="flex">
@@ -122,7 +113,7 @@
 				</div>
 			</div>
 			<div class="mt-5">
-				<p style="color: {primaryTextColor};" class="font-semibold">
+				<p class="font-semibold text-gray-500 dark:text-gray-100">
 					{$_('modals.otherOptions')}
 				</p>
 			</div>
@@ -134,7 +125,7 @@
 								userBalance.div(10),
 								stakingTokenDecimals
 							))}
-						class="text-light rounded-lg bg-green-500 py-1 px-3 text-white hover:bg-green-400"
+						class="text-light rounded-lg bg-triadicGreen-700 py-1 px-3 text-white hover:bg-green-400"
 						>10%</button>
 					<button
 						on:click={() =>
@@ -142,7 +133,7 @@
 								userBalance.div(4),
 								stakingTokenDecimals
 							))}
-						class="text-light rounded-lg bg-green-500 py-1 px-3 text-white hover:bg-green-400"
+						class="text-light rounded-lg bg-triadicGreen-700 py-1 px-3 text-white hover:bg-green-400"
 						>25%</button>
 					<button
 						on:click={() =>
@@ -150,7 +141,7 @@
 								userBalance.div(2),
 								stakingTokenDecimals
 							))}
-						class="text-light rounded-lg bg-green-500 py-1 px-3 text-white hover:bg-green-400"
+						class="text-light rounded-lg bg-triadicGreen-700 py-1 px-3 text-white hover:bg-triadicGreen-600"
 						>50%</button>
 					<button
 						on:click={() =>
@@ -158,7 +149,7 @@
 								userBalance.div(4).mul(3),
 								stakingTokenDecimals
 							))}
-						class="text-light rounded-lg bg-green-500 py-1 px-3 text-white hover:bg-green-400"
+						class="text-light rounded-lg bg-triadicGreen-700 py-1 px-3 text-white hover:bg-triadicGreen-600"
 						>75%</button>
 				{:else if action === 'WITHDRAW'}
 					<button
@@ -200,7 +191,7 @@
 				{#if action === 'DEPOSIT'}
 					<button
 						on:click={startDeposit}
-						class="text-md block w-full rounded-xl bg-green-500 py-3 font-medium 	uppercase tracking-widest text-white hover:bg-green-400 "
+						class="text-md block w-full rounded-xl bg-triadicGreen-700 py-3 font-medium 	uppercase tracking-widest text-white hover:bg-triadicGreen-600 "
 						>{$_('actions.deposit')} {info.tokenName}</button>
 				{:else if action === 'WITHDRAW'}
 					<button

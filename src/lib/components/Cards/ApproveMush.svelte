@@ -3,8 +3,6 @@
 	import { _ } from 'svelte-i18n';
 </script>
 
--->
-
 <div class="flex h-full items-center justify-center">
 	<div class="flex flex-col items-center gap-6">
 		<img src="/assets/mushCoin.webp" alt="The mush token icon" class="w-28" />

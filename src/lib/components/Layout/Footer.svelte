@@ -33,7 +33,7 @@
 		'z-20 border-none backdrop-blur backdrop-filter '}  {$darkMode &&
 		'border-dark-200'} {$darkMode &&
 		!$isHomescreen &&
-		'bg-zinc-900'} footer-height {textColor}  transition duration-500">
+		'bg-zinc-900'} footer-height {textColor} transition duration-500">
 	<div
 		class="footer-height grid grid-cols-1 gap-4 px-6 py-6 md:grid-cols-3 lg:py-1">
 		<div
@@ -41,11 +41,11 @@
 			<a
 				href={`https://app.sushi.com/${$page.params.lang}/swap`}
 				target="_blank"
-				class="rounded-full bg-complementary-600 px-3 py-1 text-sm font-[500]  text-white hover:bg-complementary-500 "
-				>Buy MUSH &rarr;</a>
+				class="rounded-full bg-complementary-600 px-3 py-1 font-[500] text-white  hover:bg-complementary-500 md:text-2xl "
+				>Buy $MUSH &rarr;</a>
 		</div>
 
-		<div class="flex items-center justify-center font-light">
+		<div class="flex items-center justify-center font-light md:text-xl">
 			<a href="https://google.com" class="mr-5 hover:text-complementary-500"
 				>Audits</a>
 			<a href="https://fung.wiki/" class="mr-5 hover:text-complementary-500"
@@ -56,7 +56,7 @@
 		</div>
 
 		<div
-			class="flex flex-row-reverse items-center justify-center lg:justify-start  ">
+			class="flex flex-row-reverse items-center justify-center md:text-lg lg:justify-start">
 			<a href="https://github.com/fungfi" class="mr-3 lg:mr-5" target="_blank">
 				<Fa icon={faGithub} size="lg" class="hover:text-[#999999]" />
 			</a>

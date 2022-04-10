@@ -38,6 +38,9 @@ export const getMushPerBlock = async (): Promise<BigNumber> => {
 	return mushPerSecond.mul(3);
 };
 
+export const getMushPerSecond = async (): Promise<BigNumber> =>
+	masterChefContract.nativePerSecond();
+
 export const owner = async (): Promise<string> => masterChefContract.owner();
 
 export const getPendingMush = async (
@@ -69,21 +72,13 @@ export const getUserInfo = async (
 ): Promise<{ amount: BigNumber; rewardDebt: BigNumber }> =>
 	masterChefContract.userInfo(pid, userAddress);
 
-export const getTokenPerBlock = async (): Promise<BigNumber> =>
-	masterChefContract.mushPerBlock();
-
 export const getVaultAddress = async (): Promise<string> =>
 	masterChefContract.vaultAddress();
 
-export const deposit = async (
-	pid: number,
-	amount: any,
-	decimals = 18,
-	referrer = ethers.constants.AddressZero
-) => {
+export const deposit = async (pid: number, amount: any, decimals = 18) => {
 	return masterChefContract
 		.connect(getSigner())
-		.deposit(pid, ethers.utils.parseUnits(amount, decimals), referrer);
+		.deposit(pid, ethers.utils.parseUnits(amount, decimals));
 };
 
 export const withdraw = async (pid: number, amount: any, decimals = 18) => {

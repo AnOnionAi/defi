@@ -3,7 +3,8 @@ import {
 	getTotalAllocPoints,
 	getMushMaxSupply,
 	getMushPerBlock,
-	getStartBlock
+	getStartBlock,
+	getMushPerSecond
 } from '$lib/utils/masterc';
 import { BigNumber, ethers } from 'ethers';
 import type { Readable } from 'svelte/store';
@@ -14,6 +15,18 @@ export const mushPerBlock: Readable<number> = readable(
 	function start(set) {
 		getMushPerBlock().then((bigNumberResponse) => {
 			const mushPerBlock = parseInt(
+				ethers.utils.formatEther(bigNumberResponse)
+			);
+			set(mushPerBlock);
+		});
+	}
+);
+
+export const mushPerSecond: Readable<number> = readable(
+	undefined,
+	function start(set) {
+		getMushPerSecond().then((bigNumberResponse) => {
+			const mushPerBlock = parseFloat(
 				ethers.utils.formatEther(bigNumberResponse)
 			);
 			set(mushPerBlock);
