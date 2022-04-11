@@ -58,7 +58,7 @@
 <section
 	class="flex h-full select-none flex-col bg-paper transition duration-500 dark:bg-darkGrey-900    ">
 	{#if daysLeft >= 0}
-		<div class=" w-full bg-primary-400 px-6 dark:bg-analogPurple-300 ">
+		<div class=" w-full bg-primary-400 py-2 px-6 dark:bg-analogPurple-300 ">
 			<h2
 				class=" hidden text-center text-xl font-semibold text-white md:block md:text-2xl">
 				COUNTDOWN TO LAUNCH T -

@@ -33,7 +33,7 @@
 		<div class="flex w-0 md:w-5/12 lg:w-5/12  xl:p-12">
 			{#if $darkMode}
 				<img
-					src="/assets/cryptoportfolio_dark.svg"
+					src="/assets/cryptofolio_dark.png"
 					alt="Cryto Investments portfolio"
 					class="" />
 			{:else}
@@ -87,7 +87,7 @@
 			</article>
 		</div>
 
-		<div class="min-h-[600px] px-8">
+		<div class="min-h-[600px] px-12">
 			<div class="grid grid-cols-1 gap-x-8 gap-y-6 py-12 md:grid-cols-2">
 				<div class="flex flex-col items-center">
 					<h2 class="text-center text-5xl font-bold text-white">
