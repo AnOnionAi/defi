@@ -153,7 +153,7 @@
 	</div>
 
 	<div class="mb-6 grid grid-cols-2 gap-y-3">
-		<DividendsInfoItem name={'APR'} info={96.17} thirdText="%" />
+		<DividendsInfoItem name={'APR'} info={0} thirdText="%" />
 		<DividendsInfoItem
 			name={'TVL'}
 			info={parseFloat(ethers.utils.formatEther(TVL))}
@@ -175,7 +175,7 @@
 			bind:isLoading={loadingState.loadingDeposit}
 			handleButton={handleDeposit}
 			buttonText={$_('actions.deposit')}>
-			<p class="pl-1">
+			<p class="pl-1 dark:text-gray-100">
 				{$_('actions.wallet')}:
 				{parseFloat(ethers.utils.formatEther(userBalance)) ?? 'Loading... '}
 				MUSH
@@ -188,7 +188,7 @@
 			isLoading={loadingState.loadingWithdraw}
 			handleButton={handleWithdraw}
 			buttonText={$_('actions.withdraw')}>
-			<p>
+			<p class="pl-1 dark:text-gray-100">
 				{$_('pastActions.deposited')}:
 				{parseFloat(ethers.utils.formatEther(userStakedTokens)) ?? 'Loading...'}
 				MUSH
@@ -202,7 +202,7 @@
 			isLoading={loadingState.loadingHarvest}
 			handleButton={handleHarvest}
 			buttonText={$_('actions.earn')}>
-			<p>
+			<p class="pl-1 dark:text-gray-100">
 				{$_('pastActions.earned')}:
 				{parseFloat(ethers.utils.formatUnits(userReward, 6))}
 				USDC

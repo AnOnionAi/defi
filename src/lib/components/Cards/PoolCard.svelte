@@ -119,9 +119,7 @@
 			);
 			if (tokenAllowance.isZero()) return;
 			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
-			if (userBalance.isZero()) return;
 			userStakedTokens = await getStakedTokens(info.pid, userAcc);
-			if (userStakedTokens.isZero()) return;
 			userEarnings = await getPendingMush(info.pid, userAcc);
 		} catch (e) {
 			console.log('Failed to refresh pool Data');

@@ -32,9 +32,9 @@
 				${formatComma(display, $page.params.lang)}
 			</p>
 		{/if}
-	{/if}
-	{#if display === null}
+	{:else}
 		<p class="text-center text-lg">{$_('actions.notAvaliable')}</p>
 	{/if}
+
 	<p />
 </div>
