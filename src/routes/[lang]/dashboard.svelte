@@ -15,7 +15,7 @@
 		maxMushSupply
 	} from '$lib/stores/MushMarketStats';
 	import { page } from '$app/stores';
-	import { mushPerBlock, mushPerSecond } from '$lib/stores/MasterChefData';
+	import { mushPerSecond } from '$lib/stores/MasterChefData';
 	import ButtonGroup from '../../lib/components/Buttons/ButtonGroup.svelte';
 	import TotalValueLocked from '$lib/components/Dashboard/TotalValueLocked.svelte';
 	import HighestApy from '$lib/components/Dashboard/HighestApy.svelte';
@@ -37,6 +37,8 @@
 	import { Chart, registerables } from 'chart.js';
 	import type { ChartType } from 'chart.js';
 	import { getMonthsEnshortedNames } from '$lib/i18n/utils';
+	import { getContractAddress } from '$lib/utils/addressHelpers';
+	import { Token } from '$lib/types/types';
 
 	let value = 0;
 	let lastPrice = 0;
@@ -47,14 +49,7 @@
 	let prices;
 	let dates;
 
-	let growthInfo: GrowthInfo = {
-		yesterdayPrice: undefined,
-		todayGrowth: undefined,
-		oneWeekAgoPrice: undefined,
-		weeklyGrowth: undefined,
-		oneMonthAgoPrice: undefined,
-		monthlyGrowth: undefined
-	};
+	let growthInfo: GrowthInfo;
 
 	const tooltipLine = {
 		id: 'tooltipLine',
@@ -140,12 +135,14 @@
 
 	onMount(async () => {
 		Chart.register(...registerables);
-		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/0x627F699300A9D693FBB84F9Be0118D17A1387D4e/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=${
+		const APIURL = `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/137/USD/${getContractAddress(
+			Token.MUSHTOKEN
+		)}/?quote-currency=USD&format=JSON&from=2021-11-29&to=2022-12-31&key=${
 			import.meta.env.VITE_COVALENT_API_KEY
 		}`;
 		const response = await fetch(APIURL);
 		const { data } = await response.json();
-
+		console.log(data);
 		const tokenData = data[0];
 		const monthsName = getMonthsEnshortedNames($page.params.lang);
 
@@ -160,7 +157,7 @@
 		lastPrice = lastLog.price;
 
 		const tempPrices = [...historicalData].map((e) => e.price).reverse();
-		console.log(tempPrices);
+		console.log('TEMP PRICES', tempPrices);
 		peak = Math.max(...tempPrices);
 
 		dataLine = {
@@ -235,7 +232,7 @@
 
 		<EarnMoreCard
 			title={$_('headers.vaults.text')}
-			primaryText={formatComma($vaultsTVL, $page.params.lang)}
+			primaryText={formatComma(0, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
 			route={`/${$page.params.lang}/vaults`} />
@@ -257,7 +254,10 @@
 			description="{formatComma($maxMushSupply, $page.params.lang)} MUSH" />
 	</IndexSection>
 
-	<SectionTitle title={`${$_('dashboard.price')}  $${$tokenPrice}`} />
+	<SectionTitle
+		title={`${$_('dashboard.price')}  $${
+			$tokenPrice ? $tokenPrice.toFixed(3) : '0'
+		}`} />
 	<MushPriceSection>
 		<div class="col-span-9 h-80  lg:col-span-6	">
 			<ButtonGroup
@@ -274,15 +274,15 @@
 		<MushPriceSide>
 			<MushPriceCard
 				title="Today"
-				display={growthInfo.todayGrowth}
+				display={growthInfo?.todayGrowth}
 				isPercentage={true} />
 			<MushPriceCard
 				title="Weekly"
-				display={growthInfo.weeklyGrowth}
+				display={growthInfo?.weeklyGrowth}
 				isPercentage={true} />
 			<MushPriceCard
 				title="Monthly"
-				display={growthInfo.monthlyGrowth}
+				display={growthInfo?.monthlyGrowth}
 				isPercentage={true} />
 			<MushPriceCard title="Peak" display={peak} />
 		</MushPriceSide>

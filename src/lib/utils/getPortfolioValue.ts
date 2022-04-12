@@ -39,17 +39,14 @@ export const getPortfolioValue = async (address: string): Promise<number> => {
 		const { data } = await response.json();
 		const dataReponse: TokenBalancesResponse = data;
 		const { items } = dataReponse;
-		return items
-			.map(
-				(tokenData) =>
-					parseFloat(
-						ethers.utils.formatUnits(
-							tokenData.balance,
-							tokenData.contract_decimals
-						)
-					) * tokenData.quote_rate
-			)
-			.reduce((prev, current) => prev + current);
+		const [farmToken, ...otherTokens] = items;
+
+		let accumulatedUSDValue = 0;
+
+		otherTokens.forEach((token) => {
+			accumulatedUSDValue += token.quote;
+		});
+		return accumulatedUSDValue;
 	} catch {
 		return 0;
 	}
