@@ -11,7 +11,7 @@ const shortLargeAmount = (amount: number): string => {
 	if (amount / oneBillion >= 1) {
 		const newAmount = (amount / oneBillion).toFixed(2);
 		return `${newAmount}B`;
-	} else if (amount / oneMillion) {
+	} else if (amount / oneMillion >= 1) {
 		const newAmount = (amount / oneMillion).toFixed(2);
 		return `${newAmount}M`;
 	} else if (amount / oneThousand >= 1) {
