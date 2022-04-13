@@ -208,7 +208,7 @@
 		<h2 class="makeIt mt-4 font-semibold italic md:text-3xl lg:text-4xl">
 			Make It MushCoin !
 		</h2>
-		<h3 class="mt-4 text-xl font-bold md:text-xl lg:text-2xl">
+		<h3 class="mt-4 mb-8 text-xl font-bold md:text-xl lg:text-2xl">
 			{$_('home.marketCap')}
 			{#if $mushMarketCap}
 				{$mushMarketCap.toLocaleString(getLocale(`${$page.params.lang}`), {
