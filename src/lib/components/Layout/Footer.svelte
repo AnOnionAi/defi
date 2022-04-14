@@ -45,7 +45,7 @@
 				>Buy $MUSH &rarr;</a>
 		</div>
 
-		<div class="flex items-center justify-center font-light ">
+		<div class="flex items-center justify-around font-light md:justify-center ">
 			<a
 				href="https://rugdoc.io/project/fungfi-defi/#"
 				target="_blank"
@@ -67,7 +67,7 @@
 		</div>
 
 		<div
-			class="flex flex-row-reverse items-center justify-center md:text-lg lg:justify-start">
+			class="flex flex-row-reverse items-center justify-around  md:justify-center md:text-lg lg:justify-start">
 			<a href="https://github.com/fungfi" class="mr-3 lg:mr-5" target="_blank">
 				<Fa
 					icon={faGithub}
@@ -75,7 +75,7 @@
 					class="transition duration-300 hover:text-[#999999]" />
 			</a>
 			<a
-				href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh"
+				href="http://www.tiktok.com/@fungfi"
 				target="_blank"
 				aria-label="Tiktok"
 				class="mr-3 lg:mr-5">

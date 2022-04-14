@@ -23,6 +23,7 @@
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import DividendsInfoItem from '../Dividends/DividendsInfoItem.svelte';
 	import InputWithButton from '../Dividends/InputWithButton.svelte';
+	import { DIVIDENDS_PID } from '$lib/config';
 
 	const { addNotification } = getNotificationsContext();
 
@@ -69,7 +70,7 @@
 				getContractAddress(Token.MUSHTOKEN),
 				userAddress
 			);
-			userStakedTokens = await stakedWantTokens(2, userAddress);
+			userStakedTokens = await stakedWantTokens(DIVIDENDS_PID, userAddress);
 			TVL = await getSharesTotal();
 			userReward = await getPendingReward(userAddress);
 		} catch {
@@ -100,7 +101,6 @@
 
 	const handleWithdraw = async () => {
 		addNotification(transactionSend);
-
 		try {
 			loadingState.loadingWithdraw = true;
 			const tx = await withdraw(2, withdrawInput.trim());

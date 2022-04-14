@@ -25,12 +25,12 @@
 
 <section
 	class="flex h-full select-none flex-col bg-paper transition duration-500 dark:bg-darkGrey-900    ">
-	{#if $timeLeftForLaunch.daysLeft}
+	{#if $timeLeftForLaunch.daysLeft >= 0}
 		<div class=" w-full bg-primary-400 py-2 px-6 dark:bg-analogPurple-300 ">
 			<h2
 				class=" hidden text-center text-xl font-semibold text-white md:block md:text-2xl">
-				COUNTDOWN TO LAUNCH T -
-				{#if $timeLeftForLaunch.daysLeft}
+				{$_('launchTimeLeft.countdown')}
+				{#if $timeLeftForLaunch.daysLeft >= 0}
 					{$timeLeftForLaunch.daysLeft} DAYS {$timeLeftForLaunch.hoursLeft} HOURS
 					{$timeLeftForLaunch.minutesLeft} MINUTES {$timeLeftForLaunch.secondsLeft}
 					SECONDS 🚀
@@ -40,7 +40,7 @@
 			<h2
 				class="block text-center text-lg font-semibold text-white md:hidden md:text-2xl">
 				COUNTDOWN TO LAUNCH T - <br />
-				{#if $timeLeftForLaunch.daysLeft}
+				{#if $timeLeftForLaunch.daysLeft >= 0}
 					{$timeLeftForLaunch.daysLeft}D {$timeLeftForLaunch.hoursLeft}H
 					{$timeLeftForLaunch.minutesLeft}M {$timeLeftForLaunch.secondsLeft}S 🚀
 				{/if}
@@ -54,8 +54,8 @@
 				<img
 					src="/theme/fungfiDarkMode.svg"
 					alt="Fung Fi"
-					width="400"
-					height="300" />
+					width="350"
+					height="100" />
 			{:else}
 				<img
 					src="/theme/liteFungFi.svg"
@@ -72,10 +72,10 @@
 		<div class="px-6">
 			<p
 				class="text-center text-lg font-medium text-gray-600 dark:text-gray-200 md:text-left">
-				Presents
+				{$_('homepage.presents')}
 			</p>
 			<h3 class="text-center text-2xl font-bold md:text-3xl lg:text-4xl">
-				The Revolution of Decentralized Finance
+				{$_('homepage.revolution')}
 			</h3>
 		</div>
 
@@ -99,8 +99,7 @@
 									MushCoin
 								</h5>
 								<p class="text-sm  text-gray-600 dark:text-gray-200">
-									MushCoin is how people express their stake in FungFi’s future.
-									MUSH will be distributed by staking in pools and farms.
+									{$_('homepage.mushcoin')}
 								</p>
 							</div>
 						</div>
@@ -121,8 +120,7 @@
 									Mushroom Farms
 								</h5>
 								<p class="text-sm text-gray-600 dark:text-gray-200">
-									Customers who stake MUSH/USDC LP tokens in FungFi farms will
-									be rewarded with MushCoin.
+									{$_('homepage.mushroomFarms')}
 								</p>
 							</div>
 						</div>
@@ -143,8 +141,7 @@
 									Mycelium Pools
 								</h5>
 								<p class="text-sm text-gray-600 dark:text-gray-200">
-									FungFi users will be able to stake other tokens into our pools
-									to start earning $MUSH every second.
+									{$_('homepage.myceliumPools')}
 								</p>
 							</div>
 						</div>
@@ -165,8 +162,7 @@
 									Fungi Vaults
 								</h5>
 								<p class="text-sm text-gray-600 dark:text-gray-200">
-									Allow users to automatically compound farming tokens back into
-									the assets they originally staked.
+									{$_('homepage.fungiVaults')}
 								</p>
 							</div>
 						</div>
@@ -177,7 +173,7 @@
 		<h2 class="makeIt mt-4 font-semibold italic md:text-3xl lg:text-4xl">
 			Make It MushCoin !
 		</h2>
-		<h3 class="mt-4 mb-8 text-xl font-bold md:text-xl lg:text-2xl">
+		<h3 class="mt-4 mb-8 text-lg font-bold md:text-xl lg:text-2xl">
 			{$_('home.marketCap')}
 			{#if $mushMarketCap}
 				{$mushMarketCap.toLocaleString(getLocale(`${$page.params.lang}`), {
