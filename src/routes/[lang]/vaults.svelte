@@ -25,6 +25,8 @@
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { BigNumber, ethers } from 'ethers';
 	import { vaultChef } from '$lib/utils/contracts';
+	import ComingSoon from '$lib/components/Cards/ComingSoon.svelte';
+	import { timeLeftForLaunch } from '$lib/stores/launchDate';
 
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
@@ -119,34 +121,38 @@
 </script>
 
 <section class="pb-3 ">
-	<PageHeader text={$_('headers.vaults.text')} />
+	{#if $timeLeftForLaunch.daysLeft > 0}
+		<ComingSoon />
+	{:else}
+		<PageHeader text={$_('headers.vaults.text')} />
 
-	<div class="mainContainer 	sideShadow background__lite pt-10">
-		<div in:fade={{ duration: 200 }}>
-			<VaultFilter
-				bind:filtersApplied
-				bind:platformSelected
-				bind:stakedOnly
-				bind:filterBy
-				bind:sortBy
-				bind:hideZeroBalances
-				bind:statement />
+		<div class="mainContainer 	sideShadow background__lite pt-10">
+			<div in:fade={{ duration: 200 }}>
+				<VaultFilter
+					bind:filtersApplied
+					bind:platformSelected
+					bind:stakedOnly
+					bind:filterBy
+					bind:sortBy
+					bind:hideZeroBalances
+					bind:statement />
+			</div>
+			{#if allVaults.length >= 1}
+				{#each filteredVaults as vault}
+					<VaultAccordeon vaultConfig={vault} />
+				{/each}
+			{:else}
+				<div
+					class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+				<div
+					class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+				<div
+					class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+				<div
+					class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+			{/if}
 		</div>
-		{#if allVaults.length >= 1}
-			{#each filteredVaults as vault}
-				<VaultAccordeon vaultConfig={vault} />
-			{/each}
-		{:else}
-			<div
-				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
-			<div
-				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
-			<div
-				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
-			<div
-				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
-		{/if}
-	</div>
+	{/if}
 </section>
 
 <style>
