@@ -1,3 +1,4 @@
+export const DIVIDENDS_PID = 0;
 export const BLOCK_TIMER = 2;
 export const BLOCKS_PER_YEAR = 43200 * 365;
 export const POLYGON_CHAIN_ID = '0x89';

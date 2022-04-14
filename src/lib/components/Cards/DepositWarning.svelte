@@ -4,8 +4,11 @@
 </script>
 
 <div
-	class="select-none bg-primary-300 py-2 px-4 text-center font-semibold text-gray-200 dark:bg-analogPurple-300">
-	⚠️ {$_('depositWarning.warning')}{$timeLeftForLaunch.daysLeft}
+	class="{$timeLeftForLaunch.daysLeft <= 0 &&
+		'hidden'} select-none bg-primary-300 py-2 px-4 text-center text-sm font-semibold text-gray-100 dark:bg-analogPurple-300 md:text-base">
+	⚠️ {$_('depositWarning.warning')}:
+	<br class="lg:hidden" />
+	{$timeLeftForLaunch.daysLeft}
 	Days
 	{$timeLeftForLaunch.hoursLeft} Hours {$timeLeftForLaunch.minutesLeft} Minutes {$timeLeftForLaunch.secondsLeft}
 	Seconds ⚠️

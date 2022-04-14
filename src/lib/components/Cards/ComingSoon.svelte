@@ -3,7 +3,7 @@
 	import { _ } from 'svelte-i18n';
 </script>
 
-<div class="mt-[200px] select-none px-4 text-center">
+<div class="mt-[100px] select-none px-4 text-center md:mt-[200px]">
 	<h2 class="text-3xl font-bold text-gray-800 dark:text-gray-200 md:text-4xl">
 		{$_('comingSoon.soon')}
 	</h2>
