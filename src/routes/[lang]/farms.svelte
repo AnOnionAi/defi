@@ -7,6 +7,7 @@
 	import { farms } from '$lib/config/constants/farms';
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
+	import DepositWarning from '$lib/components/Cards/DepositWarning.svelte';
 
 	/* 	let backgroundImage;
 
@@ -18,6 +19,7 @@
 </script>
 
 <section class=" farms flex h-full flex-col pb-5">
+	<DepositWarning />
 	<PageHeader text={$_('headers.farms.text')} />
 	<div class="w-23/24 mx-auto flex max-w-7xl flex-1 items-center">
 		<div

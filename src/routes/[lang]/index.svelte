@@ -3,40 +3,8 @@
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/stores/dark';
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
-	import { _ } from 'svelte-i18n';
-
-	const launchDate = new Date('14 April 2022 19:00:00');
-
-	$: daysLeft = 0;
-	$: hoursLeft = 0;
-	$: minutesLeft = 0;
-	$: secondsLeft = 0;
-
-	const updateTimeLeft = () => {
-		let dateNow = new Date();
-
-		let seconds = Math.floor((launchDate.getTime() - dateNow.getTime()) / 1000);
-		let minutes = Math.floor(seconds / 60);
-		let hours = Math.floor(minutes / 60);
-		let days = Math.floor(hours / 24);
-
-		hours = hours - days * 24;
-		minutes = minutes - days * 24 * 60 - hours * 60;
-		seconds = seconds - days * 24 * 60 * 60 - hours * 60 * 60 - minutes * 60;
-
-		daysLeft = days;
-		hoursLeft = hours;
-		minutesLeft = minutes;
-		secondsLeft = seconds;
-	};
-
-	const intervalID = setInterval(() => {
-		updateTimeLeft();
-	}, 1000);
-
-	onDestroy(() => {
-		clearInterval(intervalID);
-	});
+	import { time, _ } from 'svelte-i18n';
+	import { timeLeftForLaunch } from '$lib/stores/launchDate';
 
 	function getLocale(lang) {
 		console.log('LANG: ', lang);
@@ -57,23 +25,24 @@
 
 <section
 	class="flex h-full select-none flex-col bg-paper transition duration-500 dark:bg-darkGrey-900    ">
-	{#if daysLeft >= 0}
+	{#if $timeLeftForLaunch.daysLeft}
 		<div class=" w-full bg-primary-400 py-2 px-6 dark:bg-analogPurple-300 ">
 			<h2
 				class=" hidden text-center text-xl font-semibold text-white md:block md:text-2xl">
 				COUNTDOWN TO LAUNCH T -
-				{#if daysLeft >= 0}
-					{daysLeft} DAYS {hoursLeft} HOURS
-					{minutesLeft} MINUTES {secondsLeft} SECONDS 🚀
+				{#if $timeLeftForLaunch.daysLeft}
+					{$timeLeftForLaunch.daysLeft} DAYS {$timeLeftForLaunch.hoursLeft} HOURS
+					{$timeLeftForLaunch.minutesLeft} MINUTES {$timeLeftForLaunch.secondsLeft}
+					SECONDS 🚀
 				{/if}
 			</h2>
 
 			<h2
 				class="block text-center text-lg font-semibold text-white md:hidden md:text-2xl">
 				COUNTDOWN TO LAUNCH T - <br />
-				{#if daysLeft >= 0}
-					{daysLeft}D {hoursLeft}H
-					{minutesLeft}M {secondsLeft}S 🚀
+				{#if $timeLeftForLaunch.daysLeft}
+					{$timeLeftForLaunch.daysLeft}D {$timeLeftForLaunch.hoursLeft}H
+					{$timeLeftForLaunch.minutesLeft}M {$timeLeftForLaunch.secondsLeft}S 🚀
 				{/if}
 			</h2>
 		</div>
