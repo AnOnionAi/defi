@@ -25,12 +25,12 @@
 
 <section
 	class="flex h-full select-none flex-col bg-paper transition duration-500 dark:bg-darkGrey-900    ">
-	{#if $timeLeftForLaunch.daysLeft}
+	{#if $timeLeftForLaunch.daysLeft >= 0}
 		<div class=" w-full bg-primary-400 py-2 px-6 dark:bg-analogPurple-300 ">
 			<h2
 				class=" hidden text-center text-xl font-semibold text-white md:block md:text-2xl">
 				{$_('launchTimeLeft.countdown')}
-				{#if $timeLeftForLaunch.daysLeft}
+				{#if $timeLeftForLaunch.daysLeft >= 0}
 					{$timeLeftForLaunch.daysLeft} DAYS {$timeLeftForLaunch.hoursLeft} HOURS
 					{$timeLeftForLaunch.minutesLeft} MINUTES {$timeLeftForLaunch.secondsLeft}
 					SECONDS 🚀
@@ -40,7 +40,7 @@
 			<h2
 				class="block text-center text-lg font-semibold text-white md:hidden md:text-2xl">
 				COUNTDOWN TO LAUNCH T - <br />
-				{#if $timeLeftForLaunch.daysLeft}
+				{#if $timeLeftForLaunch.daysLeft >= 0}
 					{$timeLeftForLaunch.daysLeft}D {$timeLeftForLaunch.hoursLeft}H
 					{$timeLeftForLaunch.minutesLeft}M {$timeLeftForLaunch.secondsLeft}S 🚀
 				{/if}

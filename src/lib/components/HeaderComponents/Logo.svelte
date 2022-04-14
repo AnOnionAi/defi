@@ -10,9 +10,15 @@
 		class="flex cursor-pointer items-center gap-1">
 		<img class="mr-1 w-10" src="/theme/fiji.svg" alt="Fung Finance Logo" />
 		{#if $darkMode}
-			<img src="/theme/darkFungFi.webp" alt="Fung Fi" />
+			<img
+				src="/theme/fungfiDarkMode.svg"
+				alt="Fung Fi"
+				class="h-[80px] w-[104px] " />
 		{:else}
-			<img src="/theme/liteFungFi.webp" alt="Fung Fi" />
+			<img
+				src="/theme/liteFungfi.svg"
+				alt="Fung Fi"
+				class="w-[104px] h-[80px] " />
 		{/if}
 	</a>
 </div>

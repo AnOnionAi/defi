@@ -1,7 +1,6 @@
 export const polygonRPCs = [
 	'https://polygon-rpc.com/',
 	'https://rpc-mainnet.maticvigil.com/',
-	'https://rpc-mainnet.matic.quiknode.pro',
 	'https://matic-mainnet.chainstacklabs.com'
 ];
 
