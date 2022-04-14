@@ -1,4 +1,24 @@
 {
+	"launchTimeLeft": {
+		"countdown": "COUNTDOWN TO LAUNCH T -"
+	},
+
+	"depositWarning": {
+		"warning": "Deposits and Withdrawals are available but you will not earn MUSH until"
+	},
+	"comingSoon": {
+		"soon": "Coming Soon...",
+		"left": "Time Left:"
+	},
+
+	"homepage": {
+		"presents": "Presents",
+		"revolution": "The Revolution of Decentralized Finance",
+		"mushcoin": "MushCoin is how people express their stake in FungFi’s future.MUSH will be distributed by staking in pools and farms.",
+		"mushroomFarms": "Customers who stake MUSH/USDC LP tokens in FungFi farms will be rewarded with MushCoin.",
+		"myceliumPools": "FungFi users will be able to stake other tokens into our pools to start earning $MUSH every second.",
+		"fungiVaults": "Allow users to automatically compound farming tokens back into the assets they originally staked."
+	},
 	"home": {
 		"tagline1": "Make It!",
 		"tagline2": "MushCoin",

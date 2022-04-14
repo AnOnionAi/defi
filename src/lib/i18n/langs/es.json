@@ -1,4 +1,25 @@
 {
+	"launchTimeLeft": {
+		"countdown": "TIEMPO RESTANTE PARA EL LANZAMIENTO: "
+	},
+
+	"depositWarning": {
+		"warning": "Los depósitos y retiros están disponibles, sin embargo, no ganarás MUSH hasta dentro de: "
+	},
+	"comingSoon": {
+		"soon": "Disponible muy Pronto ...",
+		"left": "Faltan: "
+	},
+
+	"homepage": {
+		"presents": "Presentamos",
+		"revolution": "La revolución de las Finanzas Decentralizadas",
+		"mushcoin": "MushCoin es la manera en que los stakers deciden el futuro de FungFi. MUSH será distribuido como premio en Pools y Farms",
+		"mushroomFarms": "Quienes aporten liquidez en el Pool de MUSH/USD podrán depositar sus LP Tokens en nuestras Farms y serán recompensados con MUSH",
+		"myceliumPools": "Podrás depositar otros tokens en nuestros Pools y comenzar a ganar MUSH cada segundo",
+		"fungiVaults": "Permiten que los usuarios obtengan intereses compuestos automáticamente y reciban el mismo token que depositaron"
+	},
+
 	"home": {
 		"tagline1": "¡Hazlo!",
 		"tagline2": "MushCoin",
