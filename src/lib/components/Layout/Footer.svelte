@@ -75,7 +75,7 @@
 					class="transition duration-300 hover:text-[#999999]" />
 			</a>
 			<a
-				href="https://t.me/joinchat/w3SVXsuNWDE3ZjFh"
+				href="http://www.tiktok.com/@fungfi"
 				target="_blank"
 				aria-label="Tiktok"
 				class="mr-3 lg:mr-5">
