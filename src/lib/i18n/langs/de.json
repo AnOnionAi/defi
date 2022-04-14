@@ -1,15 +1,33 @@
 {
+	"launchTimeLeft": {
+		"countdown": "COUNTDOWN ZUM STARTEN T -"
+	},
+	"depositWarning": {
+		"warning": "Einzahlungen und Auszahlungen sind verfügbar, aber Sie werden bis dahin kein MUSH verdienen"
+	},
+	"comingSoon": {
+		"soon": "Kommt bald...",
+		"left": "Übrige Zeit:"
+	},
+	"homepage": {
+		"presents": "Die Geschenke",
+		"revolution": "Die Revolution der dezentralisierten Finanzen",
+		"mushcoin": "Mit MushCoin drücken die Menschen ihren Anteil an der Zukunft von FungFi aus. MUSH wird durch Staking in Pools und Farmen verteilt.",
+		"mushroomFarms": "Kunden, die MUSH/USDC LP-Token in FungFi-Farmen einsetzen, werden mit MushCoin belohnt.",
+		"myceliumPools": "FungFi-Benutzer können andere Token in unsere Pools einsetzen, um jede Sekunde $MUSH zu verdienen.",
+		"fungiVaults": "Ermöglichen Sie Benutzern, Farming-Token automatisch wieder in die Vermögenswerte zu integrieren, die sie ursprünglich eingesetzt haben."
+	},
 	"home": {
 		"tagline1": "Mach es!",
 		"tagline2": "MushCoin",
-		"marketCap": "Market Cap",
+		"marketCap": "Marktkapitalisierung",
 		"introTitle": "Wir präsentieren MushCoin",
 		"intro": "Die Prinzipien, denen wir bei Defi (Decentralized Finance) folgen, basieren auf der Philosophie der Pilze. Die Pilze sind ein lebenswichtiger Organismus, der die Toten zurückbringt. Bringe dann die Toten zurück, um wieder Leben zu werden. Sie setzen den Kreislauf des Lebens fort. MushCoin ist Ihr Schlüssel zu dieser neuen Emerald Cyber City. Wir zersetzen die Fäulnis.",
 		"velocityIdeas": "Verpassen Sie nicht das DeFi💡",
-		"velocityIdeasText": "In Defi wird alles von Smart Contracts betrieben, die Algorithmen auf der dezentralen Blockchain sind. Bringen Sie Ihre Krypto zum Laufen. Nicht mehr in einer Brieftasche sitzen. Kairos ist ein altgriechisches Wort und bedeutet „der richtige, kritische oder günstige Moment“. Die Ideengeschwindigkeit beschleunigt sich. Exponential. Wenn Sie mit der Technologie nicht Schritt halten, geraten Sie schnell ins Hintertreffen. Aber es gibt keinen Grund, sich zu fürchten oder zu hoffen, sondern nur nach neuen Technologien zu suchen. Denn wer jetzt Verlierer ist, wird später gewinnen, für die Zeiten sind sie eine Zeitenwende.",
+		"velocityIdeasText": "In Defi wird alles von Smart Contracts betrieben, die Algorithmen auf der dezentralen Blockchain sind. Bringen Sie Ihre Krypto zum Laufen. Nicht mehr in einer Brieftasche sitzen. Die Ideengeschwindigkeit beschleunigt sich. Exponential. Wenn Sie mit der Technologie nicht Schritt halten, geraten Sie schnell ins Hintertreffen. Wir müssen Kairos im Auge behalten. Das altgriechische Wort bedeutet „der richtige, kritische oder günstige Moment“. Dieser Moment ist jetzt. Es gibt keinen Grund, sich zu fürchten oder zu hoffen, sondern nur nach neuen Technologien zu suchen. Denn wer jetzt Verlierer ist, wird später gewinnen, für die Zeiten sind sie eine Zeitenwende.",
 		"revolution": "Revolution",
 		"gainzText": "Kommen Sie mit uns in unsere Pilz-Fantasie! Seien Sie nicht der Letzte, der etwas über DeFi erfährt",
-		"fijiSignature": " - Fiji Die Außerirdischen Pilze",
+		"fijiSignature": " - Fidschi Die außerirdischen Pilze",
 		"psText": "P.S. Es gibt noch viele Ideen im Universum, die freigeschaltet werden müssen.",
 		"powerText": "Die Macht liegt bei Ihnen. MushCoin ist der Schlüssel zur Zukunft. Wir sind die Zukunft. Gemeinsam werden wir es schaffen.",
 		"ps2Text": "P.S.S. MushCoin zum Mond und darüber hinaus!"
@@ -65,7 +83,7 @@
 		"earn": "Mehr verdienen",
 		"index": "Index",
 		"mushpb": "MUSH pro Block",
-		"mushps": "MUSH per second",
+		"mushps": "MUSH pro Sekunde",
 		"marketcap": "Marktkapitalisierung",
 		"totalvol": "Volle Lautstärke",
 		"maxsupply": "Maximale Versorgung",
@@ -90,8 +108,8 @@
 	},
 	"actions": {
 		"earn": "Verdienen",
-		"get": "Bekommen",
-		"add": "Addieren",
+		"get": "Werden",
+		"add": "Hinzufügen",
 		"depositFee": "Einzahlungsgebühr",
 		"wallet": "Brieftasche",
 		"approve": "Genehmigen",
@@ -107,7 +125,7 @@
 	},
 	"pastActions": {
 		"earned": "Verdient",
-		"deposited": "Eingezahlt",
+		"deposited": "Hinterlegt",
 		"withdrawed": "Zurückgezogen",
 		"staked": "Abgesteckt"
 	},
@@ -116,7 +134,7 @@
 		"hide": "Ausblenden",
 		"totalLiquidity": "Gesamtliquidität",
 		"myLiquidity": "Meine Liquidität",
-		"viewonMatic": "Überprüfen Sie auf PolyScan"
+		"viewonMatic": "PolyScan"
 	},
 	"vaultAccordeon": {
 		"currentPrices": "Aktuelle Preise",
@@ -125,10 +143,10 @@
 		"loading": "Wird geladen"
 	},
 	"vaultFilter": {
-		"all": "Alle",
+		"all": "Alles",
 		"hidezero": "Nullsalden ausblenden",
 		"filterby": "Filtern nach",
-		"sortby": "Sortiere nach",
+		"sortby": "Sortieren nach",
 		"search": "Suche",
 		"stakedonly": "Nur abgesteckt",
 		"desceding": "Absteigend",
@@ -137,7 +155,7 @@
 	},
 	"modals": {
 		"input": "Eingang",
-		"balance": "Balance",
+		"balance": "Gleichgewicht",
 		"otherOptions": "Andere Optionen",
 		"depositYour": "ZAHLEN SIE IHRE EIN",
 		"withdrawYour": "ZIEHEN SIE IHRE ZURÜCK"
