@@ -47,7 +47,7 @@
 	out:fly={{ duration: 300, x: 50 }}
 	class="{queuePosition == 0
 		? 'mt-[80px]'
-		: ''} relative mx-1  mb-2  rounded-lg py-5 text-white {tailwindNotificationStyles[
+		: ''} relative mx-1  mb-2  rounded-lg py-5 px-4 text-white {tailwindNotificationStyles[
 		notification.type
 	]}">
 	<h4 class="cursor-pointer select-none text-center text-xl">
