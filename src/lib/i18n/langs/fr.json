@@ -1,55 +1,49 @@
 {
 	"launchTimeLeft": {
-		"countdown": "COUNTDOWN TO LAUNCH T -"
+		"countdown": "COMPTE A REBOURS POUR LANCER T -"
 	},
-
 	"depositWarning": {
-		"warning": "Deposits and Withdrawals are available but you will not earn MUSH until"
+		"warning": "Les dépôts et les retraits sont disponibles mais vous ne gagnerez pas de MUSH avant"
 	},
 	"comingSoon": {
-		"soon": "Coming Soon...",
-		"left": "Time Left:"
+		"soon": "À venir...",
+		"left": "Temps restant:"
 	},
-
 	"homepage": {
-		"presents": "Presents",
-		"revolution": "The Revolution of Decentralized Finance",
-		"mushcoin": "MushCoin is how people express their stake in FungFi’s future.MUSH will be distributed by staking in pools and farms.",
-		"mushroomFarms": "Customers who stake MUSH/USDC LP tokens in FungFi farms will be rewarded with MushCoin.",
-		"myceliumPools": "FungFi users will be able to stake other tokens into our pools to start earning $MUSH every second.",
-		"fungiVaults": "Allow users to automatically compound farming tokens back into the assets they originally staked."
+		"presents": "Présente",
+		"revolution": "La révolution de la finance décentralisée",
+		"mushcoin": "MushCoin est la façon dont les gens expriment leur participation dans l'avenir de FungFi. MUSH sera distribué en jalonnant des pools et des fermes.",
+		"mushroomFarms": "Les clients qui misent des jetons MUSH/USDC LP dans des fermes FungFi seront récompensés par MushCoin.",
+		"myceliumPools": "Les utilisateurs de FungFi pourront miser d'autres jetons dans nos pools pour commencer à gagner $MUSH chaque seconde.",
+		"fungiVaults": "Autorisez les utilisateurs à reconstituer automatiquement les jetons agricoles dans les actifs qu'ils ont initialement jalonnés."
 	},
-
 	"home": {
 		"tagline1": "Fais-le!",
 		"tagline2": "MushCoin",
 		"marketCap": "Capitalisation boursière",
 		"introTitle": "Présentation de MushCoin",
-		"intro": "Les principes que nous suivons dans Defi (finance décentralisée) sont basés sur la philosophie des Fungi. Les Champignons sont un organisme vital qui recycle les morts. Ils ramènent les morts à la terre. Ils continuent le Cercle de la Vie. MushCoin est votre clé pour cette nouvelle Emerald Cyber City. Nous décomposons la pourriture.",
+		"intro": "Les principes que nous suivons dans Defi (finance décentralisée) sont basés sur la philosophie des Fungi. Les Champignons sont un organisme vital qui renvoie les morts. Puis ramenez les morts pour qu'ils redeviennent la vie. Ils continuent le Cercle de la Vie. MushCoin est votre clé pour cette nouvelle Emerald Cyber City. Nous décomposons la pourriture.",
 		"velocityIdeas": "Ne manquez pas le DeFi💡",
-		"velocityIdeasText": "Dans Defi, tout est géré par des contrats intelligents, qui sont des algorithmes sur la blockchain décentralisée. Mettre votre crypto au travail. Ne plus rester assis dans un portefeuille. Kairos est un mot grec ancien qui signifie « le moment juste, critique ou opportun ». La vitesse des idées s'accélère. Expotiellement. Si vous ne suivez pas la technologie, vous prendrez rapidement du retard. Mais il n'y a pas lieu d'avoir peur ou d'espérer, seulement de chercher de nouvelles technologies. Pour les perdants maintenant, ce sera plus tard pour gagner, pour l'époque, ils changent.",
+		"velocityIdeasText": "Dans Defi, tout est géré par des contrats intelligents, qui sont des algorithmes sur la blockchain décentralisée. Mettre votre crypto au travail. Ne plus rester assis dans un portefeuille. La vitesse des idées s'accélère. Expotiellement. Si vous ne suivez pas la technologie, vous prendrez rapidement du retard. Nous devons garder à l'esprit Kairos. Mot grec ancien signifiant « le moment juste, critique ou opportun ». Ce moment est maintenant. Il n'y a pas lieu d'avoir peur ou d'espérer, seulement de chercher de nouvelles technologies. Pour les perdants maintenant, ce sera plus tard pour gagner, pour l'époque, ils changent.",
 		"revolution": "Révolution",
-		"gainzText": "Venez nous rejoindre dans notre Fungi Fantasy ! Ne soyez pas le dernier à en savoir plus sur DeFi",
-		"fijiSignature": " - Fiji Le Champignon Extraterrestre",
+		"gainzText": "Venez nous rejoindre dans notre Fungi Fantasy ! Ne soyez pas le dernier à en savoir plus sur DeFi",
+		"fijiSignature": " - Fidji Les champignons extraterrestres",
 		"psText": "PS Il reste de nombreuses idées à débloquer dans l'univers.",
 		"powerText": "Le pouvoir est à vous. MushCoin est la clé du futur. Nous sommes le futur. Ensemble nous y arriverons.",
-		"ps2Text": "P.S.S. MushCoin vers la Lune et au-delà !"
+		"ps2Text": "P.S.S. MushCoin vers la Lune et au-delà !"
 	},
 	"pages": {
 		"about": {
 			"title": "Sur"
 		},
 		"contact": {
-			"title": "Contact"
+			"title": "Contacter"
 		},
 		"audits": {
 			"title": "Audits"
 		},
 		"trade": {
 			"title": "Échange"
-		},
-		"trdae": {
-			"trade": "Commerce"
 		}
 	},
 	"headers": {
@@ -60,7 +54,7 @@
 			"text": "Dividendes"
 		},
 		"dashboard": {
-			"text": "Tableau"
+			"text": "Tableau de bord"
 		},
 		"farms": {
 			"text": "Fermes"
@@ -89,13 +83,13 @@
 		"earn": "Gagne plus",
 		"index": "Indice",
 		"mushpb": "MUSH par bloc",
-		"mushps": "MUSH per second",
+		"mushps": "MUSH par seconde",
 		"marketcap": "Capitalisation boursière",
 		"totalvol": "Volume total",
 		"maxsupply": "Approvisionnement maximum",
 		"price": "Prix de la bouillie :",
 		"today": "Aujourd'hui",
-		"peak": "Culminer",
+		"peak": "Pic",
 		"profit": "Profit",
 		"lockedInFarms": "Enfermé dans les fermes Mush",
 		"lockedInPools": "Enfermé dans des piscines poly",
@@ -117,7 +111,7 @@
 		"get": "Avoir",
 		"add": "Ajouter",
 		"depositFee": "Frais de dépôt",
-		"wallet": "Portefeuille",
+		"wallet": "Porte monnaie",
 		"approve": "Approuver",
 		"unlock": "Ouvrir",
 		"deposit": "Verser",
@@ -140,7 +134,7 @@
 		"hide": "Cacher",
 		"totalLiquidity": "Liquidité totale",
 		"myLiquidity": "Ma liquidité",
-		"viewonMatic": "Vérifier sur PolyScan"
+		"viewonMatic": "PolyScan"
 	},
 	"vaultAccordeon": {
 		"currentPrices": "Prix actuels",
@@ -149,27 +143,27 @@
 		"loading": "Chargement"
 	},
 	"vaultFilter": {
-		"all": "Tous",
+		"all": "Tout",
 		"hidezero": "Masquer les soldes nuls",
 		"filterby": "Filtrer par",
 		"sortby": "Trier par",
-		"search": "Rechercher",
+		"search": "Recherche",
 		"stakedonly": "Implanté uniquement",
 		"desceding": "Descendant",
 		"ascending": "Ascendant",
 		"searchvaults": "Rechercher des coffres-forts"
 	},
 	"modals": {
-		"input": "Contribution",
-		"balance": "Équilibre",
+		"input": "Saisir",
+		"balance": "Solde",
 		"otherOptions": "Autres options",
 		"depositYour": "DÉPOSEZ VOTRE",
 		"withdrawYour": "RETIREZ VOTRE"
 	},
 	"walletStatus": {
-		"wallet": "Portefeuille",
+		"wallet": "Porte monnaie",
 		"install": "Installer Metamask",
-		"connected": "Lié",
+		"connected": "Connecté",
 		"checking": "Vérification du métamasque..."
 	}
 }
