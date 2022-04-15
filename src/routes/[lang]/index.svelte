@@ -50,7 +50,7 @@
 	<div
 		class=" flex flex-1 flex-col items-center justify-center text-gray-900 dark:text-white">
 		<div class="mb-8 flex flex-col items-center">
-			{#if $darkMode}
+			<!-- 	{#if $darkMode}
 				<img
 					src="/theme/fungfiDarkMode.svg"
 					alt="Fung Fi"
@@ -63,9 +63,14 @@
 					width="350"
 					height="100" />
 			{/if}
-
+			
+ -->
 			<img
-				src="/theme/fiji.svg"
+				class="h-[100px] w-[350px]"
+				src={$darkMode ? '/theme/fungfiDarkMode.svg' : '/theme/liteFungFi.svg'}
+				alt="Fung Fi" />
+			<img
+				src="/theme/fiji.png"
 				alt="Fiji the Fung"
 				class="w-16 md:w-20 lg:w-24 xl:w-28 " />
 		</div>
