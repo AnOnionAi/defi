@@ -86,7 +86,7 @@
 						'hover:text-[#25F4EE]'} transition duration-300" />
 			</a>
 			<a
-				href="https://facebook.com"
+				href="https://www.facebook.com/FungFi-101149892582637"
 				aria-label="Facebook"
 				class="mr-5"
 				target="_blank">
