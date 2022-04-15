@@ -86,7 +86,7 @@
 						'hover:text-[#25F4EE]'} transition duration-300" />
 			</a>
 			<a
-				href="https://facebook.com"
+				href="https://www.facebook.com/FungFi-101149892582637"
 				aria-label="Facebook"
 				class="mr-5"
 				target="_blank">
@@ -95,7 +95,10 @@
 					size="lg"
 					class="transition duration-300 hover:text-[#4267B2]" />
 			</a>
-			<a href="https://youtube.com" class="mr-3 lg:mr-5" target="_blank">
+			<a
+				href="https://www.youtube.com/channel/UCJQDpiFUzJyrifYxhK8K-Jg"
+				class="mr-3 lg:mr-5"
+				target="_blank">
 				<Fa
 					icon={faYoutube}
 					size="lg"
