@@ -54,15 +54,9 @@
 	export let info: PoolInfo;
 	export let isFarm = false;
 
-	let poolFeePercentage: number = null;
-	let stakingTokenPrice: number;
-	let stakingTokenAmount: number;
-	let rewardTokenPrice: number;
+	let poolFeePercentage: number;
 	let poolLiquidityUSD: number;
-	let tokenAllocatedPerBlock: number;
 	let poolApr;
-	let stakingTokenDecimals = 18;
-
 	let loadingState: LoadingState = {
 		loadingApproval: false,
 		loadingDeposit: false,
@@ -71,7 +65,7 @@
 	};
 
 	let poolMultiplier: number;
-
+	let stakingTokenDecimals;
 	let isHidden = true;
 
 	let userAcc: string;
@@ -79,9 +73,6 @@
 	let canStake: boolean;
 	let canWithdraw: boolean;
 	let canHarvest: boolean;
-
-	let wantWithdrawAmount: string;
-	let idInterval;
 
 	let tokenAllowance: BigNumber = ethers.constants.Zero;
 	let userBalance: BigNumber = ethers.constants.Zero;
@@ -95,173 +86,6 @@
 	$: canStake = !tokenAllowance.isZero() && !userBalance.isZero();
 	$: canWithdraw = !userStakedTokens.isZero();
 	$: canHarvest = !userEarnings.isZero();
-
-	$: if (userAcc) {
-		refreshData();
-		idInterval = setInterval(refreshData, 8000);
-	} else {
-		clearInterval(idInterval);
-	}
-
-	const refreshData = async () => {
-		try {
-			tokenAllowance = await getTokenAllowance(
-				info.tokenAddr,
-				getContractAddress(Token.MASTERCHEF),
-				userAcc
-			);
-			if (tokenAllowance.isZero()) return;
-			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
-			userStakedTokens = await getStakedTokens(info.pid, userAcc);
-			userEarnings = await getPendingMush(info.pid, userAcc);
-		} catch (e) {
-			console.log('Failed to refresh pool Data');
-		}
-	};
-
-	onMount(async () => {
-		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
-		const poolInfo = await getPoolInfo(info.pid);
-		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
-
-		poolMultiplier = 2;
-		stakingTokenPrice = await getStakingTokenPrice();
-
-		const sta: BigNumber = await getTokenBalance(
-			info.tokenAddr,
-			getContractAddress(Token.MASTERCHEF)
-		);
-		stakingTokenAmount = parseFloat(
-			ethers.utils.formatUnits(sta, stakingTokenDecimals)
-		);
-		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
-
-		const poolWeightbn = BigNumber.from(3);
-		const tokenPerBlock = await getMushPerBlock();
-		const mushPerBlock: number = parseFloat(
-			ethers.utils.formatEther(tokenPerBlock)
-		);
-		tokenAllocatedPerBlock = mushPerBlock * poolWeightbn.toNumber();
-
-		poolApr = getPoolApr(
-			stakingTokenPrice,
-			rewardTokenPrice,
-			stakingTokenAmount,
-			tokenAllocatedPerBlock
-		);
-		if (poolApr === null) {
-			poolApr = 'Infinity';
-		}
-	});
-
-	onDestroy(() => {
-		clearInterval(idInterval);
-	});
-
-	const getStakingTokenPrice = async () => {
-		if (isFarm) {
-			stakingTokenPrice = await getPriceOfMushPair(info.tokenAddr);
-			return stakingTokenPrice;
-		} else {
-			const price = await getPoolTokenPriceUSD(info.tokenAddr);
-			stakingTokenPrice = price;
-			return stakingTokenPrice;
-		}
-	};
-
-	const onDeposit = async (amount) => {
-		loadingState.loadingDeposit = true;
-		try {
-			const tx = await deposit(info.pid, amount, stakingTokenDecimals);
-			addNotification(transactionSend);
-			await tx.wait();
-			addNotification(transactionCompleted);
-		} catch (error) {
-			console.log(error);
-			addNotification(transactionDeniedByTheUser);
-		}
-		loadingState.loadingDeposit = false;
-	};
-
-	const onWithdraw = async (amount) => {
-		loadingState.loadingWithdraw = true;
-		wantWithdrawAmount = amount;
-		addNotification(transactionSend);
-		try {
-			const tx = await withdraw(
-				info.pid,
-				wantWithdrawAmount,
-				stakingTokenDecimals
-			);
-			await tx.wait();
-			addNotification(transactionCompleted);
-		} catch (error) {
-			addNotification(transactionDeniedByTheUser);
-		}
-		loadingState.loadingWithdraw = false;
-	};
-
-	const onHarvest = async () => {
-		loadingState.loadingHarvest = true;
-		try {
-			addNotification(transactionSend);
-			const tx = await deposit(info.pid, '0');
-			await tx.wait();
-			addNotification(transactionCompleted);
-		} catch (error) {
-			addNotification(transactionDeniedByTheUser);
-			console.log('Error: ', error);
-		}
-		loadingState.loadingHarvest = false;
-	};
-
-	const onApprove = async () => {
-		loadingState.loadingApproval = true;
-		try {
-			addNotification(transactionSend);
-			const tx = await approveToken(
-				info.tokenAddr,
-				getContractAddress(Token.MASTERCHEF)
-			);
-			await tx.wait();
-			addNotification(transactionCompleted);
-		} catch {
-			addNotification(transactionDeniedByTheUser);
-		}
-		loadingState.loadingApproval = false;
-	};
-
-	const openModal = (action: string) => {
-		open(
-			DepositWithdraw,
-			{
-				userStakedTokens,
-				userBalance,
-				stakingTokenDecimals,
-				info,
-				onDeposit,
-				onWithdraw,
-				action: action
-			},
-			{
-				closeButton: false,
-				closeOnEsc: true,
-				closeOnOuterClick: true
-			}
-		);
-	};
-
-	const openMetamaskAlertModal = () => {
-		open(
-			MetamaskNotInstalled,
-			{},
-			{
-				closeButton: false,
-				closeOnEsc: true,
-				closeOnOuterClick: true
-			}
-		);
-	};
 
 	const showPoolInfo = () => {
 		isHidden = !isHidden;
@@ -283,7 +107,7 @@
 		<img
 			src={info.tokenImagePath}
 			alt={info.tokenName}
-			class="my-2 self-center" />
+			class="my-2 h-[120px] self-center" />
 		<div>
 			<p class="mb-3 text-lg font-bold dark:text-white">{info.tokenName}</p>
 		</div>
@@ -295,7 +119,7 @@
 				<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
 			{:else}
 				<p
-					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
+					class="w-12 h-full bg-neutral-200 dark:bg-neutral-700 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
@@ -314,7 +138,7 @@
 				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
 			{:else}
 				<p
-					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
+					class="w-12 h-full bg-neutral-200 dark:bg-neutral-700 rounded-lg animate-pulse" />
 			{/if}
 		</div>
 
@@ -332,7 +156,7 @@
 				{/if}
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
-					on:click={onHarvest}
+					on:click={() => console.log('onHarvest')}
 					class="rounded-lg py-2 
 					{canHarvest &&
 						'bg-gradient-to-r from-complementary-600 to-triadicGreen-600 dark:bg-gradient-to-r dark:from-complementary-500 dark:to-triadicGreen-500'} px-4 text-sm font-semibold tracking-wide 
@@ -349,15 +173,11 @@
 		<div class="mb-6 mt-2  flex h-10 w-full">
 			{#if !$accounts}
 				<button
-					on:click={isMetaMaskInstalled()
-						? metaMaskCon
-						: openMetamaskAlertModal}
 					class="h-full w-full rounded-xl bg-triadicGreen-600 font-semibold tracking-wide text-white hover:bg-triadicGreen-800">
 					{$_('actions.unlock')}
 				</button>
 			{:else if !tokenApproved}
 				<button
-					on:click={onApprove}
 					class="flex justify-center items-center bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-triadicGreen-600 dark:hover:bg-triadicGreen-800 active:scale-90  ease-in-out  duration-300 text-white tracking-wide font-semibold w-full h-full rounded-xl">
 					{$_('actions.approve')}
 					{isFarm ? 'Farm' : 'Pool'}
@@ -389,12 +209,12 @@
 					<div class="flex space-x-2">
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
-							on:click={() => openModal('DEPOSIT')}
+							on:click={() => console.log('DEPOSIT')}
 							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-500 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
 							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
-							on:click={() => openModal('WITHDRAW')}
+							on:click={() => console.log('WITHDRAW')}
 							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600  disabled:cursor-not-allowed"
 							>-</button>
 					</div>
@@ -439,7 +259,8 @@
 				{#if poolLiquidityUSD}
 					${shortLargeAmount(poolLiquidityUSD)}
 				{:else}
-					0
+					<p
+						class="w-14 h-[24px] bg-neutral-200 dark:bg-neutral-700 rounded-lg animate-pulse" />
 				{/if}
 			</div>
 			<a
@@ -452,13 +273,8 @@
 
 <style>
 	.cardContainer {
-		width: 336px;
-		height: 496px;
-	}
-
-	img {
-		width: 120px;
-		height: 120px;
+		width: 332px;
+		height: 492px;
 	}
 
 	.customShadow {

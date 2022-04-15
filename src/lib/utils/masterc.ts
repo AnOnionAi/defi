@@ -50,7 +50,7 @@ export const poolExistance = async (): Promise<boolean> =>
 	masterChefContract.poolExistance();
 
 export const getPoolInfo = async (pid: number): Promise<any> =>
-	masterChefContract.poolInfo(0);
+	masterChefContract.poolInfo(pid);
 
 export const getPoolLength = async (): Promise<BigNumber> =>
 	masterChefContract.poolLength();

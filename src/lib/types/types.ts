@@ -6,15 +6,6 @@ declare global {
 	}
 }
 
-export interface FarmConfig {
-	pid: number;
-	lpSymbol: string;
-	lpAddress: string;
-	tokenSymbol: string;
-	tokenAddresses: string;
-	multiplier?: string;
-}
-
 export interface PoolInfo {
 	tokenName: string;
 	tokenImagePath: string;

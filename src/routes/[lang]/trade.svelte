@@ -4,6 +4,7 @@
 
 <script lang="ts">
 	import { sushiVaults } from '$lib/config/constants/vaults';
+	import { fetchPools } from '$lib/utils/fetchPools';
 
 	import { getVaultAPYandAPR } from '$lib/utils/getVaultAPY';
 
@@ -44,7 +45,7 @@
 	};
 
 	onMount(async () => {
-		console.log(await getVaultAPYandAPR(sushiVaults[0]));
+		await fetchPools();
 	});
 </script>
 
