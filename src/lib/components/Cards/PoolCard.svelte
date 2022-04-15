@@ -103,11 +103,11 @@
 			<MultiplierBadge multiplier={poolMultiplier} />
 		</div>
 	</div>
-	<div class="cardContainer flex h-full flex-col py-4 px-8">
+	<div class="flex h-[496px] w-[332px] flex-col py-4 px-8">
 		<img
 			src={info.tokenImagePath}
 			alt={info.tokenName}
-			class="my-2 h-[120px] self-center" />
+			class="my-2 h-[120px] w-[120] self-center" />
 		<div>
 			<p class="mb-3 text-lg font-bold dark:text-white">{info.tokenName}</p>
 		</div>
@@ -272,11 +272,6 @@
 </div>
 
 <style>
-	.cardContainer {
-		width: 332px;
-		height: 492px;
-	}
-
 	.customShadow {
 		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	}

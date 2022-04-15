@@ -10,6 +10,7 @@ export interface PoolInfo {
 	tokenName: string;
 	tokenImagePath: string;
 	tokenAddr: string;
+	tokenDecimals: number;
 	pid: number;
 }
 
