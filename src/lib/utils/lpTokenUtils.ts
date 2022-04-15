@@ -1,7 +1,7 @@
 import { BigNumber, ethers } from 'ethers';
 import UNIV2ABI from '$lib/config/abi/IUniswapV2Pair.json';
 import ERC20ABI from '$lib/config/abi/ERC20.json';
-import { getProviderSingleton } from './web3Helpers';
+import { web3Provider } from '$lib/utils/web3Utils';
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/types/types';
 import { tokenPrice } from '$lib/stores/NativeTokenPrice';
@@ -19,11 +19,11 @@ tokenPrice.subscribe((tokenPrice) => {
 });
 
 const getTokenContract = (address: string) => {
-	return new ethers.Contract(address, ERC20ABI, getProviderSingleton());
+	return new ethers.Contract(address, ERC20ABI, web3Provider);
 };
 
 export const getUniPairTokenContract = (address: string): ethers.Contract => {
-	return new ethers.Contract(address, UNIV2ABI, getProviderSingleton());
+	return new ethers.Contract(address, UNIV2ABI, web3Provider);
 };
 
 export const getPriceOfMushPair = async (address: string): Promise<number> => {

@@ -7,7 +7,7 @@ interface TimeLeft {
 	secondsLeft: number | null;
 }
 
-export const launchDate = new Date('26 April 2022 19:00:00');
+export const launchDate = new Date('13 April 2022 19:00:00');
 
 const updateTimeLeft = () => {
 	const dateNow = new Date();

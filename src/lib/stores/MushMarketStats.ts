@@ -4,15 +4,15 @@ import { tokenPrice } from './NativeTokenPrice';
 import CappedERC20 from '$lib/config/abi/CappedERC20.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/types/types';
-import { getProviderSingleton } from '$lib/utils/web3Helpers';
 import { BURN_ADDRESS } from '$lib/config';
 import type { Readable } from 'svelte/store';
 import { getFarmsTVL, getPoolsTVL } from '$lib/utils/getPortfolioValue';
+import { web3Provider } from '$lib/utils/web3Utils';
 
 const mushTokenContract = new ethers.Contract(
 	getContractAddress(Token.MUSHTOKEN),
 	CappedERC20,
-	getProviderSingleton()
+	web3Provider
 );
 
 export const totalMushSupply: Readable<number> = readable(

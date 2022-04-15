@@ -13,10 +13,9 @@
 		getTokenAllowance,
 		isNotZero
 	} from '$lib/utils/erc20';
-	import { metaMaskCon } from '$lib/utils/helpers';
+	import { metaMaskCon } from '$lib/utils/metamaskCalls';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { Token } from '$lib/types/types';
-	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import { BigNumber } from 'ethers';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
@@ -220,7 +219,7 @@
 							</p>
 							{#if userTokens}
 								<p class="pl-1 dark:text-white font-medium tracking-tighter">
-									{parseBigNumberToString(userTokens)}
+									{Number(ethers.utils.formatEther(userTokens)).toFixed(4)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{:else}
@@ -299,7 +298,7 @@
 							</p>
 							{#if stakedTokens}
 								<p class="font-medium pl-1 dark:text-white  tracking-tight">
-									{parseBigNumberToString(stakedTokens)}
+									{Number(ethers.utils.formatEther(stakedTokens)).toFixed(4)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
 							{:else}

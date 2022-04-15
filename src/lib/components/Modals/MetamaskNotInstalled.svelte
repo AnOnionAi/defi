@@ -1,18 +1,28 @@
-<script>
+<script lang="ts">
+	import { darkMode } from '$lib/stores/dark';
+
 	import { goInstallMetamask } from '$lib/utils/metamaskCalls';
 </script>
 
-<div class="flex flex w-full flex-col items-center p-5">
+<div
+	class="-m-5   flex flex-col items-center rounded-md py-12	  {$darkMode &&
+		'bg-neutral-900'}">
 	<img
 		src="/assets/upsetMush.png"
 		alt="Upset Mushroom Drawing"
 		class="w-30 mb-3" />
-	<h2 class="text-xl font-medium text-red-500">Metamask not Installed</h2>
-	<p class="-mt-1 text-sm">
-		To complete this action you need to have metamask in your browser
+	<h2
+		class="text-xl font-medium text-primary-400 {$darkMode &&
+			'text-analogPurple-400'}">
+		Metamask not Installed
+	</h2>
+	<p class=" text-sm text-gray-800 {$darkMode && 'text-gray-200'}">
+		You must install Metamask first.
 	</p>
 	<button
 		on:click={goInstallMetamask}
-		class="mt-4 rounded-lg bg-green-500 bg-green-400 py-2 px-4 text-sm text-white hover:bg-green-400"
+		class="mt-4 rounded-lg  {$darkMode
+			? 'bg-triadicGreen-700 hover:bg-triadicGreen-800'
+			: 'bg-triadicGreen-600 hover:bg-triadicGreen-500'} py-3 px-6  font-medium text-white  "
 		>Install Metamask</button>
 </div>

@@ -2,13 +2,9 @@
 	import { slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import type {
-		LoadingState,
-		PoolInfo,
-		PoolInfoResponse
-	} from '$lib/types/types';
+	import type { LoadingState, PoolInfo } from '$lib/types/types';
 	import { Token } from '$lib/types/types';
-	import { metaMaskCon } from '$lib/utils/helpers';
+	import { metaMaskCon } from '$lib/utils/metamaskCalls';
 	import {
 		approveToken,
 		getTokenAllowance,
@@ -29,10 +25,7 @@
 		getPoolInfo,
 		deposit,
 		withdraw,
-		getMushPerBlock,
-		getPoolMultiplier,
-		getPoolWeight,
-		masterChefContract
+		getMushPerBlock
 	} from '$lib/utils/masterc';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
@@ -131,7 +124,7 @@
 		const poolInfo = await getPoolInfo(info.pid);
 		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 
-		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
+		poolMultiplier = 2;
 		stakingTokenPrice = await getStakingTokenPrice();
 
 		const sta: BigNumber = await getTokenBalance(
@@ -143,7 +136,7 @@
 		);
 		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
 
-		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
+		const poolWeightbn = BigNumber.from(3);
 		const tokenPerBlock = await getMushPerBlock();
 		const mushPerBlock: number = parseFloat(
 			ethers.utils.formatEther(tokenPerBlock)
@@ -259,11 +252,15 @@
 	};
 
 	const openMetamaskAlertModal = () => {
-		open(MetamaskNotInstalled, {
-			closeButton: true,
-			closeOnEsc: true,
-			closeOnOuterClick: true
-		});
+		open(
+			MetamaskNotInstalled,
+			{},
+			{
+				closeButton: false,
+				closeOnEsc: true,
+				closeOnOuterClick: true
+			}
+		);
 	};
 
 	const showPoolInfo = () => {

@@ -1,7 +1,6 @@
 import ERC20ABI from '$lib/config/abi/ERC20.json';
 import { BigNumber, ethers } from 'ethers';
-import { getSigner } from './helpers';
-import { getProviderSingleton } from './web3Helpers';
+import { web3Provider, getSigner } from './web3Utils';
 
 export const getERC20Contract = (
 	address: string,
@@ -13,7 +12,7 @@ export const getTokenAllowance = async (
 	spenderAddr: string,
 	userAddress: string
 ): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, web3Provider);
 	return tokenContract.allowance(userAddress, spenderAddr);
 };
 
@@ -21,31 +20,31 @@ export const getTokenBalance = async (
 	tokenAddress: string,
 	userAddress: string
 ): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, web3Provider);
 	return tokenContract.balanceOf(userAddress);
 };
 
 export const getTokenDecimals = async (
 	tokenAddress: string
 ): Promise<number> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, web3Provider);
 	return tokenContract.decimals();
 };
 
 export const getTokenName = async (tokenAddress: string): Promise<string> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, web3Provider);
 	return tokenContract.name();
 };
 
 export const getTokenSymbol = async (tokenAddress: string): Promise<string> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, web3Provider);
 	return tokenContract.symbol();
 };
 
 export const getTokenTotalSupply = async (
 	tokenAddress: string
 ): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, web3Provider);
 	return tokenContract.totalSupply();
 };
 

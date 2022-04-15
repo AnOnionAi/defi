@@ -8,14 +8,6 @@
 	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import DepositWarning from '$lib/components/Cards/DepositWarning.svelte';
-
-	/* 	let backgroundImage;
-
-	darkMode.subscribe((darkEnabled) => {
-		darkEnabled
-			? (backgroundImage = '/theme/farms/gradientMushroom.png')
-			: (backgroundImage = '/theme/farms/gradientMushroom.');
-	}); */
 </script>
 
 <section class=" farms flex h-full flex-col pb-5">
@@ -24,7 +16,6 @@
 	<div class="w-23/24 mx-auto flex max-w-7xl flex-1 items-center">
 		<div
 			class="flex flex-row  flex-wrap justify-center gap-6 rounded-xl  text-center">
-			<!--Start Farms-->
 			{#each farms as farm}
 				<PoolCard info={farm} isFarm={true} />
 			{/each}

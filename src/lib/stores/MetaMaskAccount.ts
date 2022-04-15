@@ -24,6 +24,7 @@ export async function metamaskConnect(): Promise<void> {
 }
 
 export async function retrieveUserAddress(): Promise<string | null> {
+	if (!window.ethereum) return;
 	const address = window.ethereum.selectedAddress;
 	const currentBlockchain = await window.ethereum.request({
 		method: 'eth_chainId'

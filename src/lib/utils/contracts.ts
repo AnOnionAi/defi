@@ -8,12 +8,12 @@ import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
 import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
 import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import DividendsABI from '$lib/config/abi/Dividends.json';
+
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/types/types';
 import { BigNumber, ethers } from 'ethers';
-import { getSigner } from './helpers';
 import { MINICHEF_ADDRESS } from '$lib/config';
-import { getProvider } from './web3Helpers';
+import { web3Provider, getSigner } from './web3Utils';
 
 export const getMasterChefContract = (): ethers.Contract => {
 	const masterChefContract = new ethers.Contract(
@@ -65,10 +65,7 @@ export const getUniFactoryContract = (): ethers.Contract => {
 };
 
 export const getLiquidityPairContract = (address: string): ethers.Contract => {
-	const provider = new ethers.providers.JsonRpcProvider(
-		'https://polygon-rpc.com/'
-	);
-	const univ2Pair = new ethers.Contract(address, pairABI, provider);
+	const univ2Pair = new ethers.Contract(address, pairABI, web3Provider);
 	return univ2Pair;
 };
 
@@ -151,7 +148,7 @@ export const getVaultChefContract = (): ethers.Contract => {
 export const vaultChef = new ethers.Contract(
 	getContractAddress(Token.VAULTCHEF),
 	VaultChefABI,
-	getProvider()
+	web3Provider
 );
 
 export const getMushStrategyContract = (): ethers.Contract => {
@@ -167,9 +164,9 @@ export const getMushStrategyContract = (): ethers.Contract => {
 export const miniChefV2 = new ethers.Contract(
 	MINICHEF_ADDRESS,
 	MiniChefV2,
-	getProvider()
+	web3Provider
 );
 
 export const getSushiswapStrategyContract = (strategyAddress: string) => {
-	return new ethers.Contract(strategyAddress, StrategySushiswap, getProvider());
+	return new ethers.Contract(strategyAddress, StrategySushiswap, web3Provider);
 };

@@ -11,12 +11,12 @@
 	import DepositWarning from '$lib/components/Cards/DepositWarning.svelte';
 </script>
 
-<section class="background {$darkMode && 'background__dark'}">
+<section class="background {$darkMode && 'background__dark'} pb-4">
 	<DepositWarning />
 	<PageHeader text={$_('headers.pools.text')} />
 	<div class=" mt-5 space-y-4 ">
 		<div
-			class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-8 text-center ">
+			class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-2 text-center ">
 			{#each pools as pool}
 				<PoolCard info={pool} />
 			{/each}

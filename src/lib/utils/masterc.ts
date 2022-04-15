@@ -1,16 +1,14 @@
 import type { BigNumber } from 'ethers';
 import { ethers } from 'ethers';
-import { ethersToBigNumber } from './bigNumber';
-import { getProviderSingleton } from './web3Helpers';
 import MasterChefABI from '$lib/config/abi/MasterChef.json';
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/types/types';
-import { getSigner } from './helpers';
+import { web3Provider, getSigner } from './web3Utils';
 
 export const masterChefContract = new ethers.Contract(
 	getContractAddress(Token.MASTERCHEF),
 	MasterChefABI,
-	getProviderSingleton()
+	web3Provider
 );
 
 export const getDevAddress = async (): Promise<string> =>
@@ -99,21 +97,4 @@ export const getStakedTokens = async (
 ): Promise<BigNumber> => {
 	const { amount } = await getUserInfo(pid, userAddress);
 	return amount;
-};
-
-export const getPoolWeight = (
-	totalAllocPoints: BigNumber,
-	poolAllocPoints: BigNumber
-) => {
-	const totalAP = ethersToBigNumber(totalAllocPoints);
-	const poolAP = ethersToBigNumber(poolAllocPoints);
-	const poolWeight = poolAP.div(totalAP);
-
-	return poolWeight;
-};
-
-export const getPoolMultiplier = (poolAllocPoints: BigNumber): number => {
-	const poolAp = ethersToBigNumber(poolAllocPoints);
-	const multiplier = poolAp.toNumber() / 1000;
-	return multiplier;
 };

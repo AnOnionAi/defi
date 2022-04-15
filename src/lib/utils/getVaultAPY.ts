@@ -5,7 +5,7 @@ import { getTokenBalance } from './erc20';
 import { BLOCKS_PER_YEAR, SUSHI_TOKEN_ADDRESS } from '$lib/config/index';
 import { getSushiPerBlock } from './sushiSwapUtils';
 import { getLPTokenPrice } from './lpTokenUtils';
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import { getSushiswapStrategyContract } from './contracts';
 
 const getSushiPoolApr = (
@@ -45,7 +45,7 @@ export const getVaultAPYandAPR = async (
 		ethers.utils.formatEther(stakedInStrategy)
 	);
 
-	console.table({
+	/* 	console.table({
 		name: `${vault.pair.token0Name} + ${vault.pair.token1Name}`,
 		TVLonMINICHEF: lpTokenPrice * parsedTotalStaked,
 		parsedTotalStaked,
@@ -54,7 +54,7 @@ export const getVaultAPYandAPR = async (
 		lpTokenPrice,
 		sushiPerBlock,
 		MATIC_PER_BLOCK
-	});
+	}); */
 	const apr = getSushiPoolApr(
 		lpTokenPrice,
 		sushiPrice,
