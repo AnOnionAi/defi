@@ -155,3 +155,16 @@ export interface LoadingState {
 	loadingWithdraw?: boolean;
 	loadingHarvest?: boolean;
 }
+
+export interface PoolStats {
+	poolMultiplier: number;
+	depositFee: number;
+	tokenPerBlock: number;
+	totalStaked: number;
+}
+
+export interface PoolUserInfo {
+	poolAllowance: BigNumber;
+	stakedTokens: BigNumber;
+	pendingReward: BigNumber;
+}

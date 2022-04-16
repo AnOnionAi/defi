@@ -17,9 +17,7 @@
 	<div class=" mt-5 space-y-4 ">
 		<div
 			class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-2 text-center ">
-			{#each pools as pool}
-				<PoolCard info={pool} />
-			{/each}
+			{#each pools as pool}{/each}
 		</div>
 	</div>
 </section>

@@ -2,7 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import type { LoadingState, PoolInfo } from '$lib/types/types';
+	import type { LoadingState, PoolInfo, PoolStats } from '$lib/types/types';
 	import { Token } from '$lib/types/types';
 	import { metaMaskCon } from '$lib/utils/metamaskCalls';
 	import {
@@ -52,9 +52,10 @@
 	const { open } = getContext('simple-modal');
 
 	export let info: PoolInfo;
+	export let stats: PoolStats;
 	export let isFarm = false;
+	export let userAcc: string;
 
-	let poolFeePercentage: number;
 	let poolLiquidityUSD: number;
 	let poolApr;
 	let loadingState: LoadingState = {
@@ -64,15 +65,7 @@
 		loadingHarvest: false
 	};
 
-	let poolMultiplier: number;
-	let stakingTokenDecimals;
 	let isHidden = true;
-
-	let userAcc: string;
-	let tokenApproved: boolean;
-	let canStake: boolean;
-	let canWithdraw: boolean;
-	let canHarvest: boolean;
 
 	let tokenAllowance: BigNumber = ethers.constants.Zero;
 	let userBalance: BigNumber = ethers.constants.Zero;
@@ -80,12 +73,19 @@
 	let userStakedTokens: BigNumber = ethers.constants.Zero;
 
 	$: rewardTokenPrice = $tokenPrice;
-	$: userAcc = $accounts?.[0];
 
 	$: tokenApproved = !tokenAllowance.isZero();
 	$: canStake = !tokenAllowance.isZero() && !userBalance.isZero();
 	$: canWithdraw = !userStakedTokens.isZero();
 	$: canHarvest = !userEarnings.isZero();
+
+	let stakingTokenPrice;
+
+	onMount(async () => {
+		stakingTokenPrice = isFarm
+			? getPriceOfMushPair(info.tokenAddr)
+			: getPoolTokenPriceUSD(info.tokenAddr);
+	});
 
 	const showPoolInfo = () => {
 		isHidden = !isHidden;
@@ -100,7 +100,7 @@
 			{#if isFarm}
 				<SushiswapBadge />
 			{/if}
-			<MultiplierBadge multiplier={poolMultiplier} />
+			<MultiplierBadge multiplier={stats.poolMultiplier} />
 		</div>
 	</div>
 	<div class="flex h-[496px] w-[332px] flex-col py-4 px-8">
@@ -134,8 +134,8 @@
 			<p class="capitalize  text-gray-800 dark:text-gray-200">
 				{$_('actions.depositFee')}:
 			</p>
-			{#if poolFeePercentage != null}
-				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
+			{#if stats.depositFee}
+				<p class="font-medium dark:text-white">{stats.depositFee}%</p>
 			{:else}
 				<p
 					class="w-12 h-full bg-neutral-200 dark:bg-neutral-700 rounded-lg animate-pulse" />
@@ -192,12 +192,12 @@
 					{#if userStakedTokens}
 						<p class="flex text-xl dark:text-white">
 							{parseFloat(
-								ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)
+								ethers.utils.formatUnits(userStakedTokens, info.tokenDecimals)
 							).toFixed(1)}
-							{#if parseFloat(ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)) < 0.0001 && !userStakedTokens.isZero()}
+							{#if parseFloat(ethers.utils.formatUnits(userStakedTokens, info.tokenDecimals)) < 0.0001 && !userStakedTokens.isZero()}
 								<span
 									>.... {ethers.utils
-										.formatUnits(userStakedTokens, stakingTokenDecimals)
+										.formatUnits(userStakedTokens, info.tokenDecimals)
 										.slice(-2)}</span>
 							{/if}
 						</p>

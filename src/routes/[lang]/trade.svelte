@@ -3,64 +3,37 @@
 </script>
 
 <script lang="ts">
-	import { sushiVaults } from '$lib/config/constants/vaults';
+	import PoolCard from '$lib/components/Cards/PoolCard.svelte';
+	import { BLOCK_TIMER } from '$lib/config';
+	import { pools } from '$lib/config/constants/pools';
+	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { fetchPools } from '$lib/utils/fetchPools';
+	import fetchPoolUser from '$lib/utils/fetchPoolUser';
+	import { useQuery } from '@sveltestack/svelte-query';
 
-	import { getVaultAPYandAPR } from '$lib/utils/getVaultAPY';
-
-	import {
-		getLPTokenPrice,
-		getParsedLPTokenReserves
-	} from '$lib/utils/lpTokenUtils';
-	import { getSushiPerBlock } from '$lib/utils/sushiSwapUtils';
-
-	import { onMount } from 'svelte';
-
-	import { getNotificationsContext } from 'svelte-notifications';
-
-	const { addNotification } = getNotificationsContext();
-
-	const addErrorNotification = () => {
-		addNotification({
-			position: 'top-right',
-			text: 'Error Notification',
-			type: 'error'
-		});
-	};
-
-	const addSuccessNotification = () => {
-		addNotification({
-			position: 'top-right',
-			text: 'Error Notification',
-			type: 'success'
-		});
-	};
-
-	const addWarningNotification = () => {
-		addNotification({
-			position: 'top-right',
-			text: 'Warning Notification',
-			type: 'warning'
-		});
-	};
-
-	onMount(async () => {
-		await fetchPools();
+	const poolQueryResult = useQuery('poolInfo', async () => await fetchPools(), {
+		refetchOnMount: false,
+		refetchInterval: 2500,
+		refetchIntervalInBackground: true
 	});
+
+	fetchPoolUser('0x42D73a757E63a18a70C8a86564e405dEca81967c');
+	/* const poolUserQueryResult = useQuery(
+		'poolUserInfo',
+		async () => await fetchPoolUser($accounts?.[0])
+	); */
 </script>
 
 <section>
-	<br />
-	<h1 class="text-dark-200 text-center text-4xl dark:text-white">Test Page</h1>
-	<button
-		on:click={addErrorNotification}
-		class="rounded-lg bg-black px-4 py-2 text-white">Error Notification</button>
-	<button
-		on:click={addSuccessNotification}
-		class="rounded-lg bg-black px-4 py-2 text-white"
-		>Success Notification</button>
-	<button
-		on:click={addWarningNotification}
-		class="rounded-lg bg-black px-4 py-2 text-white"
-		>Success Notification</button>
+	<div
+		class="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-y-9 gap-x-6 p-2 text-center ">
+		{#if $poolQueryResult.data}
+			{#each $poolQueryResult.data as pool, i}
+				<PoolCard stats={pool} info={pools[i]} userAcc={$accounts?.[0]} />
+			{/each}
+		{/if}
+		{#if $poolQueryResult.isLoading}
+			<h1 class="text-center">Loading...</h1>
+		{/if}
+	</div>
 </section>

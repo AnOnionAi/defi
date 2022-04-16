@@ -35,16 +35,25 @@ export const fetchPools = async () => {
 	const nativePerSecond = batchReponse.pop();
 	const totalTokenPerBlock =
 		Number(ethers.utils.formatEther(nativePerSecond)) * 2;
-	console.log('Total Alloc Point', totalAllocPoint);
-	console.log(totalTokenPerBlock);
 
-	const poolsData = batchReponse.map((response, i) => ({
-		depositFeePercentage: response.depositFeeBP / 100,
-		stakedInPool: response.lpSupply,
-		allocPoint: Number(response.allocPoint.toString()),
-		poolMultiplier: Number(response.allocPoint.toString()) / 1000,
-		poolWeight: Number(response.allocPoint.toString()) / totalAllocPoint
-	}));
+	const poolsData = batchReponse.map((response, i) => {
+		const poolAllocPoints = Number(response.allocPoint.toString());
+		const tokenPerBlock = isFinite(
+			(totalTokenPerBlock * poolAllocPoints) / totalAllocPoint
+		)
+			? (totalTokenPerBlock * poolAllocPoints) / totalAllocPoint
+			: 0;
+		const totalStaked = Number(
+			ethers.utils.formatUnits(response.lpSupply, pools[i].tokenDecimals)
+		);
 
-	console.log(poolsData);
+		return {
+			poolMultiplier: Number(response.allocPoint.toString()) / 1000,
+			depositFee: response.depositFeeBP / 100,
+			tokenPerBlock,
+			totalStaked
+		};
+	});
+	console.log('BLOCK IS: ', block);
+	return poolsData;
 };
