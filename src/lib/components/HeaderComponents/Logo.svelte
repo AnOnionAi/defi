@@ -8,7 +8,7 @@
 	<a
 		href={`/${$page.params.lang}/`}
 		class="flex cursor-pointer items-center gap-1">
-		<img class="mr-1 w-10" src="/theme/fiji.svg" alt="Fung Finance Logo" />
+		<img class="mr-1 w-10" src="/theme/fiji.webp" alt="Fung Finance Logo" />
 		{#if $darkMode}
 			<img
 				src="/theme/fungfiDarkMode.svg"

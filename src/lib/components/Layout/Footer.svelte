@@ -124,7 +124,10 @@
 					size="lg"
 					class="transition duration-300 hover:text-[#229ED9]" />
 			</a>
-			<a href="https://discord.gg/vqEVtvFVNA" class="mr-3 lg:mr-5" target="_blank">
+			<a
+				href="https://discord.gg/vqEVtvFVNA"
+				class="mr-3 lg:mr-5"
+				target="_blank">
 				<Fa
 					icon={faDiscord}
 					size="lg"
