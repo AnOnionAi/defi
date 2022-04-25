@@ -118,7 +118,7 @@
 					class="transition duration-300 hover:text-[#1DA1F2]" />
 			</a>
 			<a
-				href="https://telegram.com/fungfi"
+				href="https://t.me/FungFiOfficial"
 				target="_blank"
 				aria-label="Telegram"
 				class="mr-3 lg:mr-5">
