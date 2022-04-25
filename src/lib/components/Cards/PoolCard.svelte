@@ -129,8 +129,9 @@
 	onMount(async () => {
 		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
 		const poolInfo = await getPoolInfo(info.pid);
-		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
+		console.log(poolInfo.depositFeeBP);
 
+		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
 		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
 		stakingTokenPrice = await getStakingTokenPrice();
 

@@ -39,7 +39,9 @@
 		<div
 			class="ml-0  flex items-center justify-center lg:ml-5 lg:justify-start">
 			<a
-				href={`https://app.sushi.com/${$page.params.lang}/swap`}
+				href={`https://app.sushi.com/${
+					$page.params.lang ?? 'en'
+				}/trident/swap?tokens=MATIC&tokens=0x93C55AFcBB82594F7446537e4071fc6439E14f2a&chainId=137`}
 				target="_blank"
 				class="rounded-full bg-complementary-600 px-3 py-1 font-[500] text-white transition duration-300  hover:bg-complementary-500  "
 				>Buy $MUSH &rarr;</a>
@@ -57,7 +59,8 @@
 			</a>
 
 			<a
-				href="https://fung.wiki/"
+				href="https://docs.fungfi.com/"
+				target="_blank"
 				class="mr-5 transition duration-300 hover:text-complementary-500"
 				>Wiki</a>
 			<a
