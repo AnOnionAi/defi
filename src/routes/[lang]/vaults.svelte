@@ -38,7 +38,7 @@
 	let sortBy: string;
 	let filterBy: string;
 	let filtersApplied: Array<VaultFilterFunction> = [];
-
+	/* 
 	onMount(async () => {
 		const vaultsData: Array<VaultInfo> = [...quickVaults, ...sushiVaults];
 
@@ -67,7 +67,7 @@
 			})
 		);
 
-		/* allVaults = vaultsData.map((vault) => {
+		allVaults = vaultsData.map((vault) => {
 			return {
 				...vault,
 				apy: Math.random() * $tokenPrice * 100,
@@ -75,7 +75,7 @@
 				userWalletBalance: generateRandomBalance(), //TODO: remove this random to the actual api calls.
 				stakedAmount: generateRandomBalance()
 			};
-		}); */
+		});
 	});
 
 	$: {
@@ -91,7 +91,6 @@
 
 	$: {
 		if (sortBy || filterBy) {
-			//This will trigger the sorting everytime a state variable is updated.
 			handleFilerAndSort();
 		}
 	}
@@ -118,13 +117,13 @@
 			);
 			filteredVaults = [...sortedVaults];
 		}
-	};
+	}; */
 
 	console.log($timeLeftForLaunch, 'TIME FOR LAUNCH');
 </script>
 
 <section class="pb-3 ">
-	{#if $timeLeftForLaunch.daysLeft <= 0}
+	{#if $timeLeftForLaunch.daysLeft <= 0 && $timeLeftForLaunch.hoursLeft == 0}
 		<ComingSoon />
 	{:else}
 		<DisabledFeature />
