@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class="{$timeLeftForLaunch.daysLeft <= 0 &&
+	class="{$timeLeftForLaunch.daysLeft < 0 &&
 		'hidden'} select-none bg-primary-300 py-2 px-4 text-center text-sm font-semibold text-gray-100 dark:bg-analogPurple-300 md:text-base">
 	⚠️ {$_('depositWarning.warning')}:
 	<br class="lg:hidden" />
