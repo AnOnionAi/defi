@@ -62,7 +62,7 @@
 </script>
 
 <section class="flex h-full flex-col">
-	{#if $timeLeftForLaunch.daysLeft > 0}
+	{#if $timeLeftForLaunch.daysLeft >= 0}
 		<ComingSoon />
 	{:else}
 		<PageHeader text={$_('headers.dividends.text')} />
