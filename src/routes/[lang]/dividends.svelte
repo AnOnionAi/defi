@@ -24,6 +24,7 @@
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import { timeLeftForLaunch } from '$lib/stores/launchDate';
 	import ComingSoon from '$lib/components/Cards/ComingSoon.svelte';
+	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
 	const { addNotification } = getNotificationsContext();
 
 	let userAccount: string;
@@ -65,7 +66,8 @@
 	{#if $timeLeftForLaunch.daysLeft >= 0}
 		<ComingSoon />
 	{:else}
-		<PageHeader text={$_('headers.dividends.text')} />
+		<DisabledFeature />
+		<!-- <PageHeader text={$_('headers.dividends.text')} />
 		<div class="flex-1">
 			<div
 				class="dividends-wrapper {$darkMode
@@ -85,7 +87,7 @@
 					{/if}
 				</div>
 			</div>
-		</div>
+		</div> -->
 	{/if}
 </section>
 
