@@ -118,10 +118,12 @@
 			filteredVaults = [...sortedVaults];
 		}
 	};
+
+	console.log($timeLeftForLaunch, 'TIME FOR LAUNCH');
 </script>
 
 <section class="pb-3 ">
-	{#if $timeLeftForLaunch.daysLeft > 0}
+	{#if $timeLeftForLaunch.daysLeft <= 0}
 		<ComingSoon />
 	{:else}
 		<PageHeader text={$_('headers.vaults.text')} />
