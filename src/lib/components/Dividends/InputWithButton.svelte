@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let disableInput = false;
 	export let handleButton: () => void;
-	export let buttonDisabled = false;
+	export let buttonDisabled;
 	export let isLoading = false;
 	export let buttonText: string;
 	import { Chasing } from 'svelte-loading-spinners';
@@ -9,6 +9,10 @@
 	import { _ } from 'svelte-i18n';
 
 	export let inputValue;
+
+	$: {
+		console.log('IS THE BUTTON DISSABLED', buttonDisabled);
+	}
 </script>
 
 <div class="">

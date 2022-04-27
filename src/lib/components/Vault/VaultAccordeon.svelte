@@ -225,7 +225,7 @@
 								</p>
 							{:else}
 								<p class="pl-1 dark:text-white font-semibold text-sm">
-									0.000000000000000000 WMATIC-USDC
+									0 {vaultConfig.pair.token0Name}-{vaultConfig.pair.token1Name}
 									<!-- N/A {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name} -->
 								</p>
 							{/if}
