@@ -20,6 +20,7 @@ interface ERC20MetaData {
 	supports_erc20: Array<string>;
 	logo_url: string;
 	last_transferred_at: string;
+	contract_ticker_symbol: string;
 	type: string;
 	balance: string;
 	balance_24h: string;
@@ -30,6 +31,7 @@ interface ERC20MetaData {
 	nft_data: string;
 }
 
+//hardpatched, refactor this in a future please.
 export const getPortfolioValue = async (address: string): Promise<number> => {
 	const APIURL = `https://api.covalenthq.com/v1/137/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=${
 		import.meta.env.VITE_COVALENT_API_KEY
@@ -39,14 +41,28 @@ export const getPortfolioValue = async (address: string): Promise<number> => {
 		const { data } = await response.json();
 		const dataReponse: TokenBalancesResponse = data;
 		const { items } = dataReponse;
-		const [farmToken, ...otherTokens] = items;
+		const whiteList = [
+			'USDC',
+			'WMATIC',
+			'CRYSTL',
+			'WETH',
+			'WBTC',
+			'DAI',
+			'LINK',
+			'POLYDOGE',
+			'MATIC'
+		];
 
-		let accumulatedUSDValue = 0;
+		const filteredTokens = items.filter((asset) =>
+			whiteList.includes(asset.contract_ticker_symbol.toUpperCase())
+		);
 
-		otherTokens.forEach((token) => {
-			accumulatedUSDValue += token.quote;
-		});
-		return accumulatedUSDValue;
+		let usdValue = 0;
+
+		for (const token of filteredTokens) {
+			usdValue += token.quote;
+		}
+		return usdValue;
 	} catch {
 		return 0;
 	}
