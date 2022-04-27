@@ -22,9 +22,6 @@
 	} from '$lib/config/constants/notifications';
 	import { darkMode } from '$lib/stores/dark';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
-	import { timeLeftForLaunch } from '$lib/stores/launchDate';
-	import ComingSoon from '$lib/components/Cards/ComingSoon.svelte';
-	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
 	const { addNotification } = getNotificationsContext();
 
 	let userAccount: string;
@@ -63,32 +60,27 @@
 </script>
 
 <section class="flex h-full flex-col">
-	{#if $timeLeftForLaunch.daysLeft >= 0}
-		<ComingSoon />
-	{:else}
-		<DisabledFeature />
-		<!-- <PageHeader text={$_('headers.dividends.text')} />
-		<div class="flex-1">
+	<PageHeader text={$_('headers.dividends.text')} />
+	<div class="flex-1">
+		<div
+			class="dividends-wrapper {$darkMode
+				? 'mushHouseBackground'
+				: 'smallMushBackground'}">
 			<div
-				class="dividends-wrapper {$darkMode
-					? 'mushHouseBackground'
-					: 'smallMushBackground'}">
-				<div
-					class="dividends my-7 mx-2 h-[680px]  w-[380px] rounded-2xl p-5 md:w-[432px]  lg:w-[460px] {!$darkMode &&
-						'drop-shadow-2xl'} bg-white transition  duration-500 dark:bg-neutral-800">
-					{#if approved}
-						<div in:fade={{ duration: 200 }} class="h-full">
-							<DividendCard />
-						</div>
-					{:else if $accounts && finishedApprovalFetch}
-						<ApproveMush onApproval={handleApproval} />
-					{:else if !$accounts}
-						<Connect />
-					{/if}
-				</div>
+				class="dividends my-7 mx-2 h-[680px]  w-[380px] rounded-2xl p-5 md:w-[432px]  lg:w-[460px] {!$darkMode &&
+					'drop-shadow-2xl'} bg-white transition  duration-500 dark:bg-neutral-800">
+				{#if approved}
+					<div in:fade={{ duration: 200 }} class="h-full">
+						<DividendCard />
+					</div>
+				{:else if $accounts && finishedApprovalFetch}
+					<ApproveMush onApproval={handleApproval} />
+				{:else if !$accounts}
+					<Connect />
+				{/if}
 			</div>
-		</div> -->
-	{/if}
+		</div>
+	</div>
 </section>
 
 <style>
