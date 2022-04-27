@@ -6,7 +6,8 @@
 	import {
 		faDiscord,
 		faGithub,
-		faTwitter
+		faTwitter,
+		faReddit
 	} from '@fortawesome/free-brands-svg-icons';
 	import { faTelegram } from '@fortawesome/free-brands-svg-icons';
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -106,6 +107,16 @@
 					icon={faYoutube}
 					size="lg"
 					class=" transition duration-300 hover:text-[#FF0000]" />
+			</a>
+			<a
+				href="https://www.reddit.com/r/fungfi/"
+				target="_blank"
+				aria-label="Twitter"
+				class="mr-3 lg:mr-5">
+				<Fa
+					icon={faReddit}
+					size="lg"
+					class="transition duration-300 hover:text-[#FF5700]" />
 			</a>
 			<a
 				href="https://twitter.com/fung_fi"
