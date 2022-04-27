@@ -67,6 +67,6 @@ export const vaultsTVL: Readable<number> = readable(0, function start(set) {
 export const totalValueLocked = derived(
 	[poolsTVL, farmsTVL, vaultsTVL],
 	([$poolsTVL, $farmsTVL, $vaultsTVL]) => {
-		return $poolsTVL + $farmsTVL + $vaultsTVL;
+		return $poolsTVL + $farmsTVL;
 	}
 );
