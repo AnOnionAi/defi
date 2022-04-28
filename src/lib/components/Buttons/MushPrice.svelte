@@ -3,8 +3,12 @@
 		fetchNativeTokenPrice,
 		tokenPrice
 	} from '$lib/stores/NativeTokenPrice';
+	import { Token } from '$lib/types/types';
+	import { getContractAddress } from '$lib/utils/addressHelpers';
 	fetchNativeTokenPrice();
-	const swapperURL = `https://app.sushi.com/swap?inputCurrency=${'0x2791bca1f2de4661ed88a30c99a7a9449aa84174'}&outputCurrency=${'0x627F699300A9D693FBB84F9Be0118D17A1387D4e'}`;
+	const swapperURL = `https://app.sushi.com/swap?inputCurrency=${getContractAddress(
+		Token.USDC
+	)}&outputCurrency=${getContractAddress(Token.MUSHTOKEN)}`;
 </script>
 
 <a href={swapperURL} target="_blank" class="group flex items-center">
