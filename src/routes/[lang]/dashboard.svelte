@@ -142,7 +142,7 @@
 		}`;
 		const response = await fetch(APIURL);
 		const { data } = await response.json();
-		console.log(data);
+
 		const tokenData = data[0];
 		const monthsName = getMonthsEnshortedNames($page.params.lang);
 

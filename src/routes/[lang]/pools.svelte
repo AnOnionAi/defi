@@ -8,11 +8,9 @@
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import { pools } from '$lib/config/constants/pools';
 	import { darkMode } from '$lib/stores/dark';
-	import DepositWarning from '$lib/components/Cards/DepositWarning.svelte';
 </script>
 
 <section class="background {$darkMode && 'background__dark'}">
-	<DepositWarning />
 	<PageHeader text={$_('headers.pools.text')} />
 	<div class=" mt-5 space-y-4 ">
 		<div

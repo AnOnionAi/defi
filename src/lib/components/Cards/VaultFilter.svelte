@@ -22,10 +22,6 @@
 	import StyledSearchbar from '../FormElements/StyledSearchbar.svelte';
 	import StyledSwitch from '../FormElements/StyledSwitch.svelte';
 
-	$: {
-		console.log('Sort by: ' + sortBy);
-		console.log('Filter by: ' + filterBy);
-	}
 	const handleHideZeroBalancesFilter = () => {
 		hideZeroBalances = !hideZeroBalances; //Toggles the state
 		if (hideZeroBalances) {

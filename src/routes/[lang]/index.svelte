@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/stores/dark';
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
 	import { time, _ } from 'svelte-i18n';
-	import { timeLeftForLaunch } from '$lib/stores/launchDate';
 
 	function getLocale(lang) {
-		console.log('LANG: ', lang);
 		switch (lang) {
 			case 'en':
 				return 'en-US';
@@ -25,28 +22,6 @@
 
 <section
 	class="flex h-full select-none flex-col bg-paper transition duration-500 dark:bg-darkGrey-900    ">
-	{#if $timeLeftForLaunch.daysLeft >= 0}
-		<div class=" w-full bg-primary-400 py-2 px-6 dark:bg-analogPurple-300 ">
-			<h2
-				class=" hidden text-center text-xl font-semibold text-white md:block md:text-2xl">
-				{$_('launchTimeLeft.countdown')}
-				{#if $timeLeftForLaunch.daysLeft >= 0}
-					{$timeLeftForLaunch.daysLeft} DAYS {$timeLeftForLaunch.hoursLeft} HOURS
-					{$timeLeftForLaunch.minutesLeft} MINUTES {$timeLeftForLaunch.secondsLeft}
-					SECONDS 🚀
-				{/if}
-			</h2>
-
-			<h2
-				class="block text-center text-lg font-semibold text-white md:hidden md:text-2xl">
-				COUNTDOWN TO LAUNCH T - <br />
-				{#if $timeLeftForLaunch.daysLeft >= 0}
-					{$timeLeftForLaunch.daysLeft}D {$timeLeftForLaunch.hoursLeft}H
-					{$timeLeftForLaunch.minutesLeft}M {$timeLeftForLaunch.secondsLeft}S 🚀
-				{/if}
-			</h2>
-		</div>
-	{/if}
 	<div
 		class=" flex flex-1 flex-col items-center justify-center text-gray-900 dark:text-white">
 		<div class="mb-8 flex flex-col items-center">

@@ -29,7 +29,7 @@
 
 	let pollingInterval;
 
-	let TVL: BigNumber = ethers.constants.Zero;
+	let stakedMush: BigNumber = ethers.constants.Zero;
 	let userAddress: string;
 	let userBalance: BigNumber = ethers.constants.Zero;
 	let userStakedTokens: BigNumber = ethers.constants.Zero;
@@ -49,9 +49,13 @@
 	};
 
 	$: userAddress = $accounts?.[0];
-	$: userCanDeposit = !userBalance?.isZero();
-	$: userCanWithdraw = !userStakedTokens?.isZero();
-	$: userCanDeposit = !userReward?.isZero();
+	$: userCanDeposit = !userBalance.isZero();
+	$: userCanWithdraw = !userStakedTokens.isZero();
+	$: userCanDeposit = !userReward.isZero();
+	$: TVL =
+		$tokenPrice &&
+		stakedMush &&
+		$tokenPrice * parseFloat(ethers.utils.formatEther(stakedMush));
 
 	$: if (userAddress) {
 		refreshUserData();
@@ -71,8 +75,9 @@
 				userAddress
 			);
 			userStakedTokens = await stakedWantTokens(DIVIDENDS_PID, userAddress);
-			TVL = await getSharesTotal();
+			stakedMush = await getSharesTotal();
 			userReward = await getPendingReward(userAddress);
+			console.table({ userCanDeposit, userCanWithdraw, userCanHarvest });
 		} catch {
 			console.log('Failed on updating data');
 		}
@@ -82,7 +87,8 @@
 		addNotification(transactionSend);
 		try {
 			loadingState.loadingDeposit = true;
-			const tx = await deposit(2, depositInput.trim());
+			const tx = await deposit(DIVIDENDS_PID, depositInput.trim());
+			console.log(depositInput);
 			await tx.wait();
 			loadingState.loadingDeposit = false;
 			userBalance = userBalance.sub(
@@ -103,7 +109,7 @@
 		addNotification(transactionSend);
 		try {
 			loadingState.loadingWithdraw = true;
-			const tx = await withdraw(2, withdrawInput.trim());
+			const tx = await withdraw(DIVIDENDS_PID, withdrawInput.trim());
 			await tx.wait();
 			addNotification(transactionCompleted);
 			userBalance = userBalance.add(
@@ -154,10 +160,7 @@
 
 	<div class="mb-6 grid grid-cols-2 gap-y-3">
 		<DividendsInfoItem name={'APR'} info={0} thirdText="%" />
-		<DividendsInfoItem
-			name={'TVL'}
-			info={parseFloat(ethers.utils.formatEther(TVL))}
-			secondText="$" />
+		<DividendsInfoItem name={'TVL'} info={TVL} secondText="$" />
 		<DividendsInfoItem
 			name={'Wallet'}
 			info={parseFloat(ethers.utils.formatEther(userBalance))}
@@ -171,8 +174,8 @@
 	<div class="flex flex-1 flex-col justify-around">
 		<InputWithButton
 			bind:inputValue={depositInput}
-			bind:buttonDisabled={userCanDeposit}
-			bind:isLoading={loadingState.loadingDeposit}
+			buttonDisabled={userCanDeposit}
+			isLoading={loadingState.loadingDeposit}
 			handleButton={handleDeposit}
 			buttonText={$_('actions.deposit')}>
 			<p class="pl-1 dark:text-gray-100">

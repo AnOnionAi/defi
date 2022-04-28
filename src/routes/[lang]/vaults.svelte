@@ -14,10 +14,7 @@
 	import VaultAccordeon from '$lib/components/Vault/VaultAccordeon.svelte';
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import { onMount } from 'svelte';
-	import {
-		generateRandomBalance,
-		reduceFilters
-	} from '$lib/utils/filterFunctions';
+	import { reduceFilters } from '$lib/utils/filterFunctions';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import { getVaultAPYandAPR } from '$lib/utils/getVaultAPY';
@@ -25,10 +22,6 @@
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { BigNumber, ethers } from 'ethers';
 	import { vaultChef } from '$lib/utils/contracts';
-	import ComingSoon from '$lib/components/Cards/ComingSoon.svelte';
-	import { timeLeftForLaunch } from '$lib/stores/launchDate';
-	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
-
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
 	let platformSelected: string;
@@ -38,7 +31,7 @@
 	let sortBy: string;
 	let filterBy: string;
 	let filtersApplied: Array<VaultFilterFunction> = [];
-	/* 
+
 	onMount(async () => {
 		const vaultsData: Array<VaultInfo> = [...quickVaults, ...sushiVaults];
 
@@ -66,16 +59,6 @@
 				};
 			})
 		);
-
-		allVaults = vaultsData.map((vault) => {
-			return {
-				...vault,
-				apy: Math.random() * $tokenPrice * 100,
-				tvl: Math.random() * $tokenPrice,
-				userWalletBalance: generateRandomBalance(), //TODO: remove this random to the actual api calls.
-				stakedAmount: generateRandomBalance()
-			};
-		});
 	});
 
 	$: {
@@ -117,45 +100,38 @@
 			);
 			filteredVaults = [...sortedVaults];
 		}
-	}; */
-
-	console.log($timeLeftForLaunch, 'TIME FOR LAUNCH');
+	};
 </script>
 
 <section class="pb-3 ">
-	{#if $timeLeftForLaunch.daysLeft <= 0 && $timeLeftForLaunch.hoursLeft == 0}
-		<ComingSoon />
-	{:else}
-		<DisabledFeature />
-		<!-- <PageHeader text={$_('headers.vaults.text')} />
+	<PageHeader text={$_('headers.vaults.text')} />
 
-		<div class="mainContainer 	sideShadow background__lite pt-10">
-			<div in:fade={{ duration: 200 }}>
-				<VaultFilter
-					bind:filtersApplied
-					bind:platformSelected
-					bind:stakedOnly
-					bind:filterBy
-					bind:sortBy
-					bind:hideZeroBalances
-					bind:statement />
-			</div>
-			{#if allVaults.length >= 1}
-				{#each filteredVaults as vault}
-					<VaultAccordeon vaultConfig={vault} />
-				{/each}
-			{:else}
-				<div
-					class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
-				<div
-					class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
-				<div
-					class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
-				<div
-					class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
-			{/if}
-		</div> -->
-	{/if}
+	<div class="mainContainer 	sideShadow background__lite pt-10">
+		<div in:fade={{ duration: 200 }}>
+			<VaultFilter
+				bind:filtersApplied
+				bind:platformSelected
+				bind:stakedOnly
+				bind:filterBy
+				bind:sortBy
+				bind:hideZeroBalances
+				bind:statement />
+		</div>
+		{#if allVaults.length >= 1}
+			{#each filteredVaults as vault}
+				<VaultAccordeon vaultConfig={vault} />
+			{/each}
+		{:else}
+			<div
+				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+			<div
+				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+			<div
+				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+			<div
+				class="bg-white dark:bg-neutral-800 h-[128px] mx-auto mb-4 max-w-6xl animate sm:px-4 md:px-2 lg:px-0 rounded-lg animate-pulse" />
+		{/if}
+	</div>
 </section>
 
 <style>

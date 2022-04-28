@@ -1,7 +1,6 @@
 export const polygonRPCs = [
 	'https://polygon-rpc.com/',
-	'https://rpc-mainnet.maticvigil.com/',
-	'https://matic-mainnet.chainstacklabs.com'
+	'https://rpc-mainnet.maticvigil.com/'
 ];
 
 const randomNumber = (max: number) => {
@@ -9,5 +8,5 @@ const randomNumber = (max: number) => {
 };
 
 export const getRpcUrl = () => {
-	return polygonRPCs[randomNumber(polygonRPCs.length)];
+	return 'https://polygon-rpc.com/';
 };

@@ -173,18 +173,26 @@
 			<div
 				class="flex h-20 items-center  justify-between p-2 md:flex-1 lg:mx-0">
 				<div class="flex w-11/12 justify-around ">
-					<VaultHeading
-						headingText={'APY'}
-						subHeading={vaultConfig.apy.toFixed(2)}>%</VaultHeading>
-					<VaultHeading
-						headingText={'Staked'}
-						subHeading={vaultConfig.stakedAmount.toFixed(2)} />
-					<VaultHeading
-						headingText={'Wallet'}
-						subHeading={vaultConfig.userWalletBalance.toFixed(2)} />
-					<VaultHeading
-						headingText={'TVL'}
-						subHeading={vaultConfig.tvl.toFixed(2)} />
+					<VaultHeading headingText={'APY'}>
+						<p class="text-lg tracking-tighter dark:text-white">
+							{vaultConfig.apy.toFixed(2)}%
+						</p>
+					</VaultHeading>
+					<VaultHeading headingText={'Staked'}>
+						<p class="text-lg tracking-tighter dark:text-white">
+							{vaultConfig.stakedAmount.toFixed(2)}
+						</p>
+					</VaultHeading>
+					<VaultHeading headingText={'Wallet'}>
+						<p class="text-lg tracking-tighter dark:text-white">
+							{vaultConfig.userWalletBalance.toFixed(2)}
+						</p>
+					</VaultHeading>
+					<VaultHeading headingText={'TVL'}>
+						<p class="text-lg tracking-tighter dark:text-white">
+							${vaultConfig.tvl.toFixed(2)}
+						</p>
+					</VaultHeading>
 				</div>
 				<div class="dark:text-white">
 					{#if isHidden}
@@ -215,18 +223,17 @@
 					<div class="lg:w-4/12">
 						<div class="flex items-center">
 							<p
-								class="text-gray-600 font-medium dark:text-white tracking-tight">
+								class="text-gray-600 font-medium dark:text-white tracking-tight text-sm">
 								{$_('actions.wallet')}:
 							</p>
 							{#if userTokens}
-								<p class="pl-1 dark:text-white font-medium tracking-tighter">
+								<p class="pl-1 dark:text-white font-medium text-sm">
 									{parseBigNumberToString(userTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{:else}
 								<p class="pl-1 dark:text-white font-semibold text-sm">
-									0.000000000000000000 WMATIC-USDC
-									<!-- N/A {vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name} -->
+									0 {vaultConfig.pair.token0Name}-{vaultConfig.pair.token1Name}
 								</p>
 							{/if}
 						</div>
@@ -294,11 +301,12 @@
 
 					<div class="pt-4 lg:pt-0 lg:w-4/12">
 						<div class="flex">
-							<p class="text-gray-600 font-medium dark:text-white ">
+							<p class="text-gray-600 font-medium dark:text-white text-sm">
 								{$_('pastActions.deposited')}:
 							</p>
 							{#if stakedTokens}
-								<p class="font-medium pl-1 dark:text-white  tracking-tight">
+								<p
+									class="font-medium pl-1 dark:text-white tracking-tight text-sm ">
 									{parseBigNumberToString(stakedTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
@@ -336,10 +344,10 @@
 							</button>
 						</div>
 						<div class="flex dark:text-white font-medium">
-							<p class="mr-1 text-gray-500 dark:text-white	 ">
+							<p class="mr-1 text-gray-500 dark:text-white">
 								{$_('actions.withdrawalfee')}:
 							</p>
-							{#if vaultConfig.withdrawalFee}
+							{#if !isNaN(vaultConfig.withdrawalFee)}
 								<p class="">{vaultConfig.withdrawalFee}%</p>
 							{:else}
 								<p class="">{$_('actions.notAvaliable')}</p>
