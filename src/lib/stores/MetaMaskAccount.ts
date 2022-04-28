@@ -35,6 +35,8 @@ export async function retrieveUserAddress(): Promise<string | null> {
 /*This executes only when the application mounts. */
 export async function logUser(): Promise<void> {
 	//First check if the user is already connected to the app via metamask
+	if (!window.ethereum) return;
+
 	const userAddress = await retrieveUserAddress();
 	if (userAddress) {
 		accounts.set([userAddress]);
