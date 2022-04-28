@@ -14,10 +14,7 @@
 	import VaultAccordeon from '$lib/components/Vault/VaultAccordeon.svelte';
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import { onMount } from 'svelte';
-	import {
-		generateRandomBalance,
-		reduceFilters
-	} from '$lib/utils/filterFunctions';
+	import { reduceFilters } from '$lib/utils/filterFunctions';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import { getVaultAPYandAPR } from '$lib/utils/getVaultAPY';
@@ -25,10 +22,6 @@
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { BigNumber, ethers } from 'ethers';
 	import { vaultChef } from '$lib/utils/contracts';
-	import ComingSoon from '$lib/components/Cards/ComingSoon.svelte';
-	import { timeLeftForLaunch } from '$lib/stores/launchDate';
-	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
-
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
 	let platformSelected: string;
