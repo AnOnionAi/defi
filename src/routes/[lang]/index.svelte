@@ -5,7 +5,6 @@
 	import { time, _ } from 'svelte-i18n';
 
 	function getLocale(lang) {
-		console.log('LANG: ', lang);
 		switch (lang) {
 			case 'en':
 				return 'en-US';
