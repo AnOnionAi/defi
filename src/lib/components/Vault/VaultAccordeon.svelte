@@ -173,18 +173,26 @@
 			<div
 				class="flex h-20 items-center  justify-between p-2 md:flex-1 lg:mx-0">
 				<div class="flex w-11/12 justify-around ">
-					<VaultHeading
-						headingText={'APY'}
-						subHeading={vaultConfig.apy.toFixed(2)}>%</VaultHeading>
-					<VaultHeading
-						headingText={'Staked'}
-						subHeading={vaultConfig.stakedAmount.toFixed(2)} />
-					<VaultHeading
-						headingText={'Wallet'}
-						subHeading={vaultConfig.userWalletBalance.toFixed(2)} />
-					<VaultHeading
-						headingText={'TVL'}
-						subHeading={vaultConfig.tvl.toFixed(2)} />
+					<VaultHeading headingText={'APY'}>
+						<p class="text-lg tracking-tighter dark:text-white">
+							{vaultConfig.apy.toFixed(2)}%
+						</p>
+					</VaultHeading>
+					<VaultHeading headingText={'Staked'}>
+						<p class="text-lg tracking-tighter dark:text-white">
+							{vaultConfig.stakedAmount.toFixed(2)}
+						</p>
+					</VaultHeading>
+					<VaultHeading headingText={'Wallet'}>
+						<p class="text-lg tracking-tighter dark:text-white">
+							{vaultConfig.userWalletBalance.toFixed(2)}
+						</p>
+					</VaultHeading>
+					<VaultHeading headingText={'TVL'}>
+						<p class="text-lg tracking-tighter dark:text-white">
+							${vaultConfig.tvl.toFixed(2)}
+						</p>
+					</VaultHeading>
 				</div>
 				<div class="dark:text-white">
 					{#if isHidden}
