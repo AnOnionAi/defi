@@ -1,7 +1,9 @@
-import { Token } from '$lib/types/types';
+import { sushiVaults } from '$lib/config/constants/vaults';
+import { Token, type VaultInfo } from '$lib/types/types';
 import { ethers } from 'ethers';
 import { getContractAddress, getMasterChefAddress } from './addressHelpers';
 import { getTokenBalance } from './erc20';
+import { getVaultAPYandAPR } from './getVaultAPY';
 import { getPriceOfMushPair } from './lpTokenUtils';
 
 interface TokenBalancesResponse {
@@ -86,4 +88,19 @@ export const getFarmsTVL = async (): Promise<number> => {
 	if (stakedAmount.isZero()) return 0;
 	const parsedStakedAmount = parseFloat(ethers.utils.formatEther(stakedAmount));
 	return pairPrice * parsedStakedAmount;
+};
+
+export const getVaultsTvl = async (): Promise<number> => {
+	try {
+		const sushiVaultsTVL = await Promise.all(
+			sushiVaults.map((vault) => getVaultAPYandAPR(vault))
+		);
+		let totalLockedInVaults = 0;
+		for (const { tvl } of sushiVaultsTVL) {
+			totalLockedInVaults += tvl;
+		}
+		return totalLockedInVaults;
+	} catch (e) {
+		return 0;
+	}
 };

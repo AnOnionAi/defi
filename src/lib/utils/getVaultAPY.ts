@@ -45,7 +45,7 @@ export const getVaultAPYandAPR = async (
 		ethers.utils.formatEther(stakedInStrategy)
 	);
 
-	console.table({
+	/* 	console.table({
 		name: `${vault.pair.token0Name} + ${vault.pair.token1Name}`,
 		TVLonMINICHEF: lpTokenPrice * parsedTotalStaked,
 		parsedTotalStaked,
@@ -54,7 +54,7 @@ export const getVaultAPYandAPR = async (
 		lpTokenPrice,
 		sushiPerBlock,
 		MATIC_PER_BLOCK
-	});
+	}); */
 	const apr = getSushiPoolApr(
 		lpTokenPrice,
 		sushiPrice,
