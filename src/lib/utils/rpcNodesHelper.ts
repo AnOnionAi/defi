@@ -8,5 +8,5 @@ const randomNumber = (max: number) => {
 };
 
 export const getRpcUrl = () => {
-	return polygonRPCs[randomNumber(polygonRPCs.length)];
+	return 'https://polygon-rpc.com/';
 };
