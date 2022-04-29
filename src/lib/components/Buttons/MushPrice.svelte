@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import {
 		fetchNativeTokenPrice,
 		tokenPrice
 	} from '$lib/stores/NativeTokenPrice';
 	fetchNativeTokenPrice();
-	const swapperURL = `https://app.sushi.com/swap?inputCurrency=${'0x2791bca1f2de4661ed88a30c99a7a9449aa84174'}&outputCurrency=${'0x627F699300A9D693FBB84F9Be0118D17A1387D4e'}`;
+	const swapperURL = `https://app.sushi.com/${
+		$page.params.lang ?? 'en'
+	}/trident/swap?tokens=MATIC&tokens=0x93C55AFcBB82594F7446537e4071fc6439E14f2a&chainId=137`;
 </script>
 
 <a href={swapperURL} target="_blank" class="group flex items-center">

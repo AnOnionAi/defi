@@ -232,7 +232,7 @@
 
 		<EarnMoreCard
 			title={$_('headers.vaults.text')}
-			primaryText={formatComma(0, $page.params.lang)}
+			primaryText={formatComma($vaultsTVL, $page.params.lang)}
 			secondaryText={$_('dashboard.lockedInVaults')}
 			buttonText={$_('dashboard.goDeposit')}
 			route={`/${$page.params.lang}/vaults`} />
