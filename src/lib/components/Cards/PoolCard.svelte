@@ -8,7 +8,7 @@
 		PoolInfoResponse
 	} from '$lib/types/types';
 	import { Token } from '$lib/types/types';
-	import { metaMaskCon } from '$lib/utils/helpers';
+	import { metaMaskCon } from '$lib/utils/metamaskCalls';
 	import {
 		approveToken,
 		getTokenAllowance,

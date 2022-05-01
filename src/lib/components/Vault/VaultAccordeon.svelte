@@ -13,12 +13,10 @@
 		getTokenAllowance,
 		isNotZero
 	} from '$lib/utils/erc20';
-	import { metaMaskCon } from '$lib/utils/helpers';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { Token } from '$lib/types/types';
-	import { parseBigNumberToString } from '$lib/utils/balanceParsers';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
-	import { BigNumber } from 'ethers';
+	import { BigNumber, utils } from 'ethers';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
 	import { Chasing } from 'svelte-loading-spinners';
 	import { ethers } from 'ethers';
@@ -33,9 +31,10 @@
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
-	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
+	import { isMetaMaskInstalled, metaMaskCon } from '$lib/utils/metamaskCalls';
 	import AssetPair from './AssetPair.svelte';
 	import VaultHeading from './VaultHeading.svelte';
+	import { formatEther } from 'ethers/lib/utils';
 
 	const { addNotification } = getNotificationsContext();
 
@@ -228,7 +227,7 @@
 							</p>
 							{#if userTokens}
 								<p class="pl-1 dark:text-white font-medium text-sm">
-									{parseBigNumberToString(userTokens)}
+									{ethers.utils.formatEther(userTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{:else}
@@ -307,7 +306,7 @@
 							{#if stakedTokens}
 								<p
 									class="font-medium pl-1 dark:text-white tracking-tight text-sm ">
-									{parseBigNumberToString(stakedTokens)}
+									{ethers.utils.formatEther(stakedTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
 							{:else}
