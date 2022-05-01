@@ -8,14 +8,18 @@
 	import '../app.css';
 	import { logUser, metamaskListeners } from '$lib/stores/MetaMaskAccount';
 	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
-	import { onMount, SvelteComponent } from 'svelte';
+	import { onMount } from 'svelte';
 	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
 
 	const customNotificationComponent = CustomNotification as any;
 
 	onMount(async () => {
-		await metamaskListeners();
-		await logUser();
+		try {
+			await metamaskListeners();
+			await logUser();
+		} catch (e) {
+			console.error(e);
+		}
 	});
 </script>
 
