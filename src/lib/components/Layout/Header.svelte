@@ -49,6 +49,9 @@
 			<NavbarRoute pageTitle={$_('headers.farms.text')} pageRoute="/farms" />
 			<NavbarRoute pageTitle={$_('headers.pools.text')} pageRoute="/pools" />
 			<NavbarRoute pageTitle={$_('headers.vaults.text')} pageRoute="/vaults" />
+			<NavbarRoute
+				pageTitle={$_('headers.metapixel.text')}
+				pageRoute="/metapixel" />
 		</NavRouteSection>
 
 		<div class="hidden items-center lg:flex lg:gap-x-4 xl:gap-x-6">

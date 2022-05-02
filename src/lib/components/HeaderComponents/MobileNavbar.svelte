@@ -53,6 +53,14 @@
 	</button>
 	<button
 		on:click={closeMenuOnPageSelect}
+		class="flex w-full items-center justify-center py-3 text-center"
+		>>
+		<NavbarRoute
+			pageTitle={$_('headers.metapixel.text')}
+			pageRoute="/metapixel" />
+	</button>
+	<button
+		on:click={closeMenuOnPageSelect}
 		class="flex w-full items-center justify-center py-3 text-center">
 		<DarkModeButton />
 	</button>

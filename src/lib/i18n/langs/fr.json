@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "coffres"
 		},
+		"metapixel": {
+			"text": "Metapixel"
+		},
 		"crypto-responsibility": {
 			"text": "Responsabilité cryptographique"
 		}
