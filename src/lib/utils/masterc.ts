@@ -1,16 +1,16 @@
 import type { BigNumber } from 'ethers';
 import { ethers } from 'ethers';
 import { ethersToBigNumber } from './bigNumber';
-import { getProviderSingleton } from './web3Helpers';
+import { polygonProvider } from './web3Utils';
 import MasterChefABI from '$lib/config/abi/MasterChef.json';
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/types/types';
-import { getSigner } from './helpers';
+import { getSigner } from './web3Utils';
 
 export const masterChefContract = new ethers.Contract(
 	getContractAddress(Token.MASTERCHEF),
 	MasterChefABI,
-	getProviderSingleton()
+	polygonProvider
 );
 
 export const getDevAddress = async (): Promise<string> =>

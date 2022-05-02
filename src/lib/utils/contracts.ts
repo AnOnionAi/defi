@@ -11,9 +11,9 @@ import DividendsABI from '$lib/config/abi/Dividends.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/types/types';
 import { BigNumber, ethers } from 'ethers';
-import { getSigner } from './helpers';
+import { getSigner } from './web3Utils';
 import { MINICHEF_ADDRESS } from '$lib/config';
-import { getProvider } from './web3Helpers';
+import { polygonProvider } from './web3Utils';
 
 export const getMasterChefContract = (): ethers.Contract => {
 	const masterChefContract = new ethers.Contract(
@@ -151,7 +151,7 @@ export const getVaultChefContract = (): ethers.Contract => {
 export const vaultChef = new ethers.Contract(
 	getContractAddress(Token.VAULTCHEF),
 	VaultChefABI,
-	getProvider()
+	polygonProvider
 );
 
 export const getMushStrategyContract = (): ethers.Contract => {
@@ -167,9 +167,13 @@ export const getMushStrategyContract = (): ethers.Contract => {
 export const miniChefV2 = new ethers.Contract(
 	MINICHEF_ADDRESS,
 	MiniChefV2,
-	getProvider()
+	polygonProvider
 );
 
 export const getSushiswapStrategyContract = (strategyAddress: string) => {
-	return new ethers.Contract(strategyAddress, StrategySushiswap, getProvider());
+	return new ethers.Contract(
+		strategyAddress,
+		StrategySushiswap,
+		polygonProvider
+	);
 };

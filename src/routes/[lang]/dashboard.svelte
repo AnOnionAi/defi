@@ -157,7 +157,6 @@
 		lastPrice = lastLog.price;
 
 		const tempPrices = [...historicalData].map((e) => e.price).reverse();
-		console.log('TEMP PRICES', tempPrices);
 		peak = Math.max(...tempPrices);
 
 		dataLine = {

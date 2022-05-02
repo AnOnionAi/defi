@@ -1,7 +1,7 @@
 import ERC20ABI from '$lib/config/abi/ERC20.json';
 import { BigNumber, ethers } from 'ethers';
-import { getSigner } from './helpers';
-import { getProviderSingleton } from './web3Helpers';
+import { getSigner } from './web3Utils';
+import { polygonProvider } from './web3Utils';
 
 export const getERC20Contract = (
 	address: string,
@@ -13,7 +13,7 @@ export const getTokenAllowance = async (
 	spenderAddr: string,
 	userAddress: string
 ): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, polygonProvider);
 	return tokenContract.allowance(userAddress, spenderAddr);
 };
 
@@ -21,31 +21,31 @@ export const getTokenBalance = async (
 	tokenAddress: string,
 	userAddress: string
 ): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, polygonProvider);
 	return tokenContract.balanceOf(userAddress);
 };
 
 export const getTokenDecimals = async (
 	tokenAddress: string
 ): Promise<number> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, polygonProvider);
 	return tokenContract.decimals();
 };
 
 export const getTokenName = async (tokenAddress: string): Promise<string> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, polygonProvider);
 	return tokenContract.name();
 };
 
 export const getTokenSymbol = async (tokenAddress: string): Promise<string> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, polygonProvider);
 	return tokenContract.symbol();
 };
 
 export const getTokenTotalSupply = async (
 	tokenAddress: string
 ): Promise<BigNumber> => {
-	const tokenContract = getERC20Contract(tokenAddress, getProviderSingleton());
+	const tokenContract = getERC20Contract(tokenAddress, polygonProvider);
 	return tokenContract.totalSupply();
 };
 
