@@ -113,9 +113,9 @@
 				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
 				href={`/vi${currentRoute}`}>Việt</a>
 			<a
-				on:click={() => handleNewLangSelect('vi')}
+				on:click={() => handleNewLangSelect('ur')}
 				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/vi${currentRoute}`}>اُردُو</a>
+				href={`/ur${currentRoute}`}>اُردُو</a>
 		</div>
 	{/if}
 </div>
