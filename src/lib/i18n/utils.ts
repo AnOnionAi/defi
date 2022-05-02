@@ -1,9 +1,26 @@
 export const validLang = (lang: string) => {
-	const langs = ['es', 'en', 'de', 'fr'];
+	const langs = [
+		'ar',
+		'de',
+		'el',
+		'en',
+		'es',
+		'fr',
+		'hi',
+		'it',
+		'ja',
+		'ko',
+		'pt',
+		'ru',
+		'tr',
+		'ur',
+		'vi',
+		'zh'
+	];
 	if (langs.includes(lang)) {
 		return lang;
 	} else {
-		return 'es';
+		return 'en';
 	}
 };
 
@@ -28,7 +45,7 @@ export const LANGUAGES = [
 
 export const enshortedMonthNamesByLang = {
 	es: [
-		'En',
+		'Eno',
 		'Feb',
 		'Mar',
 		'Abr',

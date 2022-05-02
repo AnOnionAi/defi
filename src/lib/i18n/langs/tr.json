@@ -1,0 +1,169 @@
+{
+	"launchTimeLeft": {
+		"countdown": "T LANSMANI İÇİN GERİ SAYIM -"
+	},
+	"depositWarning": {
+		"warning": "Para Yatırma ve Para Çekme mevcuttur ancak o zamana kadar MUSH kazanamazsınız."
+	},
+	"comingSoon": {
+		"soon": "Yakında gelecek...",
+		"left": "Kalan zaman:"
+	},
+	"homepage": {
+		"presents": "Hediyeler",
+		"revolution": "Merkezi Olmayan Finans Devrimi",
+		"mushcoin": "MushCoin, insanların FungFi'nin geleceğindeki hisselerini ifade etme şeklidir.MUSH, havuzlarda ve çiftliklerde stake edilerek dağıtılacaktır.",
+		"mushroomFarms": "FungFi çiftliklerinde MUSH/USDC LP jetonlarını hisseleyen müşteriler MushCoin ile ödüllendirilecek.",
+		"myceliumPools": "FungFi kullanıcıları, her saniye MUSH $ kazanmaya başlamak için havuzlarımıza başka jetonlar koyabilecekler.",
+		"fungiVaults": "Kullanıcıların, çiftçilik belirteçlerini otomatik olarak ilk başta stake ettikleri varlıklara geri eklemelerine izin verin."
+	},
+	"home": {
+		"tagline1": "Bunu yapmak!",
+		"tagline2": "MushCoin",
+		"marketCap": "Piyasa değeri",
+		"introTitle": "MushCoin'i Tanıtmak",
+		"intro": "Defi'de (Merkezi Olmayan Finans) izlediğimiz ilkeler, Mantarların felsefesine dayanmaktadır. Mantarlar, ölüleri geri getiren hayati bir organizmadır. Sonra tekrar hayat olmak için ölüleri geri getirin. Yaşam Döngüsüne devam ederler. MushCoin, bu yeni Zümrüt Siber Şehir için anahtarınızdır. Çürümeyi ayrıştırıyoruz.",
+		"velocityIdeas": "DeFi'yi Kaçırmayın💡",
+		"velocityIdeasText": "Defi'de her şey, merkezi olmayan blok zincirindeki algoritmalar olan akıllı sözleşmeler tarafından yürütülür. Kriptonuzu işe koymak. Artık cüzdanda oturmak yok. Fikirlerin hızı hızlanıyor. Dışsal olarak. Teknolojiye ayak uyduramazsanız hızla geri kalırsınız. Kairos'u aklımızda tutmalıyız. 'Doğru, kritik veya uygun an' anlamına gelen eski Yunanca kelime. O an şimdidir. Sadece yeni teknolojiler aramak için korkmaya veya umut etmeye gerek yok. Kaybedenler için şimdi, daha sonra kazanacaklar, zaman için onlar bir değişiyor.",
+		"revolution": "Devrim",
+		"gainzText": "Gelin Fungi Fantasy'mizde Bize Katılın! DeFi'yi öğrenen son kişi olmayın",
+		"fijiSignature": " - Fiji Uzaylı Mantarları",
+		"psText": "not Evrende çözülmesi gereken birçok fikir var.",
+		"powerText": "Güç senin. MushCoin geleceğin anahtarıdır. Biz geleceğiz. Birlikte başaracağız.",
+		"ps2Text": "not Ay'a ve Ötesine MushCoin!"
+	},
+	"pages": {
+		"about": {
+			"title": "Hakkında"
+		},
+		"contact": {
+			"title": "İletişim"
+		},
+		"audits": {
+			"title": "Denetimler"
+		},
+		"trade": {
+			"title": "Ticaret"
+		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "Otomatik Kripto Piyasa Yapımı"
+		},
+		"dividends": {
+			"text": "temettüler"
+		},
+		"dashboard": {
+			"text": "Gösterge Paneli"
+		},
+		"farms": {
+			"text": "Çiftlikler"
+		},
+		"pools": {
+			"text": "Havuzlar"
+		},
+		"vaults": {
+			"text": "kasalar"
+		},
+		"crypto-responsibility": {
+			"text": "Kripto Sorumluluğu"
+		}
+	},
+	"about": {
+		"automated-description": "Otomatik Kripto Piyasa Yapımı (ACMM), geleneksel bir alıcı ve satıcı piyasası yerine likidite havuzlarını kullanarak dijital varlıkların izinsiz ve otomatik bir şekilde alınıp satılmasına olanak tanır. Kullanıcılar, fiyatları sabit bir matematiksel formülle belirlenen kripto jetonlarıyla likidite havuzları sağlar. Alıcılar ve satıcılar arasında ticaret yapmak yerine, kullanıcılar bir jeton havuzuna (bir likidite havuzu) karşı ticaret yaparlar. Likidite sağlayıcıları normalde havuza jeton sağlamak için bir ücret alırlar. Bu ücret, likidite havuzuyla etkileşime giren tüccarlar tarafından ödenir. Bu, likidite sağlayıcılarının getiri elde etmesini sağlar. temettüler.",
+		"farms-description": "Çiftlikler, verim tarımı için kullanılmaktadır. Bu, tokenize ödüller oluşturmak için blok zinciri protokolümüzde kripto para birimlerini stake etme veya kilitleme uygulamasıdır. Fungfi, sizi ağımızın likiditesine katkıda bulunmaya teşvik etmek için verim çiftçiliğine güveniyor. Fungfi, merkezi bir pazar kolaylaştırıcısına güvenmez.",
+		"pools-description": "Likidite havuzu, merkezi olmayan bir borsada (DEX) varlıklar arasındaki işlemleri kolaylaştırmak için kullanılan, akıllı bir sözleşmeye kilitlenmiş, kitle kaynaklı bir kripto para birimi veya jeton havuzudur. Bu, dijital varlıkların likidite havuzları kullanılarak otomatik ve izinsiz bir şekilde alınıp satılmasına olanak tanır.",
+		"vaults-description": "Kasa, farklı kripto para birimi varlıklarının depolanması, yatırılması ve geri çekilmesi için kullanılan bir blok zinciri mimarisi parçasıdır. Örneğin, bir kullanıcı farklı kripto varlıklarını stake ettiğinde, ödünç verdiğinde, ödünç aldığında veya darp ettiğinde, Fungfi akıllı sözleşmeler aracılığıyla farklı taraflar arasında doğru sayıda varlığı otomatik olarak değiştirecektir.",
+		"responsibility-description": "Sorumlu Yatırım Yapın. Fungfi Defi'de büyük kazançlar için inanılmaz bir potansiyel var, ancak hayattaki her şey risk taşıyor. Buna karşı korunmak için her türlü önlem alınırken. İnternet veya Bilgisayarlarla ilgili her şey Hacker riski taşır. Ayrıca oynaklığın farkında olmalısınız. Kripto piyasaları son derece ödüllendirici olmakla birlikte yüksek miktarda oynaklık taşır. Bazen bu oynaklık panik satışına, banka kaçışlarına veya kalıcı kayıplara neden olabilir. Son olarak, özel anahtarınızı veya gizli ifadenizi cüzdanınıza kaybederseniz, o kripto yanar. Sonsuza dek gitti. Yani dikkatli ol."
+	},
+	"dashboard": {
+		"wallet": "Cüzdanınızda",
+		"tvl": "Toplam Değer Kilitli",
+		"across": "Tüm Fung Financial genelinde",
+		"earn": "Daha fazla kazan",
+		"index": "dizin",
+		"mushpb": "blok başına MUSH",
+		"mushps": "saniyede MUSH",
+		"marketcap": "Piyasa değeri",
+		"totalvol": "Toplam ses",
+		"maxsupply": "Maksimum Arz",
+		"price": "Muş Fiyatı:",
+		"today": "Bugün",
+		"peak": "Zirve",
+		"profit": "Kâr",
+		"lockedInFarms": "Muş Çiftliklerinde Kilitli",
+		"lockedInPools": "Çoklu Havuzlarda Kilitli",
+		"lockedInVaults": "Siber Kasalarda Kilitli",
+		"startFarming": "Bir Tohum Ek",
+		"addLiquidity": "Likidite Yarat",
+		"goDeposit": "Depozito"
+	},
+	"dividendsPage": {
+		"cyw": "Cüzdanı Bağla",
+		"approval": "Onay Gerekli",
+		"approvalDescription": "Önce MUSH harcamanızı onaylamanız gerekir."
+	},
+	"your": {
+		"wallet": "Cüzdanın"
+	},
+	"actions": {
+		"earn": "Para kazanmak",
+		"get": "Almak",
+		"add": "Ekle",
+		"depositFee": "Depozito Ücreti",
+		"wallet": "Cüzdan",
+		"approve": "Onaylamak",
+		"unlock": "Kilidini aç",
+		"deposit": "Depozito",
+		"withdraw": "Geri çekilmek",
+		"harvest": "Hasat",
+		"stake": "Bahis",
+		"details": "Detaylar",
+		"depositfee": "Depozito Ücreti",
+		"withdrawalfee": "para çekme ücreti",
+		"notAvaliable": "Kullanılabilir değil"
+	},
+	"pastActions": {
+		"earned": "kazanılan",
+		"deposited": "Yatırıldı",
+		"withdrawed": "çekildi",
+		"staked": "kazıklı"
+	},
+	"poolCard": {
+		"details": "Detaylar",
+		"hide": "Saklamak",
+		"totalLiquidity": "Toplam Likidite",
+		"myLiquidity": "likiditem",
+		"viewonMatic": "Çoklu Tarama"
+	},
+	"vaultAccordeon": {
+		"currentPrices": "Şimdiki fiyatlar",
+		"notListedIn": "Listelenmemiş",
+		"viewInfo": "Bilgileri Görüntüle",
+		"loading": "Yükleniyor"
+	},
+	"vaultFilter": {
+		"all": "Herşey",
+		"hidezero": "Sıfır Bakiyeleri Gizle",
+		"filterby": "Tarafından filtre",
+		"sortby": "Göre sırala",
+		"search": "Aramak",
+		"stakedonly": "Sadece Stake Edilen",
+		"desceding": "Azalan",
+		"ascending": "artan",
+		"searchvaults": "Kasaları Ara"
+	},
+	"modals": {
+		"input": "Giriş",
+		"balance": "Denge",
+		"otherOptions": "Diğer seçenekler",
+		"depositYour": "YATIRIM YAPIN",
+		"withdrawYour": "ÇEKİN"
+	},
+	"walletStatus": {
+		"wallet": "Cüzdan",
+		"install": "Meta Maskeyi Yükle",
+		"connected": "bağlı",
+		"checking": "Metamask kontrol ediliyor..."
+	}
+}

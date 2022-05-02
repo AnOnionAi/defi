@@ -1,0 +1,169 @@
+{
+	"launchTimeLeft": {
+		"countdown": "CONTAGEM REGRESSIVA PARA LANÇAMENTO T -"
+	},
+	"depositWarning": {
+		"warning": "Depósitos e Retiradas estão disponíveis, mas você não ganhará MUSH até"
+	},
+	"comingSoon": {
+		"soon": "Em breve...",
+		"left": "Tempo restante:"
+	},
+	"homepage": {
+		"presents": "Presentes",
+		"revolution": "A Revolução das Finanças Descentralizadas",
+		"mushcoin": "MushCoin é como as pessoas expressam sua participação no futuro da FungFi. O MUSH será distribuído apostando em pools e fazendas.",
+		"mushroomFarms": "Os clientes que apostarem tokens MUSH/USDC LP em fazendas FungFi serão recompensados com MushCoin.",
+		"myceliumPools": "Os usuários do FungFi poderão apostar outros tokens em nossos pools para começar a ganhar $ MUSH a cada segundo.",
+		"fungiVaults": "Permita que os usuários componham automaticamente os tokens de agricultura de volta aos ativos que eles originalmente apostaram."
+	},
+	"home": {
+		"tagline1": "Faça!",
+		"tagline2": "MushCoin",
+		"marketCap": "Valor de mercado",
+		"introTitle": "Apresentando MushCoin",
+		"intro": "Os princípios que seguimos no Defi (Finanças Descentralizadas) baseiam-se na filosofia dos Fungos. Os Cogumelos são um organismo vital que devolve os mortos. Então traga de volta os mortos para se tornarem vida novamente. Eles continuam o Círculo da Vida. MushCoin é a sua chave para esta nova Emerald Cyber City. Decompomos a podridão.",
+		"velocityIdeas": "Não perca o DeFi💡",
+		"velocityIdeasText": "No Defi, tudo é executado por contratos inteligentes, que são algoritmos no blockchain descentralizado. Colocando sua criptografia para funcionar. Não mais sentado em uma carteira. A velocidade das ideias está acelerando. Expoencialmente. Se você não estiver acompanhando a tecnologia, ficará para trás rapidamente. Devemos ter em mente Kairos. A antiga palavra grega que significa \"o momento certo, crítico ou oportuno\". Esse momento é agora. Não há necessidade de temer ou esperar, apenas buscar novas tecnologias. Para os perdedores agora, ganharão depois, para os tempos, eles estão mudando.",
+		"revolution": "Revolução",
+		"gainzText": "Venha se juntar a nós em nossa fantasia de fungos! Não seja o último a aprender sobre DeFi",
+		"fijiSignature": " - Fiji, os fungos alienígenas",
+		"psText": "P.S. Há muitas ideias a serem desbloqueadas no universo.",
+		"powerText": "O poder é seu. MushCoin é a chave para o futuro. Nós somos o futuro. Juntos vamos conseguir.",
+		"ps2Text": "P.S.S. MushCoin para a Lua e Além!"
+	},
+	"pages": {
+		"about": {
+			"title": "Sobre"
+		},
+		"contact": {
+			"title": "Contato"
+		},
+		"audits": {
+			"title": "Auditorias"
+		},
+		"trade": {
+			"title": "Troca"
+		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "Criação de mercado de criptografia automática"
+		},
+		"dividends": {
+			"text": "Dividendos"
+		},
+		"dashboard": {
+			"text": "Painel"
+		},
+		"farms": {
+			"text": "Fazendas"
+		},
+		"pools": {
+			"text": "Piscinas"
+		},
+		"vaults": {
+			"text": "Cofres"
+		},
+		"crypto-responsibility": {
+			"text": "Responsabilidade criptográfica"
+		}
+	},
+	"about": {
+		"automated-description": "O Automated Crypto Market Making (ACMM) permite que ativos digitais sejam negociados de maneira automática e sem permissão, usando pools de liquidez em vez de um mercado tradicional de compradores e vendedores. Os usuários fornecem pools de liquidez com tokens de criptografia, cujos preços são determinados por uma fórmula matemática constante. Em vez de negociar entre compradores e vendedores, os usuários negociam contra um pool de tokens - um pool de liquidez. Os provedores de liquidez normalmente ganham uma taxa por fornecer tokens ao pool. Essa taxa é paga pelos traders que interagem com o pool de liquidez. Isso permite que os provedores de liquidez possam obter rendimento. Dividendos.",
+		"farms-description": "As fazendas são usadas para a agricultura de rendimento. Essa é a prática de apostar ou bloquear criptomoedas em nosso protocolo blockchain para gerar recompensas tokenizadas. A Fungfi conta com a agricultura de rendimento para incentivá-lo a contribuir para a liquidez da nossa rede. A Fungfi não conta com um facilitador de mercado centralizado.",
+		"pools-description": "Um pool de liquidez é um pool de criptomoedas ou tokens de crowdsourcing bloqueado em um contrato inteligente que é usado para facilitar negociações entre os ativos em uma exchange descentralizada (DEX). Isso permite que os ativos digitais sejam negociados de maneira automática e sem permissão por meio do uso de pools de liquidez.",
+		"vaults-description": "Um cofre é uma parte da arquitetura blockchain usada para armazenamento, depósito e retirada de diferentes tipos de ativos de criptomoeda. Por exemplo, quando um usuário aposta, empresta, toma emprestado ou cunha diferentes ativos criptográficos, a Fungfi troca automaticamente o número correto de ativos entre diferentes partes por meio de contratos inteligentes.",
+		"responsibility-description": "Invista com Responsabilidade. Há um potencial incrível para grandes ganhos em Fungfi Defi, mas tudo na vida traz riscos. Enquanto todas as precauções são tomadas para se proteger contra isso. Qualquer coisa que lide com a Internet ou Computadores traz o risco de Hackers. Você também deve estar ciente da volatilidade. Os mercados de criptomoedas, embora sejam altamente recompensadores, carregam uma grande volatilidade. Às vezes, essa volatilidade pode levar a vendas em pânico, corridas bancárias ou perdas temporárias. Finalmente, se você perder sua chave privada ou declaração secreta em sua carteira, essa criptografia será queimada. Ele se foi para sempre. Por isso tem cuidado."
+	},
+	"dashboard": {
+		"wallet": "Na sua carteira",
+		"tvl": "Valor total bloqueado",
+		"across": "Em toda a Fung Financial",
+		"earn": "Ganhar mais",
+		"index": "Índice",
+		"mushpb": "MUSH por bloco",
+		"mushps": "MUSH por segundo",
+		"marketcap": "Valor de mercado",
+		"totalvol": "Volume total",
+		"maxsupply": "Fornecimento máximo",
+		"price": "Preço do mingau:",
+		"today": "Hoje",
+		"peak": "Pico",
+		"profit": "Lucro",
+		"lockedInFarms": "Trancado em Fazendas de Cogumelo",
+		"lockedInPools": "Trancado em Poly Pools",
+		"lockedInVaults": "Trancado em cofres cibernéticos",
+		"startFarming": "Plante uma semente",
+		"addLiquidity": "Criar liquidez",
+		"goDeposit": "Depósito"
+	},
+	"dividendsPage": {
+		"cyw": "Conectar Carteira",
+		"approval": "Aprovação necessária",
+		"approvalDescription": "Você deve primeiro aprovar seus gastos com MUSH."
+	},
+	"your": {
+		"wallet": "Sua carteira"
+	},
+	"actions": {
+		"earn": "Ganhar",
+		"get": "Obter",
+		"add": "Adicionar",
+		"depositFee": "Taxa de depósito",
+		"wallet": "Carteira",
+		"approve": "Aprovar",
+		"unlock": "Desbloquear",
+		"deposit": "Depósito",
+		"withdraw": "Retirar",
+		"harvest": "Colheita",
+		"stake": "Estaca",
+		"details": "Detalhes",
+		"depositfee": "Taxa de depósito",
+		"withdrawalfee": "Taxa de saque",
+		"notAvaliable": "Não disponível"
+	},
+	"pastActions": {
+		"earned": "Merecido",
+		"deposited": "Depositado",
+		"withdrawed": "Retirado",
+		"staked": "Apostado"
+	},
+	"poolCard": {
+		"details": "Detalhes",
+		"hide": "Esconder",
+		"totalLiquidity": "Liquidez Total",
+		"myLiquidity": "Minha Liquidez",
+		"viewonMatic": "PolyScan"
+	},
+	"vaultAccordeon": {
+		"currentPrices": "Preços atuais",
+		"notListedIn": "Não listado em",
+		"viewInfo": "Ver informações",
+		"loading": "Carregando"
+	},
+	"vaultFilter": {
+		"all": "Tudo",
+		"hidezero": "Ocultar saldos zero",
+		"filterby": "Filtrar por",
+		"sortby": "Ordenar por",
+		"search": "Procurar",
+		"stakedonly": "Apenas apostado",
+		"desceding": "descendente",
+		"ascending": "Ascendente",
+		"searchvaults": "Pesquisar cofres"
+	},
+	"modals": {
+		"input": "Entrada",
+		"balance": "Equilíbrio",
+		"otherOptions": "Outras opções",
+		"depositYour": "DEPOSITE SEU",
+		"withdrawYour": "RETIRE SEU"
+	},
+	"walletStatus": {
+		"wallet": "Carteira",
+		"install": "Instalar Metamask",
+		"connected": "Conectado",
+		"checking": "Verificando metamáscara..."
+	}
+}

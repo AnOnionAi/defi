@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import { setInit } from '$lib/i18n/init';
 	import { isHomescreen } from '$lib/stores/homescreen';
-	import { validLang } from '$lib/i18n/utils';
 	import Fa from 'svelte-fa';
 	import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 	import { darkMode } from '$lib/stores/dark';
@@ -55,17 +54,68 @@
 				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
 				href={`/en${currentRoute}`}>English</a>
 			<a
-				on:click={() => handleNewLangSelect('de')}
-				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/de${currentRoute}`}>Deutsche</a>
-			<a
 				on:click={() => handleNewLangSelect('es')}
 				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
 				href={`/es${currentRoute}`}>Español</a>
 			<a
+				on:click={() => handleNewLangSelect('de')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/de${currentRoute}`}>Deutsche</a>
+
+			<a
 				on:click={() => handleNewLangSelect('fr')}
 				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
 				href={`/fr${currentRoute}`}>Français</a>
+			<a
+				on:click={() => handleNewLangSelect('ar')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/ar${currentRoute}`}>اَلْعَرَبِيَّةُ</a>
+			<a
+				on:click={() => handleNewLangSelect('el')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/el${currentRoute}`}>ελληνικά</a>
+			<a
+				on:click={() => handleNewLangSelect('hi')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/hi${currentRoute}`}>हिन्दी</a>
+			<a
+				on:click={() => handleNewLangSelect('it')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/it${currentRoute}`}>Italiano</a>
+			<a
+				on:click={() => handleNewLangSelect('ja')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/ja${currentRoute}`}>日本語</a>
+			<a
+				on:click={() => handleNewLangSelect('ko')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/ko${currentRoute}`}>한국어</a>
+			<a
+				on:click={() => handleNewLangSelect('pt')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/pt${currentRoute}`}
+				>Português
+			</a>
+			<a
+				on:click={() => handleNewLangSelect('ru')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/ru${currentRoute}`}>Pyccкий</a>
+			<a
+				on:click={() => handleNewLangSelect('tr')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/tr${currentRoute}`}>Türkçe</a>
+			<a
+				on:click={() => handleNewLangSelect('zh')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/zh${currentRoute}`}>汉语</a>
+			<a
+				on:click={() => handleNewLangSelect('vi')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/vi${currentRoute}`}>Việt</a>
+			<a
+				on:click={() => handleNewLangSelect('vi')}
+				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+				href={`/vi${currentRoute}`}>اُردُو</a>
 		</div>
 	{/if}
 </div>
