@@ -1,0 +1,169 @@
+{
+	"launchTimeLeft": {
+		"countdown": "ĐẾM SẼ RA MẮT T -"
+	},
+	"depositWarning": {
+		"warning": "Gửi và rút tiền có sẵn nhưng bạn sẽ không kiếm được MUSH cho đến khi"
+	},
+	"comingSoon": {
+		"soon": "Sắp có...",
+		"left": "Thời gian còn lại:"
+	},
+	"homepage": {
+		"presents": "Quà tặng",
+		"revolution": "Cuộc cách mạng của tài chính phi tập trung",
+		"mushcoin": "MushCoin là cách mọi người thể hiện cổ phần của họ trong tương lai của FungFi.MUSH sẽ được phân phối bằng cách đặt cược vào các hồ bơi và trang trại.",
+		"mushroomFarms": "Những khách hàng đặt cọc MUSH / USDC LP trong các trang trại FungFi sẽ được thưởng MushCoin.",
+		"myceliumPools": "Người dùng FungFi sẽ có thể đặt cược các mã thông báo khác vào nhóm của chúng tôi để bắt đầu kiếm $ MUSH mỗi giây.",
+		"fungiVaults": "Cho phép người dùng tự động kết hợp mã thông báo nuôi trở lại vào tài sản mà họ đã đặt cọc ban đầu."
+	},
+	"home": {
+		"tagline1": "Làm cho nó!",
+		"tagline2": "MushCoin",
+		"marketCap": "Vốn hóa thị trường",
+		"introTitle": "Trình bày MushCoin",
+		"intro": "Các nguyên tắc chúng tôi tuân theo trong Defi (Tài chính phi tập trung) dựa trên triết lý của Fungi. Nấm là một sinh vật quan trọng giúp trả lại người chết. Sau đó đưa người chết trở lại để trở thành sự sống trở lại. Họ tiếp tục Vòng tròn Sự sống. MushCoin là chìa khóa của bạn để đến với Thành phố Điện tử Ngọc lục bảo mới này. Chúng tôi phân hủy thối rữa.",
+		"velocityIdeas": "Đừng bỏ lỡ DeFi💡",
+		"velocityIdeasText": "Trong Defi, mọi thứ được điều hành bởi các hợp đồng thông minh, là các thuật toán trên chuỗi khối phi tập trung. Đưa tiền điện tử của bạn hoạt động. Không còn ngồi trong ví. Tốc độ của các ý tưởng đang tăng tốc. Chính xác. Nếu bạn không theo kịp công nghệ, bạn sẽ bị tụt hậu nhanh chóng. Chúng ta phải ghi nhớ Kairos. Từ Hy Lạp cổ đại có nghĩa là 'thời điểm thích hợp, quan trọng hoặc thời cơ'. Đó là thời điểm bây giờ. Không cần phải sợ hãi hay hy vọng, chỉ cần tìm kiếm công nghệ mới. Đối với những kẻ thua cuộc bây giờ, sau này sẽ giành chiến thắng, vì thời đại, họ đang thay đổi.",
+		"revolution": "Cuộc cách mạng",
+		"gainzText": "Hãy tham gia cùng chúng tôi trong Fungi Fantasy của chúng tôi! Đừng là người cuối cùng tìm hiểu về DeFi",
+		"fijiSignature": " - Fiji The Alien Fungi",
+		"psText": "P.S. Có rất nhiều ý tưởng còn lại để được mở khóa trong vũ trụ.",
+		"powerText": "Sức mạnh là của bạn. MushCoin là chìa khóa của tương lai. Chúng ta là tương lai. Cùng nhau, chúng ta sẽ làm cho nó.",
+		"ps2Text": "P.S.S. MushCoin lên mặt trăng và xa hơn!"
+	},
+	"pages": {
+		"about": {
+			"title": "Về"
+		},
+		"contact": {
+			"title": "Tiếp xúc"
+		},
+		"audits": {
+			"title": "Kiểm toán"
+		},
+		"trade": {
+			"title": "Buôn bán"
+		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "Tạo thị trường tiền điện tử tự động"
+		},
+		"dividends": {
+			"text": "Cổ tức"
+		},
+		"dashboard": {
+			"text": "bảng điều khiển"
+		},
+		"farms": {
+			"text": "Trang trại"
+		},
+		"pools": {
+			"text": "Hồ bơi"
+		},
+		"vaults": {
+			"text": "Vault"
+		},
+		"crypto-responsibility": {
+			"text": "Trách nhiệm tiền điện tử"
+		}
+	},
+	"about": {
+		"automated-description": "Tạo thị trường tiền điện tử tự động (ACMM) cho phép tài sản kỹ thuật số được giao dịch theo cách tự động và không được phép bằng cách sử dụng các nhóm thanh khoản thay vì thị trường truyền thống của người mua và người bán. Người dùng cung cấp các nhóm thanh khoản bằng mã thông báo tiền điện tử, có giá được xác định bằng một công thức toán học không đổi. Thay vì giao dịch giữa người mua và người bán, người dùng giao dịch dựa trên một nhóm mã thông báo - một nhóm thanh khoản. Các nhà cung cấp thanh khoản thường kiếm được một khoản phí khi cung cấp mã thông báo cho nhóm. Phí này được trả bởi các nhà giao dịch tương tác với nhóm thanh khoản. Điều này cho phép các nhà cung cấp thanh khoản có thể kiếm được lợi nhuận. Cổ tức.",
+		"farms-description": "Trang trại được sử dụng để canh tác năng suất. Đây là hoạt động đặt cược hoặc khóa tiền điện tử trong giao thức blockchain của chúng tôi để tạo ra phần thưởng được mã hóa. Fungfi dựa vào canh tác năng suất để khuyến khích bạn đóng góp vào tính thanh khoản của mạng lưới của chúng tôi. Fungfi không dựa vào một công cụ hỗ trợ thị trường tập trung.",
+		"pools-description": "Nhóm thanh khoản là một nhóm tiền điện tử hoặc mã thông báo có nguồn lực từ cộng đồng được khóa trong một hợp đồng thông minh được sử dụng để tạo điều kiện giao dịch giữa các tài sản trên một sàn giao dịch phi tập trung (DEX). Điều này cho phép các tài sản kỹ thuật số được giao dịch một cách tự động và không cần sự cho phép thông qua việc sử dụng các nhóm thanh khoản.",
+		"vaults-description": "Vault là một phần của kiến trúc blockchain được sử dụng để lưu trữ, gửi và rút các loại tài sản tiền điện tử khác nhau. Ví dụ: khi người dùng đặt cọc, cho vay, đi vay hoặc đào các tài sản tiền điện tử khác nhau, Fungfi sẽ tự động trao đổi số lượng tài sản chính xác giữa các bên khác nhau thông qua hợp đồng thông minh.",
+		"responsibility-description": "Đầu tư có trách nhiệm. Fungfi Defi có tinh thần đáng kinh ngạc để đạt được lợi nhuận khổng lồ, nhưng mọi thứ trong cuộc sống đều có rủi ro. Trong khi mọi biện pháp phòng ngừa được thực hiện để bảo vệ chống lại nó. Bất cứ thứ gì giao dịch với Internet hoặc Máy tính đều có nguy cơ bị Tin tặc. Bạn cũng phải nhận thức được sự biến động. Các thị trường tiền điện tử mặc dù mang lại lợi ích cao nhưng lại mang một lượng biến động cao. Đôi khi sự biến động này có thể dẫn đến việc bán tháo hoảng loạn, chạy ngân hàng hoặc thua lỗ vô thường. Cuối cùng, nếu bạn mất khóa cá nhân hoặc tuyên bố bí mật vào ví của mình, tiền điện tử đó sẽ bị cháy. Nó đã ra đi vĩnh viễn. Vì vậy, hãy cẩn thận."
+	},
+	"dashboard": {
+		"wallet": "Trong ví của bạn",
+		"tvl": "Tổng giá trị đã khóa",
+		"across": "Trên tất cả Fung Financial",
+		"earn": "Kiếm nhiều hơn",
+		"index": "Mục lục",
+		"mushpb": "MUSH mỗi khối",
+		"mushps": "MUSH mỗi giây",
+		"marketcap": "Vốn hóa thị trường",
+		"totalvol": "Tổng khối lượng",
+		"maxsupply": "Nguồn cung cấp tối đa",
+		"price": "Giá nấm:",
+		"today": "Hôm nay",
+		"peak": "Đỉnh cao",
+		"profit": "Lợi nhuận",
+		"lockedInFarms": "Bị nhốt trong trang trại nấm",
+		"lockedInPools": "Bị nhốt trong Poly Pools",
+		"lockedInVaults": "Bị khóa trong Cyber Vaults",
+		"startFarming": "Trồng một hạt giống",
+		"addLiquidity": "Tạo tính thanh khoản",
+		"goDeposit": "Gửi tiền"
+	},
+	"dividendsPage": {
+		"cyw": "Kết nối ví",
+		"approval": "Chấp nhận những thứ thật cần thiết",
+		"approvalDescription": "Trước tiên, bạn phải chấp thuận chi tiêu MUSH của mình."
+	},
+	"your": {
+		"wallet": "Ví của bạn"
+	},
+	"actions": {
+		"earn": "Kiếm",
+		"get": "Mắc phải",
+		"add": "Thêm vào",
+		"depositFee": "Phí đặt cọc",
+		"wallet": "Cái ví",
+		"approve": "Chấp thuận",
+		"unlock": "Mở khóa",
+		"deposit": "Gửi tiền",
+		"withdraw": "Rút",
+		"harvest": "Mùa gặt",
+		"stake": "Cổ phần",
+		"details": "Thông tin chi tiết",
+		"depositfee": "Phí đặt cọc",
+		"withdrawalfee": "Phí rút tiền",
+		"notAvaliable": "Không có sẵn"
+	},
+	"pastActions": {
+		"earned": "Kiếm được",
+		"deposited": "Đã ký gửi",
+		"withdrawed": "Đã rút",
+		"staked": "Cọc"
+	},
+	"poolCard": {
+		"details": "Thông tin chi tiết",
+		"hide": "Trốn",
+		"totalLiquidity": "Tổng thanh khoản",
+		"myLiquidity": "Thanh khoản của tôi",
+		"viewonMatic": "PolyScan"
+	},
+	"vaultAccordeon": {
+		"currentPrices": "Giá hiện tại",
+		"notListedIn": "Không được liệt kê trong",
+		"viewInfo": "Xem thông tin",
+		"loading": "Đang tải"
+	},
+	"vaultFilter": {
+		"all": "Tất cả các",
+		"hidezero": "Ẩn số dư bằng không",
+		"filterby": "Lọc bởi",
+		"sortby": "Sắp xếp theo",
+		"search": "Tìm kiếm",
+		"stakedonly": "Chỉ đặt cọc",
+		"desceding": "Giảm dần",
+		"ascending": "Tăng dần",
+		"searchvaults": "Tìm kiếm Vault"
+	},
+	"modals": {
+		"input": "Đầu vào",
+		"balance": "Sự cân bằng",
+		"otherOptions": "Sự lựa chọn khác",
+		"depositYour": "GỬI TIỀN CỦA BẠN",
+		"withdrawYour": "RÚT TIỀN CỦA BẠN"
+	},
+	"walletStatus": {
+		"wallet": "Cái ví",
+		"install": "Cài đặt Metamask",
+		"connected": "Đã kết nối",
+		"checking": "Đang kiểm tra Metamask ..."
+	}
+}
