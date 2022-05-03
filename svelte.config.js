@@ -11,7 +11,7 @@ const config = {
 		adapter: adapter(),
 		vite: {
 			envDir: 'env/',
-			plugins: [precompileIntl('src/lib/i18n/langs')]
+			plugins: [precompileIntl('$lib/i18n/langs')]
 		}
 	}
 };
