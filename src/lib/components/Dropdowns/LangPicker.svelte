@@ -32,28 +32,24 @@
 			lang: 'Español'
 		},
 		{
-			code: 'ar',
-			lang: 'اَلْعَرَبِيَّةُ'
+			code: 'fr',
+			lang: 'Français'
 		},
 		{
 			code: 'de',
 			lang: 'Deutsche'
 		},
 		{
-			code: 'el',
-			lang: 'ελληνικά'
-		},
-		{
-			code: 'fr',
-			lang: 'Français'
-		},
-		{
-			code: 'hi',
-			lang: 'हिन्दी'
+			code: 'pt',
+			lang: 'Português'
 		},
 		{
 			code: 'it',
 			lang: 'Italiano'
+		},
+		{
+			code: 'zh',
+			lang: '汉语'
 		},
 		{
 			code: 'ja',
@@ -64,28 +60,32 @@
 			lang: '한국어'
 		},
 		{
-			code: 'pt',
-			lang: 'Português'
-		},
-		{
-			code: 'ru',
-			lang: 'Pyccкий'
+			code: 'vi',
+			lang: 'Việt'
 		},
 		{
 			code: 'tr',
 			lang: 'Türkçe'
 		},
 		{
+			code: 'el',
+			lang: 'ελληνικά'
+		},
+		{
+			code: 'ru',
+			lang: 'Pyccкий'
+		},
+		{
+			code: 'ar',
+			lang: 'اَلْعَرَبِيَّةُ'
+		},
+		{
 			code: 'ur',
 			lang: 'اُردُو'
 		},
 		{
-			code: 'vi',
-			lang: 'Việt'
-		},
-		{
-			code: 'zh',
-			lang: '汉语'
+			code: 'hi',
+			lang: 'हिन्दी'
 		}
 	];
 </script>
