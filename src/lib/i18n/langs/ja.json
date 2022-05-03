@@ -1,0 +1,169 @@
+{
+	"launchTimeLeft": {
+		"countdown": "Tを起動するためのカウントダウン-"
+	},
+	"depositWarning": {
+		"warning": "入出金は可能ですが、MUSHを獲得できるのは"
+	},
+	"comingSoon": {
+		"soon": "近日公開...",
+		"left": "残り時間："
+	},
+	"homepage": {
+		"presents": "プレゼント",
+		"revolution": "分散型ファイナンスの革命",
+		"mushcoin": "MushCoinは、人々がFungFiの将来への出資を表現する方法です。MUSHは、プールや農場に出資することで配布されます。",
+		"mushroomFarms": "FungFiファームでMUSH/USDC LPトークンを賭けた顧客には、MushCoinが提供されます。",
+		"myceliumPools": "FungFiユーザーは、他のトークンをプールに賭けて、毎秒$MUSHを獲得できるようになります。",
+		"fungiVaults": "ユーザーが農業トークンを最初に賭けた資産に自動的に合成できるようにします。"
+	},
+	"home": {
+		"tagline1": "成功する！",
+		"tagline2": "MushCoin",
+		"marketCap": "時価総額",
+		"introTitle": "MushCoinの提示",
+		"intro": "Defi（Decentralized Finance）で私たちが従う原則は、菌類の哲学に基づいています。きのこは死者を返す重要な生物です。その後、死者を取り戻し、再び命を取り戻します。彼らはサークルオブライフを続けています。 MushCoinは、この新しいエメラルドサイバーシティへの鍵です。腐敗を分解します。",
+		"velocityIdeas": "DeFiをお見逃しなく💡",
+		"velocityIdeasText": "Defiでは、すべてが分散型ブロックチェーン上のアルゴリズムであるスマートコントラクトによって実行されます。あなたの暗号を機能させる。もう財布に座っていません。アイデアの速度は加速しています。指数関数的に。あなたがテクノロジーに追いついていないなら、あなたはすぐに遅れるでしょう。カイロスを心に留めておく必要があります。 「正しい、批判的な、または適切な瞬間」を意味する古代ギリシャ語。その瞬間は今です。新しいテクノロジーを探すためだけに、恐れたり希望したりする必要はありません。今の敗者にとっては、後で勝つでしょう、時代のために、彼らは変化しています。",
+		"revolution": "革命",
+		"gainzText": "私たちの菌類ファンタジーに参加してください！ DeFiについて学ぶ最後の人にならないでください",
+		"fijiSignature": " -フィジーエイリアン菌類",
+		"psText": "P.S.宇宙で解き放たれるべき多くのアイデアが残っています。",
+		"powerText": "力はあなた次第です。 MushCoinは未来への鍵です。私たちは未来です。一緒に作ります。",
+		"ps2Text": "P.S.S. MushCoin to the Moon and Beyond！"
+	},
+	"pages": {
+		"about": {
+			"title": "約"
+		},
+		"contact": {
+			"title": "コンタクト"
+		},
+		"audits": {
+			"title": "監査"
+		},
+		"trade": {
+			"title": "トレード"
+		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "自動暗号マーケットメイク"
+		},
+		"dividends": {
+			"text": "配当"
+		},
+		"dashboard": {
+			"text": "ダッシュボード"
+		},
+		"farms": {
+			"text": "農場"
+		},
+		"pools": {
+			"text": "プール"
+		},
+		"vaults": {
+			"text": "ボールト"
+		},
+		"crypto-responsibility": {
+			"text": "暗号の責任"
+		}
+	},
+	"about": {
+		"automated-description": "自動暗号マーケットメイキング（ACMM）を使用すると、従来の買い手と売り手の市場ではなく、流動性プールを使用して、デジタル資産を許可なく自動的に取引できます。ユーザーは流動性プールに暗号トークンを提供します。暗号トークンの価格は一定の数式によって決定されます。買い手と売り手の間で取引する代わりに、ユーザーはトークンのプール、つまり流動性プールと取引します。流動性プロバイダーは通常、プールにトークンを提供するための料金を獲得します。この手数料は、流動性プールとやり取りするトレーダーによって支払われます。これにより、流動性プロバイダーは利回りを得ることができます。配当。",
+		"farms-description": "農場は収穫農業に使用されます。これは、トークン化された報酬を生成するために、ブロックチェーンプロトコル内で暗号通貨をステーキングまたはロックアップする方法です。 Fungfiは、ネットワークの流動性に貢献するようにあなたを動機付けるために、収穫農業に依存しています。 Fungfiは、一元化された市場ファシリテーターに依存していません。",
+		"pools-description": "流動性プールは、分散型取引所（DEX）の資産間の取引を容易にするために使用される、スマートコントラクトにロックされた暗号通貨またはトークンのクラウドソーシングプールです。これにより、流動性プールを使用して、デジタル資産を自動的かつ許可なく取引することができます。",
+		"vaults-description": "ボールトは、さまざまな種類の暗号通貨資産の保管、預け入れ、および引き出しに使用されるブロックチェーンアーキテクチャの一部です。たとえば、ユーザーがさまざまな暗号資産を賭けたり、貸したり、借りたり、ミントしたりすると、Fungfiはスマートコントラクトを介してさまざまな当事者間で正しい数の資産を自動的に交換します。",
+		"responsibility-description": "責任を持って投資します。 Fungfi Defiには巨大なゲインの可能性がありますが、人生のすべてがリスクを伴います。それから保護するためにあらゆる予防策が取られている間。インターネットやコンピューターを扱うものはすべて、ハッカーのリスクを伴います。また、ボラティリティにも注意する必要があります。暗号市場は非常にやりがいがありますが、大きな変動性を持っています。このボラティリティは、パニック売り、取り付け騒ぎ、または永久的な損失につながる場合があります。最後に、あなたがあなたの秘密鍵またはあなたの財布への秘密の声明を失うならば、その暗号は燃やされます。それは永遠になくなっています。ので注意してください。"
+	},
+	"dashboard": {
+		"wallet": "あなたの財布の中",
+		"tvl": "合計値がロックされています",
+		"across": "すべてのFungFinancial全体",
+		"earn": "もっと稼ぐ",
+		"index": "索引",
+		"mushpb": "ブロックごとのMUSH",
+		"mushps": "1秒あたりのMUSH",
+		"marketcap": "時価総額",
+		"totalvol": "全容積",
+		"maxsupply": "最大供給",
+		"price": "マッシュ価格：",
+		"today": "今日",
+		"peak": "ピーク",
+		"profit": "利益",
+		"lockedInFarms": "マッシュファームに閉じ込められた",
+		"lockedInPools": "ポリプールにロック",
+		"lockedInVaults": "サイバーボールトにロック",
+		"startFarming": "植物Aシード",
+		"addLiquidity": "流動性を生み出す",
+		"goDeposit": "預り金"
+	},
+	"dividendsPage": {
+		"cyw": "ウォレットを接続する",
+		"approval": "承認が必要です",
+		"approvalDescription": "まず、MUSHの支出を承認する必要があります。"
+	},
+	"your": {
+		"wallet": "あなたの財布"
+	},
+	"actions": {
+		"earn": "得る",
+		"get": "得る",
+		"add": "追加",
+		"depositFee": "保証金",
+		"wallet": "財布",
+		"approve": "承認",
+		"unlock": "ロックを解除する",
+		"deposit": "預り金",
+		"withdraw": "撤退",
+		"harvest": "収穫",
+		"stake": "ステーク",
+		"details": "詳細",
+		"depositfee": "保証金",
+		"withdrawalfee": "引き出し手数料",
+		"notAvaliable": "利用できません"
+	},
+	"pastActions": {
+		"earned": "稼いだ",
+		"deposited": "預け入れ",
+		"withdrawed": "撤回",
+		"staked": "ステーキング"
+	},
+	"poolCard": {
+		"details": "詳細",
+		"hide": "隠れる",
+		"totalLiquidity": "総流動性",
+		"myLiquidity": "私の流動性",
+		"viewonMatic": "ポリスキャン"
+	},
+	"vaultAccordeon": {
+		"currentPrices": "現在の価格",
+		"notListedIn": "記載されていません",
+		"viewInfo": "情報を見る",
+		"loading": "読み込み中"
+	},
+	"vaultFilter": {
+		"all": "全て",
+		"hidezero": "ゼロ残高を非表示",
+		"filterby": "フィルター",
+		"sortby": "並び替え",
+		"search": "探す",
+		"stakedonly": "ステーキングのみ",
+		"desceding": "降順",
+		"ascending": "上昇",
+		"searchvaults": "検索ボールト"
+	},
+	"modals": {
+		"input": "入力",
+		"balance": "バランス",
+		"otherOptions": "別のオプション",
+		"depositYour": "あなたの預金",
+		"withdrawYour": "あなたを撤回する"
+	},
+	"walletStatus": {
+		"wallet": "財布",
+		"install": "Metamaskをインストールする",
+		"connected": "接続済み",
+		"checking": "メタマスクをチェックしています..."
+	}
+}

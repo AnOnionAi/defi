@@ -10,7 +10,7 @@
 <nav
 	class:dark={$darkMode}
 	class=" {!$isHomescreen && !$darkMode && 'text-gray-800'} {$isHomescreen &&
-		'z-10 text-white'}  backdrop-filter {$darkMode &&
+		'z-10 text-white'} z-10  backdrop-filter {$darkMode &&
 		!$isHomescreen &&
 		'bg-darkGrey-900 '} w-full backdrop-blur  transition duration-500  {$darkMode &&
 		'text-white'} select-none ">

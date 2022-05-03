@@ -1,0 +1,169 @@
+{
+	"launchTimeLeft": {
+		"countdown": "CONTO ALLA ROVESCIA PER IL LANCIO T -"
+	},
+	"depositWarning": {
+		"warning": "Sono disponibili depositi e prelievi ma non guadagnerai MUSH fino a"
+	},
+	"comingSoon": {
+		"soon": "Prossimamente...",
+		"left": "Tempo rimasto:"
+	},
+	"homepage": {
+		"presents": "Regali",
+		"revolution": "La rivoluzione della finanza decentralizzata",
+		"mushcoin": "MushCoin è il modo in cui le persone esprimono la loro partecipazione al futuro di FungFi. MUSH sarà distribuito tramite staking in pool e fattorie.",
+		"mushroomFarms": "I clienti che scommettono token MUSH/USDC LP nelle fattorie FungFi verranno premiati con MushCoin.",
+		"myceliumPools": "Gli utenti FungFi potranno mettere in staking altri token nei nostri pool per iniziare a guadagnare $MUSH ogni secondo.",
+		"fungiVaults": "Consenti agli utenti di ricomporre automaticamente i token di coltivazione nelle risorse che avevano originariamente messo in staking."
+	},
+	"home": {
+		"tagline1": "Fallo!",
+		"tagline2": "MushCoin",
+		"marketCap": "Capitalizzazione di mercato",
+		"introTitle": "Presentazione di MushCoin",
+		"intro": "I principi che seguiamo in Defi (Finanza Decentralizzata) si basano sulla filosofia dei funghi. I Funghi sono un organismo vitale che restituisce i morti. Quindi riporta i morti affinché tornino in vita. Continuano il Circolo della Vita. MushCoin è la tua chiave per questa nuova Emerald Cyber City. Decomponiamo il marciume.",
+		"velocityIdeas": "Non perdere la DeFi💡",
+		"velocityIdeasText": "In Defi, tutto è gestito da contratti intelligenti, che sono algoritmi sulla blockchain decentralizzata. Mettere al lavoro la tua criptovaluta. Non più seduto in un portafoglio. La velocità delle idee sta accelerando. In modo esponenziale. Se non stai al passo con la tecnologia, rimarrai indietro velocemente. Dobbiamo tenere a mente Kairos. La parola greca antica significa \"il momento giusto, critico o opportuno\". Quel momento è adesso. Non c'è bisogno di temere o sperare, solo di cercare nuove tecnologie. Per i perdenti adesso, sarà poi a vincere, per i tempi, sono un cambiamento.",
+		"revolution": "Rivoluzione",
+		"gainzText": "Unisciti a noi nella nostra fantasia di funghi! Non essere l'ultimo a conoscere la DeFi",
+		"fijiSignature": " - Figi I funghi alieni",
+		"psText": "PS Ci sono molte idee rimaste da sbloccare nell'universo.",
+		"powerText": "Il potere è tuo. MushCoin è la chiave per il futuro. Noi siamo il futuro. Insieme ce la faremo.",
+		"ps2Text": "P.S.S. MushCoin verso la luna e oltre!"
+	},
+	"pages": {
+		"about": {
+			"title": "Di"
+		},
+		"contact": {
+			"title": "Contatto"
+		},
+		"audits": {
+			"title": "Audit"
+		},
+		"trade": {
+			"title": "Commercio"
+		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "Creazione automatica del mercato delle criptovalute"
+		},
+		"dividends": {
+			"text": "Dividendi"
+		},
+		"dashboard": {
+			"text": "Pannello"
+		},
+		"farms": {
+			"text": "Fattorie"
+		},
+		"pools": {
+			"text": "Piscine"
+		},
+		"vaults": {
+			"text": "Volte"
+		},
+		"crypto-responsibility": {
+			"text": "Responsabilità crittografica"
+		}
+	},
+	"about": {
+		"automated-description": "Automated Crypto Market Making (ACMM) consente di scambiare risorse digitali in modo automatico e senza autorizzazione utilizzando pool di liquidità anziché un mercato tradizionale di acquirenti e venditori. Gli utenti forniscono ai pool di liquidità token crittografici, i cui prezzi sono determinati da una formula matematica costante. Invece di fare trading tra acquirenti e venditori, gli utenti commerciano contro un pool di token, un pool di liquidità. I fornitori di liquidità normalmente guadagnano una commissione per la fornitura di token al pool. Questa commissione viene pagata dai trader che interagiscono con il pool di liquidità. Ciò consente ai fornitori di liquidità di essere in grado di guadagnare rendimento. Dividendi.",
+		"farms-description": "Le fattorie sono utilizzate per la produzione agricola. Questa è la pratica di picchettare o bloccare le criptovalute all'interno del nostro protocollo blockchain per generare ricompense tokenizzate. Fungfi si affida alla yield farming per incentivarti a contribuire alla liquidità della nostra rete. Fungfi non si affida a un facilitatore di mercato centralizzato.",
+		"pools-description": "Un pool di liquidità è un pool di criptovalute o token in crowdsourcing bloccato in uno smart contract che viene utilizzato per facilitare gli scambi tra gli asset su uno scambio decentralizzato (DEX). Ciò consente di negoziare le risorse digitali in modo automatico e senza autorizzazione attraverso l'uso di pool di liquidità.",
+		"vaults-description": "Un vault è un pezzo di architettura blockchain utilizzato per l'archiviazione, il deposito e il ritiro di diversi tipi di asset di criptovaluta. Ad esempio, quando un utente punta, presta, prende in prestito o conia diverse risorse crittografiche, Fungfi scambierà automaticamente il numero corretto di risorse tra diverse parti tramite contratti intelligenti.",
+		"responsibility-description": "Investi in modo responsabile. C'è un potenziale incredibile per un enorme guadagno in Fungfi Defi, ma tutto nella vita comporta dei rischi. Mentre ogni precauzione è presa per proteggersi. Qualsiasi cosa abbia a che fare con Internet o computer comporta il rischio di hacker. Devi anche essere consapevole della volatilità. I mercati delle criptovalute, pur essendo altamente gratificanti, portano un'elevata volatilità. A volte questa volatilità può portare a vendite di panico, corse agli sportelli o perdite temporanee. Infine, se perdi la tua chiave privata o la tua dichiarazione segreta nel tuo portafoglio, quella criptovaluta viene bruciata. È andato per sempre. Quindi sii attento."
+	},
+	"dashboard": {
+		"wallet": "Nel tuo portafoglio",
+		"tvl": "Valore totale bloccato",
+		"across": "In tutto Fung Financial",
+		"earn": "Guadagna di più",
+		"index": "Indice",
+		"mushpb": "MUSCHIA per blocco",
+		"mushps": "POLPA al secondo",
+		"marketcap": "Capitalizzazione di mercato",
+		"totalvol": "Volume totale",
+		"maxsupply": "Fornitura massima",
+		"price": "Prezzo della poltiglia:",
+		"today": "In data odierna",
+		"peak": "Picco",
+		"profit": "Profitto",
+		"lockedInFarms": "Rinchiuso negli allevamenti di funghi",
+		"lockedInPools": "Bloccato in Poly Pool",
+		"lockedInVaults": "Bloccato nei Cyber Vault",
+		"startFarming": "Pianta un seme",
+		"addLiquidity": "Crea liquidità",
+		"goDeposit": "Depositare"
+	},
+	"dividendsPage": {
+		"cyw": "Collega il portafoglio",
+		"approval": "Approvazione richiesta",
+		"approvalDescription": "Devi prima approvare la tua spesa MUSH."
+	},
+	"your": {
+		"wallet": "Il tuo portafoglio"
+	},
+	"actions": {
+		"earn": "Guadagnare",
+		"get": "Ottenere",
+		"add": "Aggiungere",
+		"depositFee": "Commissione di deposito",
+		"wallet": "Portafoglio",
+		"approve": "Approvare",
+		"unlock": "Sbloccare",
+		"deposit": "Depositare",
+		"withdraw": "Ritirare",
+		"harvest": "Raccolto",
+		"stake": "Palo",
+		"details": "Dettagli",
+		"depositfee": "Commissione di deposito",
+		"withdrawalfee": "Commissione di prelievo",
+		"notAvaliable": "Non disponibile"
+	},
+	"pastActions": {
+		"earned": "Guadagnato",
+		"deposited": "Depositato",
+		"withdrawed": "Ritirato",
+		"staked": "In palio"
+	},
+	"poolCard": {
+		"details": "Dettagli",
+		"hide": "Nascondere",
+		"totalLiquidity": "Liquidità totale",
+		"myLiquidity": "La mia liquidità",
+		"viewonMatic": "Polyscan"
+	},
+	"vaultAccordeon": {
+		"currentPrices": "Prezzi attuali",
+		"notListedIn": "Non elencato",
+		"viewInfo": "Visualizza informazioni",
+		"loading": "Caricamento in corso"
+	},
+	"vaultFilter": {
+		"all": "Tutti",
+		"hidezero": "Nascondi saldi zero",
+		"filterby": "Filtra per",
+		"sortby": "Ordina per",
+		"search": "Ricerca",
+		"stakedonly": "Solo puntato",
+		"desceding": "Discendente",
+		"ascending": "Ascendente",
+		"searchvaults": "Cerca nelle cripte"
+	},
+	"modals": {
+		"input": "Ingresso",
+		"balance": "Bilancia",
+		"otherOptions": "Altre opzioni",
+		"depositYour": "DEPOSITA IL TUO",
+		"withdrawYour": "RITIRA IL TUO"
+	},
+	"walletStatus": {
+		"wallet": "Portafoglio",
+		"install": "Installa Metamask",
+		"connected": "Collegato",
+		"checking": "Controllo della metamaschera..."
+	}
+}
