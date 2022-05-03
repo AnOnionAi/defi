@@ -2,6 +2,9 @@
 	import { onMount } from 'svelte';
 	import '@melloware/coloris/dist/coloris.css';
 	import Coloris from '@melloware/coloris';
+	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
+
+	const development = true;
 
 	let pixelsData = [];
 
@@ -20,21 +23,25 @@
 	});
 </script>
 
-<div bind:this={gridContainer} id="grid" class="m-auto mb-8 mt-8 w-11/12">
-	{#each pixelsData as pixel}
-		<div class="clr-field" style="color: {pixel};">
-			<button
-				aria-labelledby="clr-open-label"
-				style="width: 100%; height:100%;" />
-			<input
-				class="pixel"
-				type="text"
-				style="width: 100%;
-            height: max-content;
-            border-radius: 2px;" />
-		</div>
-	{/each}
-</div>
+{#if development}
+	<DisabledFeature />
+{:else}
+	<div bind:this={gridContainer} id="grid" class="m-auto mb-8 mt-8 w-11/12">
+		{#each pixelsData as pixel}
+			<div class="clr-field" style="color: {pixel};">
+				<button
+					aria-labelledby="clr-open-label"
+					style="width: 100%; height:100%;" />
+				<input
+					class="pixel"
+					type="text"
+					style="width: 100%;
+				height: max-content;
+				border-radius: 2px;" />
+			</div>
+		{/each}
+	</div>
+{/if}
 
 <style>
 	#grid {
