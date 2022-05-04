@@ -23,11 +23,6 @@
 	import { getContext } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	const { open } = getContext('simple-modal');
-	import {
-		transactionCompleted,
-		transactionDeniedByTheUser,
-		transactionSend
-	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
@@ -35,6 +30,10 @@
 	import AssetPair from './AssetPair.svelte';
 	import VaultHeading from './VaultHeading.svelte';
 	import { formatEther } from 'ethers/lib/utils';
+	import {
+		spawnErrorNotification,
+		spawnSuccessNotification
+	} from '$lib/utils/spawnNotifications';
 
 	const { addNotification } = getNotificationsContext();
 
@@ -61,20 +60,22 @@
 			userAcc = arrayAccs[0];
 		}
 	});
+
 	const openAccordeon = (): void => {
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
+
 	const handleTransaction = async (
 		transaction: Promise<any>,
 		transactionName: string
 	) => {
 		loadingState.something = true;
 		loadingState[transactionName] = true;
-		addNotification(transactionSend);
 		try {
 			const tx = await transaction;
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
-			addNotification(transactionCompleted);
+			spawnSuccessNotification(addNotification, 'MINED');
 
 			if (transactionName == 'approve') {
 				setTimeout(() => {
@@ -115,7 +116,7 @@
 			}, 8000);
 		} catch (error) {
 			console.log(error);
-			addNotification(transactionDeniedByTheUser);
+			spawnErrorNotification(addNotification, error);
 		}
 		loadingState.something = false;
 		loadingState[transactionName] = false;

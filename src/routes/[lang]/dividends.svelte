@@ -15,14 +15,13 @@
 	import { BigNumber, ethers } from 'ethers';
 	import { approveToken } from '$lib/utils/erc20';
 	import { getNotificationsContext } from 'svelte-notifications';
-	import {
-		transactionCompleted,
-		transactionDeniedByTheUser,
-		transactionSend
-	} from '$lib/config/constants/notifications';
 	import { darkMode } from '$lib/stores/dark';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
+	import {
+		spawnErrorNotification,
+		spawnSuccessNotification
+	} from '$lib/utils/spawnNotifications';
 	const { addNotification } = getNotificationsContext();
 
 	let userAccount: string;
@@ -30,7 +29,7 @@
 	let approved = false;
 	let finishedApprovalFetch = false;
 
-	/* 	$: userAccount = $accounts?.[0];
+	$: userAccount = $accounts?.[0];
 	$: approved = !userMushAllowance.isZero();
 
 	$: if (userAccount) {
@@ -50,18 +49,18 @@
 				getContractAddress(Token.MUSHTOKEN),
 				getContractAddress(Token.VAULTCHEF)
 			);
-			addNotification(transactionSend);
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
 			approved = true;
-			addNotification(transactionCompleted);
+			spawnSuccessNotification(addNotification, 'MINED');
 		} catch (e) {
-			addNotification(transactionDeniedByTheUser);
+			spawnErrorNotification(addNotification, e);
 		}
-	}; */
+	};
 </script>
 
 <section class="flex h-full flex-col">
-	<!-- 	<PageHeader text={$_('headers.dividends.text')} />
+	<PageHeader text={$_('headers.dividends.text')} />
 	<div class="flex-1">
 		<div
 			class="dividends-wrapper {$darkMode
@@ -81,8 +80,7 @@
 				{/if}
 			</div>
 		</div>
-	</div> -->
-	<DisabledFeature />
+	</div>
 </section>
 
 <style>
