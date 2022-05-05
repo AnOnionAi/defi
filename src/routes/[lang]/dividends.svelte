@@ -60,7 +60,8 @@
 </script>
 
 <section class="flex h-full flex-col">
-	<PageHeader text={$_('headers.dividends.text')} />
+	<DisabledFeature />
+	<!-- <PageHeader text={$_('headers.dividends.text')} />
 	<div class="flex-1">
 		<div
 			class="dividends-wrapper {$darkMode
@@ -80,7 +81,7 @@
 				{/if}
 			</div>
 		</div>
-	</div>
+	</div> -->
 </section>
 
 <style>
