@@ -6,8 +6,29 @@ export const transactionSend: Notification = {
 	removeAfter: 5000
 };
 
-export const transactionDeniedByTheUser: Notification = {
+export const transactionDenied: Notification = {
 	text: 'Transaction Denied',
+	position: 'top-right',
+	type: 'danger',
+	removeAfter: 5000
+};
+
+export const deniedSignature: Notification = {
+	text: 'User denied transaction signature',
+	position: 'top-right',
+	type: 'danger',
+	removeAfter: 5000
+};
+
+export const transactionUnderpriced: Notification = {
+	text: 'Transaction Underpriced',
+	position: 'top-right',
+	type: 'danger',
+	removeAfter: 5000
+};
+
+export const invalidTransaction: Notification = {
+	text: 'Transaction includes invalid data',
 	position: 'top-right',
 	type: 'danger',
 	removeAfter: 5000

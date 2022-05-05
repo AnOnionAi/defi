@@ -163,3 +163,9 @@ export interface LoadingState {
 	loadingWithdraw?: boolean;
 	loadingHarvest?: boolean;
 }
+
+export interface TransactionError {
+	code: number;
+	message: string;
+	stack: string;
+}
