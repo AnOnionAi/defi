@@ -42,11 +42,14 @@
 	let isHidden = true;
 	let isApproved: boolean;
 	let stakedTokens;
-	let userTokens: BigNumber;
+	let userTokens: BigNumber = ethers.constants.Zero;
 	let tkn0Price: number;
 	let tkn1Price: number;
 	let userDepositAmount: string;
 	let userWithdrawAmount: string;
+
+	$: allIn = ethers.utils.formatEther(userTokens) == userDepositAmount;
+
 	const loadingState = {
 		something: false,
 		approve: false,
@@ -154,16 +157,27 @@
 			closeOnOuterClick: true
 		});
 	};
+
+	const depositMaxAmount = () => {
+		if (userTokens.isZero()) {
+			console.log(userTokens);
+			console.log('is zero lol');
+			return;
+		}
+		const parsedUserTokens = ethers.utils.formatEther(userTokens);
+		userDepositAmount = parsedUserTokens;
+		handleTransaction(deposit(vaultConfig.pid, userDepositAmount), 'deposit');
+	};
 </script>
 
 <div
 	in:fly={{ y: 200, duration: 100 }}
-	class="mx-auto mb-3 max-w-6xl opacity-95 sm:px-4 md:px-2 lg:px-0">
+	class="mx-auto mb-3 max-w-6xl  sm:px-4 md:px-2 lg:px-0">
 	<div
 		on:click={openAccordeon}
 		class="{!$darkMode &&
-			'sideShadow'} mx-auto rounded-lg bg-white py-6  	{!isHidden &&
-			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-200   dark:bg-neutral-800 dark:hover:bg-neutral-600">
+			'sideShadow'} mx-auto rounded-lg bg-white/80 py-6  	{!isHidden &&
+			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-200   dark:bg-neutral-800/80 dark:hover:bg-neutral-600/80">
 		<div
 			class="mx-3 block items-center justify-between md:mx-8 md:flex lg:mx-14 xl:mx-20 ">
 			<AssetPair
@@ -208,7 +222,7 @@
 		<div
 			in:slide={{ duration: 400 }}
 			out:slide={{ duration: 400 }}
-			class="max-w-8xl mx-auto rounded-b-lg bg-neutral-200 px-5 py-5 opacity-100 dark:bg-neutral-800">
+			class="max-w-8xl mx-auto rounded-b-lg bg-neutral-200 px-5 py-5  dark:bg-neutral-800">
 			{#if !$accounts}
 				<button
 					on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
@@ -217,6 +231,23 @@
 						? 'gradientQuickswap'
 						: 'gradientSushiswap'} transform rounded-xl py-2 text-xl font-semibold tracking-wide  text-white transition duration-300 hover:bg-blue-400 "
 					>{$_('actions.unlock')}
+				</button>
+			{:else if $accounts && !isApproved}
+				<button
+					on:click={async () =>
+						handleTransaction(
+							approveToken(
+								vaultConfig.pair.pairContract,
+								getContractAddress(Token.VAULTCHEF)
+							),
+							'approve'
+						)}
+					class=" mx-auto block w-10/12 {vaultConfig.platform.name.toLowerCase() ==
+					'quickswap'
+						? 'gradientQuickswap'
+						: 'gradientSushiswap'} transform rounded-xl py-2 text-xl font-semibold tracking-wide  text-white transition duration-300 hover:bg-blue-400 "
+					>{$_('actions.approve')}
+					{vaultConfig.pair.token0Name}-{vaultConfig.pair.token1Name}
 				</button>
 			{:else}
 				<div class="flex flex-col  lg:flex-row flex-wrapper justify-around">
@@ -245,7 +276,8 @@
 								placeholder="Enter Value"
 								class="bg-transparent  text-gray-900 font-bold w-8/12 	dark:text-white"
 								type="text" />
-							{#if isApproved}
+
+							{#if userDepositAmount}
 								<button
 									class:cursor-not-allowed={loadingState.something}
 									disabled={loadingState.something}
@@ -254,7 +286,8 @@
 											deposit(vaultConfig.pid, userDepositAmount),
 											'deposit'
 										)}
-									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig
+									class="flex  items-center  disabled:cursor-not-allowed bg-triadicGreen-700 hover:bg-triadicGreen-600 dark:bg-triadicGreen-800 dark:hover:bg-triadicGreen-900  {allIn &&
+										'glowingButton bg-triadicGreen-600'} transition duration-300 text-white font-bold rounded-lg px-4 py-3 hover:bg-{vaultConfig
 										.platform.brandColor}-500 {loadingState.deposit &&
 										`bg-${vaultConfig.platform.brandColor}-500`}">
 									<p>{$_('actions.deposit')}</p>
@@ -266,6 +299,23 @@
 								</button>
 							{:else}
 								<button
+									class:cursor-not-allowed={loadingState.something}
+									disabled={loadingState.something}
+									on:click={depositMaxAmount}
+									class="flex flex-col items-center  disabled:cursor-not-allowed bg-gradient-to-r from-complementary-600 to-triadicGreen-600 transition duration-300 text-white font-bold rounded-lg px-4 py-1 hover:bg-{vaultConfig
+										.platform.brandColor}-500 {loadingState.deposit &&
+										`bg-${vaultConfig.platform.brandColor}-500`}">
+									<p>{$_('actions.deposit')}</p>
+									<p class="text-xs">MAX</p>
+									{#if loadingState.deposit}
+										<div class="pl-2">
+											<Chasing size="20" unit="px" color="#ffff" />
+										</div>
+									{/if}
+								</button>
+							{/if}
+
+							<!-- 	<button
 									class:cursor-not-allowed={loadingState.approve}
 									disabled={loadingState.approve}
 									on:click={async () =>
@@ -286,8 +336,7 @@
 											<Chasing size="20" unit="px" color="#ffff" />
 										</div>
 									{/if}
-								</button>
-							{/if}
+								</button> -->
 						</div>
 						<div class="flex">
 							<p class="pl-1 text-gray-500  dark:text-white font-medium">
@@ -332,7 +381,7 @@
 										withdraw(vaultConfig.pid, userWithdrawAmount.toString()),
 										'withdraw'
 									)}
-								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig
+								class="flex items-center disabled:cursor-not-allowed  bg-triadicYellow-700 disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig
 									.platform.brandColor}-500 {loadingState.withdraw &&
 									`bg-${vaultConfig.platform.brandColor}-500`}">
 								<p>{$_('actions.withdraw')}</p>
@@ -403,6 +452,10 @@
 </div>
 
 <style>
+	.glowingButton {
+		box-shadow: rgba(177, 255, 162, 1) 0px 20px 35px;
+	}
+
 	.sideShadow {
 		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	}
