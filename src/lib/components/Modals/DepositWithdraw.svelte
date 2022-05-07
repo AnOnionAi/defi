@@ -170,26 +170,23 @@
 				{/if}
 			</div>
 
-			<!-- {#if action == 'DEPOSIT'}
-				<button
-					on:click={() =>
-						(wantAmount = ethers.utils.formatUnits(
+			<button
+				on:click={() => {
+					if (action === 'DEPOSIT') {
+						wantAmount = ethers.utils.formatUnits(
 							userBalance,
 							stakingTokenDecimals
-						))}
-					class="mr-1  rounded-lg w-full bg-triadicGreen-600 text-green-400"
-					>MAX</button>
-			{:else if action == 'WITHDRAW'}
-				<button
-					on:click={() =>
-						(wantAmount = ethers.utils.formatUnits(
+						);
+						return;
+					}
+					if (action === 'WITHDRAW') {
+						wantAmount = ethers.utils.formatUnits(
 							userStakedTokens,
 							stakingTokenDecimals
-						))}
-					class="text-xs p-1 mr-1 text-red-400 bg-t rounded-full">MAX</button>
-			{/if} -->
-
-			<button
+						);
+						return;
+					}
+				}}
 				class="w-full rounded-xl bg-gradient-to-r from-complementary-600 to-triadicGreen-600 py-1 px-2 text-lg font-bold text-white  transition duration-500 hover:from-triadicGreen-600 hover:to-complementary-600"
 				>MAX</button>
 
