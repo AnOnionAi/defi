@@ -116,7 +116,7 @@
 				onChange={handlePlatformFilter}
 				value={'All'}
 				bind:optionsGroup={platformSelected} />
-			<p class="text-gray-700 dark:text-gray-100">All</p>
+			<p class="text-gray-700 dark:text-gray-100">{$_('vaultFilter.all')}</p>
 		</div>
 
 		<div class="flex gap-2 place-self-start md:place-self-center">
@@ -141,19 +141,23 @@
 			<div class="flex items-center gap-2">
 				<StyledCheckbox onChange={handleHideZeroBalancesFilter} />
 				<p class="flex text-sm text-gray-700 dark:text-gray-100 md:text-base">
-					Hide Zero Balances
+					{$_('vaultFilter.hidezero')}
 				</p>
 			</div>
 		</div>
 		<div class="flex  flex-col ">
-			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">Filter By</p>
+			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">
+				{$_('vaultFilter.filterby')}
+			</p>
 			<StyledSelect bind:value={filterBy}>
 				<option value="TVL">TVL</option>
 				<option value="APY">APY</option>
 			</StyledSelect>
 		</div>
 		<div class="flex  flex-col ">
-			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">Sort By</p>
+			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">
+				{$_('vaultFilter.sortby')}
+			</p>
 			<StyledSelect bind:value={sortBy}>
 				<option class="min-w-7xl" value="Descending"
 					>{$_('vaultFilter.desceding')}</option>
@@ -161,7 +165,9 @@
 			</StyledSelect>
 		</div>
 		<div class="flex  flex-col ">
-			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">Search</p>
+			<p class="pl-1 pb-1 text-gray-700 dark:text-gray-100">
+				{$_('vaultFilter.search')}
+			</p>
 			<StyledSearchbar
 				placeholder="Vaults"
 				handleInput={handleSearchByName}
@@ -174,7 +180,7 @@
 					checked={stakedOnly}
 					handleClick={handleStakedOnlyFilter} />
 				<p class="pl-2 text-sm text-gray-700 dark:text-gray-100 md:text-base">
-					Staked Only
+					{$_('vaultFilter.stakedonly')}
 				</p>
 			</div>
 		</div>
