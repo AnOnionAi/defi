@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "ボールト"
 		},
+		"metapixel": {
+			"text": "メタピクセル"
+		},
 		"crypto-responsibility": {
 			"text": "暗号の責任"
 		}
@@ -111,6 +114,7 @@
 		"get": "得る",
 		"add": "追加",
 		"depositFee": "保証金",
+		"performanceFee": "成功報酬",
 		"wallet": "財布",
 		"approve": "承認",
 		"unlock": "ロックを解除する",

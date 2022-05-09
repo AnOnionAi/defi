@@ -119,6 +119,7 @@
 		"get": "Get",
 		"add": "Add",
 		"depositFee": "Deposit Fee",
+		"performanceFee": "Performance Fee",
 		"wallet": "Wallet",
 		"approve": "Approve",
 		"unlock": "Unlock",

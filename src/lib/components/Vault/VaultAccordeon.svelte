@@ -314,29 +314,6 @@
 									{/if}
 								</button>
 							{/if}
-
-							<!-- 	<button
-									class:cursor-not-allowed={loadingState.approve}
-									disabled={loadingState.approve}
-									on:click={async () =>
-										handleTransaction(
-											approveToken(
-												vaultConfig.pair.pairContract,
-												getContractAddress(Token.VAULTCHEF)
-											),
-											'approve'
-										)}
-									class="flex items-center bg-black  disabled:opacity-50 {loadingState.something &&
-										'cursor-not-allowed'} text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig
-										.platform.brandColor}-500 {loadingState.approve &&
-										`bg-${vaultConfig.platform.brandColor}-500`}">
-									<p>{$_('actions.approve')}</p>
-									{#if loadingState.approve}
-										<div class="pl-2">
-											<Chasing size="20" unit="px" color="#ffff" />
-										</div>
-									{/if}
-								</button> -->
 						</div>
 						<div class="flex">
 							<p class="pl-1 text-gray-500  dark:text-white font-medium">
@@ -345,6 +322,12 @@
 							<p class="px-1   dark:text-white font-medium">
 								{vaultConfig.depositFee}%
 							</p>
+						</div>
+						<div class="flex">
+							<p class="pl-1 text-gray-500  dark:text-white font-medium">
+								{$_('actions.performanceFee')}:
+							</p>
+							<p class="px-1   dark:text-white font-medium">5%</p>
 						</div>
 					</div>
 
@@ -453,7 +436,7 @@
 
 <style>
 	.glowingButton {
-		box-shadow: rgba(177, 255, 162, 1) 0px 20px 35px;
+		box-shadow: rgba(177, 255, 162, 1) 0px 5px 10px;
 	}
 
 	.sideShadow {

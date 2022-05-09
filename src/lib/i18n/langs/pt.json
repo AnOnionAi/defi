@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "Cofres"
 		},
+		"metapixel": {
+			"text": "Metapixel"
+		},
 		"crypto-responsibility": {
 			"text": "Responsabilidade criptográfica"
 		}
@@ -111,6 +114,7 @@
 		"get": "Obter",
 		"add": "Adicionar",
 		"depositFee": "Taxa de depósito",
+		"performanceFee": "Taxa de performance",
 		"wallet": "Carteira",
 		"approve": "Aprovar",
 		"unlock": "Desbloquear",
