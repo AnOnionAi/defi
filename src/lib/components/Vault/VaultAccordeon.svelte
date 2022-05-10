@@ -414,7 +414,7 @@
 								<a
 									target="_blank"
 									class="block text-gray-600 font-medium hover:text-green-500 dark:text-gray-400"
-									href={vaultConfig.platform.swapperURL}
+									href={`https://app.sushi.com/add?tokens=${vaultConfig.pair.token0Contract}&tokens=${vaultConfig.pair.token1Contract}&chainId=137`}
 									>{$_('actions.get')}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a>
 								<a
