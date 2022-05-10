@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "金库"
 		},
+		"metapixel": {
+			"text": "元像素"
+		},
 		"crypto-responsibility": {
 			"text": "加密责任"
 		}
@@ -111,6 +114,7 @@
 		"get": "得到",
 		"add": "添加",
 		"depositFee": "押金",
+		"performanceFee": "演出费",
 		"wallet": "钱包",
 		"approve": "批准",
 		"unlock": "开锁",

@@ -2,7 +2,6 @@
 	"launchTimeLeft": {
 		"countdown": "TIEMPO RESTANTE PARA EL LANZAMIENTO: "
 	},
-
 	"depositWarning": {
 		"warning": "Los depósitos y retiros están disponibles, sin embargo, no ganarás MUSH hasta dentro de: "
 	},
@@ -10,7 +9,6 @@
 		"soon": "Disponible muy Pronto ...",
 		"left": "Faltan: "
 	},
-
 	"homepage": {
 		"presents": "Presentamos",
 		"revolution": "La revolución de las Finanzas Decentralizadas",
@@ -19,7 +17,6 @@
 		"myceliumPools": "Podrás depositar otros tokens en nuestros Pools y comenzar a ganar MUSH cada segundo",
 		"fungiVaults": "Permiten que los usuarios obtengan intereses compuestos automáticamente y reciban el mismo token que depositaron"
 	},
-
 	"home": {
 		"tagline1": "¡Hazlo!",
 		"tagline2": "MushCoin",
@@ -117,6 +114,7 @@
 		"get": "Obten",
 		"add": "Agregar",
 		"depositFee": "Tarifa por Depósito",
+		"performanceFee": "Comisión de Rentabilidad",
 		"wallet": "Cartera",
 		"approve": "Aprobar",
 		"unlock": "Desbloquear",
@@ -129,14 +127,12 @@
 		"withdrawalfee": "Tarifa de Retiro",
 		"notAvaliable": "No disponible"
 	},
-
 	"pastActions": {
 		"earned": "Ganado",
 		"deposited": "Depositado",
 		"withdrawed": "Retirado",
 		"staked": "Puesto"
 	},
-
 	"poolCard": {
 		"details": "Detalles",
 		"hide": "Esconder",
@@ -144,14 +140,12 @@
 		"myLiquidity": "Mi Liquidez",
 		"viewonMatic": "Explorador"
 	},
-
 	"vaultAccordeon": {
 		"currentPrices": "Precios Actuales",
 		"notListedIn": "Sin listar en",
 		"viewInfo": "Ver Información",
 		"loading": "Cargando"
 	},
-
 	"vaultFilter": {
 		"all": "Todos",
 		"hidezero": "Esconder Balances Cero",
@@ -163,7 +157,6 @@
 		"ascending": "Ascendiente",
 		"searchvaults": "Buscar Bóvedas"
 	},
-
 	"modals": {
 		"input": "Aporte",
 		"balance": "Balance",
@@ -171,7 +164,6 @@
 		"depositYour": "DEPOSITA TU",
 		"withdrawYour": "RETIRA TU"
 	},
-
 	"walletStatus": {
 		"wallet": "Cartera",
 		"install": "Instalar Metamask",

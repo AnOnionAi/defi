@@ -255,7 +255,7 @@
 
 	<SectionTitle
 		title={`${$_('dashboard.price')}  $${
-			$tokenPrice ? $tokenPrice.toFixed(3) : '0'
+			$tokenPrice ? $tokenPrice.toPrecision(4) : '0'
 		}`} />
 	<MushPriceSection>
 		<div class="col-span-9 h-80  lg:col-span-6	">

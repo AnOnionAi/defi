@@ -390,12 +390,12 @@
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-500 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
+							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-500 py-2 px-5 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
 							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
-							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600  disabled:cursor-not-allowed"
+							class=" bg-triadicGreen-700 dark:bg-triadicGreen-600 py-2 px-3 rounded-lg text-2xl font-bold text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600  disabled:cursor-not-allowed"
 							>-</button>
 					</div>
 				</div>

@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "kasalar"
 		},
+		"metapixel": {
+			"text": "metapiksel"
+		},
 		"crypto-responsibility": {
 			"text": "Kripto Sorumluluğu"
 		}
@@ -111,6 +114,7 @@
 		"get": "Almak",
 		"add": "Ekle",
 		"depositFee": "Depozito Ücreti",
+		"performanceFee": "Performans ücreti",
 		"wallet": "Cüzdan",
 		"approve": "Onaylamak",
 		"unlock": "Kilidini aç",

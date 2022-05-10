@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "والٹس"
 		},
+		"metapixel": {
+			"text": "میٹا پکسل"
+		},
 		"crypto-responsibility": {
 			"text": "کرپٹو ذمہ داری"
 		}
@@ -111,6 +114,7 @@
 		"get": "حاصل کریں۔",
 		"add": "شامل کریں۔",
 		"depositFee": "جمع فیس",
+		"performanceFee": "کارکردگی کی فیس",
 		"wallet": "پرس",
 		"approve": "منظور کرو",
 		"unlock": "غیر مقفل کریں۔",

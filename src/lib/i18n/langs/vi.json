@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "Vault"
 		},
+		"metapixel": {
+			"text": "Metapixel"
+		},
 		"crypto-responsibility": {
 			"text": "Trách nhiệm tiền điện tử"
 		}
@@ -111,6 +114,7 @@
 		"get": "Mắc phải",
 		"add": "Thêm vào",
 		"depositFee": "Phí đặt cọc",
+		"performanceFee": "Phí thi công",
 		"wallet": "Cái ví",
 		"approve": "Chấp thuận",
 		"unlock": "Mở khóa",
