@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
 	import metapixelABI from '$lib/config/abi/Metapixel.json';
-	import famABI from '$lib/config/abi/FAM';
+	import famABI from '$lib/config/abi/FAM.json';
 	import { BigNumber, ethers } from 'ethers';
 	import { getSigner } from '$lib/utils/web3Utils';
 
@@ -36,6 +36,7 @@
 
 	let pixelPrice;
 	let token;
+	let tokenSymbol;
 
 	let inputColor;
 
@@ -103,6 +104,7 @@
 
 		pixelPrice = await metapixelReadContract.pixelFee();
 		token = await FAMreadContract.name();
+		tokenSymbol = await FAMreadContract.symbol();
 
 		for (let i = 0; i < sizeX.toNumber(); i++) {
 			for (let j = 0; j < sizeY.toNumber(); j++) {
@@ -167,8 +169,8 @@
 			</div>
 			<div class="description mt-8">
 				<h1 class="dark:text-white">Jackpot:</h1>
-				<h1 class="dark:text-white">Token: {token}</h1>
-				<h1 class="dark:text-white">Price to Paint: {pixelPrice}</h1>
+				<h1 class="dark:text-white">Token: {token}({tokenSymbol})</h1>
+				<h1 class="dark:text-white">Price to Paint: ${pixelPrice}</h1>
 			</div>
 		</div>
 
