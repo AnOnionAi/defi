@@ -53,7 +53,11 @@
 	const paint = async () => {
 		console.log(pixelSelectedX, pixelSelectedY, pixelSelectedColor);
 
-		if (pixelSelectedX && pixelSelectedY && pixelSelectedColor) {
+		if (
+			(pixelSelectedX || pixelSelectedX == 0) &&
+			(pixelSelectedY || pixelSelectedY == 0) &&
+			pixelSelectedColor
+		) {
 			pixelSelectedColor = pixelSelectedColor.substring(
 				1,
 				pixelSelectedColor.length
@@ -65,18 +69,19 @@
 				getSigner()
 			);
 
-			const decimals = 18;
-			const pixelColor = ethers.utils.parseUnits(pixelSelectedColor, decimals);
+			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
+			console.log('COLOR', pixelSelectedColor);
 
 			await metapixelWriteContract.addPixel(
-				pixelColor,
+				pixelSelectedColor,
 				pixelSelectedX,
 				pixelSelectedY
 			);
 
 			location.reload();
+		} else {
+			console.log('No entro');
 		}
-		console.log('No entro');
 	};
 
 	const arrayToMatrix = (array, rows, cols) => {
