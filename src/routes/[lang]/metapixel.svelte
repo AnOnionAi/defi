@@ -72,13 +72,18 @@
 			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
 			console.log('COLOR', pixelSelectedColor);
 
+			const tx = {
+				gasLimit: 50000
+			};
+
 			await metapixelWriteContract.addPixel(
 				pixelSelectedColor,
 				pixelSelectedX,
-				pixelSelectedY
+				pixelSelectedY,
+				tx
 			);
 
-			location.reload();
+			// location.reload();
 		} else {
 			console.log('No entro');
 		}
