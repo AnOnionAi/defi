@@ -51,8 +51,6 @@
 	};
 
 	const paint = async () => {
-		console.log(pixelSelectedX, pixelSelectedY, pixelSelectedColor);
-
 		if (
 			(pixelSelectedX || pixelSelectedX == 0) &&
 			(pixelSelectedY || pixelSelectedY == 0) &&
@@ -70,7 +68,6 @@
 			);
 
 			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
-			console.log('COLOR', pixelSelectedColor);
 
 			await metapixelWriteContract.addPixel(
 				pixelSelectedColor,
@@ -218,13 +215,16 @@
 {/if}
 
 <style>
-	@media only screen and (max-width: 1010px) {
+	@media only screen and (max-width: 1160px) {
 		.Metapixel {
 			grid-template-rows: 25% 80%;
 		}
+		#grid {
+			margin-top: 2em;
+		}
 	}
 
-	@media only screen and (min-width: 1010px) {
+	@media only screen and (min-width: 1160px) {
 		.Metapixel {
 			grid-template-columns: 25% 80%;
 		}
