@@ -1,10 +1,11 @@
-<script lang="ts" module="context">
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
 	import metapixelABI from '$lib/config/abi/Metapixel.json';
 	import famABI from '$lib/config/abi/FAM.json';
 	import { BigNumber, ethers } from 'ethers';
 	import { getSigner } from '$lib/utils/web3Utils';
+	import { accounts } from '$lib/stores/MetaMaskAccount';
 
 	const development = false;
 
@@ -12,33 +13,55 @@
 	const famAddress = '0x0b072E25e06FacF1127580ec7f0C19FCC07Faaf8';
 	const pixelsArray = [];
 
-	const providerMetapixel = new ethers.providers.JsonRpcProvider(
+	const providerRinkeby = new ethers.providers.JsonRpcProvider(
 		'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
 	); // read
 
 	const metapixelReadContract = new ethers.Contract(
 		metapixelAddress,
 		metapixelABI,
-		providerMetapixel
+		providerRinkeby
 	);
 
-	const providerFAM = new ethers.providers.JsonRpcProvider(
-		'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+	const FAMreadContract = new ethers.Contract(
+		famAddress,
+		famABI,
+		providerRinkeby
 	);
 
-	const FAMreadContract = new ethers.Contract(famAddress, famABI, providerFAM);
+	$: userAddress = $accounts?.[0];
 
+	$: {
+		if (userAddress) {
+			checkApproved(userAddress);
+		}
+	}
+
+	let tokenApproved = false;
 	let gridContainer;
-
 	let pixelSelectedX;
 	let pixelSelectedY;
 	let pixelSelectedColor;
-
 	let pixelPrice;
 	let token;
 	let tokenSymbol;
-
 	let inputColor;
+
+	const checkApproved = async (userAddress) => {
+		const tokenContract = new ethers.Contract(
+			famAddress,
+			famABI,
+			providerRinkeby
+		);
+		const allowance: BigNumber = await tokenContract.allowance(
+			userAddress,
+			metapixelAddress
+		);
+		const estaAprobado = !allowance.isZero();
+		console.log('Allowance', allowance);
+		console.log(estaAprobado);
+		tokenApproved = estaAprobado;
+	};
 
 	const changeColor = (e) => {
 		e.target.style.backgroundColor = inputColor.value;
@@ -101,7 +124,7 @@
 	};
 
 	onMount(async () => {
-		const famWriteContract = new ethers.Contract(
+		/* 	const famWriteContract = new ethers.Contract(
 			famAddress,
 			famABI,
 			getSigner()
@@ -111,6 +134,7 @@
 			metapixelAddress,
 			'10000000000000000000000000'
 		);
+ */
 
 		let sizeX: BigNumber = await metapixelReadContract.gridSizeX();
 		let sizeY: BigNumber = await metapixelReadContract.gridSizeY();
@@ -161,10 +185,18 @@
 			}
 		}
 	});
+
+	// 1. Usuario no esta logueado  <Login/>
+	// 2. Usuario logueado PERO sin approve <Approve/>
+	// 3. Usuario logueado y con approve.
 </script>
 
 {#if development}
 	<DisabledFeature />
+{:else if !userAddress}
+	<h1 class="text-3xl ">CONNECT TO METAMASK</h1>
+{:else if userAddress && !tokenApproved}
+	<h1 class="text-3xl ">APPROVE THE TOKEN</h1>
 {:else}
 	<div class="Metapixel grid grid-rows lg:grid-cols">
 		<div class="metapixel-card information p-4">
