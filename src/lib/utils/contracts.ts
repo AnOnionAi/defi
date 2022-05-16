@@ -8,6 +8,7 @@ import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
 import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
 import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import DividendsABI from '$lib/config/abi/Dividends.json';
+import MetapixelABI from '$lib/config/abi/Metapixel.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/types/types';
 import { BigNumber, ethers } from 'ethers';
@@ -176,4 +177,15 @@ export const getSushiswapStrategyContract = (strategyAddress: string) => {
 		StrategySushiswap,
 		polygonProvider
 	);
+};
+
+export const getMetapixelContract = (): ethers.Contract => {
+	const metapixelContractAddress = '0x3ED9ffeb07522196F34D92E3aD849106eD3316c4';
+	const metapixelContract = new ethers.Contract(
+		metapixelContractAddress,
+		MetapixelABI,
+		getSigner()
+	);
+
+	return metapixelContract;
 };
