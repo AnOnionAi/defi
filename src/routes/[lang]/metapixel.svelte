@@ -20,7 +20,7 @@
 		metapixelAddress,
 		metapixelABI,
 		providerMetapixel
-	); // write
+	);
 
 	const providerFAM = new ethers.providers.JsonRpcProvider(
 		'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
@@ -72,18 +72,13 @@
 			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
 			console.log('COLOR', pixelSelectedColor);
 
-			const tx = {
-				gasLimit: 50000
-			};
-
 			await metapixelWriteContract.addPixel(
 				pixelSelectedColor,
 				pixelSelectedX,
-				pixelSelectedY,
-				tx
+				pixelSelectedY
 			);
 
-			// location.reload();
+			location.reload();
 		} else {
 			console.log('No entro');
 		}
@@ -109,6 +104,17 @@
 	};
 
 	onMount(async () => {
+		const famWriteContract = new ethers.Contract(
+			famAddress,
+			famABI,
+			getSigner()
+		);
+
+		await famWriteContract.approve(
+			metapixelAddress,
+			'10000000000000000000000000'
+		);
+
 		let sizeX: BigNumber = await metapixelReadContract.gridSizeX();
 		let sizeY: BigNumber = await metapixelReadContract.gridSizeY();
 
@@ -163,34 +169,68 @@
 {#if development}
 	<DisabledFeature />
 {:else}
-	<div class="Metapixel grid grid-cols-2">
-		<div class="information p-4">
+	<div class="Metapixel grid grid-rows-2 lg:grid-cols-2">
+		<div class="metapixel-card information p-4">
 			<div
-				class="options bg-white dark:bg-neutral-800 grid grid-cols-2 w-max m-auto rounded-2xl sideShadow">
-				<input bind:this={inputColor} type="color" id="color" value="#fe7688" />
-				<button
-					on:click={paint}
-					class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
-					data-dashlane-rid="96e3e72566535f11"
-					data-dashlane-label="true"
-					data-form-type="action"
-					><p>Paint</p>
-				</button>
-			</div>
-			<div class="description mt-8">
-				<h1 class="dark:text-white">Jackpot:</h1>
-				<h1 class="dark:text-white">Token: {token}({tokenSymbol})</h1>
-				<h1 class="dark:text-white">Price to Paint: ${pixelPrice}</h1>
+				class="bg-white dark:bg-neutral-800 rounded-2xl sideShadow w-max m-auto grid grid-rows-2">
+				<div class="options grid grid-cols-2">
+					<div class="input-color m-auto">
+						<input
+							bind:this={inputColor}
+							type="color"
+							id="color"
+							value="#fe7688" />
+					</div>
+					<div class="button-paint m-auto">
+						<button
+							on:click={paint}
+							class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
+							data-dashlane-rid="96e3e72566535f11"
+							data-dashlane-label="true"
+							data-form-type="action"
+							><p>Paint</p>
+						</button>
+					</div>
+				</div>
+
+				<div class="description mt-8 px-8 pb-4 flex flex-col">
+					<div class="mb-2 flex justify-between">
+						<p class="dark:text-white mr-2">Jackpot:</p>
+						<p class="dark:text-white">$48124</p>
+					</div>
+					<div class="mb-2 flex justify-between">
+						<p class="dark:text-white mr-2">Token:</p>
+						<p class="dark:text-white">{token}({tokenSymbol})</p>
+					</div>
+					<div class="mb-2 flex justify-between">
+						<p class="dark:text-white mr-2">Price to Paint:</p>
+						<p class="dark:text-white">${pixelPrice}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div bind:this={gridContainer} id="grid" class="m-auto mb-8 mt-5 w-11/12" />
+		<div
+			bind:this={gridContainer}
+			id="grid"
+			class="m-auto mb-8 mt-5 w-11/12 sideShadow" />
 	</div>
 {/if}
 
 <style>
+	@media only screen and (max-width: 720px) {
+		.Metapixel {
+			grid-template-rows: 25% 80%;
+		}
+	}
+
 	.Metapixel {
-		grid-template-columns: 20% 80%;
+		grid-template-columns: 25% 80%;
+	}
+
+	.metapixel-card {
+		width: 336px;
+		height: 496px;
 	}
 
 	#grid {
