@@ -169,7 +169,7 @@
 {#if development}
 	<DisabledFeature />
 {:else}
-	<div class="Metapixel grid grid-rows-2 lg:grid-cols-2">
+	<div class="Metapixel grid grid-rows lg:grid-cols">
 		<div class="metapixel-card information p-4">
 			<div
 				class="bg-white dark:bg-neutral-800 rounded-2xl sideShadow w-max m-auto grid grid-rows-2">
@@ -218,14 +218,16 @@
 {/if}
 
 <style>
-	@media only screen and (max-width: 720px) {
+	@media only screen and (max-width: 1010px) {
 		.Metapixel {
 			grid-template-rows: 25% 80%;
 		}
 	}
 
-	.Metapixel {
-		grid-template-columns: 25% 80%;
+	@media only screen and (min-width: 1010px) {
+		.Metapixel {
+			grid-template-columns: 25% 80%;
+		}
 	}
 
 	.metapixel-card {
