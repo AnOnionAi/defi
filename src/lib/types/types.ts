@@ -163,3 +163,11 @@ export interface LoadingState {
 	loadingWithdraw?: boolean;
 	loadingHarvest?: boolean;
 }
+
+export interface Pixel {
+	coords: {
+		x: number;
+		y: number;
+	};
+	color: string;
+}

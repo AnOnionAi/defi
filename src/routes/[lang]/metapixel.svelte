@@ -1,10 +1,17 @@
-<script lang="ts" module="context">
+<script lang="ts">
 	import { onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
 	import metapixelABI from '$lib/config/abi/Metapixel.json';
 	import famABI from '$lib/config/abi/FAM.json';
 	import { BigNumber, ethers } from 'ethers';
 	import { getSigner } from '$lib/utils/web3Utils';
+	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import { _ } from 'svelte-i18n';
+	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
+	import { metaMaskCon } from '$lib/utils/metamaskCalls';
+	import MetamaskNotInstalled from '../../lib/components/Modals/MetamaskNotInstalled.svelte';
+	const { open } = getContext('simple-modal');
 
 	const development = false;
 
@@ -12,33 +19,55 @@
 	const famAddress = '0x0b072E25e06FacF1127580ec7f0C19FCC07Faaf8';
 	const pixelsArray = [];
 
-	const providerMetapixel = new ethers.providers.JsonRpcProvider(
+	const providerRinkeby = new ethers.providers.JsonRpcProvider(
 		'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
 	); // read
 
 	const metapixelReadContract = new ethers.Contract(
 		metapixelAddress,
 		metapixelABI,
-		providerMetapixel
+		providerRinkeby
 	);
 
-	const providerFAM = new ethers.providers.JsonRpcProvider(
-		'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+	const FAMreadContract = new ethers.Contract(
+		famAddress,
+		famABI,
+		providerRinkeby
 	);
 
-	const FAMreadContract = new ethers.Contract(famAddress, famABI, providerFAM);
+	$: userAddress = $accounts?.[0];
 
+	$: {
+		if (userAddress) {
+			checkApproved(userAddress);
+		}
+	}
+
+	let tokenApproved = false;
 	let gridContainer;
-
 	let pixelSelectedX;
 	let pixelSelectedY;
 	let pixelSelectedColor;
-
 	let pixelPrice;
 	let token;
 	let tokenSymbol;
-
 	let inputColor;
+
+	const checkApproved = async (userAddress) => {
+		const tokenContract = new ethers.Contract(
+			famAddress,
+			famABI,
+			providerRinkeby
+		);
+		const allowance: BigNumber = await tokenContract.allowance(
+			userAddress,
+			metapixelAddress
+		);
+		const estaAprobado = !allowance.isZero();
+		console.log('Allowance', allowance);
+		console.log(estaAprobado);
+		tokenApproved = estaAprobado;
+	};
 
 	const changeColor = (e) => {
 		e.target.style.backgroundColor = inputColor.value;
@@ -100,7 +129,7 @@
 		return matrix;
 	};
 
-	onMount(async () => {
+	const onApprove = async () => {
 		const famWriteContract = new ethers.Contract(
 			famAddress,
 			famABI,
@@ -111,7 +140,9 @@
 			metapixelAddress,
 			'10000000000000000000000000'
 		);
+	};
 
+	onMount(async () => {
 		let sizeX: BigNumber = await metapixelReadContract.gridSizeX();
 		let sizeY: BigNumber = await metapixelReadContract.gridSizeY();
 
@@ -161,6 +192,18 @@
 			}
 		}
 	});
+
+	const openMetamaskAlertModal = () => {
+		open(MetamaskNotInstalled, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
+	};
+
+	// 1. Usuario no esta logueado  <Login/>
+	// 2. Usuario logueado PERO sin approve <Approve/>
+	// 3. Usuario logueado y con approve.
 </script>
 
 {#if development}
@@ -179,14 +222,36 @@
 							value="#fe7688" />
 					</div>
 					<div class="button-paint m-auto">
-						<button
-							on:click={paint}
-							class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
-							data-dashlane-rid="96e3e72566535f11"
-							data-dashlane-label="true"
-							data-form-type="action"
-							><p>Paint</p>
-						</button>
+						{#if !userAddress}
+							<button
+								on:click={isMetaMaskInstalled()
+									? metaMaskCon
+									: openMetamaskAlertModal}
+								class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
+								data-dashlane-rid="96e3e72566535f11"
+								data-dashlane-label="true"
+								data-form-type="action"
+								><p>{$_('actions.unlock')}</p>
+							</button>
+						{:else if userAddress && !tokenApproved}
+							<button
+								on:click={onApprove}
+								class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
+								data-dashlane-rid="96e3e72566535f11"
+								data-dashlane-label="true"
+								data-form-type="action"
+								><p>{$_('actions.approve')}</p>
+							</button>
+						{:else}
+							<button
+								on:click={paint}
+								class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
+								data-dashlane-rid="96e3e72566535f11"
+								data-dashlane-label="true"
+								data-form-type="action"
+								><p>{$_('actions.paint')}</p>
+							</button>
+						{/if}
 					</div>
 				</div>
 
