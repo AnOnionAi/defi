@@ -2,8 +2,6 @@
 	import { onMount } from 'svelte';
 	import { getContext } from 'svelte';
 	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
-	import metapixelABI from '$lib/config/abi/Metapixel.json';
-	import famABI from '$lib/config/abi/FAM.json';
 	import { BigNumber, ethers } from 'ethers';
 	import { getSigner } from '$lib/utils/web3Utils';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
@@ -11,29 +9,18 @@
 	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 	import { metaMaskCon } from '$lib/utils/metamaskCalls';
 	import MetamaskNotInstalled from '../../lib/components/Modals/MetamaskNotInstalled.svelte';
+	import {
+		famContract,
+		isApproved,
+		metapixelContract
+	} from '$lib/utils/contracts';
+	import { METAPIXEL_ADDRESS } from '$lib/config';
+	import Connect from '$lib/components/Cards/Connect.svelte';
+	import ApproveMush from '$lib/components/Cards/ApproveMush.svelte';
+	import Approve from '$lib/components/MetapixelUI/Approve.svelte';
 	const { open } = getContext('simple-modal');
 
 	const development = false;
-
-	const metapixelAddress = '0x3ED9ffeb07522196F34D92E3aD849106eD3316c4';
-	const famAddress = '0x0b072E25e06FacF1127580ec7f0C19FCC07Faaf8';
-	const pixelsArray = [];
-
-	const providerRinkeby = new ethers.providers.JsonRpcProvider(
-		'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
-	); // read
-
-	const metapixelReadContract = new ethers.Contract(
-		metapixelAddress,
-		metapixelABI,
-		providerRinkeby
-	);
-
-	const FAMreadContract = new ethers.Contract(
-		famAddress,
-		famABI,
-		providerRinkeby
-	);
 
 	$: userAddress = $accounts?.[0];
 
@@ -54,15 +41,11 @@
 	let inputColor;
 
 	const checkApproved = async (userAddress) => {
-		const tokenContract = new ethers.Contract(
-			famAddress,
-			famABI,
-			providerRinkeby
-		);
-		const allowance: BigNumber = await tokenContract.allowance(
+		const allowance: BigNumber = await famContract.allowance(
 			userAddress,
-			metapixelAddress
+			METAPIXEL_ADDRESS
 		);
+
 		const estaAprobado = !allowance.isZero();
 		console.log('Allowance', allowance);
 		console.log(estaAprobado);
@@ -90,107 +73,31 @@
 				pixelSelectedColor.length
 			);
 
-			const metapixelWriteContract = new ethers.Contract(
-				metapixelAddress,
-				metapixelABI,
-				getSigner()
-			);
-
 			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
 
-			await metapixelWriteContract.addPixel(
-				pixelSelectedColor,
-				pixelSelectedX,
-				pixelSelectedY
-			);
+			const tx = await metapixelContract
+				.connect(getSigner())
+				.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
 
-			location.reload();
+			/* await tx.wait() */
 		} else {
 			console.log('No entro');
 		}
 	};
 
-	const arrayToMatrix = (array, rows, cols) => {
-		const matrix = Array(rows);
-
-		for (var i = 0; i < rows; i++) {
-			matrix[i] = new Array(cols);
-		}
-
-		let index = 0;
-
-		for (let i = 0; i < cols; i++) {
-			for (let j = 0; j < rows; j++) {
-				matrix[i][j] = array[index];
-				index++;
-			}
-		}
-
-		return matrix;
-	};
-
 	const onApprove = async () => {
-		const famWriteContract = new ethers.Contract(
-			famAddress,
-			famABI,
-			getSigner()
-		);
-
-		await famWriteContract.approve(
-			metapixelAddress,
-			'10000000000000000000000000'
-		);
+		await famContract
+			.connect(getSigner())
+			.approve(METAPIXEL_ADDRESS, ethers.constants.MaxUint256);
 	};
 
 	onMount(async () => {
-		let sizeX: BigNumber = await metapixelReadContract.gridSizeX();
-		let sizeY: BigNumber = await metapixelReadContract.gridSizeY();
+		let sizeX: BigNumber = await metapixelContract.gridSizeX();
+		let sizeY: BigNumber = await metapixelContract.gridSizeY();
 
-		pixelPrice = await metapixelReadContract.pixelFee();
-		token = await FAMreadContract.name();
-		tokenSymbol = await FAMreadContract.symbol();
-
-		for (let i = 0; i < sizeX.toNumber(); i++) {
-			for (let j = 0; j < sizeY.toNumber(); j++) {
-				pixelsArray.push(metapixelReadContract.pixels(i, j));
-			}
-		}
-
-		const pixels = await Promise.all(pixelsArray);
-
-		const pixelMatrix = arrayToMatrix(pixels, sizeY, sizeX);
-
-		const grid = document.querySelector('#grid');
-
-		for (let i = 0; i < sizeX.toNumber(); i++) {
-			for (let j = 0; j < sizeY.toNumber(); j++) {
-				let color = pixelMatrix[i][j].color.toString(16);
-
-				const div = document.createElement('div');
-				div.classList.add('pixel');
-				if (color != 0) {
-					while (color.length < 6) color = '0' + color;
-					div.style.backgroundColor = '#' + color;
-				} else {
-					div.style.backgroundColor = '#f3f4f6';
-				}
-
-				grid.appendChild(div);
-
-				div.addEventListener('click', changeColor);
-				div.addEventListener('click', () => changePixelSelected(i, j));
-				div.addEventListener('mouseover', () => {
-					div.style.transform = 'scale(1.3)';
-					div.style.zIndex = '2';
-					div.style.border = '1px solid';
-				});
-				div.addEventListener('mouseleave', () => {
-					div.style.transform = 'scale(1)';
-					div.style.zIndex = '0';
-					div.style.border = '0px';
-				});
-			}
-		}
+		pixelPrice = await metapixelContract.pixelFee();
+		token = await famContract.name();
+		tokenSymbol = await famContract.symbol();
 	});
 
 	const openMetamaskAlertModal = () => {
@@ -206,9 +113,21 @@
 	// 3. Usuario logueado y con approve.
 </script>
 
-{#if development}
-	<DisabledFeature />
-{:else}
+<!-- <DisabledFeature /> -->
+
+{#if !userAddress}
+	<div class="flex h-full w-full items-center justify-center">
+		<div class="w-1/2 min-w-[320px] max-w-3xl ">
+			<Connect />
+		</div>
+	</div>
+{/if}
+{#if userAddress && !isApproved}
+	<Approve />
+{/if}
+{#if userAddress && isApproved}{/if}
+
+<!-- 
 	<div class="Metapixel grid grid-rows lg:grid-cols">
 		<div class="metapixel-card information p-4">
 			<div
@@ -276,9 +195,7 @@
 			bind:this={gridContainer}
 			id="grid"
 			class="m-auto mb-8 mt-5 w-11/12 sideShadow" />
-	</div>
-{/if}
-
+	</div> -->
 <style>
 	@media only screen and (max-width: 1160px) {
 		.Metapixel {
