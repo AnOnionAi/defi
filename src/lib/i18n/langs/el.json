@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "Θόλος"
 		},
+		"metapixel": {
+			"text": "Metapixel"
+		},
 		"crypto-responsibility": {
 			"text": "Υπευθυνότητα κρυπτογράφησης"
 		}
@@ -111,6 +114,7 @@
 		"get": "Παίρνω",
 		"add": "Προσθήκη",
 		"depositFee": "Προμήθεια κατάθεσης",
+		"performanceFee": "Αμοιβή απόδοσης",
 		"wallet": "Πορτοφόλι",
 		"approve": "Εγκρίνω",
 		"unlock": "Ξεκλείδωμα",

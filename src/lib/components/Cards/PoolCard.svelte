@@ -36,11 +36,6 @@
 	} from '$lib/utils/masterc';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
-	import {
-		transactionCompleted,
-		transactionDeniedByTheUser,
-		transactionSend
-	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { getPoolApr } from '$lib/utils/yieldCalculator';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
@@ -54,6 +49,10 @@
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 	import CustomSpinner from '../LoadingUI/CustomSpinner.svelte';
+	import {
+		spawnErrorNotification,
+		spawnSuccessNotification
+	} from '$lib/utils/spawnNotifications';
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
@@ -180,12 +179,11 @@
 		loadingState.loadingDeposit = true;
 		try {
 			const tx = await deposit(info.pid, amount, stakingTokenDecimals);
-			addNotification(transactionSend);
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
-			addNotification(transactionCompleted);
+			spawnSuccessNotification(addNotification, 'MINED');
 		} catch (error) {
-			console.log(error);
-			addNotification(transactionDeniedByTheUser);
+			spawnErrorNotification(addNotification, error);
 		}
 		loadingState.loadingDeposit = false;
 	};
@@ -193,17 +191,17 @@
 	const onWithdraw = async (amount) => {
 		loadingState.loadingWithdraw = true;
 		wantWithdrawAmount = amount;
-		addNotification(transactionSend);
 		try {
 			const tx = await withdraw(
 				info.pid,
 				wantWithdrawAmount,
 				stakingTokenDecimals
 			);
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
-			addNotification(transactionCompleted);
+			spawnSuccessNotification(addNotification, 'MINED');
 		} catch (error) {
-			addNotification(transactionDeniedByTheUser);
+			spawnErrorNotification(addNotification, error);
 		}
 		loadingState.loadingWithdraw = false;
 	};
@@ -211,13 +209,12 @@
 	const onHarvest = async () => {
 		loadingState.loadingHarvest = true;
 		try {
-			addNotification(transactionSend);
 			const tx = await deposit(info.pid, '0');
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
-			addNotification(transactionCompleted);
+			spawnSuccessNotification(addNotification, 'MINED');
 		} catch (error) {
-			addNotification(transactionDeniedByTheUser);
-			console.log('Error: ', error);
+			spawnErrorNotification(addNotification, error);
 		}
 		loadingState.loadingHarvest = false;
 	};
@@ -225,15 +222,15 @@
 	const onApprove = async () => {
 		loadingState.loadingApproval = true;
 		try {
-			addNotification(transactionSend);
 			const tx = await approveToken(
 				info.tokenAddr,
 				getContractAddress(Token.MASTERCHEF)
 			);
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
-			addNotification(transactionCompleted);
-		} catch {
-			addNotification(transactionDeniedByTheUser);
+			spawnSuccessNotification(addNotification, 'MINED');
+		} catch (error) {
+			spawnErrorNotification(addNotification, error);
 		}
 		loadingState.loadingApproval = false;
 	};
@@ -393,12 +390,12 @@
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-500 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
+							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-500 py-2 px-5 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
 							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
-							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 py-2 px-3 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600  disabled:cursor-not-allowed"
+							class=" bg-triadicGreen-700 dark:bg-triadicGreen-600 py-2 px-3 rounded-lg text-2xl font-bold text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600  disabled:cursor-not-allowed"
 							>-</button>
 					</div>
 				</div>

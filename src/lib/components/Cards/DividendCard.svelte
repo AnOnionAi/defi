@@ -14,16 +14,16 @@
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 
 	import { BigNumber, ethers } from 'ethers';
-	import {
-		transactionCompleted,
-		transactionDeniedByTheUser,
-		transactionSend
-	} from '$lib/config/constants/notifications';
+
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import DividendsInfoItem from '../Dividends/DividendsInfoItem.svelte';
 	import InputWithButton from '../Dividends/InputWithButton.svelte';
 	import { DIVIDENDS_PID } from '$lib/config';
+	import {
+		spawnErrorNotification,
+		spawnSuccessNotification
+	} from '$lib/utils/spawnNotifications';
 
 	const { addNotification } = getNotificationsContext();
 
@@ -77,19 +77,18 @@
 			userStakedTokens = await stakedWantTokens(DIVIDENDS_PID, userAddress);
 			stakedMush = await getSharesTotal();
 			userReward = await getPendingReward(userAddress);
-			console.table({ userCanDeposit, userCanWithdraw, userCanHarvest });
 		} catch {
 			console.log('Failed on updating data');
 		}
 	};
 
 	const handleDeposit = async () => {
-		addNotification(transactionSend);
+		loadingState.loadingDeposit = true;
 		try {
-			loadingState.loadingDeposit = true;
 			const tx = await deposit(DIVIDENDS_PID, depositInput.trim());
-			console.log(depositInput);
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
+			spawnSuccessNotification(addNotification, 'MINED');
 			loadingState.loadingDeposit = false;
 			userBalance = userBalance.sub(
 				BigNumber.from(ethers.utils.parseEther(depositInput.trim()))
@@ -97,21 +96,19 @@
 			userStakedTokens = userStakedTokens.add(
 				BigNumber.from(ethers.utils.parseEther(depositInput.trim()))
 			);
-			addNotification(transactionCompleted);
 		} catch (error) {
-			addNotification(transactionDeniedByTheUser);
-			loadingState.loadingDeposit = false;
+			spawnErrorNotification(addNotification, error);
 		}
 		loadingState.loadingDeposit = false;
 	};
 
 	const handleWithdraw = async () => {
-		addNotification(transactionSend);
+		loadingState.loadingWithdraw = true;
 		try {
-			loadingState.loadingWithdraw = true;
 			const tx = await withdraw(DIVIDENDS_PID, withdrawInput.trim());
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
-			addNotification(transactionCompleted);
+			spawnSuccessNotification(addNotification, 'MINED');
 			userBalance = userBalance.add(
 				BigNumber.from(ethers.utils.parseEther(withdrawInput.trim()))
 			);
@@ -120,22 +117,22 @@
 			);
 			loadingState.loadingWithdraw = false;
 		} catch (error) {
-			addNotification(transactionDeniedByTheUser);
+			spawnErrorNotification(addNotification, error);
 			loadingState.loadingWithdraw = false;
 		}
 	};
 
 	const handleHarvest = async () => {
 		loadingState.loadingHarvest = true;
-		addNotification(transactionSend);
 		try {
 			const tx = await harvest();
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
-			addNotification(transactionCompleted);
+			spawnSuccessNotification(addNotification, 'MINED');
 			userCanHarvest = false;
 			userReward = ethers.constants.Zero;
-		} catch {
-			addNotification(transactionDeniedByTheUser);
+		} catch (error) {
+			spawnErrorNotification(addNotification, error);
 			loadingState.loadingHarvest = false;
 		}
 		loadingState.loadingHarvest = false;

@@ -23,11 +23,6 @@
 	import { getContext } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	const { open } = getContext('simple-modal');
-	import {
-		transactionCompleted,
-		transactionDeniedByTheUser,
-		transactionSend
-	} from '$lib/config/constants/notifications';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
@@ -35,6 +30,10 @@
 	import AssetPair from './AssetPair.svelte';
 	import VaultHeading from './VaultHeading.svelte';
 	import { formatEther } from 'ethers/lib/utils';
+	import {
+		spawnErrorNotification,
+		spawnSuccessNotification
+	} from '$lib/utils/spawnNotifications';
 
 	const { addNotification } = getNotificationsContext();
 
@@ -43,11 +42,14 @@
 	let isHidden = true;
 	let isApproved: boolean;
 	let stakedTokens;
-	let userTokens: BigNumber;
+	let userTokens: BigNumber = ethers.constants.Zero;
 	let tkn0Price: number;
 	let tkn1Price: number;
 	let userDepositAmount: string;
 	let userWithdrawAmount: string;
+
+	$: allIn = ethers.utils.formatEther(userTokens) == userDepositAmount;
+
 	const loadingState = {
 		something: false,
 		approve: false,
@@ -61,20 +63,22 @@
 			userAcc = arrayAccs[0];
 		}
 	});
+
 	const openAccordeon = (): void => {
 		isHidden ? (isHidden = false) : (isHidden = true);
 	};
+
 	const handleTransaction = async (
 		transaction: Promise<any>,
 		transactionName: string
 	) => {
 		loadingState.something = true;
 		loadingState[transactionName] = true;
-		addNotification(transactionSend);
 		try {
 			const tx = await transaction;
+			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
-			addNotification(transactionCompleted);
+			spawnSuccessNotification(addNotification, 'MINED');
 
 			if (transactionName == 'approve') {
 				setTimeout(() => {
@@ -115,7 +119,7 @@
 			}, 8000);
 		} catch (error) {
 			console.log(error);
-			addNotification(transactionDeniedByTheUser);
+			spawnErrorNotification(addNotification, error);
 		}
 		loadingState.something = false;
 		loadingState[transactionName] = false;
@@ -153,16 +157,27 @@
 			closeOnOuterClick: true
 		});
 	};
+
+	const depositMaxAmount = () => {
+		if (userTokens.isZero()) {
+			console.log(userTokens);
+			console.log('is zero lol');
+			return;
+		}
+		const parsedUserTokens = ethers.utils.formatEther(userTokens);
+		userDepositAmount = parsedUserTokens;
+		handleTransaction(deposit(vaultConfig.pid, userDepositAmount), 'deposit');
+	};
 </script>
 
 <div
 	in:fly={{ y: 200, duration: 100 }}
-	class="mx-auto mb-3 max-w-6xl opacity-95 sm:px-4 md:px-2 lg:px-0">
+	class="mx-auto mb-3 max-w-6xl  sm:px-4 md:px-2 lg:px-0">
 	<div
 		on:click={openAccordeon}
 		class="{!$darkMode &&
-			'sideShadow'} mx-auto rounded-lg bg-white py-6  	{!isHidden &&
-			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-200   dark:bg-neutral-800 dark:hover:bg-neutral-600">
+			'sideShadow'} mx-auto rounded-lg bg-white/80 py-6  	{!isHidden &&
+			'rounded-t-lg'} hover:cursor-pointer hover:bg-slate-200   dark:bg-neutral-800/80 dark:hover:bg-neutral-600/80">
 		<div
 			class="mx-3 block items-center justify-between md:mx-8 md:flex lg:mx-14 xl:mx-20 ">
 			<AssetPair
@@ -207,7 +222,7 @@
 		<div
 			in:slide={{ duration: 400 }}
 			out:slide={{ duration: 400 }}
-			class="max-w-8xl mx-auto rounded-b-lg bg-neutral-200 px-5 py-5 opacity-100 dark:bg-neutral-800">
+			class="max-w-8xl mx-auto rounded-b-lg bg-neutral-200 px-5 py-5  dark:bg-neutral-800">
 			{#if !$accounts}
 				<button
 					on:click={isMetaMaskInstalled() ? metaMaskCon : openModal}
@@ -216,6 +231,23 @@
 						? 'gradientQuickswap'
 						: 'gradientSushiswap'} transform rounded-xl py-2 text-xl font-semibold tracking-wide  text-white transition duration-300 hover:bg-blue-400 "
 					>{$_('actions.unlock')}
+				</button>
+			{:else if $accounts && !isApproved}
+				<button
+					on:click={async () =>
+						handleTransaction(
+							approveToken(
+								vaultConfig.pair.pairContract,
+								getContractAddress(Token.VAULTCHEF)
+							),
+							'approve'
+						)}
+					class=" mx-auto block w-10/12 {vaultConfig.platform.name.toLowerCase() ==
+					'quickswap'
+						? 'gradientQuickswap'
+						: 'gradientSushiswap'} transform rounded-xl py-2 text-xl font-semibold tracking-wide  text-white transition duration-300 hover:bg-blue-400 "
+					>{$_('actions.approve')}
+					{vaultConfig.pair.token0Name}-{vaultConfig.pair.token1Name}
 				</button>
 			{:else}
 				<div class="flex flex-col  lg:flex-row flex-wrapper justify-around">
@@ -244,7 +276,8 @@
 								placeholder="Enter Value"
 								class="bg-transparent  text-gray-900 font-bold w-8/12 	dark:text-white"
 								type="text" />
-							{#if isApproved}
+
+							{#if userDepositAmount}
 								<button
 									class:cursor-not-allowed={loadingState.something}
 									disabled={loadingState.something}
@@ -253,7 +286,8 @@
 											deposit(vaultConfig.pid, userDepositAmount),
 											'deposit'
 										)}
-									class="flex items-center  disabled:cursor-not-allowed bg-black disabled:opacity-50 text-white font-bold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig
+									class="flex  items-center  disabled:cursor-not-allowed bg-triadicGreen-700 hover:bg-triadicGreen-600 dark:bg-triadicGreen-800 dark:hover:bg-triadicGreen-900  {allIn &&
+										'glowingButton bg-triadicGreen-600'} transition duration-300 text-white font-bold rounded-lg px-4 py-3 hover:bg-{vaultConfig
 										.platform.brandColor}-500 {loadingState.deposit &&
 										`bg-${vaultConfig.platform.brandColor}-500`}">
 									<p>{$_('actions.deposit')}</p>
@@ -265,22 +299,15 @@
 								</button>
 							{:else}
 								<button
-									class:cursor-not-allowed={loadingState.approve}
-									disabled={loadingState.approve}
-									on:click={async () =>
-										handleTransaction(
-											approveToken(
-												vaultConfig.pair.pairContract,
-												getContractAddress(Token.VAULTCHEF)
-											),
-											'approve'
-										)}
-									class="flex items-center bg-black  disabled:opacity-50 {loadingState.something &&
-										'cursor-not-allowed'} text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-{vaultConfig
-										.platform.brandColor}-500 {loadingState.approve &&
+									class:cursor-not-allowed={loadingState.something}
+									disabled={loadingState.something}
+									on:click={depositMaxAmount}
+									class="flex flex-col items-center  disabled:cursor-not-allowed bg-gradient-to-r from-complementary-600 to-triadicGreen-600 transition duration-300 text-white font-bold rounded-lg px-4 py-1 hover:bg-{vaultConfig
+										.platform.brandColor}-500 {loadingState.deposit &&
 										`bg-${vaultConfig.platform.brandColor}-500`}">
-									<p>{$_('actions.approve')}</p>
-									{#if loadingState.approve}
+									<p>{$_('actions.deposit')}</p>
+									<p class="text-xs">MAX</p>
+									{#if loadingState.deposit}
 										<div class="pl-2">
 											<Chasing size="20" unit="px" color="#ffff" />
 										</div>
@@ -295,6 +322,12 @@
 							<p class="px-1   dark:text-white font-medium">
 								{vaultConfig.depositFee}%
 							</p>
+						</div>
+						<div class="flex">
+							<p class="pl-1 text-gray-500  dark:text-white font-medium">
+								{$_('actions.performanceFee')}:
+							</p>
+							<p class="px-1   dark:text-white font-medium">5%</p>
 						</div>
 					</div>
 
@@ -331,7 +364,7 @@
 										withdraw(vaultConfig.pid, userWithdrawAmount.toString()),
 										'withdraw'
 									)}
-								class="flex items-center disabled:cursor-not-allowed  bg-black disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig
+								class="flex items-center disabled:cursor-not-allowed  bg-triadicYellow-700 disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig
 									.platform.brandColor}-500 {loadingState.withdraw &&
 									`bg-${vaultConfig.platform.brandColor}-500`}">
 								<p>{$_('actions.withdraw')}</p>
@@ -381,7 +414,7 @@
 								<a
 									target="_blank"
 									class="block text-gray-600 font-medium hover:text-green-500 dark:text-gray-400"
-									href={vaultConfig.platform.swapperURL}
+									href={`https://app.sushi.com/add?tokens=${vaultConfig.pair.token0Contract}&tokens=${vaultConfig.pair.token1Contract}&chainId=137`}
 									>{$_('actions.get')}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a>
 								<a
@@ -402,6 +435,10 @@
 </div>
 
 <style>
+	.glowingButton {
+		box-shadow: rgba(177, 255, 162, 1) 0px 5px 10px;
+	}
+
 	.sideShadow {
 		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	}

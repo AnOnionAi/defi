@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "금고"
 		},
+		"metapixel": {
+			"text": "메타픽셀"
+		},
 		"crypto-responsibility": {
 			"text": "암호화 책임"
 		}
@@ -111,6 +114,7 @@
 		"get": "얻다",
 		"add": "추가하다",
 		"depositFee": "보증금",
+		"performanceFee": "공연비",
 		"wallet": "지갑",
 		"approve": "승인하다",
 		"unlock": "터놓다",

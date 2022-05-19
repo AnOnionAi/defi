@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "वाल्टों"
 		},
+		"metapixel": {
+			"text": "मेटापिक्सेल"
+		},
 		"crypto-responsibility": {
 			"text": "क्रिप्टो जिम्मेदारी"
 		}
@@ -111,6 +114,7 @@
 		"get": "पाना",
 		"add": "जोड़ें",
 		"depositFee": "जमा शुल्क",
+		"performanceFee": "प्रदर्शन शुल्क",
 		"wallet": "बटुआ",
 		"approve": "मंज़ूरी देना",
 		"unlock": "अनलॉक",

@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "الخزائن"
 		},
+		"metapixel": {
+			"text": "ميتابيكسل"
+		},
 		"crypto-responsibility": {
 			"text": "مسؤولية التشفير"
 		}
@@ -111,6 +114,7 @@
 		"get": "يحصل",
 		"add": "يضيف",
 		"depositFee": "رسوم إيداع",
+		"performanceFee": "رسوم الأداء",
 		"wallet": "محفظة",
 		"approve": "يوافق",
 		"unlock": "الغاء القفل",

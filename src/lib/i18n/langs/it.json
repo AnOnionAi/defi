@@ -65,6 +65,9 @@
 		"vaults": {
 			"text": "Volte"
 		},
+		"metapixel": {
+			"text": "Metapixel"
+		},
 		"crypto-responsibility": {
 			"text": "Responsabilità crittografica"
 		}
@@ -111,6 +114,7 @@
 		"get": "Ottenere",
 		"add": "Aggiungere",
 		"depositFee": "Commissione di deposito",
+		"performanceFee": "Commissione di prestazione",
 		"wallet": "Portafoglio",
 		"approve": "Approvare",
 		"unlock": "Sbloccare",

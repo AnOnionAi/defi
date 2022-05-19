@@ -9,10 +9,6 @@
 	import { _ } from 'svelte-i18n';
 
 	export let inputValue;
-
-	$: {
-		console.log('IS THE BUTTON DISSABLED', buttonDisabled);
-	}
 </script>
 
 <div class="">
