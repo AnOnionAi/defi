@@ -142,10 +142,10 @@
 		</div>
 	</div>
 {/if}
-{#if userAddress && !isApproved}
+{#if userAddress && !tokenApproved}
 	<Approve />
 {/if}
-{#if userAddress && isApproved}
+{#if userAddress && tokenApproved}
 	<div class="Metapixel grid-rows lg:grid-cols grid">
 		<div
 			class="metapixel-card information flex items-center justify-center p-4">
