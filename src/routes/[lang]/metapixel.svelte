@@ -1,14 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getContext } from 'svelte';
 	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
-	import { BigNumber, ethers } from 'ethers';
+	import type { BigNumber } from 'ethers';
 	import { getSigner } from '$lib/utils/web3Utils';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { _ } from 'svelte-i18n';
-	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
-	import { metaMaskCon } from '$lib/utils/metamaskCalls';
-	import MetamaskNotInstalled from '../../lib/components/Modals/MetamaskNotInstalled.svelte';
 	import {
 		famContract,
 		isApproved,
@@ -16,9 +12,9 @@
 	} from '$lib/utils/contracts';
 	import { METAPIXEL_ADDRESS } from '$lib/config';
 	import Connect from '$lib/components/Cards/Connect.svelte';
-	import ApproveMush from '$lib/components/Cards/ApproveMush.svelte';
 	import Approve from '$lib/components/MetapixelUI/Approve.svelte';
-	const { open } = getContext('simple-modal');
+	import Grid from '$lib/components/MetapixelUI/Grid.svelte';
+	import type { Pixel } from '$lib/types/types';
 
 	const development = false;
 
@@ -29,6 +25,47 @@
 			checkApproved(userAddress);
 		}
 	}
+
+	const pixels: Pixel[] = [
+		{ coords: { x: 0, y: 0 }, color: '40D015' },
+		{ coords: { x: 1, y: 0 }, color: '40D015' },
+		{ coords: { x: 2, y: 0 }, color: '40D015' },
+		{ coords: { x: 3, y: 0 }, color: '40D015' },
+		{ coords: { x: 4, y: 0 }, color: '40D015' },
+		{ coords: { x: 5, y: 0 }, color: '40D015' },
+		{ coords: { x: 0, y: 1 }, color: '40D015' },
+		{ coords: { x: 1, y: 1 }, color: '40D015' },
+		{ coords: { x: 2, y: 1 }, color: '40D015' },
+		{ coords: { x: 3, y: 1 }, color: '40D015' },
+		{ coords: { x: 4, y: 1 }, color: '40D015' },
+		{ coords: { x: 5, y: 1 }, color: '40D015' },
+		{ coords: { x: 0, y: 2 }, color: '40D015' },
+		{ coords: { x: 1, y: 2 }, color: '40D015' },
+		{ coords: { x: 2, y: 2 }, color: '40D015' },
+		{ coords: { x: 3, y: 2 }, color: '40D015' },
+		{ coords: { x: 4, y: 2 }, color: '40D015' },
+		{ coords: { x: 5, y: 2 }, color: '40D015' },
+		{ coords: { x: 0, y: 3 }, color: '40D015' },
+		{ coords: { x: 1, y: 3 }, color: '40D015' },
+		{ coords: { x: 2, y: 3 }, color: '40D015' },
+		{ coords: { x: 3, y: 3 }, color: '40D015' },
+		{ coords: { x: 4, y: 3 }, color: '40D015' },
+		{ coords: { x: 5, y: 3 }, color: '40D015' },
+		{ coords: { x: 0, y: 4 }, color: '40D015' },
+		{ coords: { x: 1, y: 4 }, color: '40D015' },
+		{ coords: { x: 2, y: 4 }, color: '40D015' },
+		{ coords: { x: 3, y: 4 }, color: '40D015' },
+		{ coords: { x: 4, y: 4 }, color: '40D015' },
+		{ coords: { x: 5, y: 4 }, color: '40D015' },
+		{ coords: { x: 0, y: 5 }, color: '40D015' },
+		{ coords: { x: 1, y: 5 }, color: '40D015' },
+		{ coords: { x: 2, y: 5 }, color: '40D015' },
+		{ coords: { x: 3, y: 5 }, color: '40D015' },
+		{ coords: { x: 4, y: 5 }, color: '40D015' },
+		{ coords: { x: 5, y: 5 }, color: '40D015' }
+	];
+
+	const grid = [6, 6];
 
 	let tokenApproved = false;
 	let gridContainer;
@@ -79,16 +116,11 @@
 				.connect(getSigner())
 				.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
 
-			/* await tx.wait() */
+			await tx.wait();
+			location.reload();
 		} else {
 			console.log('No entro');
 		}
-	};
-
-	const onApprove = async () => {
-		await famContract
-			.connect(getSigner())
-			.approve(METAPIXEL_ADDRESS, ethers.constants.MaxUint256);
 	};
 
 	onMount(async () => {
@@ -99,18 +131,6 @@
 		token = await famContract.name();
 		tokenSymbol = await famContract.symbol();
 	});
-
-	const openMetamaskAlertModal = () => {
-		open(MetamaskNotInstalled, {
-			closeButton: true,
-			closeOnEsc: true,
-			closeOnOuterClick: true
-		});
-	};
-
-	// 1. Usuario no esta logueado  <Login/>
-	// 2. Usuario logueado PERO sin approve <Approve/>
-	// 3. Usuario logueado y con approve.
 </script>
 
 <!-- <DisabledFeature /> -->
@@ -125,13 +145,17 @@
 {#if userAddress && !isApproved}
 	<Approve />
 {/if}
-{#if userAddress && isApproved}{/if}
-
-<!-- 
-	<div class="Metapixel grid grid-rows lg:grid-cols">
-		<div class="metapixel-card information p-4">
+{#if userAddress && isApproved}
+	<div class="Metapixel grid-rows lg:grid-cols grid">
+		<div
+			class="metapixel-card information flex items-center justify-center p-4">
 			<div
-				class="bg-white dark:bg-neutral-800 rounded-2xl sideShadow w-max m-auto grid grid-rows-2">
+				class="sideShadow m-auto grid w-max grid-rows-2 rounded-2xl bg-white dark:bg-neutral-800">
+				<img
+					src="/icons/usdc.svg"
+					alt="USDC Token"
+					class="imgToken m-auto mb-8" />
+
 				<div class="options grid grid-cols-2">
 					<div class="input-color m-auto">
 						<input
@@ -141,68 +165,38 @@
 							value="#fe7688" />
 					</div>
 					<div class="button-paint m-auto">
-						{#if !userAddress}
-							<button
-								on:click={isMetaMaskInstalled()
-									? metaMaskCon
-									: openMetamaskAlertModal}
-								class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
-								data-dashlane-rid="96e3e72566535f11"
-								data-dashlane-label="true"
-								data-form-type="action"
-								><p>{$_('actions.unlock')}</p>
-							</button>
-						{:else if userAddress && !tokenApproved}
-							<button
-								on:click={onApprove}
-								class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
-								data-dashlane-rid="96e3e72566535f11"
-								data-dashlane-label="true"
-								data-form-type="action"
-								><p>{$_('actions.approve')}</p>
-							</button>
-						{:else}
-							<button
-								on:click={paint}
-								class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
-								data-dashlane-rid="96e3e72566535f11"
-								data-dashlane-label="true"
-								data-form-type="action"
-								><p>{$_('actions.paint')}</p>
-							</button>
-						{/if}
+						<button
+							on:click={paint}
+							class="false s-YQIdR16N_soy flex items-center rounded-lg bg-black px-5 py-3 font-semibold tracking-wide text-white hover:bg-pink-500 disabled:opacity-50"
+							data-dashlane-rid="96e3e72566535f11"
+							data-dashlane-label="true"
+							data-form-type="action"
+							><p>{$_('actions.paint')}</p>
+						</button>
 					</div>
 				</div>
 
-				<div class="description mt-8 px-8 pb-4 flex flex-col">
+				<div class="description mt-8 flex flex-col px-8 pb-4">
 					<div class="mb-2 flex justify-between">
-						<p class="dark:text-white mr-2">Jackpot:</p>
+						<p class="mr-2 dark:text-white">Jackpot:</p>
 						<p class="dark:text-white">$48124</p>
 					</div>
 					<div class="mb-2 flex justify-between">
-						<p class="dark:text-white mr-2">Token:</p>
-						<p class="dark:text-white">{token}({tokenSymbol})</p>
-					</div>
-					<div class="mb-2 flex justify-between">
-						<p class="dark:text-white mr-2">Price to Paint:</p>
+						<p class="mr-2 dark:text-white">Price to Paint:</p>
 						<p class="dark:text-white">${pixelPrice}</p>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div
-			bind:this={gridContainer}
-			id="grid"
-			class="m-auto mb-8 mt-5 w-11/12 sideShadow" />
-	</div> -->
+		<Grid {grid} {pixels} />
+	</div>
+{/if}
+
 <style>
 	@media only screen and (max-width: 1160px) {
 		.Metapixel {
 			grid-template-rows: 25% 80%;
-		}
-		#grid {
-			margin-top: 2em;
 		}
 	}
 
@@ -212,33 +206,12 @@
 		}
 	}
 
-	.metapixel-card {
-		width: 336px;
-		height: 496px;
-	}
-
-	#grid {
-		background-color: #f9fafb;
-	}
-
-	.options {
-		padding: 1em;
-		margin-bottom: 1em;
-		justify-content: center;
-		align-items: center;
-	}
-
-	#grid {
-		height: 90vh;
-		width: 90vh;
-		display: grid;
-		grid-template-columns: repeat(10, 1fr);
-		grid-template-rows: repeat(10, 1fr);
-		gap: 1px;
-		padding: 1px;
-	}
-
 	.sideShadow {
 		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	}
+
+	.imgToken {
+		width: 60%;
+		height: 60%;
 	}
 </style>
