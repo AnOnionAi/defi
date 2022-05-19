@@ -1,20 +1,20 @@
 <script lang="ts">
 	import type { Pixel } from '$lib/types/types';
 
-	export let grid = [4, 4];
-	export let pixels: Pixel[];
+	export let grid: [number, number];
+	export let pixels: Array<Pixel>;
 
-	$: col = `repeat(${grid[1]}, 1fr)`;
-	$: row = `repeat(${grid[0]}, 1fr)`;
+	$: col = `repeat(${grid[1]}, 10px)`;
+	$: row = `repeat(${grid[0]}, 10px)`;
 
-	const size = 36;
+	$: size = grid[0] * grid[1];
 </script>
 
 <div
 	class="sideShadow container m-auto mb-8 mt-5 w-11/12"
 	style="grid-template-rows: {row}; grid-template-columns: {col};">
 	{#each { length: size } as _, i (i)}
-		<div style="background-color: #{pixels[i].color};" />
+		<div style="background-color: #{pixels[i]?.color || 'fff'};" />
 	{/each}
 </div>
 
@@ -22,7 +22,6 @@
 	.container {
 		display: grid;
 		border: 1px solid #999;
-		border-radius: 2px;
 		grid-gap: 1px;
 		background-color: #f9fafb;
 		height: 90vh;

@@ -15,7 +15,16 @@
 	import Approve from '$lib/components/MetapixelUI/Approve.svelte';
 	import Grid from '$lib/components/MetapixelUI/Grid.svelte';
 	import type { Pixel } from '$lib/types/types';
+	import { ethers } from 'ethers/src.ts';
+	import PixelsMock from '$lib/config/constants/board.mock';
+	import {
+		spawnErrorNotification,
+		spawnSuccessNotification
+	} from '$lib/utils/spawnNotifications';
+	import { getNotificationsContext } from 'svelte-notifications';
+	import Metapixel from '$lib/components/MetapixelUI/Metapixel.svelte';
 
+	const { addNotification } = getNotificationsContext();
 	const development = false;
 
 	$: userAddress = $accounts?.[0];
@@ -26,46 +35,7 @@
 		}
 	}
 
-	const pixels: Pixel[] = [
-		{ coords: { x: 0, y: 0 }, color: '40D015' },
-		{ coords: { x: 1, y: 0 }, color: '40D015' },
-		{ coords: { x: 2, y: 0 }, color: '40D015' },
-		{ coords: { x: 3, y: 0 }, color: '40D015' },
-		{ coords: { x: 4, y: 0 }, color: '40D015' },
-		{ coords: { x: 5, y: 0 }, color: '40D015' },
-		{ coords: { x: 0, y: 1 }, color: '40D015' },
-		{ coords: { x: 1, y: 1 }, color: '40D015' },
-		{ coords: { x: 2, y: 1 }, color: '40D015' },
-		{ coords: { x: 3, y: 1 }, color: '40D015' },
-		{ coords: { x: 4, y: 1 }, color: '40D015' },
-		{ coords: { x: 5, y: 1 }, color: '40D015' },
-		{ coords: { x: 0, y: 2 }, color: '40D015' },
-		{ coords: { x: 1, y: 2 }, color: '40D015' },
-		{ coords: { x: 2, y: 2 }, color: '40D015' },
-		{ coords: { x: 3, y: 2 }, color: '40D015' },
-		{ coords: { x: 4, y: 2 }, color: '40D015' },
-		{ coords: { x: 5, y: 2 }, color: '40D015' },
-		{ coords: { x: 0, y: 3 }, color: '40D015' },
-		{ coords: { x: 1, y: 3 }, color: '40D015' },
-		{ coords: { x: 2, y: 3 }, color: '40D015' },
-		{ coords: { x: 3, y: 3 }, color: '40D015' },
-		{ coords: { x: 4, y: 3 }, color: '40D015' },
-		{ coords: { x: 5, y: 3 }, color: '40D015' },
-		{ coords: { x: 0, y: 4 }, color: '40D015' },
-		{ coords: { x: 1, y: 4 }, color: '40D015' },
-		{ coords: { x: 2, y: 4 }, color: '40D015' },
-		{ coords: { x: 3, y: 4 }, color: '40D015' },
-		{ coords: { x: 4, y: 4 }, color: '40D015' },
-		{ coords: { x: 5, y: 4 }, color: '40D015' },
-		{ coords: { x: 0, y: 5 }, color: '40D015' },
-		{ coords: { x: 1, y: 5 }, color: '40D015' },
-		{ coords: { x: 2, y: 5 }, color: '40D015' },
-		{ coords: { x: 3, y: 5 }, color: '40D015' },
-		{ coords: { x: 4, y: 5 }, color: '40D015' },
-		{ coords: { x: 5, y: 5 }, color: '40D015' }
-	];
-
-	const grid = [6, 6];
+	const grid = [32, 32];
 
 	let tokenApproved = false;
 	let gridContainer;
@@ -82,11 +52,7 @@
 			userAddress,
 			METAPIXEL_ADDRESS
 		);
-
-		const estaAprobado = !allowance.isZero();
-		console.log('Allowance', allowance);
-		console.log(estaAprobado);
-		tokenApproved = estaAprobado;
+		tokenApproved = !allowance.isZero();
 	};
 
 	const changeColor = (e) => {
@@ -99,30 +65,6 @@
 		pixelSelectedY = y;
 	};
 
-	const paint = async () => {
-		if (
-			(pixelSelectedX || pixelSelectedX == 0) &&
-			(pixelSelectedY || pixelSelectedY == 0) &&
-			pixelSelectedColor
-		) {
-			pixelSelectedColor = pixelSelectedColor.substring(
-				1,
-				pixelSelectedColor.length
-			);
-
-			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
-
-			const tx = await metapixelContract
-				.connect(getSigner())
-				.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
-
-			await tx.wait();
-			location.reload();
-		} else {
-			console.log('No entro');
-		}
-	};
-
 	onMount(async () => {
 		let sizeX: BigNumber = await metapixelContract.gridSizeX();
 		let sizeY: BigNumber = await metapixelContract.gridSizeY();
@@ -131,6 +73,20 @@
 		token = await famContract.name();
 		tokenSymbol = await famContract.symbol();
 	});
+
+	const approveToken = async () => {
+		try {
+			const approvalTx = await famContract
+				.connect(getSigner())
+				.approve(METAPIXEL_ADDRESS, ethers.constants.MaxUint256);
+			spawnSuccessNotification(addNotification, 'SENT');
+			await approvalTx.wait();
+			spawnSuccessNotification(addNotification, 'MINED');
+			tokenApproved = true;
+		} catch (e) {
+			spawnErrorNotification(addNotification, e);
+		}
+	};
 </script>
 
 <!-- <DisabledFeature /> -->
@@ -142,70 +98,9 @@
 		</div>
 	</div>
 {/if}
-{#if userAddress && !isApproved}
-	<Approve />
+{#if userAddress && !tokenApproved}
+	<Approve onApprove={approveToken} />
 {/if}
-{#if userAddress && isApproved}
-	<div class="Metapixel grid-rows lg:grid-cols grid">
-		<div
-			class="metapixel-card information flex items-center justify-center p-4">
-			<div
-				class="sideShadow m-auto w-max rounded-2xl bg-white dark:bg-neutral-800">
-				<img
-					src="/icons/usdc.svg"
-					alt="USDC Token"
-					class="imgToken m-auto mb-8 mt-8" />
-
-				<div class="options grid grid-cols-2">
-					<div class="input-color m-auto">
-						<input
-							bind:this={inputColor}
-							type="color"
-							id="color"
-							value="#fe7688" />
-					</div>
-					<div class="button-paint m-auto">
-						<button
-							on:click={paint}
-							class="false s-YQIdR16N_soy flex items-center rounded-lg bg-black px-5 py-3 font-semibold tracking-wide text-white hover:bg-pink-500 disabled:opacity-50"
-							data-dashlane-rid="96e3e72566535f11"
-							data-dashlane-label="true"
-							data-form-type="action"
-							><p>{$_('actions.paint')}</p>
-						</button>
-					</div>
-				</div>
-
-				<div class="description mt-8 flex flex-col px-8 pb-4">
-					<div class="mb-2 flex justify-between">
-						<p class="mr-2 dark:text-white">Jackpot:</p>
-						<p class="dark:text-white">$48124</p>
-					</div>
-					<div class="mb-2 flex justify-between">
-						<p class="mr-2 dark:text-white">Price to Paint:</p>
-						<p class="dark:text-white">${pixelPrice}</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<Grid {grid} {pixels} />
-	</div>
+{#if userAddress && tokenApproved}
+	<Metapixel />
 {/if}
-
-<style>
-	@media only screen and (min-width: 1160px) {
-		.Metapixel {
-			grid-template-columns: 25% 75%;
-		}
-	}
-
-	.sideShadow {
-		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-	}
-
-	.imgToken {
-		width: 40%;
-		height: 40%;
-	}
-</style>
