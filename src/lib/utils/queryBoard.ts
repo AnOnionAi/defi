@@ -1,11 +1,15 @@
 import { metapixelContract } from './contracts';
 
-const queryBoard = async () => {
+export const queryBoard = async () => {
 	const pixels = await metapixelContract.getPixels();
 	const [testpixel] = pixels;
 
-	const testpixel2 = pixels[0][0];
-	console.log(testpixel2);
+	console.log('PIXELS', pixels);
+	return pixels;
 };
 
-export default queryBoard;
+export const pixelFee = async () => {
+	const pixelFee = await metapixelContract.pixelFee();
+
+	return pixelFee;
+};

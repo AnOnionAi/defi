@@ -55,16 +55,6 @@
 		tokenApproved = !allowance.isZero();
 	};
 
-	const changeColor = (e) => {
-		e.target.style.backgroundColor = inputColor.value;
-		pixelSelectedColor = inputColor.value;
-	};
-
-	const changePixelSelected = (x, y) => {
-		pixelSelectedX = x;
-		pixelSelectedY = y;
-	};
-
 	onMount(async () => {
 		let sizeX: BigNumber = await metapixelContract.gridSizeX();
 		let sizeY: BigNumber = await metapixelContract.gridSizeY();

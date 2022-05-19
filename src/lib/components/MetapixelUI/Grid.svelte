@@ -4,17 +4,35 @@
 	export let grid: [number, number];
 	export let pixels: Array<Pixel>;
 
+	export let pixelSelectedX;
+	export let pixelSelectedY;
+	export let pixelSelectedColor;
+	export let inputColorValue;
+
 	$: col = `repeat(${grid[1]}, 10px)`;
 	$: row = `repeat(${grid[0]}, 10px)`;
 
 	$: size = grid[0] * grid[1];
+
+	const changePixelSelected = (index) => {
+		pixelSelectedX = pixels[index].coords.x;
+		pixelSelectedY = pixels[index].coords.y;
+	};
+
+	const changeColor = (e) => {
+		e.target.style.backgroundColor = inputColorValue;
+		pixelSelectedColor = inputColorValue;
+	};
 </script>
 
 <div
 	class="sideShadow container m-auto mb-8 mt-5 w-11/12"
 	style="grid-template-rows: {row}; grid-template-columns: {col};">
 	{#each { length: size } as _, i (i)}
-		<div style="background-color: #{pixels[i]?.color || 'fff'};" />
+		<div
+			on:click={changeColor}
+			on:click={() => changePixelSelected(i)}
+			style="background-color: #{pixels[i]?.color || 'fff'};" />
 	{/each}
 </div>
 
@@ -24,8 +42,8 @@
 		border: 1px solid #999;
 		grid-gap: 1px;
 		background-color: #f9fafb;
-		height: 90vh;
-		width: 90vh;
+		height: min-content;
+		width: min-content;
 	}
 
 	.container div {
