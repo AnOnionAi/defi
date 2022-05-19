@@ -1,14 +1,10 @@
-<script>
+<script lang="ts">
 	import { METAPIXEL_ADDRESS } from '$lib/config';
 	import { famContract } from '$lib/utils/contracts';
 	import { getSigner } from '$lib/utils/web3Utils';
 	import { ethers } from 'ethers';
 
-	const onApprove = async () => {
-		await famContract
-			.connect(getSigner())
-			.approve(METAPIXEL_ADDRESS, ethers.constants.MaxUint256);
-	};
+	export let onApprove: () => void;
 </script>
 
 <div class="flex h-full items-center justify-center">
