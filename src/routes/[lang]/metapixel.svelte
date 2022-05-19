@@ -150,11 +150,11 @@
 		<div
 			class="metapixel-card information flex items-center justify-center p-4">
 			<div
-				class="sideShadow m-auto grid w-max grid-rows-2 rounded-2xl bg-white dark:bg-neutral-800">
+				class="sideShadow m-auto w-max rounded-2xl bg-white dark:bg-neutral-800">
 				<img
 					src="/icons/usdc.svg"
 					alt="USDC Token"
-					class="imgToken m-auto mb-8" />
+					class="imgToken m-auto mb-8 mt-8" />
 
 				<div class="options grid grid-cols-2">
 					<div class="input-color m-auto">
@@ -194,15 +194,9 @@
 {/if}
 
 <style>
-	@media only screen and (max-width: 1160px) {
-		.Metapixel {
-			grid-template-rows: 25% 80%;
-		}
-	}
-
 	@media only screen and (min-width: 1160px) {
 		.Metapixel {
-			grid-template-columns: 25% 80%;
+			grid-template-columns: 25% 75%;
 		}
 	}
 
@@ -211,7 +205,7 @@
 	}
 
 	.imgToken {
-		width: 60%;
-		height: 60%;
+		width: 40%;
+		height: 40%;
 	}
 </style>
