@@ -1,9 +1,15 @@
 <script lang="ts">
-	import Grid from '$lib/components/UI/Grid.svelte';
+	import Grid from '$lib/components/MetapixelUI/Grid.svelte';
 
 	import type { Pixel } from '$lib/types/types';
+	import queryBoard from '$lib/utils/queryBoard';
+	import { onMount } from 'svelte';
 
 	const grid = [6, 6];
+
+	onMount(async () => {
+		await queryBoard();
+	});
 
 	const pixels: Pixel[] = [
 		{ coords: { x: 0, y: 0 }, color: '40D015' },

@@ -12,9 +12,10 @@ import MetapixelABI from '$lib/config/abi/Metapixel.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/types/types';
 import { BigNumber, ethers } from 'ethers';
-import { getSigner } from './web3Utils';
-import { MINICHEF_ADDRESS } from '$lib/config';
+import { getSigner, providerRinkeby } from './web3Utils';
+import { FAM_ADDRESS, METAPIXEL_ADDRESS, MINICHEF_ADDRESS } from '$lib/config';
 import { polygonProvider } from './web3Utils';
+import famABI from '$lib/config/abi/FAM.json';
 
 export const getMasterChefContract = (): ethers.Contract => {
 	const masterChefContract = new ethers.Contract(
@@ -178,14 +179,14 @@ export const getSushiswapStrategyContract = (strategyAddress: string) => {
 		polygonProvider
 	);
 };
+export const famContract = new ethers.Contract(
+	FAM_ADDRESS,
+	famABI,
+	providerRinkeby
+);
 
-export const getMetapixelContract = (): ethers.Contract => {
-	const metapixelContractAddress = '0x3ED9ffeb07522196F34D92E3aD849106eD3316c4';
-	const metapixelContract = new ethers.Contract(
-		metapixelContractAddress,
-		MetapixelABI,
-		getSigner()
-	);
-
-	return metapixelContract;
-};
+export const metapixelContract = new ethers.Contract(
+	METAPIXEL_ADDRESS,
+	MetapixelABI,
+	providerRinkeby
+);
