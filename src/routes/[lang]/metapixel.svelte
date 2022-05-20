@@ -1,262 +1,67 @@
-<script lang="ts" module="context">
-	import { onMount } from 'svelte';
-	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
-	import metapixelABI from '$lib/config/abi/Metapixel.json';
-	import famABI from '$lib/config/abi/FAM.json';
-	import { BigNumber, ethers } from 'ethers';
+<script lang="ts">
+	import type { BigNumber } from 'ethers';
 	import { getSigner } from '$lib/utils/web3Utils';
+	import { accounts } from '$lib/stores/MetaMaskAccount';
+	import { famContract } from '$lib/utils/contracts';
+	import { METAPIXEL_ADDRESS } from '$lib/config';
+	import Connect from '$lib/components/Cards/Connect.svelte';
+	import Approve from '$lib/components/MetapixelUI/Approve.svelte';
+	import { ethers } from 'ethers/src.ts';
+	import {
+		spawnErrorNotification,
+		spawnSuccessNotification
+	} from '$lib/utils/spawnNotifications';
+	import { getNotificationsContext } from 'svelte-notifications';
+	import Metapixel from '$lib/components/MetapixelUI/Metapixel.svelte';
 
+	const { addNotification } = getNotificationsContext();
 	const development = false;
 
-	const metapixelAddress = '0x3ED9ffeb07522196F34D92E3aD849106eD3316c4';
-	const famAddress = '0x0b072E25e06FacF1127580ec7f0C19FCC07Faaf8';
-	const pixelsArray = [];
+	$: userAddress = $accounts?.[0];
 
-	const providerMetapixel = new ethers.providers.JsonRpcProvider(
-		'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
-	); // read
-
-	const metapixelReadContract = new ethers.Contract(
-		metapixelAddress,
-		metapixelABI,
-		providerMetapixel
-	);
-
-	const providerFAM = new ethers.providers.JsonRpcProvider(
-		'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
-	);
-
-	const FAMreadContract = new ethers.Contract(famAddress, famABI, providerFAM);
-
-	let gridContainer;
-
-	let pixelSelectedX;
-	let pixelSelectedY;
-	let pixelSelectedColor;
-
-	let pixelPrice;
-	let token;
-	let tokenSymbol;
-
-	let inputColor;
-
-	const changeColor = (e) => {
-		e.target.style.backgroundColor = inputColor.value;
-		pixelSelectedColor = inputColor.value;
-	};
-
-	const changePixelSelected = (x, y) => {
-		pixelSelectedX = x;
-		pixelSelectedY = y;
-	};
-
-	const paint = async () => {
-		if (
-			(pixelSelectedX || pixelSelectedX == 0) &&
-			(pixelSelectedY || pixelSelectedY == 0) &&
-			pixelSelectedColor
-		) {
-			pixelSelectedColor = pixelSelectedColor.substring(
-				1,
-				pixelSelectedColor.length
-			);
-
-			const metapixelWriteContract = new ethers.Contract(
-				metapixelAddress,
-				metapixelABI,
-				getSigner()
-			);
-
-			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
-
-			await metapixelWriteContract.addPixel(
-				pixelSelectedColor,
-				pixelSelectedX,
-				pixelSelectedY
-			);
-
-			location.reload();
-		} else {
-			console.log('No entro');
+	$: {
+		if (userAddress) {
+			checkApproved(userAddress);
 		}
-	};
+	}
 
-	const arrayToMatrix = (array, rows, cols) => {
-		const matrix = Array(rows);
+	let tokenApproved = false;
 
-		for (var i = 0; i < rows; i++) {
-			matrix[i] = new Array(cols);
-		}
-
-		let index = 0;
-
-		for (let i = 0; i < cols; i++) {
-			for (let j = 0; j < rows; j++) {
-				matrix[i][j] = array[index];
-				index++;
-			}
-		}
-
-		return matrix;
-	};
-
-	onMount(async () => {
-		const famWriteContract = new ethers.Contract(
-			famAddress,
-			famABI,
-			getSigner()
+	const checkApproved = async (userAddress) => {
+		const allowance: BigNumber = await famContract.allowance(
+			userAddress,
+			METAPIXEL_ADDRESS
 		);
+		tokenApproved = !allowance.isZero();
+	};
 
-		await famWriteContract.approve(
-			metapixelAddress,
-			'10000000000000000000000000'
-		);
-
-		let sizeX: BigNumber = await metapixelReadContract.gridSizeX();
-		let sizeY: BigNumber = await metapixelReadContract.gridSizeY();
-
-		pixelPrice = await metapixelReadContract.pixelFee();
-		token = await FAMreadContract.name();
-		tokenSymbol = await FAMreadContract.symbol();
-
-		for (let i = 0; i < sizeX.toNumber(); i++) {
-			for (let j = 0; j < sizeY.toNumber(); j++) {
-				pixelsArray.push(metapixelReadContract.pixels(i, j));
-			}
+	const approveToken = async () => {
+		try {
+			const approvalTx = await famContract
+				.connect(getSigner())
+				.approve(METAPIXEL_ADDRESS, ethers.constants.MaxUint256);
+			spawnSuccessNotification(addNotification, 'SENT');
+			await approvalTx.wait();
+			spawnSuccessNotification(addNotification, 'MINED');
+			tokenApproved = true;
+		} catch (e) {
+			spawnErrorNotification(addNotification, e);
 		}
-
-		const pixels = await Promise.all(pixelsArray);
-
-		const pixelMatrix = arrayToMatrix(pixels, sizeY, sizeX);
-
-		const grid = document.querySelector('#grid');
-
-		for (let i = 0; i < sizeX.toNumber(); i++) {
-			for (let j = 0; j < sizeY.toNumber(); j++) {
-				let color = pixelMatrix[i][j].color.toString(16);
-
-				const div = document.createElement('div');
-				div.classList.add('pixel');
-				if (color != 0) {
-					while (color.length < 6) color = '0' + color;
-					div.style.backgroundColor = '#' + color;
-				} else {
-					div.style.backgroundColor = '#f3f4f6';
-				}
-
-				grid.appendChild(div);
-
-				div.addEventListener('click', changeColor);
-				div.addEventListener('click', () => changePixelSelected(i, j));
-				div.addEventListener('mouseover', () => {
-					div.style.transform = 'scale(1.3)';
-					div.style.zIndex = '2';
-					div.style.border = '1px solid';
-				});
-				div.addEventListener('mouseleave', () => {
-					div.style.transform = 'scale(1)';
-					div.style.zIndex = '0';
-					div.style.border = '0px';
-				});
-			}
-		}
-	});
+	};
 </script>
 
-{#if development}
-	<DisabledFeature />
-{:else}
-	<div class="Metapixel grid grid-rows lg:grid-cols">
-		<div class="metapixel-card information p-4">
-			<div
-				class="bg-white dark:bg-neutral-800 rounded-2xl sideShadow w-max m-auto grid grid-rows-2">
-				<div class="options grid grid-cols-2">
-					<div class="input-color m-auto">
-						<input
-							bind:this={inputColor}
-							type="color"
-							id="color"
-							value="#fe7688" />
-					</div>
-					<div class="button-paint m-auto">
-						<button
-							on:click={paint}
-							class="flex items-center bg-black disabled:opacity-50 false text-white font-semibold rounded-lg px-5 py-3 tracking-wide hover:bg-pink-500 s-YQIdR16N_soy"
-							data-dashlane-rid="96e3e72566535f11"
-							data-dashlane-label="true"
-							data-form-type="action"
-							><p>Paint</p>
-						</button>
-					</div>
-				</div>
+<!-- <DisabledFeature /> -->
 
-				<div class="description mt-8 px-8 pb-4 flex flex-col">
-					<div class="mb-2 flex justify-between">
-						<p class="dark:text-white mr-2">Jackpot:</p>
-						<p class="dark:text-white">$48124</p>
-					</div>
-					<div class="mb-2 flex justify-between">
-						<p class="dark:text-white mr-2">Token:</p>
-						<p class="dark:text-white">{token}({tokenSymbol})</p>
-					</div>
-					<div class="mb-2 flex justify-between">
-						<p class="dark:text-white mr-2">Price to Paint:</p>
-						<p class="dark:text-white">${pixelPrice}</p>
-					</div>
-				</div>
-			</div>
+{#if !userAddress}
+	<div class="flex h-full w-full items-center justify-center">
+		<div class="w-1/2 min-w-[320px] max-w-3xl ">
+			<Connect />
 		</div>
-
-		<div
-			bind:this={gridContainer}
-			id="grid"
-			class="m-auto mb-8 mt-5 w-11/12 sideShadow" />
 	</div>
 {/if}
-
-<style>
-	@media only screen and (max-width: 1160px) {
-		.Metapixel {
-			grid-template-rows: 25% 80%;
-		}
-		#grid {
-			margin-top: 2em;
-		}
-	}
-
-	@media only screen and (min-width: 1160px) {
-		.Metapixel {
-			grid-template-columns: 25% 80%;
-		}
-	}
-
-	.metapixel-card {
-		width: 336px;
-		height: 496px;
-	}
-
-	#grid {
-		background-color: #f9fafb;
-	}
-
-	.options {
-		padding: 1em;
-		margin-bottom: 1em;
-		justify-content: center;
-		align-items: center;
-	}
-
-	#grid {
-		height: 90vh;
-		width: 90vh;
-		display: grid;
-		grid-template-columns: repeat(10, 1fr);
-		grid-template-rows: repeat(10, 1fr);
-		gap: 1px;
-		padding: 1px;
-	}
-
-	.sideShadow {
-		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-	}
-</style>
+{#if userAddress && !tokenApproved}
+	<Approve onApprove={approveToken} />
+{/if}
+{#if userAddress && tokenApproved}
+	<Metapixel />
+{/if}

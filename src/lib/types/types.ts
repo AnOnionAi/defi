@@ -164,8 +164,11 @@ export interface LoadingState {
 	loadingHarvest?: boolean;
 }
 
-export interface TransactionError {
-	code: number;
-	message: string;
-	stack: string;
+export interface Pixel {
+	coords: {
+		x: number;
+		y: number;
+	};
+	color: string;
+	placer: string;
 }

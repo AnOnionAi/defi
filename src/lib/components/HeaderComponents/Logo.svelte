@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/stores/dark';
-	import { isHomescreen } from '$lib/stores/homescreen';
 </script>
 
 <div class="flex flex-shrink-0">

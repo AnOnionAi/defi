@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/stores/dark';
 	import { mushMarketCap } from '$lib/stores/MushMarketStats';
-	import { time, _ } from 'svelte-i18n';
+	import { _ } from 'svelte-i18n';
 
 	function getLocale(lang) {
 		switch (lang) {

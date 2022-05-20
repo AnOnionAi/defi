@@ -16,7 +16,7 @@
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { Token } from '$lib/types/types';
 	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
-	import { BigNumber, utils } from 'ethers';
+	import { BigNumber } from 'ethers';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
 	import { Chasing } from 'svelte-loading-spinners';
 	import { ethers } from 'ethers';
@@ -29,7 +29,6 @@
 	import { isMetaMaskInstalled, metaMaskCon } from '$lib/utils/metamaskCalls';
 	import AssetPair from './AssetPair.svelte';
 	import VaultHeading from './VaultHeading.svelte';
-	import { formatEther } from 'ethers/lib/utils';
 	import {
 		spawnErrorNotification,
 		spawnSuccessNotification

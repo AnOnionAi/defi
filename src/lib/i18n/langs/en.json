@@ -130,7 +130,8 @@
 		"details": "Details",
 		"depositfee": "Deposit Fee",
 		"withdrawalfee": "Withdrawal Fee",
-		"notAvaliable": "Not Avaliable"
+		"notAvaliable": "Not Avaliable",
+		"paint": "Paint"
 	},
 
 	"pastActions": {

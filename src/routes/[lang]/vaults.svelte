@@ -15,7 +15,6 @@
 	import VaultFilter from '$lib/components/Cards/VaultFilter.svelte';
 	import { onMount } from 'svelte';
 	import { reduceFilters } from '$lib/utils/filterFunctions';
-	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
 	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import { getVaultAPYandAPR } from '$lib/utils/getVaultAPY';
 	import { getTokenBalance } from '$lib/utils/erc20';
