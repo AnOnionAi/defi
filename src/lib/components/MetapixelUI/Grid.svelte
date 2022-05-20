@@ -9,7 +9,7 @@
 	export let pixelSelectedColor;
 	export let inputColorValue;
 
-	$: col = `repeat(${grid[0]}, 10px)`;
+	$: col = `repeat(${grid[0]}, 10px)`; //10
 	$: row = `repeat(${grid[1]}, 10px)`;
 
 	$: size = grid[0] * grid[1];
@@ -24,6 +24,8 @@
 		e.target.style.backgroundColor = inputColorValue;
 		pixelSelectedColor = inputColorValue;
 	};
+
+	console.log(pixels);
 </script>
 
 <div
@@ -33,7 +35,8 @@
 		<div
 			on:click={changeColor}
 			on:click={() => changePixelSelected(i)}
-			style="background-color: #{pixels[i]?.color || 'fff'};" />
+			style="background-color: #{pixels[i]?.color || 'ffffff'};"
+			class="text-xs" />
 	{/each}
 </div>
 
@@ -46,7 +49,6 @@
 		height: min-content;
 		width: max-content;
 		max-width: max-content;
-		overflow: scroll;
 	}
 
 	.container div {

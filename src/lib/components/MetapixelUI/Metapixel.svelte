@@ -1,5 +1,6 @@
 <script lang="ts">
-	import PixelsMock from '$lib/config/constants/board.mock';
+	import type { Pixel } from '$lib/types/types';
+
 	import { metapixelContract } from '$lib/utils/contracts';
 	import { getBoardSize } from '$lib/utils/metapixel';
 	import { queryBoard, pixelFee } from '$lib/utils/queryBoard';
@@ -24,14 +25,14 @@
 	let gridSizeX = 0;
 	let gridSizeY = 0;
 
-	let boardPixels;
+	let boardPixels: Array<Pixel> = [];
 
 	onMount(async () => {
 		const { x, y } = await getBoardSize();
 		gridSizeX = x;
 		gridSizeY = y;
 		console.log(gridSizeX, gridSizeY);
-		boardPixels = await queryBoard();
+		boardPixels = await queryBoard(x, y);
 
 		pixelPrice = await pixelFee();
 
@@ -39,27 +40,29 @@
 	});
 
 	const paint = async () => {
-		// if (
-		// 	(pixelSelectedX || pixelSelectedX == 0) &&
-		// 	(pixelSelectedY || pixelSelectedY == 0) &&
-		// 	pixelSelectedColor
-		// ) {
-		// 	pixelSelectedColor = pixelSelectedColor.substring(
-		// 		1,
-		// 		pixelSelectedColor.length
-		// 	);
+		if (
+			(pixelSelectedX || pixelSelectedX == 0) &&
+			(pixelSelectedY || pixelSelectedY == 0) &&
+			pixelSelectedColor
+		) {
+			pixelSelectedColor = pixelSelectedColor.substring(
+				1,
+				pixelSelectedColor.length
+			);
 
-		// 	pixelSelectedColor = parseInt(pixelSelectedColor, 16);
+			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
 
-		// 	const tx = await metapixelContract
-		// 		.connect(getSigner())
-		// 		.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
+			console.log(pixelSelectedColor);
 
-		// 	await tx.wait();
-		// 	location.reload();
-		// } else {
-		// 	console.log('No entro');
-		// }
+			const tx = await metapixelContract
+				.connect(getSigner())
+				.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
+
+			await tx.wait();
+			/* 	location.reload(); */
+		} else {
+			console.log('No entro');
+		}
 
 		console.log(pixelSelectedX, pixelSelectedY, pixelSelectedColor);
 	};
@@ -125,7 +128,7 @@
 			</div>
 			<Grid
 				grid={[gridSizeX, gridSizeY]}
-				pixels={PixelsMock}
+				pixels={boardPixels}
 				bind:pixelSelectedX
 				bind:pixelSelectedY
 				bind:pixelSelectedColor
@@ -145,6 +148,10 @@
 		.metapixel-card {
 			justify-self: flex-start;
 		}
+	}
+
+	.Metapixel {
+		overflow: scroll;
 	}
 
 	.imgToken {

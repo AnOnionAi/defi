@@ -1,22 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
 	import type { BigNumber } from 'ethers';
 	import { getSigner } from '$lib/utils/web3Utils';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { _ } from 'svelte-i18n';
-	import {
-		famContract,
-		isApproved,
-		metapixelContract
-	} from '$lib/utils/contracts';
+	import { famContract } from '$lib/utils/contracts';
 	import { METAPIXEL_ADDRESS } from '$lib/config';
 	import Connect from '$lib/components/Cards/Connect.svelte';
 	import Approve from '$lib/components/MetapixelUI/Approve.svelte';
-	import Grid from '$lib/components/MetapixelUI/Grid.svelte';
-	import type { Pixel } from '$lib/types/types';
 	import { ethers } from 'ethers/src.ts';
-	import PixelsMock from '$lib/config/constants/board.mock';
 	import {
 		spawnErrorNotification,
 		spawnSuccessNotification
@@ -35,17 +27,7 @@
 		}
 	}
 
-	const grid = [32, 32];
-
 	let tokenApproved = false;
-	let gridContainer;
-	let pixelSelectedX;
-	let pixelSelectedY;
-	let pixelSelectedColor;
-	let pixelPrice;
-	let token;
-	let tokenSymbol;
-	let inputColor;
 
 	const checkApproved = async (userAddress) => {
 		const allowance: BigNumber = await famContract.allowance(
@@ -54,15 +36,6 @@
 		);
 		tokenApproved = !allowance.isZero();
 	};
-
-	onMount(async () => {
-		let sizeX: BigNumber = await metapixelContract.gridSizeX();
-		let sizeY: BigNumber = await metapixelContract.gridSizeY();
-
-		pixelPrice = await metapixelContract.pixelFee();
-		token = await famContract.name();
-		tokenSymbol = await famContract.symbol();
-	});
 
 	const approveToken = async () => {
 		try {

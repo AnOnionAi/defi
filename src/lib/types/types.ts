@@ -170,4 +170,5 @@ export interface Pixel {
 		y: number;
 	};
 	color: string;
+	placer: string;
 }
