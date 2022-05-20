@@ -39,27 +39,27 @@
 	});
 
 	const paint = async () => {
-		if (
-			(pixelSelectedX || pixelSelectedX == 0) &&
-			(pixelSelectedY || pixelSelectedY == 0) &&
-			pixelSelectedColor
-		) {
-			pixelSelectedColor = pixelSelectedColor.substring(
-				1,
-				pixelSelectedColor.length
-			);
+		// if (
+		// 	(pixelSelectedX || pixelSelectedX == 0) &&
+		// 	(pixelSelectedY || pixelSelectedY == 0) &&
+		// 	pixelSelectedColor
+		// ) {
+		// 	pixelSelectedColor = pixelSelectedColor.substring(
+		// 		1,
+		// 		pixelSelectedColor.length
+		// 	);
 
-			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
+		// 	pixelSelectedColor = parseInt(pixelSelectedColor, 16);
 
-			const tx = await metapixelContract
-				.connect(getSigner())
-				.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
+		// 	const tx = await metapixelContract
+		// 		.connect(getSigner())
+		// 		.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
 
-			await tx.wait();
-			location.reload();
-		} else {
-			console.log('No entro');
-		}
+		// 	await tx.wait();
+		// 	location.reload();
+		// } else {
+		// 	console.log('No entro');
+		// }
 
 		console.log(pixelSelectedX, pixelSelectedY, pixelSelectedColor);
 	};
@@ -138,6 +138,12 @@
 	@media only screen and (min-width: 1160px) {
 		.Metapixel {
 			grid-template-columns: 25% 75%;
+		}
+	}
+
+	@media only screen and (max-width: 480px) {
+		.metapixel-card {
+			justify-self: flex-start;
 		}
 	}
 
