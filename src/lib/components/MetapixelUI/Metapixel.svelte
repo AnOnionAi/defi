@@ -9,7 +9,6 @@
 	import { _ } from 'svelte-i18n';
 
 	import BigSpinner from '../LoadingUI/BigSpinner.svelte';
-	import CustomSpinner from '../LoadingUI/CustomSpinner.svelte';
 	import Grid from './Grid.svelte';
 
 	let inputColor;
@@ -20,7 +19,6 @@
 	let pixelSelectedColor;
 
 	let loading = true;
-	let error = false;
 
 	let gridSizeX = 0;
 	let gridSizeY = 0;

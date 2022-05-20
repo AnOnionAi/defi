@@ -1,5 +1,5 @@
 import { sushiVaults } from '$lib/config/constants/vaults';
-import { Token, type VaultInfo } from '$lib/types/types';
+import { Token } from '$lib/types/types';
 import { ethers } from 'ethers';
 import { getContractAddress, getMasterChefAddress } from './addressHelpers';
 import { getTokenBalance } from './erc20';

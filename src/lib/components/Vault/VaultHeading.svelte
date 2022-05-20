@@ -1,6 +1,4 @@
 <script lang="ts">
-	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
-
 	export let headingText: string;
 </script>
 

@@ -1,9 +1,4 @@
 <script lang="ts">
-	import { METAPIXEL_ADDRESS } from '$lib/config';
-	import { famContract } from '$lib/utils/contracts';
-	import { getSigner } from '$lib/utils/web3Utils';
-	import { ethers } from 'ethers';
-
 	export let onApprove: () => void;
 </script>
 

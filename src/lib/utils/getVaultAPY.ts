@@ -5,7 +5,7 @@ import { getTokenBalance } from './erc20';
 import { BLOCKS_PER_YEAR, SUSHI_TOKEN_ADDRESS } from '$lib/config/index';
 import { getSushiPerBlock } from './sushiSwapUtils';
 import { getLPTokenPrice } from './lpTokenUtils';
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import { getSushiswapStrategyContract } from './contracts';
 
 const getSushiPoolApr = (

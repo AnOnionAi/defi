@@ -2,11 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import type {
-		LoadingState,
-		PoolInfo,
-		PoolInfoResponse
-	} from '$lib/types/types';
+	import type { LoadingState, PoolInfo } from '$lib/types/types';
 	import { Token } from '$lib/types/types';
 	import { metaMaskCon } from '$lib/utils/metamaskCalls';
 	import {

@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import type { BigNumber } from 'ethers';
 	import { getSigner } from '$lib/utils/web3Utils';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
-	import { _ } from 'svelte-i18n';
 	import { famContract } from '$lib/utils/contracts';
 	import { METAPIXEL_ADDRESS } from '$lib/config';
 	import Connect from '$lib/components/Cards/Connect.svelte';

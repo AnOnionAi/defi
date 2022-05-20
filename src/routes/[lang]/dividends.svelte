@@ -1,22 +1,15 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-	import { _ } from 'svelte-i18n';
 </script>
 
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { getTokenAllowance } from '$lib/utils/erc20';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
-	import ApproveMush from '$lib/components/Cards/ApproveMush.svelte';
 	import { Token } from '$lib/types/types';
-	import DividendCard from '$lib/components/Cards/DividendCard.svelte';
-	import Connect from '$lib/components/Cards/Connect.svelte';
-	import { fade } from 'svelte/transition';
 	import { BigNumber, ethers } from 'ethers';
 	import { approveToken } from '$lib/utils/erc20';
 	import { getNotificationsContext } from 'svelte-notifications';
-	import { darkMode } from '$lib/stores/dark';
-	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
 	import {
 		spawnErrorNotification,
@@ -42,21 +35,6 @@
 			finishedApprovalFetch = true;
 		});
 	}
-
-	const handleApproval = async () => {
-		try {
-			const tx = await approveToken(
-				getContractAddress(Token.MUSHTOKEN),
-				getContractAddress(Token.VAULTCHEF)
-			);
-			spawnSuccessNotification(addNotification, 'SENT');
-			await tx.wait();
-			approved = true;
-			spawnSuccessNotification(addNotification, 'MINED');
-		} catch (e) {
-			spawnErrorNotification(addNotification, e);
-		}
-	};
 </script>
 
 <section class="flex h-full flex-col">

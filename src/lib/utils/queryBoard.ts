@@ -1,7 +1,7 @@
 import type { Pixel } from '$lib/types/types';
 import { ethers } from 'ethers';
 import { metapixelContract } from './contracts';
-export const queryBoard = async (xLength: number, yLength: number) => {
+export const queryBoard = async (xLength: number) => {
 	const pixelsResponse: Array<{ color: number; placer: string }> =
 		await metapixelContract.getPixels();
 
