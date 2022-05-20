@@ -40,7 +40,7 @@
 		gridSizeX = x;
 		gridSizeY = y;
 		console.log(gridSizeX, gridSizeY);
-		boardPixels = await queryBoard(x, y);
+		boardPixels = await queryBoard(x);
 
 		pixelPrice = await pixelFee();
 
