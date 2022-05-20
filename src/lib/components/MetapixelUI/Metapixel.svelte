@@ -5,8 +5,18 @@
 	import { getBoardSize } from '$lib/utils/metapixel';
 	import { queryBoard, pixelFee } from '$lib/utils/queryBoard';
 	import { getSigner } from '$lib/utils/web3Utils';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
+	import HavePatience from '../Modals/HavePatience.svelte';
+	const { open } = getContext('simple-modal');
+
+	const openModal = () => {
+		open(HavePatience, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
+	};
 
 	import BigSpinner from '../LoadingUI/BigSpinner.svelte';
 	import Grid from './Grid.svelte';
@@ -52,11 +62,18 @@
 
 			console.log(pixelSelectedColor);
 
-			const tx = await metapixelContract
-				.connect(getSigner())
-				.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
+			try {
+				const tx = await metapixelContract
+					.connect(getSigner())
+					.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
 
-			await tx.wait();
+				await tx.wait();
+			} catch (error) {
+				if (error.code == 'UNPREDICTABLE_GAS_LIMIT') {
+					openModal();
+				}
+			}
+
 			/* 	location.reload(); */
 		} else {
 			console.log('No entro');
