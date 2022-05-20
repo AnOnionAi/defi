@@ -150,6 +150,10 @@
 		}
 	}
 
+	.metapixel-card {
+		max-width: 100vw;
+	}
+
 	.Metapixel {
 		overflow: scroll;
 	}

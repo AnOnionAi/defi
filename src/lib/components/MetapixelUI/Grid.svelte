@@ -49,6 +49,7 @@
 		height: min-content;
 		width: max-content;
 		max-width: max-content;
+		overflow-x: scroll;
 	}
 
 	.container div {
