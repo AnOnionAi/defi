@@ -6,26 +6,36 @@
 
 	export let pixelSelectedX;
 	export let pixelSelectedY;
-	export let pixelSelectedColor;
-	export let inputColorValue;
+	export let inputColorValue: string;
 
+	let selectedPixel: null | HTMLDivElement = null;
+	let selectedPixelIndex: null | number = null;
 	$: col = `repeat(${grid[0]}, 10px)`; //10
 	$: row = `repeat(${grid[1]}, 10px)`;
-
+	$: board = maintainLocalPixel(pixels);
 	$: size = grid[0] * grid[1];
 
-	const changePixelSelected = (index) => {
-		pixelSelectedX = pixels[index].coords.x;
-		pixelSelectedY = pixels[index].coords.y;
-		console.log(pixelSelectedX, pixelSelectedY);
+	const selectPixel = (clickEvent, pixelIndex) => {
+		if (selectedPixel !== null) {
+			selectedPixel.style.backgroundColor = '#ffffff';
+		}
+		selectedPixel = clickEvent.target;
+		selectedPixel.style.backgroundColor = inputColorValue;
+		pixelSelectedX = pixels[pixelIndex].coords.x;
+		pixelSelectedY = pixels[pixelIndex].coords.y;
+		selectedPixelIndex = pixelIndex;
 	};
 
-	const changeColor = (e) => {
-		e.target.style.backgroundColor = inputColorValue;
-		pixelSelectedColor = inputColorValue;
+	const maintainLocalPixel = (board: Array<Pixel>): Array<Pixel> => {
+		const boardCopy = [...board];
+		if (selectedPixelIndex) {
+			boardCopy[selectedPixelIndex] = {
+				...boardCopy[selectedPixelIndex],
+				color: inputColorValue.replace('#', '')
+			};
+		}
+		return [...boardCopy];
 	};
-
-	console.log(pixels);
 </script>
 
 <div
@@ -33,9 +43,9 @@
 	style="grid-template-rows: {row}; grid-template-columns: {col};">
 	{#each { length: size } as _, i (i)}
 		<div
-			on:click={changeColor}
-			on:click={() => changePixelSelected(i)}
-			style="background-color: #{pixels[i]?.color || 'ffffff'};"
+			id={`${i}`}
+			on:click={(e) => selectPixel(e, i)}
+			style="background-color: #{board[i]?.color || 'ffffff'};"
 			class="text-xs" />
 	{/each}
 </div>

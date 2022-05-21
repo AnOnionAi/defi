@@ -20,14 +20,15 @@
 
 	import BigSpinner from '../LoadingUI/BigSpinner.svelte';
 	import Grid from './Grid.svelte';
+	import getJackpot from '$lib/utils/metapixel/getJackpot';
+	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
+	import { ethers } from 'ethers';
 
-	let inputColor;
-	let inputColorValue;
+	let inputColor = '#fe7688';
 	let pixelPrice;
 	let pixelSelectedX;
 	let pixelSelectedY;
-	let pixelSelectedColor;
-
+	let jackpot: string;
 	let gridSizeX = 0;
 	let gridSizeY = 0;
 
@@ -39,29 +40,24 @@
 		const { x, y } = await getBoardSize();
 		gridSizeX = x;
 		gridSizeY = y;
-		/* boardPixels = await queryBoard(); */
 		pixelPrice = await pixelFee();
+		jackpot = await getJackpot();
 	});
 
 	const paint = async () => {
 		if (
 			(pixelSelectedX || pixelSelectedX == 0) &&
 			(pixelSelectedY || pixelSelectedY == 0) &&
-			pixelSelectedColor
+			inputColor
 		) {
-			pixelSelectedColor = pixelSelectedColor.substring(
-				1,
-				pixelSelectedColor.length
-			);
+			inputColor = inputColor.substring(1, inputColor.length);
 
-			pixelSelectedColor = parseInt(pixelSelectedColor, 16);
-
-			console.log(pixelSelectedColor);
+			const encodedColor = parseInt(inputColor, 16);
 
 			try {
 				const tx = await metapixelContract
 					.connect(getSigner())
-					.addPixel(pixelSelectedColor, pixelSelectedX, pixelSelectedY);
+					.addPixel(encodedColor, pixelSelectedX, pixelSelectedY);
 
 				await tx.wait();
 			} catch (error) {
@@ -69,20 +65,12 @@
 					openModal();
 				}
 			}
-
-			/* 	location.reload(); */
 		} else {
 			console.log('No entro');
 		}
 
-		console.log(pixelSelectedX, pixelSelectedY, pixelSelectedColor);
+		console.log(pixelSelectedX, pixelSelectedY, inputColor);
 	};
-
-	const changeColor = () => {
-		inputColorValue = inputColor.value;
-	};
-
-	$: inputColorValue = inputColor?.value;
 </script>
 
 <div class="h-full w-full select-none">
@@ -95,44 +83,41 @@
 		</div>
 	{:else if $boardPixels.data}
 		<div class="Metapixel grid grid-rows xl:grid-cols">
-			<div
-				class="metapixel-card information flex items-center justify-center p-4">
+			<div class="metapixel-card  flex items-center justify-center p-4">
 				<div
-					class="sideShadow m-auto w-max rounded-2xl bg-white dark:bg-neutral-800">
-					<img
-						src="/icons/usdc.svg"
-						alt="USDC Token"
-						class="imgToken m-auto mb-8 mt-8" />
-
-					<div class="options grid grid-cols-2">
-						<div class="input-color m-auto">
-							<input
-								on:change={changeColor}
-								bind:this={inputColor}
-								type="color"
-								id="color"
-								value="#fe7688" />
+					class="sideShadow p-8 min-w-[320px]  rounded-2xl  dark:bg-neutral-800 ">
+					<div class="flex justify-between">
+						<div class="">
+							<p class="text-xs">Selected Color:</p>
+							<input bind:value={inputColor} type="color" id="color" />
 						</div>
-						<div class="button-paint m-auto">
+						<div class="">
 							<button
 								on:click={paint}
-								class="false s-YQIdR16N_soy flex items-center rounded-lg bg-black px-5 py-3 font-semibold tracking-wide text-white hover:bg-pink-500 disabled:opacity-50"
-								data-dashlane-rid="96e3e72566535f11"
-								data-dashlane-label="true"
-								data-form-type="action"
-								><p>{$_('actions.paint')}</p>
+								class="rounded-lg bg-black px-5 py-2 font-semibold tracking-wide text-white hover:bg-pink-500 disabled:opacity-50"
+								>{$_('actions.paint')}
 							</button>
 						</div>
 					</div>
 
-					<div class="description mt-8 flex flex-col px-8 pb-4">
-						<div class="mb-2 flex justify-between">
-							<p class="mr-2 dark:text-white">Jackpot:</p>
-							<p class="dark:text-white">$48124</p>
+					<div class="flex flex-col  pt-2 gap-1">
+						<div class="flex justify-between">
+							<p class=" ">Jackpot:</p>
+							{#if jackpot}
+								<p class="">{jackpot}</p>
+							{:else}
+								<LoadingSkeleton styles={{ width: '80px', height: '20px' }} />
+							{/if}
 						</div>
-						<div class="mb-2 flex justify-between">
-							<p class="mr-2 dark:text-white">Price to Paint:</p>
-							<p class="dark:text-white">${pixelPrice}</p>
+						<div class=" flex justify-between">
+							<p class="">Price to Paint:</p>
+							{#if pixelPrice}
+								<p class="">
+									{ethers.utils.formatEther(pixelPrice)} FAM
+								</p>
+							{:else}
+								<LoadingSkeleton styles={{ width: '80px', height: '20px' }} />
+							{/if}
 						</div>
 					</div>
 				</div>
@@ -142,8 +127,7 @@
 				pixels={$boardPixels.data}
 				bind:pixelSelectedX
 				bind:pixelSelectedY
-				bind:pixelSelectedColor
-				bind:inputColorValue />
+				bind:inputColorValue={inputColor} />
 		</div>
 	{/if}
 </div>
@@ -167,11 +151,6 @@
 
 	.Metapixel {
 		overflow: scroll;
-	}
-
-	.imgToken {
-		width: 40%;
-		height: 40%;
 	}
 
 	.sideShadow {
