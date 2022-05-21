@@ -43,8 +43,6 @@
 <style>
 	.container {
 		display: grid;
-		border: 1px solid #999;
-		grid-gap: 1px;
 		background-color: #f9fafb;
 		height: min-content;
 		width: max-content;
