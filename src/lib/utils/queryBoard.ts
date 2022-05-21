@@ -4,7 +4,6 @@ import { metapixelContract } from './contracts';
 export const queryBoard = async () => {
 	const xLengthBig: BigNumber = await metapixelContract.gridSizeX();
 	const xLength = xLengthBig.toNumber();
-	console.log(xLength);
 
 	const pixelsResponse: Array<{ color: number; placer: string }> =
 		await metapixelContract.getPixels();
