@@ -47,7 +47,9 @@
 	"dependencies": {
 		"@fortawesome/free-brands-svg-icons": "^5.15.3",
 		"@fortawesome/free-solid-svg-icons": "^5.15.3",
+		"@sveltestack/svelte-query": "^1.6.0",
 		"bignumber.js": "^9.0.1",
+		"broadcast-channel": "^4.11.0",
 		"chart.js": "^3.7.1",
 		"ethers": "5.5.1",
 		"svelte-fa": "^2.3.3",

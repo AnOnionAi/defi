@@ -1,7 +1,11 @@
 import type { Pixel } from '$lib/types/types';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { metapixelContract } from './contracts';
-export const queryBoard = async (xLength: number) => {
+export const queryBoard = async () => {
+	const xLengthBig: BigNumber = await metapixelContract.gridSizeX();
+	const xLength = xLengthBig.toNumber();
+	console.log(xLength);
+
 	const pixelsResponse: Array<{ color: number; placer: string }> =
 		await metapixelContract.getPixels();
 
@@ -9,8 +13,6 @@ export const queryBoard = async (xLength: number) => {
 	let yIndex = 0;
 
 	const pixels: Array<Pixel> = [];
-
-	console.log('RESPONSE LENGTH' + pixelsResponse.length);
 
 	for (let i = 0; i < pixelsResponse.length; i++) {
 		if (xIndex >= xLength) {
@@ -28,8 +30,6 @@ export const queryBoard = async (xLength: number) => {
 		xIndex++;
 	}
 
-	console.log(pixels.length);
-	console.log('AMOUNT OF PIXELS');
 	return pixels;
 };
 

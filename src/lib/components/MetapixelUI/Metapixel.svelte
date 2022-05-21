@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Pixel } from '$lib/types/types';
-
 	import { metapixelContract } from '$lib/utils/contracts';
 	import { getBoardSize } from '$lib/utils/metapixel';
 	import { queryBoard, pixelFee } from '$lib/utils/queryBoard';
@@ -8,6 +7,7 @@
 	import { getContext, onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
 	import HavePatience from '../Modals/HavePatience.svelte';
+	import { useQuery } from '@sveltestack/svelte-query';
 	const { open } = getContext('simple-modal');
 
 	const openModal = () => {
@@ -28,23 +28,19 @@
 	let pixelSelectedY;
 	let pixelSelectedColor;
 
-	let loading = true;
-
 	let gridSizeX = 0;
 	let gridSizeY = 0;
 
-	let boardPixels: Array<Pixel> = [];
+	const boardPixels = useQuery('boardPixels', queryBoard, {
+		refetchInterval: 6000
+	});
 
 	onMount(async () => {
 		const { x, y } = await getBoardSize();
 		gridSizeX = x;
 		gridSizeY = y;
-		console.log(gridSizeX, gridSizeY);
-		boardPixels = await queryBoard(x);
-
+		/* boardPixels = await queryBoard(); */
 		pixelPrice = await pixelFee();
-
-		loading = false;
 	});
 
 	const paint = async () => {
@@ -90,14 +86,14 @@
 </script>
 
 <div class="h-full w-full select-none">
-	{#if loading}
+	{#if $boardPixels.isLoading}
 		<div class="flex h-full w-full  flex-col items-center justify-center gap-4">
 			<BigSpinner tailwindWidthClass="w-20" tailwindnHeightClass="h-20" />
 			<h1 class="text-xl font-bold text-gray-600 dark:text-gray-200">
 				Loading Metapixel...
 			</h1>
 		</div>
-	{:else}
+	{:else if $boardPixels.data}
 		<div class="Metapixel grid grid-rows xl:grid-cols">
 			<div
 				class="metapixel-card information flex items-center justify-center p-4">
@@ -143,7 +139,7 @@
 			</div>
 			<Grid
 				grid={[gridSizeX, gridSizeY]}
-				pixels={boardPixels}
+				pixels={$boardPixels.data}
 				bind:pixelSelectedX
 				bind:pixelSelectedY
 				bind:pixelSelectedColor
