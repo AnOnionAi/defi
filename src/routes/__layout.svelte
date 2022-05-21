@@ -10,8 +10,10 @@
 	import GradientLinearBar from '$lib/components/LoadingUI/GradientLinearBar.svelte';
 	import { onMount } from 'svelte';
 	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
+	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 
 	const customNotificationComponent = CustomNotification as any;
+	const queryClient = new QueryClient();
 
 	onMount(async () => {
 		try {
@@ -23,25 +25,27 @@
 	});
 </script>
 
-<Notifications item={customNotificationComponent}>
-	<Modal>
-		<Header />
-		{#if $navigating}
-			<div class="absolute left-0 top-0 z-10 w-screen">
-				<GradientLinearBar />
-			</div>
-		{/if}
-		<main
-			class:dark={$darkMode}
-			class="main background_pattern flex flex-1  {$darkMode &&
-				'bg-darkGrey-900 '} transition duration-500 ">
-			<div class="flex-1">
-				<slot />
-			</div>
-		</main>
-		<Footer />
-	</Modal>
-</Notifications>
+<QueryClientProvider client={queryClient}>
+	<Notifications item={customNotificationComponent}>
+		<Modal>
+			<Header />
+			{#if $navigating}
+				<div class="absolute left-0 top-0 z-10 w-screen">
+					<GradientLinearBar />
+				</div>
+			{/if}
+			<main
+				class:dark={$darkMode}
+				class="main background_pattern flex flex-1  {$darkMode &&
+					'bg-darkGrey-900 '} transition duration-500 ">
+				<div class="flex-1">
+					<slot />
+				</div>
+			</main>
+			<Footer />
+		</Modal>
+	</Notifications>
+</QueryClientProvider>
 
 <style>
 	.main {
