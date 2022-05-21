@@ -6,11 +6,10 @@ import {
 	transactionSend,
 	transactionUnderpriced
 } from '$lib/config/constants/notifications';
-import type { TransactionError } from '$lib/types/types';
 
 export const spawnErrorNotification = (
 	addNotification,
-	error: TransactionError
+	error: { code: number; message: string }
 ) => {
 	const { code } = error;
 	switch (code) {

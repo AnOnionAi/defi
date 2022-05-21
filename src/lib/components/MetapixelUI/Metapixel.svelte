@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Pixel } from '$lib/types/types';
-
 	import { metapixelContract } from '$lib/utils/contracts';
 	import { getBoardSize } from '$lib/utils/metapixel';
 	import { queryBoard, pixelFee } from '$lib/utils/queryBoard';
