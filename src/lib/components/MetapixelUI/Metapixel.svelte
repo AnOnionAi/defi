@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Pixel } from '$lib/types/types';
-	import { metapixelContract } from '$lib/utils/contracts';
+	import { famContract, metapixelContract } from '$lib/utils/contracts';
 	import { getBoardSize } from '$lib/utils/metapixel';
 	import { queryBoard, pixelFee } from '$lib/utils/queryBoard';
 	import { getSigner } from '$lib/utils/web3Utils';
@@ -32,6 +32,9 @@
 	let gridSizeX = 0;
 	let gridSizeY = 0;
 
+	let loadingPainting = false;
+	let loadingMinting = false;
+
 	const boardPixels = useQuery('boardPixels', queryBoard, {
 		refetchInterval: 6000
 	});
@@ -55,6 +58,7 @@
 			const encodedColor = parseInt(inputColor, 16);
 
 			try {
+				loadingPainting = true;
 				const tx = await metapixelContract
 					.connect(getSigner())
 					.addPixel(encodedColor, pixelSelectedX, pixelSelectedY);
@@ -65,11 +69,20 @@
 					openModal();
 				}
 			}
-		} else {
-			console.log('No entro');
 		}
-
 		console.log(pixelSelectedX, pixelSelectedY, inputColor);
+		loadingPainting = false;
+	};
+
+	const mintFAM = async () => {
+		loadingMinting = true;
+		try {
+			const tx = await famContract.connect(getSigner()).mint();
+			await tx.wait();
+		} catch (e) {
+			console.log(e);
+		}
+		loadingMinting = false;
 	};
 </script>
 
@@ -83,24 +96,27 @@
 		</div>
 	{:else if $boardPixels.data}
 		<div class="Metapixel grid grid-rows xl:grid-cols">
-			<div class="metapixel-card  flex items-center justify-center p-4">
+			<div
+				class="metapixel-card  flex flex-col items-center justify-center p-4 gap-12">
 				<div
-					class="sideShadow p-8 min-w-[320px]  rounded-2xl  dark:bg-neutral-800 ">
-					<div class="flex justify-between">
-						<div class="">
-							<p class="text-xs">Selected Color:</p>
-							<input bind:value={inputColor} type="color" id="color" />
-						</div>
-						<div class="">
-							<button
-								on:click={paint}
-								class="rounded-lg bg-black px-5 py-2 font-semibold tracking-wide text-white hover:bg-pink-500 disabled:opacity-50"
-								>{$_('actions.paint')}
-							</button>
-						</div>
-					</div>
+					class="sideShadow p-8 min-w-[360px]  rounded-2xl  dark:bg-neutral-800 ">
+					<div class="flex justify-between items-center">
+						<input
+							class="h-10"
+							bind:value={inputColor}
+							type="color"
+							id="color" />
 
-					<div class="flex flex-col  pt-2 gap-1">
+						<button
+							disabled={loadingPainting}
+							on:click={paint}
+							class="px-5 py-2 font-semibold text-white rounded-lg {!loadingPainting
+								? 'bg-gradient-to-r from-complementary-600 to-triadicGreen-600 transition duration-300 hover:scale-105 hover:opacity-80'
+								: 'bg-gray-400 dark:bg-neutral-700'}  disabled:cursor-not-allowed"
+							>{loadingPainting ? 'Painting' : $_('actions.paint')}
+						</button>
+					</div>
+					<div class="flex flex-col mt-4 gap-1 dark:text-white">
 						<div class="flex justify-between">
 							<p class=" ">Jackpot:</p>
 							{#if jackpot}
@@ -119,6 +135,46 @@
 								<LoadingSkeleton styles={{ width: '80px', height: '20px' }} />
 							{/if}
 						</div>
+					</div>
+				</div>
+				<div
+					class="bg-white p-8 dark:bg-neutral-800 sideShadow min-w-[360px] rounded-2xl flex flex-col gap-2">
+					<h2 class=" font-medium text-gray-800 dark:text-gray-100 ">
+						Rinkeby ETH Required
+					</h2>
+					<div class="flex justify-between">
+						<p class="dark:text-gray-200 ">Get ETH:</p>
+						<div>
+							<a
+								href="https://rinkebyfaucet.com/"
+								target="_blank"
+								class="text-sm font-semibold mr-1 text-primary-300 dark:text-analogPurple-300 underline hover:text-primary-500 dark:hover:text-analogPurple-200"
+								>Faucet A</a>
+							<a
+								href="https://faucet.rinkeby.io/"
+								target="_blank"
+								class="text-sm font-semibold  text-primary-300 dark:text-analogPurple-300 underline hover:text-primary-500 dark:hover:text-analogPurple-200"
+								>Faucet B</a>
+						</div>
+					</div>
+					<h2 class=" font-medium text-gray-800 dark:text-gray-100 ">
+						Contract requires test token
+					</h2>
+					<button
+						on:click={mintFAM}
+						disabled={loadingMinting}
+						class=" text-primary-400 dark:text-analogPurple-300  font-semibold underline disabled:text-gray-400 dark:disabled:text-gray-600 disabled:cursor-not-allowed
+						">Need more test token? Mint here</button>
+
+					<div class="dark:text-white">
+						<h3 class="font-bold">To play:</h3>
+						<ol class="list-decimal pl-2">
+							<li>Make sure you have the correct contracts</li>
+							<li>Use the color selector and grab your color</li>
+							<li>Click on a pixel on the board</li>
+							<li>Click on "Paint"</li>
+							<li>Confirm the transaction!</li>
+						</ol>
 					</div>
 				</div>
 			</div>
