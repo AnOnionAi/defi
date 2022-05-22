@@ -1,6 +1,6 @@
 {
 	"name": "defi",
-	"version": "0.15.0",
+	"version": "1.0.0",
 	"description": "Decentralized Finance",
 	"private": true,
 	"scripts": {
