@@ -97,9 +97,52 @@
 	{:else if $boardPixels.data}
 		<div class="Metapixel grid grid-rows xl:grid-cols">
 			<div
-				class="metapixel-card  flex flex-col items-center justify-center p-4 gap-12">
+				class="metapixel-card flex flex-col items-center justify-center sm:pl-36 gap-2">
 				<div
-					class="sideShadow p-8 min-w-[360px]  rounded-2xl  dark:bg-neutral-800 ">
+					class="bg-white py-4 px-8 dark:bg-neutral-800 sideShadow min-w-[360px] rounded-2xl flex flex-col gap-1">
+					<h2 class=" font-medium text-gray-800 dark:text-gray-100 ">
+						Welcome To MetaPixel ! 🎉 <br /> An Interactive Art Collaborative 🎨
+					</h2>
+					<div class="flex justify-between">
+						<p class="dark:text-gray-200">Rinkeby ETH Required</p>
+						<div>
+							<a
+								href="https://rinkebyfaucet.com/"
+								target="_blank"
+								class="text-sm font-semibold  text-primary-300 dark:text-analogPurple-300 underline hover:text-primary-500 dark:hover:text-analogPurple-200"
+								>FaucetA</a>
+							<a
+								href="https://faucet.rinkeby.io/"
+								target="_blank"
+								class="text-sm font-semibold  text-primary-300 dark:text-analogPurple-300 underline hover:text-primary-500 dark:hover:text-analogPurple-200"
+								>FaucetB</a>
+						</div>
+					</div>
+					<h2 class=" font-medium text-gray-800 dark:text-gray-100 ">
+						Contract requires Test Tokens
+						<button
+							on:click={mintFAM}
+							disabled={loadingMinting}
+							class=" text-primary-400 dark:text-analogPurple-300  font-semibold underline disabled:text-gray-400 dark:disabled:text-gray-600 disabled:cursor-not-allowed
+						">Mint</button>
+					</h2>
+					<div class="dark:text-white">
+						<h3 class="font-bold">To Play:</h3>
+						<ol class="list-decimal pl-4">
+							<li>Make sure you have the correct contracts</li>
+							<li>Use the color selector and grab your color</li>
+							<li>Click a pixel on the board. Only one at a time</li>
+							<li>Click on "Paint"</li>
+							<li>Confirm the transaction</li>
+							<li>
+								Draw with friends & win prizes !
+								<br /> There's One lucky pixel !
+							</li>
+						</ol>
+					</div>
+				</div>
+				<div
+					class="sideShadow px-8 py-4 min-w-[360px]  rounded-2xl  dark:bg-neutral-800 ">
 					<div class="flex justify-between items-center">
 						<input
 							class="h-10"
@@ -126,7 +169,7 @@
 							{/if}
 						</div>
 						<div class=" flex justify-between">
-							<p class="">Price to Paint:</p>
+							<p class="">Paint $:</p>
 							{#if pixelPrice}
 								<p class="">
 									{ethers.utils.formatEther(pixelPrice)} FAM
@@ -135,46 +178,6 @@
 								<LoadingSkeleton styles={{ width: '80px', height: '20px' }} />
 							{/if}
 						</div>
-					</div>
-				</div>
-				<div
-					class="bg-white p-8 dark:bg-neutral-800 sideShadow min-w-[360px] rounded-2xl flex flex-col gap-2">
-					<h2 class=" font-medium text-gray-800 dark:text-gray-100 ">
-						Rinkeby ETH Required
-					</h2>
-					<div class="flex justify-between">
-						<p class="dark:text-gray-200 ">Get ETH:</p>
-						<div>
-							<a
-								href="https://rinkebyfaucet.com/"
-								target="_blank"
-								class="text-sm font-semibold mr-1 text-primary-300 dark:text-analogPurple-300 underline hover:text-primary-500 dark:hover:text-analogPurple-200"
-								>Faucet A</a>
-							<a
-								href="https://faucet.rinkeby.io/"
-								target="_blank"
-								class="text-sm font-semibold  text-primary-300 dark:text-analogPurple-300 underline hover:text-primary-500 dark:hover:text-analogPurple-200"
-								>Faucet B</a>
-						</div>
-					</div>
-					<h2 class=" font-medium text-gray-800 dark:text-gray-100 ">
-						Contract requires test token
-					</h2>
-					<button
-						on:click={mintFAM}
-						disabled={loadingMinting}
-						class=" text-primary-400 dark:text-analogPurple-300  font-semibold underline disabled:text-gray-400 dark:disabled:text-gray-600 disabled:cursor-not-allowed
-						">Need more test token? Mint here</button>
-
-					<div class="dark:text-white">
-						<h3 class="font-bold">To play:</h3>
-						<ol class="list-decimal pl-2">
-							<li>Make sure you have the correct contracts</li>
-							<li>Use the color selector and grab your color</li>
-							<li>Click on a pixel on the board</li>
-							<li>Click on "Paint"</li>
-							<li>Confirm the transaction!</li>
-						</ol>
 					</div>
 				</div>
 			</div>
