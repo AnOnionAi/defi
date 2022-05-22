@@ -132,11 +132,11 @@
 							<li>Make sure you have the correct contracts</li>
 							<li>Use the color selector and grab your color</li>
 							<li>Click a pixel on the board. Only one at a time</li>
-							<li>Click on "Paint"</li>
+							<li>Click on "Paint". Paint fresh or steal</li>
 							<li>Confirm the transaction</li>
 							<li>
-								Draw with friends & win prizes !
-								<br /> There's One lucky pixel !
+								Draw with friends & win jackpot !
+								<br />There's One lucky pixel !
 							</li>
 						</ol>
 					</div>
