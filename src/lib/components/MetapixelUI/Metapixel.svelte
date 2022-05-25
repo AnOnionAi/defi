@@ -95,12 +95,12 @@
 			</h1>
 		</div>
 	{:else if $boardPixels.data}
-		<div class="Metapixel grid grid-rows xl:grid-cols">
+		<div class="Metapixel grid-rows xl:grid-cols grid">
 			<div
-				class="metapixel-card  flex flex-col items-center justify-center p-4 gap-12">
+				class="metapixel-card  flex flex-col items-center justify-center gap-12 p-4">
 				<div
-					class="sideShadow p-8 min-w-[360px]  rounded-2xl  dark:bg-neutral-800 ">
-					<div class="flex justify-between items-center">
+					class="sideShadow min-w-[360px] rounded-2xl  p-8  dark:bg-neutral-800 ">
+					<div class="flex items-center justify-between">
 						<input
 							class="h-10"
 							bind:value={inputColor}
@@ -110,13 +110,13 @@
 						<button
 							disabled={loadingPainting}
 							on:click={paint}
-							class="px-5 py-2 font-semibold text-white rounded-lg {!loadingPainting
+							class="rounded-lg px-5 py-2 font-semibold text-white {!loadingPainting
 								? 'bg-gradient-to-r from-complementary-600 to-triadicGreen-600 transition duration-300 hover:scale-105 hover:opacity-80'
 								: 'bg-gray-400 dark:bg-neutral-700'}  disabled:cursor-not-allowed"
 							>{loadingPainting ? 'Painting' : $_('actions.paint')}
 						</button>
 					</div>
-					<div class="flex flex-col mt-4 gap-1 dark:text-white">
+					<div class="mt-4 flex flex-col gap-1 dark:text-white">
 						<div class="flex justify-between">
 							<p class=" ">Jackpot:</p>
 							{#if jackpot}
@@ -138,7 +138,7 @@
 					</div>
 				</div>
 				<div
-					class="bg-white p-8 dark:bg-neutral-800 sideShadow min-w-[360px] rounded-2xl flex flex-col gap-2">
+					class="sideShadow flex min-w-[360px] flex-col gap-2 rounded-2xl bg-white p-8 dark:bg-neutral-800">
 					<h2 class=" font-medium text-gray-800 dark:text-gray-100 ">
 						Rinkeby ETH Required
 					</h2>
@@ -148,12 +148,12 @@
 							<a
 								href="https://rinkebyfaucet.com/"
 								target="_blank"
-								class="text-sm font-semibold mr-1 text-primary-300 dark:text-analogPurple-300 underline hover:text-primary-500 dark:hover:text-analogPurple-200"
+								class="mr-1 text-sm font-semibold text-primary-300 underline hover:text-primary-500 dark:text-analogPurple-300 dark:hover:text-analogPurple-200"
 								>Faucet A</a>
 							<a
 								href="https://faucet.rinkeby.io/"
 								target="_blank"
-								class="text-sm font-semibold  text-primary-300 dark:text-analogPurple-300 underline hover:text-primary-500 dark:hover:text-analogPurple-200"
+								class="text-sm font-semibold  text-primary-300 underline hover:text-primary-500 dark:text-analogPurple-300 dark:hover:text-analogPurple-200"
 								>Faucet B</a>
 						</div>
 					</div>
@@ -163,7 +163,7 @@
 					<button
 						on:click={mintFAM}
 						disabled={loadingMinting}
-						class=" text-primary-400 dark:text-analogPurple-300  font-semibold underline disabled:text-gray-400 dark:disabled:text-gray-600 disabled:cursor-not-allowed
+						class=" font-semibold text-primary-400  underline disabled:cursor-not-allowed disabled:text-gray-400 dark:text-analogPurple-300 dark:disabled:text-gray-600
 						">Need more test token? Mint here</button>
 
 					<div class="dark:text-white">

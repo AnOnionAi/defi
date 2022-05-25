@@ -141,7 +141,7 @@
 								userStakedTokens.div(10),
 								stakingTokenDecimals
 							))}
-						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
+						class="text-light rounded-lg bg-red-500 py-1 px-3 text-white hover:bg-red-400"
 						>10%</button>
 					<button
 						on:click={() =>
@@ -149,7 +149,7 @@
 								userStakedTokens.div(4),
 								stakingTokenDecimals
 							))}
-						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
+						class="text-light rounded-lg bg-red-500 py-1 px-3 text-white hover:bg-red-400"
 						>25%</button>
 					<button
 						on:click={() =>
@@ -157,7 +157,7 @@
 								userStakedTokens.div(2),
 								stakingTokenDecimals
 							))}
-						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
+						class="text-light rounded-lg bg-red-500 py-1 px-3 text-white hover:bg-red-400"
 						>50%</button>
 					<button
 						on:click={() =>
@@ -165,7 +165,7 @@
 								userStakedTokens.div(4),
 								stakingTokenDecimals
 							))}
-						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
+						class="text-light rounded-lg bg-red-500 py-1 px-3 text-white hover:bg-red-400"
 						>75%</button>
 				{/if}
 			</div>
@@ -199,7 +199,7 @@
 				{:else if action === 'WITHDRAW'}
 					<button
 						on:click={startWithdraw}
-						class="block w-full py-3 bg-red-500 hover:bg-red-400 text-md uppercase 	text-white font-medium tracking-widest rounded-xl "
+						class="text-md block w-full rounded-xl bg-red-500 py-3 font-medium 	uppercase tracking-widest text-white hover:bg-red-400 "
 						>{$_('actions.withdraw')} {info.tokenName}</button>
 				{/if}
 			</div>

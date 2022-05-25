@@ -27,7 +27,7 @@
 		</p>
 	{:else}
 		<div
-			class="h-8 w-24 rounded-lg bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+			class="h-8 w-24 animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-800" />
 	{/if}
 </a>
 
