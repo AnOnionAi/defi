@@ -22,8 +22,9 @@
 
 	onMount(() => {
 		isInstalled = isMetaMaskInstalled() ? 'isInstalled' : 'notInstalled';
+
 		chainID.subscribe((id) => {
-			if (id !== POLYGON_CHAIN_ID && id !== undefined) {
+			/* 		if (id !== POLYGON_CHAIN_ID && id !== undefined) {
 				open(
 					WrongNetwork,
 					{},
@@ -37,7 +38,7 @@
 						}
 					}
 				);
-			}
+			} */
 		});
 	});
 
