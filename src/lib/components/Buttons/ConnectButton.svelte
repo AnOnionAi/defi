@@ -22,23 +22,6 @@
 
 	onMount(() => {
 		isInstalled = isMetaMaskInstalled() ? 'isInstalled' : 'notInstalled';
-		chainID.subscribe((id) => {
-			if (id !== POLYGON_CHAIN_ID && id !== undefined) {
-				open(
-					WrongNetwork,
-					{},
-					{
-						closeButton: false,
-						closeOnEsc: false,
-						closeOnOuterClick: true,
-						styleWindow: {
-							backgroundColor: modalBackgroundColor,
-							width: '400px'
-						}
-					}
-				);
-			}
-		});
 	});
 
 	const onClickDispatcher = (status: MetamaskExtensionStatus) => {
