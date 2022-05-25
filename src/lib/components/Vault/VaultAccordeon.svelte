@@ -249,31 +249,31 @@
 					{vaultConfig.pair.token0Name}-{vaultConfig.pair.token1Name}
 				</button>
 			{:else}
-				<div class="flex flex-col  lg:flex-row flex-wrapper justify-around">
+				<div class="flex-wrapper flex  flex-col justify-around lg:flex-row">
 					<div class="lg:w-4/12">
 						<div class="flex items-center">
 							<p
-								class="text-gray-600 font-medium dark:text-white tracking-tight text-sm">
+								class="text-sm font-medium tracking-tight text-gray-600 dark:text-white">
 								{$_('actions.wallet')}:
 							</p>
 							{#if userTokens}
-								<p class="pl-1 dark:text-white font-medium text-sm">
+								<p class="pl-1 text-sm font-medium dark:text-white">
 									{ethers.utils.formatEther(userTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{:else}
-								<p class="pl-1 dark:text-white font-semibold text-sm">
+								<p class="pl-1 text-sm font-semibold dark:text-white">
 									0 {vaultConfig.pair.token0Name}-{vaultConfig.pair.token1Name}
 								</p>
 							{/if}
 						</div>
 						<div
-							class="flex my-2 py-2 px-3 bg-neutral-300 dark:bg-neutral-700 rounded-lg  lg:w-11/12 justify-between">
+							class="my-2 flex justify-between rounded-lg bg-neutral-300 py-2 px-3  dark:bg-neutral-700 lg:w-11/12">
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userDepositAmount}
 								placeholder="Enter Value"
-								class="bg-transparent  text-gray-900 font-bold w-8/12 	dark:text-white"
+								class="w-8/12  bg-transparent font-bold text-gray-900 	dark:text-white"
 								type="text" />
 
 							{#if userDepositAmount}
@@ -285,8 +285,8 @@
 											deposit(vaultConfig.pid, userDepositAmount),
 											'deposit'
 										)}
-									class="flex  items-center  disabled:cursor-not-allowed bg-triadicGreen-700 hover:bg-triadicGreen-600 dark:bg-triadicGreen-800 dark:hover:bg-triadicGreen-900  {allIn &&
-										'glowingButton bg-triadicGreen-600'} transition duration-300 text-white font-bold rounded-lg px-4 py-3 hover:bg-{vaultConfig
+									class="flex  items-center  bg-triadicGreen-700 hover:bg-triadicGreen-600 disabled:cursor-not-allowed dark:bg-triadicGreen-800 dark:hover:bg-triadicGreen-900  {allIn &&
+										'glowingButton bg-triadicGreen-600'} rounded-lg px-4 py-3 font-bold text-white transition duration-300 hover:bg-{vaultConfig
 										.platform.brandColor}-500 {loadingState.deposit &&
 										`bg-${vaultConfig.platform.brandColor}-500`}">
 									<p>{$_('actions.deposit')}</p>
@@ -301,7 +301,7 @@
 									class:cursor-not-allowed={loadingState.something}
 									disabled={loadingState.something}
 									on:click={depositMaxAmount}
-									class="flex flex-col items-center  disabled:cursor-not-allowed bg-gradient-to-r from-complementary-600 to-triadicGreen-600 transition duration-300 text-white font-bold rounded-lg px-4 py-1 hover:bg-{vaultConfig
+									class="flex flex-col items-center  rounded-lg bg-gradient-to-r from-complementary-600 to-triadicGreen-600 px-4 py-1 font-bold text-white transition duration-300 disabled:cursor-not-allowed hover:bg-{vaultConfig
 										.platform.brandColor}-500 {loadingState.deposit &&
 										`bg-${vaultConfig.platform.brandColor}-500`}">
 									<p>{$_('actions.deposit')}</p>
@@ -315,46 +315,46 @@
 							{/if}
 						</div>
 						<div class="flex">
-							<p class="pl-1 text-gray-500  dark:text-white font-medium">
+							<p class="pl-1 font-medium  text-gray-500 dark:text-white">
 								{$_('actions.depositfee')}:
 							</p>
-							<p class="px-1   dark:text-white font-medium">
+							<p class="px-1   font-medium dark:text-white">
 								{vaultConfig.depositFee}%
 							</p>
 						</div>
 						<div class="flex">
-							<p class="pl-1 text-gray-500  dark:text-white font-medium">
+							<p class="pl-1 font-medium  text-gray-500 dark:text-white">
 								{$_('actions.performanceFee')}:
 							</p>
-							<p class="px-1   dark:text-white font-medium">5%</p>
+							<p class="px-1   font-medium dark:text-white">5%</p>
 						</div>
 					</div>
 
-					<div class="pt-4 lg:pt-0 lg:w-4/12">
+					<div class="pt-4 lg:w-4/12 lg:pt-0">
 						<div class="flex">
-							<p class="text-gray-600 font-medium dark:text-white text-sm">
+							<p class="text-sm font-medium text-gray-600 dark:text-white">
 								{$_('pastActions.deposited')}:
 							</p>
 							{#if stakedTokens}
 								<p
-									class="font-medium pl-1 dark:text-white tracking-tight text-sm ">
+									class="pl-1 text-sm font-medium tracking-tight dark:text-white ">
 									{ethers.utils.formatEther(stakedTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
 							{:else}
-								<p class="font-medium pl-1 dark:text-white">
+								<p class="pl-1 font-medium dark:text-white">
 									0 {vaultConfig.pair.token0quote}-{vaultConfig.pair
 										.token1quote}
 								</p>
 							{/if}
 						</div>
 						<div
-							class="flex justify-between my-2 py-2 px-3 bg-neutral-300 rounded-lg  dark:bg-neutral-700 lg:w-11/12 ">
+							class="my-2 flex justify-between rounded-lg bg-neutral-300 py-2 px-3  dark:bg-neutral-700 lg:w-11/12 ">
 							<input
 								on:keypress={onyAllowFloatNumbers}
 								bind:value={userWithdrawAmount}
 								placeholder="Enter Value"
-								class="text-gray-900 font-bold w-8/12 bg-transparent dark:text-white"
+								class="w-8/12 bg-transparent font-bold text-gray-900 dark:text-white"
 								type="text" />
 							<button
 								disabled={loadingState.something}
@@ -363,7 +363,7 @@
 										withdraw(vaultConfig.pid, userWithdrawAmount.toString()),
 										'withdraw'
 									)}
-								class="flex items-center disabled:cursor-not-allowed  bg-triadicYellow-700 disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-3 tracking-wide hover:bg-{vaultConfig
+								class="flex items-center rounded-lg  bg-triadicYellow-700 px-4 py-3 font-semibold tracking-wide text-white disabled:cursor-not-allowed disabled:opacity-50 hover:bg-{vaultConfig
 									.platform.brandColor}-500 {loadingState.withdraw &&
 									`bg-${vaultConfig.platform.brandColor}-500`}">
 								<p>{$_('actions.withdraw')}</p>
@@ -374,7 +374,7 @@
 								{/if}
 							</button>
 						</div>
-						<div class="flex dark:text-white font-medium">
+						<div class="flex font-medium dark:text-white">
 							<p class="mr-1 text-gray-500 dark:text-white">
 								{$_('actions.withdrawalfee')}:
 							</p>
@@ -386,9 +386,9 @@
 						</div>
 					</div>
 
-					<div class="pt-4 lg:pt-0 lg:w-3/12">
+					<div class="pt-4 lg:w-3/12 lg:pt-0">
 						<div class="pl-1">
-							<p class="text-gray-500  pb-1 dark:text-gray-400 font-medium">
+							<p class="pb-1  font-medium text-gray-500 dark:text-gray-400">
 								{$_('vaultAccordeon.currentPrices')}:
 							</p>
 							<p class="font-light	 dark:text-white ">
@@ -412,13 +412,13 @@
 							<div class="py-2">
 								<a
 									target="_blank"
-									class="block text-gray-600 font-medium hover:text-green-500 dark:text-gray-400"
+									class="block font-medium text-gray-600 hover:text-green-500 dark:text-gray-400"
 									href={`https://app.sushi.com/add?tokens=${vaultConfig.pair.token0Contract}&tokens=${vaultConfig.pair.token1Contract}&chainId=137`}
 									>{$_('actions.get')}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote} LP</a>
 								<a
 									target="_blank"
-									class="block text-gray-600 font-medium  dark:text-gray-400"
+									class="block font-medium text-gray-600  dark:text-gray-400"
 									href={vaultConfig.pair.pairURL}>
 									<span class="hover:text-green-500">
 										{$_('vaultAccordeon.viewInfo')}

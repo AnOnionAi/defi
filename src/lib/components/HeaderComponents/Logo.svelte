@@ -14,7 +14,7 @@
 				alt="Fung Fi"
 				class="h-10 w-[104px] " />
 		{:else}
-			<img src="/theme/liteFungfi.svg" alt="Fung Fi" class="w-[104px] h-10 " />
+			<img src="/theme/liteFungfi.svg" alt="Fung Fi" class="h-10 w-[104px] " />
 		{/if}
 	</a>
 </div>

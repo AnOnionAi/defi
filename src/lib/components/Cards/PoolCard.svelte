@@ -291,7 +291,7 @@
 				<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
 			{:else}
 				<p
-					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
+					class="h-full w-12 animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-300" />
 			{/if}
 		</div>
 
@@ -310,7 +310,7 @@
 				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
 			{:else}
 				<p
-					class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
+					class="h-full w-12 animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-300" />
 			{/if}
 		</div>
 
@@ -324,7 +324,7 @@
 						{parseFloat(ethers.utils.formatEther(userEarnings)).toFixed(2)}
 					</p>
 				{:else}
-					<p class="text-xl flex items-center dark:text-white">0</p>
+					<p class="flex items-center text-xl dark:text-white">0</p>
 				{/if}
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
@@ -354,7 +354,7 @@
 			{:else if !tokenApproved}
 				<button
 					on:click={onApprove}
-					class="flex justify-center items-center bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-triadicGreen-600 dark:hover:bg-triadicGreen-800 active:scale-90  ease-in-out  duration-300 text-white tracking-wide font-semibold w-full h-full rounded-xl">
+					class="flex h-full w-full items-center justify-center rounded-xl bg-triadicGreen-700 font-semibold  tracking-wide  text-white duration-300 ease-in-out hover:bg-triadicGreen-600 active:scale-90 dark:bg-triadicGreen-600 dark:hover:bg-triadicGreen-800">
 					{$_('actions.approve')}
 					{isFarm ? 'Farm' : 'Pool'}
 					{#if loadingState.loadingApproval}
@@ -364,7 +364,7 @@
 					{/if}
 				</button>
 			{:else}
-				<div class="flex justify-between items-center w-full h-full">
+				<div class="flex h-full w-full items-center justify-between">
 					{#if userStakedTokens}
 						<p class="flex text-xl dark:text-white">
 							{parseFloat(
@@ -379,19 +379,19 @@
 						</p>
 					{:else}
 						<p
-							class="w-12 h-full bg-neutral-200 dark:bg-neutral-300 rounded-lg animate-pulse" />
+							class="h-full w-12 animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-300" />
 					{/if}
 
 					<div class="flex space-x-2">
 						<button
 							disabled={!canStake || loadingState.loadingDeposit}
 							on:click={() => openModal('DEPOSIT')}
-							class="bg-triadicGreen-700 dark:bg-triadicGreen-600 hover:bg-green-500 py-2 px-5 rounded-lg text-xl text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600 disabled:cursor-not-allowed"
+							class="rounded-lg bg-triadicGreen-700 py-2 px-5 text-xl text-white hover:bg-green-500 disabled:cursor-not-allowed disabled:bg-neutral-300 dark:bg-triadicGreen-600 dark:disabled:bg-neutral-600"
 							>+</button>
 						<button
 							disabled={!canWithdraw || loadingState.loadingWithdraw}
 							on:click={() => openModal('WITHDRAW')}
-							class=" bg-triadicGreen-700 dark:bg-triadicGreen-600 py-2 px-3 rounded-lg text-2xl font-bold text-white disabled:bg-neutral-300 dark:disabled:bg-neutral-600  disabled:cursor-not-allowed"
+							class=" rounded-lg bg-triadicGreen-700 py-2 px-3 text-2xl font-bold text-white disabled:cursor-not-allowed disabled:bg-neutral-300 dark:bg-triadicGreen-600  dark:disabled:bg-neutral-600"
 							>-</button>
 					</div>
 				</div>
