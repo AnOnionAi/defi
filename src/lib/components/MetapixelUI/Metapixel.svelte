@@ -8,23 +8,15 @@
 	import { _ } from 'svelte-i18n';
 	import HavePatience from '../Modals/HavePatience.svelte';
 	import { useQuery } from '@sveltestack/svelte-query';
-	const { open } = getContext('simple-modal');
-
-	const openModal = () => {
-		open(HavePatience, {
-			closeButton: true,
-			closeOnEsc: true,
-			closeOnOuterClick: true
-		});
-	};
-
 	import BigSpinner from '../LoadingUI/BigSpinner.svelte';
 	import Grid from './Grid.svelte';
 	import getJackpot from '$lib/utils/metapixel/getJackpot';
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
 	import { ethers } from 'ethers';
 
+	const { open } = getContext('simple-modal');
 	let inputColor = '#fe7688';
+
 	let pixelPrice;
 	let pixelSelectedX;
 	let pixelSelectedY;
@@ -38,6 +30,14 @@
 	const boardPixels = useQuery('boardPixels', queryBoard, {
 		refetchInterval: 6000
 	});
+
+	const openModal = () => {
+		open(HavePatience, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
+	};
 
 	onMount(async () => {
 		const { x, y } = await getBoardSize();

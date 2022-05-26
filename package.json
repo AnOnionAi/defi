@@ -10,7 +10,7 @@
 		"format": "prettier --write --plugin-search-dir=. .",
 		"check:eslint": "eslint --fix --ignore-path .gitignore .",
 		"check:prettier": "prettier --check --plugin-search-dir=. .",
-		"check:svelte": "tsc && svelte-check --tsconfig tsconfig.json",
+		"check:svelte": "tsc && svelte-check --ignore node_modules",
 		"prepare": "git config core.hooksPath .githooks",
 		"lint": "pnpm check:prettier && pnpm check:svelte && pnpm check:eslint",
 		"test": "playwright test"
