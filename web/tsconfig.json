@@ -9,9 +9,9 @@
   },
   "include": [
     "./scripts",
-    "./test",
+    "tests",
     "jobs",
-    "test/DevSharesVesting.ts",
+    "tests/DevSharesVesting.ts",
     "./typechain"
   ],
   "files": ["./hardhat.config.ts"]
