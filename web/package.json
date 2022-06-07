@@ -1,0 +1,53 @@
+{
+  "name": "coin",
+  "version": "0.5.0",
+  "description": "Crypto, Binary, Tokens, Oh my!",
+  "author": "FungFi",
+  "private": true,
+  "engine": {
+    "node": ">=16.17.0",
+    "pnpm": ">=6"
+  },
+  "scripts": {
+    "prepare": "git config core.hooksPath .githooks",
+    "test": "hardhat test",
+    "format": "prettier --write --plugin-search-dir=. .",
+    "lint": "tsc && eslint --fix '**/*.ts'"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --plugin-search-dir=. -u",
+      "eslint --fix --resolve-plugins-relative-to . --ignore-path .gitignore --config .eslintrc"
+    ]
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.0",
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.4.10",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "chai": "^4.3.4",
+    "eslint": "^8.10.0",
+    "ethereum-waffle": "^3.0.0",
+    "ethers": "^5.0.0",
+    "hardhat": "^2.9.2",
+    "hardhat-prettier": "^0.0.1",
+    "lint-staged": "^12.3.5",
+    "prettier": "^2.3.2",
+    "prettier-plugin-solidity": "^1.0.0-dev.21",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.4.1",
+    "@ethersproject/experimental": "^5.5.0",
+    "@nomiclabs/hardhat-etherscan": "^3.0.0",
+    "@openzeppelin/contracts": "3.1.0",
+    "@openzeppelin/contracts8": "npm:@openzeppelin/contracts@4.6.0",
+    "@uniswap/lib": "^4.0.1-alpha",
+    "@uniswap/v2-core": "^1.0.1",
+    "dotenv": "^16.0.0"
+  }
+}
