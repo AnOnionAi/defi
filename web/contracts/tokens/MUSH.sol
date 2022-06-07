@@ -6,7 +6,7 @@ pragma solidity 0.6.12;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 
-contract QMush is ERC20('QMush', 'QMUSH'), Ownable {
+contract Mush is ERC20('Mush', 'MUSH'), Ownable {
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);

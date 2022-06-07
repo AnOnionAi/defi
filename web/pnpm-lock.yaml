@@ -1,12 +1,13 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@chainlink/contracts': ^0.4.1
   '@ethersproject/experimental': ^5.5.0
   '@nomiclabs/hardhat-ethers': ^2.0.0
   '@nomiclabs/hardhat-etherscan': ^3.0.0
   '@nomiclabs/hardhat-waffle': ^2.0.0
   '@openzeppelin/contracts': 3.1.0
-  '@openzeppelin/contracts8': npm:@openzeppelin/contracts@4.3.2
+  '@openzeppelin/contracts8': npm:@openzeppelin/contracts@4.6.0
   '@types/chai': ^4.2.21
   '@types/mocha': ^9.0.0
   '@types/node': ^16.4.10
@@ -28,10 +29,11 @@ specifiers:
   typescript: ^4.5.5
 
 dependencies:
+  '@chainlink/contracts': 0.4.1
   '@ethersproject/experimental': 5.6.2
   '@nomiclabs/hardhat-etherscan': 3.0.4_hardhat@2.9.7
   '@openzeppelin/contracts': 3.1.0
-  '@openzeppelin/contracts8': /@openzeppelin/contracts/4.3.2
+  '@openzeppelin/contracts8': /@openzeppelin/contracts/4.6.0
   '@uniswap/lib': 4.0.1-alpha
   '@uniswap/v2-core': 1.0.1
   dotenv: 16.0.1
@@ -57,6 +59,10 @@ devDependencies:
   typescript: 4.7.3
 
 packages:
+
+  /@chainlink/contracts/0.4.1:
+    resolution: {integrity: sha512-eC8biY6Ks8k9kZKVt5305veCP3z57yyiy6Os5aR6auta6Bp34xWQ/s4qvrifcW4FNgWw1HJPwMPXDGfiehcLjg==}
+    dev: false
 
   /@cspotcode/source-map-support/0.8.1:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -660,8 +666,8 @@ packages:
     resolution: {integrity: sha512-dVXDnUKxrAKLzPdCRkz+N8qsVkK1XxJ6kk3zuI6zaQmcKxN7CkizoDP7lXxcs/Mi2I0mxceTRjJBqlzFffLJrQ==}
     dev: false
 
-  /@openzeppelin/contracts/4.3.2:
-    resolution: {integrity: sha512-AybF1cesONZStg5kWf6ao9OlqTZuPqddvprc0ky7lrUVOjXeKpmQ2Y9FK+6ygxasb+4aic4O5pneFBfwVsRRRg==}
+  /@openzeppelin/contracts/4.6.0:
+    resolution: {integrity: sha512-8vi4d50NNya/bQqCmaVzvHNmwHvS0OBKb7HNtuNwEE3scXWrP31fKQoGxNMT+KbzmrNZzatE3QK5p2gFONI/hg==}
     dev: false
 
   /@resolver-engine/core/0.3.3:

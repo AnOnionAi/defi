@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+pragma solidity ^0.8.10;
 
 import '@chainlink/contracts/src/v0.8/VRFConsumerBase.sol';
-import './ColorMap.sol';
+import '.libs/ColorMap.sol';
 
 contract Lottery is VRFConsumerBase, ColorMap {
     using SafeERC20 for IERC20;

@@ -6,7 +6,7 @@ pragma solidity 0.6.12;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
 
-contract DYFN is ERC20('DYFN', 'DYFN'), Ownable {
+contract MXPC is ERC20('MXPC', 'MXPC'), Ownable {
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
