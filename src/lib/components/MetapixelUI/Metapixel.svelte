@@ -13,10 +13,11 @@
 	import getJackpot from '$lib/utils/metapixel/getJackpot';
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
 	import { ethers } from 'ethers';
+	import WinningAnnouncement from './WinningAnnouncement.svelte';
 
 	const { open } = getContext('simple-modal');
 	let inputColor = '#fe7688';
-
+	let lotteryEnd = false;
 	let pixelPrice;
 	let pixelSelectedX;
 	let pixelSelectedY;
@@ -29,6 +30,10 @@
 
 	const boardPixels = useQuery('boardPixels', queryBoard, {
 		refetchInterval: 6000
+	});
+
+	metapixelContract.on('PixelAdded', () => {
+		handleLotteryWinnerEvent();
 	});
 
 	const openModal = () => {
@@ -53,9 +58,9 @@
 			(pixelSelectedY || pixelSelectedY == 0) &&
 			inputColor
 		) {
-			inputColor = inputColor.substring(1, inputColor.length);
+			const selectedColor = inputColor.substring(1, inputColor.length);
 
-			const encodedColor = parseInt(inputColor, 16);
+			const encodedColor = parseInt(selectedColor, 16);
 
 			try {
 				loadingPainting = true;
@@ -70,7 +75,6 @@
 				}
 			}
 		}
-		console.log(pixelSelectedX, pixelSelectedY, inputColor);
 		loadingPainting = false;
 	};
 
@@ -84,9 +88,22 @@
 		}
 		loadingMinting = false;
 	};
+
+	const handleLotteryWinnerEvent = () => {
+		lotteryEnd = true;
+		setTimeout(() => {
+			lotteryEnd = false;
+		}, 15000);
+	};
 </script>
 
 <div class="h-full w-full select-none">
+	{#if lotteryEnd}
+		<WinningAnnouncement
+			winnerAddress={'0x42D73a757E63a18a70C8a86564e405dEca81967c'}
+			jackpot={150} />
+	{/if}
+
 	{#if $boardPixels.isLoading}
 		<div class="flex h-full w-full  flex-col items-center justify-center gap-4">
 			<BigSpinner tailwindWidthClass="w-20" tailwindnHeightClass="h-20" />
