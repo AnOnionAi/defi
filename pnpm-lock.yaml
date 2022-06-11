@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@fortawesome/free-brands-svg-icons': ^5.15.3
   '@fortawesome/free-solid-svg-icons': ^5.15.3
+  '@indexed-finance/multicall': ^2.0.0
   '@playwright/test': ^1.19.0
   '@sveltejs/adapter-netlify': ^1.0.0-next.50
   '@sveltejs/kit': 1.0.0-next.304
@@ -41,6 +42,7 @@ specifiers:
 dependencies:
   '@fortawesome/free-brands-svg-icons': 5.15.4
   '@fortawesome/free-solid-svg-icons': 5.15.4
+  '@indexed-finance/multicall': 2.0.0_ethers@5.5.1
   '@sveltestack/svelte-query': 1.6.0_broadcast-channel@4.11.0
   bignumber.js: 9.0.2
   broadcast-channel: 4.11.0
@@ -1068,6 +1070,14 @@ packages:
   /@iarna/toml/2.2.5:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: true
+
+  /@indexed-finance/multicall/2.0.0_ethers@5.5.1:
+    resolution: {integrity: sha512-UgwW+XfLvjjswWc4OWAK8xtSZcW4BEaIA14bebE5JePt2b35gab9W72MKrrL0Wp5hGvAtuaQXbPHgOFuKcqR4g==}
+    peerDependencies:
+      ethers: ^5.0.0
+    dependencies:
+      ethers: 5.5.1
+    dev: false
 
   /@jest/types/27.4.2:
     resolution: {integrity: sha512-j35yw0PMTPpZsUoOBiuHzr1zTYoad1cVIE0ajEjcrJONxxrko/IRGKkXx3os0Nsi4Hu3+5VmDbVfq5WhG/pWAg==}
