@@ -1,4 +1,4 @@
-pragma solidity 0.8.0;
+pragma solidity ^0.8.10;
 import './libs/IVaultChef.sol';
 import './libs/IStrategyMush.sol';
 //import '../openzeppelin@4.3.2/contracts/token/ERC20/utils/SafeERC20.sol';

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.10;
 
 import '@chainlink/contracts/src/v0.8/VRFConsumerBase.sol';
-import '.libs/ColorMap.sol';
+import './libs/ColorMap.sol';
 
 contract Lottery is VRFConsumerBase, ColorMap {
     using SafeERC20 for IERC20;
