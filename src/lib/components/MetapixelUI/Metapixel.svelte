@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Pixel } from '$lib/types/types';
 	import { famContract, metapixelContract } from '$lib/utils/contracts';
 	import { getBoardSize } from '$lib/utils/metapixel';
 	import { queryBoard, pixelFee } from '$lib/utils/queryBoard';
@@ -12,18 +11,20 @@
 	import Grid from './Grid.svelte';
 	import getJackpot from '$lib/utils/metapixel/getJackpot';
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
-	import { ethers } from 'ethers';
+	import { BigNumber, ethers } from 'ethers';
 	import WinningAnnouncement from './WinningAnnouncement.svelte';
 
 	const { open } = getContext('simple-modal');
 	let inputColor = '#fe7688';
-	let lotteryEnd = false;
 	let pixelPrice;
 	let pixelSelectedX;
 	let pixelSelectedY;
 	let jackpot: string;
 	let gridSizeX = 0;
 	let gridSizeY = 0;
+
+	let lotteryEnd = false;
+	let winnerAddress: string;
 
 	let loadingPainting = false;
 	let loadingMinting = false;
@@ -32,9 +33,17 @@
 		refetchInterval: 6000
 	});
 
-	metapixelContract.on('PixelAdded', () => {
-		handleLotteryWinnerEvent();
-	});
+	metapixelContract.on(
+		'LotteryTriggered',
+		(address: string, lottPott: BigNumber) => {
+			winnerAddress = address;
+			jackpot = ethers.utils.formatEther(lottPott);
+			lotteryEnd = true;
+			setTimeout(() => {
+				lotteryEnd = false;
+			}, 15000);
+		}
+	);
 
 	const openModal = () => {
 		open(HavePatience, {
@@ -88,20 +97,11 @@
 		}
 		loadingMinting = false;
 	};
-
-	const handleLotteryWinnerEvent = () => {
-		lotteryEnd = true;
-		setTimeout(() => {
-			lotteryEnd = false;
-		}, 15000);
-	};
 </script>
 
 <div class="h-full w-full select-none">
 	{#if lotteryEnd}
-		<WinningAnnouncement
-			winnerAddress={'0x42D73a757E63a18a70C8a86564e405dEca81967c'}
-			jackpot={150} />
+		<WinningAnnouncement {winnerAddress} {jackpot} />
 	{/if}
 
 	{#if $boardPixels.isLoading}
