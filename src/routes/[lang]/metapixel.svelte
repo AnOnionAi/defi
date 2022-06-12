@@ -15,7 +15,6 @@
 	import Metapixel from '$lib/components/MetapixelUI/Metapixel.svelte';
 
 	const { addNotification } = getNotificationsContext();
-	const development = false;
 
 	$: userAddress = $accounts?.[0];
 

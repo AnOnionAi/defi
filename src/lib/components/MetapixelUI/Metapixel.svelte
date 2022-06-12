@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Pixel } from '$lib/types/types';
 	import { famContract, metapixelContract } from '$lib/utils/contracts';
 	import { getBoardSize } from '$lib/utils/metapixel';
 	import { queryBoard, pixelFee } from '$lib/utils/queryBoard';
@@ -8,22 +7,14 @@
 	import { _ } from 'svelte-i18n';
 	import HavePatience from '../Modals/HavePatience.svelte';
 	import { useQuery } from '@sveltestack/svelte-query';
-	const { open } = getContext('simple-modal');
-
-	const openModal = () => {
-		open(HavePatience, {
-			closeButton: true,
-			closeOnEsc: true,
-			closeOnOuterClick: true
-		});
-	};
-
 	import BigSpinner from '../LoadingUI/BigSpinner.svelte';
 	import Grid from './Grid.svelte';
 	import getJackpot from '$lib/utils/metapixel/getJackpot';
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
-	import { ethers } from 'ethers';
+	import { BigNumber, ethers } from 'ethers';
+	import WinningAnnouncement from './WinningAnnouncement.svelte';
 
+	const { open } = getContext('simple-modal');
 	let inputColor = '#fe7688';
 	let pixelPrice;
 	let pixelSelectedX;
@@ -32,12 +23,35 @@
 	let gridSizeX = 0;
 	let gridSizeY = 0;
 
+	let lotteryEnd = false;
+	let winnerAddress: string;
+
 	let loadingPainting = false;
 	let loadingMinting = false;
 
 	const boardPixels = useQuery('boardPixels', queryBoard, {
 		refetchInterval: 6000
 	});
+
+	metapixelContract.on(
+		'LotteryTriggered',
+		(address: string, lottPott: BigNumber) => {
+			winnerAddress = address;
+			jackpot = ethers.utils.formatEther(lottPott);
+			lotteryEnd = true;
+			setTimeout(() => {
+				lotteryEnd = false;
+			}, 15000);
+		}
+	);
+
+	const openModal = () => {
+		open(HavePatience, {
+			closeButton: true,
+			closeOnEsc: true,
+			closeOnOuterClick: true
+		});
+	};
 
 	onMount(async () => {
 		const { x, y } = await getBoardSize();
@@ -53,9 +67,9 @@
 			(pixelSelectedY || pixelSelectedY == 0) &&
 			inputColor
 		) {
-			inputColor = inputColor.substring(1, inputColor.length);
+			const selectedColor = inputColor.substring(1, inputColor.length);
 
-			const encodedColor = parseInt(inputColor, 16);
+			const encodedColor = parseInt(selectedColor, 16);
 
 			try {
 				loadingPainting = true;
@@ -70,7 +84,6 @@
 				}
 			}
 		}
-		console.log(pixelSelectedX, pixelSelectedY, inputColor);
 		loadingPainting = false;
 	};
 
@@ -87,6 +100,10 @@
 </script>
 
 <div class="h-full w-full select-none">
+	{#if lotteryEnd}
+		<WinningAnnouncement {winnerAddress} {jackpot} />
+	{/if}
+
 	{#if $boardPixels.isLoading}
 		<div class="flex h-full w-full  flex-col items-center justify-center gap-4">
 			<BigSpinner tailwindWidthClass="w-20" tailwindnHeightClass="h-20" />

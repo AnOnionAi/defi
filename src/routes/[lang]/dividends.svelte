@@ -67,7 +67,7 @@
 		height: 100%;
 		width: 100%;
 	}
-	.dividends-wrapper {
+	/* .dividends-wrapper {
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -109,5 +109,5 @@
 
 	.dividends {
 		max-height: 600px;
-	}
+	} */
 </style>
