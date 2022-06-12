@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import { _ } from 'svelte-i18n';
+	import { isLoading, _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { LoadingState, PoolInfo } from '$lib/types/types';
 	import { Token } from '$lib/types/types';
@@ -49,6 +49,12 @@
 		spawnErrorNotification,
 		spawnSuccessNotification
 	} from '$lib/utils/spawnNotifications';
+	import { useQuery } from '@sveltestack/svelte-query';
+	import fetchMasterChefPool from '$lib/utils/fetchPool';
+	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
+	import { height } from '@fortawesome/free-solid-svg-icons/faChevronUp';
+	import fetchPoolUserBalance from '$lib/utils/fetchPoolUserBalance';
+	import { dataset_dev } from 'svelte/internal';
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
@@ -56,14 +62,7 @@
 	export let info: PoolInfo;
 	export let isFarm = false;
 
-	let poolFeePercentage: number = null;
-	let stakingTokenPrice: number;
-	let stakingTokenAmount: number;
-	let rewardTokenPrice: number;
-	let poolLiquidityUSD: number;
-	let tokenAllocatedPerBlock: number;
 	let poolApr;
-	let stakingTokenDecimals = 18;
 
 	let loadingState: LoadingState = {
 		loadingApproval: false,
@@ -71,8 +70,6 @@
 		loadingWithdraw: false,
 		loadingHarvest: false
 	};
-
-	let poolMultiplier: number;
 
 	let isHidden = true;
 
@@ -83,98 +80,69 @@
 	let canHarvest: boolean;
 
 	let wantWithdrawAmount: string;
-	let idInterval;
 
-	let tokenAllowance: BigNumber = ethers.constants.Zero;
-	let userBalance: BigNumber = ethers.constants.Zero;
-	let userEarnings: BigNumber = ethers.constants.Zero;
-	let userStakedTokens: BigNumber = ethers.constants.Zero;
-
-	$: rewardTokenPrice = $tokenPrice;
 	$: userAcc = $accounts?.[0];
 
-	$: tokenApproved = !tokenAllowance.isZero();
-	$: canStake = !tokenAllowance.isZero() && !userBalance.isZero();
-	$: canWithdraw = !userStakedTokens.isZero();
-	$: canHarvest = !userEarnings.isZero();
+	$: tokenApproved = $poolUserQuery.data
+		? !$poolUserQuery.data?.tokenAllowance.isZero()
+		: false;
+	$: userHasBalance = $poolUserQuery.data
+		? !$poolUserQuery.data.userBalance.isZero()
+		: false;
+	$: canStake = tokenApproved && userHasBalance;
+	$: canWithdraw = $poolUserQuery.data
+		? !$poolUserQuery.data.userStakedTokens.isZero()
+		: false;
+	$: canHarvest = $poolUserQuery.data
+		? !$poolUserQuery.data.userEarnings.isZero()
+		: false;
 
-	$: if (userAcc) {
-		refreshData();
-		idInterval = setInterval(refreshData, 8000);
-	} else {
-		clearInterval(idInterval);
-	}
-
-	const refreshData = async () => {
-		try {
-			tokenAllowance = await getTokenAllowance(
+	const poolQuery = useQuery(
+		['poolQuery', info.pid, info.tokenAddr, isFarm],
+		async () => {
+			const poolQueryResponse = await fetchMasterChefPool(
+				info.pid,
 				info.tokenAddr,
-				getContractAddress(Token.MASTERCHEF),
-				userAcc
+				isFarm
 			);
-			if (tokenAllowance.isZero()) return;
-			userBalance = await getTokenBalance(info.tokenAddr, userAcc);
-			userStakedTokens = await getStakedTokens(info.pid, userAcc);
-			userEarnings = await getPendingMush(info.pid, userAcc);
-		} catch (e) {
-			console.log('Failed to refresh pool Data');
+			return poolQueryResponse;
+		},
+		{
+			refetchInterval: 4000
 		}
-	};
+	);
 
-	onMount(async () => {
-		stakingTokenDecimals = await getTokenDecimals(info.tokenAddr);
-		const poolInfo = await getPoolInfo(info.pid);
-
-		poolFeePercentage = poolInfo.depositFeeBP * 0.01;
-		poolMultiplier = getPoolMultiplier(poolInfo.allocPoint);
-		stakingTokenPrice = await getStakingTokenPrice();
-
-		const sta: BigNumber = await getTokenBalance(
-			info.tokenAddr,
-			getContractAddress(Token.MASTERCHEF)
-		);
-		stakingTokenAmount = parseFloat(
-			ethers.utils.formatUnits(sta, stakingTokenDecimals)
-		);
-		poolLiquidityUSD = stakingTokenPrice * stakingTokenAmount;
-
-		const poolWeightbn = getPoolWeight($totalAllocPoints, poolInfo.allocPoint);
-		const tokenPerBlock = await getMushPerBlock();
-		const mushPerBlock: number = parseFloat(
-			ethers.utils.formatEther(tokenPerBlock)
-		);
-		tokenAllocatedPerBlock = mushPerBlock * poolWeightbn.toNumber();
-
-		poolApr = getPoolApr(
-			stakingTokenPrice,
-			rewardTokenPrice,
-			stakingTokenAmount,
-			tokenAllocatedPerBlock
-		);
-		if (poolApr === null) {
-			poolApr = 'Infinity';
+	const poolUserQuery = useQuery(
+		['poolUserQuery', info.pid, info.tokenAddr, userAcc],
+		async () => {
+			if (!userAcc) return null;
+			const poolUserResponse = await fetchPoolUserBalance(
+				info.pid,
+				userAcc,
+				info.tokenAddr
+			);
+			return poolUserResponse;
+		},
+		{
+			refetchInterval: 4000
 		}
-	});
+	);
 
-	onDestroy(() => {
-		clearInterval(idInterval);
-	});
-
-	const getStakingTokenPrice = async () => {
-		if (isFarm) {
-			stakingTokenPrice = await getPriceOfMushPair(info.tokenAddr);
-			return stakingTokenPrice;
-		} else {
-			const price = await getPoolTokenPriceUSD(info.tokenAddr);
-			stakingTokenPrice = price;
-			return stakingTokenPrice;
+	$: {
+		if ($poolQuery.data && $tokenPrice) {
+			poolApr = getPoolApr(
+				$poolQuery.data?.stakingTokenPrice,
+				$tokenPrice,
+				$poolQuery.data?.stakedInPool,
+				$poolQuery.data?.tokenAllocatedPerBlock
+			);
 		}
-	};
+	}
 
 	const onDeposit = async (amount) => {
 		loadingState.loadingDeposit = true;
 		try {
-			const tx = await deposit(info.pid, amount, stakingTokenDecimals);
+			const tx = await deposit(info.pid, amount, info.tokenDecimals);
 			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
 			spawnSuccessNotification(addNotification, 'MINED');
@@ -191,7 +159,7 @@
 			const tx = await withdraw(
 				info.pid,
 				wantWithdrawAmount,
-				stakingTokenDecimals
+				info.tokenDecimals
 			);
 			spawnSuccessNotification(addNotification, 'SENT');
 			await tx.wait();
@@ -235,9 +203,9 @@
 		open(
 			DepositWithdraw,
 			{
-				userStakedTokens,
-				userBalance,
-				stakingTokenDecimals,
+				userStakedTokens: $poolUserQuery.data?.userStakedTokens,
+				userBalance: $poolUserQuery.data?.userBalance,
+				stakingTokenDecimals: info.tokenDecimals,
 				info,
 				onDeposit,
 				onWithdraw,
@@ -259,7 +227,7 @@
 		});
 	};
 
-	const showPoolInfo = () => {
+	const toggleOpen = () => {
 		isHidden = !isHidden;
 	};
 </script>
@@ -272,7 +240,7 @@
 			{#if isFarm}
 				<SushiswapBadge />
 			{/if}
-			<MultiplierBadge multiplier={poolMultiplier} />
+			<MultiplierBadge multiplier={$poolQuery.data?.poolMultiplier} />
 		</div>
 	</div>
 	<div class="cardContainer flex h-full flex-col py-4 px-8">
@@ -285,13 +253,14 @@
 		</div>
 		<div class="mb-2 flex justify-between">
 			<p class="text-gray-800  dark:text-gray-200">APR:</p>
-			{#if poolApr == 'Infinity'}
+			{#if poolApr === null}
 				<p class="font-medium dark:text-white">∞</p>
 			{:else if poolApr}
-				<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
+				<p class="font-medium dark:text-white">
+					{shortLargeAmount(poolApr)}%
+				</p>
 			{:else}
-				<p
-					class="h-full w-12 animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-300" />
+				<LoadingSkeleton styles={{ width: '60px', height: '24px' }} />
 			{/if}
 		</div>
 
@@ -306,11 +275,14 @@
 			<p class="capitalize  text-gray-800 dark:text-gray-200">
 				{$_('actions.depositFee')}:
 			</p>
-			{#if poolFeePercentage != null}
-				<p class="font-medium dark:text-white">{poolFeePercentage}%</p>
-			{:else}
-				<p
-					class="h-full w-12 animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-300" />
+			{#if $poolQuery.data?.poolFeePercentage === null}
+				<p class="font-medium dark:text-white">∞</p>
+			{:else if $poolQuery.data?.poolFeePercentage}
+				<p class="font-medium dark:text-white">
+					{$poolQuery.data?.poolFeePercentage}%
+				</p>
+			{:else if $poolQuery.isLoading}
+				<LoadingSkeleton styles={{ width: '60px', height: '24px' }} />
 			{/if}
 		</div>
 
@@ -319,12 +291,14 @@
 				<span class="text-pink-400">MUSH </span>{$_('pastActions.earned')}
 			</p>
 			<div class="flex w-full justify-between">
-				{#if userEarnings}
+				{#if $poolUserQuery.data?.userEarnings}
 					<p class="flex items-center text-xl dark:text-white">
-						{parseFloat(ethers.utils.formatEther(userEarnings)).toFixed(2)}
+						{parseFloat(
+							ethers.utils.formatEther($poolUserQuery.data?.userEarnings)
+						).toFixed(2)}
 					</p>
-				{:else}
-					<p class="flex items-center text-xl dark:text-white">0</p>
+				{:else if $poolUserQuery.isLoading || $poolUserQuery.data === null}
+					<LoadingSkeleton styles={{ width: '60px', height: '32px' }} />
 				{/if}
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
@@ -365,15 +339,21 @@
 				</button>
 			{:else}
 				<div class="flex h-full w-full items-center justify-between">
-					{#if userStakedTokens}
+					{#if $poolUserQuery.data?.userStakedTokens}
 						<p class="flex text-xl dark:text-white">
 							{parseFloat(
-								ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)
+								ethers.utils.formatUnits(
+									$poolUserQuery.data?.userStakedTokens,
+									info.tokenDecimals
+								)
 							).toFixed(1)}
-							{#if parseFloat(ethers.utils.formatUnits(userStakedTokens, stakingTokenDecimals)) < 0.0001 && !userStakedTokens.isZero()}
+							{#if parseFloat(ethers.utils.formatUnits($poolUserQuery.data?.userStakedTokens, info.tokenDecimals)) < 0.0001 && !$poolUserQuery.data?.userStakedTokens.isZero()}
 								<span
 									>.... {ethers.utils
-										.formatUnits(userStakedTokens, stakingTokenDecimals)
+										.formatUnits(
+											$poolUserQuery.data?.userStakedTokens,
+											info.tokenDecimals
+										)
 										.slice(-2)}</span>
 							{/if}
 						</p>
@@ -399,7 +379,7 @@
 		</div>
 
 		<div
-			on:click={showPoolInfo}
+			on:click={toggleOpen}
 			class="group flex cursor-pointer items-center justify-center dark:text-white">
 			<p
 				class="mr-2 font-medium  group-hover:text-triadicGreen-500 {!isHidden &&
@@ -432,10 +412,10 @@
 			</div>
 			<div class="mb-1 flex justify-between">
 				<p>{$_('poolCard.totalLiquidity')}:</p>
-				{#if poolLiquidityUSD}
-					${shortLargeAmount(poolLiquidityUSD)}
-				{:else}
-					0
+				{#if $poolQuery.data?.poolLiquidity}
+					${shortLargeAmount($poolQuery.data?.poolLiquidity)}
+				{:else if $poolQuery.isLoading}
+					<LoadingSkeleton styles={{ width: '60px', height: '20px' }} />
 				{/if}
 			</div>
 			<a
