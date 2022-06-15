@@ -15,14 +15,7 @@
 	const customNotificationComponent = CustomNotification as any;
 	const queryClient = new QueryClient();
 
-	const routes = [
-		'/dashboard',
-		'/about',
-		'/story',
-		'/index',
-		'/farms',
-		'/pools'
-	];
+	const routes = ['/dashboard', '/about', '/index', '/farms', '/pools'];
 
 	onMount(async () => {
 		prefetchRoutes(routes);
