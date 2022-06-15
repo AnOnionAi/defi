@@ -15,16 +15,23 @@
 	const customNotificationComponent = CustomNotification as any;
 	const queryClient = new QueryClient();
 
-	const routes = ['/dashboard', '/about', '/index', '/farms', '/pools'];
+	const routes = [
+		'/dashboard',
+		'/about',
+		'/metapixel',
+		'/farms',
+		'/pools',
+		'/vaults'
+	];
 
 	onMount(async () => {
-		prefetchRoutes(routes);
 		try {
 			await metamaskListeners();
 			await logUser();
 		} catch (e) {
 			console.error(e);
 		}
+		await prefetchRoutes(routes);
 	});
 </script>
 
