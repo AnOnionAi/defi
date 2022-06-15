@@ -11,9 +11,18 @@
 	import { onMount } from 'svelte';
 	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
-
+	import { prefetchRoutes } from '$app/navigation';
 	const customNotificationComponent = CustomNotification as any;
 	const queryClient = new QueryClient();
+
+	const routes = [
+		'/dashboard',
+		'/about',
+		'/metapixel',
+		'/farms',
+		'/pools',
+		'/vaults'
+	];
 
 	onMount(async () => {
 		try {
@@ -22,6 +31,7 @@
 		} catch (e) {
 			console.error(e);
 		}
+		await prefetchRoutes(routes);
 	});
 </script>
 

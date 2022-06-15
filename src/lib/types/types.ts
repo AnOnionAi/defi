@@ -19,6 +19,7 @@ export interface PoolInfo {
 	tokenName: string;
 	tokenImagePath: string;
 	tokenAddr: string;
+	tokenDecimals: number;
 	pid: number;
 }
 
@@ -171,4 +172,13 @@ export interface Pixel {
 	};
 	color: string;
 	placer: string;
+}
+
+type Address = string;
+
+export interface CallInput {
+	interface?: any;
+	target: Address;
+	function: string;
+	args: Array<any>;
 }
