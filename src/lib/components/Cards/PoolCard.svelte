@@ -1,47 +1,28 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import { isLoading, _ } from 'svelte-i18n';
+	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import type { LoadingState, PoolInfo } from '$lib/types/types';
 	import { Token } from '$lib/types/types';
 	import { metaMaskCon } from '$lib/utils/metamaskCalls';
-	import {
-		approveToken,
-		getTokenAllowance,
-		getTokenBalance,
-		getTokenDecimals
-	} from '$lib/utils/erc20';
-	import { onDestroy, onMount } from 'svelte';
+	import { approveToken } from '$lib/utils/erc20';
 	import { getContext } from 'svelte';
-	import { BigNumber, ethers } from 'ethers';
+	import { ethers } from 'ethers';
 	import Fa from 'svelte-fa';
 	import {
 		faChevronUp,
 		faChevronDown
 	} from '@fortawesome/free-solid-svg-icons';
-	import {
-		getStakedTokens,
-		getPendingMush,
-		getPoolInfo,
-		deposit,
-		withdraw,
-		getMushPerBlock,
-		getPoolMultiplier,
-		getPoolWeight,
-		masterChefContract
-	} from '$lib/utils/masterc';
+	import { deposit, withdraw } from '$lib/utils/masterc';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { darkMode } from '$lib/stores/dark';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { getPoolApr } from '$lib/utils/yieldCalculator';
 	import { tokenPrice } from '$lib/stores/NativeTokenPrice';
-	import { getPriceOfMushPair } from '$lib/utils/lpTokenUtils';
-	import { getPoolTokenPriceUSD } from '$lib/utils/coinGecko';
 	import shortLargeAmount from '$lib/utils/shortLargeAmounts';
 	import DepositWithdraw from '../Modals/DepositWithdraw.svelte';
 	import SushiswapBadge from '../Badges/SushiswapBadge.svelte';
 	import MultiplierBadge from '../Badges/MultiplierBadge.svelte';
-	import { totalAllocPoints } from '$lib/stores/MasterChefData';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	import { isMetaMaskInstalled } from '$lib/utils/metamaskCalls';
 	import CustomSpinner from '../LoadingUI/CustomSpinner.svelte';
@@ -52,9 +33,7 @@
 	import { useQuery } from '@sveltestack/svelte-query';
 	import fetchMasterChefPool from '$lib/utils/fetchPool';
 	import LoadingSkeleton from '../LoadingUI/LoadingSkeleton.svelte';
-	import { height } from '@fortawesome/free-solid-svg-icons/faChevronUp';
 	import fetchPoolUserBalance from '$lib/utils/fetchPoolUserBalance';
-	import { dataset_dev } from 'svelte/internal';
 
 	const { addNotification } = getNotificationsContext();
 	const { open } = getContext('simple-modal');
@@ -62,7 +41,7 @@
 	export let info: PoolInfo;
 	export let isFarm = false;
 
-	let poolApr;
+	let poolApr: number;
 
 	let loadingState: LoadingState = {
 		loadingApproval: false,
@@ -74,6 +53,7 @@
 	let isHidden = true;
 
 	let userAcc: string;
+
 	let tokenApproved: boolean;
 	let canStake: boolean;
 	let canWithdraw: boolean;
@@ -121,21 +101,36 @@
 				userAcc,
 				info.tokenAddr
 			);
+
 			return poolUserResponse;
 		},
 		{
+			enabled: !!userAcc,
 			refetchInterval: 4000
 		}
 	);
 
 	$: {
+		poolUserQuery.updateOptions({
+			enabled: !!userAcc
+		});
+	}
+
+	$: {
 		if ($poolQuery.data && $tokenPrice) {
+			console.table({
+				stakingTokenPrice: $poolQuery.data?.stakingTokenPrice,
+				mushPrice: $tokenPrice,
+				totalStaked: $poolQuery.data?.stakedInPool,
+				perBlock: $poolQuery.data?.tokenAllocatedPerBlock
+			});
 			poolApr = getPoolApr(
 				$poolQuery.data?.stakingTokenPrice,
 				$tokenPrice,
 				$poolQuery.data?.stakedInPool,
 				$poolQuery.data?.tokenAllocatedPerBlock
 			);
+			console.log(poolApr);
 		}
 	}
 
@@ -243,24 +238,22 @@
 			<MultiplierBadge multiplier={$poolQuery.data?.poolMultiplier} />
 		</div>
 	</div>
-	<div class="cardContainer flex h-full flex-col py-4 px-8">
+	<div class="flex h-[496px] w-[336px]  flex-col py-4 px-8">
 		<img
 			src={info.tokenImagePath}
 			alt={info.tokenName}
-			class="my-2 self-center" />
+			class="my-2 h-[120px] w-[120px] self-center" />
 		<div>
 			<p class="mb-3 text-lg font-bold dark:text-white">{info.tokenName}</p>
 		</div>
 		<div class="mb-2 flex justify-between">
 			<p class="text-gray-800  dark:text-gray-200">APR:</p>
-			{#if poolApr === null}
-				<p class="font-medium dark:text-white">∞</p>
-			{:else if poolApr}
-				<p class="font-medium dark:text-white">
-					{shortLargeAmount(poolApr)}%
-				</p>
-			{:else}
+			{#if poolApr === undefined}
 				<LoadingSkeleton styles={{ width: '60px', height: '24px' }} />
+			{:else if poolApr === null}
+				<p class="font-medium dark:text-white">∞</p>
+			{:else}
+				<p class="font-medium dark:text-white">{shortLargeAmount(poolApr)}%</p>
 			{/if}
 		</div>
 
@@ -275,30 +268,37 @@
 			<p class="capitalize  text-gray-800 dark:text-gray-200">
 				{$_('actions.depositFee')}:
 			</p>
-			{#if $poolQuery.data?.poolFeePercentage === null}
+
+			{#if $poolQuery.isLoading}
+				<LoadingSkeleton styles={{ width: '60px', height: '24px' }} />
+			{:else if $poolQuery.isError}
+				<p class="font-medium dark:text-white">N/A</p>
+			{:else if $poolQuery.data?.poolFeePercentage === null}
 				<p class="font-medium dark:text-white">∞</p>
-			{:else if $poolQuery.data?.poolFeePercentage}
+			{:else}
 				<p class="font-medium dark:text-white">
 					{$poolQuery.data?.poolFeePercentage}%
 				</p>
-			{:else if $poolQuery.isLoading}
-				<LoadingSkeleton styles={{ width: '60px', height: '24px' }} />
 			{/if}
 		</div>
 
 		<div class="mb-2 flex w-full flex-col">
 			<p class="text-left text-xs font-medium uppercase dark:text-white">
-				<span class="text-pink-400">MUSH </span>{$_('pastActions.earned')}
+				<span class="text-pink-400">MUSH</span>{$_('pastActions.earned')}
 			</p>
 			<div class="flex w-full justify-between">
-				{#if $poolUserQuery.data?.userEarnings}
+				{#if $poolUserQuery.isLoading}
+					<LoadingSkeleton styles={{ width: '60px', height: '32px' }} />
+				{:else if $poolQuery.isError}
+					<p class="flex items-center text-xl dark:text-white">N/A</p>
+				{:else if $poolUserQuery.data?.userEarnings}
 					<p class="flex items-center text-xl dark:text-white">
 						{parseFloat(
 							ethers.utils.formatEther($poolUserQuery.data?.userEarnings)
 						).toFixed(2)}
 					</p>
-				{:else if $poolUserQuery.isLoading || $poolUserQuery.data === null}
-					<LoadingSkeleton styles={{ width: '60px', height: '32px' }} />
+				{:else}
+					<p class="flex items-center text-xl dark:text-white">0</p>
 				{/if}
 				<button
 					disabled={!canHarvest || loadingState.loadingHarvest}
@@ -339,27 +339,21 @@
 				</button>
 			{:else}
 				<div class="flex h-full w-full items-center justify-between">
-					{#if $poolUserQuery.data?.userStakedTokens}
-						<p class="flex text-xl dark:text-white">
-							{parseFloat(
-								ethers.utils.formatUnits(
+					{#if $poolUserQuery.isLoading}
+						<LoadingSkeleton styles={{ width: '60px', height: '32px' }} />
+					{:else if $poolUserQuery.isError}
+						<p class="flex items-center text-xl dark:text-white">N/A</p>
+					{:else if $poolUserQuery.data.userStakedTokens && !$poolUserQuery.data?.userStakedTokens.isZero()}
+						<p class="flex items-center text-xl dark:text-white">
+							0. ... {ethers.utils
+								.formatUnits(
 									$poolUserQuery.data?.userStakedTokens,
 									info.tokenDecimals
 								)
-							).toFixed(1)}
-							{#if parseFloat(ethers.utils.formatUnits($poolUserQuery.data?.userStakedTokens, info.tokenDecimals)) < 0.0001 && !$poolUserQuery.data?.userStakedTokens.isZero()}
-								<span
-									>.... {ethers.utils
-										.formatUnits(
-											$poolUserQuery.data?.userStakedTokens,
-											info.tokenDecimals
-										)
-										.slice(-2)}</span>
-							{/if}
+								.slice(-2)}
 						</p>
 					{:else}
-						<p
-							class="h-full w-12 animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-300" />
+						<p class="flex items-center text-xl dark:text-white">0</p>
 					{/if}
 
 					<div class="flex space-x-2">
@@ -403,8 +397,8 @@
 	</div>
 	{#if !isHidden}
 		<div
-			in:slide={{ duration: 350 }}
-			out:slide={{ duration: 350 }}
+			in:slide={{ duration: 200 }}
+			out:slide={{ duration: 200 }}
 			class="px-8 pb-4 dark:text-white">
 			<div class="mb-1 flex justify-between">
 				<p>{$_('actions.stake')}</p>
@@ -427,16 +421,6 @@
 </div>
 
 <style>
-	.cardContainer {
-		width: 336px;
-		height: 496px;
-	}
-
-	img {
-		width: 120px;
-		height: 120px;
-	}
-
 	.customShadow {
 		box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	}

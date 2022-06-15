@@ -11,11 +11,21 @@
 	import { onMount } from 'svelte';
 	import CustomNotification from '$lib/components/Notifications/CustomNotification.svelte';
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
-
+	import { prefetchRoutes } from '$app/navigation';
 	const customNotificationComponent = CustomNotification as any;
 	const queryClient = new QueryClient();
 
+	const routes = [
+		'/dashboard',
+		'/about',
+		'/story',
+		'/index',
+		'/farms',
+		'/pools'
+	];
+
 	onMount(async () => {
+		prefetchRoutes(routes);
 		try {
 			await metamaskListeners();
 			await logUser();
