@@ -133,6 +133,9 @@
 				if (error.code == 'UNPREDICTABLE_GAS_LIMIT') {
 					openModal();
 				}
+				if (error.code === -32603) {
+					spawnErrorNotification(addNotification, error.message);
+				}
 			}
 		}
 		loadingPainting = false;
