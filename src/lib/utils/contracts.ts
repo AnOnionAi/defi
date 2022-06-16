@@ -12,10 +12,9 @@ import MetapixelABI from '$lib/config/abi/Metapixel.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/types/types';
 import { BigNumber, ethers } from 'ethers';
-import { getSigner, providerRinkeby } from './web3Utils';
-import { FAM_ADDRESS, METAPIXEL_ADDRESS, MINICHEF_ADDRESS } from '$lib/config';
+import { getSigner } from './web3Utils';
+import { METAPIXEL_ADDRESS, MINICHEF_ADDRESS } from '$lib/config';
 import { polygonProvider } from './web3Utils';
-import famABI from '$lib/config/abi/FAM.json';
 
 export const getMasterChefContract = (): ethers.Contract => {
 	const masterChefContract = new ethers.Contract(
@@ -35,6 +34,12 @@ export const getMushTokenContract = (): ethers.Contract => {
 	return mushTokenContract;
 };
 
+export const mushTokenContract = new ethers.Contract(
+	getContractAddress(Token.MUSHTOKEN),
+	MushTokenABI,
+	polygonProvider
+);
+
 export const getContractObject = (
 	address: string,
 	abi: any
@@ -44,7 +49,7 @@ export const getContractObject = (
 };
 
 export const getERC20Contract = (address: string): ethers.Contract => {
-	const ercToken = new ethers.Contract(address, ERC20ABI, getSigner());
+	const ercToken = new ethers.Contract(address, ERC20ABI, polygonProvider);
 	return ercToken;
 };
 
@@ -179,14 +184,9 @@ export const getSushiswapStrategyContract = (strategyAddress: string) => {
 		polygonProvider
 	);
 };
-export const famContract = new ethers.Contract(
-	FAM_ADDRESS,
-	famABI,
-	providerRinkeby
-);
 
 export const metapixelContract = new ethers.Contract(
 	METAPIXEL_ADDRESS,
 	MetapixelABI,
-	providerRinkeby
+	polygonProvider
 );
