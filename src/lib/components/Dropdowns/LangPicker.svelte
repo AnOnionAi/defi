@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import { setInit } from '$lib/i18n/init';
 	import { isHomescreen } from '$lib/stores/homescreen';
-	import { validLang } from '$lib/i18n/utils';
 	import Fa from 'svelte-fa';
 	import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 	import { darkMode } from '$lib/stores/dark';
@@ -22,6 +21,73 @@
 		setInit(lang);
 		isShowing = false;
 	};
+
+	const LANGUAGES = [
+		{
+			code: 'en',
+			lang: 'English'
+		},
+		{
+			code: 'es',
+			lang: 'Español'
+		},
+		{
+			code: 'fr',
+			lang: 'Français'
+		},
+		{
+			code: 'de',
+			lang: 'Deutsche'
+		},
+		{
+			code: 'pt',
+			lang: 'Português'
+		},
+		{
+			code: 'it',
+			lang: 'Italiano'
+		},
+		{
+			code: 'zh',
+			lang: '汉语'
+		},
+		{
+			code: 'ja',
+			lang: '日本語'
+		},
+		{
+			code: 'ko',
+			lang: '한국어'
+		},
+		{
+			code: 'vi',
+			lang: 'Việt'
+		},
+		{
+			code: 'tr',
+			lang: 'Türkçe'
+		},
+		{
+			code: 'el',
+			lang: 'ελληνικά'
+		},
+		{
+			code: 'ru',
+			lang: 'Pyccкий'
+		},
+		{
+			code: 'ar',
+			lang: 'اَلْعَرَبِيَّةُ'
+		},
+		{
+			code: 'ur',
+			lang: 'اُردُو'
+		},
+		{
+			code: 'hi',
+			lang: 'हिन्दी'
+		}
+	];
 </script>
 
 <svelte:window
@@ -49,23 +115,13 @@
 			in:scale={{ duration: 150, start: 0.95 }}
 			out:scale={{ duration: 100, start: 0.95 }}
 			class=" {$isHomescreen &&
-				'z-20'} absolute z-20  rounded-md bg-white text-black dark:bg-neutral-900 dark:text-white">
-			<a
-				on:click={() => handleNewLangSelect('en')}
-				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/en${currentRoute}`}>English</a>
-			<a
-				on:click={() => handleNewLangSelect('de')}
-				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/de${currentRoute}`}>Deutsche</a>
-			<a
-				on:click={() => handleNewLangSelect('es')}
-				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/es${currentRoute}`}>Español</a>
-			<a
-				on:click={() => handleNewLangSelect('fr')}
-				class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
-				href={`/fr${currentRoute}`}>Français</a>
+				'z-20'} grid-rows-8 absolute z-20 grid w-max grid-cols-2 gap-x-1 rounded-md bg-white text-black dark:bg-neutral-900 dark:text-white">
+			{#each LANGUAGES as l}
+				<a
+					on:click={() => handleNewLangSelect(l.code)}
+					class=" flex items-center justify-center px-5 py-2 hover:bg-gray-200 dark:hover:bg-neutral-700"
+					href={`/${l.code}${currentRoute}`}>{l.lang}</a>
+			{/each}
 		</div>
 	{/if}
 </div>

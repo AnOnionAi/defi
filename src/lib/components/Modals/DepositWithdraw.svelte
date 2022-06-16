@@ -57,23 +57,6 @@
 					class="flex flex-col items-center px-4 py-3 md:flex-row md:justify-between">
 					<p class="font-semibold">{$_('modals.input')}:</p>
 					<div class="flex">
-						{#if action == 'DEPOSIT'}
-							<button
-								on:click={() =>
-									(wantAmount = ethers.utils.formatUnits(
-										userBalance,
-										stakingTokenDecimals
-									))}
-								class="mr-1  rounded-full text-xs  text-green-400">MAX</button>
-						{:else if action == 'WITHDRAW'}
-							<button
-								on:click={() =>
-									(wantAmount = ethers.utils.formatUnits(
-										userStakedTokens,
-										stakingTokenDecimals
-									))}
-								class="text-xs p-1 mr-1 text-red-400  rounded-full">MAX</button>
-						{/if}
 						<p style="color: {primaryTextColor};" class="mr-1">
 							{#if action == 'DEPOSIT'}
 								{$_('modals.balance')}:
@@ -117,7 +100,7 @@
 					{$_('modals.otherOptions')}
 				</p>
 			</div>
-			<div class="mt-3 flex w-full justify-between">
+			<div class="mt-3 mb-3 flex w-full flex-row-reverse justify-between">
 				{#if action === 'DEPOSIT'}
 					<button
 						on:click={() =>
@@ -158,7 +141,7 @@
 								userStakedTokens.div(10),
 								stakingTokenDecimals
 							))}
-						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
+						class="text-light rounded-lg bg-red-500 py-1 px-3 text-white hover:bg-red-400"
 						>10%</button>
 					<button
 						on:click={() =>
@@ -166,7 +149,7 @@
 								userStakedTokens.div(4),
 								stakingTokenDecimals
 							))}
-						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
+						class="text-light rounded-lg bg-red-500 py-1 px-3 text-white hover:bg-red-400"
 						>25%</button>
 					<button
 						on:click={() =>
@@ -174,7 +157,7 @@
 								userStakedTokens.div(2),
 								stakingTokenDecimals
 							))}
-						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
+						class="text-light rounded-lg bg-red-500 py-1 px-3 text-white hover:bg-red-400"
 						>50%</button>
 					<button
 						on:click={() =>
@@ -182,12 +165,32 @@
 								userStakedTokens.div(4),
 								stakingTokenDecimals
 							))}
-						class="bg-red-500 py-1 px-3 hover:bg-red-400 rounded-lg text-white text-light"
+						class="text-light rounded-lg bg-red-500 py-1 px-3 text-white hover:bg-red-400"
 						>75%</button>
 				{/if}
 			</div>
 
-			<div class="mt-9">
+			<button
+				on:click={() => {
+					if (action === 'DEPOSIT') {
+						wantAmount = ethers.utils.formatUnits(
+							userBalance,
+							stakingTokenDecimals
+						);
+						return;
+					}
+					if (action === 'WITHDRAW') {
+						wantAmount = ethers.utils.formatUnits(
+							userStakedTokens,
+							stakingTokenDecimals
+						);
+						return;
+					}
+				}}
+				class="w-full rounded-xl bg-gradient-to-r from-complementary-600 to-triadicGreen-600 py-1 px-2 text-lg font-bold text-white  transition duration-500 hover:from-triadicGreen-600 hover:to-complementary-600"
+				>MAX</button>
+
+			<div class="mt-6">
 				{#if action === 'DEPOSIT'}
 					<button
 						on:click={startDeposit}
@@ -196,7 +199,7 @@
 				{:else if action === 'WITHDRAW'}
 					<button
 						on:click={startWithdraw}
-						class="block w-full py-3 bg-red-500 hover:bg-red-400 text-md uppercase 	text-white font-medium tracking-widest rounded-xl "
+						class="text-md block w-full rounded-xl bg-red-500 py-3 font-medium 	uppercase tracking-widest text-white hover:bg-red-400 "
 						>{$_('actions.withdraw')} {info.tokenName}</button>
 				{/if}
 			</div>

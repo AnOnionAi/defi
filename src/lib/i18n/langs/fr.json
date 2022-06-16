@@ -30,7 +30,7 @@
 		"fijiSignature": " - Fidji Les champignons extraterrestres",
 		"psText": "PS Il reste de nombreuses idées à débloquer dans l'univers.",
 		"powerText": "Le pouvoir est à vous. MushCoin est la clé du futur. Nous sommes le futur. Ensemble nous y arriverons.",
-		"ps2Text": "P.S.S. MushCoin vers la Lune et au-delà !"
+		"ps2Text": "P.S.S. MushCoin sur la Lune et au-delà !"
 	},
 	"pages": {
 		"about": {
@@ -64,6 +64,9 @@
 		},
 		"vaults": {
 			"text": "coffres"
+		},
+		"metapixel": {
+			"text": "Metapixel"
 		},
 		"crypto-responsibility": {
 			"text": "Responsabilité cryptographique"
@@ -111,6 +114,7 @@
 		"get": "Avoir",
 		"add": "Ajouter",
 		"depositFee": "Frais de dépôt",
+		"performanceFee": "Commission de performance",
 		"wallet": "Porte monnaie",
 		"approve": "Approuver",
 		"unlock": "Ouvrir",

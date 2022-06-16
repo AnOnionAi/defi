@@ -1,28 +1,20 @@
 <script context="module" lang="ts">
 	export const prerender = false;
-	import { _ } from 'svelte-i18n';
 </script>
 
 <script lang="ts">
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { getTokenAllowance } from '$lib/utils/erc20';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
-	import ApproveMush from '$lib/components/Cards/ApproveMush.svelte';
 	import { Token } from '$lib/types/types';
-	import DividendCard from '$lib/components/Cards/DividendCard.svelte';
-	import Connect from '$lib/components/Cards/Connect.svelte';
-	import { fade } from 'svelte/transition';
 	import { BigNumber, ethers } from 'ethers';
 	import { approveToken } from '$lib/utils/erc20';
 	import { getNotificationsContext } from 'svelte-notifications';
-	import {
-		transactionCompleted,
-		transactionDeniedByTheUser,
-		transactionSend
-	} from '$lib/config/constants/notifications';
-	import { darkMode } from '$lib/stores/dark';
-	import PageHeader from '$lib/components/Text/PageHeader.svelte';
 	import DisabledFeature from '$lib/components/Cards/DisabledFeature.svelte';
+	import {
+		spawnErrorNotification,
+		spawnSuccessNotification
+	} from '$lib/utils/spawnNotifications';
 	const { addNotification } = getNotificationsContext();
 
 	let userAccount: string;
@@ -30,7 +22,7 @@
 	let approved = false;
 	let finishedApprovalFetch = false;
 
-	/* 	$: userAccount = $accounts?.[0];
+	$: userAccount = $accounts?.[0];
 	$: approved = !userMushAllowance.isZero();
 
 	$: if (userAccount) {
@@ -43,25 +35,11 @@
 			finishedApprovalFetch = true;
 		});
 	}
-
-	const handleApproval = async () => {
-		try {
-			const tx = await approveToken(
-				getContractAddress(Token.MUSHTOKEN),
-				getContractAddress(Token.VAULTCHEF)
-			);
-			addNotification(transactionSend);
-			await tx.wait();
-			approved = true;
-			addNotification(transactionCompleted);
-		} catch (e) {
-			addNotification(transactionDeniedByTheUser);
-		}
-	}; */
 </script>
 
 <section class="flex h-full flex-col">
-	<!-- 	<PageHeader text={$_('headers.dividends.text')} />
+	<DisabledFeature />
+	<!-- <PageHeader text={$_('headers.dividends.text')} />
 	<div class="flex-1">
 		<div
 			class="dividends-wrapper {$darkMode
@@ -82,7 +60,6 @@
 			</div>
 		</div>
 	</div> -->
-	<DisabledFeature />
 </section>
 
 <style>
@@ -90,7 +67,7 @@
 		height: 100%;
 		width: 100%;
 	}
-	.dividends-wrapper {
+	/* .dividends-wrapper {
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -132,5 +109,5 @@
 
 	.dividends {
 		max-height: 600px;
-	}
+	} */
 </style>

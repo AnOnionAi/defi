@@ -28,8 +28,8 @@
 					WrongNetwork,
 					{},
 					{
-						closeButton: false,
-						closeOnEsc: false,
+						closeButton: true,
+						closeOnEsc: true,
 						closeOnOuterClick: true,
 						styleWindow: {
 							backgroundColor: modalBackgroundColor,
@@ -40,7 +40,6 @@
 			}
 		});
 	});
-
 	const onClickDispatcher = (status: MetamaskExtensionStatus) => {
 		if (status == 'notInstalled') {
 			return goInstallMetamask();

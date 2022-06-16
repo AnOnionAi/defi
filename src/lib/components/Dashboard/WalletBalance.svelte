@@ -65,7 +65,7 @@
 				---- MUSH
 			</p>
 		{:else if userMushBalance != undefined}
-			<p class="text-3xl font-medium text-dark-500 dark:text-white">
+			<p class="text-dark-500 text-3xl font-medium dark:text-white">
 				{formatComma(userMushBalance, $page.params.lang)} MUSH
 			</p>
 		{:else}

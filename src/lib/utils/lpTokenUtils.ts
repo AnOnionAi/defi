@@ -5,12 +5,8 @@ import { polygonProvider } from './web3Utils';
 import { getContractAddress } from './addressHelpers';
 import { Token } from '$lib/types/types';
 import { tokenPrice } from '$lib/stores/NativeTokenPrice';
-import {
-	getTokenBalance,
-	getTokenDecimals,
-	getTokenTotalSupply
-} from './erc20';
-import { getPoolTokenPriceUSD, getTokenPriceUSD } from './coinGecko';
+import { getTokenDecimals, getTokenTotalSupply } from './erc20';
+import { getPoolTokenPriceUSD } from './coinGecko';
 
 let mushTokenPriceUSD = 0;
 

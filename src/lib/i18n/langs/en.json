@@ -68,6 +68,9 @@
 		"vaults": {
 			"text": "Vaults"
 		},
+		"metapixel": {
+			"text": "Metapixel"
+		},
 		"crypto-responsibility": {
 			"text": "Crypto Responsibility"
 		}
@@ -116,6 +119,7 @@
 		"get": "Get",
 		"add": "Add",
 		"depositFee": "Deposit Fee",
+		"performanceFee": "Performance Fee",
 		"wallet": "Wallet",
 		"approve": "Approve",
 		"unlock": "Unlock",
@@ -126,7 +130,8 @@
 		"details": "Details",
 		"depositfee": "Deposit Fee",
 		"withdrawalfee": "Withdrawal Fee",
-		"notAvaliable": "Not Avaliable"
+		"notAvaliable": "Not Avaliable",
+		"paint": "Paint"
 	},
 
 	"pastActions": {

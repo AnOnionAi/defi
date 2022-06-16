@@ -1,0 +1,173 @@
+{
+	"launchTimeLeft": {
+		"countdown": "推出 T 倒计时 -"
+	},
+	"depositWarning": {
+		"warning": "可以进行存款和取款，但您将无法获得 MUSH，直到"
+	},
+	"comingSoon": {
+		"soon": "快来了...",
+		"left": "剩余时间："
+	},
+	"homepage": {
+		"presents": "礼物",
+		"revolution": "去中心化金融的革命",
+		"mushcoin": "MushCoin 是人们表达他们对 FungFi 未来的股份的方式。MUSH 将通过在矿池和农场中质押来分配。",
+		"mushroomFarms": "在 FungFi 农场质押 MUSH/USDC LP 代币的客户将获得 MushCoin 奖励。",
+		"myceliumPools": "FungFi 用户将能够将其他代币投入我们的池中，开始每秒赚取 $MUSH。",
+		"fungiVaults": "允许用户将农业代币自动复合回他们最初质押的资产中。"
+	},
+	"home": {
+		"tagline1": "做了！",
+		"tagline2": "蘑菇币",
+		"marketCap": "市值",
+		"introTitle": "介绍 MushCoin",
+		"intro": "我们在 Defi（去中心化金融）中遵循的原则是基于 Fungi 的哲学。蘑菇是一种使死者归来的重要生物。然后让死者复活，重新成为生命。他们继续生命循环。 MushCoin 是您开启新翡翠网络城的钥匙。我们分解腐烂。",
+		"velocityIdeas": "不要错过 DeFi💡",
+		"velocityIdeasText": "在 Defi 中，一切都由智能合约运行，智能合约是去中心化区块链上的算法。让你的加密货币发挥作用。不再坐在钱包里。想法的速度正在加快。指数地。如果您跟不上技术，您将很快落后。我们必须牢记凯罗斯。古希腊词的意思是“正确的、关键的或合适的时刻”。那一刻就是现在。无需恐惧或希望，只需寻求新技术。对于现在的输家，以后会赢，对于时代来说，他们是一个变化的。",
+		"revolution": "革命",
+		"gainzText": "快来加入我们的真菌幻想吧！不要成为最后一个了解 DeFi 的人",
+		"fijiSignature": " - 斐济外来真菌",
+		"psText": "附言宇宙中有许多想法有待解锁。",
+		"powerText": "权力是你的。 MushCoin 是未来的关键。我们是未来。我们将一起实现它。",
+		"ps2Text": "P.S.S. MushCoin 到月球和更远的地方！"
+	},
+	"pages": {
+		"about": {
+			"title": "关于"
+		},
+		"contact": {
+			"title": "接触"
+		},
+		"audits": {
+			"title": "审计"
+		},
+		"trade": {
+			"title": "贸易"
+		}
+	},
+	"headers": {
+		"automated-crypto": {
+			"text": "自动加密做市商"
+		},
+		"dividends": {
+			"text": "股息"
+		},
+		"dashboard": {
+			"text": "仪表盘"
+		},
+		"farms": {
+			"text": "农场"
+		},
+		"pools": {
+			"text": "游泳池"
+		},
+		"vaults": {
+			"text": "金库"
+		},
+		"metapixel": {
+			"text": "元像素"
+		},
+		"crypto-responsibility": {
+			"text": "加密责任"
+		}
+	},
+	"about": {
+		"automated-description": "自动加密做市商 (ACMM) 允许数字资产通过使用流动性池而不是传统的买卖双方市场以无需许可和自动的方式进行交易。用户向流动性池提供加密代币，其价格由恒定的数学公式确定。用户不是在买卖双方之间进行交易，而是针对一个代币池进行交易——一个流动性池。流动性提供者通常会通过向池中提供代币来赚取费用。该费用由与流动资金池交互的交易者支付。这使得流动性提供者能够获得收益。股息。",
+		"farms-description": "农场用于单产农业。这是在我们的区块链协议中质押或锁定加密货币以生成代币化奖励的做法。 Fungfi 依靠单产农业来激励您为我们网络的流动性做出贡献。 Fungfi 不依赖中心化的市场促进者。",
+		"pools-description": "流动性池是锁定在智能合约中的加密货币或代币的众包池，用于促进去中心化交易所（DEX）上资产之间的交易。这允许通过使用流动性池以自动和无需许可的方式交易数字资产。",
+		"vaults-description": "保险库是一种区块链架构，用于存储、存款和提取不同类型的加密货币资产。例如，当用户质押、借出、借入或铸造不同的加密资产时，Fungfi 将通过智能合约在不同方之间自动交换正确数量的资产。",
+		"responsibility-description": "负责任地投资。 Fungfi Defi 有巨大的收益潜力，但生活中的一切都有风险。虽然采取了一切预防措施来防止它发生。任何与互联网或计算机打交道的事情都存在黑客的风险。您还必须注意波动性。加密市场虽然回报丰厚，但波动性很大。有时这种波动会导致恐慌性抛售、银行挤兑或永久性损失。最后，如果您丢失了您钱包的私钥或秘密声明，该加密货币将被烧毁。它永远消失了。所以，要小心。"
+	},
+	"dashboard": {
+		"wallet": "在你的钱包里",
+		"tvl": "总价值锁定",
+		"across": "跨越所有丰金融",
+		"earn": "赚取更多",
+		"index": "指数",
+		"mushpb": "MUSH 每块",
+		"mushps": "每秒糊状",
+		"marketcap": "市值",
+		"totalvol": "总容积",
+		"maxsupply": "最大供应",
+		"price": "糊状价格：",
+		"today": "今天",
+		"peak": "顶峰",
+		"profit": "利润",
+		"lockedInFarms": "锁定在蘑菇农场",
+		"lockedInPools": "锁定在保利池中",
+		"lockedInVaults": "锁定在网络保险库中",
+		"startFarming": "种下一颗种子",
+		"addLiquidity": "创造流动性",
+		"goDeposit": "订金"
+	},
+	"dividendsPage": {
+		"cyw": "连接钱包",
+		"approval": "需要批准",
+		"approvalDescription": "您必须首先批准您的 MUSH 支出。"
+	},
+	"your": {
+		"wallet": "你的钱包"
+	},
+	"actions": {
+		"earn": "赚",
+		"get": "得到",
+		"add": "添加",
+		"depositFee": "押金",
+		"performanceFee": "演出费",
+		"wallet": "钱包",
+		"approve": "批准",
+		"unlock": "开锁",
+		"deposit": "订金",
+		"withdraw": "提取",
+		"harvest": "收成",
+		"stake": "赌注",
+		"details": "细节",
+		"depositfee": "押金",
+		"withdrawalfee": "提款费",
+		"notAvaliable": "不可用"
+	},
+	"pastActions": {
+		"earned": "赢得",
+		"deposited": "存款",
+		"withdrawed": "撤回",
+		"staked": "质押"
+	},
+	"poolCard": {
+		"details": "细节",
+		"hide": "隐藏",
+		"totalLiquidity": "总流动性",
+		"myLiquidity": "我的流动性",
+		"viewonMatic": "PolyScan"
+	},
+	"vaultAccordeon": {
+		"currentPrices": "当前价格",
+		"notListedIn": "未列出",
+		"viewInfo": "查看信息",
+		"loading": "正在加载"
+	},
+	"vaultFilter": {
+		"all": "全部",
+		"hidezero": "隐藏零余额",
+		"filterby": "过滤",
+		"sortby": "排序方式",
+		"search": "搜索",
+		"stakedonly": "仅质押",
+		"desceding": "降序",
+		"ascending": "上升",
+		"searchvaults": "搜索保险库"
+	},
+	"modals": {
+		"input": "输入",
+		"balance": "平衡",
+		"otherOptions": "其他选项",
+		"depositYour": "存款",
+		"withdrawYour": "撤回您的"
+	},
+	"walletStatus": {
+		"wallet": "钱包",
+		"install": "安装元掩码",
+		"connected": "连接的",
+		"checking": "正在检查元掩码..."
+	}
+}

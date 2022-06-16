@@ -9,7 +9,8 @@
 		"README.md",
 		"src/app.html",
 		"static/",
-		"netlify.toml"
+		"netlify.toml",
+		"node_modules/"
 	],
 	"overrides": [{ "files": ["*.svelte"], "processor": "svelte3/svelte3" }],
 	"settings": {

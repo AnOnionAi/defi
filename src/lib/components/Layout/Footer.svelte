@@ -11,7 +11,6 @@
 	} from '@fortawesome/free-brands-svg-icons';
 	import { faTelegram } from '@fortawesome/free-brands-svg-icons';
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-	import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 	import { faTiktok } from '@fortawesome/free-brands-svg-icons';
 
 	let textColor = 'text-white';

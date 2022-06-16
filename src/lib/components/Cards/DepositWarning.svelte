@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { launchDate, timeLeftForLaunch } from '$lib/stores/launchDate';
+	import { timeLeftForLaunch } from '$lib/stores/launchDate';
 	import { _ } from 'svelte-i18n';
 </script>
 

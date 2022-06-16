@@ -50,7 +50,7 @@
 		: ''} relative mx-1  mb-2  rounded-lg py-5 px-4 text-white {tailwindNotificationStyles[
 		notification.type
 	]}">
-	<h4 class="cursor-pointer select-none text-center text-xl">
+	<h4 class="cursor-pointer select-none text-center text-lg">
 		{notification.text}
 	</h4>
 	{#if notification.description}

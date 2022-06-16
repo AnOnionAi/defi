@@ -8,11 +8,12 @@ import routerABI from '$lib/config/abi/IUniswapV2Router02.json';
 import factoryABI from '$lib/config/abi/IUniswapV2Factory.json';
 import VaultChefABI from '$lib/config/abi/VaultChef.json';
 import DividendsABI from '$lib/config/abi/Dividends.json';
+import MetapixelABI from '$lib/config/abi/Metapixel.json';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 import { Token } from '$lib/types/types';
 import { BigNumber, ethers } from 'ethers';
 import { getSigner } from './web3Utils';
-import { MINICHEF_ADDRESS } from '$lib/config';
+import { METAPIXEL_ADDRESS, MINICHEF_ADDRESS } from '$lib/config';
 import { polygonProvider } from './web3Utils';
 
 export const getMasterChefContract = (): ethers.Contract => {
@@ -33,6 +34,12 @@ export const getMushTokenContract = (): ethers.Contract => {
 	return mushTokenContract;
 };
 
+export const mushTokenContract = new ethers.Contract(
+	getContractAddress(Token.MUSHTOKEN),
+	MushTokenABI,
+	polygonProvider
+);
+
 export const getContractObject = (
 	address: string,
 	abi: any
@@ -42,7 +49,7 @@ export const getContractObject = (
 };
 
 export const getERC20Contract = (address: string): ethers.Contract => {
-	const ercToken = new ethers.Contract(address, ERC20ABI, getSigner());
+	const ercToken = new ethers.Contract(address, ERC20ABI, polygonProvider);
 	return ercToken;
 };
 
@@ -177,3 +184,9 @@ export const getSushiswapStrategyContract = (strategyAddress: string) => {
 		polygonProvider
 	);
 };
+
+export const metapixelContract = new ethers.Contract(
+	METAPIXEL_ADDRESS,
+	MetapixelABI,
+	polygonProvider
+);

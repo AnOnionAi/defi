@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { darkMode } from '$lib/stores/dark';
-	import { isHomescreen } from '$lib/stores/homescreen';
 </script>
 
 <div class="flex flex-shrink-0">
@@ -13,12 +12,9 @@
 			<img
 				src="/theme/fungfiDarkMode.svg"
 				alt="Fung Fi"
-				class="h-[80px] w-[104px] " />
+				class="h-10 w-[104px] " />
 		{:else}
-			<img
-				src="/theme/liteFungfi.svg"
-				alt="Fung Fi"
-				class="w-[104px] h-[80px] " />
+			<img src="/theme/liteFungfi.svg" alt="Fung Fi" class="h-10 w-[104px] " />
 		{/if}
 	</a>
 </div>

@@ -7,12 +7,10 @@ import type { Writable } from 'svelte/store';
 import { Token } from '$lib/types/types';
 import { getContractAddress } from '$lib/utils/addressHelpers';
 
-export const loading = writable(false);
 export const error = writable(undefined);
 export const tokenPrice: Writable<number> = writable(undefined);
 
 export const fetchNativeTokenPrice = async () => {
-	loading.set(true);
 	const liquidityPair = getLiquidityPairContract(
 		getContractAddress(Token.SUSHILP)
 	);
@@ -28,5 +26,4 @@ export const fetchNativeTokenPrice = async () => {
 		error.set(e);
 		console.log('Error on fetching $MUSH last price :(');
 	}
-	loading.set(false);
 };

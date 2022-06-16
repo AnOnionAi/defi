@@ -4,10 +4,15 @@
 		fetchNativeTokenPrice,
 		tokenPrice
 	} from '$lib/stores/NativeTokenPrice';
-	fetchNativeTokenPrice();
+	import { onMount } from 'svelte';
+
 	const swapperURL = `https://app.sushi.com/${
 		$page.params.lang ?? 'en'
 	}/trident/swap?tokens=MATIC&tokens=0x93C55AFcBB82594F7446537e4071fc6439E14f2a&chainId=137`;
+
+	onMount(async () => {
+		await fetchNativeTokenPrice();
+	});
 </script>
 
 <a href={swapperURL} target="_blank" class="group flex items-center">
@@ -22,7 +27,7 @@
 		</p>
 	{:else}
 		<div
-			class="h-8 w-24 rounded-lg bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
+			class="h-8 w-24 animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-800" />
 	{/if}
 </a>
 

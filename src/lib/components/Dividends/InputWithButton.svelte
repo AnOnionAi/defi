@@ -6,13 +6,8 @@
 	export let buttonText: string;
 	import { Chasing } from 'svelte-loading-spinners';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
-	import { _ } from 'svelte-i18n';
 
 	export let inputValue;
-
-	$: {
-		console.log('IS THE BUTTON DISSABLED', buttonDisabled);
-	}
 </script>
 
 <div class="">
