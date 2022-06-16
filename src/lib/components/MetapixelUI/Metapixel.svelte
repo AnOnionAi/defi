@@ -157,8 +157,8 @@
 	{:else if $boardPixels.data}
 		<div class="Metapixel grid-rows xl:grid-cols grid">
 			<div
-				class="metapixel-card  flex flex-col items-center justify-center gap-12 p-4">
-				{#if !$tokenAllowance.data?.isZero() && $tokenAllowance.isSuccess}
+				class="metapixel-card  flex flex-col items-center justify-center gap-8 p-4">
+				{#if $tokenAllowance.isSuccess}
 					<div
 						class="sideShadow w-[360px] rounded-2xl p-8  dark:bg-neutral-800  lg:w-[420px] ">
 						<div class="flex items-center justify-between">
@@ -169,11 +169,12 @@
 								id="color" />
 
 							<button
-								disabled={loadingPainting}
+								disabled={loadingPainting || $tokenAllowance.data.isZero()}
 								on:click={paint}
-								class="rounded-lg px-5 py-2 font-semibold text-white {!loadingPainting
-									? 'bg-gradient-to-r from-complementary-600 to-triadicGreen-600 transition duration-300 hover:scale-105 hover:opacity-80'
-									: 'bg-gray-400 dark:bg-neutral-700'}  disabled:cursor-not-allowed"
+								class="rounded-lg px-5 py-2 font-semibold text-white {loadingPainting ||
+								$tokenAllowance.data.isZero()
+									? 'bg-gray-300 dark:bg-neutral-700'
+									: 'bg-gradient-to-r from-complementary-600 to-triadicGreen-600 transition duration-300 hover:scale-105 hover:opacity-80'}  disabled:cursor-not-allowed"
 								>{loadingPainting ? 'Painting' : $_('actions.paint')}
 							</button>
 						</div>
