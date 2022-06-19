@@ -5,7 +5,7 @@
 		faChevronUp,
 		faChevronDown
 	} from '@fortawesome/free-solid-svg-icons';
-	import { _ } from 'svelte-i18n';
+	import { isLoading, _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import {
 		getTokenBalance,
@@ -20,9 +20,8 @@
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
 	import { Chasing } from 'svelte-loading-spinners';
 	import { ethers } from 'ethers';
-	import { getContext } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
-	const { open } = getContext('simple-modal');
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
 	import onyAllowFloatNumbers from '$lib/utils/inputsHelper';
@@ -33,21 +32,19 @@
 		spawnErrorNotification,
 		spawnSuccessNotification
 	} from '$lib/utils/spawnNotifications';
+	import { useQuery } from '@sveltestack/svelte-query';
+	import { fetchVault, fetchVaultPairTokensPrice } from '$lib/utils/fetchVault';
 
+	const { open } = getContext('simple-modal');
 	const { addNotification } = getNotificationsContext();
 
 	export let vaultConfig;
-	let userAcc: string;
+	let userAcc;
 	let isHidden = true;
-	let isApproved: boolean;
 	let stakedTokens;
 	let userTokens: BigNumber = ethers.constants.Zero;
-	let tkn0Price: number;
-	let tkn1Price: number;
 	let userDepositAmount: string;
 	let userWithdrawAmount: string;
-
-	$: allIn = ethers.utils.formatEther(userTokens) == userDepositAmount;
 
 	const loadingState = {
 		something: false,
@@ -57,14 +54,64 @@
 		harvest: false
 	};
 
-	accounts.subscribe(async (arrayAccs) => {
-		if (arrayAccs) {
-			userAcc = arrayAccs[0];
+	$: userAcc = $accounts?.[0];
+
+	$: vaultApproved = $vaultQuery.data?.tokenAllowance
+		? !$vaultQuery.data?.tokenAllowance.isZero()
+		: false;
+
+	const vaultQuery = useQuery(
+		['vaultQuery', userAcc, vaultConfig.pid, vaultConfig.pair.pairContract],
+		async () => {
+			const vaultQueryResponse = await fetchVault(
+				vaultConfig.pid,
+				userAcc,
+				vaultConfig.pair.pairContract
+			);
+			return vaultQueryResponse;
+		},
+		{
+			enabled: !!userAcc && !isHidden,
+			refetchInterval: 4000
 		}
-	});
+	);
+
+	const tokenPricesQuery = useQuery(
+		[
+			'tokenPricesQuery',
+			vaultConfig.pair.token0Contract,
+			vaultConfig.pair.token1Contract
+		],
+		async () => {
+			const tokenPricesResponse = await fetchVaultPairTokensPrice(
+				vaultConfig.pair.token0Contract,
+				vaultConfig.pair.token1Contract
+			);
+			return tokenPricesResponse;
+		},
+		{
+			enabled: !isHidden
+		}
+	);
+
+	$: {
+		vaultQuery.updateOptions({
+			enabled: !!userAcc && !isHidden
+		});
+	}
+
+	$: {
+		if (!isHidden) {
+			tokenPricesQuery.updateOptions({
+				enabled: !isHidden
+			});
+		}
+	}
+
+	$: allIn = ethers.utils.formatEther(userTokens) == userDepositAmount;
 
 	const openAccordeon = (): void => {
-		isHidden ? (isHidden = false) : (isHidden = true);
+		isHidden = !isHidden;
 	};
 
 	const handleTransaction = async (
@@ -86,7 +133,7 @@
 						getContractAddress(Token.VAULTCHEF),
 						userAcc
 					).then((res) => {
-						isApproved = isNotZero(res);
+						vaultApproved = isNotZero(res);
 					});
 				}, 10000);
 			}
@@ -123,31 +170,6 @@
 		loadingState.something = false;
 		loadingState[transactionName] = false;
 	};
-	$: if (!isHidden) {
-		if (userAcc) {
-			getTokenAllowance(
-				vaultConfig.pair.pairContract,
-				getContractAddress(Token.VAULTCHEF),
-				userAcc
-			).then((res) => {
-				isApproved = isNotZero(res);
-			});
-			getTokenBalance(vaultConfig.pair.pairContract, userAcc).then(
-				(balance) => {
-					userTokens = balance;
-				}
-			);
-			stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
-				stakedTokens = stakedAmount;
-			});
-			getTokenPriceUSD(vaultConfig.pair.token0Contract).then((response) => {
-				tkn0Price = response[vaultConfig.pair.token0Contract.toLowerCase()].usd;
-			});
-			getTokenPriceUSD(vaultConfig.pair.token1Contract).then((response) => {
-				tkn1Price = response[vaultConfig.pair.token1Contract.toLowerCase()].usd;
-			});
-		}
-	}
 
 	const openModal = () => {
 		open(MetamaskNotInstalled, {
@@ -231,7 +253,7 @@
 						: 'gradientSushiswap'} transform rounded-xl py-2 text-xl font-semibold tracking-wide  text-white transition duration-300 hover:bg-blue-400 "
 					>{$_('actions.unlock')}
 				</button>
-			{:else if $accounts && !isApproved}
+			{:else if $accounts && !vaultApproved}
 				<button
 					on:click={async () =>
 						handleTransaction(
@@ -248,7 +270,7 @@
 					>{$_('actions.approve')}
 					{vaultConfig.pair.token0Name}-{vaultConfig.pair.token1Name}
 				</button>
-			{:else}
+			{:else if $accounts && vaultApproved}
 				<div class="flex-wrapper flex  flex-col justify-around lg:flex-row">
 					<div class="lg:w-4/12">
 						<div class="flex items-center">
@@ -256,14 +278,19 @@
 								class="text-sm font-medium tracking-tight text-gray-600 dark:text-white">
 								{$_('actions.wallet')}:
 							</p>
-							{#if userTokens}
+							{#if $vaultQuery.data.userBalance}
 								<p class="pl-1 text-sm font-medium dark:text-white">
-									{ethers.utils.formatEther(userTokens)}
+									{ethers.utils.formatEther($vaultQuery.data.userBalance)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
-							{:else}
+							{:else if $vaultQuery.isLoading}
 								<p class="pl-1 text-sm font-semibold dark:text-white">
-									0 {vaultConfig.pair.token0Name}-{vaultConfig.pair.token1Name}
+									{$_('vaultAccordeon.loading')}...
+								</p>
+							{:else if $vaultQuery.isError}
+								<p class="pl-1 text-sm font-medium dark:text-white">
+									N/A
+									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{/if}
 						</div>
@@ -335,16 +362,20 @@
 							<p class="text-sm font-medium text-gray-600 dark:text-white">
 								{$_('pastActions.deposited')}:
 							</p>
-							{#if stakedTokens}
+							{#if $vaultQuery.data?.userStakedTokens}
 								<p
 									class="pl-1 text-sm font-medium tracking-tight dark:text-white ">
-									{ethers.utils.formatEther(stakedTokens)}
+									{ethers.utils.formatEther($vaultQuery.data?.userStakedTokens)}
 									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1quote}
 								</p>
-							{:else}
+							{:else if $vaultQuery.isLoading}
 								<p class="pl-1 font-medium dark:text-white">
-									0 {vaultConfig.pair.token0quote}-{vaultConfig.pair
-										.token1quote}
+									{$_('vaultAccordeon.loading')}...
+								</p>
+							{:else if $vaultQuery.isError}
+								<p class="pl-1 text-sm font-medium dark:text-white">
+									N/A
+									{vaultConfig.pair.token0quote}-{vaultConfig.pair.token1Name}
 								</p>
 							{/if}
 						</div>
@@ -391,24 +422,35 @@
 							<p class="pb-1  font-medium text-gray-500 dark:text-gray-400">
 								{$_('vaultAccordeon.currentPrices')}:
 							</p>
-							<p class="font-light	 dark:text-white ">
-								{#if tkn0Price}
-									{vaultConfig.pair.token0quote}: ${tkn0Price}
-								{:else}
+							{#if $tokenPricesQuery.data}
+								<p class="font-light dark:text-white">
+									{vaultConfig.pair.token0quote}: ${$tokenPricesQuery.data
+										.token0Price}
+								</p>
+								<p class="font-light dark:text-white">
+									{vaultConfig.pair.token1quote}: ${$tokenPricesQuery.data
+										.token1Price}
+								</p>
+							{:else if $tokenPricesQuery.isLoading || $tokenPricesQuery.isIdle}
+								<p class="font-light dark:text-white">
 									{vaultConfig.pair.token0quote}: {$_(
 										'vaultAccordeon.loading'
 									)}...
-								{/if}
-							</p>
-							<p class="font-light dark:text-white">
-								{#if tkn1Price}
-									{vaultConfig.pair.token1quote}: ${tkn1Price}
-								{:else}
+								</p>
+								<p class="font-light dark:text-white">
 									{vaultConfig.pair.token1quote}: {$_(
 										'vaultAccordeon.loading'
 									)}...
-								{/if}
-							</p>
+								</p>
+							{:else}
+								<p class="font-light dark:text-white">
+									{vaultConfig.pair.token0quote}: N/A
+								</p>
+								<p class="font-light dark:text-white">
+									{vaultConfig.pair.token1quote}: N/A
+								</p>
+							{/if}
+
 							<div class="py-2">
 								<a
 									target="_blank"
