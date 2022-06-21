@@ -4,13 +4,11 @@ import erc20Abi from '$lib/config/abi/ERC20.json';
 import { polygonProvider } from './web3Utils';
 import { Token, type CallInput } from '$lib/types/types';
 import { getContractAddress } from './addressHelpers';
-import { getTokenBalance, getTokenDecimals } from './erc20';
 import { getPriceOfMushPair } from './lpTokenUtils';
 import { getPoolTokenPriceUSD } from './coinGecko';
 import { ethers, type BigNumber } from 'ethers';
 import { getPoolMultiplier, getPoolWeight } from './masterc';
-import { getPoolApr } from './yieldCalculator';
-import { tokenPrice } from '$lib/stores/NativeTokenPrice';
+
 const getStakingTokenPrice = async (tokenAddress: string, isFarm: boolean) => {
 	if (isFarm) {
 		const stakingTokenPrice = await getPriceOfMushPair(tokenAddress);

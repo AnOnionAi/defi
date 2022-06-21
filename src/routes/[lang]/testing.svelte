@@ -1,21 +1,13 @@
 <script lang="ts">
-	import fetchMasterChefPool from '$lib/utils/fetchPool';
-	import fetchPoolUserBalance from '$lib/utils/fetchPoolUserBalance';
+	import { fetchVault, fetchVaultPairTokensPrice } from '$lib/utils/fetchVault';
 	import { onMount } from 'svelte';
 
 	onMount(async () => {
-		/* 	const response = await fetchMasterChefPool(
-			1,
-			'0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+		const xd = await fetchVaultPairTokensPrice(
+			'0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+			'0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619'
 		);
-		console.log(response); */
-
-		const bar = await fetchPoolUserBalance(
-			1,
-			'0x42D73a757E63a18a70C8a86564e405dEca81967c',
-			'0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
-		);
-		console.log(bar);
+		console.log(xd);
 	});
 </script>
 
