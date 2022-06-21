@@ -5,7 +5,7 @@
 		faChevronUp,
 		faChevronDown
 	} from '@fortawesome/free-solid-svg-icons';
-	import { isLoading, _ } from 'svelte-i18n';
+	import { _ } from 'svelte-i18n';
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import {
 		getTokenBalance,
@@ -15,12 +15,11 @@
 	} from '$lib/utils/erc20';
 	import { getContractAddress } from '$lib/utils/addressHelpers';
 	import { Token } from '$lib/types/types';
-	import { getTokenPriceUSD } from '$lib/utils/coinGecko';
 	import { BigNumber } from 'ethers';
 	import { deposit, withdraw, stakedWantTokens } from '$lib/utils/vaultChef';
 	import { Chasing } from 'svelte-loading-spinners';
 	import { ethers } from 'ethers';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import MetamaskNotInstalled from '../Modals/MetamaskNotInstalled.svelte';
 	import { getNotificationsContext } from 'svelte-notifications';
 	import { darkMode } from '$lib/stores/dark';
@@ -152,17 +151,6 @@
 				stakedTokens = stakedTokens.sub(bnWithdrawedTokens);
 				userTokens = userTokens.add(bnWithdrawedTokens);
 			}
-
-			setTimeout(() => {
-				getTokenBalance(vaultConfig.pair.pairContract, userAcc).then(
-					(balance) => {
-						userTokens = balance;
-					}
-				);
-				stakedWantTokens(vaultConfig.pid, userAcc).then((stakedAmount) => {
-					stakedTokens = stakedAmount;
-				});
-			}, 8000);
 		} catch (error) {
 			console.log(error);
 			spawnErrorNotification(addNotification, error);
