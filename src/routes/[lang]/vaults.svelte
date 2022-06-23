@@ -5,7 +5,11 @@
 
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { quickVaults, sushiVaults } from '$lib/config/constants/vaults';
+	import {
+		quickVaults,
+		sushiVaults,
+		fishVault
+	} from '$lib/config/constants/vaults';
 	import type {
 		VaultFilterFunction,
 		VaultInfo,
@@ -21,6 +25,7 @@
 	import { accounts } from '$lib/stores/MetaMaskAccount';
 	import { BigNumber, ethers } from 'ethers';
 	import { vaultChef } from '$lib/utils/contracts';
+	import PolycatDividendVault from '$lib/components/Vault/PolycatDividendVault.svelte';
 	let allVaults: Array<VaultState> = [];
 	let filteredVaults: Array<VaultState> = [];
 	let platformSelected: string;
@@ -120,6 +125,7 @@
 			{#each filteredVaults as vault}
 				<VaultAccordeon vaultConfig={vault} />
 			{/each}
+			<PolycatDividendVault vaultConfig={fishVault} />
 		{:else}
 			<div
 				class="animate mx-auto mb-4 h-[128px] max-w-6xl animate-pulse rounded-lg bg-white dark:bg-neutral-800 sm:px-4 md:px-2 lg:px-0" />

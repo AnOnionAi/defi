@@ -3,6 +3,13 @@ import platforms from './platforms.json';
 
 export const quickVaults: VaultInfo[] = [];
 
+export const fishVault = {
+	pid: 5,
+	depositFee: 0,
+	withdrawalFee: 0,
+	tokenAddress: '0x3a3Df212b7AA91Aa0402B9035b098891d276572B'
+};
+
 export const sushiVaults: VaultInfo[] = [
 	{
 		pid: 1,
@@ -41,25 +48,6 @@ export const sushiVaults: VaultInfo[] = [
 		strategyContractAddress: '0x57aa0F5e99056Ea37670fE2DB81b3b915D00cF55'
 	},
 	{
-		pid: 4,
-		depositFee: 0,
-		withdrawalFee: 0,
-		pair: {
-			token0Name: 'WBTC',
-			token1Name: 'WETH',
-			token0quote: 'WBTC',
-			token1quote: 'WETH',
-			token0Contract: '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6',
-			token1Contract: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
-			pairContract: '0xE62Ec2e799305E0D367b0Cc3ee2CdA135bF89816',
-			pairURL:
-				'https://polygonscan.com/address/0xE62Ec2e799305E0D367b0Cc3ee2CdA135bF89816'
-		},
-		platform: platforms.SUSHISWAP,
-		strategyContractAddress: '0xD417d29849d0Ad3e5Ec630D016B1E616E2F96aF2'
-	},
-
-	{
 		pid: 3,
 		depositFee: 0,
 		withdrawalFee: 0,
@@ -76,5 +64,23 @@ export const sushiVaults: VaultInfo[] = [
 		},
 		platform: platforms.SUSHISWAP,
 		strategyContractAddress: '0x3Af05b4741fDd9B27450341c63c8959F438F2A2f'
+	},
+	{
+		pid: 4,
+		depositFee: 0,
+		withdrawalFee: 0,
+		pair: {
+			token0Name: 'WBTC',
+			token1Name: 'WETH',
+			token0quote: 'WBTC',
+			token1quote: 'WETH',
+			token0Contract: '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6',
+			token1Contract: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+			pairContract: '0xE62Ec2e799305E0D367b0Cc3ee2CdA135bF89816',
+			pairURL:
+				'https://polygonscan.com/address/0xE62Ec2e799305E0D367b0Cc3ee2CdA135bF89816'
+		},
+		platform: platforms.SUSHISWAP,
+		strategyContractAddress: '0xD417d29849d0Ad3e5Ec630D016B1E616E2F96aF2'
 	}
 ];
